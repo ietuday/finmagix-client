@@ -1,0 +1,174 @@
+@import url("../sf-webfont/style.css");
+
+
+.css-box{
+  display: flex;
+  justify-content: space-around;
+  margin-top:10px ;
+   
+}
+
+
+.MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiInputBase-input.MuiInput-input{
+  border: none;
+  width:100% !important;
+  border-bottom: 1px solid black;
+
+}
+.header-row-get-started{
+  height: 140px;
+  background-color: #00aff0;
+  width: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.get-started-label {
+  font-weight: 700;
+  font-family: 'SF UI Display Medium' !important;
+}
+.get-started-short-question {
+  margin-right: 50px;
+  font-weight: 700;
+}
+.get-started-long-question {
+  font-weight: 700;
+}
+.get-started-container {
+  border:1px solid lightgrey;
+  /* width:70% !important; */
+  margin-top:140px !important;
+}
+.address-fields {
+  margin-top: 85px;
+}
+.form-control {
+  background-color: white !important;
+}
+.input-class-mdb {
+  width: -webkit-fill-available;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid #7F8586 !important; 
+
+}
+.increment-button {
+  /* margin-right: 30px; */
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  color: #00aff0;
+  border: none;
+  background: lightgrey;
+  font-size: x-large;
+  float:right;
+  margin-right: 20px;;
+}
+.decrement-button {
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  color: #00aff0;
+  border: none;
+  background: lightgrey;
+  font-size: x-large;
+  margin-left:20px;
+}
+.fico-score-range-text{
+  margin-left:46%;
+  margin-top:30px;
+  text-align:center;
+}
+.property-payment-row {
+  height: auto;
+  background-color: lightgray;
+  border-radius:0 0 14px 14px;
+  text-align: center;
+  padding: 20px;
+}
+.link {
+  color: #00aff0;
+  cursor: pointer;
+}
+.property-payment-button {
+  width: -webkit-fill-available;
+  border-radius: 30px;
+}
+.prelim-report-row {
+  
+  color: white; 
+  background: linear-gradient(180deg, rgba(8,142,201, 1) 0%, rgba(11,167,236, 1) 100%);
+  box-shadow: 0px 3px 6px #eee;
+  border-radius:0 0 8px 8px;
+  opacity: 1;
+  padding: 20px;
+}
+
+
+.facebook-button {
+  width: -webkit-fill-available;
+  border-color: #00aff0;
+  background-color: white;
+  height: 45px;
+}
+.google-button {
+  width: -webkit-fill-available;
+  border: none;
+  border-color: #00aff0;
+}
+.marginBottom20 {
+  margin-bottom: 20px;
+}
+.loading-dot {
+  font-size: 100px;
+  margin-top: -80px;
+  position: relative;
+  animation: ease-in-out infinite alternate;
+  /* animation-name: run;
+  animation-duration: 1.2s; */
+}
+
+
+@media screen and (max-width:700px) {
+  .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiInputBase-input.MuiInput-input {
+    border: none;
+    width:100% !important;
+    border-bottom: 1px solid black;
+  }
+  .get-started-container{
+    width: 100% !important;
+  }
+}
+@media screen and (max-width:800px) {
+  .get-started-container{
+    width: 100% !important;
+  }
+  
+}
+
+@media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px) {
+  .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiInputBase-input.MuiInput-input {
+    border: none;
+    width:100% !important;
+    border-bottom: 1px solid black;
+  }
+  .fico-score-range-text{
+    margin-left:30% !important;
+  }
+}
+
+.bottom_line{
+  border-bottom: 1px solid #BDCACC;
+ 
+ 
+}
+.MuiSwitch-colorPrimary.Mui-checked{
+  color: #0BA7EC !important;
+}
+
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 0 1rem !important;
+}

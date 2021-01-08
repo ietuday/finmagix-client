@@ -1,0 +1,104 @@
+.MuiOutlinedInput-root {
+  position: relative !important;
+  background: #ffffff80 0% 0% no-repeat padding-box !important;
+  border-radius: 10px !important;
+}
+.MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedStart.MuiOutlinedInput-inputAdornedStart{
+    height:0px !important;
+}
+.dashboard-cover-img{
+    width:100% !important;
+}
+
+.h4, h4{
+  font-size: 1.2rem !important;
+}
+
+.text-al{
+  text-align: right;
+}
+
+.dashboard-container {
+    border:1px solid lightgrey;
+    /* width:40% !important; */
+  }
+.input-class-mdb {
+  width: -webkit-fill-available;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+.signup-signin-label {
+  font-weight: 700;
+}
+.signuplastsentence {
+  margin-bottom: 20px;
+}
+.sign-up-back-arrow {
+  float: left;
+  color: black;
+  cursor: pointer;
+  font-size: x-large;
+  font-weight: 700px;
+}
+.modal-text {
+  cursor: pointer;
+  font-weight: 700px;
+  margin-left: 30px;
+}
+.navbar-icon {
+  float: right;
+  margin-top: -31px;
+  color: white;
+}
+.marginbottom20 {
+  margin-bottom: 20px;
+}
+.sign-up-small-label {
+  color: #7f8586;
+}
+
+@media only screen and (max-width: 760px),
+  (min-width: 768px) and (max-width: 1024px) {
+  .dashboard-container {
+    width: 100% !important;
+  }
+}
+.fa-facebook-square {
+  color: #3b5998;
+  background-color: #fff;
+}
+.google-button {
+  background-color: rgb(255, 255, 255);
+
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  box-shadow: none !important;
+
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Roboto, sans-serif;
+  border: 1px solid #00a9f4 !important;
+  border-radius: 5px !important;
+}
+
+.facebook-button {
+  background-color: rgb(255, 255, 255);
+
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  box-shadow: none !important;
+
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Roboto, sans-serif;
+  border: 1px solid #00a9f4 !important;
+  border-radius: 5px !important;
+  text-align: center;
+  height: auto !important;
+  padding: 9px 0 !important;
+}

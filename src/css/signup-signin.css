@@ -1,0 +1,134 @@
+.input-class-mdb {
+  width: -webkit-fill-available;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+.space-left{
+  padding-left:60px ;
+}
+.space-top{
+  padding-top:50px ;
+}
+.for-img{
+width:12%;
+padding-bottom:20px ;
+}
+.forgot-container {
+  padding:3%;
+  width: 80% !important; 
+  background: rgb(11,167,236);
+  background: linear-gradient(180deg, rgba(11,167,236, 0.1) 0%, rgba(255,255,255, 0.1) 32%);
+}
+.signup-signin-container {
+  /* width: 55% !important; */
+  /* border:1px solid lightgrey; */
+  background: rgb(11,167,236);
+  background: linear-gradient(180deg, rgba(11,167,236, 0.1) 0%, rgba(255,255,255, 0.1) 32%);
+}
+.select-module-container{
+  /* width: 40% !important; */
+  border:1px solid #6c757d36;
+}
+.signup-signin-label {
+  font-weight: 700;
+}
+.signuplastsentence {
+  margin-bottom: 20px;
+}
+.sign-up-back-arrow {
+  float: left;
+  color: black;
+  cursor: pointer;
+  font-size: x-large;
+  font-weight: 700px;
+}
+.modal-text {
+  cursor: pointer;
+  font-weight: 700px;
+  margin-left: 30px;
+}
+.navbar-icon {
+  float: right;
+  margin-top: -31px;
+  color: white;
+}
+.marginbottom20{
+  margin-bottom: 20px;
+}
+.sign-up-small-label{
+  color:#7F8586;
+}
+
+@media screen and (max-width:700px) {
+  .signup-signin-container {
+    width: 100% !important;
+  }
+  .select-module-container{
+    width:100% !important;
+  }
+}
+@media screen and (max-width:800px) {
+  .signup-signin-container {
+    width: 100% !important;
+  }
+  .select-module-container{
+    width:100% !important;
+  }
+  
+}
+.fa-facebook-square {
+  color: #3b5998;
+  background-color: #fff;
+}
+.google-button{
+  background-color: rgb(255, 255, 255);
+  
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  box-shadow: none !important;
+  
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'SF Pro Display Regular' !important;
+  border: 1px solid #00A9F4 !important;
+  border-radius: 5px !important;
+}
+
+.facebook-button {
+  background-color: rgb(255, 255, 255);
+ 
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  box-shadow: none !important;
+  
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'SF Pro Display Regular' !important;
+  border: 1px solid #00A9F4 !important;
+  border-radius: 5px !important;
+  text-align: center;
+  height: auto !important;
+  padding: 9px 0 !important;
+}
+
+.img-pos{
+  width: 50px;
+  position: absolute;
+  margin: -14px 0 0 0;
+}
+.img-pos5{
+  width: 50px;
+  position: absolute;
+  margin: -0px 0 0 0px;
+}
+
+.img-header{
+  width: 50px;
+  position: absolute;
+  margin: -8px 0px 0 -57px;
+}

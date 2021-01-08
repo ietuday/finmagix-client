@@ -1,0 +1,176 @@
+ol.progtrckr {
+  list-style-type: none;
+  padding: 0;
+  text-align: center !important;
+}
+
+ol.progtrckr li {
+  display: inline-block;
+  text-align: center;
+  line-height: 4.5rem;
+  cursor: pointer;
+}
+
+ol.progtrckr li span {
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 650px) {
+  .progtrckr li span {
+    display: none;
+  }
+}
+.progtrckr em {
+  display: none;
+  font-weight: 700;
+  padding-left: 1rem;
+}
+
+@media (max-width: 650px) {
+  .progtrckr em {
+    display: inline;
+  }
+}
+
+ol.progtrckr li.progtrckr-todo {
+  color: silver;
+  border-bottom: 4px solid silver;
+}
+
+ol.progtrckr li.progtrckr-doing {
+  color: black;
+  border-bottom: 4px solid #cccccc;
+}
+
+ol.progtrckr li.progtrckr-done {
+  color: black;
+  border-bottom: 4px solid #5cb85c;
+}
+
+ol.progtrckr li:after {
+  content: "\00a0\00a0";
+}
+
+ol.progtrckr li:before {
+  position: relative;
+  bottom: -3.7rem;
+  float: left;
+  left: 50%;
+}
+
+ol.progtrckr li.progtrckr-todo:before {
+  content: "\039F";
+  color: silver;
+  background-color: white;
+  width: 1.2em;
+  line-height: 1.4em;
+}
+
+ol.progtrckr li.progtrckr-todo:hover:before {
+  color: #ff4500;
+}
+
+ol.progtrckr li.progtrckr-doing:before {
+  content: "\2022";
+  color: white;
+  background-color: #cccccc;
+  width: 1.2em;
+  line-height: 1.2em;
+  border-radius: 1.2em;
+}
+
+ol.progtrckr li.progtrckr-doing:hover:before {
+  color: #ff4500;
+}
+
+ol.progtrckr li.progtrckr-done:before {
+  content: "\2713";
+  color: white;
+  background-color: #5cb85c;
+  width: 1.2em;
+  line-height: 1.2em;
+  border-radius: 1.2em;
+}
+
+ol.progtrckr li.progtrckr-done:hover:before {
+  color: #333;
+}
+
+
+.modal.show .modal-dialog {
+  max-width: 840px !important;
+}
+.input-class-mdb {
+  width: -webkit-fill-available;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+.get-started-label {
+  font-weight: 700;
+}
+.btn-prev {
+  width: -webkit-fill-available !important;
+  margin-top: 20px !important;
+}
+.MuiPaper-root.MuiStepper-root.MuiStepper-horizontal.stepper-class.MuiPaper-elevation0 {
+  background-color: #00aff0 !important;
+}
+.MuiStepIcon-root.MuiStepIcon-active {
+  color: #e83494 !important;
+}
+.btn-next {
+  background: white !important;
+  color: black !important;
+  position: absolute !important;
+  border: none !important;
+  top: 50px !important;
+}
+.property-payment-button {
+  width: -webkit-fill-available;
+  border-radius: 30px;
+}
+.property-form-container {
+  /* width: 40% !important; */
+  border: 1px solid lightgrey;
+}
+.back-arrow {
+  float: left;
+  color: black;
+  cursor: pointer;
+  font-size: x-large;
+  font-weight: 700px;
+}
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.back-arrow.Mui-disabled {
+  float: left !important;
+  color: black !important;
+  cursor: pointer !important;
+  font-size: x-large !important;
+  font-weight: 700px !important;
+}
+.marginbottom20 {
+  margin-bottom: 20px;
+}
+.marginbottom50 {
+  margin-bottom: 50px;
+}
+.report-text {
+  color: #3fba82;
+}
+.header-icon {
+  float: right;
+  margin-top: 89px;
+  color: white;
+}
+.MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiInputBase-input.MuiInput-input {
+  border: none;
+  width: 100% !important;
+  border-bottom: 1px solid black;
+}
+
+@media only screen and (max-width: 760px),
+  (min-width: 768px) and (max-width: 1024px) {
+  .property-form-container {
+    width: 100% !important;
+  }
+}
