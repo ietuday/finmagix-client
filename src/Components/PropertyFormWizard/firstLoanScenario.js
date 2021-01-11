@@ -16,6 +16,9 @@ import {
 
 import quss from "../../assets/images/que.png";
 
+import NumberFormat from 'react-number-format';
+
+
 export class FirstLoanScenario extends Component {
   constructor() {
     super(); 
@@ -339,13 +342,23 @@ export class FirstLoanScenario extends Component {
 <span className="tooltip-img-text">Enter the amount you plan to borrow for this mortgage </span>
 </div>
                 <br />
-                <Input
+                {/* <Input
                   className="input-class-mdb"
                   placeholder="Enter amount here"
                   name="loan_amount"
                   value={this.state.loan_amount}
                   onChange={this.handleChange}
-                />
+                /> */}
+
+<NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="loan_amount"
+              value={this.state.loan_amount}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              // prefix={"$"}
+            />
               </MDBCol>
             </MDBRow>
             {displayValidationErrors(this.validators, "loan_amount")}

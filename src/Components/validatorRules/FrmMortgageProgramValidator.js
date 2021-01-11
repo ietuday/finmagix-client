@@ -9,13 +9,14 @@ const FrmMortgageProgramValidator = {
           message: "Loan amount cannot be empty",
         },
         {
-          test: /^[0-9,]*$/,
+          // test: /^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
         {
           test: (value) => {
             return (
-              Number(value) <= Number(HouseInfoValidator.property_price.state)
+              value <= HouseInfoValidator.property_price.state
             );
           },
           message: "Loan value should not be greater than property price!",
