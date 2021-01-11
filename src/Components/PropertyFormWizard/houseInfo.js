@@ -4,13 +4,16 @@ import { Input } from "antd";
 import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import NumberFormat from 'react-number-format';
+
 import MapContainer from "../../common/googleMap";
 import NumberSpinner from "../../common/inputNumberSpinner";
 import { updateValidators } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
 import "../../css/addProperty.css";
 
-import { 
+
+import {
   resetValidators,
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
@@ -32,7 +35,7 @@ export class GetStartedHouseInfo extends Component {
       annual_property_tax: "",
       annual_home_owner_association_dues: "",
       home_owner_insurance: "",
-      home_price_growth:""
+      home_price_growth: "",
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -42,7 +45,7 @@ export class GetStartedHouseInfo extends Component {
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
   }
   async handleChange(event) {
-    const{name} = event.target
+    const { name } = event.target;
     event.persist();
     let downpayment;
     await this.setState({
@@ -61,11 +64,10 @@ export class GetStartedHouseInfo extends Component {
       name === "downpayment_amount" ||
       name === "area_of_the_house" ||
       name == "annual_property_tax" ||
-      name=="annual_home_owner_association_dues"||
-      name=="home_owner_insurance"||
-      name=="home_owner_insurance"||
-      name=="home_price_growth"
-
+      name == "annual_home_owner_association_dues" ||
+      name == "home_owner_insurance" ||
+      name == "home_owner_insurance" ||
+      name == "home_price_growth"
     ) {
       updateValidators(this.validators, event.target.name, event.target.value);
       const validationErrorLength = this.validators[event.target.name].errors
@@ -110,31 +112,43 @@ export class GetStartedHouseInfo extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
-              What is the price of the property? 
+              What is the price of the property?
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Enter the price of the house requested by the seller or the current appraised value of the house.
-             If both prices are available, please enter the appraised value of the house.</span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Enter the price of the house requested by the seller or the
+                current appraised value of the house. If both prices are
+                available, please enter the appraised value of the house.
+              </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="property_price"
               value={this.state.property_price}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="property_price"
+              value={this.state.property_price}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              // prefix={"$"}
             />
           </MDBCol>
           {displayValidationErrors(this.validators, "property_price")}
         </MDBRow>
 
         {/* New field add */}
-        
+
         <MDBRow className="margin20">
           <MDBCol md="12">
-            <span className="get-started-label">
-            Home Price Growth
-            </span>
+            <span className="get-started-label">Home Price Growth</span>
             <br />
             <Input
               className="input-class-mdb"
@@ -143,33 +157,42 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.home_price_growth}
               onChange={this.handleChange}
             />
-            
           </MDBCol>
           {displayValidationErrors(this.validators, "home_price_growth")}
         </MDBRow>
 
-        
-        
         {/* End */}
 
-       
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
               What is the downpayment amount?
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text"> Enter the amount (Money) you intend to pay i.e. 
-            difference between the purchase price and loan amount.</span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                {" "}
+                Enter the amount (Money) you intend to pay i.e. difference
+                between the purchase price and loan amount.
+              </span>
             </div>
             <br />
-            <Input
+            <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="downpayment_amount"
               value={this.state.downpayment_amount}
               onChange={this.handleChange}
+              thousandSeparator={true}
+              // prefix={"$"}
             />
+            {/* <Input
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="downpayment_amount"
+              value={this.state.downpayment_amount}
+              onChange={this.handleChange}
+            /> */}
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(this.validators, "downpayment_amount")}
@@ -178,20 +201,22 @@ export class GetStartedHouseInfo extends Component {
             <span className="get-started-label">
               How long do you intend to stay in this house?
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-<span className="tooltip-img-text">Enter the number of years you intend to stay in this house,
- or the number of years after which you intend to refinance the mortgage on this house. </span>
-</div>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Enter the number of years you intend to stay in this house, or
+                the number of years after which you intend to refinance the
+                mortgage on this house.{" "}
+              </span>
+            </div>
             <br />
             <Input
-            className="input-class-mdb"
-            placeholder="Duration of stay"
-            value={this.state.stay_duration}
-            name="stay_duration"
-            onChange={this.handleChange}
-             
+              className="input-class-mdb"
+              placeholder="Duration of stay"
+              value={this.state.stay_duration}
+              name="stay_duration"
+              onChange={this.handleChange}
             />
-       
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -199,7 +224,10 @@ export class GetStartedHouseInfo extends Component {
             <span className="get-started-long-question">Bedrooms</span>
           </MDBCol>
           <MDBCol md="5" sm="6" xs="6" size="6">
-            <NumberSpinner count={0} onRoomCount={this.handleBedroomRoomCount} />
+            <NumberSpinner
+              count={0}
+              onRoomCount={this.handleBedroomRoomCount}
+            />
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -227,9 +255,12 @@ export class GetStartedHouseInfo extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Enter the annual property tax in number not %. 
-            Typically these range between 1-2% of the home price. </span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Enter the annual property tax in number not %. Typically these
+                range between 1-2% of the home price.{" "}
+              </span>
             </div>
             <br />
             <Input
@@ -245,12 +276,16 @@ export class GetStartedHouseInfo extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
-            Monthly Home Owner's Association dues (if applicable) 
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Enter the monthly association dues that you expect to pay the home owner's association of your residential complex. 
-            These dues are levied for the services or amenities provided by the HOA. </span>
-            </div>
-            
+              Monthly Home Owner's Association dues (if applicable)
+              <div className="tooltip-img">
+                <img src={quss} className="tool-img"></img>
+                <span className="tooltip-img-text">
+                  Enter the monthly association dues that you expect to pay the
+                  home owner's association of your residential complex. These
+                  dues are levied for the services or amenities provided by the
+                  HOA.{" "}
+                </span>
+              </div>
             </span>
             <br />
             <Input
@@ -262,7 +297,10 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "annual_home_owner_association_dues")}
+        {displayValidationErrors(
+          this.validators,
+          "annual_home_owner_association_dues"
+        )}
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
             <span className="get-started-label">Home Owner's Insurance</span>

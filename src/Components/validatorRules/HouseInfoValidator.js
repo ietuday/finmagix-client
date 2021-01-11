@@ -8,7 +8,8 @@ const   HouseInfoValidator = {
         message: "Property Price cannot be empty",
       },
       {
-        test: /^[0-9,]*$/,
+        // test: /^[0-9,]*$/,
+        test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
         message: "only numbers are allowed!",
       },
     ],
@@ -21,14 +22,15 @@ const   HouseInfoValidator = {
     rules: [
       {
         test: (value) => {
+          console.log(HouseInfoValidator)
           return (
-            Number(value) <= Number(HouseInfoValidator.property_price.state)
+            value <= HouseInfoValidator.property_price.state
           );
         },
         message: "Downpayment Amount cannot exceed Home Price",
       },
       {
-        test: /^[0-9,]*$/,
+        test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
         message: "only numbers are allowed!",
       },
       {
@@ -124,6 +126,7 @@ const   HouseInfoValidator = {
       {
         // test: /^[0-9,]*$/,
         test: /^[0-9]\d*(\.\d+)*$/,
+        // test:/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/,
         message: "only numbers are allowed!",
       },
     ],
