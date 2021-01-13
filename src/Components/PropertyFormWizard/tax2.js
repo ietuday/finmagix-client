@@ -158,13 +158,13 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
               acquisition debt
             </span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter % here"
               name="paid_mortgage_on_gf_ha_debt"
               value={this.state.paid_mortgage_on_gf_ha_debt}
               onChange={this.handleChange}
-            />
+            /> */}
 
 <NumberFormat
      className="input-class-mdb"

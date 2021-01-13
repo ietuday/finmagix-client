@@ -44,25 +44,68 @@ export class Taxes extends Component {
       openModal: true,
       radioValue: false,
 
-      fedral_adjusted_gross_income: JSON.parse(localStorage.getItem('tax_array')).fedral_adjusted_gross_income ? JSON.parse(localStorage.getItem('tax_array')).fedral_adjusted_gross_income : "",
-      avg_loan_balance_for_grandfathered_debt: JSON.parse(localStorage.getItem('tax_array')).avg_loan_balance_for_grandfathered_debt ? JSON.parse(localStorage.getItem('tax_array')).avg_loan_balance_for_grandfathered_debt : "",
-      avg_loan_balance_for_home_acquisition_debt: JSON.parse(localStorage.getItem('tax_array')).avg_loan_balance_for_home_acquisition_debt ? JSON.parse(localStorage.getItem('tax_array')).avg_loan_balance_for_home_acquisition_debt : "",
-      paid_mortgage_on_gf_ha_debt: JSON.parse(localStorage.getItem('tax_array')).paid_mortgage_on_gf_ha_debt ? JSON.parse(localStorage.getItem('tax_array')).paid_mortgage_on_gf_ha_debt : "",
-      medical_and_dental_expenses: JSON.parse(localStorage.getItem('tax_array')).medical_and_dental_expenses ? JSON.parse(localStorage.getItem('tax_array')).medical_and_dental_expenses : "",
-      state_local_generalsales_taxes: JSON.parse(localStorage.getItem('tax_array')).state_local_generalsales_taxes ? JSON.parse(localStorage.getItem('tax_array')).state_local_generalsales_taxes : "",
-      other_taxes: JSON.parse(localStorage.getItem('tax_array')).other_taxes ? JSON.parse(localStorage.getItem('tax_array')).other_taxes : "",
-      tax_deductive_investment_interest: JSON.parse(localStorage.getItem('tax_array')).tax_deductive_investment_interest ? JSON.parse(localStorage.getItem('tax_array')).tax_deductive_investment_interest : "",
-      tax_deductible_charitable_donations: JSON.parse(localStorage.getItem('tax_array')).tax_deductible_charitable_donations ? JSON.parse(localStorage.getItem('tax_array')).tax_deductible_charitable_donations : "",
-      tax_deductible_casualty_and_theft_losses: JSON.parse(localStorage.getItem('tax_array')).tax_deductible_casualty_and_theft_losses ? JSON.parse(localStorage.getItem('tax_array')).tax_deductible_casualty_and_theft_losses : "",
+      fedral_adjusted_gross_income: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).fedral_adjusted_gross_income
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .fedral_adjusted_gross_income
+        : "",
+      avg_loan_balance_for_grandfathered_debt: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_grandfathered_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_grandfathered_debt
+        : "",
+      avg_loan_balance_for_home_acquisition_debt: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_home_acquisition_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_home_acquisition_debt
+        : "",
+      paid_mortgage_on_gf_ha_debt: JSON.parse(localStorage.getItem("tax_array"))
+        .paid_mortgage_on_gf_ha_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .paid_mortgage_on_gf_ha_debt
+        : "",
+      medical_and_dental_expenses: JSON.parse(localStorage.getItem("tax_array"))
+        .medical_and_dental_expenses
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .medical_and_dental_expenses
+        : "",
+      state_local_generalsales_taxes: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).state_local_generalsales_taxes
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .state_local_generalsales_taxes
+        : "",
+      other_taxes: JSON.parse(localStorage.getItem("tax_array")).other_taxes
+        ? JSON.parse(localStorage.getItem("tax_array")).other_taxes
+        : "",
+      tax_deductive_investment_interest: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).tax_deductive_investment_interest
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .tax_deductive_investment_interest
+        : "",
+      tax_deductible_charitable_donations: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).tax_deductible_charitable_donations
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .tax_deductible_charitable_donations
+        : "",
+      tax_deductible_casualty_and_theft_losses: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).tax_deductible_casualty_and_theft_losses
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .tax_deductible_casualty_and_theft_losses
+        : "",
       // pub936_line_13a:JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a ? JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a : "",
     };
     this.Tax1YesValidators = Tax1YesValidator;
     resetValidators(this.Tax1YesValidators);
     this.handleChange = this.handleChange.bind(this);
   }
-  componentDidMount() {
-   
-  }
+  componentDidMount() {}
   async onChange(event) {
     await this.setState({
       [event.target.name]: event.target.value,
@@ -199,16 +242,14 @@ export class Taxes extends Component {
             placeholder="Enter amount here"
           /> */}
 
-<NumberFormat
-               className="input-class-mdb"
-               name="fedral_adjusted_gross_income"
-               value={this.state.fedral_adjusted_gross_income}
-               onChange={this.handleChange}
-               placeholder="Enter amount here"
-              thousandSeparator={true}
-            />
-
-
+          <NumberFormat
+            className="input-class-mdb"
+            name="fedral_adjusted_gross_income"
+            value={this.state.fedral_adjusted_gross_income}
+            onChange={this.handleChange}
+            placeholder="Enter amount here"
+            thousandSeparator={true}
+          />
         </MDBCol>
       </MDBRow>
     );
@@ -219,70 +260,70 @@ export class Taxes extends Component {
         backdrop={true}
       >
         <MDBModalHeader toggle={this.toggle}>
-        <div className="popupstyle">
-          You haven't opted for this module.Do you still want to fill Tax
-          module?
-</div>
+          <div className="popupstyle">
+            You haven't opted for this module.Do you still want to fill Tax
+            module?
+          </div>
         </MDBModalHeader>
         <div className="popupra">
-        <MDBModalBody>
-          <Radio.Group
-            onChange={this.onRadioChange}
-            value={this.state.radioValue}
-            className="text-center"
-          >
-            <Radio value={"y"}>Yes</Radio>
-            <Radio value={"n"}>No</Radio>
-          </Radio.Group>
-        </MDBModalBody>
-   </div>
+          <MDBModalBody>
+            <Radio.Group
+              onChange={this.onRadioChange}
+              value={this.state.radioValue}
+              className="text-center"
+            >
+              <Radio value={"y"}>Yes</Radio>
+              <Radio value={"n"}>No</Radio>
+            </Radio.Group>
+          </MDBModalBody>
+        </div>
       </MDBModal>
     );
 
     const showDetailedDeductionRow = (
       <div>
-
-<MDBRow className="margin20">
-        <MDBCol md="12">
-          <span className="get-started-label">
-            Federal adjusted gross income
-          </span>
-          <br />
-          {/* <Input
+        <MDBRow className="margin20">
+          <MDBCol md="12">
+            <span className="get-started-label">
+              Federal adjusted gross income
+            </span>
+            <br />
+            {/* <Input
             className="input-class-mdb"
             name="fedral_adjusted_gross_income"
             value={this.state.fedral_adjusted_gross_income}
             onChange={this.handleChange}
             placeholder="Enter amount here"
           /> */}
-<NumberFormat
-                 className="input-class-mdb"
-                 name="fedral_adjusted_gross_income"
-                 value={this.state.fedral_adjusted_gross_income}
-                 onChange={this.handleChange}
-                 placeholder="Enter amount here"
+            <NumberFormat
+              className="input-class-mdb"
+              name="fedral_adjusted_gross_income"
+              value={this.state.fedral_adjusted_gross_income}
+              onChange={this.handleChange}
+              placeholder="Enter amount here"
               thousandSeparator={true}
             />
+          </MDBCol>
+        </MDBRow>
 
-
-
-        </MDBCol>
-      </MDBRow>
-
-      
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
               Eligible medical and dental expenses
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-<span className="tooltip-img-text">If you itemize your deductions for a taxable year on
- Schedule A (Form 1040 or 1040-SR), Itemized Deductions PDF, you may be able to deduct
-  expenses you paid that year for medical and dental care for yourself, your spouse, 
-  and your dependents. You may deduct only the amount of your total medical expenses 
-  that exceed 7.5% of your adjusted gross income. You figure the amount you're allowed to 
-  deduct on Schedule A (Form 1040 or 1040-SR). Source: IRS</span>
-</div>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                If you itemize your deductions for a taxable year on Schedule A
+                (Form 1040 or 1040-SR), Itemized Deductions PDF, you may be able
+                to deduct expenses you paid that year for medical and dental
+                care for yourself, your spouse, and your dependents. You may
+                deduct only the amount of your total medical expenses that
+                exceed 7.5% of your adjusted gross income. You figure the amount
+                you're allowed to deduct on Schedule A (Form 1040 or 1040-SR).
+                Source: IRS
+              </span>
+            </div>
             <br />
             {/* <Input
               className="input-class-mdb"
@@ -292,16 +333,14 @@ export class Taxes extends Component {
               onChange={this.handleChange}
             /> */}
 
-<NumberFormat
-                  className="input-class-mdb"
-                  placeholder="Enter amount here"
-                  name="medical_and_dental_expenses"
-                  value={this.state.medical_and_dental_expenses}
-                  onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="medical_and_dental_expenses"
+              value={this.state.medical_and_dental_expenses}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
-
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -309,12 +348,16 @@ export class Taxes extends Component {
             <span className="get-started-label">
               Eligible state and local taxes or general sales taxes
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">If you itemize deductions on Schedule A, 
-            your total deduction for state and local income, sales and property taxes is
-             limited to a combined, total deduction of $10,000 ($5,000 if married filing 
-             separately). You have the option of claiming either state and local income
-              taxes or state and local sales taxes (you can’t claim both). Source: IRS </span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                If you itemize deductions on Schedule A, your total deduction
+                for state and local income, sales and property taxes is limited
+                to a combined, total deduction of $10,000 ($5,000 if married
+                filing separately). You have the option of claiming either state
+                and local income taxes or state and local sales taxes (you can’t
+                claim both). Source: IRS{" "}
+              </span>
             </div>
             <br />
             {/* <Input
@@ -325,17 +368,14 @@ export class Taxes extends Component {
               onChange={this.handleChange}
             /> */}
 
-<NumberFormat
-                     className="input-class-mdb"
-                     placeholder="Enter amount here"
-                     name="state_local_generalsales_taxes"
-                     value={this.state.state_local_generalsales_taxes}
-                     onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="state_local_generalsales_taxes"
+              value={this.state.state_local_generalsales_taxes}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
-
-
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -343,12 +383,16 @@ export class Taxes extends Component {
             <span className="get-started-label">
               Other state,local or personal taxes
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-<span className="tooltip-img-text">Deductible personal property taxes are those based only 
-on the value of personal property such as a boat or car. The tax must be charged to you on 
-a yearly basis, even if it's collected more than once a year or less than once a year. 
-Refer to form 1040 and Publication 17 for details. Source: IRS </span>
-</div>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Deductible personal property taxes are those based only on the
+                value of personal property such as a boat or car. The tax must
+                be charged to you on a yearly basis, even if it's collected more
+                than once a year or less than once a year. Refer to form 1040
+                and Publication 17 for details. Source: IRS{" "}
+              </span>
+            </div>
             <br />
             {/* <Input
               className="input-class-mdb"
@@ -357,30 +401,29 @@ Refer to form 1040 and Publication 17 for details. Source: IRS </span>
               value={this.state.other_taxes}
               onChange={this.handleChange}
             /> */}
-<NumberFormat
-                         className="input-class-mdb"
-                         placeholder="Enter amount here"
-                         name="other_taxes"
-                         value={this.state.other_taxes}
-                         onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="other_taxes"
+              value={this.state.other_taxes}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
-
-
           </MDBCol>
-          
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
               Tax deductive investment interest
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Investment interest is interest paid on money you borrowed
-             that is allocable to property held for investment. It doesn't include any interest 
-             allocable to passive activities or to securities that generate tax-exempt income.
-              Source: IRS </span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Investment interest is interest paid on money you borrowed that
+                is allocable to property held for investment. It doesn't include
+                any interest allocable to passive activities or to securities
+                that generate tax-exempt income. Source: IRS{" "}
+              </span>
             </div>
             <br />
             {/* <Input
@@ -391,18 +434,14 @@ Refer to form 1040 and Publication 17 for details. Source: IRS </span>
               onChange={this.handleChange}
             /> */}
 
-<NumberFormat
-                         className="input-class-mdb"
-                         placeholder="Enter amount here"
-                         name="tax_deductive_investment_interest"
-                         value={this.state.tax_deductive_investment_interest}
-                         onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="tax_deductive_investment_interest"
+              value={this.state.tax_deductive_investment_interest}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
-
-
-
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -419,22 +458,20 @@ Refer to form 1040 and Publication 17 for details. Source: IRS </span>
               onChange={this.handleChange}
             /> */}
 
-<NumberFormat
-                             className="input-class-mdb"
-                             placeholder="Enter amount here"
-                             name="tax_deductible_charitable_donations"
-                             value={this.state.tax_deductible_charitable_donations}
-                             onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="tax_deductible_charitable_donations"
+              value={this.state.tax_deductible_charitable_donations}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
-
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
-            Tax deductible casualty and theft losses
+              Tax deductible casualty and theft losses
             </span>
             <br />
             {/* <Input
@@ -445,17 +482,14 @@ Refer to form 1040 and Publication 17 for details. Source: IRS </span>
               onChange={this.handleChange}
             /> */}
 
-<NumberFormat
-                                    className="input-class-mdb"
-                                    placeholder="Enter amount here"
-                                    name="tax_deductible_casualty_and_theft_losses"
-                                    value={this.state.tax_deductible_casualty_and_theft_losses}
-                                    onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="tax_deductible_casualty_and_theft_losses"
+              value={this.state.tax_deductible_casualty_and_theft_losses}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
-
-
           </MDBCol>
         </MDBRow>
       </div>
@@ -468,13 +502,18 @@ Refer to form 1040 and Publication 17 for details. Source: IRS </span>
             <span className="get-started-label">
               Average loan balance for grandfathered debt
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-<span className="tooltip-img-text">If you took out a mortgage on your home before October 14, 
-1987, or you refinanced such a mortgage, it may qualify as grandfathered debt. Grandfathered 
-debt isn't limited. All of the interest you paid on grandfathered debt is fully deductible
- home mortgage interest. However, the amount of your grandfathered debt reduces the limit for 
- home acquisition debt. Source: IRS Publication 936 </span>
-</div>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                If you took out a mortgage on your home before October 14, 1987,
+                or you refinanced such a mortgage, it may qualify as
+                grandfathered debt. Grandfathered debt isn't limited. All of the
+                interest you paid on grandfathered debt is fully deductible home
+                mortgage interest. However, the amount of your grandfathered
+                debt reduces the limit for home acquisition debt. Source: IRS
+                Publication 936{" "}
+              </span>
+            </div>
             <br />
             {/* <Input
               className="input-class-mdb"
@@ -484,16 +523,14 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
               onChange={this.handleChange}
             /> */}
 
-<NumberFormat
-                                       className="input-class-mdb"
-                                       placeholder="Enter amount here"
-                                       name="avg_loan_balance_for_grandfathered_debt"
-                                       value={this.state.avg_loan_balance_for_grandfathered_debt}
-                                       onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="avg_loan_balance_for_grandfathered_debt"
+              value={this.state.avg_loan_balance_for_grandfathered_debt}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
-
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -501,10 +538,14 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
             <span className="get-started-label">
               Average loan balance for home acquisition debt
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Home acquisition debt is a mortgage you took out after 
-            October 13, 1987, to buy, build, or substantially improve a qualified home (your main or second home).
-             It must also be secured by that home. Source: IRS publication 936 </span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Home acquisition debt is a mortgage you took out after October
+                13, 1987, to buy, build, or substantially improve a qualified
+                home (your main or second home). It must also be secured by that
+                home. Source: IRS publication 936{" "}
+              </span>
             </div>
             <br />
             {/* <Input
@@ -515,17 +556,14 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
               onChange={this.handleChange}
             /> */}
 
-<NumberFormat
-                                           className="input-class-mdb"
-                                           placeholder="Enter amount here"
-                                           name="avg_loan_balance_for_home_acquisition_debt"
-                                           value={this.state.avg_loan_balance_for_home_acquisition_debt}
-                                           onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="avg_loan_balance_for_home_acquisition_debt"
+              value={this.state.avg_loan_balance_for_home_acquisition_debt}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
-
-
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20 marginbottom20">
@@ -543,27 +581,26 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
               onChange={this.handleChange}
             /> */}
 
-<NumberFormat
-                                           className="input-class-mdb"
-                                           placeholder="Enter amount here %"
-                                           name="paid_mortgage_on_gf_ha_debt"
-                                           value={this.state.paid_mortgage_on_gf_ha_debt}
-                                           onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here %"
+              name="paid_mortgage_on_gf_ha_debt"
+              value={this.state.paid_mortgage_on_gf_ha_debt}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
-
-
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.Tax1YesValidators, "paid_mortgage_on_gf_ha_debt")}
+        {displayValidationErrors(
+          this.Tax1YesValidators,
+          "paid_mortgage_on_gf_ha_debt"
+        )}
       </div>
     );
 
     return (
       <Fragment>
-        {this.props.location.state.istaxChecked
-         ? (
+        {this.props.location.state.istaxChecked ? (
           <div>
             <MDBRow className="margin20">
               <MDBCol md="12">
