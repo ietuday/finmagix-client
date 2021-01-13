@@ -13,6 +13,8 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import quss from "../../assets/images/que.png";
+
+import NumberFormat from "react-number-format";
 import {
   resetValidators,
   displayValidationErrors,
@@ -189,13 +191,24 @@ export class Taxes extends Component {
             Federal adjusted gross income
           </span>
           <br />
-          <Input
+          {/* <Input
             className="input-class-mdb"
             name="fedral_adjusted_gross_income"
             value={this.state.fedral_adjusted_gross_income}
             onChange={this.handleChange}
             placeholder="Enter amount here"
-          />
+          /> */}
+
+<NumberFormat
+               className="input-class-mdb"
+               name="fedral_adjusted_gross_income"
+               value={this.state.fedral_adjusted_gross_income}
+               onChange={this.handleChange}
+               placeholder="Enter amount here"
+              thousandSeparator={true}
+            />
+
+
         </MDBCol>
       </MDBRow>
     );
@@ -235,13 +248,24 @@ export class Taxes extends Component {
             Federal adjusted gross income
           </span>
           <br />
-          <Input
+          {/* <Input
             className="input-class-mdb"
             name="fedral_adjusted_gross_income"
             value={this.state.fedral_adjusted_gross_income}
             onChange={this.handleChange}
             placeholder="Enter amount here"
-          />
+          /> */}
+<NumberFormat
+                 className="input-class-mdb"
+                 name="fedral_adjusted_gross_income"
+                 value={this.state.fedral_adjusted_gross_income}
+                 onChange={this.handleChange}
+                 placeholder="Enter amount here"
+              thousandSeparator={true}
+            />
+
+
+
         </MDBCol>
       </MDBRow>
 
@@ -260,13 +284,24 @@ export class Taxes extends Component {
   deduct on Schedule A (Form 1040 or 1040-SR). Source: IRS</span>
 </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="medical_and_dental_expenses"
               value={this.state.medical_and_dental_expenses}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+                  className="input-class-mdb"
+                  placeholder="Enter amount here"
+                  name="medical_and_dental_expenses"
+                  value={this.state.medical_and_dental_expenses}
+                  onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -282,13 +317,25 @@ export class Taxes extends Component {
               taxes or state and local sales taxes (you can’t claim both). Source: IRS </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="state_local_generalsales_taxes"
               value={this.state.state_local_generalsales_taxes}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+                     className="input-class-mdb"
+                     placeholder="Enter amount here"
+                     name="state_local_generalsales_taxes"
+                     value={this.state.state_local_generalsales_taxes}
+                     onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
+
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -303,13 +350,24 @@ a yearly basis, even if it's collected more than once a year or less than once a
 Refer to form 1040 and Publication 17 for details. Source: IRS </span>
 </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="other_taxes"
               value={this.state.other_taxes}
               onChange={this.handleChange}
+            /> */}
+<NumberFormat
+                         className="input-class-mdb"
+                         placeholder="Enter amount here"
+                         name="other_taxes"
+                         value={this.state.other_taxes}
+                         onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
+
           </MDBCol>
           
         </MDBRow>
@@ -325,13 +383,26 @@ Refer to form 1040 and Publication 17 for details. Source: IRS </span>
               Source: IRS </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="tax_deductive_investment_interest"
               value={this.state.tax_deductive_investment_interest}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+                         className="input-class-mdb"
+                         placeholder="Enter amount here"
+                         name="tax_deductive_investment_interest"
+                         value={this.state.tax_deductive_investment_interest}
+                         onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
+
+
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -340,13 +411,24 @@ Refer to form 1040 and Publication 17 for details. Source: IRS </span>
               Tax deductible charitable donations
             </span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="tax_deductible_charitable_donations"
               value={this.state.tax_deductible_charitable_donations}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+                             className="input-class-mdb"
+                             placeholder="Enter amount here"
+                             name="tax_deductible_charitable_donations"
+                             value={this.state.tax_deductible_charitable_donations}
+                             onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -355,13 +437,25 @@ Refer to form 1040 and Publication 17 for details. Source: IRS </span>
             Tax deductible casualty and theft losses
             </span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="tax_deductible_casualty_and_theft_losses"
               value={this.state.tax_deductible_casualty_and_theft_losses}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+                                    className="input-class-mdb"
+                                    placeholder="Enter amount here"
+                                    name="tax_deductible_casualty_and_theft_losses"
+                                    value={this.state.tax_deductible_casualty_and_theft_losses}
+                                    onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
+
           </MDBCol>
         </MDBRow>
       </div>
@@ -382,13 +476,24 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
  home acquisition debt. Source: IRS Publication 936 </span>
 </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="avg_loan_balance_for_grandfathered_debt"
               value={this.state.avg_loan_balance_for_grandfathered_debt}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+                                       className="input-class-mdb"
+                                       placeholder="Enter amount here"
+                                       name="avg_loan_balance_for_grandfathered_debt"
+                                       value={this.state.avg_loan_balance_for_grandfathered_debt}
+                                       onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -402,13 +507,25 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
              It must also be secured by that home. Source: IRS publication 936 </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="avg_loan_balance_for_home_acquisition_debt"
               value={this.state.avg_loan_balance_for_home_acquisition_debt}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+                                           className="input-class-mdb"
+                                           placeholder="Enter amount here"
+                                           name="avg_loan_balance_for_home_acquisition_debt"
+                                           value={this.state.avg_loan_balance_for_home_acquisition_debt}
+                                           onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
+
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20 marginbottom20">
@@ -418,13 +535,25 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
               acquisition debt
             </span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here %"
               name="paid_mortgage_on_gf_ha_debt"
               value={this.state.paid_mortgage_on_gf_ha_debt}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+                                           className="input-class-mdb"
+                                           placeholder="Enter amount here %"
+                                           name="paid_mortgage_on_gf_ha_debt"
+                                           value={this.state.paid_mortgage_on_gf_ha_debt}
+                                           onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
+
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(this.Tax1YesValidators, "paid_mortgage_on_gf_ha_debt")}

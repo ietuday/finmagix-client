@@ -4,14 +4,13 @@ import { Input } from "antd";
 import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 
 import MapContainer from "../../common/googleMap";
 import NumberSpinner from "../../common/inputNumberSpinner";
 import { updateValidators } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
 import "../../css/addProperty.css";
-
 
 import {
   resetValidators,
@@ -27,14 +26,19 @@ export class GetStartedHouseInfo extends Component {
       house_state: "",
       house_zip_code: "",
       property_price: "",
+      property_price_number: "",
       downpayment_amount: "",
+      downpayment_amount_number: "",
       stay_duration: "",
       no_of_bedrooms: "",
       no_of_bathrooms: "",
       area_of_the_house: "",
       annual_property_tax: "",
+      annual_property_tax_number: "",
       annual_home_owner_association_dues: "",
+      annual_home_owner_association_dues_number: "",
       home_owner_insurance: "",
+      home_owner_insurance_number: "",
       home_price_growth: "",
     };
     this.validators = HouseInfoValidator;
@@ -52,13 +56,19 @@ export class GetStartedHouseInfo extends Component {
       [event.target.name]: event.target.value,
     });
     let twenty_percent_of_property_price =
-      (this.state.property_price * 20) / 100;
-    if (this.state.downpayment_amount < twenty_percent_of_property_price) {
+      (this.state.property_price_number * 20) / 100;
+    if (
+      this.state.downpayment_amount_number < twenty_percent_of_property_price
+    ) {
       downpayment = "lessthan20";
     } else {
       downpayment = "greaterthan20";
     }
-
+    console.log("this.state.property_price", this.state.property_price_number);
+    console.log(
+      "twenty_percent_of_property_price",
+      twenty_percent_of_property_price
+    );
     if (
       name === "property_price" ||
       name === "downpayment_amount" ||
@@ -66,15 +76,15 @@ export class GetStartedHouseInfo extends Component {
       name == "annual_property_tax" ||
       name == "annual_home_owner_association_dues" ||
       name == "home_owner_insurance" ||
-      name == "home_owner_insurance" ||
       name == "home_price_growth"
     ) {
       updateValidators(this.validators, event.target.name, event.target.value);
       const validationErrorLength = this.validators[event.target.name].errors
         .length;
+      console.log(this.validators[event.target.name]);
       this.props.getValidationError(validationErrorLength);
     }
-
+    console.log("#######################################################",this.state)
     this.props.handleHouseInfo(downpayment, this.state);
   }
   handleBedroomRoomCount(count) {
@@ -139,6 +149,15 @@ export class GetStartedHouseInfo extends Component {
               onChange={this.handleChange}
               thousandSeparator={true}
               // prefix={"$"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  property_price: formattedValue,
+                });
+                await this.setState({
+                  property_price_number: value,
+                });
+              }}
             />
           </MDBCol>
           {displayValidationErrors(this.validators, "property_price")}
@@ -184,7 +203,15 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.downpayment_amount}
               onChange={this.handleChange}
               thousandSeparator={true}
-              // prefix={"$"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  downpayment_amount: formattedValue,
+                });
+                await this.setState({
+                  downpayment_amount_number: value,
+                });
+              }}
             />
             {/* <Input
               className="input-class-mdb"
@@ -263,12 +290,30 @@ export class GetStartedHouseInfo extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="annual_property_tax"
               value={this.state.annual_property_tax}
               onChange={this.handleChange}
+            /> */}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="annual_property_tax"
+              value={this.state.annual_property_tax}
+               onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  annual_property_tax: formattedValue,
+                });
+                await this.setState({
+                  annual_property_tax_number: value,
+                });
+                console.log(this.state);
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -288,12 +333,31 @@ export class GetStartedHouseInfo extends Component {
               </div>
             </span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="annual_home_owner_association_dues"
               value={this.state.annual_home_owner_association_dues}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="annual_home_owner_association_dues"
+              value={this.state.annual_home_owner_association_dues}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  annual_home_owner_association_dues: formattedValue,
+                });
+                await this.setState({
+                  annual_home_owner_association_dues_number: value,
+                });
+                console.log("nnual_home_owner_association_dues",this.state)
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -305,12 +369,31 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Home Owner's Insurance</span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="home_owner_insurance"
               value={this.state.home_owner_insurance}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="home_owner_insurance"
+              value={this.state.home_owner_insurance}
+               onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  home_owner_insurance: formattedValue,
+                });
+                await this.setState({
+                  home_owner_insurance_number: value,
+                });
+                console.log("home_owner_insurance",this.state)
+              }}
             />
           </MDBCol>
         </MDBRow>

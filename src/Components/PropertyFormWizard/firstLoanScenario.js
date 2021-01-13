@@ -474,6 +474,7 @@ export class FirstLoanScenario extends Component {
                 handleDownpaymentData={this.handleDownpaymentData}
               />
             ) : null}
+            {console.log("this.props.downpayment",this.props.downpayment)}
           </div>
         )}
       </Fragment>

@@ -5,6 +5,8 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import NumberFormat from "react-number-format";
+
 import quss from "../../assets/images/que.png";
 export class ShowPmiOptionsSecondLoanARM extends Component {
   constructor() {
@@ -96,6 +98,16 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
               value={this.state.loanamountsecond2}
               onChange={this.handleChange}
             />
+
+<NumberFormat
+           className="input-class-mdb"
+           placeholder="Enter amount here"
+           name="loanamountsecond2"
+           value={this.state.loanamountsecond2}
+           onChange={this.handleChange}
+              thousandSeparator={true}
+            />
+
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">

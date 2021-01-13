@@ -7,11 +7,11 @@ const   HouseInfoValidator = {
         },
         message: "Property Price cannot be empty",
       },
-      {
-        // test: /^[0-9,]*$/,
-        test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
-        message: "only numbers are allowed!",
-      },
+      // {
+      //   // test: /^[0-9,]*$/,
+      //   test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
+      //   message: "only numbers are allowed!",
+      // },
     ],
     errors: [],
     valid: false,
@@ -29,10 +29,10 @@ const   HouseInfoValidator = {
         },
         message: "Downpayment Amount cannot exceed Home Price",
       },
-      {
-        test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
-        message: "only numbers are allowed!",
-      },
+      // {
+      //   test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
+      //   message: "only numbers are allowed!",
+      // },
       {
         test: (value) => {
           return Object.keys(value).length !== 0;
@@ -69,10 +69,11 @@ const   HouseInfoValidator = {
         },
         message: "Annual Property Tax cannot be empty",
       },
-      {
-        test: /^[0-9,]*$/,
-        message: "only numbers are allowed!",
-      },
+      // {
+      //   // test: /^[0-9,]*$/,
+      //   test:/^(\d{1,3}(\,?\d{2,3}){1,2})$/,
+      //   message: "only numbers are allowed!",
+      // },
     ],
     errors: [],
     valid: false,
@@ -86,10 +87,11 @@ const   HouseInfoValidator = {
         },
         message: "Annual home owner association dues cannot be empty",
       },
-      {
-        test:/^[0-9,]*$/,
-        message: "only numbers are allowed!",
-      },
+      // {
+      //   // test:/^[0-9,]*$/,
+      //   test:/^(\d{1,3}(\,?\d{2,3}){1,2})$/,
+      //   message: "only numbers are allowed!",
+      // },
     ],
     errors: [],
     valid: false,
@@ -103,10 +105,11 @@ const   HouseInfoValidator = {
         },
         message: "Home owner insurance cannot be empty",
       },
-      {
-        test: /^[0-9,]*$/,
-        message: "only numbers are allowed!",
-      },
+      // {
+        
+      //   test:/^(\d{1,3}(\,?\d{2,3}){1,2})$/,
+      //   message: "only numbers are allowed!",
+      // },
     ],
     errors: [],
     valid: false,
@@ -124,7 +127,7 @@ const   HouseInfoValidator = {
         message: "Home Price growth cannot be empty",
       },
       {
-        // test: /^[0-9,]*$/,
+       
         test: /^[0-9]\d*(\.\d+)*$/,
         // test:/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/,
         message: "only numbers are allowed!",

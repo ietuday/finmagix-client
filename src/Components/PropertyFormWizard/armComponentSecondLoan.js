@@ -5,6 +5,8 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+
+import NumberFormat from 'react-number-format';
 import ShowPmiOptionsSecondLoanARM from "./showPmiOptionsSecondLoanARM";
 import ArmMortgageProgramValidator from "../validatorRules/ArmMortgageProgramValidator";
 import { updateValidators } from "../../common/ValidatorFunction";
@@ -298,14 +300,24 @@ export class ARMComponentSecondLoan extends Component {
 <span className="tooltip-img-text">Enter the amount you plan to borrow for this mortgage </span>
 </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="loan_amount"
               value={this.state.loan_amount}
               onChange={this.handleChange}
-            />
+            /> */}
           </MDBCol>
+          <NumberFormat
+             className="input-class-mdb"
+             placeholder="Enter amount here"
+             name="loan_amount"
+             value={this.state.loan_amount}
+             onChange={this.handleChange}
+              thousandSeparator={true}
+              // prefix={"$"}
+            />
+
         </MDBRow>
         {displayValidationErrors(this.validators, "loan_amount")}
         <MDBRow className="margin20">

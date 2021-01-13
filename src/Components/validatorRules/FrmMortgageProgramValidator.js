@@ -8,13 +8,16 @@ const FrmMortgageProgramValidator = {
           },
           message: "Loan amount cannot be empty",
         },
-        {
-          // test: /^[0-9,]*$/,
-          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
-          message: "only numbers are allowed!",
-        },
+        // {
+        //   // test: /^[0-9,]*$/,
+        //   test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
+        //   message: "only numbers are allowed!",
+        // },
         {
           test: (value) => {
+            console.log("value",value)
+            console.log("HouseInfoValidator.property_price",HouseInfoValidator.property_price)
+            console.log("HouseInfoValidator.property_price",Number(HouseInfoValidator.property_price))
             return (
               value <= HouseInfoValidator.property_price.state
             );

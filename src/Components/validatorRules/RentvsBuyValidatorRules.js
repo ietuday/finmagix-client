@@ -9,7 +9,8 @@ current_monthly_rent_payment: {
           message: "Current monthly rent payment cannot be empty",
         },
         {
-          test: /^[0-9,]*$/,
+          // test: /^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],

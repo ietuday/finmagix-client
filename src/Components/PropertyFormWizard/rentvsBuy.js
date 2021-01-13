@@ -17,6 +17,7 @@ import {
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
 import { setRentvsBuyFilledStatus } from "../../routes/utils";
+import NumberFormat from "react-number-format";
 
 import quss from "../../assets/images/que.png";
 
@@ -124,14 +125,25 @@ export class RentvsBuy extends Component {
                   Current monthly rent payment
                 </span>
                 <br />
-                <Input
+                {/* <Input
                   type="text"
                   className="input-class-mdb"
                   placeholder="Enter amount here"
                   name="current_monthly_rent_payment"
                   value={this.state.current_monthly_rent_payment}
                   onChange={this.handleChange}
-                />
+                /> */}
+            <NumberFormat
+                  className="input-class-mdb"
+                  placeholder="Enter amount here"
+                  name="current_monthly_rent_payment"
+                  value={this.state.current_monthly_rent_payment}
+                  onChange={this.handleChange}
+                  thousandSeparator={true}
+            />
+
+
+
               </MDBCol>
             </MDBRow>
             {displayValidationErrors(

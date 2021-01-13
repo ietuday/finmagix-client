@@ -15,6 +15,9 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Tax2Validator from "../validatorRules/Tax2Validator";
 import { updateValidators } from "../../common/ValidatorFunction";
+
+import NumberFormat from "react-number-format";
+
 import {
   resetValidators,
   displayValidationErrors,
@@ -94,13 +97,24 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
  home acquisition debt. Source: IRS Publication 936 </span>
 </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="avg_loan_balance_for_grandfathered_debt"
               value={this.state.avg_loan_balance_for_grandfathered_debt}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+        className="input-class-mdb"
+        placeholder="Enter amount here"
+        name="avg_loan_balance_for_grandfathered_debt"
+        value={this.state.avg_loan_balance_for_grandfathered_debt}
+        onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(this.validators, "avg_loan_balance_for_grandfathered_debt")}
@@ -115,13 +129,25 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
              It must also be secured by that home. Source: IRS publication 936 </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="avg_loan_balance_for_home_acquisition_debt"
               value={this.state.avg_loan_balance_for_home_acquisition_debt}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+     className="input-class-mdb"
+     placeholder="Enter amount here"
+     name="avg_loan_balance_for_home_acquisition_debt"
+     value={this.state.avg_loan_balance_for_home_acquisition_debt}
+     onChange={this.handleChange}
+              thousandSeparator={true}
             />
+
+
+
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(this.validators, "avg_loan_balance_for_home_acquisition_debt")}
@@ -139,6 +165,17 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
               value={this.state.paid_mortgage_on_gf_ha_debt}
               onChange={this.handleChange}
             />
+
+<NumberFormat
+     className="input-class-mdb"
+     placeholder="Enter % here"
+     name="paid_mortgage_on_gf_ha_debt"
+     value={this.state.paid_mortgage_on_gf_ha_debt}
+     onChange={this.handleChange}
+              thousandSeparator={true}
+            />
+
+
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(this.validators, "paid_mortgage_on_gf_ha_debt")}

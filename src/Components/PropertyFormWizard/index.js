@@ -258,6 +258,7 @@ export class StepperComponent extends Component {
     });
   };
   getHouseInfoValidationError = (error) => {
+    console.log("getHouseInfoValidationError------------",error)
     this.setState({
       houseInofValidationErrors: error,
     });
