@@ -84,8 +84,7 @@ export class GetStartedHouseInfo extends Component {
       console.log(this.validators[event.target.name]);
       this.props.getValidationError(validationErrorLength);
     }
-    console.log("#######################################################",this.state)
-    this.props.handleHouseInfo(downpayment, this.state);
+this.props.handleHouseInfo(downpayment, this.state);
   }
   handleBedroomRoomCount(count) {
     this.setState({

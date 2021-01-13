@@ -45,7 +45,8 @@ const Tax2Validator = {
           message: "Paid mortgage of tax cannot be empty",
         },
         {
-          test: /^[0-9]\d*(\.\d+)*$/,
+          // test: /^[0-9]\d*(\.\d+)*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],
