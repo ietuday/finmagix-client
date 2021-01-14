@@ -67,6 +67,8 @@ export class ARMComponentFirstLoan extends Component {
       ceiling2: 0,
       periodicadjcap2: 0,
       rateadd2: 0,
+      points_percentage: 0,
+      closing_costs_percentage: 0,
     };
     this.validators = ArmMortgageProgramValidator;
     resetValidators(this.validators);
@@ -613,16 +615,33 @@ export class ARMComponentFirstLoan extends Component {
                   </span>
                 </div>
                 <br />
-                <Input
+                {/* <Input
                   className="input-class-mdb"
                   placeholder="Enter amount here"
                   name="points"
                   value={this.state.points}
                   onChange={this.handleChange}
+                /> */}
+                <NumberFormat
+                  className="input-class-mdb"
+                  placeholder="Enter amount here"
+                  name="points_percentage"
+                  value={this.state.points_percentage}
+                  onChange={this.handleChange}
+                  suffix={"%"}
+                  onValueChange={async (values) => {
+                    const { formattedValue, value } = values;
+                    await this.setState({
+                      points: value,
+                    });
+                    await this.setState({
+                      points_percentage: formattedValue,
+                    });
+                  }}
                 />
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "points")}
+            {/* {displayValidationErrors(this.validators, "points")} */}
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -641,12 +660,30 @@ export class ARMComponentFirstLoan extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="closing_costs"
               value={this.state.closing_costs}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="closing_costs_percentage"
+              value={this.state.closing_costs_percentage}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  closing_costs: value,
+                });
+                await this.setState({
+                  closing_costs_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>

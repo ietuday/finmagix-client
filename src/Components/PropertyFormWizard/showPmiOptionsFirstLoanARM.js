@@ -44,6 +44,8 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
       ceiling2: "0",
       periodicadjcap2: "0",
       rateadd2: "0",
+      second_mortgage_closing_costs_percentage: "0",
+      second_mortgage_points_percentage:"0"
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -193,12 +195,29 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="second_mortgage_points"
               value={this.state.second_mortgage_points}
               onChange={this.handleChange}
+            /> */}
+            <NumberFormat
+             className="input-class-mdb"
+             placeholder="Enter amount here"
+             name="second_mortgage_points_percentage"
+             value={this.state.second_mortgage_points_percentage}
+             onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  second_mortgage_points: value,
+                });
+                await this.setState({
+                  second_mortgage_points_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -219,12 +238,30 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="second_mortgage_closing_costs"
               value={this.state.second_mortgage_closing_costs}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="second_mortgage_closing_costs_percentage"
+              value={this.state.second_mortgage_closing_costs_percentage}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  second_mortgage_closing_costs: value,
+                });
+                await this.setState({
+                  second_mortgage_closing_costs_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
