@@ -394,7 +394,7 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
- 
+      console.log(this.state.houseInofValidationErrors,isFormValid("house_info") )
       this.state.houseInofValidationErrors === 0 && isFormValid("house_info")
         ? this.setState({
             activeStep: newActiveStep,
@@ -410,6 +410,8 @@ export class StepperComponent extends Component {
       this.state.propertyInfo['home_price_growth'] = String(
         Number(this.state.propertyInfo["home_price_growth"]) / 100
       );
+      console.log(this.state)
+
       PropertyInfoCreate(
         this.state.propertyInfo,
         this.onSuccessHouseInfo,

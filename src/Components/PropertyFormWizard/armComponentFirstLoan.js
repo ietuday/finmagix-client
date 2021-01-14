@@ -6,7 +6,7 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 import ShowPmiOptionsFirstLoanARM from "./showPmiOptionsFirstLoanARM";
 import ArmMortgageProgramValidator from "../validatorRules/ArmMortgageProgramValidator";
 import { updateValidators } from "../../common/ValidatorFunction";
@@ -25,11 +25,16 @@ export class ARMComponentFirstLoan extends Component {
       loan_term: "15",
       select_loan_program: "1/1 ARM",
       initial_interest_rate: 0,
+      initial_interest_rate_percentage: 0,
       first_interest_rate_adj_cap: 0,
+      first_interest_rate_adj_cap_percentage: 0,
       floor_interest_rate: 0,
+      floor_interest_rate_percentage: 0,
       ceiling_interest_rate: 0,
+      ceiling_interest_rate_percentage: 0,
       period_cap: 0,
       rate_add: 0,
+      rate_add_percentage: 0,
       points: 0,
       closing_costs: 0,
       interest_only_option: "N",
@@ -369,16 +374,36 @@ export class ARMComponentFirstLoan extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Initial Interest Rate</span>
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter here"
               name="initial_interest_rate"
               value={this.state.initial_interest_rate}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="initial_interest_rate_percentage"
+              value={this.state.initial_interest_rate_percentage}
+              onChange={this.handleChange}
+              // thousandSeparator={true}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  initial_interest_rate: value,
+                });
+                await this.setState({
+                  initial_interest_rate_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "initial_interest_rate")}
+        {/* {displayValidationErrors(this.validators, "initial_interest_rate")} */}
+
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -396,17 +421,36 @@ export class ARMComponentFirstLoan extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="first_interest_rate_adj_cap"
               value={this.state.first_interest_rate_adj_cap}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="first_interest_rate_adj_cap_percentage"
+              value={this.state.first_interest_rate_adj_cap_percentage}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  first_interest_rate_adj_cap: value,
+                });
+                await this.setState({
+                  first_interest_rate_adj_cap_percentage: formattedValue,
+                });
+              }}
             />
-            {displayValidationErrors(
+
+            {/* {displayValidationErrors(
               this.validators,
               "first_interest_rate_adj_cap"
-            )}
+            )} */}
           </MDBCol>
         </MDBRow>
 
@@ -423,12 +467,30 @@ export class ARMComponentFirstLoan extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="floor_interest_rate"
               value={this.state.floor_interest_rate}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="floor_interest_rate_percentage"
+              value={this.state.floor_interest_rate_percentage}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  floor_interest_rate: value,
+                });
+                await this.setState({
+                  floor_interest_rate_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -446,16 +508,34 @@ export class ARMComponentFirstLoan extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="ceiling_interest_rate"
               value={this.state.ceiling_interest_rate}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="ceiling_interest_rate_percentage"
+              value={this.state.ceiling_interest_rate_percentage}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  ceiling_interest_rate: value,
+                });
+                await this.setState({
+                  ceiling_interest_rate_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "ceiling_interest_rate")}
+        {/* {displayValidationErrors(this.validators, "ceiling_interest_rate")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Period cap</span>
@@ -480,6 +560,7 @@ export class ARMComponentFirstLoan extends Component {
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(this.validators, "period_cap")}
+
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Rate add</span>
@@ -491,14 +572,34 @@ export class ARMComponentFirstLoan extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="rate_add"
               value={this.state.rate_add}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="rate_add_percentage"
+              value={this.state.rate_add_percentage}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  rate_add: value,
+                });
+                await this.setState({
+                  rate_add_percentage: formattedValue,
+                });
+              }}
             />
-            {displayValidationErrors(this.validators, "rate_add")}
+
+            {/* {displayValidationErrors(this.validators, "rate_add")} */}
+
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Points</span>

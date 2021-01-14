@@ -32,6 +32,8 @@ export class RentvsBuy extends Component {
       property_obj : localStorage.getItem("property_id"),
       radioValue:  false,
       rentinflation: "",
+      rate_of_investment_percentage: 0,
+      rentinflation_percentage: 0
     };
     this.validators = RentvsBuyValidator;
     resetValidators(this.validators);
@@ -45,9 +47,7 @@ export class RentvsBuy extends Component {
       [e.target.name]: e.target.value,
     });
     if (name === "current_monthly_rent_payment" ||
-      name === "annual_rent_insurance" ||
-      name === "rate_of_investment" ||
-      name == 'rentinflation'
+      name === "annual_rent_insurance" 
     ) {
     updateValidators(this.validators, e.target.name, e.target.value);
     const validationErrorLength = this.validators[e.target.name].errors.length;
@@ -177,32 +177,73 @@ export class RentvsBuy extends Component {
             This input is used in the 'rent vs. buy' comparison.</span>
             </div> 
                 <br />
-                <Input
+                {/* <Input
                   type="text"
                   className="input-class-mdb"
                   placeholder="Enter amount here %"
                   name="rate_of_investment"
                   value={this.state.rate_of_investment}
                   onChange={this.handleChange}
-                />
+                /> */}
+
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here %"
+              name="rate_of_investment_percentage"
+              value={this.state.rate_of_investment_percentage}
+              onChange={this.handleChange}
+              // thousandSeparator={true}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  rate_of_investment: value,
+                });
+                await this.setState({
+                  rate_of_investment_percentage: formattedValue,
+                });
+              }}
+            />
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "rate_of_investment")}
+            {/* {displayValidationErrors(this.validators, "rate_of_investment")} */}
 
             <MDBRow className="margin20 marginbottom20">
               <MDBCol md="12">
                 <span className="get-started-label">Rate Inflation</span>
                 <br />
-                <Input
+                {/* <Input
                   type="text"
                   className="input-class-mdb"
                   placeholder="Enter amount here %"
                   name="rentinflation"
                   value={this.state.rentinflation}
                   onChange={this.handleChange}
-                />
+                /> */}
+
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here %"
+              name="rentinflation_percentage"
+              value={this.state.rentinflation_percentage}
+              onChange={this.handleChange}
+              // thousandSeparator={true}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  rentinflation: value,
+                });
+                await this.setState({
+                  rentinflation_percentage: formattedValue,
+                });
+              }}
+            />
+
               </MDBCol>
-              {displayValidationErrors(this.validators, "rentinflation")}
+              {/* {displayValidationErrors(this.validators, "rentinflation")} */}
             </MDBRow>
           </div>
         ) : (

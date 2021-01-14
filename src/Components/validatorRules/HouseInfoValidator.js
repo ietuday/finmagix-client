@@ -118,25 +118,25 @@ const   HouseInfoValidator = {
 
 /* add new validations  */ 
 
-  home_price_growth: {
-    rules: [
-      {
-        test: (value) => {
-          return Object.keys(value).length !== 0;
-        },
-        message: "Home Price growth cannot be empty",
-      },
-      {
+  // home_price_growth: {
+  //   rules: [
+  //     {
+  //       test: (value) => {
+  //         return Object.keys(value).length !== 0;
+  //       },
+  //       message: "Home Price growth cannot be empty",
+  //     },
+  //     // {
        
-        test: /^[0-9]\d*(\.\d+)*$/,
-        // test:/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/,
-        message: "only numbers are allowed!",
-      },
-    ],
-    errors: [],
-    valid: false,
-    state: "",
-  },
+  //     //   test: /^[0-9]\d*(\.\d+)*$/,
+  //     //   // test:/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/,
+  //     //   message: "only numbers are allowed!",
+  //     // },
+  //   ],
+  //   errors: [],
+  //   valid: false,
+  //   state: "",
+  // },
 
 
 

@@ -29,6 +29,12 @@ export class PersonalFinance extends Component {
           ? JSON.parse(localStorage.getItem("personal_finance_array"))
               .marginal_tax_rate
           : "",
+      marginal_tax_rate_percentage:  Object.entries(
+        JSON.parse(localStorage.getItem("personal_finance_array"))
+      ).length !== 0
+        ? JSON.parse(localStorage.getItem("personal_finance_array"))
+            .marginal_tax_rate + "%"
+        : "",
       annual_gross_income:
         Object.entries(
           JSON.parse(localStorage.getItem("personal_finance_array"))
@@ -246,11 +252,11 @@ export class PersonalFinance extends Component {
             /> */}
 
             <NumberFormat
-             className="input-class-mdb"
-             placeholder="Enter amount here"
-             name="monthly_debt_payments"
-             value={this.state.monthly_debt_payments}
-             onChange={this.handleChange}
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="monthly_debt_payments"
+              value={this.state.monthly_debt_payments}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
 
@@ -322,13 +328,32 @@ export class PersonalFinance extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               type="number"
               className="input-class-mdb"
               placeholder="Enter amount here %"
-              name="marginal_tax_rate"
-              value={this.state.marginal_tax_rate}
+              name="marginal_tax_rate_percentage"
+              value={this.state.marginal_tax_rate_percentage}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here %"
+              name="marginal_tax_rate_percentage"
+              value={this.state.marginal_tax_rate_percentage}
+              onChange={this.handleChange}
+              // thousandSeparator={true}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  marginal_tax_rate: value,
+                });
+                await this.setState({
+                  marginal_tax_rate_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>

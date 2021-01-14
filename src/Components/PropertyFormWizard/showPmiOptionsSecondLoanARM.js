@@ -12,35 +12,36 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
   constructor() {
     super();
     this.state = {
-      pmi_amount : "",
-      second_mortgage_loan_amount:"",
-      second_mortgage_loan_term:"",
-      second_mortgage_interest:"",
-      second_mortgage_points:"",
-      second_mortgage_closing_costs:"",
+      pmi_amount: "",
+      second_mortgage_loan_amount: "",
+      second_mortgage_loan_term: "",
+      second_mortgage_interest: "",
+      second_mortgage_interest_percentage: "",
+      second_mortgage_points: "",
+      second_mortgage_closing_costs: "",
       PMIOptions: "PMI",
       showSecondloanOption: false,
-      secondmtgpmichoice1:"",
-      PMIfirst1:"0",
-      loanamountsecond1:"0",
-      Pmtsecond1:"0",
-      ARMtype1:"0",
-      ARM1rate:"0",
-      ARMfirstadjin1:"0",
-      floor1:"0",
-      ceiling1:"0",
-      periodicadjcap1:"0",
-      rateadd1:"0",
-      secondmtgpmichoice2:"0",
-      PMIfirst2:"0",
-      loanamountsecond2:"0",
-      Pmtsecond2:"0",
-      ARM2rate:"0",
-      ARMfirstadjin2:"0",
-      floor2:"0",
-      ceiling2:"0",
-      periodicadjcap2:"0",
-      rateadd2:"0",
+      secondmtgpmichoice1: "",
+      PMIfirst1: "0",
+      loanamountsecond1: "0",
+      Pmtsecond1: "0",
+      ARMtype1: "0",
+      ARM1rate: "0",
+      ARMfirstadjin1: "0",
+      floor1: "0",
+      ceiling1: "0",
+      periodicadjcap1: "0",
+      rateadd1: "0",
+      secondmtgpmichoice2: "0",
+      PMIfirst2: "0",
+      loanamountsecond2: "0",
+      Pmtsecond2: "0",
+      ARM2rate: "0",
+      ARMfirstadjin2: "0",
+      floor2: "0",
+      ceiling2: "0",
+      periodicadjcap2: "0",
+      rateadd2: "0",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -87,27 +88,29 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Loan Amount</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-<span className="tooltip-img-text">Enter the amount you plan to borrow for this mortgage </span>
-</div>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Enter the amount you plan to borrow for this mortgage{" "}
+              </span>
+            </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="loanamountsecond2"
               value={this.state.loanamountsecond2}
               onChange={this.handleChange}
-            />
+            /> */}
 
-<NumberFormat
-           className="input-class-mdb"
-           placeholder="Enter amount here"
-           name="loanamountsecond2"
-           value={this.state.loanamountsecond2}
-           onChange={this.handleChange}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="loanamountsecond2"
+              value={this.state.loanamountsecond2}
+              onChange={this.handleChange}
               thousandSeparator={true}
             />
-
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -136,22 +139,45 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
               Interest on your second mortgage
             </span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="second_mortgage_interest"
               value={this.state.second_mortgage_interest}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="second_mortgage_interest_percentage"
+              value={this.state.second_mortgage_interest_percentage}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  second_mortgage_interest: value,
+                });
+                await this.setState({
+                  second_mortgage_interest_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Points</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-<span className="tooltip-img-text">Input the points you may need to pay on your loan expressed as a % of the loan amount.
- For e.g. 2 points is 2% of the loan amount. Points are levied to cover origination costs or reduce interest rate. </span>
-</div>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Input the points you may need to pay on your loan expressed as a
+                % of the loan amount. For e.g. 2 points is 2% of the loan
+                amount. Points are levied to cover origination costs or reduce
+                interest rate.{" "}
+              </span>
+            </div>
             <br />
             <Input
               className="input-class-mdb"
@@ -166,13 +192,17 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
           <MDBCol md="12">
             {/* <span className="get-started-label">Closing costs</span> */}
             <span className="get-started-label">Closing costs</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">These are fees charged by the lender to the
-             borrower for offering the loan. These may include home appraisal fees, 
-             credit appraisal fees etc. Do not include any 'points' you have to pay on 
-             the loan. Other closing costs may include escrow fees, title insurance, 
-             recording fee, survey fee etc. These can range from 0.3% - 1% of the loan 
-             amount or slightly higher based on the lender.</span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                These are fees charged by the lender to the borrower for
+                offering the loan. These may include home appraisal fees, credit
+                appraisal fees etc. Do not include any 'points' you have to pay
+                on the loan. Other closing costs may include escrow fees, title
+                insurance, recording fee, survey fee etc. These can range from
+                0.3% - 1% of the loan amount or slightly higher based on the
+                lender.
+              </span>
             </div>
             <br />
             <Input
@@ -184,7 +214,6 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
             />
           </MDBCol>
         </MDBRow>
-
       </div>
     );
     return (

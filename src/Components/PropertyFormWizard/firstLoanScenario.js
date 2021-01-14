@@ -28,6 +28,7 @@ export class FirstLoanScenario extends Component {
       loan_amount: 0,
       loan_term: 30,
       interest: 0,
+      interest_percentage: 0,
       points: 0,
       closing_costs: 0,
       interest_only_option: "N",
@@ -390,15 +391,37 @@ export class FirstLoanScenario extends Component {
             <span className="tooltip-img-text">Interest rate is the cost of borrowing or the amount charged on the first mortgage. Enter Interest % and not APR %. </span>
             </div>
                 <br />
-                <Input
+                {/* <Input
                   className="input-class-mdb"
                   placeholder="Enter amount here"
                   name="interest"
                   value={this.state.interest}
                   onChange={this.handleChange}
-                />
+                /> */}
+
+               <NumberFormat
+                className="input-class-mdb"
+                placeholder="Enter amount here"
+                name="interest_percentage"
+                value={this.state.interest_percentage}
+                onChange={this.handleChange}
+                // thousandSeparator={true}
+                suffix={'%'}
+                onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  interest: value,
+                });
+                await this.setState({
+                  interest_percentage: formattedValue,
+                });
+              }}
+            />
+
+
+
               </MDBCol>
-              {displayValidationErrors(this.validators, "interest")}
+              {/* {displayValidationErrors(this.validators, "interest")} */}
             </MDBRow>
 {/* new fields */}
 

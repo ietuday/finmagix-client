@@ -18,6 +18,7 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
       second_mortgage_loan_amount: "0",
       second_mortgage_loan_term: "0",
       second_mortgage_interest: "0",
+      second_mortgage_interest_percentage: "0",
       second_mortgage_points: "0",
       second_mortgage_closing_costs: "0",
       PMIOptions: "PMI",
@@ -107,12 +108,22 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
             </div>
 
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="loanamountsecond1"
               value={this.state.loanamountsecond1}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="loanamountsecond1"
+              value={this.state.loanamountsecond1}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              // prefix={"$"}
             />
           </MDBCol>
         </MDBRow>
@@ -142,12 +153,30 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
               Interest on your second mortgage
             </span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="second_mortgage_interest"
               value={this.state.second_mortgage_interest}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="second_mortgage_interest_percentage"
+              value={this.state.second_mortgage_interest_percentage}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  second_mortgage_interest: value,
+                });
+                await this.setState({
+                  second_mortgage_interest_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>

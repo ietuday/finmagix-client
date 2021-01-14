@@ -16,6 +16,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       second_mortgage_loan_amount: "",
       second_mortgage_loan_term: "",
       second_mortgage_interest: "",
+      second_mortgage_interest_percentage:"",
       second_mortgage_points: "",
       second_mortgage_closing_costs: "",
       PMIOptions: "PMI",
@@ -146,13 +147,33 @@ export class ShowPmiOptionsSecondLoan extends Component {
               Interest on your second mortgage
             </span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="second_mortgage_interest"
               value={this.state.second_mortgage_interest}
               onChange={this.handleChange}
+            /> */}
+<NumberFormat
+                className="input-class-mdb"
+                placeholder="Enter amount here"
+                name="second_mortgage_interest_percentage"
+                value={this.state.second_mortgage_interest_percentage}
+                onChange={this.handleChange}
+                // thousandSeparator={true}
+                suffix={'%'}
+                onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  second_mortgage_interest: value,
+                });
+                await this.setState({
+                  second_mortgage_interest_percentage: formattedValue,
+                });
+              }}
             />
+
+
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">

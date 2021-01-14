@@ -40,6 +40,7 @@ export class GetStartedHouseInfo extends Component {
       home_owner_insurance: "",
       home_owner_insurance_number: "",
       home_price_growth: "",
+      home_price_growth_percentage: ""
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -55,6 +56,7 @@ export class GetStartedHouseInfo extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
+    console.log(this.state.home_price_growth)
     let twenty_percent_of_property_price =
       (this.state.property_price_number * 20) / 100;
     if (
@@ -75,15 +77,17 @@ export class GetStartedHouseInfo extends Component {
       name === "area_of_the_house" ||
       name == "annual_property_tax" ||
       name == "annual_home_owner_association_dues" ||
-      name == "home_owner_insurance" ||
-      name == "home_price_growth"
+      name == "home_owner_insurance" 
     ) {
+      console.log(this.state.home_price_growth)
       updateValidators(this.validators, event.target.name, event.target.value);
       const validationErrorLength = this.validators[event.target.name].errors
         .length;
       console.log(this.validators[event.target.name]);
       this.props.getValidationError(validationErrorLength);
+      console.log(this.state.home_price_growth)
     }
+    console.log(this.state)
 this.props.handleHouseInfo(downpayment, this.state);
   }
   handleBedroomRoomCount(count) {
@@ -147,7 +151,7 @@ this.props.handleHouseInfo(downpayment, this.state);
               value={this.state.property_price}
               onChange={this.handleChange}
               thousandSeparator={true}
-              // prefix={"$"}
+              // suffix={"%"}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
                 await this.setState({
@@ -168,15 +172,33 @@ this.props.handleHouseInfo(downpayment, this.state);
           <MDBCol md="12">
             <span className="get-started-label">Home Price Growth</span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount in Percentage"
               name="home_price_growth"
               value={this.state.home_price_growth}
               onChange={this.handleChange}
+            /> */}
+             <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount in Percentage"
+              name="home_price_growth_percentage"
+              value={this.state.home_price_growth_percentage}
+              onChange={this.handleChange}
+              // thousandSeparator={true}
+              suffix={'%'}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  home_price_growth: value,
+                });
+                await this.setState({
+                  home_price_growth_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
-          {displayValidationErrors(this.validators, "home_price_growth")}
+          {/* {displayValidationErrors(this.validators, "home_price_growth")} */}
         </MDBRow>
 
         {/* End */}
