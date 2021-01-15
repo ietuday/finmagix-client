@@ -15,6 +15,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
 
     this.state = {
       pmi_amount: "0",
+      pmi_amount_number: "0",
       second_mortgage_loan_amount: "0",
       second_mortgage_loan_term: "0",
       second_mortgage_interest: "0",
@@ -26,6 +27,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
       secondmtgpmichoice1: "0",
       PMIfirst1: "0",
       loanamountsecond1: "0",
+      loanamountsecond1_number:"0",
       Pmtsecond1: "0",
       ARMtype1: "",
       ARM1rate: "",
@@ -45,8 +47,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
       periodicadjcap2: "",
       rateadd2: "",
       second_mortgage_closing_costs_percentage: "",
-      second_mortgage_points_percentage:""
-      
+      second_mortgage_points_percentage: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -93,6 +94,15 @@ export class ShowPmiOptionsFirstLoan extends Component {
             value={this.state.pmi_amount}
             onChange={this.handleChange}
             thousandSeparator={true}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                pmi_amount_number: formattedValue,
+              });
+              await this.setState({
+                pmi_amount: value,
+              });
+            }}
           />
         </MDBCol>
       </MDBRow>
@@ -118,13 +128,22 @@ export class ShowPmiOptionsFirstLoan extends Component {
               value={this.state.loanamountsecond1}
               onChange={this.handleChange}
             /> */}
-            <NumberFormat
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="loanamountsecond1"
-              value={this.state.loanamountsecond1}
-              onChange={this.handleChange}
+       <NumberFormat
+                className="input-class-mdb"
+                placeholder="Enter amount here"
+                name="loanamountsecond1"
+                value={this.state.loanamountsecond1}
+                onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  loanamountsecond1_number: formattedValue,
+                });
+                await this.setState({
+                  loanamountsecond1: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>

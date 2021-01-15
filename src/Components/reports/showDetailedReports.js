@@ -178,7 +178,7 @@ export class ShowDetailedReports extends Component {
   calculateHome(data) {
     return {
       Homeaddress: data.GetSinglePropertyResponse['data'][0].house_address,
-      homePrice: data.GetSinglePropertyResponse['data'][0].property_price,
+      homePrice: Number(data.GetSinglePropertyResponse['data'][0].property_price),
       Zipcode: Number(data.GetSinglePropertyResponse['data'][0].house_zip_code),
       Statename: data.GetSinglePropertyResponse['data'][0].house_state,
       durationofstay: Number(data.GetSinglePropertyResponse['data'][0].stay_duration),
@@ -186,12 +186,12 @@ export class ShowDetailedReports extends Component {
       Homesqfootage: Number(data.GetSinglePropertyResponse['data'][0].area_of_the_house),
       Homebedrooms: Number(data.GetSinglePropertyResponse['data'][0].no_of_bedrooms),
       Homebathrooms: Number(data.GetSinglePropertyResponse['data'][0].no_of_bathrooms),
-      Propertytax: data.GetSinglePropertyResponse['data'][0].annual_property_tax,
-      HOI: data.GetSinglePropertyResponse['data'][0].home_owner_insurance,
-      HOA: data.GetSinglePropertyResponse['data'][0].annual_home_owner_association_dues,
-      Downpaymentnew: data.GetSinglePropertyResponse['data'][0].downpayment_amount,
+      Propertytax: Number(data.GetSinglePropertyResponse['data'][0].annual_property_tax),
+      HOI: Number(data.GetSinglePropertyResponse['data'][0].home_owner_insurance),
+      HOA: Number(data.GetSinglePropertyResponse['data'][0].annual_home_owner_association_dues),
+      Downpaymentnew: Number(data.GetSinglePropertyResponse['data'][0].downpayment_amount),
       Officeaddress: data.GetSinglePropertyResponse['data'][0].office_address,
-      OfficeZipcode:  Number(data.GetSinglePropertyResponse['data'][0].office_zip_code),
+      OfficeZipcode:  data.GetSinglePropertyResponse['data'][0].office_zip_code,
       OfficeStatename: data.GetSinglePropertyResponse['data'][0].office_state_name,
     }
   }
@@ -229,11 +229,11 @@ export class ShowDetailedReports extends Component {
     const personal_finance = JSON.parse(localStorage.getItem('personal_finance_array')).marginal_tax_rate
     return {
       FICOscore: this.state.personalFinace.fico_score_range  ? this.state.personalFinace.fico_score_range : "",
-      Federalincome: this.state.personalFinace.federal_income ? this.state.personalFinace.federal_income : 0,
+      Federalincome: this.state.personalFinace.federal_income ? Number(this.state.personalFinace.federal_income) : 0,
       Taxrate: this.state.personalFinace.marginal_tax_rate ? Number(this.state.personalFinace.marginal_tax_rate) : 0,
-      Mtlydebt: this.state.personalFinace.monthly_debt_payments ? this.state.personalFinace.monthly_debt_payments : 0,
+      Mtlydebt: this.state.personalFinace.monthly_debt_payments ? Number(this.state.personalFinace.monthly_debt_payments) : 0,
       FilingStatus: this.state.personalFinace.filling_status ? Number(this.state.personalFinace.filling_status) : 0,
-      Nonhousingoption: this.state.personalFinace.monthly_non_housing_expenses ? this.state.personalFinace.monthly_non_housing_expenses : 0,
+      Nonhousingoption: this.state.personalFinace.monthly_non_housing_expenses ? Number(this.state.personalFinace.monthly_non_housing_expenses) : 0,
       Mtlyutilities: data.GetSinglePropertyResponse['data'][0].personal_finances.detail_non_housing_expenses && data.GetSinglePropertyResponse['data'][0].personal_finances.detail_non_housing_expenses.id ? Number(data.GetSinglePropertyResponse['data'][0].personal_finances.detail_non_housing_expenses.utilities) : 0,
       Mtlytelinternet: data.GetSinglePropertyResponse['data'][0].personal_finances.detail_non_housing_expenses && data.GetSinglePropertyResponse['data'][0].personal_finances.detail_non_housing_expenses.id ? Number(data.GetSinglePropertyResponse['data'][0].personal_finances.detail_non_housing_expenses.telephone_internet) : 0,
       MtlyTE: data.GetSinglePropertyResponse['data'][0].personal_finances.detail_non_housing_expenses && data.GetSinglePropertyResponse['data'][0].personal_finances.detail_non_housing_expenses.id ? Number(data.GetSinglePropertyResponse['data'][0].personal_finances.detail_non_housing_expenses.travel_entertainment) : 0,
@@ -249,7 +249,7 @@ export class ShowDetailedReports extends Component {
       return {
         loanchoicefirst1: 1,
         loanchoicefirst1_details: {
-          loanamountfirst1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? data.GetSinglePropertyResponse['data'][0].first_frm.loan_amount : 0.0,
+          loanamountfirst1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.loan_amount) : 0.0,
           termfirst1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.loan_term) : 0,
           interestfirst1: data.GetSinglePropertyResponse['data'][0].first_frm.interest ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.interest) : 0.0,
           pointsfirst1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.points) : 0.0,
@@ -257,8 +257,8 @@ export class ShowDetailedReports extends Component {
           interestonlyfirst1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? data.GetSinglePropertyResponse['data'][0].first_frm.interest_only_option : "N",
           interestonlyfirstterm1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.interest_only_period) : 0,
           secondmtgpmichoice1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.secondmtgpmichoice1) : 0,
-          PMIfirst1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? data.GetSinglePropertyResponse['data'][0].first_frm.pmi : 0,
-          loanamountsecond1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? data.GetSinglePropertyResponse['data'][0].first_frm.loanamountsecond1 : 0,
+          PMIfirst1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.pmi) : 0,
+          loanamountsecond1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.loanamountsecond1) : 0,
           interestsecond1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.second_mortgage_loan_term) : 0,
           termsecond1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.second_mortgage_interest) : 0,
           pointssecond1: data.GetSinglePropertyResponse['data'][0].first_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_frm.second_mortgage_points) : 0,
@@ -278,7 +278,7 @@ export class ShowDetailedReports extends Component {
       return {
         loanchoicefirst1: 2,
         loanchoicefirst1_details: {
-          loanamountfirst1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? data.GetSinglePropertyResponse['data'][0].first_arm.loan_amount : 0.0,
+          loanamountfirst1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.loan_amount) : 0.0,
           termfirst1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.loan_term) : 0,
           interestfirst1: data.GetSinglePropertyResponse['data'][0].first_arm.interest ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.interest) : 0.0,
           pointsfirst1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.points) : 0.0,
@@ -286,8 +286,8 @@ export class ShowDetailedReports extends Component {
           interestonlyfirst1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? data.GetSinglePropertyResponse['data'][0].first_arm.interest_only_option : "N",
           interestonlyfirstterm1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.interest_only_period) : 0,
           secondmtgpmichoice1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.secondmtgpmichoice2) : 0,
-          PMIfirst1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? data.GetSinglePropertyResponse['data'][0].first_arm.pmi : 0,
-          loanamountsecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? data.GetSinglePropertyResponse['data'][0].first_arm.loanamountsecond1 : 0,
+          PMIfirst1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.pmi) : 0,
+          loanamountsecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.loanamountsecond1) : 0,
           interestsecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.second_mortgage_interest) : 0,
           termsecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.second_mortgage_loan_term) : 0,
           // pointssecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.second_mortgage_points) : 0,
@@ -312,7 +312,7 @@ export class ShowDetailedReports extends Component {
       return {
         loanchoicefirst2: 1,
         loanchoicefirst2_details: {
-          loanamountfirst2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? data.GetSinglePropertyResponse['data'][0].second_frm.loan_amount : 0.0,
+          loanamountfirst2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.loan_amount) : 0.0,
           termfirst2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.loan_term) : 0,
           interestfirst2: data.GetSinglePropertyResponse['data'][0].second_frm.interest ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.interest) : 0.0,
           pointsfirst2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.points) : 0.0,
@@ -320,8 +320,8 @@ export class ShowDetailedReports extends Component {
           interestonlyfirst2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? data.GetSinglePropertyResponse['data'][0].second_frm.interest_only_option : "N",
           interestonlyfirstterm2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.interest_only_period) : 0,
           secondmtgpmichoice2:data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.secondmtgpmichoice2) : 0,
-          PMIfirst2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? data.GetSinglePropertyResponse['data'][0].second_frm.pmi : 0,
-          loanamountsecond2: data.GetSinglePropertyResponse['data'][0].second_frm.loanamountsecond2 ? data.GetSinglePropertyResponse['data'][0].second_frm.loanamountsecond2 : 0,
+          PMIfirst2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.pmi) : 0,
+          loanamountsecond2: data.GetSinglePropertyResponse['data'][0].second_frm.loanamountsecond2 ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.loanamountsecond2) : 0,
           interestsecond2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.second_mortgage_loan_term) : 0,
           termsecond2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.second_mortgage_interest) : 0,
           // pointssecond2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.second_mortgage_points) : 0,
@@ -368,7 +368,7 @@ export class ShowDetailedReports extends Component {
 
 
 
-          loanamountfirst2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? data.GetSinglePropertyResponse['data'][0].second_arm.loan_amount : 0.0,
+          loanamountfirst2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.loan_amount) : 0.0,
           termfirst2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.loan_term) : 0,
           interestfirst2: data.GetSinglePropertyResponse['data'][0].second_arm.interest ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.interest) : 0.0,
           pointsfirst2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.points) : 0.0,
@@ -376,8 +376,8 @@ export class ShowDetailedReports extends Component {
           interestonlyfirst2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? data.GetSinglePropertyResponse['data'][0].second_arm.interest_only_option : "N",
           interestonlyfirstterm2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.interest_only_period) : 0,
           secondmtgpmichoice2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.secondmtgpmichoice2) : 0,
-          PMIfirst2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? data.GetSinglePropertyResponse['data'][0].second_arm.pmi : 0,
-          loanamountsecond2: data.GetSinglePropertyResponse['data'][0].second_arm.loanamountsecond2 ? data.GetSinglePropertyResponse['data'][0].second_arm.loanamountsecond2 : 0,
+          PMIfirst2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.pmi) : 0,
+          loanamountsecond2: data.GetSinglePropertyResponse['data'][0].second_arm.loanamountsecond2 ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.loanamountsecond2) : 0,
           interestsecond2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.second_mortgage_interest) : 0,
           termsecond2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.second_mortgage_loan_term) : 0,
           pointssecond2: data.GetSinglePropertyResponse['data'][0].second_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_arm.second_mortgage_points) : 0,
@@ -429,7 +429,7 @@ export class ShowDetailedReports extends Component {
 
   calculateScreen11(data) {
     return {
-      rent: data.GetSinglePropertyResponse['data'][0].rent_vs_buy && data.GetSinglePropertyResponse['data'][0].rent_vs_buy.id ? data.GetSinglePropertyResponse['data'][0].rent_vs_buy.current_monthly_rent_payment : 0.0,
+      rent: data.GetSinglePropertyResponse['data'][0].rent_vs_buy && data.GetSinglePropertyResponse['data'][0].rent_vs_buy.id ? Number(data.GetSinglePropertyResponse['data'][0].rent_vs_buy.current_monthly_rent_payment) : 0.0,
       //Need to add on DB and UI
       // rentinflation: data.GetSinglePropertyResponse['data'][0].rent_vs_buy && data.GetSinglePropertyResponse['data'][0].rent_vs_buy.id ? data.GetSinglePropertyResponse['data'][0].rent_vs_buy.rentinflation : 0.0,
       rentinflation: data.GetSinglePropertyResponse['data'][0].rent_vs_buy && data.GetSinglePropertyResponse['data'][0].rent_vs_buy.rentinflation ? Number(data.GetSinglePropertyResponse['data'][0].rent_vs_buy.rentinflation) : 0.0,
@@ -444,16 +444,16 @@ export class ShowDetailedReports extends Component {
   calculateScreen12(data) {
     return {
       Detailedtaxexpenses: this.state.taxes && this.state.taxes.detailed_tax_expenses ? "Y" : "N",
-      Medicalexpenses: this.state.taxes && this.state.taxes.id ? this.state.taxes.medical_and_dental_expenses : 0.0,
-      Stateorsalestax: this.state.taxes && this.state.taxes.id ? this.state.taxes.state_local_generalsales_taxes : 0.0,
-      Othertaxes: this.state.taxes && this.state.taxes.id ? this.state.taxes.other_taxes : 0.0,
+      Medicalexpenses: this.state.taxes && this.state.taxes.id ? Number(this.state.taxes.medical_and_dental_expenses) : 0.0,
+      Stateorsalestax: this.state.taxes && this.state.taxes.id ? Number(this.state.taxes.state_local_generalsales_taxes) : 0.0,
+      Othertaxes: this.state.taxes && this.state.taxes.id ? Number(this.state.taxes.other_taxes) : 0.0,
       Investmentinterest: this.state.taxes && this.state.taxes.id ? Number(this.state.taxes.tax_deductive_investment_interest) : 0.0,
-      Charitabledonation: this.state.taxes && this.state.taxes.id ? this.state.taxes.tax_deductible_charitable_donations : 0.0,
-      CasualtyTheft: this.state.taxes && this.state.taxes.id ? this.state.taxes.tax_deductible_casualty_and_theft_losses : 0.0,
+      Charitabledonation: this.state.taxes && this.state.taxes.id ? Number(this.state.taxes.tax_deductible_charitable_donations) : 0.0,
+      CasualtyTheft: this.state.taxes && this.state.taxes.id ? Number(this.state.taxes.tax_deductible_casualty_and_theft_losses) : 0.0,
       previousbalance: this.state.taxes && this.state.taxes.previous_balance ? "Y" : "N",
-      Grandfatherdebt: this.state.taxes && this.state.taxes.id ? this.state.taxes.avg_loan_balance_for_grandfathered_debt : 0.0,
-      Homeacquisitiondebt: this.state.taxes && this.state.taxes.id ? this.state.taxes.avg_loan_balance_for_home_acquisition_debt : 0.0,
-      _Pub936Line13a: this.state.taxes && this.state.taxes.id ? this.state.taxes.pub936_line_13a : 0.0,
+      Grandfatherdebt: this.state.taxes && this.state.taxes.id ? Number(this.state.taxes.avg_loan_balance_for_grandfathered_debt) : 0.0,
+      Homeacquisitiondebt: this.state.taxes && this.state.taxes.id ? Number(this.state.taxes.avg_loan_balance_for_home_acquisition_debt) : 0.0,
+      _Pub936Line13a: this.state.taxes && this.state.taxes.id ? Number(this.state.taxes.pub936_line_13a) : 0.0,
     }
   }
   render() {

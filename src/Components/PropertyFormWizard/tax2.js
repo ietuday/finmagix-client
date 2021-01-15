@@ -28,8 +28,11 @@ export class Tax2 extends Component {
     super();
     this.state = {
       avg_loan_balance_for_grandfathered_debt: "",
+      avg_loan_balance_for_grandfathered_debt_number: "",
       avg_loan_balance_for_home_acquisition_debt: "",
+      avg_loan_balance_for_home_acquisition_debt_number: "",
       paid_mortgage_on_gf_ha_debt: "",
+      paid_mortgage_on_gf_ha_debt_number:"",
       previous_balance: "N",
       showDetailedDeductionOption: false,
       showPreviousLoanBalanceButton: false,
@@ -115,6 +118,15 @@ export class Tax2 extends Component {
               value={this.state.avg_loan_balance_for_grandfathered_debt}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  avg_loan_balance_for_grandfathered_debt_number: formattedValue,
+                });
+                await this.setState({
+                  avg_loan_balance_for_grandfathered_debt: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -152,6 +164,15 @@ export class Tax2 extends Component {
               value={this.state.avg_loan_balance_for_home_acquisition_debt}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  avg_loan_balance_for_home_acquisition_debt_number: formattedValue,
+                });
+                await this.setState({
+                  avg_loan_balance_for_home_acquisition_debt: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -173,15 +194,24 @@ export class Tax2 extends Component {
               value={this.state.paid_mortgage_on_gf_ha_debt}
               onChange={this.handleChange}
             /> */}
-
-            <NumberFormat
-              className="input-class-mdb"
-              placeholder="Enter % here"
-              name="paid_mortgage_on_gf_ha_debt"
-              value={this.state.paid_mortgage_on_gf_ha_debt}
-              onChange={this.handleChange}
+     <NumberFormat
+             className="input-class-mdb"
+             placeholder="Enter amount here"
+             name="paid_mortgage_on_gf_ha_debt"
+             value={this.state.paid_mortgage_on_gf_ha_debt}
+             onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  paid_mortgage_on_gf_ha_debt_number: formattedValue,
+                });
+                await this.setState({
+                  paid_mortgage_on_gf_ha_debt: value,
+                });
+              }}
             />
+     
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(

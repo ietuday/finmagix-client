@@ -50,55 +50,129 @@ export class Taxes extends Component {
         ? JSON.parse(localStorage.getItem("tax_array"))
             .fedral_adjusted_gross_income
         : "",
+
+      fedral_adjusted_gross_income_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).fedral_adjusted_gross_income
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .fedral_adjusted_gross_income
+        : "",
+
       avg_loan_balance_for_grandfathered_debt: JSON.parse(
         localStorage.getItem("tax_array")
       ).avg_loan_balance_for_grandfathered_debt
         ? JSON.parse(localStorage.getItem("tax_array"))
             .avg_loan_balance_for_grandfathered_debt
         : "",
+      avg_loan_balance_for_grandfathered_debt_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_grandfathered_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_grandfathered_debt
+        : "",
+
       avg_loan_balance_for_home_acquisition_debt: JSON.parse(
         localStorage.getItem("tax_array")
       ).avg_loan_balance_for_home_acquisition_debt
         ? JSON.parse(localStorage.getItem("tax_array"))
             .avg_loan_balance_for_home_acquisition_debt
         : "",
+      avg_loan_balance_for_home_acquisition_debt_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_home_acquisition_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_home_acquisition_debt
+        : "",
+
       paid_mortgage_on_gf_ha_debt: JSON.parse(localStorage.getItem("tax_array"))
         .paid_mortgage_on_gf_ha_debt
         ? JSON.parse(localStorage.getItem("tax_array"))
             .paid_mortgage_on_gf_ha_debt
         : "",
+
+      paid_mortgage_on_gf_ha_debt_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).paid_mortgage_on_gf_ha_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .paid_mortgage_on_gf_ha_debt
+        : "",
+
       medical_and_dental_expenses: JSON.parse(localStorage.getItem("tax_array"))
         .medical_and_dental_expenses
         ? JSON.parse(localStorage.getItem("tax_array"))
             .medical_and_dental_expenses
         : "",
+
+      medical_and_dental_expenses_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).medical_and_dental_expenses
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .medical_and_dental_expenses
+        : "",
+
       state_local_generalsales_taxes: JSON.parse(
         localStorage.getItem("tax_array")
       ).state_local_generalsales_taxes
         ? JSON.parse(localStorage.getItem("tax_array"))
             .state_local_generalsales_taxes
         : "",
+      state_local_generalsales_taxes_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).state_local_generalsales_taxes
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .state_local_generalsales_taxes
+        : "",
+
       other_taxes: JSON.parse(localStorage.getItem("tax_array")).other_taxes
         ? JSON.parse(localStorage.getItem("tax_array")).other_taxes
         : "",
+
+      other_taxes_number: JSON.parse(localStorage.getItem("tax_array"))
+        .other_taxes
+        ? JSON.parse(localStorage.getItem("tax_array")).other_taxes
+        : "",
+
       tax_deductive_investment_interest: JSON.parse(
         localStorage.getItem("tax_array")
       ).tax_deductive_investment_interest
         ? JSON.parse(localStorage.getItem("tax_array"))
             .tax_deductive_investment_interest
         : "",
+
+      tax_deductive_investment_interest_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).tax_deductive_investment_interest
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .tax_deductive_investment_interest
+        : "",
+
       tax_deductible_charitable_donations: JSON.parse(
         localStorage.getItem("tax_array")
       ).tax_deductible_charitable_donations
         ? JSON.parse(localStorage.getItem("tax_array"))
             .tax_deductible_charitable_donations
         : "",
+      tax_deductible_charitable_donations_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).tax_deductible_charitable_donations
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .tax_deductible_charitable_donations
+        : "",
+
       tax_deductible_casualty_and_theft_losses: JSON.parse(
         localStorage.getItem("tax_array")
       ).tax_deductible_casualty_and_theft_losses
         ? JSON.parse(localStorage.getItem("tax_array"))
             .tax_deductible_casualty_and_theft_losses
         : "",
+
+      tax_deductible_casualty_and_theft_losses_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).tax_deductible_casualty_and_theft_losses
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .tax_deductible_casualty_and_theft_losses
+        : "",
+
       // pub936_line_13a:JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a ? JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a : "",
     };
     this.Tax1YesValidators = Tax1YesValidator;
@@ -249,6 +323,15 @@ export class Taxes extends Component {
             onChange={this.handleChange}
             placeholder="Enter amount here"
             thousandSeparator={true}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                fedral_adjusted_gross_income_number: formattedValue,
+              });
+              await this.setState({
+                fedral_adjusted_gross_income: value,
+              });
+            }}
           />
         </MDBCol>
       </MDBRow>
@@ -302,6 +385,15 @@ export class Taxes extends Component {
               onChange={this.handleChange}
               placeholder="Enter amount here"
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  fedral_adjusted_gross_income_number: formattedValue,
+                });
+                await this.setState({
+                  fedral_adjusted_gross_income: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -340,6 +432,15 @@ export class Taxes extends Component {
               value={this.state.medical_and_dental_expenses}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  medical_and_dental_expenses_number: formattedValue,
+                });
+                await this.setState({
+                  medical_and_dental_expenses: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -375,6 +476,15 @@ export class Taxes extends Component {
               value={this.state.state_local_generalsales_taxes}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  state_local_generalsales_taxes_number: formattedValue,
+                });
+                await this.setState({
+                  state_local_generalsales_taxes: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -408,6 +518,15 @@ export class Taxes extends Component {
               value={this.state.other_taxes}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  other_taxes_number: formattedValue,
+                });
+                await this.setState({
+                  other_taxes: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -440,7 +559,16 @@ export class Taxes extends Component {
               name="tax_deductive_investment_interest"
               value={this.state.tax_deductive_investment_interest}
               onChange={this.handleChange}
-              thousandSeparator={true}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  tax_deductive_investment_interest: value,
+                });
+                await this.setState({
+                  tax_deductive_investment_interest_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -457,7 +585,6 @@ export class Taxes extends Component {
               value={this.state.tax_deductible_charitable_donations}
               onChange={this.handleChange}
             /> */}
-
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
@@ -465,6 +592,15 @@ export class Taxes extends Component {
               value={this.state.tax_deductible_charitable_donations}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  tax_deductible_charitable_donations_number: formattedValue,
+                });
+                await this.setState({
+                  tax_deductible_charitable_donations: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -489,6 +625,15 @@ export class Taxes extends Component {
               value={this.state.tax_deductible_casualty_and_theft_losses}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  tax_deductible_casualty_and_theft_losses_number: formattedValue,
+                });
+                await this.setState({
+                  tax_deductible_casualty_and_theft_losses: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -530,6 +675,15 @@ export class Taxes extends Component {
               value={this.state.avg_loan_balance_for_grandfathered_debt}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  avg_loan_balance_for_grandfathered_debt_number: formattedValue,
+                });
+                await this.setState({
+                  avg_loan_balance_for_grandfathered_debt: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -555,7 +709,6 @@ export class Taxes extends Component {
               value={this.state.avg_loan_balance_for_home_acquisition_debt}
               onChange={this.handleChange}
             /> */}
-
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
@@ -563,6 +716,15 @@ export class Taxes extends Component {
               value={this.state.avg_loan_balance_for_home_acquisition_debt}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  avg_loan_balance_for_home_acquisition_debt_number: formattedValue,
+                });
+                await this.setState({
+                  avg_loan_balance_for_home_acquisition_debt: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -583,11 +745,20 @@ export class Taxes extends Component {
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here %"
+              placeholder="Enter amount here "
               name="paid_mortgage_on_gf_ha_debt"
               value={this.state.paid_mortgage_on_gf_ha_debt}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  paid_mortgage_on_gf_ha_debt_number: formattedValue,
+                });
+                await this.setState({
+                  paid_mortgage_on_gf_ha_debt: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>

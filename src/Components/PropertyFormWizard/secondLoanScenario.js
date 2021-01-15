@@ -25,6 +25,7 @@ export class SecondLoanScenario extends Component {
       mortage_program_type: "SECOND",
       mortgage_program_type_value: 1,
       loan_amount: 0,
+      loan_amount_number: 0,
       loan_term: 30,
       interest: 0,
       interest_percentage: 0,
@@ -51,8 +52,7 @@ export class SecondLoanScenario extends Component {
       PMIOptions: "PMI",
       armValidationErrors: 0,
       closing_costs_percentage: 0,
-      points_percentage:0
-
+      points_percentage: 0,
     };
     this.validators = FrmMortgageProgramValidator;
     resetValidators(this.validators);
@@ -254,6 +254,7 @@ export class SecondLoanScenario extends Component {
                   value={this.state.loan_amount}
                   onChange={this.handleChange}
                 /> */}
+
                 <NumberFormat
                   className="input-class-mdb"
                   placeholder="Enter amount here"
@@ -261,7 +262,15 @@ export class SecondLoanScenario extends Component {
                   value={this.state.loan_amount}
                   onChange={this.handleChange}
                   thousandSeparator={true}
-                  // prefix={"$"}
+                  onValueChange={async (values) => {
+                    const { formattedValue, value } = values;
+                    await this.setState({
+                      loan_amount_number: formattedValue,
+                    });
+                    await this.setState({
+                      loan_amount: value,
+                    });
+                  }}
                 />
               </MDBCol>
             </MDBRow>

@@ -68,7 +68,7 @@ export class ARMComponentSecondLoan extends Component {
       ceiling_interest_rate_percentage: "0",
       rate_add_percentage: "0",
       closing_costs_percentage: "0",
-      points_percentage:"0"
+      points_percentage: "0",
     };
     this.validators = ArmMortgageProgramValidator;
     resetValidators(this.validators);
@@ -331,7 +331,15 @@ export class ARMComponentSecondLoan extends Component {
             value={this.state.loan_amount}
             onChange={this.handleChange}
             thousandSeparator={true}
-            // prefix={"$"}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                loan_amount_number: formattedValue,
+              });
+              await this.setState({
+                loan_amount: value,
+              });
+            }}
           />
         </MDBRow>
         {displayValidationErrors(this.validators, "loan_amount")}
@@ -617,7 +625,7 @@ export class ARMComponentSecondLoan extends Component {
                   value={this.state.points}
                   onChange={this.handleChange}
                 /> */}
-               <NumberFormat
+                <NumberFormat
                   className="input-class-mdb"
                   placeholder="Enter amount here"
                   name="points_percentage"
