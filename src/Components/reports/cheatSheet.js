@@ -118,9 +118,9 @@ export class CheatSheet extends Component {
               <br />
               <div className="get-started-label">
                 {CalculatorResponse.ARM1
-                  ? Number(CalculatorResponse.ARM1.loanamountfirst1).toFixed(2)
+                  ? CalculatorResponse.ARM1.loanamountfirst1
                   : CalculatorResponse.FRM1
-                  ? Number(CalculatorResponse.FRM1.loanamountfirst1).toFixed(2)
+                  ? CalculatorResponse.FRM1.loanamountfirst1
                   : "0"}
               </div>
             </MDBCol>
@@ -149,13 +149,9 @@ export class CheatSheet extends Component {
                   <br />
                   <div className="get-started-label">
                     {CalculatorResponse.ARM2
-                      ? Number(CalculatorResponse.ARM2["mth-mrtg-exp"]).toFixed(
-                          2
-                        )
+                      ? CalculatorResponse.ARM2["mth-mrtg-exp"]
                       : CalculatorResponse.FRM2
-                      ? Number(CalculatorResponse.FRM2["mth-mrtg-exp"]).toFixed(
-                          2
-                        )
+                      ? CalculatorResponse.FRM2["mth-mrtg-exp"]
                       : "0"}
                   </div>
                 </MDBCol>
@@ -208,14 +204,12 @@ export class CheatSheet extends Component {
                     {" "}
                     {CalculatorResponse.ARM1 &&
                     CalculatorResponse.ARM1.loanamountfirst1
-                      ? Number(
+                      ? 
                           CalculatorResponse.ARM1.loanamountfirst1
-                        ).toFixed(2)
                       : CalculatorResponse.FRM1 &&
                         CalculatorResponse.FRM1.loanamountfirst1
-                      ? Number(
+                      ? 
                           CalculatorResponse.FRM1.loanamountfirst1
-                        ).toFixed(2)
                       : "0"}
                   </div>
                 </MDBCol>
@@ -247,14 +241,10 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM2 &&
                     CalculatorResponse.ARM2["mth-mrtg-exp"]
-                      ? Number(CalculatorResponse.ARM2["mth-mrtg-exp"]).toFixed(
-                          2
-                        )
+                      ? CalculatorResponse.ARM2["mth-mrtg-exp"]
                       : CalculatorResponse.FRM2 &&
                         CalculatorResponse.FRM2["mth-mrtg-exp"]
-                      ? Number(CalculatorResponse.FRM2["mth-mrtg-exp"]).toFixed(
-                          2
-                        )
+                      ? CalculatorResponse.FRM2["mth-mrtg-exp"]
                       : "0"}
                   </div>
                 </MDBCol>
@@ -289,14 +279,12 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM1 &&
                     CalculatorResponse.ARM1["total-mth-hsg-pay"]
-                      ? Number(
-                          CalculatorResponse.ARM1["total-mth-hsg-pay"]
-                        ).toFixed(2)
+                      ? 
+                        CalculatorResponse.ARM1["total-mth-hsg-pay"]
                       : CalculatorResponse.FRM1 &&
                         CalculatorResponse.FRM1["total-mth-hsg-pay"]
-                      ? Number(
-                          CalculatorResponse.FRM1["total-mth-hsg-pay"]
-                        ).toFixed(2)
+                      ? 
+                        CalculatorResponse.FRM1["total-mth-hsg-pay"]
                       : 0}
                   </div>
                 </MDBCol>
@@ -325,14 +313,12 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM2 &&
                     CalculatorResponse.ARM2["total-mth-hsg-pay"]
-                      ? Number(
+                      ? 
                           CalculatorResponse.ARM2["total-mth-hsg-pay"]
-                        ).toFixed(2)
                       : CalculatorResponse.FRM2 &&
                         CalculatorResponse.FRM2["total-mth-hsg-pay"]
-                      ? Number(
+                      ? 
                           CalculatorResponse.FRM2["total-mth-hsg-pay"]
-                        ).toFixed(2)
                       : 0}
                   </div>
                 </MDBCol>
@@ -366,14 +352,12 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM1 &&
                     CalculatorResponse.ARM1.ProjectedequityARMOption1
-                      ? Number(
+                      ? 
                           CalculatorResponse.ARM1.ProjectedequityARMOption1
-                        ).toFixed(2)
                       : CalculatorResponse.FRM1 &&
                         CalculatorResponse.FRM1.ProjectedequityFRMOption1
-                      ? Number(
+                      ? 
                           CalculatorResponse.FRM1.ProjectedequityFRMOption1
-                        ).toFixed(2)
                       : 0}
                   </div>
                 </MDBCol>
@@ -402,14 +386,12 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM2 &&
                     CalculatorResponse.ARM2.ProjectedequityARMOption2
-                      ? Number(
+                      ? 
                           CalculatorResponse.ARM2.ProjectedequityARMOption2
-                        ).toFixed(2)
                       : CalculatorResponse.FRM2 &&
                         CalculatorResponse.FRM2.ProjectedequityFRMOption2
-                      ? Number(
+                      ? 
                           CalculatorResponse.FRM2.ProjectedequityFRMOption2
-                        ).toFixed(2)
                       : 0}
                   </div>
                 </MDBCol>
@@ -446,14 +428,11 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM1 &&
                     CalculatorResponse.ARM1.Balanceoption1
-                      ? Number(CalculatorResponse.ARM1.Balanceoption1).toFixed(
-                          2
-                        )
+                      ? CalculatorResponse.ARM1.Balanceoption1
+                        
                       : CalculatorResponse.FRM1 &&
                         CalculatorResponse.FRM1.Balanceoption1
-                      ? Number(CalculatorResponse.FRM1.Balanceoption1).toFixed(
-                          2
-                        )
+                      ? CalculatorResponse.FRM1.Balanceoption1
                       : 0}
                   </div>
                 </MDBCol>
@@ -483,14 +462,10 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM2 &&
                     CalculatorResponse.ARM2.Balanceoption2
-                      ? Number(CalculatorResponse.ARM2.Balanceoption2).toFixed(
-                          2
-                        )
+                      ? CalculatorResponse.ARM2.Balanceoption2
                       : CalculatorResponse.FRM2 &&
                         CalculatorResponse.FRM2.Balanceoption2
-                      ? Number(CalculatorResponse.FRM2.Balanceoption2).toFixed(
-                          2
-                        )
+                      ? CalculatorResponse.FRM2.Balanceoption2
                       : 0}
                   </div>
                 </MDBCol>
@@ -534,21 +509,21 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                   {CalculatorResponse.ARM1 &&
                     CalculatorResponse.ARM1["better-buying-by"]
-                      ? Number(
+                      ? 
                           CalculatorResponse.ARM1["better-buying-by"]
-                        ).toFixed(2)
+                        
                       : CalculatorResponse.FRM1 &&
                         CalculatorResponse.FRM1["better-buying-by"]
-                      ? Number(
+                      ? 
                           CalculatorResponse.FRM1["better-buying-by"]
-                        ).toFixed(2)
+                        
                       : (CalculatorResponse.ARM1 &&
-                      CalculatorResponse.ARM1["better-buying-by"]) ? Number(
+                      CalculatorResponse.ARM1["better-buying-by"]) ? 
                         CalculatorResponse.ARM1["better-buying-by"]
-                      ).toFixed(2):(CalculatorResponse.FRM1 &&
-                        CalculatorResponse.FRM1["better-buying-by"]) ?  Number(
+                      :(CalculatorResponse.FRM1 &&
+                        CalculatorResponse.FRM1["better-buying-by"]) ?  
                           CalculatorResponse.ARM1["better-buying-by"]
-                        ).toFixed(2): 0}
+                        : 0}
                   </div>
                 </MDBCol>
               </MDBRow>
@@ -602,21 +577,21 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM2 &&
                     CalculatorResponse.ARM2["better-buying-by"]
-                      ? Number(
+                      ? 
                           CalculatorResponse.ARM2["better-buying-by"]
-                        ).toFixed(2)
+                       
                       : CalculatorResponse.FRM2 &&
                         CalculatorResponse.FRM2["better-buying-by"]
-                      ? Number(
+                      ? 
                           CalculatorResponse.FRM2["better-buying-by"]
-                        ).toFixed(2)
+                       
                       : (CalculatorResponse.ARM2 &&
-                      CalculatorResponse.ARM2["better-buying-by"]) ? Number(
+                      CalculatorResponse.ARM2["better-buying-by"]) ? 
                         CalculatorResponse.ARM2["better-buying-by"]
-                      ).toFixed(2):(CalculatorResponse.FRM2 &&
-                        CalculatorResponse.FRM2["better-buying-by"]) ?  Number(
+                     :(CalculatorResponse.FRM2 &&
+                        CalculatorResponse.FRM2["better-buying-by"]) ?  
                           CalculatorResponse.ARM2["better-buying-by"]
-                        ).toFixed(2): ""}
+                       : ""}
                   </div>
                 </MDBCol>
               </MDBRow>
@@ -650,14 +625,12 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM1 &&
                     CalculatorResponse.ARM1.Taxbenfithomeoption1
-                      ? Number(
+                      ? 
                           CalculatorResponse.ARM1.Taxbenfithomeoption1
-                        ).toFixed(2)
                       : CalculatorResponse.FRM1 &&
                         CalculatorResponse.FRM1.Taxbenfithomeoption1
-                      ? Number(
+                      ? 
                           CalculatorResponse.FRM1.Taxbenfithomeoption1
-                        ).toFixed(2)
                       : 0}
                   </div>
                 </MDBCol>
@@ -699,14 +672,12 @@ export class CheatSheet extends Component {
                   <div className="get-started-label">
                     {CalculatorResponse.ARM2 &&
                     CalculatorResponse.ARM2.Taxbenfithomeoption2
-                      ? Number(
+                      ? 
                           CalculatorResponse.ARM2.Taxbenfithomeoption2
-                        ).toFixed(2)
                       : CalculatorResponse.FRM2 &&
                         CalculatorResponse.FRM2.Taxbenfithomeoption2
-                      ? Number(
+                      ? 
                           CalculatorResponse.FRM2.Taxbenfithomeoption2
-                        ).toFixed(2)
                       : 0}
                   </div>
                 </MDBCol>
