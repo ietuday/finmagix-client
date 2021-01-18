@@ -29,12 +29,13 @@ export class PersonalFinance extends Component {
           ? JSON.parse(localStorage.getItem("personal_finance_array"))
               .marginal_tax_rate
           : "",
-      marginal_tax_rate_percentage:  Object.entries(
-        JSON.parse(localStorage.getItem("personal_finance_array"))
-      ).length !== 0
-        ? JSON.parse(localStorage.getItem("personal_finance_array"))
-            .marginal_tax_rate + "%"
-        : "",
+      marginal_tax_rate_percentage:
+        Object.entries(
+          JSON.parse(localStorage.getItem("personal_finance_array"))
+        ).length !== 0
+          ? JSON.parse(localStorage.getItem("personal_finance_array"))
+              .marginal_tax_rate + "%"
+          : "",
       annual_gross_income:
         Object.entries(
           JSON.parse(localStorage.getItem("personal_finance_array"))
@@ -258,18 +259,16 @@ export class PersonalFinance extends Component {
               value={this.state.monthly_debt_payments}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  monthly_debt_payments_number: formattedValue,
+                });
+                await this.setState({
+                  monthly_debt_payments: value,
+                });
+              }}
             />
-
-            {/* <NumberFormat
-              type="number"
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="monthly_debt_payments"
-              value={this.state.monthly_debt_payments}
-              onChange={this.handleChange}
-              thousandSeparator={true}
-              // prefix={"$"}
-            /> */}
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(this.validators, "monthly_debt_payments")}
@@ -295,16 +294,6 @@ export class PersonalFinance extends Component {
               value={this.state.monthly_non_housing_expenses}
               onChange={this.handleChange}
             /> */}
-            {/* <NumberFormat
-              type="number"
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="monthly_non_housing_expenses"
-              value={this.state.monthly_non_housing_expenses}
-              onChange={this.handleChange}
-              thousandSeparator={true}
-              // prefix={"$"}
-            /> */}
 
             <NumberFormat
               className="input-class-mdb"
@@ -313,6 +302,15 @@ export class PersonalFinance extends Component {
               value={this.state.monthly_non_housing_expenses}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  monthly_non_housing_expenses_number: formattedValue,
+                });
+                await this.setState({
+                  monthly_non_housing_expenses: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -377,7 +375,15 @@ export class PersonalFinance extends Component {
               value={this.state.federal_income}
               onChange={this.handleChange}
               thousandSeparator={true}
-              // prefix={"$"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  federal_income_number: formattedValue,
+                });
+                await this.setState({
+                  federal_income: value,
+                });
+              }}
             />
           </MDBCol>
           {displayValidationErrors(this.validators, "federal_income")}

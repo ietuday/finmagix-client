@@ -15,6 +15,8 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
 
     this.state = {
       pmi_amount: "0",
+      pmi_amount_number: "0",
+      loanamountsecond1_number: "0",
       second_mortgage_loan_amount: "0",
       second_mortgage_loan_term: "0",
       second_mortgage_interest: "0",
@@ -45,7 +47,7 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
       periodicadjcap2: "0",
       rateadd2: "0",
       second_mortgage_closing_costs_percentage: "0",
-      second_mortgage_points_percentage:"0"
+      second_mortgage_points_percentage: "0",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -92,6 +94,15 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
             value={this.state.pmi_amount}
             onChange={this.handleChange}
             thousandSeparator={true}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                pmi_amount_number: formattedValue,
+              });
+              await this.setState({
+                pmi_amount: value,
+              });
+            }}
           />
         </MDBCol>
       </MDBRow>
@@ -117,7 +128,6 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
               value={this.state.loanamountsecond1}
               onChange={this.handleChange}
             /> */}
-
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
@@ -125,7 +135,15 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
               value={this.state.loanamountsecond1}
               onChange={this.handleChange}
               thousandSeparator={true}
-              // prefix={"$"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  loanamountsecond1_number: formattedValue,
+                });
+                await this.setState({
+                  loanamountsecond1: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -203,11 +221,11 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
               onChange={this.handleChange}
             /> */}
             <NumberFormat
-             className="input-class-mdb"
-             placeholder="Enter amount here"
-             name="second_mortgage_points_percentage"
-             value={this.state.second_mortgage_points_percentage}
-             onChange={this.handleChange}
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="second_mortgage_points_percentage"
+              value={this.state.second_mortgage_points_percentage}
+              onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;

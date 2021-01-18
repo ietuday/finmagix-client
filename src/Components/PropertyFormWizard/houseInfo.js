@@ -58,15 +58,16 @@ export class GetStartedHouseInfo extends Component {
     });
     console.log(this.state.home_price_growth)
     let twenty_percent_of_property_price =
-      (this.state.property_price_number * 20) / 100;
+      (this.state.property_price * 20) / 100;
     if (
-      this.state.downpayment_amount_number < twenty_percent_of_property_price
+      this.state.downpayment_amount < twenty_percent_of_property_price
     ) {
       downpayment = "lessthan20";
     } else {
       downpayment = "greaterthan20";
     }
     console.log("this.state.property_price", this.state.property_price_number);
+    
     console.log(
       "twenty_percent_of_property_price",
       twenty_percent_of_property_price
@@ -155,10 +156,10 @@ this.props.handleHouseInfo(downpayment, this.state);
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
                 await this.setState({
-                  property_price: formattedValue,
+                  property_price_number: formattedValue,
                 });
                 await this.setState({
-                  property_price_number: value,
+                  property_price: value,
                 });
               }}
             />
@@ -227,10 +228,10 @@ this.props.handleHouseInfo(downpayment, this.state);
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
                 await this.setState({
-                  downpayment_amount: formattedValue,
+                  downpayment_amount_number: formattedValue,
                 });
                 await this.setState({
-                  downpayment_amount_number: value,
+                  downpayment_amount: value,
                 });
               }}
             />
@@ -328,10 +329,10 @@ this.props.handleHouseInfo(downpayment, this.state);
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
                 await this.setState({
-                  annual_property_tax: formattedValue,
+                  annual_property_tax_number: formattedValue,
                 });
                 await this.setState({
-                  annual_property_tax_number: value,
+                  annual_property_tax: value,
                 });
                 console.log(this.state);
               }}
@@ -372,10 +373,10 @@ this.props.handleHouseInfo(downpayment, this.state);
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
                 await this.setState({
-                  annual_home_owner_association_dues: formattedValue,
+                  annual_home_owner_association_dues_number: formattedValue,
                 });
                 await this.setState({
-                  annual_home_owner_association_dues_number: value,
+                  annual_home_owner_association_dues: value,
                 });
                 console.log("nnual_home_owner_association_dues",this.state)
               }}
@@ -408,10 +409,10 @@ this.props.handleHouseInfo(downpayment, this.state);
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
                 await this.setState({
-                  home_owner_insurance: formattedValue,
+                  home_owner_insurance_number: formattedValue,
                 });
                 await this.setState({
-                  home_owner_insurance_number: value,
+                  home_owner_insurance: value,
                 });
                 console.log("home_owner_insurance",this.state)
               }}

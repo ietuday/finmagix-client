@@ -27,8 +27,9 @@ function HomeAffordability(props) {
     singlePropertyResponse = props.location.state.singlePropertyResponse;
     CalculatorResponse = props.location.state.GetSinglePropertyResponse;
   } else {
-    CalculatorResponse = localStorage.getItem('calculatorResponse');
-    singlePropertyResponse = localStorage.getItem('GetSinglePropertyResponse');
+    CalculatorResponse = JSON.parse(localStorage.getItem('calculatorResponse'));
+    singlePropertyResponse = JSON.parse(localStorage.getItem('GetSinglePropertyResponse'));
+    console.log(CalculatorResponse)
   }
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -85,7 +86,22 @@ function HomeAffordability(props) {
 
                 </div>
               </MDBCol>
+              
+            </MDBRow>
 
+
+            <MDBRow>
+              <MDBCol md="12">
+                <div className="tab_contnt">
+                <h6>{CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1['Housingpmtaffordableoption1_comment']
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1['Housingpmtaffordableoption1_comment']
+                          : "TEST"}</h6>
+
+                </div>
+              </MDBCol>
+              
             </MDBRow>
 
             <MDBRow>
@@ -154,6 +170,20 @@ function HomeAffordability(props) {
             </MDBRow>
 
             <MDBRow>
+              <MDBCol md="12">
+                <div className="tab_contnt">
+                 <h6>{CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2['Housingpmtaffordableoption2_comment']
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2['Housingpmtaffordableoption2_comment']
+                          : "TEST"}</h6>
+
+                </div>
+              </MDBCol>
+              
+            </MDBRow>
+
+            <MDBRow>
               <MDBCol>
 
                 <MDBCol md="6" className="margin20">
@@ -171,7 +201,7 @@ function HomeAffordability(props) {
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-red"></span>
-                    <div>May not be affordable</div>
+                    <div> </div>
                   </div>
                 </MDBCol>
               </MDBCol>

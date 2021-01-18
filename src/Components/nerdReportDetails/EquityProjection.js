@@ -201,7 +201,7 @@ function EquityProjection(props) {
               <h6>Equity represents the difference between your projected</h6>
               <h4>
                 
-              For {CalculatorResponse.ARM1
+              {CalculatorResponse.ARM1
                   ? "ARM"
                   : CalculatorResponse.FRM1
                   ? "FRM"
@@ -233,7 +233,7 @@ function EquityProjection(props) {
               <p>
                 Equity represents the difference between your projected home
                 price and your total mortgage loan balance at the end of your
-                duration of stay of XX year (durationofstay) variable’{" "}
+                duration of stay of {singlePropertyResponse.stay_duration} years
               </p>
               <h6>Equity represents the difference between your projected</h6>
               <h4>

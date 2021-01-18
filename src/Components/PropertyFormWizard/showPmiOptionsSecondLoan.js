@@ -13,6 +13,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
     super();
     this.state = {
       pmi_amount: "",
+      pmi_amount_number:"",
       second_mortgage_loan_amount: "",
       second_mortgage_loan_term: "",
       second_mortgage_interest: "",
@@ -44,6 +45,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       rateadd2: "0",
       second_mortgage_closing_costs_percentage: "0",
       second_mortgage_points_percentage: "0",
+      loanamountsecond2_number:"0"
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -82,14 +84,23 @@ export class ShowPmiOptionsSecondLoan extends Component {
             value={this.state.pmi_amount}
             onChange={this.handleChange}
           /> */}
-          <NumberFormat
-            className="input-class-mdb"
-            placeholder="Enter amount here"
-            name="pmi_amount"
-            value={this.state.pmi_amount}
-            onChange={this.handleChange}
-            thousandSeparator={true}
-          />
+       <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="pmi_amount"
+              value={this.state.pmi_amount}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  pmi_amount_number: formattedValue,
+                });
+                await this.setState({
+                  pmi_amount: value,
+                });
+              }}
+            />
         </MDBCol>
       </MDBRow>
     );
@@ -112,7 +123,6 @@ export class ShowPmiOptionsSecondLoan extends Component {
               value={this.state.loanamountsecond2}
               onChange={this.handleChange}
             /> */}
-
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
@@ -120,6 +130,15 @@ export class ShowPmiOptionsSecondLoan extends Component {
               value={this.state.loanamountsecond2}
               onChange={this.handleChange}
               thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  loanamountsecond2_number: formattedValue,
+                });
+                await this.setState({
+                  loanamountsecond2: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>

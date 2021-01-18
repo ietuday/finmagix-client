@@ -22,6 +22,7 @@ export class ARMComponentFirstLoan extends Component {
     this.state = {
       mortgage_program_type: "FIRST",
       loan_amount: 0,
+      loan_amount_number:0,
       loan_term: "15",
       select_loan_program: "1/1 ARM",
       initial_interest_rate: 0,
@@ -324,6 +325,7 @@ export class ARMComponentFirstLoan extends Component {
               value={this.state.loan_amount}
               onChange={this.handleChange}
             /> */}
+
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
@@ -331,7 +333,15 @@ export class ARMComponentFirstLoan extends Component {
               value={this.state.loan_amount}
               onChange={this.handleChange}
               thousandSeparator={true}
-              // prefix={"$"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  loan_amount_number: formattedValue,
+                });
+                await this.setState({
+                  loan_amount: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
