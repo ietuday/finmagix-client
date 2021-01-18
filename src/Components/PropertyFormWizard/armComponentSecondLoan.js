@@ -656,34 +656,17 @@ export class ARMComponentSecondLoan extends Component {
               </span>
             </div>
             <br />
-            {/* <Input
+            <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="closing_costs"
               value={this.state.closing_costs}
               onChange={this.handleChange}
-            /> */}
-
-            <NumberFormat
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="closing_costs_percentage"
-              value={this.state.closing_costs_percentage}
-              onChange={this.handleChange}
-              suffix={"%"}
-              onValueChange={async (values) => {
-                const { formattedValue, value } = values;
-                await this.setState({
-                  closing_costs: value,
-                });
-                await this.setState({
-                  closing_costs_percentage: formattedValue,
-                });
-              }}
             />
+
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "closing_costs")} */}
+        {displayValidationErrors(this.validators, "closing_costs")}
 
         <MDBRow className="margin20">
           <MDBCol md="12">

@@ -232,30 +232,14 @@ export class ShowPmiOptionsSecondLoan extends Component {
               </span>
             </div>
             <br />
-            {/* <Input
+            <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="second_mortgage_closing_costs"
               value={this.state.second_mortgage_closing_costs}
               onChange={this.handleChange}
-            /> */}
-            <NumberFormat
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="second_mortgage_closing_costs_percentage"
-              value={this.state.second_mortgage_closing_costs_percentage}
-              onChange={this.handleChange}
-              suffix={"%"}
-              onValueChange={async (values) => {
-                const { formattedValue, value } = values;
-                await this.setState({
-                  second_mortgage_closing_costs: value,
-                });
-                await this.setState({
-                  second_mortgage_closing_costs_percentage: formattedValue,
-                });
-              }}
             />
+           
           </MDBCol>
         </MDBRow>
       </div>
