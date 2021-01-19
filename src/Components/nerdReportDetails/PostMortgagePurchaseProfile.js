@@ -345,9 +345,9 @@ function PostMortgagePurchaseProfile(props) {
               <MDBRow className="margin_30">
                 <MDBCol col="12" md="12">
                   <h6>Home expenses post tax <b>{CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2.Homeexpensesposttax1
+                    ? CalculatorResponse.ARM2.Homeexpensesposttax2
                     : CalculatorResponse.FRM2
-                      ? CalculatorResponse.FRM2.Homeexpensesposttax1
+                      ? CalculatorResponse.FRM2.Homeexpensesposttax2
                       : 0}
                   </b>  </h6>
                   <div className="progress" style={{ height: "30px" }}>

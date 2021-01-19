@@ -69,6 +69,7 @@ export class ARMComponentSecondLoan extends Component {
       rate_add_percentage: "0",
       closing_costs_percentage: "0",
       points_percentage: "0",
+      period_cap_percentage:"0"
     };
     this.validators = ArmMortgageProgramValidator;
     resetValidators(this.validators);
@@ -557,12 +558,30 @@ export class ARMComponentSecondLoan extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="period_cap"
               value={this.state.period_cap}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="period_cap"
+              value={this.state.period_cap}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  period_cap: value,
+                });
+                await this.setState({
+                  period_cap_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>

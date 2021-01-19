@@ -836,7 +836,7 @@ function MortgageSummary(props) {
                   <MDBCol md="3" size="3">
                     <div className="get-started-label">
                     {CalculatorResponse.ARM2
-                          ? CalculatorResponse.ARM.Paymentsecond2
+                          ? CalculatorResponse.ARM2.Paymentsecond2
                           : CalculatorResponse.FRM2
                           ? CalculatorResponse.FRM2.Paymentsecond2
                           : 0}
