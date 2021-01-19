@@ -73,7 +73,7 @@ class AmortizationTableFRM extends React.Component {
                 const Principalpaids = this.CalculatorResponse.dFRM1.Principalpaid;
                 const Payments = this.CalculatorResponse.dFRM1.Payment;
                 const Interestpaids = this.CalculatorResponse.dFRM1.Interestpaid;
-                const TotalPayments = this.CalculatorResponse.dFRM1["Total Payments"];
+                const TotalPayments = this.CalculatorResponse.dFRM1["TotalPayments"];
                 const Endingbalances = this.CalculatorResponse.dFRM1.Endingbalance;
                 const objYear = Years.map((x) => {
                     return {
@@ -134,7 +134,7 @@ class AmortizationTableFRM extends React.Component {
                 const Principalpaids = this.CalculatorResponse.dFRM2.Principalpaid;
                 const Payments = this.CalculatorResponse.dFRM2.Payment;
                 const Interestpaids = this.CalculatorResponse.dFRM2.Interestpaid;
-                const TotalPayments = this.CalculatorResponse.dFRM2["Total Payments"];
+                const TotalPayments = this.CalculatorResponse.dFRM2["TotalPayments"];
                 const Endingbalances = this.CalculatorResponse.dFRM2.Endingbalance;
                 const objYear = Years.map((x) => {
                     return {
@@ -196,7 +196,7 @@ class AmortizationTableFRM extends React.Component {
                 const Principalpaids = this.CalculatorResponse.dARM1.Principalpaid;
                 const Payments = this.CalculatorResponse.dARM1.Payment;
                 const Interestpaids = this.CalculatorResponse.dARM1.Interestpaid;
-                const TotalPayments = this.CalculatorResponse.dARM1["Total Payments"];
+                const TotalPayments = this.CalculatorResponse.dARM1["TotalPayments"];
                 const Endingbalances = this.CalculatorResponse.dARM1.Endingbalance;
                 const objYear = Years.map((x) => {
                     return {
@@ -256,7 +256,7 @@ class AmortizationTableFRM extends React.Component {
                 const Principalpaids = this.CalculatorResponse.dARM2.Principalpaid;
                 const Payments = this.CalculatorResponse.dARM2.Payment;
                 const Interestpaids = this.CalculatorResponse.dARM2.Interestpaid;
-                const TotalPayments = this.CalculatorResponse.dARM2["Total Payments"];
+                const TotalPayments = this.CalculatorResponse.dARM2["TotalPayments"];
                 const Endingbalances = this.CalculatorResponse.dARM2.Endingbalance;
                 const objYear = Years.map((x) => {
                     return {
@@ -318,7 +318,7 @@ class AmortizationTableFRM extends React.Component {
                 const Payments = this.CalculatorResponse.dsecond1.Payment;
                 const Interestpaids = this.CalculatorResponse.dsecond1.Interestpaid;
                 const TotalPayments = this.CalculatorResponse.dsecond1[
-                    "Total Payments"
+                    "TotalPayments"
                 ];
                 const Endingbalances = this.CalculatorResponse.dsecond1.Endingbalance;
                 const objYear = Years.map((x) => {
@@ -381,7 +381,7 @@ class AmortizationTableFRM extends React.Component {
                 const Payments = this.CalculatorResponse.dsecond2.Payment;
                 const Interestpaids = this.CalculatorResponse.dsecond2.Interestpaid;
                 const TotalPayments = this.CalculatorResponse.dsecond2[
-                    "Total Payments"
+                    "TotalPayments"
                 ];
                 const Endingbalances = this.CalculatorResponse.dsecond2.Endingbalance;
                 const objYear = Years.map((x) => {
