@@ -12,7 +12,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
   constructor() {
     super();
     this.state = {
-      pmi_amount: "",
+      pmi_amount: 0,
       pmi_amount_number:"",
       second_mortgage_loan_amount: "",
       second_mortgage_loan_term: "",

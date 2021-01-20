@@ -102,11 +102,11 @@ const ArmMortgageProgramValidator = {
       },
       period_cap: {
         rules: [
-          {
-            // test: /^[0-9,]*$/,
-            test: /^[0-9]\d*(\.\d+)*$/,
-            message: "only numbers are allowed!",
-          },
+          // {
+          //   // test: /^[0-9,]*$/,
+          //   test: /^[0-9]\d*(\.\d+)*$/,
+          //   message: "only numbers are allowed!",
+          // },
           {
             test: (value) => {
               return Object.keys(value).length !== 0;

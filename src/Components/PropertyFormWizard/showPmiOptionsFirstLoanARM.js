@@ -14,7 +14,7 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
     super();
 
     this.state = {
-      pmi_amount: "0",
+      pmi_amount: 0,
       pmi_amount_number: "0",
       loanamountsecond1_number: "0",
       second_mortgage_loan_amount: "0",
