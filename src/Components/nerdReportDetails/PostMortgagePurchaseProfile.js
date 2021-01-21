@@ -391,7 +391,7 @@ function PostMortgagePurchaseProfile(props) {
                   <div className="progress" style={{ height: "30px" }}>
 
                     <div
-                      className="progress-bar-dgreen"
+                      className="progress-bar-pink"
                       role="progressbar"
                       style={{ width: "100%" }}
                       aria-valuenow="100"
