@@ -86,51 +86,52 @@ function EquityProjection(props) {
       localStorage.getItem("GetSinglePropertyResponse")
     );
 
-    const pv1 =
+    let pv1 =
       CalculatorResponse && CalculatorResponse.ARM1
         ? CalculatorResponse.ARM1.homepricedurationofstay
         : CalculatorResponse && CalculatorResponse.FRM1
         ? CalculatorResponse.FRM1.homepricedurationofstay
         : 0;
-    const pv2 =
+      pv1 = parseFloat(String(pv1).replace(/,/g, ''))
+    let pv2 =
       CalculatorResponse && CalculatorResponse.ARM2
         ? CalculatorResponse.ARM2.homepricedurationofstay
         : CalculatorResponse && CalculatorResponse.FRM2
         ? CalculatorResponse.FRM2.homepricedurationofstay
         : 0;
-
-    const at1 =
+        pv2 = parseFloat(String(pv2).replace(/,/g, ''))
+    let at1 =
       CalculatorResponse && CalculatorResponse.ARM1
         ? CalculatorResponse.ARM1.EndingARMLoanBaloption1
         : CalculatorResponse && CalculatorResponse.FRM1
         ? CalculatorResponse.FRM1.EndingFRMLoanBaloption1
         : 0;
-
-    const at2 =
+      at1 = parseFloat(String(at1).replace(/,/g, ''))
+    let at2 =
       CalculatorResponse && CalculatorResponse.ARM2
         ? CalculatorResponse.ARM2.EndingARMLoanBaloption2
         : CalculatorResponse && CalculatorResponse.FRM2
         ? CalculatorResponse.FRM2.EndingFRMLoanBaloption2
         : 0;
-
-    const ct1 =
+        at2 = parseFloat(String(at2).replace(/,/g, ''))
+    let ct1 =
       CalculatorResponse && CalculatorResponse.ARM1
         ? CalculatorResponse.ARM1.ProjectedequityARMOption1
         : CalculatorResponse && CalculatorResponse.FRM1
         ? CalculatorResponse.FRM1.ProjectedequityFRMOption1
         : 0;
-
-    const ct2 =
+      ct1 = parseFloat(String(ct1).replace(/,/g, ''))
+    let ct2 =
       CalculatorResponse && CalculatorResponse.ARM2
         ? CalculatorResponse.ARM2.ProjectedequityARMOption2
         : CalculatorResponse && CalculatorResponse.FRM2
         ? CalculatorResponse.FRM2.ProjectedequityFRMOption2
         : 0;
-
+      ct2 = parseFloat(String(ct2).replace(/,/g, ''))
     data = [
       {
         name: "Projected home price",
-        uv: 4000,
+        // uv: 4000,
         pv:
           (CalculatorResponse && CalculatorResponse.ARM1) ||
           (CalculatorResponse && CalculatorResponse.FRM1)
@@ -139,11 +140,12 @@ function EquityProjection(props) {
               (CalculatorResponse && CalculatorResponse.FRM2)
             ? pv2
             : 0,
-        amt: 2400,
+        // pv: 600,
+        // amt: 2400,
       },
       {
         name: "Loan Balance",
-        uv: 3000,
+        // uv: 3000,
         at:
           (CalculatorResponse && CalculatorResponse.ARM1) ||
           (CalculatorResponse && CalculatorResponse.FRM1)
@@ -152,11 +154,12 @@ function EquityProjection(props) {
               (CalculatorResponse && CalculatorResponse.FRM2)
             ? at2
             : 0,
-        amt: 2210,
+        // at: 500,
+        // amt: 2210,
       },
       {
         name: "Equity",
-        uv: 2000,
+        // uv: 2000,
         ct:
           (CalculatorResponse && CalculatorResponse.ARM1) ||
           (CalculatorResponse && CalculatorResponse.FRM1)
@@ -165,10 +168,12 @@ function EquityProjection(props) {
               (CalculatorResponse && CalculatorResponse.FRM2)
             ? ct2
             : 0,
-        amt: 2290,
+        // ct:400,
+        // amt: 2290,
       },
     ];
   }
+  console.log(data)
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);

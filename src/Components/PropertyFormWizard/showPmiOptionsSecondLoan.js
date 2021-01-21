@@ -108,7 +108,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       <div>
         <MDBRow className="margin20">
           <MDBCol md="12">
-            <span className="get-started-label">loanamountsecond2</span>
+            <span className="get-started-label">Loan Amount</span>
             <div className="tooltip-img">
               <img src={quss} className="tool-img"></img>
               <span className="tooltip-img-text">

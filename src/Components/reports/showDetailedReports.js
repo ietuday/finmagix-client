@@ -357,18 +357,21 @@ export class ShowDetailedReports extends Component {
       data.GetSinglePropertyResponse["data"][0].first_frm &&
       data.GetSinglePropertyResponse["data"][0].first_frm.id
     ) {
-      let secondmtgpmichoice ;
-      if(data.GetSinglePropertyResponse["data"][0].first_frm.pmi){
+      let secondmtgpmichoice;
+      if (data.GetSinglePropertyResponse["data"][0].first_frm.pmi) {
         console.log("PMI");
-        secondmtgpmichoice = 1
-      }else if(Number(data.GetSinglePropertyResponse["data"][0].first_frm.loanamountsecond1)){
+        secondmtgpmichoice = 1;
+      } else if (
+        Number(
+          data.GetSinglePropertyResponse["data"][0].first_frm.loanamountsecond1
+        )
+      ) {
         console.log("loanamountsecond1");
-        secondmtgpmichoice = 2
-      }else{
+        secondmtgpmichoice = 2;
+      } else {
         console.log("ELSE");
-        secondmtgpmichoice = 0
+        secondmtgpmichoice = 0;
       }
-      
 
       return {
         loanchoicefirst1: 1,
@@ -427,13 +430,13 @@ export class ShowDetailedReports extends Component {
             .id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_frm
-                  .second_mortgage_loan_term
+                  .second_mortgage_interest
               )
             : 0,
           termsecond1: data.GetSinglePropertyResponse["data"][0].first_frm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_frm
-                  .second_mortgage_interest
+                  .second_mortgage_loan_term
               )
             : 0,
           pointssecond1: data.GetSinglePropertyResponse["data"][0].first_frm.id
@@ -496,13 +499,28 @@ export class ShowDetailedReports extends Component {
         },
       };
     } else {
-      const secondmtgpmichoice = data.GetSinglePropertyResponse["data"][0]
-        .first_arm.pmi
-        ? 1
-        : data.GetSinglePropertyResponse["data"][0].first_arm.loanamountsecond1
-        ? 2
-        : 0;
+      // const secondmtgpmichoice = data.GetSinglePropertyResponse["data"][0]
+      //   .first_arm.pmi
+      //   ? 1
+      //   : data.GetSinglePropertyResponse["data"][0].first_arm.loanamountsecond1
+      //   ? 2
+      //   : 0;
 
+      let secondmtgpmichoice;
+      if (data.GetSinglePropertyResponse["data"][0].first_arm.pmi) {
+        console.log("PMI");
+        secondmtgpmichoice = 1;
+      } else if (
+        Number(
+          data.GetSinglePropertyResponse["data"][0].first_arm.loanamountsecond1
+        )
+      ) {
+        console.log("loanamountsecond1");
+        secondmtgpmichoice = 2;
+      } else {
+        console.log("ELSE");
+        secondmtgpmichoice = 0;
+      }
       return {
         loanchoicefirst1: 2,
         loanchoicefirst1_details: {
@@ -635,12 +653,28 @@ export class ShowDetailedReports extends Component {
       data.GetSinglePropertyResponse["data"][0].second_frm &&
       data.GetSinglePropertyResponse["data"][0].second_frm.id
     ) {
-      const secondmtgpmichoice = data.GetSinglePropertyResponse["data"][0]
-        .second_frm.pmi
-        ? 1
-        : data.GetSinglePropertyResponse["data"][0].second_frm.loanamountsecond2
-        ? 2
-        : 0;
+      // const secondmtgpmichoice = data.GetSinglePropertyResponse["data"][0]
+      //   .second_frm.pmi
+      //   ? 1
+      //   : data.GetSinglePropertyResponse["data"][0].second_frm.loanamountsecond2
+      //   ? 2
+      //   : 0;
+
+        let secondmtgpmichoice;
+        if (data.GetSinglePropertyResponse["data"][0].second_frm.pmi) {
+          console.log("PMI");
+          secondmtgpmichoice = 1;
+        } else if (
+          Number(
+            data.GetSinglePropertyResponse["data"][0].second_frm.loanamountsecond2
+          )
+        ) {
+          console.log("loanamountsecond1");
+          secondmtgpmichoice = 2;
+        } else {
+          console.log("ELSE");
+          secondmtgpmichoice = 0;
+        }
       return {
         loanchoicefirst2: 1,
         loanchoicefirst2_details: {
@@ -700,17 +734,17 @@ export class ShowDetailedReports extends Component {
             .id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].second_frm
-                  .second_mortgage_loan_term
+                  .second_mortgage_interest
               )
             : 0,
           termsecond2: data.GetSinglePropertyResponse["data"][0].second_frm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].second_frm
-                  .second_mortgage_interest
+                  .second_mortgage_loan_term
               )
             : 0,
           // pointssecond2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.second_mortgage_points) : 0,
-          pointssecond2: 0,
+          pointssecond2: data.GetSinglePropertyResponse['data'][0].second_frm.id ? Number(data.GetSinglePropertyResponse['data'][0].second_frm.second_mortgage_points) : 0,
 
           Pmtsecond2: data.GetSinglePropertyResponse["data"][0].second_frm.id
             ? Number(
@@ -772,13 +806,21 @@ export class ShowDetailedReports extends Component {
       data.GetSinglePropertyResponse["data"][0].second_arm &&
       data.GetSinglePropertyResponse["data"][0].second_arm.id
     ) {
-
-      const secondmtgpmichoice = data.GetSinglePropertyResponse["data"][0]
-        .second_arm.pmi
-        ? 1
-        : data.GetSinglePropertyResponse["data"][0].second_arm.loanamountsecond2
-        ? 2
-        : 0;
+      let secondmtgpmichoice;
+      if (data.GetSinglePropertyResponse["data"][0].second_arm.pmi) {
+        console.log("PMI");
+        secondmtgpmichoice = 1;
+      } else if (
+        Number(
+          data.GetSinglePropertyResponse["data"][0].second_arm.loanamountsecond2
+        )
+      ) {
+        console.log("loanamountsecond1");
+        secondmtgpmichoice = 2;
+      } else {
+        console.log("ELSE");
+        secondmtgpmichoice = 0;
+      }
 
       return {
         loanchoicefirst2: 2,
