@@ -51,7 +51,7 @@ function PostMortgagePurchaseProfile(props) {
     CalculatorResponse = JSON.parse(localStorage.getItem('calculatorResponse'))
     singlePropertyResponse = JSON.parse(localStorage.getItem('GetSinglePropertyResponse'));
   }
-  const ga1 = (CalculatorResponse && CalculatorResponse.FRM1)
+  let ga1 = (CalculatorResponse && CalculatorResponse.FRM1)
     ?
     CalculatorResponse.FRM1.Homeexpensesposttax1
     :
@@ -59,8 +59,10 @@ function PostMortgagePurchaseProfile(props) {
       ?
       CalculatorResponse.ARM1.Homeexpensesposttax1
       :
-      0
-  const ga2 = (CalculatorResponse && CalculatorResponse.FRM2)
+      0 
+  ga1 = parseFloat(String(ga1).replace(/,/g, ''))
+
+  let ga2 = (CalculatorResponse && CalculatorResponse.FRM2)
     ?
     CalculatorResponse.FRM2.Homeexpensesposttax2
     :
@@ -69,7 +71,10 @@ function PostMortgagePurchaseProfile(props) {
       CalculatorResponse.ARM2.Homeexpensesposttax2
       :
       0
-  const gb1 = (CalculatorResponse && CalculatorResponse.FRM1)
+  
+  ga2 = parseFloat(String(ga2).replace(/,/g, ''))
+
+  let gb1 = (CalculatorResponse && CalculatorResponse.FRM1)
     ?
     CalculatorResponse.FRM1.Estimatedtax
     :
@@ -79,7 +84,9 @@ function PostMortgagePurchaseProfile(props) {
       :
       0
 
-  const gb2 = (CalculatorResponse && CalculatorResponse.FRM2)
+  gb1 = parseFloat(String(gb1).replace(/,/g, ''))
+
+  let gb2 = (CalculatorResponse && CalculatorResponse.FRM2)
     ?
     CalculatorResponse.FRM2.Estimatedtax
     :
@@ -88,8 +95,9 @@ function PostMortgagePurchaseProfile(props) {
       CalculatorResponse.ARM2.Estimatedtax
       :
       0
+  gb2 = parseFloat(String(gb2).replace(/,/g, ''))
 
-  const gc1 = (CalculatorResponse && CalculatorResponse.FRM1)
+  let gc1 = (CalculatorResponse && CalculatorResponse.FRM1)
     ?
     CalculatorResponse.FRM1._Totalnonhousing
     :
@@ -98,8 +106,10 @@ function PostMortgagePurchaseProfile(props) {
       CalculatorResponse.ARM1._Totalnonhousing
       :
       0
+  
+  gc1 = parseFloat(String(gc1).replace(/,/g, ''))
 
-  const gc2 = (CalculatorResponse && CalculatorResponse.FRM2)
+  let gc2 = (CalculatorResponse && CalculatorResponse.FRM2)
     ?
     CalculatorResponse.FRM2._Totalnonhousing
     :
@@ -108,8 +118,9 @@ function PostMortgagePurchaseProfile(props) {
       CalculatorResponse.ARM2._Totalnonhousing
       :
       0
+  gc2 = parseFloat(String(gc2).replace(/,/g, ''))
 
-  const gd1 = (CalculatorResponse && CalculatorResponse.FRM1)
+  let gd1 = (CalculatorResponse && CalculatorResponse.FRM1)
     ?
     CalculatorResponse.FRM1.Balanceoption1
     :
@@ -118,7 +129,10 @@ function PostMortgagePurchaseProfile(props) {
       CalculatorResponse.ARM1.Balanceoption1
       :
       0
-  const gd2 = (CalculatorResponse && CalculatorResponse.FRM2)
+
+  gd1 = parseFloat(String(gd1).replace(/,/g, ''))
+
+  let gd2 = (CalculatorResponse && CalculatorResponse.FRM2)
     ?
     CalculatorResponse.FRM2.Balanceoption2
     :
@@ -127,6 +141,7 @@ function PostMortgagePurchaseProfile(props) {
       CalculatorResponse.ARM2.Balanceoption2
       :
       0
+  gd2 = parseFloat(String(gd2).replace(/,/g, ''))
 
   const data = [
     { name: 'Group A', value: (CalculatorResponse && CalculatorResponse.ARM1) ||

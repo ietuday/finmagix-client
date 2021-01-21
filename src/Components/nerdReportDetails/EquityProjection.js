@@ -131,7 +131,6 @@ function EquityProjection(props) {
     data = [
       {
         name: "Projected home price",
-        // uv: 4000,
         pv:
           (CalculatorResponse && CalculatorResponse.ARM1) ||
           (CalculatorResponse && CalculatorResponse.FRM1)
@@ -139,13 +138,10 @@ function EquityProjection(props) {
             : (CalculatorResponse && CalculatorResponse.ARM2) ||
               (CalculatorResponse && CalculatorResponse.FRM2)
             ? pv2
-            : 0,
-        // pv: 600,
-        // amt: 2400,
+            : 0
       },
       {
         name: "Loan Balance",
-        // uv: 3000,
         at:
           (CalculatorResponse && CalculatorResponse.ARM1) ||
           (CalculatorResponse && CalculatorResponse.FRM1)
@@ -153,13 +149,10 @@ function EquityProjection(props) {
             : (CalculatorResponse && CalculatorResponse.ARM2) ||
               (CalculatorResponse && CalculatorResponse.FRM2)
             ? at2
-            : 0,
-        // at: 500,
-        // amt: 2210,
+            : 0
       },
       {
         name: "Equity",
-        // uv: 2000,
         ct:
           (CalculatorResponse && CalculatorResponse.ARM1) ||
           (CalculatorResponse && CalculatorResponse.FRM1)
@@ -167,9 +160,7 @@ function EquityProjection(props) {
             : (CalculatorResponse && CalculatorResponse.ARM2) ||
               (CalculatorResponse && CalculatorResponse.FRM2)
             ? ct2
-            : 0,
-        // ct:400,
-        // amt: 2290,
+            : 0
       },
     ];
   }
