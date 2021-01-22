@@ -357,7 +357,6 @@ export class ShowDetailedReports extends Component {
       data.GetSinglePropertyResponse["data"][0].first_frm &&
       data.GetSinglePropertyResponse["data"][0].first_frm.id
     ) {
-      console.log("if")
       let secondmtgpmichoice;
       if (data.GetSinglePropertyResponse["data"][0].first_frm.pmi) {
         console.log("PMI");
@@ -452,7 +451,7 @@ export class ShowDetailedReports extends Component {
               )
             : 0,
           closingcostssecond1: data.GetSinglePropertyResponse["data"][0]
-            .first_frm.id
+            .first_frm.closingcostssecond1
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_frm
                   .second_mortgage_closing_costs
@@ -473,7 +472,7 @@ export class ShowDetailedReports extends Component {
           ARMfirstadjin1: data.GetSinglePropertyResponse["data"][0].first_frm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_frm
-                  .first_interest_rate_adj_cap
+                  .ARMfirstadjin1
               )
             : 0,
           floor1: data.GetSinglePropertyResponse["data"][0].first_frm.id
@@ -500,7 +499,13 @@ export class ShowDetailedReports extends Component {
         },
       };
     } else {
-      console.log("else")
+      // const secondmtgpmichoice = data.GetSinglePropertyResponse["data"][0]
+      //   .first_arm.pmi
+      //   ? 1
+      //   : data.GetSinglePropertyResponse["data"][0].first_arm.loanamountsecond1
+      //   ? 2
+      //   : 0;
+
       let secondmtgpmichoice;
       if (data.GetSinglePropertyResponse["data"][0].first_arm.pmi) {
         console.log("PMI");
@@ -516,8 +521,6 @@ export class ShowDetailedReports extends Component {
         console.log("ELSE");
         secondmtgpmichoice = 0;
       }
-
-      console.log("@",data.GetSinglePropertyResponse["data"][0].first_arm.first_interest_rate_adj_cap)
       return {
         loanchoicefirst1: 2,
         loanchoicefirst1_details: {
@@ -533,9 +536,9 @@ export class ShowDetailedReports extends Component {
               )
             : 0,
           interestfirst1: data.GetSinglePropertyResponse["data"][0].first_arm
-            .initial_interest_rate
+            .interest
             ? Number(
-                data.GetSinglePropertyResponse["data"][0].first_arm.initial_interest_rate
+                data.GetSinglePropertyResponse["data"][0].first_arm.interest
               )
             : 0.0,
           pointsfirst1: data.GetSinglePropertyResponse["data"][0].first_arm.id
@@ -584,15 +587,15 @@ export class ShowDetailedReports extends Component {
                   .second_mortgage_loan_term
               )
             : 0,
-          pointssecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.second_mortgage_points) : 0,
-          // pointssecond1: 0,
+          // pointssecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.second_mortgage_points) : 0,
+          pointssecond1: 0,
           Pmtsecond1: data.GetSinglePropertyResponse["data"][0].first_arm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_arm.Pmtsecond2
               )
             : 0,
           closingcostssecond1: data.GetSinglePropertyResponse["data"][0]
-            .first_arm.id
+            .first_arm.closingcostssecond1
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_arm
                   .second_mortgage_closing_costs
@@ -613,7 +616,7 @@ export class ShowDetailedReports extends Component {
           ARMfirstadjin1: data.GetSinglePropertyResponse["data"][0].first_arm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_arm
-                  .first_interest_rate_adj_cap
+                  .ARMfirstadjin2
               )
             : 0,
           floor1: data.GetSinglePropertyResponse["data"][0].first_arm.id
@@ -642,7 +645,6 @@ export class ShowDetailedReports extends Component {
           secondmtgpmichoice1: secondmtgpmichoice,
         },
       };
-
     }
   }
 
@@ -768,10 +770,11 @@ export class ShowDetailedReports extends Component {
                 data.GetSinglePropertyResponse["data"][0].second_frm.ARM2rate
               )
             : 0,
-          ARMfirstadjin2: data.GetSinglePropertyResponse["data"][0].second_frm.id
+          ARMfirstadjin2: data.GetSinglePropertyResponse["data"][0].second_frm
+            .id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].second_frm
-                  .first_interest_rate_adj_cap
+                  .ARMfirstadjin2
               )
             : 0,
           floor2: data.GetSinglePropertyResponse["data"][0].second_frm.id
@@ -834,9 +837,9 @@ export class ShowDetailedReports extends Component {
               )
             : 0,
           interestfirst2: data.GetSinglePropertyResponse["data"][0].second_arm
-            .initial_interest_rate
+            .interest
             ? Number(
-                data.GetSinglePropertyResponse["data"][0].second_arm.initial_interest_rate
+                data.GetSinglePropertyResponse["data"][0].second_arm.interest
               )
             : 0.0,
           pointsfirst2: data.GetSinglePropertyResponse["data"][0].second_arm.id
@@ -924,10 +927,11 @@ export class ShowDetailedReports extends Component {
                   .initial_interest_rate
               )
             : 0,
-          ARMfirstadjin2: data.GetSinglePropertyResponse["data"][0].second_arm.id
+          ARMfirstadjin2: data.GetSinglePropertyResponse["data"][0].second_arm
+            .id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].second_arm
-                  .first_interest_rate_adj_cap
+                  .ARMfirstadjin2
               )
             : 0,
           floor2: data.GetSinglePropertyResponse["data"][0].second_arm.id
