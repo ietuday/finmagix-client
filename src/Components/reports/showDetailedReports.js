@@ -451,7 +451,7 @@ export class ShowDetailedReports extends Component {
               )
             : 0,
           closingcostssecond1: data.GetSinglePropertyResponse["data"][0]
-            .first_frm.closingcostssecond1
+            .first_frm.second_mortgage_closing_costs
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_frm
                   .second_mortgage_closing_costs
@@ -587,15 +587,15 @@ export class ShowDetailedReports extends Component {
                   .second_mortgage_loan_term
               )
             : 0,
-          // pointssecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.second_mortgage_points) : 0,
-          pointssecond1: 0,
+          pointssecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.second_mortgage_points) : 0,
+          // pointssecond1: 0,
           Pmtsecond1: data.GetSinglePropertyResponse["data"][0].first_arm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_arm.Pmtsecond2
               )
             : 0,
           closingcostssecond1: data.GetSinglePropertyResponse["data"][0]
-            .first_arm.closingcostssecond1
+            .first_arm.second_mortgage_closing_costs
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_arm
                   .second_mortgage_closing_costs
