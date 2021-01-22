@@ -533,9 +533,9 @@ export class ShowDetailedReports extends Component {
               )
             : 0,
           interestfirst1: data.GetSinglePropertyResponse["data"][0].first_arm
-            .interest
+            .initial_interest_rate
             ? Number(
-                data.GetSinglePropertyResponse["data"][0].first_arm.interest
+                data.GetSinglePropertyResponse["data"][0].first_arm.initial_interest_rate
               )
             : 0.0,
           pointsfirst1: data.GetSinglePropertyResponse["data"][0].first_arm.id
@@ -834,9 +834,9 @@ export class ShowDetailedReports extends Component {
               )
             : 0,
           interestfirst2: data.GetSinglePropertyResponse["data"][0].second_arm
-            .interest
+            .initial_interest_rate
             ? Number(
-                data.GetSinglePropertyResponse["data"][0].second_arm.interest
+                data.GetSinglePropertyResponse["data"][0].second_arm.initial_interest_rate
               )
             : 0.0,
           pointsfirst2: data.GetSinglePropertyResponse["data"][0].second_arm.id
