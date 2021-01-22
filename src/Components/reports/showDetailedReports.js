@@ -536,9 +536,9 @@ export class ShowDetailedReports extends Component {
               )
             : 0,
           interestfirst1: data.GetSinglePropertyResponse["data"][0].first_arm
-            .interest
+            .initial_interest_rate
             ? Number(
-                data.GetSinglePropertyResponse["data"][0].first_arm.interest
+                data.GetSinglePropertyResponse["data"][0].first_arm.initial_interest_rate
               )
             : 0.0,
           pointsfirst1: data.GetSinglePropertyResponse["data"][0].first_arm.id
@@ -616,7 +616,7 @@ export class ShowDetailedReports extends Component {
           ARMfirstadjin1: data.GetSinglePropertyResponse["data"][0].first_arm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_arm
-                  .ARMfirstadjin2
+                  .first_interest_rate_adj_cap
               )
             : 0,
           floor1: data.GetSinglePropertyResponse["data"][0].first_arm.id
@@ -653,12 +653,6 @@ export class ShowDetailedReports extends Component {
       data.GetSinglePropertyResponse["data"][0].second_frm &&
       data.GetSinglePropertyResponse["data"][0].second_frm.id
     ) {
-      // const secondmtgpmichoice = data.GetSinglePropertyResponse["data"][0]
-      //   .second_frm.pmi
-      //   ? 1
-      //   : data.GetSinglePropertyResponse["data"][0].second_frm.loanamountsecond2
-      //   ? 2
-      //   : 0;
 
         let secondmtgpmichoice;
         if (data.GetSinglePropertyResponse["data"][0].second_frm.pmi) {
@@ -837,9 +831,9 @@ export class ShowDetailedReports extends Component {
               )
             : 0,
           interestfirst2: data.GetSinglePropertyResponse["data"][0].second_arm
-            .interest
+            .initial_interest_rate
             ? Number(
-                data.GetSinglePropertyResponse["data"][0].second_arm.interest
+                data.GetSinglePropertyResponse["data"][0].second_arm.initial_interest_rate
               )
             : 0.0,
           pointsfirst2: data.GetSinglePropertyResponse["data"][0].second_arm.id
@@ -931,7 +925,7 @@ export class ShowDetailedReports extends Component {
             .id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].second_arm
-                  .ARMfirstadjin2
+                  .first_interest_rate_adj_cap
               )
             : 0,
           floor2: data.GetSinglePropertyResponse["data"][0].second_arm.id
@@ -1216,75 +1210,6 @@ export class ShowDetailedReports extends Component {
               </Card>
             </MDBCol>
           </MDBRow>
-          {/* <MDBRow className="margin20">
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <Card>
-                <CardContent>
-                  <MDBRow>
-                    <MDBCol md="9" size="10">
-                      <Typography variant="h5" component="h2">
-                        Property Report
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        Details of the mortgage amount and type
-                      </Typography>
-                    </MDBCol>
-                    <MDBCol md="2" size="2">
-                      <div className="text-center">
-                        <MDBIcon icon="angle-right" size="large" />
-                      </div>
-                    </MDBCol>
-                  </MDBRow>
-                </CardContent>
-              </Card>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow className="margin20">
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <Card>
-                <CardContent>
-                  <MDBRow>
-                    <MDBCol md="9" size="10">
-                      <Typography variant="h5" component="h2">
-                        Property Comparison
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        Tax advantage to buying a home
-                      </Typography>
-                    </MDBCol>
-                    <MDBCol md="2" size="2">
-                      <div className="text-center">
-                        <MDBIcon icon="angle-right" size="large" />
-                      </div>
-                    </MDBCol>
-                  </MDBRow>
-                </CardContent>
-              </Card>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow className="margin20">
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <Card>
-                <CardContent>
-                  <MDBRow>
-                    <MDBCol md="9" size="10">
-                      <Typography variant="h5" component="h2">
-                        Offers
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        Equility in the house or house price
-                      </Typography>
-                    </MDBCol>
-                    <MDBCol md="2" size="2">
-                      <div className="text-center">
-                        <MDBIcon icon="angle-right" size="large" />
-                      </div>
-                    </MDBCol>
-                  </MDBRow>
-                </CardContent>
-              </Card>
-            </MDBCol>
-          </MDBRow> */}
         </MDBContainer>
       </Fragment>
     );
