@@ -33,6 +33,7 @@ export class ARMComponentSecondLoan extends Component {
       rate_add: 0,
       points: 0,
       closing_costs: 0,
+      closing_costs_number:0,
       interest_only_option: "N",
       interest_only_period: 0,
       pmi: 0,
@@ -69,7 +70,7 @@ export class ARMComponentSecondLoan extends Component {
       rate_add_percentage: "0",
       closing_costs_percentage: "0",
       points_percentage: "0",
-      period_cap_percentage:"0"
+      period_cap_percentage: "0",
     };
     this.validators = ArmMortgageProgramValidator;
     resetValidators(this.validators);
@@ -566,7 +567,7 @@ export class ARMComponentSecondLoan extends Component {
               onChange={this.handleChange}
             /> */}
 
-<NumberFormat
+            <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="period_cap"
@@ -683,17 +684,34 @@ export class ARMComponentSecondLoan extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="closing_costs"
               value={this.state.closing_costs}
               onChange={this.handleChange}
-            />
+            /> */}
 
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="closing_costs"
+              value={this.state.closing_costs}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  closing_costs_number: formattedValue,
+                });
+                await this.setState({
+                  closing_costs: value,
+                });
+              }}
+            />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "closing_costs")}
+        {/* {displayValidationErrors(this.validators, "closing_costs")} */}
 
         <MDBRow className="margin20">
           <MDBCol md="12">

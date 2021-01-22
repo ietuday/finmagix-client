@@ -159,11 +159,11 @@ export class PropertyMortgageHOC extends Component {
             );
           }
         
-          if(this.state.firstLoanScenario['second_mortgage_closing_costs']){
-            this.state.firstLoanScenario['second_mortgage_closing_costs'] = String(
-              Number(this.state.firstLoanScenario[" "]) / 100
-            );
-          }
+          // if(this.state.firstLoanScenario['second_mortgage_closing_costs']){
+          //   this.state.firstLoanScenario['second_mortgage_closing_costs'] = String(
+          //     Number(this.state.firstLoanScenario[" "]) / 100
+          //   );
+          // }
         
           if(this.state.firstLoanScenario['initial_interest_rate']){
             this.state.firstLoanScenario['initial_interest_rate'] = String(
@@ -265,11 +265,11 @@ export class PropertyMortgageHOC extends Component {
             );
           }
         
-          if(this.state.firstLoanScenario['second_mortgage_closing_costs']){
-            this.state.firstLoanScenario['second_mortgage_closing_costs'] = String(
-              Number(this.state.firstLoanScenario[" "]) / 100
-            );
-          }
+          // if(this.state.firstLoanScenario['second_mortgage_closing_costs']){
+          //   this.state.firstLoanScenario['second_mortgage_closing_costs'] = String(
+          //     Number(this.state.firstLoanScenario[" "]) / 100
+          //   );
+          // }
         
           if(this.state.firstLoanScenario['initial_interest_rate']){
             this.state.firstLoanScenario['initial_interest_rate'] = String(

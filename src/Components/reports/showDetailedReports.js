@@ -346,8 +346,8 @@ export class ShowDetailedReports extends Component {
                 .detail_non_housing_expenses.other_expenses
             )
           : 0,
-      _Totalnonhousing: this.state.personalFinace.total_non_housing
-        ? Number(this.state.personalFinace.total_non_housing)
+      _Totalnonhousing: this.state.personalFinace.monthly_non_housing_expenses
+        ? Number(this.state.personalFinace.monthly_non_housing_expenses)
         : 0,
     };
   }
@@ -357,6 +357,7 @@ export class ShowDetailedReports extends Component {
       data.GetSinglePropertyResponse["data"][0].first_frm &&
       data.GetSinglePropertyResponse["data"][0].first_frm.id
     ) {
+      console.log("if")
       let secondmtgpmichoice;
       if (data.GetSinglePropertyResponse["data"][0].first_frm.pmi) {
         console.log("PMI");
@@ -451,7 +452,7 @@ export class ShowDetailedReports extends Component {
               )
             : 0,
           closingcostssecond1: data.GetSinglePropertyResponse["data"][0]
-            .first_frm.closingcostssecond1
+            .first_frm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_frm
                   .second_mortgage_closing_costs
@@ -472,7 +473,7 @@ export class ShowDetailedReports extends Component {
           ARMfirstadjin1: data.GetSinglePropertyResponse["data"][0].first_frm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_frm
-                  .ARMfirstadjin1
+                  .first_interest_rate_adj_cap
               )
             : 0,
           floor1: data.GetSinglePropertyResponse["data"][0].first_frm.id
@@ -499,13 +500,7 @@ export class ShowDetailedReports extends Component {
         },
       };
     } else {
-      // const secondmtgpmichoice = data.GetSinglePropertyResponse["data"][0]
-      //   .first_arm.pmi
-      //   ? 1
-      //   : data.GetSinglePropertyResponse["data"][0].first_arm.loanamountsecond1
-      //   ? 2
-      //   : 0;
-
+      console.log("else")
       let secondmtgpmichoice;
       if (data.GetSinglePropertyResponse["data"][0].first_arm.pmi) {
         console.log("PMI");
@@ -521,6 +516,8 @@ export class ShowDetailedReports extends Component {
         console.log("ELSE");
         secondmtgpmichoice = 0;
       }
+
+      console.log("@",data.GetSinglePropertyResponse["data"][0].first_arm.first_interest_rate_adj_cap)
       return {
         loanchoicefirst1: 2,
         loanchoicefirst1_details: {
@@ -587,15 +584,15 @@ export class ShowDetailedReports extends Component {
                   .second_mortgage_loan_term
               )
             : 0,
-          // pointssecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.second_mortgage_points) : 0,
-          pointssecond1: 0,
+          pointssecond1: data.GetSinglePropertyResponse['data'][0].first_arm.id ? Number(data.GetSinglePropertyResponse['data'][0].first_arm.second_mortgage_points) : 0,
+          // pointssecond1: 0,
           Pmtsecond1: data.GetSinglePropertyResponse["data"][0].first_arm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_arm.Pmtsecond2
               )
             : 0,
           closingcostssecond1: data.GetSinglePropertyResponse["data"][0]
-            .first_arm.closingcostssecond1
+            .first_arm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_arm
                   .second_mortgage_closing_costs
@@ -616,7 +613,7 @@ export class ShowDetailedReports extends Component {
           ARMfirstadjin1: data.GetSinglePropertyResponse["data"][0].first_arm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].first_arm
-                  .ARMfirstadjin2
+                  .first_interest_rate_adj_cap
               )
             : 0,
           floor1: data.GetSinglePropertyResponse["data"][0].first_arm.id
@@ -645,6 +642,7 @@ export class ShowDetailedReports extends Component {
           secondmtgpmichoice1: secondmtgpmichoice,
         },
       };
+
     }
   }
 
@@ -770,11 +768,10 @@ export class ShowDetailedReports extends Component {
                 data.GetSinglePropertyResponse["data"][0].second_frm.ARM2rate
               )
             : 0,
-          ARMfirstadjin2: data.GetSinglePropertyResponse["data"][0].second_frm
-            .id
+          ARMfirstadjin2: data.GetSinglePropertyResponse["data"][0].second_frm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].second_frm
-                  .ARMfirstadjin2
+                  .first_interest_rate_adj_cap
               )
             : 0,
           floor2: data.GetSinglePropertyResponse["data"][0].second_frm.id
@@ -927,11 +924,10 @@ export class ShowDetailedReports extends Component {
                   .initial_interest_rate
               )
             : 0,
-          ARMfirstadjin2: data.GetSinglePropertyResponse["data"][0].second_arm
-            .id
+          ARMfirstadjin2: data.GetSinglePropertyResponse["data"][0].second_arm.id
             ? Number(
                 data.GetSinglePropertyResponse["data"][0].second_arm
-                  .ARMfirstadjin2
+                  .first_interest_rate_adj_cap
               )
             : 0,
           floor2: data.GetSinglePropertyResponse["data"][0].second_arm.id

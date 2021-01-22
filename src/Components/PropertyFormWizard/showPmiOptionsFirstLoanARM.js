@@ -22,7 +22,8 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
       second_mortgage_interest: "0",
       second_mortgage_interest_percentage: "0",
       second_mortgage_points: "0",
-      second_mortgage_closing_costs: "0",
+      second_mortgage_closing_costs:0,
+      second_mortgage_closing_costs_number:0,
       PMIOptions: "PMI",
       showSecondloanOption: false,
       secondmtgpmichoice1: "0",
@@ -46,7 +47,6 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
       ceiling2: "0",
       periodicadjcap2: "0",
       rateadd2: "0",
-      second_mortgage_closing_costs_percentage: "0",
       second_mortgage_points_percentage: "0",
     };
     this.handleChange = this.handleChange.bind(this);
@@ -256,12 +256,29 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="second_mortgage_closing_costs"
               value={this.state.second_mortgage_closing_costs}
               onChange={this.handleChange}
+            /> */}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="second_mortgage_closing_costs"
+              value={this.state.second_mortgage_closing_costs}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  second_mortgage_closing_costs_number: formattedValue,
+                });
+                await this.setState({
+                  second_mortgage_closing_costs: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>

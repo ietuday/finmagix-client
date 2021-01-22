@@ -31,6 +31,7 @@ export class SecondLoanScenario extends Component {
       interest_percentage: 0,
       points: 0,
       closing_costs: 0,
+      closing_costs_number:0,
       interest_only_option: "N",
       interest_only_period: 0,
       downpayment: 0,
@@ -393,17 +394,33 @@ export class SecondLoanScenario extends Component {
                   </span>
                 </div>
                 <br />
-                <Input
+                {/* <Input
                   className="input-class-mdb"
                   placeholder="Enter amount here"
                   name="closing_costs"
                   value={this.state.closing_costs}
                   onChange={this.handleChange}
+                /> */}
+                <NumberFormat
+                  className="input-class-mdb"
+                  placeholder="Enter amount here"
+                  name="closing_costs"
+                  value={this.state.closing_costs}
+                  onChange={this.handleChange}
+                  thousandSeparator={true}
+                  onValueChange={async (values) => {
+                    const { formattedValue, value } = values;
+                    await this.setState({
+                      closing_costs_number: formattedValue,
+                    });
+                    await this.setState({
+                      closing_costs: value,
+                    });
+                  }}
                 />
-                
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "closing_costs")}
+            {/* {displayValidationErrors(this.validators, "closing_costs")} */}
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Interest only option</span>
