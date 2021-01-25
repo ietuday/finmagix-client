@@ -603,8 +603,8 @@ export class ShowDetailedReports extends Component {
             : 0,
           ARMtype1: data.GetSinglePropertyResponse["data"][0].first_arm
             .select_loan_program
-            ? data.GetSinglePropertyResponse["data"][0].first_arm
-                .select_loan_program
+            ? Number(data.GetSinglePropertyResponse["data"][0].first_arm
+                .select_loan_program)
             : 0,
           ARM1rate: data.GetSinglePropertyResponse["data"][0].first_arm
             .initial_interest_rate
@@ -910,7 +910,7 @@ export class ShowDetailedReports extends Component {
             : 0,
           ARMtype2: data.GetSinglePropertyResponse["data"][0].second_arm
             .select_loan_program
-            ? String(
+            ? Number(
                 data.GetSinglePropertyResponse["data"][0].second_arm
                   .select_loan_program
               )

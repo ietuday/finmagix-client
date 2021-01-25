@@ -116,7 +116,7 @@ class AmortizationTableFRM extends React.Component {
             Principalpaid: objPrincipalpaid[index].Principalpaid,
             Payment: objPayment[index].Payment,
             Interestpaid: objInterestpaid[index].Interestpaid,
-            TotalPayment: objTotalPayment[index].TotalPayment,
+            TotalPayment: objTotalPayment[index].TotalPayment || "N/A",
           });
         });
         if (this.state.dfrm1.length > 0) {
@@ -194,8 +194,8 @@ class AmortizationTableFRM extends React.Component {
         const Priorbalances = this.CalculatorResponse.dARM1.PriorBalance;
         const Principalpaids = this.CalculatorResponse.dARM1.PrincipalPaid;
         const Payments = this.CalculatorResponse.dARM1.Payment;
-        const Interestpaids = this.CalculatorResponse.dARM1.InterestPaid;
-        const TotalPayments = this.CalculatorResponse.dARM1["TotalPayments"];
+        const Interestpaids = this.CalculatorResponse.dARM1[' InterestPaid'];
+        const TotalPayments = this.CalculatorResponse.dARM1["TotalPayments"] || [];
         const Endingbalances = this.CalculatorResponse.dARM1.Endingbalance;
         const objYear = Years.map((x) => {
           return {
@@ -240,7 +240,7 @@ class AmortizationTableFRM extends React.Component {
             Principalpaid: objPrincipalpaid[index].Principalpaid,
             Payment: objPayment[index].Payment,
             Interestpaid: objInterestpaid[index].Interestpaid,
-            TotalPayment: objTotalPayment[index].TotalPayment,
+            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "N/A",
           });
         });
         if (this.state.darm1.length > 0) {
@@ -253,12 +253,13 @@ class AmortizationTableFRM extends React.Component {
 
       if (this.CalculatorResponse && this.CalculatorResponse.dARM2) {
         const Years = this.CalculatorResponse.dARM2.Year;
-        const Priorbalances = this.CalculatorResponse.dARM2.Priorbalance;
-        const Principalpaids = this.CalculatorResponse.dARM2.Principalpaid;
+        const Priorbalances = this.CalculatorResponse.dARM2.PriorBalance;
+        const Principalpaids = this.CalculatorResponse.dARM2.PrincipalPaid;
         const Payments = this.CalculatorResponse.dARM2.Payment;
-        const Interestpaids = this.CalculatorResponse.dARM2.Interestpaid;
-        const TotalPayments = this.CalculatorResponse.dARM2["TotalPayments"];
+        const Interestpaids = this.CalculatorResponse.dARM2['InterestPaid'];
+        const TotalPayments = this.CalculatorResponse.dARM2["TotalPayments"] || [];
         const Endingbalances = this.CalculatorResponse.dARM2.Endingbalance;
+        // debugger
         const objYear = Years.map((x) => {
           return {
             Year: x,
@@ -302,7 +303,7 @@ class AmortizationTableFRM extends React.Component {
             Principalpaid: objPrincipalpaid[index].Principalpaid,
             Payment: objPayment[index].Payment,
             Interestpaid: objInterestpaid[index].Interestpaid,
-            TotalPayment: objTotalPayment[index].TotalPayment,
+            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "N/A",
           });
         });
         if (this.state.darm2.length > 0) {
@@ -365,7 +366,7 @@ class AmortizationTableFRM extends React.Component {
             Principalpaid: objPrincipalpaid[index].Principalpaid,
             Payment: objPayment[index].Payment,
             Interestpaid: objInterestpaid[index].Interestpaid,
-            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "",
+            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "N/A",
           });
 
           if (this.state.dsecond1.length > 0) {
@@ -428,7 +429,7 @@ class AmortizationTableFRM extends React.Component {
             Principalpaid: objPrincipalpaid[index].Principalpaid,
             Payment: objPayment[index].Payment,
             Interestpaid: objInterestpaid[index].Interestpaid,
-            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "",
+            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "N/A",
           });
         });
         if (this.state.dsecond2.length > 0) {

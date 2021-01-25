@@ -377,11 +377,11 @@ export class ARMComponentFirstLoan extends Component {
               onChange={this.handleChange}
               style={{ minWidth: "100%" }}
             >
-              <MenuItem value={"1/1 ARM"}>1/1 ARM</MenuItem>
-              <MenuItem value={"3/1 ARM"}>3/1 ARM</MenuItem>
-              <MenuItem value={"5/1 ARM"}>5/1 ARM</MenuItem>
-              <MenuItem value={"7/1 ARM"}>7/1 ARM</MenuItem>
-              <MenuItem value={"10/1 ARM"}>10/1 ARM</MenuItem>
+              <MenuItem value={"1"}>1/1 ARM</MenuItem>
+              <MenuItem value={"2"}>3/1 ARM</MenuItem>
+              <MenuItem value={"3"}>5/1 ARM</MenuItem>
+              <MenuItem value={"4"}>7/1 ARM</MenuItem>
+              <MenuItem value={"5"}>10/1 ARM</MenuItem>
             </Select>
           </MDBCol>
         </MDBRow>
