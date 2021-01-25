@@ -574,8 +574,8 @@ export class ARMComponentFirstLoan extends Component {
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="period_cap"
-              value={this.state.period_cap}
+              name="period_cap_percentage"
+              value={this.state.period_cap_percentage}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {
@@ -586,11 +586,12 @@ export class ARMComponentFirstLoan extends Component {
                 await this.setState({
                   period_cap_percentage: formattedValue,
                 });
+                console.log(this.state)
               }}
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "period_cap")}
+        {/* {displayValidationErrors(this.validators, "period_cap")} */}
 
         <MDBRow className="margin20">
           <MDBCol md="12">

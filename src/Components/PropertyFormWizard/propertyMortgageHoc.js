@@ -127,6 +127,8 @@ export class PropertyMortgageHOC extends Component {
           );
         }
         if(this.state.firstLoanScenario['period_cap']){
+          console.log(this.state.firstLoanScenario['period_cap'])
+          console.log(this.state.firstLoanScenario["period_cap_percentage"])
           this.state.firstLoanScenario['period_cap'] = String(
             Number(this.state.firstLoanScenario["period_cap"]) / 100
           );
@@ -233,6 +235,8 @@ export class PropertyMortgageHOC extends Component {
           );
         }
         if(this.state.firstLoanScenario['period_cap']){
+          console.log(this.state.firstLoanScenario['period_cap'])
+          console.log(this.state.firstLoanScenario["period_cap_percentage"])
           this.state.firstLoanScenario['period_cap'] = String(
             Number(this.state.firstLoanScenario["period_cap"]) / 100
           );
@@ -358,9 +362,13 @@ export class PropertyMortgageHOC extends Component {
           );
         }
         if(this.state.secondLoanScenario['period_cap']){
+        
+          console.log(this.state.secondLoanScenario['period_cap'])
+          console.log(this.state.secondLoanScenario["period_cap_percentage"])
           this.state.secondLoanScenario['period_cap'] = String(
             Number(this.state.secondLoanScenario["period_cap"]) / 100
           );
+         
         }
         if(this.state.secondLoanScenario['rate_add']){
           this.state.secondLoanScenario['rate_add'] = String(
@@ -465,6 +473,8 @@ export class PropertyMortgageHOC extends Component {
           );
         }
         if(this.state.secondLoanScenario['period_cap']){
+          console.log(this.state.firstLoanScenario['period_cap'])
+          console.log(this.state.firstLoanScenario["period_cap_percentage"])
           this.state.secondLoanScenario['period_cap'] = String(
             Number(this.state.secondLoanScenario["period_cap"]) / 100
           );
