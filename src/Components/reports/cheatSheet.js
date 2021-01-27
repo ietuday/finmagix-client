@@ -81,7 +81,6 @@ export class CheatSheet extends Component {
       this.props.location.state &&
       this.props.location.state.CalculatorResponse
     ) {
-
       // {
       //   name: 'First Mortage Amount', Amount1: 40000, Amount2: 8000,
       // },
@@ -175,8 +174,6 @@ export class CheatSheet extends Component {
               ).replace(/,/g, "")
             ),
           },
-          
- 
         ],
 
         projectedEquitys: [
@@ -205,10 +202,7 @@ export class CheatSheet extends Component {
               ).replace(/,/g, "")
             ),
           },
-          
- 
-        ],      
-
+        ],
 
         afterHomePurchaseSpendProfile: [
           {
@@ -236,10 +230,7 @@ export class CheatSheet extends Component {
               ).replace(/,/g, "")
             ),
           },
-          
- 
-        ],  
-
+        ],
 
         taxImpact: [
           {
@@ -267,12 +258,7 @@ export class CheatSheet extends Component {
               ).replace(/,/g, "")
             ),
           },
-          
- 
-        ],  
-
-
-        
+        ],
       });
     }
   }
@@ -320,9 +306,7 @@ export class CheatSheet extends Component {
               </Card>
             </MDBCol>
           </MDBRow>
- 
 
-          
           <MDBRow>
             <MDBCol>
               <h6 className="CardTitle">Loan Program Comparison</h6>
@@ -406,7 +390,11 @@ export class CheatSheet extends Component {
                   <YAxis />
                   <Tooltip />
                   {/* <Legend /> */}
-                  <Bar dataKey="projectedEquityptionscenario1" fill="#4d6fc4" minPointSize={5}>
+                  <Bar
+                    dataKey="projectedEquityptionscenario1"
+                    fill="#4d6fc4"
+                    minPointSize={5}
+                  >
                     {/* <LabelList dataKey="name" content={renderCustomizedLabel} /> */}
                   </Bar>
                   <Bar
@@ -438,7 +426,11 @@ export class CheatSheet extends Component {
                   <YAxis />
                   <Tooltip />
                   {/* <Legend /> */}
-                  <Bar dataKey="HomePurchaseSpendProfilescenario1" fill="#4d6fc4" minPointSize={5}>
+                  <Bar
+                    dataKey="HomePurchaseSpendProfilescenario1"
+                    fill="#4d6fc4"
+                    minPointSize={5}
+                  >
                     {/* <LabelList dataKey="name" content={renderCustomizedLabel} /> */}
                   </Bar>
                   <Bar
@@ -450,7 +442,6 @@ export class CheatSheet extends Component {
               </div>
             </MDBCol>
           </MDBRow>
-          
 
           <MDBRow>
             <MDBCol>
@@ -471,7 +462,11 @@ export class CheatSheet extends Component {
                   <YAxis />
                   <Tooltip />
                   {/* <Legend /> */}
-                  <Bar dataKey="Taximpactscenario1" fill="#4d6fc4" minPointSize={5}>
+                  <Bar
+                    dataKey="Taximpactscenario1"
+                    fill="#4d6fc4"
+                    minPointSize={5}
+                  >
                     {/* <LabelList dataKey="name" content={renderCustomizedLabel} /> */}
                   </Bar>
                   <Bar
@@ -483,8 +478,6 @@ export class CheatSheet extends Component {
               </div>
             </MDBCol>
           </MDBRow>
-
-
         </MDBContainer>
         <br />
         <br />
