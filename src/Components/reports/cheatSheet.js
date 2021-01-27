@@ -23,30 +23,6 @@ import {
   LabelList,
 } from "recharts";
 
-const data = [
-  {
-    name: "First Mortage Amount",
-    MortgageAmount: 40000,
-    MonthlyMortgagePayment: 8000,
-  },
-];
-
-const data1 = [
-  {
-    name: "Housing Payment",
-    Amount1: 20000,
-    Amount2: 8000,
-  },
-];
-
-const data2 = [
-  {
-    name: "Projected Equity",
-    Amount1: 5000,
-    Amount2: 8000,
-  },
-];
-
 const renderCustomizedLabel = (props) => {
   console.log("props", props);
   const { x, y, width, height, value } = props;
@@ -81,18 +57,6 @@ export class CheatSheet extends Component {
       this.props.location.state &&
       this.props.location.state.CalculatorResponse
     ) {
-      // {
-      //   name: 'First Mortage Amount', Amount1: 40000, Amount2: 8000,
-      // },
-      // {
-      //   name: 'Second Mortage Amount', Amount1: 3000, Amount2: 6000,
-      // },
-      // {
-      //   name: 'Housing Payment', Amount1: 29000, Amount2: 25000,
-      // },
-      // {
-      //   name: 'Projected Equity', Amount1: 500000, Amount2: 450000,
-      // },
       const { CalculatorResponse } = this.props.location.state;
       this.setState({
         mortgageProgram: [
@@ -312,8 +276,8 @@ export class CheatSheet extends Component {
               <h6 className="CardTitle">Loan Program Comparison</h6>
               <div>
                 <BarChart
-                  width={600}
-                  height={400}
+                  width={500}
+                  height={300}
                   data={this.state.mortgageProgram}
                   margin={{
                     top: 0,
@@ -337,15 +301,12 @@ export class CheatSheet extends Component {
                 </BarChart>
               </div>
             </MDBCol>
-          </MDBRow>
-
-          <MDBRow>
             <MDBCol>
               <h6 className="CardTitle">Housing Payment</h6>
               <div>
                 <BarChart
-                  width={600}
-                  height={400}
+                  width={500}
+                  height={300}
                   data={this.state.housingPayments}
                   margin={{
                     top: 0,
@@ -376,8 +337,8 @@ export class CheatSheet extends Component {
               <h6 className="CardTitle">Projected Equity</h6>
               <div>
                 <BarChart
-                  width={600}
-                  height={400}
+                  width={500}
+                  height={300}
                   data={this.state.projectedEquitys}
                   margin={{
                     top: 0,
@@ -405,15 +366,12 @@ export class CheatSheet extends Component {
                 </BarChart>
               </div>
             </MDBCol>
-          </MDBRow>
-
-          <MDBRow>
             <MDBCol>
               <h6 className="CardTitle">After home purchase spend profile</h6>
               <div>
                 <BarChart
-                  width={600}
-                  height={400}
+                  width={500}
+                  height={300}
                   data={this.state.afterHomePurchaseSpendProfile}
                   margin={{
                     top: 0,
@@ -448,8 +406,8 @@ export class CheatSheet extends Component {
               <h6 className="CardTitle">Tax Impact</h6>
               <div>
                 <BarChart
-                  width={600}
-                  height={400}
+                  width={500}
+                  height={300}
                   data={this.state.taxImpact}
                   margin={{
                     top: 0,
