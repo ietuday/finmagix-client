@@ -502,7 +502,7 @@ class AmortizationTableFRM extends React.Component {
     const { value } = this.state;
     return (
       <Fragment>
-        <Header type="Amortization Table For FRM" className="header-row" />
+        <Header type="Amortization Table" className="header-row" />
         <MDBContainer>
           <Button
             size="medium"

@@ -2,6 +2,13 @@
   border: 1px solid lightgrey;
   /* width: 40% !important; */
 }
+.CardTitle[class] {
+  color: #00AAF6;
+  font-size:22px;
+  font-weight: 600 !important;
+  margin-top: 20px;
+}
+
 .mortgage-number {
   font-weight: 800;
   font-size: large;
