@@ -61,7 +61,7 @@ export class CheatSheet extends Component {
       this.setState({
         mortgageProgram: [
           {
-            name: `First Mortage Program`,
+            name: `FirstMortageProgram`,
             MortgageAmount: parseFloat(
               String(
                 `${
@@ -86,7 +86,7 @@ export class CheatSheet extends Component {
             ),
           },
           {
-            name: `Second Mortage Program`,
+            name: `SecondMortageProgram`,
             MortgageAmount: parseFloat(
               String(
                 `${
@@ -114,7 +114,7 @@ export class CheatSheet extends Component {
 
         housingPayments: [
           {
-            name: `housing Payment`,
+            name: `HousingPayment`,
             housingPayment: parseFloat(
               String(
                 `${
@@ -142,7 +142,7 @@ export class CheatSheet extends Component {
 
         projectedEquitys: [
           {
-            name: `Projected Equity`,
+            name: `ProjectedEquity`,
             projectedEquityptionscenario1: parseFloat(
               String(
                 `${
@@ -170,7 +170,7 @@ export class CheatSheet extends Component {
 
         afterHomePurchaseSpendProfile: [
           {
-            name: `After home purchase spend profile`,
+            name: `AfterHomePurchaseSpendProfile`,
             HomePurchaseSpendProfilescenario1: parseFloat(
               String(
                 `${
@@ -198,7 +198,7 @@ export class CheatSheet extends Component {
 
         taxImpact: [
           {
-            name: `Tax impact`,
+            name: `TaxImpact`,
             Taximpactscenario1: parseFloat(
               String(
                 `${
@@ -276,7 +276,7 @@ export class CheatSheet extends Component {
               <h6 className="CardTitle">Loan Program Comparison</h6>
               <div>
                 <BarChart
-                  width={500}
+                  width={300}
                   height={300}
                   data={this.state.mortgageProgram}
                   margin={{
@@ -305,7 +305,7 @@ export class CheatSheet extends Component {
               <h6 className="CardTitle">Housing Payment</h6>
               <div>
                 <BarChart
-                  width={500}
+                  width={300}
                   height={300}
                   data={this.state.housingPayments}
                   margin={{
@@ -337,7 +337,7 @@ export class CheatSheet extends Component {
               <h6 className="CardTitle">Projected Equity</h6>
               <div>
                 <BarChart
-                  width={500}
+                  width={300}
                   height={300}
                   data={this.state.projectedEquitys}
                   margin={{
@@ -370,7 +370,7 @@ export class CheatSheet extends Component {
               <h6 className="CardTitle">After home purchase spend profile</h6>
               <div>
                 <BarChart
-                  width={500}
+                  width={300}
                   height={300}
                   data={this.state.afterHomePurchaseSpendProfile}
                   margin={{
@@ -406,7 +406,7 @@ export class CheatSheet extends Component {
               <h6 className="CardTitle">Tax Impact</h6>
               <div>
                 <BarChart
-                  width={500}
+                  width={300}
                   height={300}
                   data={this.state.taxImpact}
                   margin={{
