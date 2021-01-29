@@ -140,7 +140,9 @@ h6 {
 
 
 .home-afer{
-  margin: 2% 0 1% 14%;
+  margin: -5% 0% -2% -2%;
+  position: fixed;
+
 }
 
 .box-green{

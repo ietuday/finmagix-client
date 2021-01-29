@@ -9,15 +9,27 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
+import Box from '@material-ui/core/Box';
 
 function TabContainer(props) {
+  const { children, value, index, ...other } = props;
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
-      {props.children}
-    </Typography>
-  );
+    <div
+    role="tabpanel"
+    hidden={value !== index}
+    id={`scrollable-auto-tabpanel-${index}`}
+    aria-labelledby={`scrollable-auto-tab-${index}`}
+    {...other}
+  >
+    {value === index && (
+      <Box p={3}>
+        <Typography>{children}</Typography>
+      </Box>
+    )}
+  </div>
+);
 }
-
+ 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
@@ -517,11 +529,13 @@ class AmortizationTableFRM extends React.Component {
                 onChange={this.handleChange}
                 indicatorColor="primary"
                 textColor="primary"
-                scrollable
+                variant="scrollable"
                 scrollButtons="auto"
               >
-                <Tab label="Scenario One" />
-                <Tab label="Scenario Two" />
+                <Tab label="Scenario One dfrm1" />
+                <Tab label="Scenario One dsecond1" />
+                <Tab label="Scenario Two dfrm2" />  
+                <Tab label="Scenario Two dsecond2" />
               </Tabs>
             </AppBar>
             {value === 0 && (
