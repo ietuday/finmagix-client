@@ -191,7 +191,9 @@ export class NerdReport extends Component {
             </MDBCol>
           </MDBRow>
           <hr />
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+            onClick={this.goToPropertyAndPersonalFinanceInfo}
+          >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
                 <CardContent>
@@ -209,7 +211,7 @@ export class NerdReport extends Component {
                         <MDBIcon
                           icon="angle-right"
                           size="large"
-                          onClick={this.goToPropertyAndPersonalFinanceInfo}
+                          // onClick={this.goToPropertyAndPersonalFinanceInfo}
                         />
                       </div>
                     </MDBCol>
@@ -218,7 +220,9 @@ export class NerdReport extends Component {
               </Card>
             </MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+          onClick={this.goToHomeAffordability}
+          >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
                 <CardContent>
@@ -236,7 +240,7 @@ export class NerdReport extends Component {
                         <MDBIcon
                           icon="angle-right"
                           size="large"
-                          onClick={this.goToHomeAffordability}
+                          
                         />
                       </div>
                     </MDBCol>
@@ -245,7 +249,9 @@ export class NerdReport extends Component {
               </Card>
             </MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+           onClick={this.goToRentBuySummary}
+          >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
                 <CardContent>
@@ -263,7 +269,7 @@ export class NerdReport extends Component {
                         <MDBIcon
                           icon="angle-right"
                           size="large"
-                          onClick={this.goToRentBuySummary}
+                         
                         />
                       </div>
                     </MDBCol>
@@ -272,7 +278,9 @@ export class NerdReport extends Component {
               </Card>
             </MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+          onClick={this.goToMortgageSummary}
+          >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
                 <CardContent>
@@ -290,7 +298,7 @@ export class NerdReport extends Component {
                         <MDBIcon
                           icon="angle-right"
                           size="large"
-                          onClick={this.goToMortgageSummary}
+                          
                         />
                       </div>
                     </MDBCol>
@@ -299,7 +307,9 @@ export class NerdReport extends Component {
               </Card>
             </MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+          onClick={this.goToTaxSummary}
+          >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
                 <CardContent>
@@ -317,7 +327,7 @@ export class NerdReport extends Component {
                         <MDBIcon
                           icon="angle-right"
                           size="large"
-                          onClick={this.goToTaxSummary}
+                          // onClick={this.goToTaxSummary}
                         />
                       </div>
                     </MDBCol>
@@ -326,7 +336,9 @@ export class NerdReport extends Component {
               </Card>
             </MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+          onClick={this.goToEquityProjection}
+          >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
                 <CardContent>
@@ -345,7 +357,7 @@ export class NerdReport extends Component {
                           icon="angle-right"
                           size="large"
                           
-                          onClick={this.goToEquityProjection}
+                          // onClick={this.goToEquityProjection}
                         />
                       </div>
                     </MDBCol>
@@ -354,7 +366,9 @@ export class NerdReport extends Component {
               </Card>
             </MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer" 
+          onClick={this.goToAmortizationTableFRM}
+          >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
                 <CardContent>
@@ -372,7 +386,7 @@ export class NerdReport extends Component {
                         <MDBIcon
                           icon="angle-right"
                           size="large"
-                          onClick={this.goToAmortizationTableFRM}
+                          // onClick={this.goToAmortizationTableFRM}
                         />
                       </div>
                     </MDBCol>
@@ -382,7 +396,9 @@ export class NerdReport extends Component {
             </MDBCol>
           </MDBRow>
    
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+          onClick={this.goToPostMortgagePurchaseProfile}
+          >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
                 <CardContent>
@@ -400,7 +416,7 @@ export class NerdReport extends Component {
                         <MDBIcon
                           icon="angle-right"
                           size="large"
-                          onClick={this.goToPostMortgagePurchaseProfile}
+                          // onClick={this.goToPostMortgagePurchaseProfile}
                         />
                       </div>
                     </MDBCol>

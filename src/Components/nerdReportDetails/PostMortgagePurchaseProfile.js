@@ -514,7 +514,7 @@ function PostMortgagePurchaseProfile(props) {
 
               <PieChart width={400} height={230}>
                 <Pie
-                  data={data}
+                  data={piedata}
                   cx={100}
                   cy={100}
                   labelLine={false}
