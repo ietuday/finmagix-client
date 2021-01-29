@@ -9,27 +9,27 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import Box from '@material-ui/core/Box';
+import Box from "@material-ui/core/Box";
 
 function TabContainer(props) {
   const { children, value, index, ...other } = props;
   return (
     <div
-    role="tabpanel"
-    hidden={value !== index}
-    id={`scrollable-auto-tabpanel-${index}`}
-    aria-labelledby={`scrollable-auto-tab-${index}`}
-    {...other}
-  >
-    {value === index && (
-      <Box p={3}>
-        <Typography>{children}</Typography>
-      </Box>
-    )}
-  </div>
-);
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
 }
- 
+
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
@@ -49,6 +49,8 @@ class AmortizationTableFRM extends React.Component {
       value: 0,
       scenarioData1: [],
       scenarioData2: [],
+      scenariodescond1: [],
+      scenariodsecond2: [],
       singlePropertyResponse: {},
       CalculatorResponse: {},
       dfrm1: [],
@@ -206,8 +208,9 @@ class AmortizationTableFRM extends React.Component {
         const Priorbalances = this.CalculatorResponse.dARM1.PriorBalance;
         const Principalpaids = this.CalculatorResponse.dARM1.PrincipalPaid;
         const Payments = this.CalculatorResponse.dARM1.Payment;
-        const Interestpaids = this.CalculatorResponse.dARM1[' InterestPaid'];
-        const TotalPayments = this.CalculatorResponse.dARM1["TotalPayments"] || [];
+        const Interestpaids = this.CalculatorResponse.dARM1[" InterestPaid"];
+        const TotalPayments =
+          this.CalculatorResponse.dARM1["TotalPayments"] || [];
         const Endingbalances = this.CalculatorResponse.dARM1.Endingbalance;
         const objYear = Years.map((x) => {
           return {
@@ -252,7 +255,10 @@ class AmortizationTableFRM extends React.Component {
             Principalpaid: objPrincipalpaid[index].Principalpaid,
             Payment: objPayment[index].Payment,
             Interestpaid: objInterestpaid[index].Interestpaid,
-            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "N/A",
+            TotalPayment:
+              objTotalPayment.length > 0
+                ? objTotalPayment[index].TotalPayment
+                : "N/A",
           });
         });
         if (this.state.darm1.length > 0) {
@@ -268,10 +274,10 @@ class AmortizationTableFRM extends React.Component {
         const Priorbalances = this.CalculatorResponse.dARM2.PriorBalance;
         const Principalpaids = this.CalculatorResponse.dARM2.PrincipalPaid;
         const Payments = this.CalculatorResponse.dARM2.Payment;
-        const Interestpaids = this.CalculatorResponse.dARM2['InterestPaid'];
-        const TotalPayments = this.CalculatorResponse.dARM2["TotalPayments"] || [];
+        const Interestpaids = this.CalculatorResponse.dARM2["InterestPaid"];
+        const TotalPayments =
+          this.CalculatorResponse.dARM2["TotalPayments"] || [];
         const Endingbalances = this.CalculatorResponse.dARM2.Endingbalance;
-        // debugger
         const objYear = Years.map((x) => {
           return {
             Year: x,
@@ -315,7 +321,10 @@ class AmortizationTableFRM extends React.Component {
             Principalpaid: objPrincipalpaid[index].Principalpaid,
             Payment: objPayment[index].Payment,
             Interestpaid: objInterestpaid[index].Interestpaid,
-            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "N/A",
+            TotalPayment:
+              objTotalPayment.length > 0
+                ? objTotalPayment[index].TotalPayment
+                : "N/A",
           });
         });
         if (this.state.darm2.length > 0) {
@@ -332,7 +341,8 @@ class AmortizationTableFRM extends React.Component {
         const Principalpaids = this.CalculatorResponse.dsecond1.Principalpaid;
         const Payments = this.CalculatorResponse.dsecond1.Payment;
         const Interestpaids = this.CalculatorResponse.dsecond1.Interestpaid;
-        const TotalPayments = this.CalculatorResponse.dsecond1["TotalPayments"] || [];
+        const TotalPayments =
+          this.CalculatorResponse.dsecond1["TotalPayments"] || [];
         const Endingbalances = this.CalculatorResponse.dsecond1.Endingbalance;
         const objYear = Years.map((x) => {
           return {
@@ -378,13 +388,19 @@ class AmortizationTableFRM extends React.Component {
             Principalpaid: objPrincipalpaid[index].Principalpaid,
             Payment: objPayment[index].Payment,
             Interestpaid: objInterestpaid[index].Interestpaid,
-            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "N/A",
+            TotalPayment:
+              objTotalPayment.length > 0
+                ? objTotalPayment[index].TotalPayment
+                : "N/A",
           });
 
           if (this.state.dsecond1.length > 0) {
-            this.state.scenarioData1 = this.state.dsecond1;
+            this.state.scenariodescond1 = this.state.dsecond1;
             this.setState((prevState, props) => ({
-              scenarioData1: [this.state.dsecond1, ...prevState.scenarioData1],
+              scenariodescond1: [
+                this.state.dsecond1,
+                ...prevState.scenariodescond1,
+              ],
             }));
           }
         });
@@ -395,7 +411,8 @@ class AmortizationTableFRM extends React.Component {
         const Principalpaids = this.CalculatorResponse.dsecond2.Principalpaid;
         const Payments = this.CalculatorResponse.dsecond2.Payment;
         const Interestpaids = this.CalculatorResponse.dsecond2.Interestpaid;
-        const TotalPayments = this.CalculatorResponse.dsecond2["TotalPayments"] || [];
+        const TotalPayments =
+          this.CalculatorResponse.dsecond2["TotalPayments"] || [];
         const Endingbalances = this.CalculatorResponse.dsecond2.Endingbalance;
         const objYear = Years.map((x) => {
           return {
@@ -441,20 +458,26 @@ class AmortizationTableFRM extends React.Component {
             Principalpaid: objPrincipalpaid[index].Principalpaid,
             Payment: objPayment[index].Payment,
             Interestpaid: objInterestpaid[index].Interestpaid,
-            TotalPayment: objTotalPayment.length > 0 ? objTotalPayment[index].TotalPayment : "N/A",
+            TotalPayment:
+              objTotalPayment.length > 0
+                ? objTotalPayment[index].TotalPayment
+                : "N/A",
           });
         });
         if (this.state.dsecond2.length > 0) {
-          this.state.scenarioData2 = this.state.dsecond2;
+          this.state.scenariodsecond2 = this.state.dsecond2;
           this.setState((prevState, props) => ({
-            scenarioData2: [this.state.dsecond2, ...prevState.scenarioData2],
+            scenariodsecond2: [
+              this.state.dsecond2,
+              ...prevState.scenariodsecond2,
+            ],
           }));
         }
       }
     }
   }
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({ value: value });
   };
 
   dropChange = (event, value) => {
@@ -512,9 +535,29 @@ class AmortizationTableFRM extends React.Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
+    console.log(value);
+    const name = this.CalculatorResponse
+      ? this.CalculatorResponse.ARM1
+        ? "Amortization Table ARM"
+        : "Amortization Table FRM"
+      : "";
+    const label1 = this.CalculatorResponse
+      ? this.CalculatorResponse.ARM1
+        ? "Scenario One ARM"
+        : "Scenario One FRM"
+      : "";
+
+    const label2 = "dsecond1";
+    const label3 = this.CalculatorResponse
+      ? this.CalculatorResponse.ARM2
+        ? "Scenario Two ARM"
+        : "Scenario Two FRM"
+      : "";
+
+    const label4 = "dsecond2";
     return (
       <Fragment>
-        <Header type="Amortization Table" className="header-row" />
+        <Header type={name} className="header-row" />
         <MDBContainer>
           <Button
             size="medium"
@@ -532,36 +575,14 @@ class AmortizationTableFRM extends React.Component {
                 variant="scrollable"
                 scrollButtons="auto"
               >
-                <Tab label="Scenario One dfrm1" />
-                <Tab label="Scenario One dsecond1" />
-                <Tab label="Scenario Two dfrm2" />  
-                <Tab label="Scenario Two dsecond2" />
+                <Tab label={label1} />
+                <Tab label={label2} />
+                <Tab label={label3} />
+                <Tab label={label4} />
               </Tabs>
             </AppBar>
             {value === 0 && (
               <TabContainer>
-                <select
-                  className="browser-default custom-select"
-                  name="tab"
-                  onChange={this.dropChange}
-                >
-                  <option
-                    name={
-                      this.CalculatorResponse && this.CalculatorResponse.dFRM1
-                        ? "dfrm1"
-                        : "darm1"
-                    }
-                    value="1"
-                    selected
-                  >
-                    {this.CalculatorResponse && this.CalculatorResponse.dFRM1
-                      ? "dfrm1"
-                      : "darm1"}
-                  </option>
-                  <option name="dsecond1" value="2">
-                    dsecond1
-                  </option>
-                </select>
                 <table className="table" width="100%">
                   <thead>
                     <tr>
@@ -606,28 +627,50 @@ class AmortizationTableFRM extends React.Component {
             )}
             {value === 1 && (
               <TabContainer>
-                <select
-                  className="browser-default custom-select"
-                  name="tab"
-                  onChange={this.dropChange}
-                >
-                  <option
-                    name={
-                      this.CalculatorResponse && this.CalculatorResponse.dFRM2
-                        ? "dfrm2"
-                        : "darm2"
-                    }
-                    value="1"
-                    selected
-                  >
-                    {this.CalculatorResponse && this.CalculatorResponse.dFRM2
-                      ? "dfrm2"
-                      : "darm2"}
-                  </option>
-                  <option name="dsecond2" value="2">
-                    dsecond2
-                  </option>
-                </select>
+                <table className="table" width="100%">
+                  <thead>
+                    <tr>
+                      <th scope="col">Year</th>
+                      <th scope="col">Prior Balance</th>
+                      <th scope="col">Payment Amount</th>
+                      <th scope="col">Principal Paid</th>
+                      <th scope="col">Interest Paid</th>
+                      <th scope="col">Total Payments</th>
+                      <th scope="col">Ending Balance </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.scenariodescond1.length > 0 ? (
+                      this.state.scenariodescond1.map((listValue, index) => {
+                        return (
+                          <tr key={index}>
+                            <td>{listValue.Year}</td>
+                            <td>{listValue.Priorbalance}</td>
+                            <td>{listValue.Payment}</td>
+                            <td>{listValue.Principalpaid}</td>
+                            <td>{listValue.Interestpaid}</td>
+                            <td>{listValue.TotalPayment}</td>
+                            <td>{listValue.Endingbalance}</td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </TabContainer>
+            )}
+            {value === 2 && (
+              <TabContainer>
                 <table className="table" width="100%">
                   <thead>
                     <tr>
@@ -643,6 +686,51 @@ class AmortizationTableFRM extends React.Component {
                   <tbody>
                     {this.state.scenarioData2.length > 0 ? (
                       this.state.scenarioData2.map((listValue, index) => {
+                        return (
+                          <tr key={index}>
+                            <td>{listValue.Year}</td>
+                            <td>{listValue.Priorbalance}</td>
+                            <td>{listValue.Payment}</td>
+                            <td>{listValue.Principalpaid}</td>
+                            <td>{listValue.Interestpaid}</td>
+                            <td>{listValue.TotalPayment}</td>
+                            <td>{listValue.Endingbalance}</td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </TabContainer>
+            )}
+
+            {value === 3 && (
+              <TabContainer>
+                <table className="table" width="100%">
+                  <thead>
+                    <tr>
+                      <th scope="col">Year</th>
+                      <th scope="col">Prior Balance</th>
+                      <th scope="col">Payment Amount</th>
+                      <th scope="col">Principal Paid</th>
+                      <th scope="col">Interest Paid</th>
+                      <th scope="col">Total Payments</th>
+                      <th scope="col">Ending Balance </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.scenariodsecond2.length > 0 ? (
+                      this.state.scenariodsecond2.map((listValue, index) => {
                         return (
                           <tr key={index}>
                             <td>{listValue.Year}</td>
