@@ -154,7 +154,7 @@ function HomeAffordability(props) {
               <Tab label="Scenario 2" />
             </Tabs>
           </AppBar>
-          <TabPanel value={value} index={0} style={{ marginTop: "50px" }}>
+          <TabPanel value={value} index={0} style={{ marginTop: "30px" }}>
             <div className="progress" style={{ height: "30px" }}>
               <div
                 className="progress-bar-green"

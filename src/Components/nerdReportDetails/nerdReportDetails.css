@@ -140,7 +140,7 @@ h6 {
 
 
 .home-afer{
-  margin: -5% 0% -2% -2%;
+  margin: -3.5em 0 0 0;
   position: fixed;
 
 }
@@ -194,4 +194,15 @@ th, td{
 }
 .MuiTab-textColorPrimary.Mui-selected [class]{
   color: #000;
+}
+
+
+@media only screen and (max-width: 760px)
+ {
+
+  .home-afer {
+    margin: -3.5em 0 0 0;
+   scroll-behavior: smooth;
+  
+}
 }
