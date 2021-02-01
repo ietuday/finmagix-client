@@ -547,14 +547,14 @@ class AmortizationTableFRM extends React.Component {
         : "Scenario One FRM"
       : "";
 
-    const label2 = "dsecond1";
+    const label2 = "Second Mortgage";
     const label3 = this.CalculatorResponse
       ? this.CalculatorResponse.ARM2
         ? "Scenario Two ARM"
         : "Scenario Two FRM"
       : "";
 
-    const label4 = "dsecond2";
+    const label4 = "Second Mortgage";
     return (
       <Fragment>
         <Header type={name} className="header-row" />
