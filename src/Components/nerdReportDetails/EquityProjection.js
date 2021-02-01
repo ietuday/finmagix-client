@@ -204,7 +204,7 @@ function EquityProjection(props) {
                   : ""}
               </h4>
               <BarChart
-                width={500}
+                width={300}
                 height={400}
                 data={data}
                 margin={{
@@ -240,7 +240,7 @@ function EquityProjection(props) {
                   : ""}
               </h4>
               <BarChart
-                width={500}
+                width={300}
                 height={300}
                 data={data}
                 margin={{
