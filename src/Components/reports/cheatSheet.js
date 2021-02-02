@@ -121,7 +121,7 @@ export class CheatSheet extends Component {
                   CalculatorResponse.ARM1
                     ? CalculatorResponse.ARM1.HousingpaymentcomboARM
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1.HousingpaymentcomboARM
+                    ? CalculatorResponse.FRM1.HousingpaymentcomboFRM
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -149,7 +149,7 @@ export class CheatSheet extends Component {
                   CalculatorResponse.ARM1
                     ? CalculatorResponse.ARM1.ProjectedequityARMOption1
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1.ProjectedequityARMOption1
+                    ? CalculatorResponse.FRM1.ProjectedequityFRMOption1
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -160,7 +160,7 @@ export class CheatSheet extends Component {
                   CalculatorResponse.ARM2
                     ? CalculatorResponse.ARM2.ProjectedequityARMOption2
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2.ProjectedequityARMOption2
+                    ? CalculatorResponse.FRM2.ProjectedequityFRMOption2
                     : 0
                 }`
               ).replace(/,/g, "")
