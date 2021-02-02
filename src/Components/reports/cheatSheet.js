@@ -39,6 +39,7 @@ export class CheatSheet extends Component {
       housingPayment: [],
       projectedEquity: [],
       afterHomePurchaseSpendProfile: [],
+      monthlyMortgagePayment:[],
       buy: [],
       taxImpact: [],
     };
@@ -62,7 +63,7 @@ export class CheatSheet extends Component {
         mortgageProgram: [
           {
             name: `FirstMortageProgram`,
-            MortgageAmount: parseFloat(
+            LoanAmountFirst: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM1
@@ -73,7 +74,62 @@ export class CheatSheet extends Component {
                 }`
               ).replace(/,/g, "")
             ),
-            MonthlyMortgagePayment: parseFloat(
+            LoanAmountSecond: parseFloat(
+              String(
+                `${
+                  CalculatorResponse.ARM1
+                    ? CalculatorResponse.ARM1.loanamountsecond1
+                    : CalculatorResponse.FRM1
+                    ? CalculatorResponse.FRM1.loanamountsecond1
+                    : 0
+                }`
+              ).replace(/,/g, "")
+            ),
+          },
+          {
+            name: `SecondMortageProgram`,
+            LoanAmountFirst: parseFloat(
+              String(
+                `${
+                  CalculatorResponse.ARM2
+                    ? CalculatorResponse.ARM2.loanamountfirst2
+                    : CalculatorResponse.FRM2
+                    ? CalculatorResponse.FRM2.loanamountfirst2
+                    : 0
+                }`
+              ).replace(/,/g, "")
+            ),
+            LoanAmountSecond: parseFloat(
+              String(
+                `${
+                  CalculatorResponse.ARM2
+                    ? CalculatorResponse.ARM2.loanamountsecond2
+                    : CalculatorResponse.FRM2
+                    ? CalculatorResponse.FRM2.loanamountsecond2
+                    : 0
+                }`
+              ).replace(/,/g, "")
+            ),
+          },
+        ],
+
+
+
+        monthlyMortgagePayment: [
+          {
+            name: `Firstmortgagepayments`,
+            FirstMortgagePayment: parseFloat(
+              String(
+                `${
+                  CalculatorResponse.ARM1
+                    ? CalculatorResponse.ARM1["mth-mrtg-exp"]
+                    : CalculatorResponse.FRM1
+                    ? CalculatorResponse.FRM1["mth-mrtg-exp"]
+                    : 0
+                }`
+              ).replace(/,/g, "")
+            ),
+            SecondMortgagePayment: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM1
@@ -86,19 +142,19 @@ export class CheatSheet extends Component {
             ),
           },
           {
-            name: `SecondMortageProgram`,
-            MortgageAmount: parseFloat(
+            name: `MortgagePayment`,
+            FirstMortgagePayment: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2.loanamountfirst2
+                    ? CalculatorResponse.ARM2["mth-mrtg-exp"]
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2.loanamountfirst2
+                    ? CalculatorResponse.FRM2["mth-mrtg-exp"]
                     : 0
                 }`
               ).replace(/,/g, "")
             ),
-            MonthlyMortgagePayment: parseFloat(
+            SecondMortgagePayment: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM2
@@ -112,10 +168,11 @@ export class CheatSheet extends Component {
           },
         ],
 
-        housingPayments: [
+
+        housingPayment: [
           {
             name: `HousingPayment`,
-            housingPayment: parseFloat(
+            HousingPayment: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM1
@@ -126,7 +183,7 @@ export class CheatSheet extends Component {
                 }`
               ).replace(/,/g, "")
             ),
-            totalhousingPayment: parseFloat(
+            TotalHousingPayment: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM2
@@ -140,10 +197,10 @@ export class CheatSheet extends Component {
           },
         ],
 
-        projectedEquitys: [
+        projectedEquity: [
           {
             name: `ProjectedEquity`,
-            projectedEquityptionscenario1: parseFloat(
+            ProjectedEquityptionScenario1: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM1
@@ -154,7 +211,7 @@ export class CheatSheet extends Component {
                 }`
               ).replace(/,/g, "")
             ),
-            projectedEquityptionscenario2: parseFloat(
+            ProjectedEquityptionScenario2: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM2
@@ -199,7 +256,7 @@ export class CheatSheet extends Component {
         taxImpact: [
           {
             name: `TaxImpact`,
-            Taximpactscenario1: parseFloat(
+            TaxImpactScenario1: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM1
@@ -210,7 +267,7 @@ export class CheatSheet extends Component {
                 }`
               ).replace(/,/g, "")
             ),
-            Taximpactscenario2: parseFloat(
+            TaxImpactScenario2: parseFloat(
               String(
                 `${
                   CalculatorResponse.ARM2
@@ -272,6 +329,7 @@ export class CheatSheet extends Component {
           </MDBRow>
 
           <MDBRow>
+            
             <MDBCol>
               <h6 className="CardTitle">Loan Program Comparison</h6>
               <div>
@@ -290,24 +348,25 @@ export class CheatSheet extends Component {
                   <YAxis />
                   <Tooltip />
                   {/* <Legend /> */}
-                  <Bar dataKey="MortgageAmount" fill="#4d6fc4" minPointSize={5}>
+                  <Bar dataKey="LoanAmountFirst" fill="#4d6fc4" minPointSize={5}>
                     {/* <LabelList dataKey="name" content={renderCustomizedLabel} /> */}
                   </Bar>
                   <Bar
-                    dataKey="MonthlyMortgagePayment"
+                    dataKey="LoanAmountSecond"
                     fill="#97d24f"
                     minPointSize={10}
                   />
                 </BarChart>
               </div>
             </MDBCol>
+
             <MDBCol>
-              <h6 className="CardTitle">Housing Payment</h6>
+              <h6 className="CardTitle">Monthly mortgage payments</h6>
               <div>
                 <BarChart
                   width={300}
                   height={300}
-                  data={this.state.housingPayments}
+                  data={this.state.monthlyMortgagePayment}
                   margin={{
                     top: 0,
                     right: 0,
@@ -319,11 +378,44 @@ export class CheatSheet extends Component {
                   <YAxis />
                   <Tooltip />
                   {/* <Legend /> */}
-                  <Bar dataKey="housingPayment" fill="#4d6fc4" minPointSize={5}>
+                  <Bar dataKey="FirstMortgagePayment" fill="#4d6fc4" minPointSize={5}>
                     {/* <LabelList dataKey="name" content={renderCustomizedLabel} /> */}
                   </Bar>
                   <Bar
-                    dataKey="totalhousingPayment"
+                    dataKey="SecondMortgagePayment"
+                    fill="#97d24f"
+                    minPointSize={10}
+                  />
+                </BarChart>
+              </div>
+            </MDBCol>
+
+
+            </MDBRow>
+            <MDBRow>
+            <MDBCol>
+              <h6 className="CardTitle">Housing Payment</h6>
+              <div>
+                <BarChart
+                  width={300}
+                  height={300}
+                  data={this.state.housingPayment}
+                  margin={{
+                    top: 0,
+                    right: 0,
+                    left: 0,
+                    bottom: 0,
+                  }}
+                >
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  {/* <Legend /> */}
+                  <Bar dataKey="HousingPayment" fill="#4d6fc4" minPointSize={5}>
+                    {/* <LabelList dataKey="name" content={renderCustomizedLabel} /> */}
+                  </Bar>
+                  <Bar
+                    dataKey="TotalHousingPayment"
                     fill="#97d24f"
                     minPointSize={10}
                   />
@@ -339,7 +431,7 @@ export class CheatSheet extends Component {
                 <BarChart
                   width={300}
                   height={300}
-                  data={this.state.projectedEquitys}
+                  data={this.state.projectedEquity}
                   margin={{
                     top: 0,
                     right: 0,
@@ -352,14 +444,14 @@ export class CheatSheet extends Component {
                   <Tooltip />
                   {/* <Legend /> */}
                   <Bar
-                    dataKey="projectedEquityptionscenario1"
+                    dataKey="ProjectedEquityptionScenario1"
                     fill="#4d6fc4"
                     minPointSize={5}
                   >
                     {/* <LabelList dataKey="name" content={renderCustomizedLabel} /> */}
                   </Bar>
                   <Bar
-                    dataKey="projectedEquityptionscenario2"
+                    dataKey="ProjectedEquityptionScenario2"
                     fill="#97d24f"
                     minPointSize={10}
                   />
@@ -421,14 +513,14 @@ export class CheatSheet extends Component {
                   <Tooltip />
                   {/* <Legend /> */}
                   <Bar
-                    dataKey="Taximpactscenario1"
+                    dataKey="TaxImpactScenario1"
                     fill="#4d6fc4"
                     minPointSize={5}
                   >
                     {/* <LabelList dataKey="name" content={renderCustomizedLabel} /> */}
                   </Bar>
                   <Bar
-                    dataKey="Taximpactscenario2"
+                    dataKey="TaxImpactScenario2"
                     fill="#97d24f"
                     minPointSize={10}
                   />
