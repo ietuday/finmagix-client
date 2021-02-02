@@ -422,9 +422,7 @@ export class CheatSheet extends Component {
                 </BarChart>
               </div>
             </MDBCol>
-          </MDBRow>
 
-          <MDBRow>
             <MDBCol>
               <h6 className="CardTitle">Projected Equity</h6>
               <div>
@@ -458,6 +456,10 @@ export class CheatSheet extends Component {
                 </BarChart>
               </div>
             </MDBCol>
+          </MDBRow>
+
+          <MDBRow>
+    
             <MDBCol>
               <h6 className="CardTitle">After home purchase spend profile</h6>
               <div>

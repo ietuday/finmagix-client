@@ -179,14 +179,14 @@ export class PropertyPaymentInfo2 extends Component {
             </Select>
           </MDBCol>
         </MDBRow>
-        <MDBRow className="margin20">
+        {/* <MDBRow className="margin20">
           <MDBCol md="8"></MDBCol>
           <MDBCol md="4">
             <span className="link" onClick={this.toggle}>
               Enter Detail Expenses {`>`}
             </span>
           </MDBCol>
-        </MDBRow>
+        </MDBRow> */}
 
         {this.state.showModal ? (
           <DetailedExpenseModal

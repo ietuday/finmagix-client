@@ -394,14 +394,14 @@ export class PersonalFinance extends Component {
           JSON.parse(localStorage.getItem("personal_finance_array"))
         ).length === 0 ? (
           <div>
-            <MDBRow className="margin20">
+            {/* <MDBRow className="margin20">
               <MDBCol md="8"></MDBCol>
               <MDBCol md="4">
                 <span className="link" onClick={this.toggle}>
                   Enter Detailed Expenses {`>`}
                 </span>
               </MDBCol>
-            </MDBRow>
+            </MDBRow> */}
             {this.state.showModal ? (
               <DetailedExpenseModal
                 toggle={this.toggle}
