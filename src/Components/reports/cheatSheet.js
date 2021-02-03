@@ -67,9 +67,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM1
-                    ? CalculatorResponse.ARM1.loanamountfirst1
+                    ? CalculatorResponse.ARM1.loanamountfirst1 != 0 ? CalculatorResponse.ARM1.loanamountfirst1:""
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1.loanamountfirst1
+                    ? CalculatorResponse.FRM1.loanamountfirst1 != 0 ? CalculatorResponse.FRM1.loanamountfirst1:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -78,9 +78,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM1
-                    ? CalculatorResponse.ARM1.loanamountsecond1
+                    ? CalculatorResponse.ARM1.loanamountsecond1 != 0 ? CalculatorResponse.ARM1.loanamountsecond1:""
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1.loanamountsecond1
+                    ? CalculatorResponse.FRM1.loanamountsecond1 != 0 ? CalculatorResponse.FRM1.loanamountsecond1:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -92,9 +92,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2.loanamountfirst2
+                    ? CalculatorResponse.ARM2.loanamountfirst2 != 0 ? CalculatorResponse.ARM2.loanamountfirst2:""
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2.loanamountfirst2
+                    ? CalculatorResponse.FRM2.loanamountfirst2 != 0 ? CalculatorResponse.FRM2.loanamountfirst2:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -103,9 +103,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2.loanamountsecond2
+                    ? CalculatorResponse.ARM2.loanamountsecond2 != 0 ? CalculatorResponse.ARM2.loanamountsecond2:""
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2.loanamountsecond2
+                    ? CalculatorResponse.FRM2.loanamountsecond2 != 0 ? CalculatorResponse.FRM2.loanamountsecond2:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -122,9 +122,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM1
-                    ? CalculatorResponse.ARM1["mth-mrtg-exp"]
+                    ? CalculatorResponse.ARM1["mth-mrtg-exp"] != 0 ? CalculatorResponse.ARM1["mth-mrtg-exp"]:""
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1["mth-mrtg-exp"]
+                    ? CalculatorResponse.FRM1["mth-mrtg-exp"] != 0 ? CalculatorResponse.FRM1["mth-mrtg-exp"]:"" 
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -133,9 +133,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM1
-                    ? CalculatorResponse.ARM1["mth-mrtg-exp"]
+                    ? CalculatorResponse.ARM1["mth-mrtg-exp"] != 0 ? CalculatorResponse.ARM1["mth-mrtg-exp"]:""
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1["mth-mrtg-exp"]
+                    ? CalculatorResponse.FRM1["mth-mrtg-exp"] != 0 ? CalculatorResponse.FRM1["mth-mrtg-exp"]:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -147,9 +147,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2["mth-mrtg-exp"]
+                    ? CalculatorResponse.ARM2["mth-mrtg-exp"] != 0 ? CalculatorResponse.ARM2["mth-mrtg-exp"]:"" 
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2["mth-mrtg-exp"]
+                    ? CalculatorResponse.FRM2["mth-mrtg-exp"] != 0 ? CalculatorResponse.FRM2["mth-mrtg-exp"]:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -158,9 +158,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2["mth-mrtg-exp"]
+                    ? CalculatorResponse.ARM2["mth-mrtg-exp"] != 0 ? CalculatorResponse.ARM2["mth-mrtg-exp"]:""
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2["mth-mrtg-exp"]
+                    ? CalculatorResponse.FRM2["mth-mrtg-exp"] != 0 ? CalculatorResponse.FRM2["mth-mrtg-exp"]:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -176,9 +176,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM1
-                    ? CalculatorResponse.ARM1.HousingpaymentcomboARM
+                    ? CalculatorResponse.ARM1.HousingpaymentcomboARM != 0 ? CalculatorResponse.ARM1.HousingpaymentcomboARM:""  
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1.HousingpaymentcomboFRM
+                    ? CalculatorResponse.FRM1.HousingpaymentcomboFRM != 0 ? CalculatorResponse.FRM1.HousingpaymentcomboFRM:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -187,9 +187,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2["total-mth-hsg-pay"]
+                    ? CalculatorResponse.ARM2["total-mth-hsg-pay"] != 0 ? CalculatorResponse.ARM2["total-mth-hsg-pay"]:""
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2["total-mth-hsg-pay"]
+                    ? CalculatorResponse.FRM2["total-mth-hsg-pay"] != 0 ? CalculatorResponse.FRM2["total-mth-hsg-pay"]:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -204,9 +204,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM1
-                    ? CalculatorResponse.ARM1.ProjectedequityARMOption1
+                    ? CalculatorResponse.ARM1.ProjectedequityARMOption1 != 0 ? CalculatorResponse.ARM1.ProjectedequityARMOption1:""
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1.ProjectedequityFRMOption1
+                    ? CalculatorResponse.FRM1.ProjectedequityFRMOption1 != 0 ? CalculatorResponse.FRM1.ProjectedequityFRMOption1:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -215,9 +215,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2.ProjectedequityARMOption2
+                    ? CalculatorResponse.ARM2.ProjectedequityARMOption2 != 0 ? CalculatorResponse.ARM2.ProjectedequityARMOption2:""
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2.ProjectedequityFRMOption2
+                    ? CalculatorResponse.FRM2.ProjectedequityFRMOption2 != 0 ? CalculatorResponse.FRM2.ProjectedequityFRMOption2:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -232,9 +232,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM1
-                    ? CalculatorResponse.ARM1.Balanceoption1
+                    ? CalculatorResponse.ARM1.Balanceoption1 != 0 ? CalculatorResponse.ARM1.Balanceoption1:""
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1.Balanceoption1
+                    ? CalculatorResponse.FRM1.Balanceoption1 != 0 ? CalculatorResponse.FRM1.Balanceoption1:"" 
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -243,9 +243,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2.Balanceoption2
+                    ? CalculatorResponse.ARM2.Balanceoption2 != 0 ? CalculatorResponse.ARM2.Balanceoption2:""
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2.Balanceoption2
+                    ? CalculatorResponse.FRM2.Balanceoption2 != 0 ? CalculatorResponse.FRM2.Balanceoption2:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -260,9 +260,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM1
-                    ? CalculatorResponse.ARM1.Taxbenfithomeoption1
+                    ? CalculatorResponse.ARM1.Taxbenfithomeoption1 != 0 ? CalculatorResponse.ARM1.Taxbenfithomeoption1:""
                     : CalculatorResponse.FRM1
-                    ? CalculatorResponse.FRM1.Taxbenfithomeoption1
+                    ? CalculatorResponse.FRM1.Taxbenfithomeoption1 != 0 ? CalculatorResponse.FRM1.Taxbenfithomeoption1:""
                     : 0
                 }`
               ).replace(/,/g, "")
@@ -271,9 +271,9 @@ export class CheatSheet extends Component {
               String(
                 `${
                   CalculatorResponse.ARM2
-                    ? CalculatorResponse.ARM2.Taxbenfithomeoption2
+                    ? CalculatorResponse.ARM2.Taxbenfithomeoption2 != 0 ? CalculatorResponse.ARM2.Taxbenfithomeoption2:""
                     : CalculatorResponse.FRM2
-                    ? CalculatorResponse.FRM2.Taxbenfithomeoption2
+                    ? CalculatorResponse.FRM2.Taxbenfithomeoption2 != 0 ? CalculatorResponse.FRM2.Taxbenfithomeoption2:""
                     : 0
                 }`
               ).replace(/,/g, "")
