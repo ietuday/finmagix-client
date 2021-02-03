@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import NumberFormat from "react-number-format";
 
 import MapContainer from "../../common/googleMap";
+import MapWithASearchBox from "../../common/geocode";
 import NumberSpinner from "../../common/inputNumberSpinner";
 import { updateValidators } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
@@ -40,7 +41,8 @@ export class GetStartedHouseInfo extends Component {
       home_owner_insurance: "",
       home_owner_insurance_number: "",
       home_price_growth: "",
-      home_price_growth_percentage: ""
+      home_price_growth_percentage: "",
+      address: localStorage.getItem('address') ? JSON.parse(localStorage.getItem('address')) : ""
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -48,6 +50,7 @@ export class GetStartedHouseInfo extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleBedroomRoomCount = this.handleBedroomRoomCount.bind(this);
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
+    
   }
   async handleChange(event) {
     const { name } = event.target;
@@ -102,27 +105,143 @@ this.props.handleHouseInfo(downpayment, this.state);
     });
   }
   selectAddress = (data) => {
+    const addressArray = data.address_components;
     this.setState({
-      house_address: data.address,
-      house_state: data.state,
-      house_zip_code: data.area,
+      house_address: data.formatted_address,
+      // house_state: this.getState(addressArray),
+      // house_zip_code: 829101,
     });
+    localStorage.setItem('changeAddress', false)
+    console.log(this.state)
   };
   handleBack = () => {
     this.props.history.push("/select-modules");
   };
+
+
+  getCity =  (addressArray) => {
+    let city = "";
+    for (let i = 0; i < addressArray.length; i++) {
+      if (
+        addressArray[i].types[0] &&
+        "administrative_area_level_2" === addressArray[i].types[0]
+      ) {
+        city = addressArray[i].long_name;
+        console.log(city);
+        return city;
+      }
+    }
+  };
+  getArea = (addressArray) => {
+    console.log(addressArray);
+    let area = "";
+    for (let i = 0; i < addressArray.length; i++) {
+      if (addressArray[i].types[0]) {
+        for (let j = 0; j < addressArray[i].types.length; j++) {
+          if (
+            // "sublocality_level_1" === addressArray[i].types[j] ||
+            // "locality" === addressArray[i].types[j] ||
+            addressArray[i].types[j] == "postal_code"
+          ) {
+            area = addressArray[i].long_name;
+            return area;
+          }
+        }
+      }
+    }
+  };
+  getState = (addressArray) => {
+    let state = "";
+    for (let i = 0; i < addressArray.length; i++) {
+      for (let i = 0; i < addressArray.length; i++) {
+        if (
+          addressArray[i].types[0] &&
+          "administrative_area_level_1" === addressArray[i].types[0]
+        ) {
+          state = addressArray[i].long_name;
+          return state;
+        }
+      }
+    }
+  };
+
   componentDidMount() {}
 
   componentWillUpdate(nextProps, nextState) {}
   render() {
+    {
+      console.log(this.state.address && this.state.address.formatted_address && JSON.parse(localStorage.getItem('changeAddress')))
+    }
+    if(this.state.address && this.state.address.formatted_address && JSON.parse(localStorage.getItem('changeAddress'))){
+      this.selectAddress(this.state.address)
+    }
     return (
+      
       <Fragment>
         <MDBRow className="margin20">
           <MDBCol>
-            <MapContainer type="home" onSelectAddress={this.selectAddress} />
+            {/* <MapContainer type="home" onSelectAddress={this.selectAddress} /> */}
+            <MapWithASearchBox />
           </MDBCol>
         </MDBRow>
 
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
+      <br/><br/>
+      <br/>
+
+
+      <br/><br/>
+      <br/>
+
+
+        {/* <MDBRow className="margin20">
+        <MDBCol>
+        <div className="row form-group address-fields">
+        <div className="col-md-8">
+                <span className="get-started-label">Address</span>
+                <br />
+                <Input
+                  className="input-class-mdb"
+                  placeholder="Address"
+                  name="house_address"
+                  disabled={true}
+                  onChange={this.onChange}
+                  value={this.state.house_address}
+                />
+              </div>
+              <div className="col-md-8">
+                <span className="get-started-label">State</span>
+                <br />
+                <Input
+                  className="input-class-mdb"
+                  placeholder="Start typing state name"
+                  name="house_state"
+                  disabled={true}
+                  onChange={this.onChange}
+                  value={this.state.house_state}
+                />
+              </div>
+              <div className="col-md-4">
+                <span className="get-started-label">Zip Code</span>
+                <br />
+                <Input
+                  className="input-class-mdb"
+                  placeholder="zip code"
+                  name="house_zip_code"
+                  disabled={true}
+                  onChange={this.onChange}
+                  value={this.state.house_zip_code}
+                />
+              </div>
+              </div>
+            </MDBCol>
+          </MDBRow> */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">

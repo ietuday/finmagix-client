@@ -22,7 +22,7 @@ class MapContainer extends Component {
     this.props.onSelectAddress(this.state.addressData);
   }
   render() {
-    return (
+    return ( 
       <div>
         <Map
           google={this.props.google}

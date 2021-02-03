@@ -36,13 +36,19 @@ import EquityProjection from "./Components/nerdReportDetails/EquityProjection";
 import PostMortgagePurchaseProfile from "./Components/nerdReportDetails/PostMortgagePurchaseProfile";
 import ForgotPassword from "./Components/ForgotPassword";
 import CreatePassword from "./Components/createPassword";
-
+import Geocode from "./common/geocode"
 
 function App() {
   return (
     <React.Fragment>
       <Router>
         <Switch>
+          <PublicRoute
+            restricted={false}
+            component={Geocode}
+            path="/geo"
+            exact
+          />
           <PublicRoute
             restricted={false}
             component={SplashScreen}

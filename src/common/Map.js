@@ -272,7 +272,7 @@ class Map extends Component {
                   <div
                     style={{
                       height: "200px",
-                    }}
+                    }} 
                   />
                 }
                 mapElement={
