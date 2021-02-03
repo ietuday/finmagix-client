@@ -318,7 +318,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="1" size="1"></MDBCol>
                     <MDBCol md="6" size="6">
                       <div className="">
-                        <span className="get-started-label">PMI Amount</span>
+                        <span className="get-started-label">Monthly PMI Amount</span>
                       </div>
                     </MDBCol>
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
@@ -725,7 +725,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="1" size="1"></MDBCol>
                     <MDBCol md="6" size="6">
                       <div className="">
-                        <span className="get-started-label">PMI Amount</span>
+                        <span className="get-started-label">Monthly PMI Amount</span>
                       </div>
                     </MDBCol>
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
@@ -1005,7 +1005,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="1" size="1"></MDBCol>
                     <MDBCol md="6" size="6">
                       <div className="">
-                        <span className="get-started-label">PMI Amount</span>
+                        <span className="get-started-label">Monthly PMI Amount</span>
                       </div>
                     </MDBCol>
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
@@ -1401,7 +1401,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="1" size="1"></MDBCol>
                     <MDBCol md="6" size="6">
                       <div className="">
-                        <span className="get-started-label">PMI Amount</span>
+                        <span className="get-started-label">Monthly PMI Amount</span>
                       </div>
                     </MDBCol>
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;

@@ -71,7 +71,7 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
     const showPmiAmount = (
       <MDBRow className="margin20">
         <MDBCol md="12">
-          <span className="get-started-label">PMI Amount</span>
+          <span className="get-started-label">Monthly PMI Amount</span>
           <br />
           <Input
             className="input-class-mdb"

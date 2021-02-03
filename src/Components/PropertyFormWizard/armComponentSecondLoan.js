@@ -325,8 +325,7 @@ export class ARMComponentSecondLoan extends Component {
               value={this.state.loan_amount}
               onChange={this.handleChange}
             /> */}
-          </MDBCol>
-          <NumberFormat
+      <NumberFormat
             className="input-class-mdb"
             placeholder="Enter amount here"
             name="loan_amount"
@@ -343,6 +342,9 @@ export class ARMComponentSecondLoan extends Component {
               });
             }}
           />
+
+          </MDBCol>
+    
         </MDBRow>
         {displayValidationErrors(this.validators, "loan_amount")}
         <MDBRow className="margin20">
