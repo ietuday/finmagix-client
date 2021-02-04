@@ -253,7 +253,7 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">
               What is the downpayment amount?
-            </span>
+            </span> 
             <div className="tooltip-img">
               <img src={quss} className="tool-img"></img>
               <span className="tooltip-img-text">

@@ -10,8 +10,9 @@ const ArmMortgageProgramValidator = {
         },
         {
           test: (value) => {
+            console.log("@@@@",parseFloat(String(value).replace(/,/g, '')) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, '')))
             return (
-              value <= HouseInfoValidator.property_price.state
+              parseFloat(String(value).replace(/,/g, '')) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, ''))
             );
           },
           message: "Loan value should not be greater than property price!",

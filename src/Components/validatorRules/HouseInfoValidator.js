@@ -22,9 +22,11 @@ const   HouseInfoValidator = {
     rules: [
       {
         test: (value) => {
-          console.log(HouseInfoValidator)
+          console.log(parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, '')), value)
+          console.log(Number(value) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, '')))
+          
           return (
-            value <= HouseInfoValidator.property_price.state
+            parseFloat(String(value).replace(/,/g, '')) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, ''))
           );
         },
         message: "Downpayment Amount cannot exceed Home Price",

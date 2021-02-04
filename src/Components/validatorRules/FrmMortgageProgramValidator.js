@@ -15,11 +15,9 @@ const FrmMortgageProgramValidator = {
         // },
         {
           test: (value) => {
-            console.log("value",value)
-            console.log("HouseInfoValidator.property_price",HouseInfoValidator.property_price)
-            console.log("HouseInfoValidator.property_price",Number(HouseInfoValidator.property_price))
+            console.log(parseFloat(String(value).replace(/,/g, '')) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, '')))
             return (
-              value <= HouseInfoValidator.property_price.state
+              parseFloat(String(value).replace(/,/g, '')) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, ''))
             );
           },
           message: "Loan value should not be greater than property price!",

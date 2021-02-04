@@ -564,7 +564,7 @@ export class FirstLoanScenario extends Component {
             </MDBRow>
             {this.state.showInterestOnlyPeriodOption
               ? showInterestOnlyPeriodButton
-              : null}
+              : null} 
             <br />
             {this.props.downpayment === "lessthan20" ? (
               <ShowPmiOptionsFirstLoan
