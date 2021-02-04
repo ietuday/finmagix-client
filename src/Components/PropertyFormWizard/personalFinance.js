@@ -33,8 +33,10 @@ export class PersonalFinance extends Component {
         Object.entries(
           JSON.parse(localStorage.getItem("personal_finance_array"))
         ).length !== 0
-          ? JSON.parse(localStorage.getItem("personal_finance_array"))
-              .marginal_tax_rate + "%"
+          ? 
+          parseInt(String(Number(JSON.parse(localStorage.getItem("personal_finance_array"))
+          .marginal_tax_rate)*100))
+           + "%"
           : "",
       annual_gross_income:
         Object.entries(
@@ -84,19 +86,8 @@ export class PersonalFinance extends Component {
     this.validators = PersonaLFinanceValidator;
     resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
-    // this.updateState()
+ 
   }
-
-  // updateState = () => {
-  //   console.log("updateState",this.state.marginal_tax_rate);
-  //   if(this.state.marginal_tax_rate){
-  //     this.setState({
-  //       marginal_tax_rate: String(Number(this.state.marginal_tax_rate)/100)
-  //     });
-  //   }
-  //   console.log("updateState",this.state);
-  // }
-
   handleRangeData = (data) => {
     this.setState({
       fico_score_range: data,
@@ -109,13 +100,6 @@ export class PersonalFinance extends Component {
     this.props.handleContinue();
   };
   componentDidMount() {
-    // console.log("updateState",this.state.marginal_tax_rate);
-    // if(this.state.marginal_tax_rate){
-    //   this.setState({
-    //     marginal_tax_rate: String(Number(this.state.marginal_tax_rate)/100)
-    //   });
-    // }
-    // console.log("updateState",this.state);
   }
   async handleChange(event) {
     const { name } = event.target;

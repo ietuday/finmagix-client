@@ -29,6 +29,7 @@ export class PropertyAndPersonalFinanceInfo extends Component {
       personalFinanace: JSON.parse(
         localStorage.getItem("personal_finance_array")
       ),
+      marginal_tax_rate:"",
       A: "620 - 639",
       B: "640 - 659",
       C: "660 - 679",
@@ -47,6 +48,12 @@ export class PropertyAndPersonalFinanceInfo extends Component {
     this.state.singlePropertyResponse = JSON.parse(
       localStorage.getItem("GetSinglePropertyResponse")
     );
+
+    if(this.state.CalculatorResponse){
+      const data = parseInt(String(Number(this.state.personalFinanace.marginal_tax_rate)*100))
+      console.log(data)
+      this.setState({marginal_tax_rate: parseInt(String(Number(this.state.personalFinanace.marginal_tax_rate)*100))})
+    }
     
   }
   render() {
@@ -263,7 +270,7 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                         />
                         <div>
                         {this.state.personalFinanace
-                            ? `${(this.state.personalFinanace.marginal_tax_rate)}%`
+                            ? `${(this.state.marginal_tax_rate)}%`
                             : 0}
                         </div>
                       </div>
