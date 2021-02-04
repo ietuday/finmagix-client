@@ -6,6 +6,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.geocode-style{
+  background: none padding-box rgb(255, 255, 255);
+  display: table-cell;
+  border: 0px;
+  margin-top: 11px;
+  padding: 4px 17px !important;
+  text-transform: none;
+  -webkit-appearance: none;
+  position: relative;
+  user-select: none;
+  direction: ltr;
+  overflow: hidden;
+  text-align: left;
+  height: 40px;
+  vertical-align: middle;
+  color: rgb(86, 86, 86);
+  /* font-family: Roboto, Arial, sans-serif; */
+  font-size:16px !important;
+  border-radius: 2px;
+  border-top-right-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  min-width: 64px;
+}
+
+
 .popupstyle {
   padding: 50px 0 15px 0;
   text-align: center;

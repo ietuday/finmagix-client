@@ -167,19 +167,7 @@ const MapWithASearchBox = compose(
         <input
           type="text"
           placeholder="Enter your address"
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            width: `255px`,
-            height: `40px`,
-            marginTop: `12px`,
-            padding: `5px 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `12px`,
-            outline: `none`,
-            textOverflow: `ellipses`
-          }}
+          className="geocode-style"   
         />
       </SearchBox>
       {props.markers.map((marker, index) => (
@@ -214,8 +202,6 @@ const MapWithASearchBox = compose(
             value={props.house_state}
           />
         </MDBCol>
-      </MDBRow>
-      <MDBRow className="margin20">
         <MDBCol>
           <span className="get-started-label">Zip Code</span>
           <br />
@@ -229,6 +215,7 @@ const MapWithASearchBox = compose(
           />
         </MDBCol>
       </MDBRow>
+
     </div>
   </>
 ));

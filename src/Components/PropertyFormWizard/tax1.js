@@ -558,7 +558,7 @@ export class Tax1 extends Component {
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.Tax1YesValidators, "tax_deductible_casualty_and_theft_losses")} */}
-        {/* <MDBRow className="margin20">
+        <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
             Pub936Line13a
@@ -572,7 +572,7 @@ export class Tax1 extends Component {
               onChange={this.handleChange}
             />
           </MDBCol>
-        </MDBRow> */}
+        </MDBRow>
       </div>
     );
 
