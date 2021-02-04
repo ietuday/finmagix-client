@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import NumberFormat from "react-number-format";
 
 import MapContainer from "../../common/googleMap";
-import MapWithASearchBox from "../../common/geocode";
+import MapWithASearchBox from "../../common/geocode"; 
 import NumberSpinner from "../../common/inputNumberSpinner";
 import { updateValidators } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
@@ -54,6 +54,7 @@ export class GetStartedHouseInfo extends Component {
   }
   async handleChange(event) {
     const { name } = event.target;
+    this.selectAddress(JSON.parse(localStorage.getItem('addressData')))
     event.persist();
     let downpayment;
     await this.setState({
@@ -107,9 +108,9 @@ this.props.handleHouseInfo(downpayment, this.state);
   selectAddress = (data) => {
     const addressArray = data.address_components;
     this.setState({
-      house_address: data.formatted_address,
-      // house_state: this.getState(addressArray),
-      // house_zip_code: 829101,
+      house_address: data.house_address,
+      house_state: data.house_state,
+      house_zip_code: data.house_zip_code,
     });
     localStorage.setItem('changeAddress', false)
     console.log(this.state)
@@ -169,12 +170,6 @@ this.props.handleHouseInfo(downpayment, this.state);
 
   componentWillUpdate(nextProps, nextState) {}
   render() {
-    {
-      console.log(this.state.address && this.state.address.formatted_address && JSON.parse(localStorage.getItem('changeAddress')))
-    }
-    if(this.state.address && this.state.address.formatted_address && JSON.parse(localStorage.getItem('changeAddress'))){
-      this.selectAddress(this.state.address)
-    }
     return (
       
       <Fragment>

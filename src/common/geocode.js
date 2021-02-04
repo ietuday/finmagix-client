@@ -102,8 +102,12 @@ const MapWithASearchBox = compose(
                 house_address: address,
                 addressArray: addressArray,
               });
-
-              refs.map.getState();
+              let addressData ={
+                "house_address": this.state.house_address,
+                "house_state": this.state.house_state,
+                "house_zip_code": this.state.house_zip_code,
+              } 
+              localStorage.setItem('addressData', JSON.stringify(addressData))
               console.log(this.state);
               //   city = this.getCity(addressArray),
               //   area = this.getArea(addressArray),
