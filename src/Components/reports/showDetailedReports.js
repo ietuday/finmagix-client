@@ -1156,11 +1156,11 @@ export class ShowDetailedReports extends Component {
             </MDBCol>
           </MDBRow>
           <hr />
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
                 <CardContent>
-                  <MDBRow>
+                  <MDBRow onClick={this.goToCheatSheet}>
                     <MDBCol md="9" size="10">
                       <Typography variant="h5" component="h2">
                         Cheat Sheet
@@ -1174,7 +1174,7 @@ export class ShowDetailedReports extends Component {
                         <MDBIcon
                           icon="angle-right"
                           size="large"
-                          onClick={this.goToCheatSheet}
+                          // onClick={this.goToCheatSheet}
                         />
                       </div>
                     </MDBCol>
@@ -1183,11 +1183,11 @@ export class ShowDetailedReports extends Component {
               </Card>
             </MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <Card>
-                <CardContent>
-                  <MDBRow>
+                <CardContent  onClick={this.goToNerdReport}>
+                  <MDBRow >
                     <MDBCol md="9" size="10">
                       <Typography variant="h5" component="h2">
                         Nerd Report
@@ -1201,7 +1201,7 @@ export class ShowDetailedReports extends Component {
                         <MDBIcon
                           icon="angle-right"
                           size="large"
-                          onClick={this.goToNerdReport}
+                          // onClick={this.goToNerdReport}
                         />
                       </div>
                     </MDBCol>
