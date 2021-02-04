@@ -426,7 +426,8 @@ export class StepperComponent extends Component {
       }
     } else if (this.state.activeStep === 1) {
       const personal_finance_data = JSON.parse(localStorage.getItem("personal_finance_array"))
-      personal_finance_data.marginal_tax_rate = String(Number(personal_finance_data.marginal_tax_rate/100))
+      personal_finance_data.marginal_tax_rate = String(Number(personal_finance_data.marginal_tax_rate))
+      // personal_finance_data.marginal_tax_rate = String(Number(personal_finance_data.marginal_tax_rate))
       localStorage.setItem("personal_finance_array", JSON.stringify(personal_finance_data));
       this.setState({
         activeStep: newActiveStep,

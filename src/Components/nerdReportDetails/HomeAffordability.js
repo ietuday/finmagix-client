@@ -41,8 +41,7 @@ function HomeAffordability(props) {
       localStorage.getItem("GetSinglePropertyResponse")
     );
     console.log(CalculatorResponse);
-    // debugger
-    // console.log(parseInt(String(CalculatorResponse.FRM1.Housingpmtaffordableoption1).replace(/%/g, "")))
+    
     if (
       CalculatorResponse.FRM1 &&
       CalculatorResponse.FRM1.Housingpmtaffordableoption1 &&

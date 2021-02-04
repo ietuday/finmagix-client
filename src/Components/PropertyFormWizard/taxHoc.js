@@ -60,19 +60,17 @@ export class TaxHoc extends Component {
     }
   };
   saveApiData = () => {
-    // if(this.state.tax.previous_balance === "N"){
-    //     if(this.state.tax1YesValidationError === 0 && isFormValid("tax1Yes")){
-
-    //     }
-    // }else{
-
-    // }
     if (
       this.state.tax.detailed_tax_expenses === "Y" &&
       this.state.tax.previous_balance === "N"
     ) {
       const showDetailedTax = {
         user_obj: localStorage.getItem("id"),
+        
+        pub936_line_13a: this.state.tax.pub936_line_13a,
+        avg_loan_balance_for_grandfathered_debt: this.state.tax.avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state.tax.avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
         fedral_adjusted_gross_income: this.state.tax.fedral_adjusted_gross_income,
         previous_balance: this.state.tax.previous_balance,
@@ -102,6 +100,7 @@ export class TaxHoc extends Component {
     ) {
       const hidePreviousBal = {
         user_obj: localStorage.getItem("id"),
+        pub936_line_13a: this.state.tax.pub936_line_13a,
         fedral_adjusted_gross_income: this.state.tax
           .fedral_adjusted_gross_income,
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
@@ -122,6 +121,7 @@ export class TaxHoc extends Component {
     ) {
       const showPreviousBal = {
         user_obj: localStorage.getItem("id"),
+        pub936_line_13a: this.state.tax.pub936_line_13a,
         fedral_adjusted_gross_income: this.state.tax
           .fedral_adjusted_gross_income,
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
@@ -147,6 +147,7 @@ export class TaxHoc extends Component {
     ) {
       const showallData = {
         user_obj: localStorage.getItem("id"),
+        pub936_line_13a: this.state.tax.pub936_line_13a,
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
         fedral_adjusted_gross_income: this.state.tax
         .fedral_adjusted_gross_income,
