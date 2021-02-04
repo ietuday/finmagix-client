@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import NumberFormat from "react-number-format";
 
 import MapContainer from "../../common/googleMap";
-import MapWithASearchBox from "../../common/geocode"; 
+import MapWithASearchBox from "../../common/geocode";
 import NumberSpinner from "../../common/inputNumberSpinner";
 import { updateValidators } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
@@ -42,7 +42,9 @@ export class GetStartedHouseInfo extends Component {
       home_owner_insurance_number: "",
       home_price_growth: "",
       home_price_growth_percentage: "",
-      address: localStorage.getItem('address') ? JSON.parse(localStorage.getItem('address')) : ""
+      address: localStorage.getItem("address")
+        ? JSON.parse(localStorage.getItem("address"))
+        : "",
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -50,28 +52,25 @@ export class GetStartedHouseInfo extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleBedroomRoomCount = this.handleBedroomRoomCount.bind(this);
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
-    
   }
   async handleChange(event) {
     const { name } = event.target;
-    this.selectAddress(JSON.parse(localStorage.getItem('addressData')))
+    this.selectAddress(JSON.parse(localStorage.getItem("addressData")));
     event.persist();
     let downpayment;
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    console.log(this.state.home_price_growth)
+    console.log(this.state.home_price_growth);
     let twenty_percent_of_property_price =
       (this.state.property_price * 20) / 100;
-    if (
-      this.state.downpayment_amount < twenty_percent_of_property_price
-    ) {
+    if (this.state.downpayment_amount < twenty_percent_of_property_price) {
       downpayment = "lessthan20";
     } else {
       downpayment = "greaterthan20";
     }
     console.log("this.state.property_price", this.state.property_price_number);
-    
+
     console.log(
       "twenty_percent_of_property_price",
       twenty_percent_of_property_price
@@ -82,18 +81,18 @@ export class GetStartedHouseInfo extends Component {
       name === "area_of_the_house" ||
       name == "annual_property_tax" ||
       name == "annual_home_owner_association_dues" ||
-      name == "home_owner_insurance" 
+      name == "home_owner_insurance"
     ) {
-      console.log(this.state.home_price_growth)
+      console.log(this.state.home_price_growth);
       updateValidators(this.validators, event.target.name, event.target.value);
       const validationErrorLength = this.validators[event.target.name].errors
         .length;
       console.log(this.validators[event.target.name]);
       this.props.getValidationError(validationErrorLength);
-      console.log(this.state.home_price_growth)
+      console.log(this.state.home_price_growth);
     }
-    console.log(this.state)
-this.props.handleHouseInfo(downpayment, this.state);
+    console.log(this.state);
+    this.props.handleHouseInfo(downpayment, this.state);
   }
   handleBedroomRoomCount(count) {
     this.setState({
@@ -106,21 +105,19 @@ this.props.handleHouseInfo(downpayment, this.state);
     });
   }
   selectAddress = (data) => {
-    const addressArray = data.address_components;
     this.setState({
       house_address: data.house_address,
       house_state: data.house_state,
       house_zip_code: data.house_zip_code,
     });
-    localStorage.setItem('changeAddress', false)
-    console.log(this.state)
+    localStorage.setItem("changeAddress", false);
+    console.log(this.state);
   };
   handleBack = () => {
     this.props.history.push("/select-modules");
   };
 
-
-  getCity =  (addressArray) => {
+  getCity = (addressArray) => {
     let city = "";
     for (let i = 0; i < addressArray.length; i++) {
       if (
@@ -139,11 +136,7 @@ this.props.handleHouseInfo(downpayment, this.state);
     for (let i = 0; i < addressArray.length; i++) {
       if (addressArray[i].types[0]) {
         for (let j = 0; j < addressArray[i].types.length; j++) {
-          if (
-            // "sublocality_level_1" === addressArray[i].types[j] ||
-            // "locality" === addressArray[i].types[j] ||
-            addressArray[i].types[j] == "postal_code"
-          ) {
+          if (addressArray[i].types[j] == "postal_code") {
             area = addressArray[i].long_name;
             return area;
           }
@@ -171,7 +164,6 @@ this.props.handleHouseInfo(downpayment, this.state);
   componentWillUpdate(nextProps, nextState) {}
   render() {
     return (
-      
       <Fragment>
         <MDBRow className="margin20">
           <MDBCol>
@@ -179,60 +171,7 @@ this.props.handleHouseInfo(downpayment, this.state);
             <MapWithASearchBox />
           </MDBCol>
         </MDBRow>
-
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/><br/>
-      <br/> <br/> <br/>
-      <br/> <br/> <br/>
-
-    
-
-
-        {/* <MDBRow className="margin20">
-        <MDBCol>
-        <div className="row form-group address-fields">
-        <div className="col-md-8">
-                <span className="get-started-label">Address</span>
-                <br />
-                <Input
-                  className="input-class-mdb"
-                  placeholder="Address"
-                  name="house_address"
-                  disabled={true}
-                  onChange={this.onChange}
-                  value={this.state.house_address}
-                />
-              </div>
-              <div className="col-md-8">
-                <span className="get-started-label">State</span>
-                <br />
-                <Input
-                  className="input-class-mdb"
-                  placeholder="Start typing state name"
-                  name="house_state"
-                  disabled={true}
-                  onChange={this.onChange}
-                  value={this.state.house_state}
-                />
-              </div>
-              <div className="col-md-4">
-                <span className="get-started-label">Zip Code</span>
-                <br />
-                <Input
-                  className="input-class-mdb"
-                  placeholder="zip code"
-                  name="house_zip_code"
-                  disabled={true}
-                  onChange={this.onChange}
-                  value={this.state.house_zip_code}
-                />
-              </div>
-              </div>
-            </MDBCol>
-          </MDBRow> */}
+        <br /><br /><br /><br /><br /><br /><br /> <br /> <br /><br /> <br /> <br />
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -276,9 +215,7 @@ this.props.handleHouseInfo(downpayment, this.state);
           </MDBCol>
           {displayValidationErrors(this.validators, "property_price")}
         </MDBRow>
-
         {/* New field add */}
-
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Home Price Growth</span>
@@ -290,14 +227,14 @@ this.props.handleHouseInfo(downpayment, this.state);
               value={this.state.home_price_growth}
               onChange={this.handleChange}
             /> */}
-             <NumberFormat
+            <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount in Percentage"
               name="home_price_growth_percentage"
               value={this.state.home_price_growth_percentage}
               onChange={this.handleChange}
               // thousandSeparator={true}
-              suffix={'%'}
+              suffix={"%"}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
                 await this.setState({
@@ -311,9 +248,7 @@ this.props.handleHouseInfo(downpayment, this.state);
           </MDBCol>
           {/* {displayValidationErrors(this.validators, "home_price_growth")} */}
         </MDBRow>
-
         {/* End */}
-
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -434,7 +369,7 @@ this.props.handleHouseInfo(downpayment, this.state);
               placeholder="Enter amount here"
               name="annual_property_tax"
               value={this.state.annual_property_tax}
-               onChange={this.handleChange}
+              onChange={this.handleChange}
               thousandSeparator={true}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
@@ -488,7 +423,7 @@ this.props.handleHouseInfo(downpayment, this.state);
                 await this.setState({
                   annual_home_owner_association_dues: value,
                 });
-                console.log("nnual_home_owner_association_dues",this.state)
+                console.log("nnual_home_owner_association_dues", this.state);
               }}
             />
           </MDBCol>
@@ -514,7 +449,7 @@ this.props.handleHouseInfo(downpayment, this.state);
               placeholder="Enter amount here"
               name="home_owner_insurance"
               value={this.state.home_owner_insurance}
-               onChange={this.handleChange}
+              onChange={this.handleChange}
               thousandSeparator={true}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
@@ -524,7 +459,7 @@ this.props.handleHouseInfo(downpayment, this.state);
                 await this.setState({
                   home_owner_insurance: value,
                 });
-                console.log("home_owner_insurance",this.state)
+                console.log("home_owner_insurance", this.state);
               }}
             />
           </MDBCol>

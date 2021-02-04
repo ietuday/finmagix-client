@@ -102,16 +102,12 @@ const MapWithASearchBox = compose(
                 house_address: address,
                 addressArray: addressArray,
               });
-              let addressData ={
-                "house_address": this.state.house_address,
-                "house_state": this.state.house_state,
-                "house_zip_code": this.state.house_zip_code,
-              } 
-              localStorage.setItem('addressData', JSON.stringify(addressData))
-              console.log(this.state);
-              //   city = this.getCity(addressArray),
-              //   area = this.getArea(addressArray),
-              //   state = this.getState(addressArray);
+              let addressData = {
+                house_address: this.state.house_address,
+                house_state: this.state.house_state,
+                house_zip_code: this.state.house_zip_code,
+              };
+              localStorage.setItem("addressData", JSON.stringify(addressData));
             })
             .catch((err) => {
               console.log(err);
@@ -171,7 +167,7 @@ const MapWithASearchBox = compose(
         <input
           type="text"
           placeholder="Enter your address"
-          className="geocode-style"   
+          className="geocode-style"
         />
       </SearchBox>
       {props.markers.map((marker, index) => (
@@ -206,10 +202,9 @@ const MapWithASearchBox = compose(
             value={props.house_state}
           />
         </MDBCol>
-
       </MDBRow>
-<MDBRow className="margin20">
-<MDBCol>
+      <MDBRow className="margin20">
+        <MDBCol>
           <span className="get-started-label">Zip Code</span>
           <br />
           <Input
@@ -221,7 +216,7 @@ const MapWithASearchBox = compose(
             value={props.house_zip_code}
           />
         </MDBCol>
-</MDBRow>
+      </MDBRow>
     </div>
   </>
 ));
