@@ -184,7 +184,8 @@ this.props.handleHouseInfo(downpayment, this.state);
       <br/>
       <br/>
       <br/>
-      <br/>
+      <br/><br/>
+      <br/> <br/> <br/>
       <br/> <br/> <br/>
 
     

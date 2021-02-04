@@ -206,7 +206,10 @@ const MapWithASearchBox = compose(
             value={props.house_state}
           />
         </MDBCol>
-        <MDBCol>
+
+      </MDBRow>
+<MDBRow className="margin20">
+<MDBCol>
           <span className="get-started-label">Zip Code</span>
           <br />
           <Input
@@ -218,8 +221,7 @@ const MapWithASearchBox = compose(
             value={props.house_zip_code}
           />
         </MDBCol>
-      </MDBRow>
-
+</MDBRow>
     </div>
   </>
 ));
