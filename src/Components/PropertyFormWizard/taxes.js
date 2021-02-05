@@ -171,9 +171,9 @@ export class Taxes extends Component {
       ).tax_deductible_casualty_and_theft_losses
         ? JSON.parse(localStorage.getItem("tax_array"))
             .tax_deductible_casualty_and_theft_losses
-        : "",
+        : ""
 
-      pub936_line_13a:JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a ? JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a : "",
+      // pub936_line_13a:JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a ? JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a : "",
     };
     this.Tax1YesValidators = Tax1YesValidator;
     resetValidators(this.Tax1YesValidators);

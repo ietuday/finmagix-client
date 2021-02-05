@@ -124,8 +124,7 @@ class ForgotPassword extends Component {
             <img src={forgot} className="for-img"></img>
             <h4>You Forgot Your Password</h4>
             <p>
-              Forgot your password? No problem! Please enter your email below,
-              and press <b>SEND</b>
+            Forgot your password? No problem! Please enter your email below, and press <b>SEND</b>
             </p>
           </MDBCol>
           <MDBRow className="margin20">

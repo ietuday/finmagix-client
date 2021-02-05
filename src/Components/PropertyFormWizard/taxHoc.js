@@ -67,7 +67,7 @@ export class TaxHoc extends Component {
       const showDetailedTax = {
         user_obj: localStorage.getItem("id"),
         
-        pub936_line_13a: this.state.tax.pub936_line_13a,
+        // pub936_line_13a: this.state.tax.pub936_line_13a,
         avg_loan_balance_for_grandfathered_debt: this.state.tax.avg_loan_balance_for_grandfathered_debt,
         avg_loan_balance_for_home_acquisition_debt: this.state.tax.avg_loan_balance_for_home_acquisition_debt,
         paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
@@ -100,7 +100,7 @@ export class TaxHoc extends Component {
     ) {
       const hidePreviousBal = {
         user_obj: localStorage.getItem("id"),
-        pub936_line_13a: this.state.tax.pub936_line_13a,
+        // pub936_line_13a: this.state.tax.pub936_line_13a,
         fedral_adjusted_gross_income: this.state.tax
           .fedral_adjusted_gross_income,
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
@@ -121,7 +121,7 @@ export class TaxHoc extends Component {
     ) {
       const showPreviousBal = {
         user_obj: localStorage.getItem("id"),
-        pub936_line_13a: this.state.tax.pub936_line_13a,
+        // pub936_line_13a: this.state.tax.pub936_line_13a,
         fedral_adjusted_gross_income: this.state.tax
           .fedral_adjusted_gross_income,
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
@@ -147,7 +147,7 @@ export class TaxHoc extends Component {
     ) {
       const showallData = {
         user_obj: localStorage.getItem("id"),
-        pub936_line_13a: this.state.tax.pub936_line_13a,
+        // pub936_line_13a: this.state.tax.pub936_line_13a,
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
         fedral_adjusted_gross_income: this.state.tax
         .fedral_adjusted_gross_income,

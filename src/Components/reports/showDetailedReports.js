@@ -1042,6 +1042,7 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateScreen12(data) {
+    console.log(data, this.state.taxes)
     return {
       Detailedtaxexpenses:
         this.state.taxes && this.state.taxes.detailed_tax_expenses ? "Y" : "N",
@@ -1081,8 +1082,10 @@ export class ShowDetailedReports extends Component {
           : 0.0,
       _Pub936Line13a:
         this.state.taxes && this.state.taxes.id
-          ? Number(this.state.taxes.pub936_line_13a)
+          ? Number(this.state.taxes.paid_mortgage_on_gf_ha_debt)
           : 0.0,
+
+      
     };
   }
   render() {

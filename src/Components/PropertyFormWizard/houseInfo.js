@@ -219,6 +219,12 @@ export class GetStartedHouseInfo extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Home Price Growth</span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+              Enter the growth in the home price per year for the duration of stay.
+              </span>
+            </div>
             <br />
             {/* <Input
               className="input-class-mdb"
@@ -258,8 +264,7 @@ export class GetStartedHouseInfo extends Component {
               <img src={quss} className="tool-img"></img>
               <span className="tooltip-img-text">
                 {" "}
-                Enter the amount (Money) you intend to pay i.e. difference
-                between the purchase price and loan amount.
+                Enter your downpayment. 
               </span>
             </div>
             <br />
@@ -434,7 +439,7 @@ export class GetStartedHouseInfo extends Component {
         )}
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
-            <span className="get-started-label">Home Owner's Insurance</span>
+            <span className="get-started-label">Annual Home Insurance</span>
             <br />
             {/* <Input
               className="input-class-mdb"

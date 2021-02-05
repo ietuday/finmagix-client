@@ -148,15 +148,15 @@ export class Tax1 extends Component {
             .tax_deductible_casualty_and_theft_losses
         : "",
 
-      pub936_line_13a: JSON.parse(localStorage.getItem("tax_array"))
-        .pub936_line_13a
-        ? JSON.parse(localStorage.getItem("tax_array")).pub936_line_13a
-        : "",
+      // pub936_line_13a: JSON.parse(localStorage.getItem("tax_array"))
+      //   .pub936_line_13a
+      //   ? JSON.parse(localStorage.getItem("tax_array")).pub936_line_13a
+      //   : "",
 
-        pub936_line_13a_number: JSON.parse(localStorage.getItem("tax_array"))
-        .pub936_line_13a
-        ? JSON.parse(localStorage.getItem("tax_array")).pub936_line_13a
-        : "",
+      //   pub936_line_13a_number: JSON.parse(localStorage.getItem("tax_array"))
+      //   .pub936_line_13a
+      //   ? JSON.parse(localStorage.getItem("tax_array")).pub936_line_13a
+      //   : "",
 
 
       showDetailedDeductionOption: false,
@@ -567,37 +567,7 @@ export class Tax1 extends Component {
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.Tax1YesValidators, "tax_deductible_casualty_and_theft_losses")} */}
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">Pub936Line13a</span>
-            <br />
-            {/* <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="pub936_line_13a"
-              value={this.state.pub936_line_13a}
-              onChange={this.handleChange}
-            /> */}
 
-            <NumberFormat
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="pub936_line_13a_number"
-              value={this.state.pub936_line_13a_number}
-              onChange={this.handleChange}
-              thousandSeparator={true}
-              onValueChange={async (values) => {
-                const { formattedValue, value } = values;
-                await this.setState({
-                  pub936_line_13a_number: formattedValue,
-                });
-                await this.setState({
-                  pub936_line_13a: value,
-                });
-              }}
-            />
-          </MDBCol>
-        </MDBRow>
       </div>
     );
 

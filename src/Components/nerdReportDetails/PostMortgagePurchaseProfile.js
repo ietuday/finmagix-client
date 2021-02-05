@@ -1,5 +1,5 @@
 import { withRouter, Redirect, Link, PureComponent } from "react-router-dom";
-import React, { Fragment, useMemo  } from "react";
+import React, { Fragment, useMemo } from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -8,10 +8,10 @@ import {
   YAxis,
   Cell,
   Text,
-  PieChart, 
-  Pie, 
-  Sector
-} from "recharts"
+  PieChart,
+  Pie,
+  Sector,
+} from "recharts";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -64,21 +64,11 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return <div {...other}>{value === index && <Box p={3}>{children}</Box>}</div>;
 }
-const blues = [
-  ["#33c0cc"],
-  ["#19aaf2"],
-  ["#88e6a1"],
-  ["#efb1ef"]
-];
+const blues = [["#33c0cc"], ["#19aaf2"], ["#88e6a1"], ["#efb1ef"]];
 
 const getColor = (length, index) => {
-  
-    return blues[index];
-  // }
-
-  // return blues[blues.length - 1][index % blues.length];
+  return blues[index];
 };
-
 
 const YAxisLeftTick = ({ y, payload: { value } }) => {
   return (
@@ -90,7 +80,7 @@ const YAxisLeftTick = ({ y, payload: { value } }) => {
 
 let ctx;
 
-export const measureText14HelveticaNeue = text => {
+export const measureText14HelveticaNeue = (text) => {
   if (!ctx) {
     ctx = document.createElement("canvas").getContext("2d");
     ctx.font = "14px 'Helvetica Neue";
@@ -102,8 +92,6 @@ export const measureText14HelveticaNeue = text => {
 const BAR_AXIS_SPACE = 10;
 
 function PostMortgagePurchaseProfile(props) {
-  
-
   let singlePropertyResponse;
   let CalculatorResponse;
   if (
@@ -119,61 +107,112 @@ function PostMortgagePurchaseProfile(props) {
       localStorage.getItem("GetSinglePropertyResponse")
     );
   }
- 
-  const data2 = [
-    { name: "Home expenses post tax", pv: parseFloat(String(CalculatorResponse.ARM2
-      ? CalculatorResponse.ARM2.Homeexpensesposttax2
-      : CalculatorResponse.FRM2
-      ? CalculatorResponse.FRM2.Homeexpensesposttax2
-      : 0).replace(/,/g, ""))},
-    { name: "Estimated tax", pv: parseFloat(String(CalculatorResponse.ARM2
-      ? CalculatorResponse.ARM2.Estimatedtax
-      : CalculatorResponse.FRM2
-      ? CalculatorResponse.FRM2.Estimatedtax
-      : 0).replace(/,/g, ""))},
-    { name: "Total Non Housing", pv: parseFloat(String(CalculatorResponse.ARM2
-      ? CalculatorResponse.ARM2._Totalnonhousing
-      : CalculatorResponse.FRM2
-      ? CalculatorResponse.FRM2._Totalnonhousing
-      : 0).replace(/,/g, "")) },
-    { name: "Balance Option", pv: parseFloat(String(CalculatorResponse.ARM2
-      ? CalculatorResponse.ARM2.Balanceoption2
-      : CalculatorResponse.FRM2
-      ? CalculatorResponse.FRM2.Balanceoption2
-      : 0).replace(/,/g, "")) }
-  ];
 
+  const data2 = [
+    {
+      name: "Home expenses post tax",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM2
+            ? CalculatorResponse.ARM2.Homeexpensesposttax2
+            : CalculatorResponse.FRM2
+            ? CalculatorResponse.FRM2.Homeexpensesposttax2
+            : 0
+        ).replace(/,/g, "")
+      ),
+    },
+    {
+      name: "Estimated tax",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM2
+            ? CalculatorResponse.ARM2.Estimatedtax
+            : CalculatorResponse.FRM2
+            ? CalculatorResponse.FRM2.Estimatedtax
+            : 0
+        ).replace(/,/g, "")
+      ),
+    },
+    {
+      name: "Total Non Housing",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM2
+            ? CalculatorResponse.ARM2._Totalnonhousing
+            : CalculatorResponse.FRM2
+            ? CalculatorResponse.FRM2._Totalnonhousing
+            : 0
+        ).replace(/,/g, "")
+      ),
+    },
+    {
+      name: "Balance Option",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM2
+            ? CalculatorResponse.ARM2.Balanceoption2
+            : CalculatorResponse.FRM2
+            ? CalculatorResponse.FRM2.Balanceoption2
+            : 0
+        ).replace(/,/g, "")
+      ),
+    },
+  ];
 
   const data = [
-    { name: "Home expenses post tax", pv: parseFloat(String(CalculatorResponse.ARM1
-      ? CalculatorResponse.ARM1.Homeexpensesposttax1
-      : CalculatorResponse.FRM1
-      ? CalculatorResponse.FRM1.Homeexpensesposttax1
-      : 0).replace(/,/g, ""))},
-    { name: "Estimated tax", pv: parseFloat(String(CalculatorResponse.ARM1
-      ? CalculatorResponse.ARM1.Estimatedtax
-      : CalculatorResponse.FRM1
-      ? CalculatorResponse.FRM1.Estimatedtax
-      : 0).replace(/,/g, ""))},
-    { name: "Total Non Housing", pv: parseFloat(String(CalculatorResponse.ARM1
-      ? CalculatorResponse.ARM1._Totalnonhousing
-      : CalculatorResponse.FRM1
-      ? CalculatorResponse.FRM1._Totalnonhousing
-      : 0).replace(/,/g, "")) },
-    { name: "Balance Option", pv: parseFloat(String(CalculatorResponse.ARM1
-      ? CalculatorResponse.ARM1.Balanceoption1
-      : CalculatorResponse.FRM1
-      ? CalculatorResponse.FRM1.Balanceoption1
-      : 0).replace(/,/g, "")) }
+    {
+      name: "Home expenses post tax",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM1
+            ? CalculatorResponse.ARM1.Homeexpensesposttax1
+            : CalculatorResponse.FRM1
+            ? CalculatorResponse.FRM1.Homeexpensesposttax1
+            : 0
+        ).replace(/,/g, "")
+      ),
+    },
+    {
+      name: "Estimated tax",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM1
+            ? CalculatorResponse.ARM1.Estimatedtax
+            : CalculatorResponse.FRM1
+            ? CalculatorResponse.FRM1.Estimatedtax
+            : 0
+        ).replace(/,/g, "")
+      ),
+    },
+    {
+      name: "Total Non Housing",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM1
+            ? CalculatorResponse.ARM1._Totalnonhousing
+            : CalculatorResponse.FRM1
+            ? CalculatorResponse.FRM1._Totalnonhousing
+            : 0
+        ).replace(/,/g, "")
+      ),
+    },
+    {
+      name: "Balance Option",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM1
+            ? CalculatorResponse.ARM1.Balanceoption1
+            : CalculatorResponse.FRM1
+            ? CalculatorResponse.FRM1.Balanceoption1
+            : 0
+        ).replace(/,/g, "")
+      ),
+    },
   ];
 
+  const xKey = "name";
+  const yKey = "pv";
 
-
-
-  const xKey="name";
-  const yKey="pv";
-  //  yKey, xKey
-  console.log("data",data)
   const maxTextWidth = useMemo(
     () =>
       data.reduce((acc, cur) => {
@@ -360,139 +399,52 @@ function PostMortgagePurchaseProfile(props) {
                   ))}
                 </Pie>
               </PieChart>
-              <ResponsiveContainer width={"100%"} height={50 * data.length} debounce={50}>
-      <BarChart
-        data={data}
-        layout="vertical"
-        margin={{ left: 130, right: maxTextWidth + (BAR_AXIS_SPACE - 8) }}
-      >
-        <XAxis hide axisLine={false} type="number" />
-        <YAxis
-          yAxisId={0}
-          dataKey={xKey}
-          type="category"
-          axisLine={false}
-          tickLine={false}
-          tick={YAxisLeftTick}
-        />
-        <YAxis
-          orientation="right"
-          yAxisId={1}
-          dataKey={yKey}
-          type="category"
-          axisLine={false}
-          tickLine={false}
-          tickFormatter={value => value.toLocaleString()}
-          mirror
-          tick={{
-            transform: `translate(${maxTextWidth + BAR_AXIS_SPACE}, 0)`
-          }}
-        />
-        <Bar dataKey={yKey} minPointSize={2} barSize={32}>
-          {data.map((d, idx) => {
-            return <Cell key={d[xKey]} fill={getColor(data.length, idx)} />;
-          })}
-        </Bar>
-      </BarChart>
-    </ResponsiveContainer>
-
-              {/* <MDBRow className="margin_30">
-                <MDBCol col="12" md="12">
-                  <h6>
-                    Home expenses post tax{" "}
-                    <b>
-                      {CalculatorResponse.ARM1
-                        ? CalculatorResponse.ARM1.Homeexpensesposttax1
-                        : CalculatorResponse.FRM1
-                        ? CalculatorResponse.FRM1.Homeexpensesposttax1
-                        : 0}
-                    </b>
-                  </h6>
-                  <div className="progress" style={{ height: "30px" }}>
-                    <div
-                      className="progress-bar-dgreen"
-                      role="progressbar"
-                      style={{ width: "100%" }}
-                      aria-valuenow="100"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </MDBCol>
-              </MDBRow>
-              <MDBRow className="margin_30">
-                <MDBCol col="12" md="12">
-                  <h6>
-                    Estimated tax{" "}
-                    <b>
-                      {CalculatorResponse.ARM1
-                        ? CalculatorResponse.ARM1.Estimatedtax
-                        : CalculatorResponse.FRM1
-                        ? CalculatorResponse.FRM1.Estimatedtax
-                        : 0}
-                    </b>
-                  </h6>
-                  <div className="progress" style={{ height: "30px" }}>
-                    <div
-                      className="progress-bar-pink"
-                      role="progressbar"
-                      style={{ width: "100%" }}
-                      aria-valuenow="100"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </MDBCol>
-              </MDBRow>
-
-              <MDBRow className="margin_30">
-                <MDBCol col="12" md="12">
-                  <h6>
-                    Total Non Housing{" "}
-                    <b>
-                      {CalculatorResponse.ARM1
-                        ? CalculatorResponse.ARM1._Totalnonhousing
-                        : CalculatorResponse.FRM1
-                        ? CalculatorResponse.FRM1._Totalnonhousing
-                        : 0}
-                    </b>
-                  </h6>
-                  <div className="progress" style={{ height: "30px" }}>
-                    <div
-                      className="progress-bar-dgreen"
-                      role="progressbar"
-                      style={{ width: "100%" }}
-                      aria-valuenow="100"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </MDBCol>
-              </MDBRow>
-              <MDBRow className="margin_30">
-                <MDBCol col="12" md="12">
-                  <h6>
-                    Balance Option{" "}
-                    <b>
-                      {CalculatorResponse.ARM1
-                        ? CalculatorResponse.ARM1.Balanceoption1
-                        : CalculatorResponse.FRM1
-                        ? CalculatorResponse.FRM1.Balanceoption1
-                        : 0}
-                    </b>
-                  </h6>
-                  <div className="progress" style={{ height: "30px" }}>
-                    <div
-                      className="progress-bar-blue"
-                      role="progressbar"
-                      style={{ width: "100%" }}
-                      aria-valuenow="100"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </MDBCol>
-              </MDBRow> */}
+              <ResponsiveContainer
+                width={"100%"}
+                height={50 * data.length}
+                debounce={50}
+              >
+                <BarChart
+                  data={data}
+                  layout="vertical"
+                  margin={{
+                    left: 130,
+                    right: maxTextWidth + (BAR_AXIS_SPACE - 8),
+                  }}
+                >
+                  <XAxis hide axisLine={false} type="number" />
+                  <YAxis
+                    yAxisId={0}
+                    dataKey={xKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={YAxisLeftTick}
+                  />
+                  <YAxis
+                    orientation="right"
+                    yAxisId={1}
+                    dataKey={yKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tickFormatter={(value) => value.toLocaleString()}
+                    mirror
+                    tick={{
+                      transform: `translate(${
+                        maxTextWidth + BAR_AXIS_SPACE
+                      }, 0)`,
+                    }}
+                  />
+                  <Bar dataKey={yKey} minPointSize={2} barSize={32}>
+                    {data.map((d, idx) => {
+                      return (
+                        <Cell key={d[xKey]} fill={getColor(data.length, idx)} />
+                      );
+                    })}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </TabPanel>
           <TabPanel value={value} index={1}>
@@ -532,141 +484,52 @@ function PostMortgagePurchaseProfile(props) {
                 </Pie>
               </PieChart>
 
-              {/* <MDBRow className="margin_30">
-                <MDBCol col="12" md="12">
-                  <h6>
-                    Home expenses post tax{" "}
-                    <b>
-                      {CalculatorResponse.ARM2
-                        ? CalculatorResponse.ARM2.Homeexpensesposttax2
-                        : CalculatorResponse.FRM2
-                        ? CalculatorResponse.FRM2.Homeexpensesposttax2
-                        : 0}
-                    </b>{" "}
-                  </h6>
-                  <div className="progress" style={{ height: "30px" }}>
-                    <div
-                      className="progress-bar-dgreen"
-                      role="progressbar"
-                      style={{ width: "100%" }}
-                      aria-valuenow="100"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </MDBCol>
-              </MDBRow> */}
-              {/* <MDBRow className="margin_30">
-                <MDBCol col="12" md="12">
-                  <h6>
-                    Estimated tax{" "}
-                    <b>
-                      {CalculatorResponse.ARM2
-                        ? CalculatorResponse.ARM2.Estimatedtax
-                        : CalculatorResponse.FRM2
-                        ? CalculatorResponse.FRM2.Estimatedtax
-                        : 0}
-                    </b>
-                  </h6>
-                  <div className="progress" style={{ height: "30px" }}>
-                    <div
-                      className="progress-bar-pink"
-                      role="progressbar"
-                      style={{ width: "100%" }}
-                      aria-valuenow="100"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </MDBCol>
-              </MDBRow> */}
-
-              {/* <MDBRow className="margin_30">
-                <MDBCol col="12" md="12">
-                  <h6>
-                    Total Non Housing{" "}
-                    <b>
-                      {CalculatorResponse.ARM2
-                        ? CalculatorResponse.ARM2._Totalnonhousing
-                        : CalculatorResponse.FRM2
-                        ? CalculatorResponse.FRM2._Totalnonhousing
-                        : 0}
-                    </b>
-                  </h6>
-                  <div className="progress" style={{ height: "30px" }}>
-                    <div
-                      className="progress-bar-pgreen"
-                      role="progressbar"
-                      style={{ width: "100%" }}
-                      aria-valuenow="100"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </MDBCol>
-              </MDBRow> */}
-
-              {/* <MDBRow className="margin_30">
-                <MDBCol col="12" md="12">
-                  <h6>
-                    Balance Option{" "}
-                    <b>
-                      {CalculatorResponse.ARM1
-                        ? CalculatorResponse.ARM2.Balanceoption2
-                        : CalculatorResponse.FRM2
-                        ? CalculatorResponse.FRM2.Balanceoption2
-                        : 0}
-                    </b>
-                  </h6>
-                  <div className="progress" style={{ height: "30px" }}>
-                    <div
-                      className="progress-bar-blue"
-                      role="progressbar"
-                      style={{ width: "100%" }}
-                      aria-valuenow="100"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </MDBCol>
-              </MDBRow> */}
-            <ResponsiveContainer width={"100%"} height={50 * data.length} debounce={50}>
-      <BarChart
-        data={data2}
-        layout="vertical"
-        margin={{ left: 130, right: maxTextWidth + (BAR_AXIS_SPACE - 8) }}
-      >
-        <XAxis hide axisLine={false} type="number" />
-        <YAxis
-          yAxisId={0}
-          dataKey={xKey}
-          type="category"
-          axisLine={false}
-          tickLine={false}
-          tick={YAxisLeftTick}
-        />
-        <YAxis
-          orientation="right"
-          yAxisId={1}
-          dataKey={yKey}
-          type="category"
-          axisLine={false}
-          tickLine={false}
-          tickFormatter={value => value.toLocaleString()}
-          mirror
-          tick={{
-            transform: `translate(${maxTextWidth + BAR_AXIS_SPACE}, 0)`
-          }}
-        />
-        <Bar dataKey={yKey} minPointSize={2} barSize={32}>
-          {data.map((d, idx) => {
-            return <Cell key={d[xKey]} fill={getColor(data.length, idx)} />;
-          })}
-        </Bar>
-      </BarChart>
-    </ResponsiveContainer>
-
-
+              <ResponsiveContainer
+                width={"100%"}
+                height={50 * data.length}
+                debounce={50}
+              >
+                <BarChart
+                  data={data2}
+                  layout="vertical"
+                  margin={{
+                    left: 130,
+                    right: maxTextWidth + (BAR_AXIS_SPACE - 8),
+                  }}
+                >
+                  <XAxis hide axisLine={false} type="number" />
+                  <YAxis
+                    yAxisId={0}
+                    dataKey={xKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={YAxisLeftTick}
+                  />
+                  <YAxis
+                    orientation="right"
+                    yAxisId={1}
+                    dataKey={yKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tickFormatter={(value) => value.toLocaleString()}
+                    mirror
+                    tick={{
+                      transform: `translate(${
+                        maxTextWidth + BAR_AXIS_SPACE
+                      }, 0)`,
+                    }}
+                  />
+                  <Bar dataKey={yKey} minPointSize={2} barSize={32}>
+                    {data.map((d, idx) => {
+                      return (
+                        <Cell key={d[xKey]} fill={getColor(data.length, idx)} />
+                      );
+                    })}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </TabPanel>
         </MDBCard>
