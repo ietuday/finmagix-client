@@ -89,7 +89,7 @@ export const measureText14HelveticaNeue = (text) => {
   return ctx.measureText(text).width;
 };
 
-const BAR_AXIS_SPACE = 10;
+const BAR_AXIS_SPACE = 100;
 
 function PostMortgagePurchaseProfile(props) {
   let singlePropertyResponse;
