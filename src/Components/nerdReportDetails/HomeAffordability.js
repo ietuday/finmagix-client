@@ -172,7 +172,7 @@ function HomeAffordability(props) {
                 ) <= 28 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black", fontWeight:"bold"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.ARM1.Housingpmtaffordableoption1}
                       </div>
@@ -189,7 +189,7 @@ function HomeAffordability(props) {
                 ) <= 28 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black", fontWeight:"bold"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.FRM1.Housingpmtaffordableoption1}
                       </div>
@@ -220,7 +220,7 @@ function HomeAffordability(props) {
                 ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black", fontWeight:"bold"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.ARM1.Housingpmtaffordableoption1}
                       </div>
@@ -242,7 +242,7 @@ function HomeAffordability(props) {
                 ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black", fontWeight:"bold"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.FRM1.Housingpmtaffordableoption1}
                       </div>
@@ -266,7 +266,7 @@ function HomeAffordability(props) {
                     CalculatorResponse.ARM1.Housingpmtaffordableoption1
                   ).replace(/%/g, "")
                 ) > 36 ? (
-                  <MDBRow style={{color: "black"}}>
+                  <MDBRow className="housing-ratio">
                     <MDBCol md="12">
                       <div>
                         <img src={down} className="home-afer"></img>
@@ -285,7 +285,7 @@ function HomeAffordability(props) {
                 ) > 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.FRM1.Housingpmtaffordableoption1}
                       </div>
@@ -366,7 +366,7 @@ function HomeAffordability(props) {
                 ) <= 28 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.ARM2.Housingpmtaffordableoption2}
                       </div>
@@ -383,7 +383,7 @@ function HomeAffordability(props) {
                 ) <= 28 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.FRM2.Housingpmtaffordableoption2}
                       </div>
@@ -414,7 +414,7 @@ function HomeAffordability(props) {
                 ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.ARM2.Housingpmtaffordableoption2}
                       </div>
@@ -436,7 +436,7 @@ function HomeAffordability(props) {
                 ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.FRM2.Housingpmtaffordableoption2}
                       </div>
@@ -460,7 +460,7 @@ function HomeAffordability(props) {
                     CalculatorResponse.ARM2.Housingpmtaffordableoption2
                   ).replace(/%/g, "")
                 ) > 36 ? (
-                  <MDBRow style={{color: "black"}}>
+                  <MDBRow className="housing-ratio">
                     <MDBCol md="12">
                       <div>
                         <img src={down} className="home-afer"></img>
@@ -479,7 +479,7 @@ function HomeAffordability(props) {
                 ) > 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div className="housing-ratio">
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.FRM2.Housingpmtaffordableoption2}
                       </div>

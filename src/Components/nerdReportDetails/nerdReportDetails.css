@@ -3,6 +3,12 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.housing-ratio{
+  color: #000;
+  font-weight: bold !important;
+ 
+}
+
 .property-finance-logo {
   width: auto;
   margin-right: 20px;
