@@ -55,7 +55,7 @@ export class TaxHoc extends Component {
       } else {
         NotificationManager.error("Please Validate Fields", "Error");
       }
-    } else if (this.state.tax.previous_balance === "N") {
+    } else {
       this.saveApiData();
     }
   };

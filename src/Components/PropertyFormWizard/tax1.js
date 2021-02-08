@@ -148,41 +148,10 @@ export class Tax1 extends Component {
             .tax_deductible_casualty_and_theft_losses
         : "",
 
-      // pub936_line_13a: JSON.parse(localStorage.getItem("tax_array"))
-      //   .pub936_line_13a
-      //   ? JSON.parse(localStorage.getItem("tax_array")).pub936_line_13a
-      //   : "",
-
-      //   pub936_line_13a_number: JSON.parse(localStorage.getItem("tax_array"))
-      //   .pub936_line_13a
-      //   ? JSON.parse(localStorage.getItem("tax_array")).pub936_line_13a
-      //   : "",
-
-
       showDetailedDeductionOption: false,
       showPreviousLoanBalanceButton: false,
     };
 
-    
-
-    //     id: 37
-    // detailed_tax_expenses: "N"
-    // medical_and_dental_expenses: null
-    // state_local_generalsales_taxes: null
-    // other_taxes: null
-    // tax_deductive_investment_interest: null
-    // tax_deductible_charitable_donations: null
-    // tax_deductible_casualty_and_theft_losses: null
-    // fedral_adjusted_gross_income: "1500"
-    // previous_balance: "N"
-    // avg_loan_balance_for_grandfathered_debt: null
-    // avg_loan_balance_for_home_acquisition_debt: null
-    // paid_mortgage_on_gf_ha_debt: null
-    // pub936_line_13a: null
-    // updated_at: "2020-12-30T18:12:42.792782+05:30"
-    // created_at: "2020-12-30T18:12:42.792805+05:30"
-    // user_obj: 84
-    // property_obj: 813
     this.Tax1YesValidators = Tax1YesValidator;
     this.Tax1NoValidators = Tax1NoValidator;
     resetValidators(this.Tax1YesValidators);
