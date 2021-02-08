@@ -161,9 +161,9 @@ function MortgageSummary(props) {
                       <div className="box">Monthly Mortgage Payment</div>
                       <div className="box-1">
                         {CalculatorResponse.ARM1
-                          ? CalculatorResponse.ARM1.InitialpaymentARM1 // This should be changed to InitialpaymentARM1. Note 'InitialpaymentFRM1' is for FRM only
+                          ? CalculatorResponse.ARM1["mth-mrtg-exp"] // This should be changed to InitialpaymentARM1. Note 'InitialpaymentFRM1' is for FRM only
                           : CalculatorResponse.FRM1
-                          ? CalculatorResponse.FRM1.InitialpaymentFRM1
+                          ? CalculatorResponse.FRM1["mth-mrtg-exp"]
                           : 0}
                       </div>
                       <div className="box-1">
@@ -350,9 +350,9 @@ function MortgageSummary(props) {
                       </div>
                       <div className="box-1">
                         {CalculatorResponse.ARM2
-                          ? CalculatorResponse.ARM2.interestsecond2 // is this for interest rate for second mortgage? if so, then it's correct!
+                          ? CalculatorResponse.ARM2.interestsecond1 // is this for interest rate for second mortgage? if so, then it's correct!
                           : CalculatorResponse.FRM2
-                          ? CalculatorResponse.FRM2.interestsecond2
+                          ? CalculatorResponse.FRM2.interestsecond1
                           : 0}
                       </div>
                     </div>
@@ -365,9 +365,9 @@ function MortgageSummary(props) {
                       <div className="box">Interest Only Period</div>
                       <div className="box-1">
                         {CalculatorResponse.ARM2
-                          ? CalculatorResponse.ARM2.interestonlyfirstterm1 // this is the interest only period for ARM in second scenario
+                          ? CalculatorResponse.ARM2.interestonlyfirstterm2 // this is the interest only period for ARM in second scenario
                           : CalculatorResponse.FRM2
-                          ? CalculatorResponse.FRM2.interestonlyfirstterm1 // this is the interest only period for FRM in second scenario
+                          ? CalculatorResponse.FRM2.interestonlyfirstterm2 // this is the interest only period for FRM in second scenario
                           : 0}
                       </div>
                       <div className="box-1"></div>
@@ -387,11 +387,11 @@ function MortgageSummary(props) {
                           : 0}
                       </div>
                       <div className="box-1">
-                        {CalculatorResponse.ARM2
+                        {/* {CalculatorResponse.ARM2
                           ? CalculatorResponse.ARM2["total-mth-hsg-pay"] // are we repeating the lines 623-625? note that there is no 'total-mth-hsg-pay' for second mortgage, it's only for first mortgage
                           : CalculatorResponse.FRM2
                           ? CalculatorResponse.FRM2["total-mth-hsg-pay"]
-                          : 0}
+                          : 0} */}
                       </div>
                     </div>
                   </MDBCol>
@@ -402,9 +402,9 @@ function MortgageSummary(props) {
                       <div className="box">Monthly Mortgage Payment</div>
                       <div className="box-1">
                         {CalculatorResponse.ARM2
-                          ? CalculatorResponse.ARM2.InitialpaymentARM2 // change to InitialpaymentARM2
+                          ? CalculatorResponse.ARM2["mth-mrtg-exp"] // change to InitialpaymentARM2
                           : CalculatorResponse.FRM2
-                          ? CalculatorResponse.FRM2.InitialpaymentFRM2
+                          ? CalculatorResponse.FRM2["mth-mrtg-exp"]
                           : 0}
                       </div>
                       <div className="box-1">
