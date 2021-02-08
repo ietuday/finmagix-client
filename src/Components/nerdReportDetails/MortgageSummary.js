@@ -81,18 +81,10 @@ function MortgageSummary(props) {
                     <div className="tab_contnt">
                       <div className="box">Loan Type</div>
                       <div className="box-1">
-                        {CalculatorResponse.ARM1
-                          ? "ARM"
-                          : CalculatorResponse.FRM1
-                          ? "FRM"
-                          : ""}
+                      { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""}
                       </div>
                       <div className="box-1">
-                        {CalculatorResponse.ARM1
-                          ? "ARM"
-                          : CalculatorResponse.FRM1
-                          ? "FRM"
-                          : ""}
+                        {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
                       </div>
                     </div>
                   </MDBCol>
@@ -111,7 +103,7 @@ function MortgageSummary(props) {
                       </div>
                       <div className="box-1">
                         {CalculatorResponse.ARM1
-                          ? CalculatorResponse.ARM1.ARM2rate
+                          ? CalculatorResponse.ARM1.ARM2rate  
                           : CalculatorResponse.FRM1
                           ? CalculatorResponse.FRM1.interestsecond1
                           : 0}
@@ -337,18 +329,10 @@ function MortgageSummary(props) {
                     <div className="tab_contnt">
                       <div className="box">Loan Type</div>
                       <div className="box-1">
-                        {CalculatorResponse.ARM2
-                          ? "ARM"
-                          : CalculatorResponse.FRM2
-                          ? "FRM"
-                          : ""}
+                      { CalculatorResponse ?  (CalculatorResponse.ARM2 ? "ARM" : CalculatorResponse.FRM2 ? "FRM" : "") : ""}
                       </div>
                       <div className="box-1">
-                        {CalculatorResponse.ARM2
-                          ? "ARM"
-                          : CalculatorResponse.FRM2
-                          ? "FRM"
-                          : ""}
+                      {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
                       </div>
                     </div>
                   </MDBCol>

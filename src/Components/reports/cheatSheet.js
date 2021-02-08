@@ -220,7 +220,7 @@ function CheatSheet(props) {
 
   const projectedEquitydata = [
     {
-      name: "Scenerio1",
+      name: "Scenario1",
       Amount: parseFloat(
         String(
           `${
@@ -251,7 +251,7 @@ function CheatSheet(props) {
 
   const afterHomedata = [
     {
-      name: "Scenerio1",
+      name: "Scenario1",
       Amount: parseFloat(
         String(
           `${
@@ -282,7 +282,7 @@ function CheatSheet(props) {
 
   const taxImpact = [
     {
-      name: "Scenerio1",
+      name: "Scenario1",
       Amount: parseFloat(
         String(
           `${
@@ -296,7 +296,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenerio2",
+      name: "Scenario2",
       Amount: parseFloat(
         String(
           `${

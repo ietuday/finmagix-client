@@ -172,7 +172,7 @@ function HomeAffordability(props) {
                 ) <= 28 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div style={{color: "black", fontWeight:"bold"}}>
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.ARM1.Housingpmtaffordableoption1}
                       </div>
@@ -189,7 +189,7 @@ function HomeAffordability(props) {
                 ) <= 28 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div style={{color: "black", fontWeight:"bold"}}>
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.FRM1.Housingpmtaffordableoption1}
                       </div>
@@ -220,7 +220,7 @@ function HomeAffordability(props) {
                 ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div style={{color: "black", fontWeight:"bold"}}>
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.ARM1.Housingpmtaffordableoption1}
                       </div>
@@ -242,7 +242,7 @@ function HomeAffordability(props) {
                 ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
-                      <div style={{color: "black"}}>
+                      <div style={{color: "black", fontWeight:"bold"}}>
                         <img src={down} className="home-afer"></img>
                         {CalculatorResponse.FRM1.Housingpmtaffordableoption1}
                       </div>
