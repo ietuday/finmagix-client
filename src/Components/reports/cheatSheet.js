@@ -44,13 +44,13 @@ let ctx;
 export const measureText14HelveticaNeue = (text) => {
   if (!ctx) {
     ctx = document.createElement("canvas").getContext("2d");
-    ctx.font = "14px 'Helvetica Neue";
+    ctx.font = "8px 'Helvetica Neue";
   }
 
   return ctx.measureText(text).width;
 };
 
-const BAR_AXIS_SPACE = 10;
+const BAR_AXIS_SPACE =100;
 
 function CheatSheet(props) {
   let singlePropertyResponse;
