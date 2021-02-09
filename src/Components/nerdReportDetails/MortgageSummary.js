@@ -103,7 +103,7 @@ function MortgageSummary(props) {
                       </div>
                       <div className="box-1">
                         {CalculatorResponse.ARM1
-                          ? CalculatorResponse.ARM1.ARM2rate  
+                          ? CalculatorResponse.ARM1.interestsecond1  
                           : CalculatorResponse.FRM1
                           ? CalculatorResponse.FRM1.interestsecond1
                           : 0}
@@ -350,7 +350,7 @@ function MortgageSummary(props) {
                       </div>
                       <div className="box-1">
                         {CalculatorResponse.ARM2
-                          ? CalculatorResponse.ARM2.interestsecond1 // is this for interest rate for second mortgage? if so, then it's correct!
+                          ? CalculatorResponse.ARM2.interestsecond2 // is this for interest rate for second mortgage? if so, then it's correct!
                           : CalculatorResponse.FRM2
                           ? CalculatorResponse.FRM2.interestsecond1
                           : 0}
@@ -409,7 +409,7 @@ function MortgageSummary(props) {
                       </div>
                       <div className="box-1">
                         {CalculatorResponse.ARM2
-                          ? CalculatorResponse.ARM2.Paymentsecond1 // if this is for second mortgage, change to 'Paymentsecond2'
+                          ? CalculatorResponse.ARM2.Paymentsecond2 // if this is for second mortgage, change to 'Paymentsecond2'
                           : CalculatorResponse.FRM2
                           ? CalculatorResponse.FRM2.Paymentsecond1
                           : 0}

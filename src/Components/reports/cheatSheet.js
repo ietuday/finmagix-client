@@ -118,9 +118,9 @@ function CheatSheet(props) {
         String(
           `${
             CalculatorResponse.ARM2
-              ? CalculatorResponse.ARM2.loanamountsecond1
+              ? CalculatorResponse.ARM2.loanamountsecond2
               : CalculatorResponse.FRM2
-              ? CalculatorResponse.FRM2.loanamountsecond1
+              ? CalculatorResponse.FRM2.loanamountsecond2
               : 0
           }`
         ).replace(/,/g, "")
@@ -177,7 +177,7 @@ function CheatSheet(props) {
         String(
           `${
             CalculatorResponse.ARM2
-              ? CalculatorResponse.ARM2.Paymentsecond1
+              ? CalculatorResponse.ARM2.Paymentsecond2
               : CalculatorResponse.FRM2
               ? CalculatorResponse.FRM2.Paymentsecond1
               : 0
