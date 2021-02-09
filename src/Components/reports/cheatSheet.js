@@ -71,7 +71,7 @@ function CheatSheet(props) {
 
   const loandata = [
     {
-      name: "Loan Amount First",
+      name: "Loan Amount First",  
       Amount: parseFloat(
         String(
           `${
@@ -234,7 +234,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenerio2",
+      name: "Scenario2",
       Amount: parseFloat(
         String(
           `${
@@ -497,7 +497,7 @@ function CheatSheet(props) {
                 transform: `translate(${maxTextWidthLoan + BAR_AXIS_SPACE}, 0)`,
               }}
             />
-            <Tooltip />
+         
             <Bar dataKey={yKey} minPointSize={2} barSize={32}>
               {loandata.map((d, idx) => {
                 return (
@@ -547,7 +547,7 @@ function CheatSheet(props) {
                 }, 0)`,
               }}
             />
-            <Tooltip />
+         
             <Bar dataKey={yKey} minPointSize={2} barSize={32}>
               {paymentdata.map((d, idx) => {
                 return (
@@ -599,7 +599,7 @@ function CheatSheet(props) {
                 }, 0)`,
               }}
             />
-            <Tooltip />
+         
             <Bar dataKey={yKey} minPointSize={2} barSize={32}>
               {housingdata.map((d, idx) => {
                 return (
@@ -653,7 +653,7 @@ function CheatSheet(props) {
                 }, 0)`,
               }}
             />
-            <Tooltip />
+         
             <Bar dataKey={yKey} minPointSize={2} barSize={32}>
               {projectedEquitydata.map((d, idx) => {
                 return (
@@ -706,7 +706,7 @@ function CheatSheet(props) {
                 }, 0)`,
               }}
             />
-            <Tooltip />
+         
             <Bar dataKey={yKey} minPointSize={2} barSize={32}>
               {afterHomedata.map((d, idx) => {
                 return (
@@ -758,7 +758,7 @@ function CheatSheet(props) {
                 }, 0)`,
               }}
             />
-            <Tooltip />
+         
             <Bar dataKey={yKey} minPointSize={2} barSize={32}>
               {taxImpact.map((d, idx) => {
                 return (

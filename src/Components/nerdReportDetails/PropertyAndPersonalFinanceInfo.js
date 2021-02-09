@@ -11,6 +11,7 @@ import {
   MDBRow,
   MDBContainer,
 } from "mdbreact";
+import NumberFormat from "react-number-format";
 
 import Header from "../../common/header";
 import "./nerdReportDetails.css";
@@ -70,7 +71,7 @@ export class PropertyAndPersonalFinanceInfo extends Component {
           >
             <Link to="/nerd-report">Go to Nerd Report</Link>
           </Button>
-
+ 
           <MDBCol className="margin10">
             <MDBCard>
               <MDBCardBody>
@@ -139,9 +140,8 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           className="property-finance-logo"
                         />
                         <div>
-                          {this.state.singlePropertyResponse
-                            ? this.state.singlePropertyResponse.property_price
-                            : 0}
+                        <NumberFormat value={this.state.singlePropertyResponse ? this.state.singlePropertyResponse.property_price : 0} displayType={'text'} thousandSeparator={true} />
+                          
                         </div>
                       </div>
                     </MDBCol>
@@ -154,9 +154,13 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           alt="finmagix"
                           className="property-finance-logo"
                         />
-                        <div> {this.state.singlePropertyResponse
+                        <div>
+                          
+                        <NumberFormat value={this.state.singlePropertyResponse
                             ? this.state.singlePropertyResponse.downpayment_amount
-                            : 0}</div>
+                            : 0} displayType={'text'} thousandSeparator={true} />
+                          
+                           </div>
                       </div>
                     </MDBCol>
                   </MDBRow>
@@ -184,9 +188,11 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           alt="finmagix"
                           className="property-finance-logo"
                         />
-                        <div>{this.state.singlePropertyResponse
+                        <div>
+                        <NumberFormat value={this.state.singlePropertyResponse
                             ? this.state.singlePropertyResponse.annual_property_tax
-                            : 0}</div>
+                            : 0} displayType={'text'} thousandSeparator={true} />
+                          </div>
                       </div>
                     </MDBCol>
                   </MDBRow>
@@ -201,9 +207,10 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           className="property-finance-logo"
                         />
                         <div>
-                        {this.state.singlePropertyResponse
+                        <NumberFormat value={this.state.singlePropertyResponse
                             ? this.state.singlePropertyResponse.home_owner_insurance
-                            : 0}
+                            : 0} displayType={'text'} thousandSeparator={true} />
+                        
                         </div>
                       </div>
                     </MDBCol>
@@ -216,9 +223,10 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           className="property-finance-logo"
                         />
                         <div>
-                        {this.state.singlePropertyResponse
+                        <NumberFormat value={this.state.singlePropertyResponse
                             ? this.state.singlePropertyResponse.annual_home_owner_association_dues
-                            : 0}
+                            : 0} displayType={'text'} thousandSeparator={true} />
+                        
                         </div>
                       </div>
                     </MDBCol>
@@ -237,9 +245,11 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           alt="finmagix"
                           className="property-finance-logo"
                         />
-                        <div>{this.state.personalFinanace
+                        <div>
+                        <NumberFormat value={this.state.personalFinanace
                             ? this.state[this.state.personalFinanace.fico_score_range]
-                            : 0}</div>
+                            : 0} displayType={'text'} thousandSeparator={true} />
+                          </div>
                       </div>
                     </MDBCol>
                     <MDBCol md="6">
@@ -251,9 +261,11 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           className="property-finance-logo"
                         />
                         <div>
-                        {this.state.personalFinanace
+                        <NumberFormat value={this.state.personalFinanace
                             ? this.state.personalFinanace.federal_income
-                            : 0}
+                            : 0} displayType={'text'} thousandSeparator={true} />
+                        
+                        
                         </div>
                       </div>
                     </MDBCol>
@@ -285,9 +297,10 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           className="property-finance-logo"
                         />
                         <div>
-                        {this.state.personalFinanace
+
+                        <NumberFormat value={this.state.personalFinanace
                             ? this.state.personalFinanace.monthly_debt_payments
-                            : 0}
+                            : 0} displayType={'text'} thousandSeparator={true} />
                         </div>
                       </div>
                     </MDBCol>

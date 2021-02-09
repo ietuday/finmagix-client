@@ -10,6 +10,7 @@ import {
   MDBModalFooter,
 } from "mdbreact";
 import { Button } from "@material-ui/core";
+import NumberFormat from "react-number-format";
 import Header from "../common/header";
 import { Redirect, Link } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -253,7 +254,8 @@ export class Dashboard extends Component {
                               </MDBCol>
                               <MDBCol md="3">
                                 <Typography variant="body2" component="p">
-                                  {property_price}
+                                <NumberFormat value={property_price} displayType={'text'} thousandSeparator={true} />
+                                
                                 </Typography>
                               </MDBCol>
                             </MDBRow>
