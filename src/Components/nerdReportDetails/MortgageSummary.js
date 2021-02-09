@@ -411,7 +411,7 @@ function MortgageSummary(props) {
                         {CalculatorResponse.ARM2
                           ? CalculatorResponse.ARM2.Paymentsecond2 // if this is for second mortgage, change to 'Paymentsecond2'
                           : CalculatorResponse.FRM2
-                          ? CalculatorResponse.FRM2.Paymentsecond1
+                          ? CalculatorResponse.FRM2.Paymentsecond2
                           : 0}
                       </div>
                     </div>
