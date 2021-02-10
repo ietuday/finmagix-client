@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
+
+import Axios from "axios";
+
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { Input } from "antd";
@@ -17,6 +20,9 @@ import {
 import quss from "../../assets/images/que.png";
 
 import NumberFormat from "react-number-format";
+
+import { config } from '../config/default';
+const { baseURL } = config;
 
 export class SecondLoanScenario extends Component {
   constructor() {
@@ -58,7 +64,84 @@ export class SecondLoanScenario extends Component {
     this.validators = FrmMortgageProgramValidator;
     resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
+    this.checkproperty()
   }
+
+  checkproperty(){
+    const propertyId = JSON.parse(localStorage.getItem('property_id'))
+    console.log(propertyId)
+    if(propertyId){
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0]
+          this.setState({
+            mortgage_program_type:propertyDetail.second_frm.mortage_program_type,
+            mortgage_program_type_value: 1,
+            loan_amount:propertyDetail.second_frm.loan_amount,
+            loan_amount_number:propertyDetail.second_frm.loan_amount,
+            loan_term: propertyDetail.second_frm.loan_term,
+            interest: propertyDetail.second_frm.interest,
+            interest_percentage: Number(propertyDetail.second_frm.interest)*100,
+            points: propertyDetail.second_frm.points,
+            closing_costs: propertyDetail.second_frm.closing_costs,
+            closing_costs_number:propertyDetail.second_frm.closing_costs,
+            interest_only_option:propertyDetail.second_frm.interest_only_option,
+            interest_only_period: propertyDetail.second_frm.interest_only_period,
+            downpayment: 0,
+            pmi: propertyDetail.second_frm.mpi,
+            select_loan_program: "",
+            initial_interest_rate: propertyDetail.second_frm.interest,
+            first_interest_rate_adj_cap: 0,
+            floor_interest_rate: 0,
+            ceiling_interest_rate: 0,
+            period_cap:propertyDetail.second_frm.periodicadjcap1,
+            rate_add:propertyDetail.second_frm.rateadd1,
+
+            second_mortgage_loan_amount:propertyDetail.second_frm.loanamountsecond1,
+            second_mortgage_loan_term:propertyDetail.second_frm.second_mortgage_loan_term,
+            second_mortgage_interest: propertyDetail.second_frm.second_mortgage_interest,
+            second_mortgage_points:propertyDetail.second_frm.second_mortgage_points,
+            second_mortgage_closing_costs:propertyDetail.second_frm.second_mortgage_closing_costs,
+            showInterestOnlyPeriodOption: false,
+            showMortgageTypeChangeOption: false,
+            PMIOptions: "PMI",
+            armValidationErrors: "",
+            secondmtgpmichoice1: "0",
+            PMIfirst1: "0",
+            loanamountsecond1: "0",
+            Pmtsecond1: "0",
+            ARMtype1: 0,
+            ARM1rate: 0,
+            ARMfirstadjin1: "0",
+            floor1: "0",
+            ceiling1: "0",
+            periodicadjcap1: "0",
+            rateadd1: "0",
+            secondmtgpmichoice2: "0",
+            PMIfirst2: "0",
+            loanamountsecond2: "0",
+            Pmtsecond2: "0",
+            ARM2rate: "0",
+            ARMfirstadjin2: "0",
+            floor2: "0",
+            ceiling2: "0",
+            periodicadjcap2: "0",
+            rateadd2: "0",
+            closing_costs_percentage: Number(propertyDetail.second_frm.closing_costs)*100,
+            points_percentage: Number(propertyDetail.second_frm.points)*100,
+          })
+        })
+        .catch((err) => {
+         
+        });
+    }
+  }
+
   getArmValidationError = (error) => {
     this.setState({
       armValidationErrors: error,

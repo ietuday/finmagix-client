@@ -54,6 +54,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
       second_mortgage_points_percentage: "",
     };
     this.handleChange = this.handleChange.bind(this);
+    this.checkProperty()
   }
 
   checkProperty(){
@@ -73,10 +74,10 @@ export class ShowPmiOptionsFirstLoan extends Component {
             second_mortgage_loan_amount: propertyDetail.first_frm.loanamountsecond1,
             second_mortgage_loan_term: propertyDetail.first_frm.second_mortgage_loan_term,
             second_mortgage_interest: propertyDetail.first_frm.second_mortgage_interest,
-            second_mortgage_interest_percentage: Number(propertyDetail.first_frm.second_mortgage_interest_percentage)*100,
+            second_mortgage_interest_percentage: Number(propertyDetail.first_frm.second_mortgage_interest)*100,
             second_mortgage_points: propertyDetail.first_frm.second_mortgage_points,
             second_mortgage_closing_costs:propertyDetail.first_frm.second_mortgage_closing_costs,
-            second_mortgage_closing_costs_number:propertyDetail.first_frm.second_mortgage_closing_costs_number,
+            second_mortgage_closing_costs_number:propertyDetail.first_frm.second_mortgage_closing_costs,
             PMIOptions: "PMI",
             showSecondloanOption: false,
             secondmtgpmichoice1: propertyDetail.first_frm.secondmtgpmichoice1,
@@ -101,14 +102,17 @@ export class ShowPmiOptionsFirstLoan extends Component {
             ceiling2: propertyDetail.first_frm.ceiling2,
             periodicadjcap2: propertyDetail.first_frm.periodicadjcap2,
             rateadd2: propertyDetail.first_frm.rateadd2,
-            second_mortgage_points_percentage: Number(propertyDetail.first_frm.second_mortgage_points_percentage)*100,
+            second_mortgage_points_percentage: Number(propertyDetail.first_frm.second_mortgage_points)*100,
           })
+          console.log(this.state);
+          
         })
         .catch((err) => {
          
         });
     }
   }
+  
   showPmiSecondloan = (event, value) => {
     this.setState({
       PMIOptions: value,
@@ -170,7 +174,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
       <div>
         <MDBRow className="margin20">
           <MDBCol md="12">
-            <span className="get-started-label">Loan Amount2222222222222222222222222</span>
+            <span className="get-started-label">Loan Amount</span>
             <div className="tooltip-img">
               <img src={quss} className="tool-img"></img>
               <span className="tooltip-img-text">

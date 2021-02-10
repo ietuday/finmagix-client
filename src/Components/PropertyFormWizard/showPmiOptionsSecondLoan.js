@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
 import { Input } from "antd";
+import Axios from "axios";
+
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import ToggleButton from "@material-ui/lab/ToggleButton";
@@ -8,6 +10,9 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 import NumberFormat from "react-number-format";
 import quss from "../../assets/images/que.png";
+import { config } from '../config/default';
+const { baseURL } = config;
+
 export class ShowPmiOptionsSecondLoan extends Component {
   constructor() {
     super();
@@ -48,7 +53,65 @@ export class ShowPmiOptionsSecondLoan extends Component {
       loanamountsecond2_number:"0"
     };
     this.handleChange = this.handleChange.bind(this);
+    this.checkProperty();
   }
+
+  checkProperty(){
+    const propertyId = JSON.parse(localStorage.getItem('property_id'))
+    if(propertyId){
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0]
+          this.setState({
+            pmi_amount: propertyDetail.second_frm.pmi,
+            pmi_amount_number: propertyDetail.second_frm.pmi,
+            second_mortgage_loan_amount: propertyDetail.second_frm.loanamountsecond1,
+            second_mortgage_loan_term: propertyDetail.second_frm.second_mortgage_loan_term,
+            second_mortgage_interest: propertyDetail.second_frm.second_mortgage_interest,
+            second_mortgage_interest_percentage: Number(propertyDetail.second_frm.second_mortgage_interest)*100,
+            second_mortgage_points: propertyDetail.second_frm.second_mortgage_points,
+            second_mortgage_closing_costs:propertyDetail.second_frm.second_mortgage_closing_costs,
+            second_mortgage_closing_costs_number:propertyDetail.second_frm.second_mortgage_closing_costs,
+            PMIOptions: "PMI",
+            showSecondloanOption: false,
+            secondmtgpmichoice1: propertyDetail.second_frm.secondmtgpmichoice1,
+            PMIfirst1: propertyDetail.second_frm.PMIfirst1,
+            loanamountsecond1: propertyDetail.second_frm.loanamountsecond1,
+            loanamountsecond1_number: propertyDetail.second_frm.loanamountsecond1,
+            Pmtsecond1: propertyDetail.second_frm.Pmtsecond1,
+            ARMtype1: propertyDetail.second_frm.ARMtype1,
+            ARM1rate: propertyDetail.second_frm.ARM1rate,
+            ARMfirstadjin1: propertyDetail.second_frm.ARMfirstadjin1,
+            floor1: propertyDetail.second_frm.floor1,
+            ceiling1: propertyDetail.second_frm.ceiling1,
+            periodicadjcap1: propertyDetail.second_frm.periodicadjcap1,
+            rateadd1: propertyDetail.second_frm.rateadd1,
+            secondmtgpmichoice2: propertyDetail.second_frm.secondmtgpmichoice2,
+            PMIfirst2: propertyDetail.second_frm.PMIfirst2,
+            loanamountsecond2: propertyDetail.second_frm.loanamountsecond2,
+            Pmtsecond2: propertyDetail.second_frm.Pmtsecond2,
+            ARM2rate: propertyDetail.second_frm.ARM2rate,
+            ARMfirstadjin2: propertyDetail.second_frm.ARMfirstadjin2,
+            floor2: propertyDetail.second_frm.floor2,
+            ceiling2: propertyDetail.second_frm.ceiling2,
+            periodicadjcap2: propertyDetail.second_frm.periodicadjcap2,
+            rateadd2: propertyDetail.second_frm.rateadd2,
+            second_mortgage_points_percentage: Number(propertyDetail.second_frm.second_mortgage_points)*100,
+          })
+          console.log(this.state);
+          
+        })
+        .catch((err) => {
+         
+        });
+    }
+  }
+
   showPmiSecondloan = (event, value) => {
     this.setState({
       PMIOptions: value,
