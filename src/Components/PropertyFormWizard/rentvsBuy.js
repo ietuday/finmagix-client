@@ -48,15 +48,15 @@ export class RentvsBuy extends Component {
     await this.setState({
       [e.target.name]: e.target.value,
     });
-    if (
-      name === "current_monthly_rent_payment" ||
-      name === "annual_rent_insurance"
-    ) {
-      updateValidators(this.validators, e.target.name, e.target.value);
-      const validationErrorLength = this.validators[e.target.name].errors
-        .length;
-      this.props.getValidationError(validationErrorLength);
-    }
+    // if (
+    //   name === "current_monthly_rent_payment" ||
+    //   name === "annual_rent_insurance"
+    // ) {
+    //   updateValidators(this.validators, e.target.name, e.target.value);
+    //   const validationErrorLength = this.validators[e.target.name].errors
+    //     .length;
+    //   this.props.getValidationError(validationErrorLength);
+    // }
     this.props.getRentvsBuyData(this.state);
   }
 
@@ -158,10 +158,10 @@ export class RentvsBuy extends Component {
                 />
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(
+            {/* {displayValidationErrors(
               this.validators,
               "current_monthly_rent_payment"
-            )}
+            )} */}
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Annual rent insurance</span>
@@ -207,7 +207,7 @@ export class RentvsBuy extends Component {
 
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "annual_rent_insurance")}
+            {/* {displayValidationErrors(this.validators, "annual_rent_insurance")} */}
             <MDBRow className="margin20 marginbottom20">
               <MDBCol md="12">
                 <span className="get-started-label">Rate of investment</span>

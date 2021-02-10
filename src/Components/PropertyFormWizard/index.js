@@ -395,18 +395,21 @@ export class StepperComponent extends Component {
 
     if (this.state.activeStep === 0) {
       console.log(this.state.houseInofValidationErrors,isFormValid("house_info") )
-      this.state.houseInofValidationErrors === 0 && isFormValid("house_info")
-        ? this.setState({
-            activeStep: newActiveStep,
-          })
-        : this.setState({
-            activeStep: this.state.activeStep,
-          });
-      this.state.houseInofValidationErrors === 0 && isFormValid("house_info")
-        ? this.setState({
-            activeStep: newActiveStep,
-          })
-        : NotificationManager.error("Please Validate Fields", "Error");
+      // this.state.houseInofValidationErrors === 0 && isFormValid("house_info")
+      //   ? this.setState({
+      //       activeStep: newActiveStep,
+      //     })
+      //   : this.setState({
+      //       activeStep: this.state.activeStep,
+      //     });
+      // this.state.houseInofValidationErrors === 0 && isFormValid("house_info")
+      //   ? this.setState({
+      //       activeStep: newActiveStep,
+      //     })
+      //   : NotificationManager.error("Please Validate Fields", "Error");
+      this.setState({
+              activeStep: newActiveStep,
+            })
       this.state.propertyInfo['home_price_growth'] = String(
         Number(this.state.propertyInfo["home_price_growth"]) / 100
       );
@@ -436,18 +439,21 @@ export class StepperComponent extends Component {
         activeStep: newActiveStep,
       });
     } else if (this.state.activeStep === 3) {
-      this.state.rentvsBuyValidationErrors === 0 && isFormValid("rent_vs_buy")
-        ? this.setState({
-            activeStep: newActiveStep,
-          })
-        : this.setState({
-            activeStep: this.state.activeStep,
-          });
-      this.state.rentvsBuyValidationErrors === 0 && isFormValid("rent_vs_buy")
-        ? this.setState({
-            activeStep: newActiveStep,
-          })
-        : NotificationManager.error("Please Validate Fields", "Error");
+      // this.state.rentvsBuyValidationErrors === 0 && isFormValid("rent_vs_buy")
+      //   ? this.setState({
+      //       activeStep: newActiveStep,
+      //     })
+      //   : this.setState({
+      //       activeStep: this.state.activeStep,
+      //     });
+      // this.state.rentvsBuyValidationErrors === 0 && isFormValid("rent_vs_buy")
+      //   ? this.setState({
+      //       activeStep: newActiveStep,
+      //     })
+      //   : NotificationManager.error("Please Validate Fields", "Error");
+        this.setState({
+          activeStep: newActiveStep,
+        })
         this.state.RentvsBuy['rate_of_investment'] = String(
           Number(this.state.RentvsBuy["rate_of_investment"]) / 100
         );
