@@ -102,7 +102,7 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
             ceiling2: propertyDetail.first_arm.ceiling2,
             periodicadjcap2: propertyDetail.first_arm.periodicadjcap2,
             rateadd2: propertyDetail.first_arm.rateadd2,
-            second_mortgage_points_percentage: Number(propertyDetail.first_arm.second_mortgage_points)*100,
+            second_mortgage_points_percentage: parseInt(Number(propertyDetail.first_arm.second_mortgage_points)*100),
           })
           console.log(this.state);
           

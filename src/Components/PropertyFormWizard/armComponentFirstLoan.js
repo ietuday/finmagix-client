@@ -114,7 +114,7 @@ export class ARMComponentFirstLoan extends Component {
             ceiling_interest_rate_percentage: Number(propertyDetail.first_arm.ceiling_interest_rate)*100,
             period_cap: propertyDetail.first_arm.period_cap,
             rate_add: propertyDetail.first_arm.rate_add,
-            rate_add_percentage: Number(propertyDetail.first_arm.rate_add),
+            rate_add_percentage: Number(propertyDetail.first_arm.rate_add)*100,
             points: propertyDetail.first_arm.points,
             closing_costs: propertyDetail.first_arm.closing_costs,
             closing_costs_number:propertyDetail.first_arm.closing_costs,
