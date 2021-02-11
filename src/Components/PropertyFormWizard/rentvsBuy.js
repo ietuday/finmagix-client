@@ -32,17 +32,17 @@ export class RentvsBuy extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current_monthly_rent_payment: "",
-      current_monthly_rent_payment_number: "",
-      annual_rent_insurance: "",
-      rate_of_investment: "",
+      current_monthly_rent_payment: 0,
+      current_monthly_rent_payment_number: 0,
+      annual_rent_insurance: 0,
+      rate_of_investment: 0,
       openModal: true,
       property_obj: localStorage.getItem("property_id"),
       radioValue: false,
-      rentinflation: "",
+      rentinflation: 0,
       rate_of_investment_percentage: 0,
       rentinflation_percentage: 0,
-      annual_rent_insurance_number: "",
+      annual_rent_insurance_number: 0,
     };
     this.validators = RentvsBuyValidator;
     resetValidators(this.validators);
@@ -74,6 +74,7 @@ export class RentvsBuy extends Component {
             rentinflation_percentage: Number(propertyDetail.rent_vs_buy.rentinflation)*100,
             annual_rent_insurance_number: propertyDetail.rent_vs_buy.annual_rent_insurance
           });
+          console.log(this.state)
           this.props.getRentvsBuyData(this.state);
         })
         .catch((err) => {});
@@ -219,12 +220,29 @@ export class RentvsBuy extends Component {
                   valuen={this.state.annual_rent_insurance}
                   onChange={this.handleChange}
                 /> */}
-
+{/* 
                 <NumberFormat
                   className="input-class-mdb"
                   placeholder="Enter amount here"
                   name="annual_rent_insurance"
                   valuen={this.state.annual_rent_insurance}
+                  onChange={this.handleChange}
+                  thousandSeparator={true}
+                  onValueChange={async (values) => {
+                    const { formattedValue, value } = values;
+                    await this.setState({
+                      annual_rent_insurance_number: formattedValue,
+                    });
+                    await this.setState({
+                      annual_rent_insurance: value,
+                    });
+                  }}
+                /> */}
+                <NumberFormat
+                  className="input-class-mdb"
+                  placeholder="Enter amount here"
+                  name="annual_rent_insurance"
+                  value={this.state.annual_rent_insurance}
                   onChange={this.handleChange}
                   thousandSeparator={true}
                   onValueChange={async (values) => {
