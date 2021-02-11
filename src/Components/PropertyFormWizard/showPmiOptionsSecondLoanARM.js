@@ -104,8 +104,8 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
             rateadd2: propertyDetail.second_arm.rateadd2,
             second_mortgage_points_percentage: Number(propertyDetail.second_arm.second_mortgage_points)*100,
           })
-          console.log(this.state);
           
+          this.props.handleDownpaymentData(this.state);
         })
         .catch((err) => {
          

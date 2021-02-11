@@ -135,6 +135,7 @@ export class SecondLoanScenario extends Component {
             closing_costs_percentage: Number(propertyDetail.second_frm.closing_costs)*100,
             points_percentage: Number(propertyDetail.second_frm.points)*100,
           })
+          this.props.handleSecondloanMortgageInfo(this.state, null);
         })
         .catch((err) => {
          
