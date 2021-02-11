@@ -93,7 +93,7 @@ export class GetStartedHouseInfo extends Component {
             home_owner_insurance: propertyDetail.home_owner_insurance,
             home_owner_insurance_number: propertyDetail.home_owner_insurance,
             home_price_growth: propertyDetail.home_price_growth,
-            home_price_growth_percentage: propertyDetail.home_price_growth,
+            home_price_growth_percentage: Number(propertyDetail.home_price_growth)*100,
           })
           let downpayment
           let twenty_percent_of_property_price =
