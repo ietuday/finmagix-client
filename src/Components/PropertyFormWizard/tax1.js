@@ -6,7 +6,7 @@ import { withRouter, Redirect } from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { updateValidators } from "../../common/ValidatorFunction";
-
+import Axios from "axios";
 import NumberFormat from "react-number-format";
 
 import {
@@ -18,6 +18,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Tax1YesValidator from "../validatorRules/Tax1YesValidator";
 import Tax1NoValidator from "../validatorRules/Tax1NoValidator";
 import quss from "../../assets/images/que.png";
+
+import { config } from '../config/default';
+const { baseURL } = config;
+
 
 export class Tax1 extends Component {
   constructor() {
@@ -157,7 +161,54 @@ export class Tax1 extends Component {
     resetValidators(this.Tax1YesValidators);
     resetValidators(this.Tax1NoValidators);
     this.handleChange = this.handleChange.bind(this);
+    this.checkProperty()
   }
+
+  checkProperty() {
+    console.log("ncbncbz");
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+          this.setState({
+            fedral_adjusted_gross_income:propertyDetail.taxes.fedral_adjusted_gross_income,
+            fedral_adjusted_gross_income_number:propertyDetail.taxes.fedral_adjusted_gross_income,
+            avg_loan_balance_for_grandfathered_debt:propertyDetail.taxes.avg_loan_balance_for_grandfathered_debt,  
+            avg_loan_balance_for_grandfathered_debt_number:propertyDetail.taxes.avg_loan_balance_for_grandfathered_debt,   
+            avg_loan_balance_for_home_acquisition_debt: propertyDetail.taxes.avg_loan_balance_for_home_acquisition_debt,
+            avg_loan_balance_for_home_acquisition_debt_number: propertyDetail.taxes.avg_loan_balance_for_home_acquisition_debt,
+            paid_mortgage_on_gf_ha_debt: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt,
+            paid_mortgage_on_gf_ha_debt_number: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt,
+            medical_and_dental_expenses:propertyDetail.taxes.medical_and_dental_expenses,
+            medical_and_dental_expenses_number: propertyDetail.taxes.medical_and_dental_expenses,
+            state_local_generalsales_taxes: propertyDetail.taxes.state_local_generalsales_taxes,
+            state_local_generalsales_taxes_number: propertyDetail.taxes.state_local_generalsales_taxes,
+            other_taxes: propertyDetail.taxes.other_taxes,
+            other_taxes_number: propertyDetail.taxes.other_taxes,
+            tax_deductive_investment_interest: propertyDetail.taxes.tax_deductive_investment_interest,
+            tax_deductible_charitable_donations: propertyDetail.taxes.tax_deductible_charitable_donations,
+            tax_deductible_charitable_donations_number: propertyDetail.taxes.tax_deductible_charitable_donations,
+            tax_deductible_casualty_and_theft_losses: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
+            tax_deductible_casualty_and_theft_losses_number: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
+          });
+          console.log(this.state)
+          this.props.getData("tax1", this.state);
+          
+        })
+        .catch((err) => {});
+    }
+  }
+
+
+
+
+
   componentDidMount() {}
   detailedExpenseChange = (event, value) => {
     this.setState({
