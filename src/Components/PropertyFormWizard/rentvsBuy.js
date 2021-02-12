@@ -43,9 +43,11 @@ export class RentvsBuy extends Component {
       rate_of_investment_percentage: 0,
       rentinflation_percentage: 0,
       annual_rent_insurance_number: 0,
+      is_update:false,
+      id: ""
     };
-    this.validators = RentvsBuyValidator;
-    resetValidators(this.validators);
+    // this.validators = RentvsBuyValidator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
     this.onRadioChange = this.onRadioChange.bind(this);
     this.checkProperty()
@@ -72,7 +74,9 @@ export class RentvsBuy extends Component {
             rentinflation: propertyDetail.rent_vs_buy.rentinflation,
             rate_of_investment_percentage: Number(propertyDetail.rent_vs_buy.rate_of_investment)*100,
             rentinflation_percentage: Number(propertyDetail.rent_vs_buy.rentinflation)*100,
-            annual_rent_insurance_number: propertyDetail.rent_vs_buy.annual_rent_insurance
+            annual_rent_insurance_number: propertyDetail.rent_vs_buy.annual_rent_insurance,
+            is_update:true,
+            id: propertyDetail.rent_vs_buy.id
           });
           console.log(this.state)
           this.props.getRentvsBuyData(this.state);
@@ -220,24 +224,7 @@ export class RentvsBuy extends Component {
                   valuen={this.state.annual_rent_insurance}
                   onChange={this.handleChange}
                 /> */}
-{/* 
-                <NumberFormat
-                  className="input-class-mdb"
-                  placeholder="Enter amount here"
-                  name="annual_rent_insurance"
-                  valuen={this.state.annual_rent_insurance}
-                  onChange={this.handleChange}
-                  thousandSeparator={true}
-                  onValueChange={async (values) => {
-                    const { formattedValue, value } = values;
-                    await this.setState({
-                      annual_rent_insurance_number: formattedValue,
-                    });
-                    await this.setState({
-                      annual_rent_insurance: value,
-                    });
-                  }}
-                /> */}
+
                 <NumberFormat
                   className="input-class-mdb"
                   placeholder="Enter amount here"
