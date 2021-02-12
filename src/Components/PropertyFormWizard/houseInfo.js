@@ -50,7 +50,8 @@ export class GetStartedHouseInfo extends Component {
       address: localStorage.getItem("address")
         ? JSON.parse(localStorage.getItem("address"))
         : "",
-      downpayment: ""
+      downpayment: "",
+      is_update: false
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -94,6 +95,7 @@ export class GetStartedHouseInfo extends Component {
             home_owner_insurance_number: propertyDetail.home_owner_insurance,
             home_price_growth: propertyDetail.home_price_growth,
             home_price_growth_percentage: Number(propertyDetail.home_price_growth)*100,
+            is_update: true
           })
           let downpayment
           let twenty_percent_of_property_price =
