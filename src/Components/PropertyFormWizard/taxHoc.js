@@ -60,14 +60,13 @@ export class TaxHoc extends Component {
     }
   };
   saveApiData = () => {
+    console.log(this.state.tax)
     if (
       this.state.tax.detailed_tax_expenses === "Y" &&
       this.state.tax.previous_balance === "N"
     ) {
       const showDetailedTax = {
         user_obj: localStorage.getItem("id"),
-        
-        // pub936_line_13a: this.state.tax.pub936_line_13a,
         avg_loan_balance_for_grandfathered_debt: this.state.tax.avg_loan_balance_for_grandfathered_debt,
         avg_loan_balance_for_home_acquisition_debt: this.state.tax.avg_loan_balance_for_home_acquisition_debt,
         paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
@@ -177,6 +176,8 @@ export class TaxHoc extends Component {
       Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
         ? this.props.TaxesUpdate(showallData)
         : this.props.TaxesCreate(showallData);
+    }else{
+      console.log("ldkjlgkjdgldgjdlgdjg",this.state)
     }
     this.props.handleContinue();
   };
@@ -198,6 +199,7 @@ export class TaxHoc extends Component {
       tax: { ...this.state.tax1.data, ...this.state.tax2.data },
       isTaxFilled: true,
     });
+    console.log(this.state)
     this.props.getTaxFilledStataus(this.state.isTaxFilled);
   };
   toggle = () => {

@@ -29,35 +29,22 @@ export class Taxes extends Component {
       filling_status: "",
       detailed_tax_expenses: "N",
       previous_balance: "N",
-      // fedral_adjusted_gross_income: "",
-      // avg_loan_balance_for_grandfathered_debt: "",
-      // avg_loan_balance_for_home_acquisition_debt: "",
-      // paid_mortgage_on_gf_ha_debt: "",
-      // medical_and_dental_expenses: "",
-      // state_local_generalsales_taxes: "",
-      // other_taxes: "",
-      // tax_deductive_investment_interest: "",
-      // tax_deductible_charitable_donations: "",
-      // tax_deductible_casualty_and_theft_losses: "",
       showDetailedDeductionOption: false,
       showPreviousLoanBalanceButton: false,
       openModal: true,
       radioValue: false,
-
       fedral_adjusted_gross_income: JSON.parse(
         localStorage.getItem("tax_array")
       ).fedral_adjusted_gross_income
         ? JSON.parse(localStorage.getItem("tax_array"))
             .fedral_adjusted_gross_income
         : "",
-
       fedral_adjusted_gross_income_number: JSON.parse(
         localStorage.getItem("tax_array")
       ).fedral_adjusted_gross_income
         ? JSON.parse(localStorage.getItem("tax_array"))
             .fedral_adjusted_gross_income
         : "",
-
       avg_loan_balance_for_grandfathered_debt: JSON.parse(
         localStorage.getItem("tax_array")
       ).avg_loan_balance_for_grandfathered_debt
@@ -70,7 +57,6 @@ export class Taxes extends Component {
         ? JSON.parse(localStorage.getItem("tax_array"))
             .avg_loan_balance_for_grandfathered_debt
         : "",
-
       avg_loan_balance_for_home_acquisition_debt: JSON.parse(
         localStorage.getItem("tax_array")
       ).avg_loan_balance_for_home_acquisition_debt
@@ -83,13 +69,11 @@ export class Taxes extends Component {
         ? JSON.parse(localStorage.getItem("tax_array"))
             .avg_loan_balance_for_home_acquisition_debt
         : "",
-
       paid_mortgage_on_gf_ha_debt: JSON.parse(localStorage.getItem("tax_array"))
         .paid_mortgage_on_gf_ha_debt
         ? JSON.parse(localStorage.getItem("tax_array"))
             .paid_mortgage_on_gf_ha_debt
         : "",
-
       paid_mortgage_on_gf_ha_debt_number: JSON.parse(
         localStorage.getItem("tax_array")
       ).paid_mortgage_on_gf_ha_debt
@@ -175,6 +159,7 @@ export class Taxes extends Component {
 
       // pub936_line_13a:JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a ? JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a : "",
     };
+    console.log(JSON.parse(localStorage.getItem('tax_array')))
     this.Tax1YesValidators = Tax1YesValidator;
     resetValidators(this.Tax1YesValidators);
     this.handleChange = this.handleChange.bind(this);
@@ -184,7 +169,7 @@ export class Taxes extends Component {
   checkProperty() {
     console.log("ncbncbz");
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
-    if (propertyId) {
+    if (propertyId && JSON.parse(localStorage.getItem("tax_array")) && JSON.parse(localStorage.getItem("tax_array")).id) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {
           "Content-type": "Application/json",
@@ -193,29 +178,32 @@ export class Taxes extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0];
-          this.setState({
-            fedral_adjusted_gross_income:propertyDetail.taxes.fedral_adjusted_gross_income,
-            fedral_adjusted_gross_income_number:propertyDetail.taxes.fedral_adjusted_gross_income,
-            avg_loan_balance_for_grandfathered_debt:propertyDetail.taxes.avg_loan_balance_for_grandfathered_debt,  
-            avg_loan_balance_for_grandfathered_debt_number:propertyDetail.taxes.avg_loan_balance_for_grandfathered_debt,   
-            avg_loan_balance_for_home_acquisition_debt: propertyDetail.taxes.avg_loan_balance_for_home_acquisition_debt,
-            avg_loan_balance_for_home_acquisition_debt_number: propertyDetail.taxes.avg_loan_balance_for_home_acquisition_debt,
-            paid_mortgage_on_gf_ha_debt: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt,
-            paid_mortgage_on_gf_ha_debt_number: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt,
-            medical_and_dental_expenses:propertyDetail.taxes.medical_and_dental_expenses,
-            medical_and_dental_expenses_number: propertyDetail.taxes.medical_and_dental_expenses,
-            state_local_generalsales_taxes: propertyDetail.taxes.state_local_generalsales_taxes,
-            state_local_generalsales_taxes_number: propertyDetail.taxes.state_local_generalsales_taxes,
-            other_taxes: propertyDetail.taxes.other_taxes,
-            other_taxes_number: propertyDetail.taxes.other_taxes,
-            tax_deductive_investment_interest: propertyDetail.taxes.tax_deductive_investment_interest,
-            tax_deductible_charitable_donations: propertyDetail.taxes.tax_deductible_charitable_donations,
-            tax_deductible_charitable_donations_number: propertyDetail.taxes.tax_deductible_charitable_donations,
-            tax_deductible_casualty_and_theft_losses: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
-            tax_deductible_casualty_and_theft_losses_number: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
-          });
+          if(propertyDetail.taxes.id){
+            this.setState({
+              fedral_adjusted_gross_income:propertyDetail.taxes.fedral_adjusted_gross_income,
+              fedral_adjusted_gross_income_number:propertyDetail.taxes.fedral_adjusted_gross_income,
+              avg_loan_balance_for_grandfathered_debt:propertyDetail.taxes.avg_loan_balance_for_grandfathered_debt,  
+              avg_loan_balance_for_grandfathered_debt_number:propertyDetail.taxes.avg_loan_balance_for_grandfathered_debt,   
+              avg_loan_balance_for_home_acquisition_debt: propertyDetail.taxes.avg_loan_balance_for_home_acquisition_debt,
+              avg_loan_balance_for_home_acquisition_debt_number: propertyDetail.taxes.avg_loan_balance_for_home_acquisition_debt,
+              paid_mortgage_on_gf_ha_debt: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt,
+              paid_mortgage_on_gf_ha_debt_number: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt,
+              medical_and_dental_expenses:propertyDetail.taxes.medical_and_dental_expenses,
+              medical_and_dental_expenses_number: propertyDetail.taxes.medical_and_dental_expenses,
+              state_local_generalsales_taxes: propertyDetail.taxes.state_local_generalsales_taxes,
+              state_local_generalsales_taxes_number: propertyDetail.taxes.state_local_generalsales_taxes,
+              other_taxes: propertyDetail.taxes.other_taxes,
+              other_taxes_number: propertyDetail.taxes.other_taxes,
+              tax_deductive_investment_interest: propertyDetail.taxes.tax_deductive_investment_interest,
+              tax_deductible_charitable_donations: propertyDetail.taxes.tax_deductible_charitable_donations,
+              tax_deductible_charitable_donations_number: propertyDetail.taxes.tax_deductible_charitable_donations,
+              tax_deductible_casualty_and_theft_losses: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
+              tax_deductible_casualty_and_theft_losses_number: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
+            });
+            this.props.getData("tax1", this.state);
+          }
+         
           console.log(this.state)
-          this.props.getData("tax1", this.state);
           
         })
         .catch((err) => {});
