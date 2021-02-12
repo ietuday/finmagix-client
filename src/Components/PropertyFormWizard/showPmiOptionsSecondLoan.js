@@ -50,7 +50,9 @@ export class ShowPmiOptionsSecondLoan extends Component {
       rateadd2: "0",
       second_mortgage_closing_costs_number:0,
       second_mortgage_points_percentage: "0",
-      loanamountsecond2_number:"0"
+      loanamountsecond2_number:"0",
+      is_update: false,
+      id:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty();
@@ -102,6 +104,8 @@ export class ShowPmiOptionsSecondLoan extends Component {
             periodicadjcap2: propertyDetail.second_frm.periodicadjcap2,
             rateadd2: propertyDetail.second_frm.rateadd2,
             second_mortgage_points_percentage: Number(propertyDetail.second_frm.second_mortgage_points)*100,
+            is_update: true,
+            id:propertyDetail.second_frm.id
           })
           console.log(this.state);
           this.props.handleDownpaymentData(this.state);

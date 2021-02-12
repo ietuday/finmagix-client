@@ -78,9 +78,11 @@ export class ARMComponentFirstLoan extends Component {
       points_percentage: 0,
       closing_costs_percentage: 0,
       period_cap_percentage: 0,
+      is_update:false,
+      id: ""
     };
-    this.validators = ArmMortgageProgramValidator;
-    resetValidators(this.validators);
+    // this.validators = ArmMortgageProgramValidator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
   }
@@ -151,6 +153,8 @@ export class ARMComponentFirstLoan extends Component {
             points_percentage: Number(propertyDetail.first_arm.points)*100,
             closing_costs_percentage: Number(propertyDetail.first_arm.closing_costs)*100,
             period_cap_percentage: Number(propertyDetail.first_arm.period_cap)*100,
+            is_update: true,
+            id: propertyDetail.first_arm.id
           })
         
           this.props.handleArmData(this.state);
@@ -169,23 +173,23 @@ export class ARMComponentFirstLoan extends Component {
       [event.target.name]: event.target.value,
     });
 
-    if (
-      (this.state.mortgage_program_type_value === 2 &&
-        name === "loan_amount") ||
-      // name === "initial_interest_rate" ||
-      name === "first_interest_rate_adj_cap" ||
-      name === "floor_interest_rate" ||
-      name === "ceiling_interest_rate" ||
-      name === "period_cap" ||
-      name === "rate_add" ||
-      name === "points" ||
-      name == "closing_costs"
-    ) {
-      updateValidators(this.validators, event.target.name, event.target.value);
-      const validationErrorLength = this.validators[event.target.name].errors
-        .length;
-      this.props.getArmValidationError(validationErrorLength);
-    }
+    // if (
+    //   (this.state.mortgage_program_type_value === 2 &&
+    //     name === "loan_amount") ||
+    //   // name === "initial_interest_rate" ||
+    //   name === "first_interest_rate_adj_cap" ||
+    //   name === "floor_interest_rate" ||
+    //   name === "ceiling_interest_rate" ||
+    //   name === "period_cap" ||
+    //   name === "rate_add" ||
+    //   name === "points" ||
+    //   name == "closing_costs"
+    // ) {
+    //   updateValidators(this.validators, event.target.name, event.target.value);
+    //   const validationErrorLength = this.validators[event.target.name].errors
+    //     .length;
+    //   this.props.getArmValidationError(validationErrorLength);
+    // }
     const dataObject = {
       mortgage_program_type: this.state.mortgage_program_type,
       mortgage_program_type_value: 2,
@@ -224,6 +228,8 @@ export class ARMComponentFirstLoan extends Component {
       ceiling2: this.state.ceiling2,
       periodicadjcap2: this.state.periodicadjcap2,
       rateadd2: this.state.rateadd2,
+      is_update: this.state.is_update,
+      id: this.state.id
     };
     this.props.handleArmData(dataObject);
   }
@@ -261,6 +267,8 @@ export class ARMComponentFirstLoan extends Component {
       ceiling2: data && data.ceiling2 ? data.ceiling2 : "",
       periodicadjcap2: data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
       rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
+      is_update: this.state.is_update,
+      id: this.state.id
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -302,6 +310,8 @@ export class ARMComponentFirstLoan extends Component {
         ceiling2: this.state.ceiling2,
         periodicadjcap2: this.state.periodicadjcap2,
         rateadd2: this.state.rateadd2,
+        is_update: this.state.is_update,
+        id: this.state.id
       };
       this.props.handleArmData(dataWithPmi);
     } else {
@@ -348,6 +358,8 @@ export class ARMComponentFirstLoan extends Component {
         ceiling2: this.state.ceiling2,
         periodicadjcap2: this.state.periodicadjcap2,
         rateadd2: this.state.rateadd2,
+        is_update: this.state.is_update,
+        id: this.state.id
       };
       this.props.handleArmData(dataWithSecondMortgage);
     }
@@ -430,7 +442,7 @@ export class ARMComponentFirstLoan extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "loan_amount")}
+        {/* {displayValidationErrors(this.validators, "loan_amount")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Select Loan Term</span>
@@ -591,7 +603,7 @@ export class ARMComponentFirstLoan extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "floor_interest_rate")}
+        {/* {displayValidationErrors(this.validators, "floor_interest_rate")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Ceiling interest rate</span>

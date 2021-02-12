@@ -52,6 +52,8 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
       periodicadjcap2: "0",
       rateadd2: "0",
       second_mortgage_points_percentage: "0",
+      is_update: false,
+      id:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
@@ -103,6 +105,8 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
             periodicadjcap2: propertyDetail.first_arm.periodicadjcap2,
             rateadd2: propertyDetail.first_arm.rateadd2,
             second_mortgage_points_percentage: parseInt(Number(propertyDetail.first_arm.second_mortgage_points)*100),
+            is_update:true,
+            id: propertyDetail.first_arm.id
           })
           console.log(this.state);
           this.props.handleDownpaymentData(this.state);

@@ -79,9 +79,11 @@ export class FirstLoanScenario extends Component {
       rateadd2: "0",
       closing_costs_percentage: "0",
       points_percentage: "0",
+      is_update:false,
+      id: ""
     };
-    this.validators = FrmMortgageProgramValidator;
-    resetValidators(this.validators);
+    // this.validators = FrmMortgageProgramValidator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
   }
@@ -153,7 +155,12 @@ export class FirstLoanScenario extends Component {
             rateadd2: "0",
             closing_costs_percentage: Number(propertyDetail.first_frm.closing_costs)*100,
             points_percentage: Number(propertyDetail.first_frm.points)*100,
+            is_update: true,
+            id:propertyDetail.first_frm.id
           })
+          this.props.handleFirstloanMortgageInfo(this.state, null);
+          
+          
         })
         .catch((err) => {
          
@@ -216,6 +223,8 @@ export class FirstLoanScenario extends Component {
       ceiling2: this.state.ceiling2,
       periodicadjcap2: this.state.periodicadjcap2,
       rateadd2: this.state.rateadd2,
+      is_update: this.state.is_update,
+      id: this.state.id
     };
     this.props.handleFirstloanMortgageInfo(dataObject, null);
   }
@@ -252,6 +261,8 @@ export class FirstLoanScenario extends Component {
       ceiling2: data && data.ceiling2 ? data.ceiling2 : "",
       periodicadjcap2: data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
       rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
+      is_update: this.state.is_update,
+      id: this.state.id
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -293,6 +304,8 @@ export class FirstLoanScenario extends Component {
         periodicadjcap2:
           data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
         rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
+        is_update: this.state.is_update,
+        id: this.state.id
       };
       this.props.handleFirstloanMortgageInfo(dataWithPmi, null);
     } else {
@@ -339,6 +352,8 @@ export class FirstLoanScenario extends Component {
         periodicadjcap2:
           data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
         rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
+        is_update: this.state.is_update,
+        id: this.state.id
       };
       this.props.handleFirstloanMortgageInfo(dataWithSecondMortgage, null);
     }
@@ -476,7 +491,7 @@ export class FirstLoanScenario extends Component {
                 />
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "loan_amount")}
+            {/* {displayValidationErrors(this.validators, "loan_amount")} */}
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Select loan term </span>
@@ -580,7 +595,7 @@ export class FirstLoanScenario extends Component {
                 />
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "points")}
+            {/* {displayValidationErrors(this.validators, "points")} */}
             <MDBRow className="margin20">
               <MDBCol md="12">
                 {/* <span className="get-started-label">Closing costs</span> */}

@@ -60,9 +60,11 @@ export class SecondLoanScenario extends Component {
       armValidationErrors: 0,
       closing_costs_percentage: 0,
       points_percentage: 0,
+      is_update:false,
+      id: ""
     };
-    this.validators = FrmMortgageProgramValidator;
-    resetValidators(this.validators);
+    // this.validators = FrmMortgageProgramValidator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
   }
@@ -134,6 +136,8 @@ export class SecondLoanScenario extends Component {
             rateadd2: "0",
             closing_costs_percentage: Number(propertyDetail.second_frm.closing_costs)*100,
             points_percentage: Number(propertyDetail.second_frm.points)*100,
+            is_update: true,
+            id: propertyDetail.second_frm.id
           })
           this.props.handleSecondloanMortgageInfo(this.state, null);
         })
@@ -155,18 +159,18 @@ export class SecondLoanScenario extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    if (
-      (this.state.mortgage_program_type_value === 1 &&
-        name === "loan_amount") ||
-      name === "interest" ||
-      name === "points" ||
-      name == "closing_costs"
-    ) {
-      updateValidators(this.validators, event.target.name, event.target.value);
-      const validationErrorLength = this.validators[event.target.name].errors
-        .length;
-      this.props.getValidationError(validationErrorLength);
-    }
+    // if (
+    //   (this.state.mortgage_program_type_value === 1 &&
+    //     name === "loan_amount") ||
+    //   name === "interest" ||
+    //   name === "points" ||
+    //   name == "closing_costs"
+    // ) {
+    //   updateValidators(this.validators, event.target.name, event.target.value);
+    //   const validationErrorLength = this.validators[event.target.name].errors
+    //     .length;
+    //   this.props.getValidationError(validationErrorLength);
+    // }
     const dataObject = {
       mortage_program_type: this.state.mortage_program_type,
       mortgage_program_type_value: 1,
@@ -178,6 +182,8 @@ export class SecondLoanScenario extends Component {
       interest_only_option: this.state.interest_only_option,
       interest_only_period: this.state.interest_only_period,
       property_obj: localStorage.getItem("property_id"),
+      is_update: this.state.is_update,
+      id: this.state.id
     };
     this.props.handleSecondloanMortgageInfo(dataObject, null);
   }
@@ -189,6 +195,8 @@ export class SecondLoanScenario extends Component {
       second_mortgage_interest: data.second_mortgage_interest,
       second_mortgage_points: data.second_mortgage_points,
       second_mortgage_closing_costs: data.second_mortgage_closing_costs,
+      is_update: this.state.is_update,
+      id: this.state.id
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -203,6 +211,8 @@ export class SecondLoanScenario extends Component {
         interest_only_period: this.state.interest_only_period,
         pmi: this.state.pmi,
         property_obj: localStorage.getItem("property_id"),
+        is_update: this.state.is_update,
+        id: this.state.id
       };
       this.props.handleSecondloanMortgageInfo(dataWithPmi, null);
     } else {
@@ -222,6 +232,8 @@ export class SecondLoanScenario extends Component {
         second_mortgage_points: this.state.second_mortgage_points,
         second_mortgage_closing_costs: this.state.second_mortgage_closing_costs,
         property_obj: localStorage.getItem("property_id"),
+        is_update: this.state.is_update,
+        id: this.state.id
       };
       this.props.handleSecondloanMortgageInfo(dataWithSecondMortgage, null);
     }
@@ -359,7 +371,7 @@ export class SecondLoanScenario extends Component {
                 />
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "loan_amount")}
+            {/* {displayValidationErrors(this.validators, "loan_amount")} */}
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Select loan term</span>
@@ -419,7 +431,7 @@ export class SecondLoanScenario extends Component {
                 />
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "interest")}
+            {/* {displayValidationErrors(this.validators, "interest")} */}
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Points</span>
@@ -460,7 +472,7 @@ export class SecondLoanScenario extends Component {
                 />
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "points")}
+            {/* {displayValidationErrors(this.validators, "points")} */}
             <MDBRow className="margin20">
               <MDBCol md="12">
                 {/* <span className="get-started-label">Closing costs</span> */}
