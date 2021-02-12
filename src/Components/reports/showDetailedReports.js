@@ -47,13 +47,13 @@ export class ShowDetailedReports extends Component {
     });
   };
   goToCheatSheet = () => {
-    this.clearPropertyId()
+    // this.clearPropertyId()
     this.setState({
       cheatSheet: !this.state.cheatSheet,
     });
   };
   goToNerdReport = () => {
-    this.clearPropertyId()
+    // this.clearPropertyId()
     this.setState({
       nerdReport: !this.state.nerdReport,
     });
@@ -72,7 +72,7 @@ export class ShowDetailedReports extends Component {
     await this.sleep(milliseconds);
   };
   componentWillMount() {
-
+    this.props.GetSingleProperty(JSON.parse(localStorage.getItem("property_id")))
   }
   componentDidMount() {
     this.wait(3000);
