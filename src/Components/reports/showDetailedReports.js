@@ -34,23 +34,32 @@ export class ShowDetailedReports extends Component {
       calculateResponse: false,
     };
   }
+
+  clearPropertyId(){
+    if(localStorage.getItem('property_id')){
+      localStorage.removeItem('property_id')
+    }
+  }
   goToHomeScreen = () => {
+    this.clearPropertyId()
     this.setState({
       homeScreen: !this.state.homeScreen,
     });
   };
   goToCheatSheet = () => {
+    this.clearPropertyId()
     this.setState({
       cheatSheet: !this.state.cheatSheet,
     });
   };
   goToNerdReport = () => {
+    this.clearPropertyId()
     this.setState({
       nerdReport: !this.state.nerdReport,
     });
   };
   sleep = (milliseconds) => {
-    let me = this;
+    let me = this; 
     return new Promise(function (resolve, reject) {
       setTimeout(() => {
         me.setState({
@@ -63,9 +72,7 @@ export class ShowDetailedReports extends Component {
     await this.sleep(milliseconds);
   };
   componentWillMount() {
-    const data = this.props.GetSingleProperty(
-      localStorage.getItem("property_id")
-    );
+
   }
   componentDidMount() {
     this.wait(3000);
