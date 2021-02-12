@@ -193,8 +193,7 @@ export class StepperComponent extends Component {
       });
       NotificationManager.error("Please Validate Fields", "Error");
     }
-    // localStorage.setItem("personal_finance_array", JSON.stringify(this.state));
-    // console.log(JSON.parse(localStorage.getItem("personal_finance_array")))
+
 
     {
       Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
@@ -404,26 +403,15 @@ export class StepperComponent extends Component {
         this.state.houseInofValidationErrors,
         isFormValid("house_info")
       );
-      // this.state.houseInofValidationErrors === 0 && isFormValid("house_info")
-      //   ? this.setState({
-      //       activeStep: newActiveStep,
-      //     })
-      //   : this.setState({
-      //       activeStep: this.state.activeStep,
-      //     });
-      // this.state.houseInofValidationErrors === 0 && isFormValid("house_info")
-      //   ? this.setState({
-      //       activeStep: newActiveStep,
-      //     })
-      //   : NotificationManager.error("Please Validate Fields", "Error");
+
       this.setState({
         activeStep: newActiveStep,
       });
       this.state.propertyInfo["home_price_growth"] = String(
         Number(this.state.propertyInfo["home_price_growth"]) / 100
       );
-      console.log(this.state.propertyInfo);
-      debugger
+      
+      
       if (this.state.propertyInfo.is_update) {
         this.state.propertyInfo['id'] = JSON.parse(localStorage.getItem('property_id'))
         PropertyInfoUpdate(
@@ -431,7 +419,7 @@ export class StepperComponent extends Component {
           this.onSuccessHouseInfo,
           this.onFailureHouseInfo
         );
-        debugger
+        
       } else {
         PropertyInfoCreate(
           this.state.propertyInfo,
