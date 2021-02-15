@@ -33,7 +33,7 @@ export class Tax1 extends Component {
       tax_deductible_casualty_and_theft_losses: props.taxDataResponse.detailed_tax_expenses === "Y" ?
       props.taxDataResponse.tax_deductible_casualty_and_theft_losses : "",
       showDetailedDeductionOption: props.taxDataResponse.detailed_tax_expenses === "Y" ? true : false,
-      pub936_line_13a: props.taxDataResponse.pub936_line_13a, 
+      // pub936_line_13a: props.taxDataResponse.pub936_line_13a, 
     };
     this.handleChange = this.handleChange.bind(this);
   }

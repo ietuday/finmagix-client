@@ -16,7 +16,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import quss from "../../assets/images/que.png";
 
 
-
+import NumberFormat from "react-number-format";
 
 export class Tax2 extends Component {
   constructor(props) {
@@ -75,12 +75,20 @@ debt isn't limited. All of the interest you paid on grandfathered debt is fully 
  home acquisition debt. Source: IRS Publication 936 </span>
 </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="avg_loan_balance_for_grandfathered_debt"
               value={this.state.avg_loan_balance_for_grandfathered_debt}
               onChange={this.handleChange}
+            /> */}
+               <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="avg_loan_balance_for_grandfathered_debt"
+              value={this.state.avg_loan_balance_for_grandfathered_debt}
+              onChange={this.handleChange}
+              thousandSeparator={true}
             />
           </MDBCol>
         </MDBRow>

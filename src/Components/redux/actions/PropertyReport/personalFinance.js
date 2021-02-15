@@ -5,6 +5,9 @@ import { config } from "../../../config/default";
 const { baseURL } = config;
 const token = window.localStorage.getItem('accessToken')
 export const personal_finance_create = (data) => {
+  if(data && data.marginal_tax_rate){
+    data.marginal_tax_rate = String(Number(data.marginal_tax_rate/100))
+  }
   return (dispatch) => {
     Axios.post(`${baseURL}/personal_finances/list_or_create`, data, {
       headers: {
@@ -118,6 +121,7 @@ export const personal_finance_update = (data) => {
           type: PERSONAL_FINANCE_UPDATE,
           payload: updatePersonalFinanceData.data.data,
         });
+
         savePersonalFinanace(updatePersonalFinanceData.data);
       })
       .catch((err) => {

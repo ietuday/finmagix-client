@@ -9,7 +9,8 @@ const Tax1Validator = {
           message: "Medical and dental expenses cannot be empty",
         },
         {
-          test: /^[0-9,]*$/,
+          // test: /^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],
@@ -26,7 +27,8 @@ const Tax1Validator = {
           message: "State loccal general sales taxes cannot be empty",
         },
         {
-          test:/^[0-9,]*$/,
+          // test:/^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],
@@ -43,7 +45,8 @@ const Tax1Validator = {
           message: "Other taxes cannot be empty",
         },
         {
-          test: /^[0-9,]*$/,
+          // test: /^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],
@@ -60,7 +63,8 @@ const Tax1Validator = {
           message: "Tax deductive investment interest cannot be empty",
         },
         {
-          test: /^[0-9,]*$/,
+          // test: /^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],
@@ -77,7 +81,8 @@ const Tax1Validator = {
           message: "Tax deductible charitable donations cannot be empty",
         },
         {
-          test: /^[0-9,]*$/,
+          // test: /^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],
@@ -94,7 +99,8 @@ const Tax1Validator = {
           message: "Tax deductible casualty and theft losses cannot be empty",
         },
         {
-          test: /^[0-9,]*$/,
+          // test: /^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],

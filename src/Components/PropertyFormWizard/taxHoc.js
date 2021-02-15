@@ -50,31 +50,22 @@ export class TaxHoc extends Component {
   };
   goToNextPage = () => {
     if (this.state.tax.previous_balance === "Y") {
-      if (this.state.tax2ValidationError === 0 && isFormValid("tax2")) {
-        this.saveApiData();
-      } else {
-        NotificationManager.error("Please Validate Fields", "Error");
-      }
-    } else if (this.state.tax.previous_balance === "N") {
+      this.saveApiData();
+    } else {
       this.saveApiData();
     }
   };
   saveApiData = () => {
-    // if(this.state.tax.previous_balance === "N"){
-    //     if(this.state.tax1YesValidationError === 0 && isFormValid("tax1Yes")){
-
-    //     }
-    // }else{
-
-    // }
+    console.log(this.state.tax)
     if (
       this.state.tax.detailed_tax_expenses === "Y" &&
       this.state.tax.previous_balance === "N"
     ) {
-      const showDetailedTax = {
+      const showallData = {
         user_obj: localStorage.getItem("id"),
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
-        fedral_adjusted_gross_income: this.state.tax.fedral_adjusted_gross_income,
+        fedral_adjusted_gross_income: this.state.tax
+        .fedral_adjusted_gross_income,
         previous_balance: this.state.tax.previous_balance,
         medical_and_dental_expenses: this.state.tax.medical_and_dental_expenses,
         state_local_generalsales_taxes: this.state.tax
@@ -86,46 +77,6 @@ export class TaxHoc extends Component {
           .tax_deductible_charitable_donations,
         tax_deductible_casualty_and_theft_losses: this.state.tax
           .tax_deductible_casualty_and_theft_losses,
-        property_obj: localStorage.getItem("property_id"),
-        id:
-          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
-            .length !== 0
-            ? JSON.parse(localStorage.getItem("tax_array")).id
-            : null,
-      };
-      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
-        ? this.props.TaxesUpdate(showDetailedTax)
-        : this.props.TaxesCreate(showDetailedTax);
-    } else if (
-      this.state.tax.detailed_tax_expenses === "N" &&
-      this.state.tax.previous_balance === "N"
-    ) {
-      const hidePreviousBal = {
-        user_obj: localStorage.getItem("id"),
-        fedral_adjusted_gross_income: this.state.tax
-          .fedral_adjusted_gross_income,
-        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
-        previous_balance: this.state.tax.previous_balance,
-        property_obj: localStorage.getItem("property_id"),
-        id:
-          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
-            .length !== 0
-            ? JSON.parse(localStorage.getItem("tax_array")).id
-            : null,
-      };
-      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
-        ? this.props.TaxesUpdate(hidePreviousBal)
-        : this.props.TaxesCreate(hidePreviousBal);
-    } else if (
-      this.state.tax.detailed_tax_expenses === "N" &&
-      this.state.tax.previous_balance === "Y"
-    ) {
-      const showPreviousBal = {
-        user_obj: localStorage.getItem("id"),
-        fedral_adjusted_gross_income: this.state.tax
-          .fedral_adjusted_gross_income,
-        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
-        previous_balance: this.state.tax.previous_balance,
         avg_loan_balance_for_grandfathered_debt: this.state.tax
           .avg_loan_balance_for_grandfathered_debt,
         avg_loan_balance_for_home_acquisition_debt: this.state.tax
@@ -139,10 +90,45 @@ export class TaxHoc extends Component {
             : null,
       };
       Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
-        ? this.props.TaxesUpdate(showPreviousBal)
-        : this.props.TaxesCreate(showPreviousBal);
+        ? this.props.TaxesUpdate(showallData)
+        : this.props.TaxesCreate(showallData);
     } else if (
-      this.state.tax.detailed_tax_expenses === "Y" &&
+      this.state.tax.detailed_tax_expenses === "N" &&
+      this.state.tax.previous_balance === "N"
+    ) {
+      const showallData = {
+        user_obj: localStorage.getItem("id"),
+        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
+        fedral_adjusted_gross_income: this.state.tax
+        .fedral_adjusted_gross_income,
+        previous_balance: this.state.tax.previous_balance,
+        medical_and_dental_expenses: this.state.tax.medical_and_dental_expenses,
+        state_local_generalsales_taxes: this.state.tax
+          .state_local_generalsales_taxes,
+        other_taxes: this.state.tax.other_taxes,
+        tax_deductive_investment_interest: this.state.tax
+          .tax_deductive_investment_interest,
+        tax_deductible_charitable_donations: this.state.tax
+          .tax_deductible_charitable_donations,
+        tax_deductible_casualty_and_theft_losses: this.state.tax
+          .tax_deductible_casualty_and_theft_losses,
+        avg_loan_balance_for_grandfathered_debt: this.state.tax
+          .avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state.tax
+          .avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
+        property_obj: localStorage.getItem("property_id"),
+        id:
+          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
+            .length !== 0
+            ? JSON.parse(localStorage.getItem("tax_array")).id
+            : null,
+      };
+      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
+        ? this.props.TaxesUpdate(showallData)
+        : this.props.TaxesCreate(showallData);
+    } else if (
+      this.state.tax.detailed_tax_expenses === "N" &&
       this.state.tax.previous_balance === "Y"
     ) {
       const showallData = {
@@ -176,6 +162,75 @@ export class TaxHoc extends Component {
       Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
         ? this.props.TaxesUpdate(showallData)
         : this.props.TaxesCreate(showallData);
+    } else if (
+      this.state.tax.detailed_tax_expenses === "Y" &&
+      this.state.tax.previous_balance === "Y"
+    ) {
+
+      const showallData = {
+        user_obj: localStorage.getItem("id"),
+        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
+        fedral_adjusted_gross_income: this.state.tax
+        .fedral_adjusted_gross_income,
+        previous_balance: this.state.tax.previous_balance,
+        medical_and_dental_expenses: this.state.tax.medical_and_dental_expenses,
+        state_local_generalsales_taxes: this.state.tax
+          .state_local_generalsales_taxes,
+        other_taxes: this.state.tax.other_taxes,
+        tax_deductive_investment_interest: this.state.tax
+          .tax_deductive_investment_interest,
+        tax_deductible_charitable_donations: this.state.tax
+          .tax_deductible_charitable_donations,
+        tax_deductible_casualty_and_theft_losses: this.state.tax
+          .tax_deductible_casualty_and_theft_losses,
+        avg_loan_balance_for_grandfathered_debt: this.state.tax
+          .avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state.tax
+          .avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
+        property_obj: localStorage.getItem("property_id"),
+        id:
+          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
+            .length !== 0
+            ? JSON.parse(localStorage.getItem("tax_array")).id
+            : null,
+      };
+      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
+        ? this.props.TaxesUpdate(showallData)
+        : this.props.TaxesCreate(showallData);
+    }else{
+      const showallData = {
+        user_obj: localStorage.getItem("id"),
+        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
+        fedral_adjusted_gross_income: this.state.tax
+        .fedral_adjusted_gross_income,
+        previous_balance: this.state.tax.previous_balance,
+        medical_and_dental_expenses: this.state.tax.medical_and_dental_expenses,
+        state_local_generalsales_taxes: this.state.tax
+          .state_local_generalsales_taxes,
+        other_taxes: this.state.tax.other_taxes,
+        tax_deductive_investment_interest: this.state.tax
+          .tax_deductive_investment_interest,
+        tax_deductible_charitable_donations: this.state.tax
+          .tax_deductible_charitable_donations,
+        tax_deductible_casualty_and_theft_losses: this.state.tax
+          .tax_deductible_casualty_and_theft_losses,
+        avg_loan_balance_for_grandfathered_debt: this.state.tax
+          .avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state.tax
+          .avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
+        property_obj: localStorage.getItem("property_id"),
+        id:
+          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
+            .length !== 0
+            ? JSON.parse(localStorage.getItem("tax_array")).id
+            : null,
+      };
+      console.log(showallData)
+      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
+      ? this.props.TaxesUpdate(showallData)
+      : this.props.TaxesCreate(showallData);
     }
     this.props.handleContinue();
   };
@@ -197,6 +252,8 @@ export class TaxHoc extends Component {
       tax: { ...this.state.tax1.data, ...this.state.tax2.data },
       isTaxFilled: true,
     });
+    console.log("getData",this.state)
+    
     this.props.getTaxFilledStataus(this.state.isTaxFilled);
   };
   toggle = () => {

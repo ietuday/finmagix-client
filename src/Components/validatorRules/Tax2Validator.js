@@ -3,7 +3,8 @@ const Tax2Validator = {
     avg_loan_balance_for_grandfathered_debt: {
       rules: [
         {
-          test: /^[0-9,]*$/,
+          // test: /^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
         {
@@ -26,7 +27,8 @@ const Tax2Validator = {
           message: "Average loan balance for home acquisition debt cannot be empty",
         },
         {
-          test:/^[0-9,]*$/,
+          // test:/^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],
@@ -43,7 +45,8 @@ const Tax2Validator = {
           message: "Paid mortgage of tax cannot be empty",
         },
         {
-          test: /^[0-9]\d*(\.\d+)*$/,
+          // test: /^[0-9]\d*(\.\d+)*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],

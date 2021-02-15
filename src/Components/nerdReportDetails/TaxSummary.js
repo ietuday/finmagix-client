@@ -27,8 +27,9 @@ function TaxSummary(props) {
     singlePropertyResponse = props.location.state.singlePropertyResponse;
     CalculatorResponse = props.location.state.GetSinglePropertyResponse;
   } else {
-    CalculatorResponse = localStorage.getItem('calculatorResponse');
-    singlePropertyResponse = localStorage.getItem('GetSinglePropertyResponse');
+    CalculatorResponse = JSON.parse(localStorage.getItem('calculatorResponse'));
+    singlePropertyResponse = JSON.parse(localStorage.getItem('GetSinglePropertyResponse'));
+    console.log("CalculatorResponse" , CalculatorResponse);
   }
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -54,9 +55,17 @@ function TaxSummary(props) {
           </AppBar>
           <TabPanel value={value} index={0}>
 <div>
-    <p>Tax benefit of buying a home for Option #1 for first year is 2020</p>
+    <p>Tax benefit of buying a home for Option #1 for first year is {CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1['Taxbenfithomeoption1']
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1['Taxbenfithomeoption1']
+                          : 0}</p>
     <p>    As a result of this home purchase, your margin tax rate is projected to
-          improve by marginal-tax-rate-improve</p>
+          improve by {CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1['marginal-tax-rate-improve']
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1['marginal-tax-rate-improve']
+                          : 0} </p>
           <p>
           To determine the tax benefit of buying a home, we calculate standard deductions and itemized deductions.
            Itemized deductions include amounts related to housing that can be deducted such as property tax and mortgage interest. 
@@ -67,9 +76,17 @@ function TaxSummary(props) {
           </TabPanel>
           <TabPanel value={value} index={1}>
           <div>
-    <p>Tax benefit of buying a home for Option #1 for first year is 2020</p>
+    <p>Tax benefit of buying a home for Option #1 for first year is {CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2['Taxbenfithomeoption2']
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2['Taxbenfithomeoption2']
+                          : 0}</p>
     <p>    As a result of this home purchase, your margin tax rate is projected to
-          improve by marginal-tax-rate-improve</p>
+          improve by {CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2['marginal-tax-rate-improve']
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2['marginal-tax-rate-improve']
+                          : 0}  </p>
           <p>
           To determine the tax benefit of buying a home, we calculate standard deductions and itemized deductions.
            Itemized deductions include amounts related to housing that can be deducted such as property tax and mortgage interest. 

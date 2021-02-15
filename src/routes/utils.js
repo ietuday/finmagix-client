@@ -12,6 +12,7 @@ export const login = (token,id,data) => {
   localStorage.setItem(TOKEN_KEY, token);
   localStorage.setItem(ID, id);
   localStorage.setItem(LAST_LOGIN,data.last_login);
+  
   localStorage.setItem(PERSONAL_FINANCE, JSON.stringify(data.personal_finances));
   localStorage.setItem(TAX_ARRAY,JSON.stringify(data.taxes))
 };

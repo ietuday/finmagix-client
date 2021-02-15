@@ -158,84 +158,6 @@ export class PropertyPaymentInfo2 extends Component {
     return (
       <Fragment>
         <MDBRow className="margin20">
-          <MDBCol md="12" className="text-center">
-            <span>Select your FICO score range</span>
-            <br />
-            <RangeSlider />
-          </MDBCol>
-        </MDBRow>
-        <MDBRow className="c">
-          <MDBCol md="12">
-            <span className="get-started-label">Annual gross income </span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="annualGrossIncome"
-              value={this.state.annualGrossIncome}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">
-              Your monthly debt payments
-            </span>
-
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="monthDebtPayment"
-              value={this.state.monthDebtPayment}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">
-              Annual Home Owner's insurance
-            </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Note that we have to build a check here that the
-             interest only period cannot be equal to the loan term or greater 
-             than the loan term. </span>
-            </div>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="annualHomeOwnerInsurance"
-              value={this.state.annualHomeOwnerInsurance}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">
-              Monthly non-housing expenses
-            </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">
-            These are all of the non-housing expenses except Taxes such as Food,
-             Utilities, Entertainment etc. This input is used to calculate your 
-             'post home purchase' spend profile
-            </span>
-            </div>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="monthNonHousingExpenses"
-              value={this.state.monthNonHousingExpenses}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-        <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
               How long do you intend to stay in this house?
@@ -257,14 +179,14 @@ export class PropertyPaymentInfo2 extends Component {
             </Select>
           </MDBCol>
         </MDBRow>
-        <MDBRow className="margin20">
+        {/* <MDBRow className="margin20">
           <MDBCol md="8"></MDBCol>
           <MDBCol md="4">
             <span className="link" onClick={this.toggle}>
               Enter Detail Expenses {`>`}
             </span>
           </MDBCol>
-        </MDBRow>
+        </MDBRow> */}
 
         {this.state.showModal ? (
           <DetailedExpenseModal

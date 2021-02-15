@@ -5,7 +5,8 @@ import Button from "@material-ui/core/Button";
 import RangeSlider from "../../common/RangeSilder";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import NumberFormat from 'react-number-format';
+
+import NumberFormat from "react-number-format";
 import "react-rangeslider/lib/index.css";
 import PersonaLFinanceValidator from "../validatorRules/PersonalFinanceValidatorRules";
 import { updateValidators } from "../../common/ValidatorFunction";
@@ -27,6 +28,15 @@ export class PersonalFinance extends Component {
         ).length !== 0
           ? JSON.parse(localStorage.getItem("personal_finance_array"))
               .marginal_tax_rate
+          : "",
+      marginal_tax_rate_percentage:
+        Object.entries(
+          JSON.parse(localStorage.getItem("personal_finance_array"))
+        ).length !== 0
+          ? 
+          parseInt(String(Number(JSON.parse(localStorage.getItem("personal_finance_array"))
+          .marginal_tax_rate)*100))
+           + "%"
           : "",
       annual_gross_income:
         Object.entries(
@@ -56,12 +66,13 @@ export class PersonalFinance extends Component {
           ? JSON.parse(localStorage.getItem("personal_finance_array"))
               .filling_status
           : "",
-      federal_income:  Object.entries(
-        JSON.parse(localStorage.getItem("personal_finance_array"))
-      ).length !== 0
-        ? JSON.parse(localStorage.getItem("personal_finance_array"))
-            .federal_income
-        : "",
+      federal_income:
+        Object.entries(
+          JSON.parse(localStorage.getItem("personal_finance_array"))
+        ).length !== 0
+          ? JSON.parse(localStorage.getItem("personal_finance_array"))
+              .federal_income
+          : "",
       // total_non_housing: Object.entries(
       //   JSON.parse(localStorage.getItem("personal_finance_array"))
       // ).length !== 0
@@ -75,19 +86,8 @@ export class PersonalFinance extends Component {
     this.validators = PersonaLFinanceValidator;
     resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
-    // this.updateState()
+ 
   }
-
-  // updateState = () => {
-  //   console.log("updateState",this.state.marginal_tax_rate);
-  //   if(this.state.marginal_tax_rate){
-  //     this.setState({
-  //       marginal_tax_rate: String(Number(this.state.marginal_tax_rate)/100)
-  //     });
-  //   }
-  //   console.log("updateState",this.state);
-  // }
-
   handleRangeData = (data) => {
     this.setState({
       fico_score_range: data,
@@ -96,17 +96,10 @@ export class PersonalFinance extends Component {
   };
   goToNextPage = () => {
     localStorage.setItem("personal_finance_array", JSON.stringify(this.state));
-    
+
     this.props.handleContinue();
   };
   componentDidMount() {
-    // console.log("updateState",this.state.marginal_tax_rate);
-    // if(this.state.marginal_tax_rate){
-    //   this.setState({
-    //     marginal_tax_rate: String(Number(this.state.marginal_tax_rate)/100)
-    //   });
-    // }
-    // console.log("updateState",this.state);
   }
   async handleChange(event) {
     const { name } = event.target;
@@ -118,8 +111,8 @@ export class PersonalFinance extends Component {
       name === "marginal_tax_rate" ||
       name === "annual_gross_income" ||
       name === "monthly_debt_payments" ||
-      name == "monthly_non_housing_expenses"||
-      name == "federal_income" 
+      name == "monthly_non_housing_expenses" ||
+      name == "federal_income"
       // ||
       // name == "total_non_housing"
     ) {
@@ -133,7 +126,7 @@ export class PersonalFinance extends Component {
   }
 
   calculateNonHousingExpense = async (data) => {
-     this.setState((prevState) => {
+    this.setState((prevState) => {
       let detail_non_housing_expenses = Object.assign(
         {},
         prevState.detail_non_housing_expenses
@@ -141,8 +134,12 @@ export class PersonalFinance extends Component {
       detail_non_housing_expenses = data;
       return { detail_non_housing_expenses };
     });
-    ( JSON.parse(localStorage.getItem("personal_finance_array")).detail_non_housing_expenses && Object.entries(
-      JSON.parse(localStorage.getItem("personal_finance_array")).detail_non_housing_expenses).length !== 0)
+    JSON.parse(localStorage.getItem("personal_finance_array"))
+      .detail_non_housing_expenses &&
+    Object.entries(
+      JSON.parse(localStorage.getItem("personal_finance_array"))
+        .detail_non_housing_expenses
+    ).length !== 0
       ? this.props.updateDetailExpenses(this.state.detail_non_housing_expenses)
       : this.props.saveDetailExpenses(this.state.detail_non_housing_expenses);
   };
@@ -158,7 +155,7 @@ export class PersonalFinance extends Component {
     return num_parts.join(".");
   };
   render() {
-    return ( 
+    return (
       <Fragment>
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -222,18 +219,39 @@ export class PersonalFinance extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Monthly debt payments</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Monthly debt payments are all your NON-HOUSING 
-            debt payments such as credit cards, car loans etc. </span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Monthly debt payments are all your NON-HOUSING debt payments
+                such as credit cards, car loans etc.{" "}
+              </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               type="number"
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="monthly_debt_payments"
               value={this.state.monthly_debt_payments}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="monthly_debt_payments"
+              value={this.state.monthly_debt_payments}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  monthly_debt_payments_number: formattedValue,
+                });
+                await this.setState({
+                  monthly_debt_payments: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -243,74 +261,131 @@ export class PersonalFinance extends Component {
             <span className="get-started-label">
               Monthly non-housing expenses
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">
-            These are all of the non-housing expenses except Taxes such as Food,
-             Utilities, Entertainment etc. This input is used to calculate your 
-             'post home purchase' spend profile
-            </span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                These are all of the non-housing expenses except Taxes such as
+                Food, Utilities, Entertainment etc. This input is used to
+                calculate your 'post home purchase' spend profile
+              </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               type="number"
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="monthly_non_housing_expenses"
               value={this.state.monthly_non_housing_expenses}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="monthly_non_housing_expenses"
+              value={this.state.monthly_non_housing_expenses}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  monthly_non_housing_expenses_number: formattedValue,
+                });
+                await this.setState({
+                  monthly_non_housing_expenses: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Marginal tax rate</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Note that we have to build a check here that the
-             interest only period cannot be equal to the loan term or greater 
-             than the loan term. </span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                Note that we have to build a check here that the interest only
+                period cannot be equal to the loan term or greater than the loan
+                term.{" "}
+              </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               type="number"
               className="input-class-mdb"
               placeholder="Enter amount here %"
-              name="marginal_tax_rate"
-              value={this.state.marginal_tax_rate}
+              name="marginal_tax_rate_percentage"
+              value={this.state.marginal_tax_rate_percentage}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here %"
+              name="marginal_tax_rate_percentage"
+              value={this.state.marginal_tax_rate_percentage}
+              onChange={this.handleChange}
+              // thousandSeparator={true}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  marginal_tax_rate: value,
+                });
+                await this.setState({
+                  marginal_tax_rate_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
 
         <MDBRow className="margin20">
-              <MDBCol md="12">
-                <span className="get-started-label">
-                Federal Income
-                </span>
-                <br />
-                <Input
-                  className="input-class-mdb"
-                  placeholder="Enter amount here"
-                  name="federal_income"
-                  value={this.state.federal_income}
-                  onChange={this.handleChange}
-                />
-              </MDBCol>
-              {displayValidationErrors(this.validators, "federal_income")}
-            </MDBRow>
+          <MDBCol md="12">
+            <span className="get-started-label">Federal Income</span>
+            <br />
+            {/* <Input
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="federal_income"
+              value={this.state.federal_income}
+              onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="federal_income"
+              value={this.state.federal_income}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  federal_income_number: formattedValue,
+                });
+                await this.setState({
+                  federal_income: value,
+                });
+              }}
+            />
+          </MDBCol>
+          {displayValidationErrors(this.validators, "federal_income")}
+        </MDBRow>
 
         {this.props.saveButtonforPersonalFinance &&
         Object.entries(
-          JSON.parse(localStorage.getItem("personal_finance_array")))
-        .length === 0 ? (
+          JSON.parse(localStorage.getItem("personal_finance_array"))
+        ).length === 0 ? (
           <div>
-            <MDBRow className="margin20">
+            {/* <MDBRow className="margin20">
               <MDBCol md="8"></MDBCol>
               <MDBCol md="4">
                 <span className="link" onClick={this.toggle}>
                   Enter Detailed Expenses {`>`}
                 </span>
               </MDBCol>
-            </MDBRow>
+            </MDBRow> */}
             {this.state.showModal ? (
               <DetailedExpenseModal
                 toggle={this.toggle}
@@ -339,11 +414,12 @@ export class PersonalFinance extends Component {
           </div>
         ) : null}
 
-        {(JSON.parse(localStorage.getItem("personal_finance_array"))
-            .detail_non_housing_expenses && Object.entries(
+        {JSON.parse(localStorage.getItem("personal_finance_array"))
+          .detail_non_housing_expenses &&
+        Object.entries(
           JSON.parse(localStorage.getItem("personal_finance_array"))
             .detail_non_housing_expenses
-        ).length !== 0) ? (
+        ).length !== 0 ? (
           <div>
             <MDBRow className="margin20">
               <MDBCol md="8"></MDBCol>

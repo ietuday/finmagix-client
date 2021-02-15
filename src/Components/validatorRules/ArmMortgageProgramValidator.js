@@ -10,14 +10,16 @@ const ArmMortgageProgramValidator = {
         },
         {
           test: (value) => {
+            console.log("@@@@",parseFloat(String(value).replace(/,/g, '')) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, '')))
             return (
-              Number(value) <= Number(HouseInfoValidator.property_price.state)
+              parseFloat(String(value).replace(/,/g, '')) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, ''))
             );
           },
           message: "Loan value should not be greater than property price!",
         },
         {
-          test: /^[0-9,]*$/,
+          // test: /^[0-9,]*$/,
+          test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
           message: "only numbers are allowed!",
         },
       ],
@@ -101,11 +103,11 @@ const ArmMortgageProgramValidator = {
       },
       period_cap: {
         rules: [
-          {
-            // test: /^[0-9,]*$/,
-            test: /^[0-9]\d*(\.\d+)*$/,
-            message: "only numbers are allowed!",
-          },
+          // {
+          //   // test: /^[0-9,]*$/,
+          //   test: /^[0-9]\d*(\.\d+)*$/,
+          //   message: "only numbers are allowed!",
+          // },
           {
             test: (value) => {
               return Object.keys(value).length !== 0;

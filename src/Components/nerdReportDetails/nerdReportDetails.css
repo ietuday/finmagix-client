@@ -3,6 +3,12 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.housing-ratio{
+  color: #000;
+  font-weight: bold !important;
+ 
+}
+
 .property-finance-logo {
   width: auto;
   margin-right: 20px;
@@ -140,7 +146,9 @@ h6 {
 
 
 .home-afer{
-  margin: 2% 0 1% 14%;
+  margin: -3.5em 0 0 0;
+  position: fixed;
+
 }
 
 .box-green{
@@ -192,4 +200,15 @@ th, td{
 }
 .MuiTab-textColorPrimary.Mui-selected [class]{
   color: #000;
+}
+
+
+@media only screen and (max-width: 760px)
+ {
+
+  .home-afer {
+    margin: -3.5em 0 0 0;
+   scroll-behavior: smooth;
+  
+}
 }
