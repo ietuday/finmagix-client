@@ -97,7 +97,7 @@ export class ARMComponentSecondLoan extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
-          console.log(propertyDetail)
+          
           this.setState({
             mortgage_program_type: propertyDetail.second_arm.mortage_program_type,
             loan_amount: propertyDetail.second_arm.loan_amount,

@@ -366,17 +366,17 @@ export class ShowDetailedReports extends Component {
     ) {
       let secondmtgpmichoice;
       if (data.GetSinglePropertyResponse["data"][0].first_frm.pmi) {
-        console.log("PMI");
+        
         secondmtgpmichoice = 1;
       } else if (
         Number(
           data.GetSinglePropertyResponse["data"][0].first_frm.loanamountsecond1
         )
       ) {
-        console.log("loanamountsecond1");
+        
         secondmtgpmichoice = 2;
       } else {
-        console.log("ELSE");
+        
         secondmtgpmichoice = 0;
       }
 
@@ -515,17 +515,17 @@ export class ShowDetailedReports extends Component {
 
       let secondmtgpmichoice;
       if (data.GetSinglePropertyResponse["data"][0].first_arm.pmi) {
-        console.log("PMI");
+       
         secondmtgpmichoice = 1;
       } else if (
         Number(
           data.GetSinglePropertyResponse["data"][0].first_arm.loanamountsecond1
         )
       ) {
-        console.log("loanamountsecond1");
+       
         secondmtgpmichoice = 2;
       } else {
-        console.log("ELSE");
+        
         secondmtgpmichoice = 0;
       }
       return {
@@ -663,17 +663,17 @@ export class ShowDetailedReports extends Component {
 
         let secondmtgpmichoice;
         if (data.GetSinglePropertyResponse["data"][0].second_frm.pmi) {
-          console.log("PMI");
+         
           secondmtgpmichoice = 1;
         } else if (
           Number(
             data.GetSinglePropertyResponse["data"][0].second_frm.loanamountsecond2
           )
         ) {
-          console.log("loanamountsecond1");
+         
           secondmtgpmichoice = 2;
         } else {
-          console.log("ELSE");
+         
           secondmtgpmichoice = 0;
         }
       return {
@@ -809,17 +809,17 @@ export class ShowDetailedReports extends Component {
     ) {
       let secondmtgpmichoice;
       if (data.GetSinglePropertyResponse["data"][0].second_arm.pmi) {
-        console.log("PMI");
+       
         secondmtgpmichoice = 1;
       } else if (
         Number(
           data.GetSinglePropertyResponse["data"][0].second_arm.loanamountsecond2
         )
       ) {
-        console.log("loanamountsecond1");
+        
         secondmtgpmichoice = 2;
       } else {
-        console.log("ELSE");
+       
         secondmtgpmichoice = 0;
       }
 
@@ -1049,7 +1049,7 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateScreen12(data) {
-    console.log(data, this.state.taxes)
+   
     return {
       Detailedtaxexpenses:
         this.state.taxes && this.state.taxes.detailed_tax_expenses ? "Y" : "N",

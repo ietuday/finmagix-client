@@ -108,7 +108,7 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
             is_update:true,
             id: propertyDetail.first_arm.id
           })
-          console.log(this.state);
+          
           this.props.handleDownpaymentData(this.state);
         })
         .catch((err) => {

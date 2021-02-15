@@ -586,7 +586,6 @@ class AmortizationTableFRM extends React.Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-    console.log(value);
     const name = this.CalculatorResponse
       ? this.CalculatorResponse.ARM1
         ? "Amortization Table ARM"

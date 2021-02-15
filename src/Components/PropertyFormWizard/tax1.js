@@ -165,7 +165,6 @@ export class Tax1 extends Component {
   }
 
   checkProperty() {
-    console.log("ncbncbz");
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -198,7 +197,6 @@ export class Tax1 extends Component {
               tax_deductible_casualty_and_theft_losses: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
               tax_deductible_casualty_and_theft_losses_number: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
             });
-            console.log(this.state)
             this.props.getData("tax1", this.state);
           }else{
             this.props.getData("tax1", this.state);

@@ -56,7 +56,7 @@ export class TaxHoc extends Component {
     }
   };
   saveApiData = () => {
-    console.log(this.state.tax)
+    
     if (
       this.state.tax.detailed_tax_expenses === "Y" &&
       this.state.tax.previous_balance === "N"
@@ -227,7 +227,7 @@ export class TaxHoc extends Component {
             ? JSON.parse(localStorage.getItem("tax_array")).id
             : null,
       };
-      console.log(showallData)
+      
       Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
       ? this.props.TaxesUpdate(showallData)
       : this.props.TaxesCreate(showallData);
@@ -252,7 +252,7 @@ export class TaxHoc extends Component {
       tax: { ...this.state.tax1.data, ...this.state.tax2.data },
       isTaxFilled: true,
     });
-    console.log("getData",this.state)
+    
     
     this.props.getTaxFilledStataus(this.state.isTaxFilled);
   };

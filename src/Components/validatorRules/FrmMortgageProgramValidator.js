@@ -15,7 +15,6 @@ const FrmMortgageProgramValidator = {
         // },
         {
           test: (value) => {
-            console.log(parseFloat(String(value).replace(/,/g, '')) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, '')))
             return (
               parseFloat(String(value).replace(/,/g, '')) <= parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, ''))
             );

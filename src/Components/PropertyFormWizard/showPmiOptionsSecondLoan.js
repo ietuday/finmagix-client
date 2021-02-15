@@ -107,7 +107,6 @@ export class ShowPmiOptionsSecondLoan extends Component {
             is_update: true,
             id:propertyDetail.second_frm.id
           })
-          console.log(this.state);
           this.props.handleDownpaymentData(this.state);
         })
         .catch((err) => {

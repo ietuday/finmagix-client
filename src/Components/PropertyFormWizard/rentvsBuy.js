@@ -54,7 +54,7 @@ export class RentvsBuy extends Component {
   }
 
   checkProperty() {
-    console.log("ncbncbz");
+    
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -78,7 +78,7 @@ export class RentvsBuy extends Component {
             is_update:true,
             id: propertyDetail.rent_vs_buy.id
           });
-          console.log(this.state)
+          
           this.props.getRentvsBuyData(this.state);
         })
         .catch((err) => {});

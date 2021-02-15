@@ -40,7 +40,7 @@ function HomeAffordability(props) {
     singlePropertyResponse = JSON.parse(
       localStorage.getItem("GetSinglePropertyResponse")
     );
-    console.log(CalculatorResponse);
+    
     
     if (
       CalculatorResponse.FRM1 &&
@@ -58,7 +58,7 @@ function HomeAffordability(props) {
         )
       ) <= 36
     ) {
-      console.log("FRM1 28-36");
+      
     }
     if (
       CalculatorResponse.FRM1 &&
@@ -70,7 +70,7 @@ function HomeAffordability(props) {
         )
       ) > 36
     ) {
-      console.log("FRM1 >36");
+      
     }
 
     if (
@@ -83,7 +83,7 @@ function HomeAffordability(props) {
         )
       ) < 28
     ) {
-      console.log("FRM1 28");
+      
     }
 
     if (
@@ -102,7 +102,7 @@ function HomeAffordability(props) {
         )
       ) <= 36
     ) {
-      console.log("ARM1 28-36");
+      
     }
     if (
       CalculatorResponse.ARM1 &&
@@ -114,7 +114,7 @@ function HomeAffordability(props) {
         )
       ) > 36
     ) {
-      console.log("ARM1 >36");
+     
     }
 
     if (
@@ -127,7 +127,7 @@ function HomeAffordability(props) {
         )
       ) < 28
     ) {
-      console.log("ARM1 28");
+      
     }
   }
   const [value, setValue] = React.useState(0);

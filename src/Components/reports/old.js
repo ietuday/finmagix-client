@@ -24,7 +24,7 @@
 // } from "recharts";
 
 // const renderCustomizedLabel = (props) => {
-//   console.log("props", props);
+//  
 //   const { x, y, width, height, value } = props;
 //   const radius = 10;
 // };
@@ -43,7 +43,7 @@
 //       buy: [],
 //       taxImpact: [],
 //     };
-//     // console.log(this.props.location.state.CalculatorResponse)
+//    
 //   }
 //   goToHomeScreen = () => {
 //     this.setState({
@@ -51,7 +51,7 @@
 //     });
 //   };
 //   componentDidMount() {
-//     // console.log(this.props.location.state.CalculatorResponse)
+//    
 //     if (
 //       this.props &&
 //       this.props.location &&

@@ -52,7 +52,7 @@ export class PropertyAndPersonalFinanceInfo extends Component {
 
     if(this.state.CalculatorResponse){
       const data = parseInt(String(Number(this.state.personalFinanace.marginal_tax_rate)*100))
-      console.log(data)
+      
       this.setState({marginal_tax_rate: parseInt(String(Number(this.state.personalFinanace.marginal_tax_rate)*100))})
     }
     

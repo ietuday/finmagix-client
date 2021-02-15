@@ -29,7 +29,7 @@ function TaxSummary(props) {
   } else {
     CalculatorResponse = JSON.parse(localStorage.getItem('calculatorResponse'));
     singlePropertyResponse = JSON.parse(localStorage.getItem('GetSinglePropertyResponse'));
-    console.log("CalculatorResponse" , CalculatorResponse);
+    
   }
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {

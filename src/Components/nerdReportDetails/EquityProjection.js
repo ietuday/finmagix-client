@@ -164,7 +164,7 @@ function EquityProjection(props) {
       },
     ];
   }
-  console.log(data)
+  
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
