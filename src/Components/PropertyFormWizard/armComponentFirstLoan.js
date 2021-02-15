@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
 import { Input } from "antd";
+import Axios from "axios";
+
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Select from "@material-ui/core/Select";
@@ -15,6 +17,10 @@ import {
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
+
+
+import { config } from '../config/default';
+const { baseURL } = config;
 
 export class ARMComponentFirstLoan extends Component {
   constructor() {
@@ -72,10 +78,91 @@ export class ARMComponentFirstLoan extends Component {
       points_percentage: 0,
       closing_costs_percentage: 0,
       period_cap_percentage: 0,
+      is_update:false,
+      id: ""
     };
-    this.validators = ArmMortgageProgramValidator;
-    resetValidators(this.validators);
+    // this.validators = ArmMortgageProgramValidator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
+    this.checkProperty()
+  }
+
+  checkProperty(){
+    
+    const propertyId = JSON.parse(localStorage.getItem('property_id'))
+    if(propertyId){
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0]
+          console.log(propertyDetail)
+          this.setState({
+            mortgage_program_type: propertyDetail.first_arm.mortage_program_type,
+            loan_amount: propertyDetail.first_arm.loan_amount,
+            loan_amount_number: propertyDetail.first_arm.loan_amount,
+            loan_term: propertyDetail.first_arm.loan_term,
+            select_loan_program: propertyDetail.first_arm.select_loan_program,
+            initial_interest_rate: propertyDetail.first_arm.initial_interest_rate,
+            initial_interest_rate_percentage: Number(propertyDetail.first_arm.initial_interest_rate)*100,
+            first_interest_rate_adj_cap: propertyDetail.first_arm.first_interest_rate_adj_cap,
+            first_interest_rate_adj_cap_percentage: Number(propertyDetail.first_arm.first_interest_rate_adj_cap)*100,
+            floor_interest_rate: propertyDetail.first_arm.floor_interest_rate,
+            floor_interest_rate_percentage: Number(propertyDetail.first_arm.floor_interest_rate)*100,
+            ceiling_interest_rate: propertyDetail.first_arm.ceiling_interest_rate,
+            ceiling_interest_rate_percentage: Number(propertyDetail.first_arm.ceiling_interest_rate)*100,
+            period_cap: propertyDetail.first_arm.period_cap,
+            rate_add: propertyDetail.first_arm.rate_add,
+            rate_add_percentage: Number(propertyDetail.first_arm.rate_add)*100,
+            points: propertyDetail.first_arm.points,
+            closing_costs: propertyDetail.first_arm.closing_costs,
+            closing_costs_number:propertyDetail.first_arm.closing_costs,
+            interest_only_option: propertyDetail.first_arm.interest_only_option,
+            interest_only_period: propertyDetail.first_arm.interest_only_period,
+            pmi: propertyDetail.first_arm.pmi,
+            second_mortgage_loan_amount: propertyDetail.first_arm.second_mortgage_loan_amount,
+            second_mortgage_loan_term: propertyDetail.first_arm.second_mortgage_loan_term,
+            second_mortgage_interest: propertyDetail.first_arm.second_mortgage_interest,
+            second_mortgage_points: propertyDetail.first_arm.second_mortgage_points,
+            second_mortgage_closing_costs: propertyDetail.first_arm.second_mortgage_closing_costs,
+            showInterestOnlyPeriodOption: false,
+            secondmtgpmichoice1: propertyDetail.first_arm.secondmtgpmichoice1,
+            PMIfirst1: propertyDetail.first_arm.PMIfirst1,
+            loanamountsecond1: propertyDetail.first_arm.loanamountsecond1,
+            Pmtsecond1: propertyDetail.first_arm.Pmtsecond1,
+            ARMtype1: propertyDetail.first_arm.ARMtype1,
+            ARM1rate: propertyDetail.first_arm.ARM1rate,
+            ARMfirstadjin1: propertyDetail.first_arm.ARMfirstadjin1,
+            floor1: propertyDetail.first_arm.floor1,
+            ceiling1: propertyDetail.first_arm.ceiling1,
+            periodicadjcap1: propertyDetail.first_arm.periodicadjcap1,
+            rateadd1: propertyDetail.first_arm.rateadd1,
+            secondmtgpmichoice2: propertyDetail.first_arm.secondmtgpmichoice2,
+            PMIfirst2: propertyDetail.first_arm.PMIfirst2,
+            loanamountsecond2: propertyDetail.first_arm.loanamountsecond2,
+            Pmtsecond2: propertyDetail.first_arm.Pmtsecond2,
+            ARM2rate: propertyDetail.first_arm.ARM2rate,
+            ARMfirstadjin2: propertyDetail.first_arm.ARMfirstadjin2,
+            floor2: propertyDetail.first_arm.floor2,
+            ceiling2: propertyDetail.first_arm.ceiling2,
+            periodicadjcap2: propertyDetail.first_arm.periodicadjcap2,
+            rateadd2: propertyDetail.first_arm.rateadd2,
+            points_percentage: Number(propertyDetail.first_arm.points)*100,
+            closing_costs_percentage: Number(propertyDetail.first_arm.closing_costs)*100,
+            period_cap_percentage: Number(propertyDetail.first_arm.period_cap)*100,
+            is_update: true,
+            id: propertyDetail.first_arm.id
+          })
+        
+          this.props.handleArmData(this.state);
+        })
+        .catch((err) => {
+         
+        });
+    }
   }
 
   async handleChange(event) {
@@ -86,23 +173,23 @@ export class ARMComponentFirstLoan extends Component {
       [event.target.name]: event.target.value,
     });
 
-    if (
-      (this.state.mortgage_program_type_value === 2 &&
-        name === "loan_amount") ||
-      // name === "initial_interest_rate" ||
-      name === "first_interest_rate_adj_cap" ||
-      name === "floor_interest_rate" ||
-      name === "ceiling_interest_rate" ||
-      name === "period_cap" ||
-      name === "rate_add" ||
-      name === "points" ||
-      name == "closing_costs"
-    ) {
-      updateValidators(this.validators, event.target.name, event.target.value);
-      const validationErrorLength = this.validators[event.target.name].errors
-        .length;
-      this.props.getArmValidationError(validationErrorLength);
-    }
+    // if (
+    //   (this.state.mortgage_program_type_value === 2 &&
+    //     name === "loan_amount") ||
+    //   // name === "initial_interest_rate" ||
+    //   name === "first_interest_rate_adj_cap" ||
+    //   name === "floor_interest_rate" ||
+    //   name === "ceiling_interest_rate" ||
+    //   name === "period_cap" ||
+    //   name === "rate_add" ||
+    //   name === "points" ||
+    //   name == "closing_costs"
+    // ) {
+    //   updateValidators(this.validators, event.target.name, event.target.value);
+    //   const validationErrorLength = this.validators[event.target.name].errors
+    //     .length;
+    //   this.props.getArmValidationError(validationErrorLength);
+    // }
     const dataObject = {
       mortgage_program_type: this.state.mortgage_program_type,
       mortgage_program_type_value: 2,
@@ -141,6 +228,8 @@ export class ARMComponentFirstLoan extends Component {
       ceiling2: this.state.ceiling2,
       periodicadjcap2: this.state.periodicadjcap2,
       rateadd2: this.state.rateadd2,
+      is_update: this.state.is_update,
+      id: this.state.id
     };
     this.props.handleArmData(dataObject);
   }
@@ -178,6 +267,8 @@ export class ARMComponentFirstLoan extends Component {
       ceiling2: data && data.ceiling2 ? data.ceiling2 : "",
       periodicadjcap2: data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
       rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
+      is_update: this.state.is_update,
+      id: this.state.id
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -219,6 +310,8 @@ export class ARMComponentFirstLoan extends Component {
         ceiling2: this.state.ceiling2,
         periodicadjcap2: this.state.periodicadjcap2,
         rateadd2: this.state.rateadd2,
+        is_update: this.state.is_update,
+        id: this.state.id
       };
       this.props.handleArmData(dataWithPmi);
     } else {
@@ -265,6 +358,8 @@ export class ARMComponentFirstLoan extends Component {
         ceiling2: this.state.ceiling2,
         periodicadjcap2: this.state.periodicadjcap2,
         rateadd2: this.state.rateadd2,
+        is_update: this.state.is_update,
+        id: this.state.id
       };
       this.props.handleArmData(dataWithSecondMortgage);
     }
@@ -347,7 +442,7 @@ export class ARMComponentFirstLoan extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "loan_amount")}
+        {/* {displayValidationErrors(this.validators, "loan_amount")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Select Loan Term</span>
@@ -508,7 +603,7 @@ export class ARMComponentFirstLoan extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "floor_interest_rate")}
+        {/* {displayValidationErrors(this.validators, "floor_interest_rate")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Ceiling interest rate</span>

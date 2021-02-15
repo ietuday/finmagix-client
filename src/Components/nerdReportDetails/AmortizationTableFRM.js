@@ -303,7 +303,6 @@ class AmortizationTableFRM extends React.Component {
           this.CalculatorResponse.dARM2["TotalPayments"] || [];
         const Endingbalances = this.CalculatorResponse.dARM2.Endingbalance;
         const InterestRate = this.CalculatorResponse.dARM2.InterestRate;
-        debugger
         const objYear = Years.map((x) => {
           return {
             Year: x,

@@ -8,6 +8,9 @@ import {
   MDBModalFooter,
 } from "mdbreact";
 import Button from "@material-ui/core/Button";
+
+import Axios from "axios";
+
 import { Radio, Input } from "antd";
 import { withRouter, Redirect } from "react-router-dom";
 import RentvsBuyValidator from "../validatorRules/RentvsBuyValidatorRules";
@@ -21,26 +24,65 @@ import NumberFormat from "react-number-format";
 
 import quss from "../../assets/images/que.png";
 
+import { config } from '../config/default';
+const { baseURL } = config;
+
+
 export class RentvsBuy extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current_monthly_rent_payment: "",
-      current_monthly_rent_payment_number: "",
-      annual_rent_insurance: "",
-      rate_of_investment: "",
+      current_monthly_rent_payment: 0,
+      current_monthly_rent_payment_number: 0,
+      annual_rent_insurance: 0,
+      rate_of_investment: 0,
       openModal: true,
       property_obj: localStorage.getItem("property_id"),
       radioValue: false,
-      rentinflation: "",
+      rentinflation: 0,
       rate_of_investment_percentage: 0,
       rentinflation_percentage: 0,
-      annual_rent_insurance_number:""
+      annual_rent_insurance_number: 0,
+      is_update:false,
+      id: ""
     };
-    this.validators = RentvsBuyValidator;
-    resetValidators(this.validators);
+    // this.validators = RentvsBuyValidator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
     this.onRadioChange = this.onRadioChange.bind(this);
+    this.checkProperty()
+  }
+
+  checkProperty() {
+    console.log("ncbncbz");
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+
+          this.setState({
+            current_monthly_rent_payment: propertyDetail.rent_vs_buy.current_monthly_rent_payment,
+            current_monthly_rent_payment_number: propertyDetail.rent_vs_buy.current_monthly_rent_payment,
+            annual_rent_insurance: propertyDetail.rent_vs_buy.annual_rent_insurance,
+            rate_of_investment: propertyDetail.rent_vs_buy.rate_of_investment,
+            rentinflation: propertyDetail.rent_vs_buy.rentinflation,
+            rate_of_investment_percentage: Number(propertyDetail.rent_vs_buy.rate_of_investment)*100,
+            rentinflation_percentage: Number(propertyDetail.rent_vs_buy.rentinflation)*100,
+            annual_rent_insurance_number: propertyDetail.rent_vs_buy.annual_rent_insurance,
+            is_update:true,
+            id: propertyDetail.rent_vs_buy.id
+          });
+          console.log(this.state)
+          this.props.getRentvsBuyData(this.state);
+        })
+        .catch((err) => {});
+    }
   }
   async handleChange(e, value) {
     const { name } = e.target;
@@ -48,15 +90,15 @@ export class RentvsBuy extends Component {
     await this.setState({
       [e.target.name]: e.target.value,
     });
-    if (
-      name === "current_monthly_rent_payment" ||
-      name === "annual_rent_insurance"
-    ) {
-      updateValidators(this.validators, e.target.name, e.target.value);
-      const validationErrorLength = this.validators[e.target.name].errors
-        .length;
-      this.props.getValidationError(validationErrorLength);
-    }
+    // if (
+    //   name === "current_monthly_rent_payment" ||
+    //   name === "annual_rent_insurance"
+    // ) {
+    //   updateValidators(this.validators, e.target.name, e.target.value);
+    //   const validationErrorLength = this.validators[e.target.name].errors
+    //     .length;
+    //   this.props.getValidationError(validationErrorLength);
+    // }
     this.props.getRentvsBuyData(this.state);
   }
 
@@ -158,10 +200,10 @@ export class RentvsBuy extends Component {
                 />
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(
+            {/* {displayValidationErrors(
               this.validators,
               "current_monthly_rent_payment"
-            )}
+            )} */}
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Annual rent insurance</span>
@@ -183,11 +225,11 @@ export class RentvsBuy extends Component {
                   onChange={this.handleChange}
                 /> */}
 
-<NumberFormat
+                <NumberFormat
                   className="input-class-mdb"
                   placeholder="Enter amount here"
                   name="annual_rent_insurance"
-                  valuen={this.state.annual_rent_insurance}
+                  value={this.state.annual_rent_insurance}
                   onChange={this.handleChange}
                   thousandSeparator={true}
                   onValueChange={async (values) => {
@@ -200,14 +242,9 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
-
-
-
-
-
               </MDBCol>
             </MDBRow>
-            {displayValidationErrors(this.validators, "annual_rent_insurance")}
+            {/* {displayValidationErrors(this.validators, "annual_rent_insurance")} */}
             <MDBRow className="margin20 marginbottom20">
               <MDBCol md="12">
                 <span className="get-started-label">Rate of investment</span>

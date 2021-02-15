@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
+import Axios from "axios";
 import { Input } from "antd";
 import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
@@ -17,7 +18,11 @@ import {
   resetValidators,
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
+
 import HouseInfoValidator from "../validatorRules/HouseInfoValidator";
+
+import { config } from '../config/default';
+const { baseURL } = config;
 
 export class GetStartedHouseInfo extends Component {
   constructor(props) {
@@ -31,8 +36,8 @@ export class GetStartedHouseInfo extends Component {
       downpayment_amount: "",
       downpayment_amount_number: "",
       stay_duration: "",
-      no_of_bedrooms: "",
-      no_of_bathrooms: "",
+      no_of_bedrooms: 0,
+      no_of_bathrooms: 0,
       area_of_the_house: "",
       annual_property_tax: "",
       annual_property_tax_number: "",
@@ -45,6 +50,8 @@ export class GetStartedHouseInfo extends Component {
       address: localStorage.getItem("address")
         ? JSON.parse(localStorage.getItem("address"))
         : "",
+      downpayment: "",
+      is_update: false
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -52,7 +59,61 @@ export class GetStartedHouseInfo extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleBedroomRoomCount = this.handleBedroomRoomCount.bind(this);
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
+    this.checkProperty()
   }
+
+  checkProperty(){
+    console.log("ncbncbz");
+    const propertyId = JSON.parse(localStorage.getItem('property_id'))
+    if(propertyId){
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0]
+          console.log(propertyDetail)
+          this.setState({
+            house_address: propertyDetail.house_address,
+            house_state: propertyDetail.house_state,
+            house_zip_code: propertyDetail.house_zip_code,
+            property_price: propertyDetail.property_price,
+            property_price_number: propertyDetail.property_price,
+            downpayment_amount: propertyDetail.downpayment_amount,
+            downpayment_amount_number: propertyDetail.downpayment_amount,
+            stay_duration: propertyDetail.stay_duration,
+            no_of_bedrooms: Number(propertyDetail.no_of_bedrooms),
+            no_of_bathrooms: Number(propertyDetail.no_of_bathrooms),
+            area_of_the_house: propertyDetail.area_of_the_house,
+            annual_property_tax: propertyDetail.annual_property_tax,
+            annual_property_tax_number: propertyDetail.annual_property_tax,
+            annual_home_owner_association_dues: propertyDetail.annual_home_owner_association_dues,
+            annual_home_owner_association_dues_number: propertyDetail.annual_home_owner_association_dues,
+            home_owner_insurance: propertyDetail.home_owner_insurance,
+            home_owner_insurance_number: propertyDetail.home_owner_insurance,
+            home_price_growth: propertyDetail.home_price_growth,
+            home_price_growth_percentage: Number(propertyDetail.home_price_growth)*100,
+            is_update: true
+          })
+          let downpayment
+          let twenty_percent_of_property_price =
+          (this.state.property_price * 20) / 100;
+        if (this.state.downpayment_amount < twenty_percent_of_property_price) {
+          downpayment = "lessthan20";
+        } else {
+          downpayment = "greaterthan20";
+        }
+          this.props.handleHouseInfo(downpayment, this.state);
+        })
+        .catch((err) => {
+         
+        });
+    }
+  }
+
+
   async handleChange(event) {
     const { name } = event.target;
     this.selectAddress(JSON.parse(localStorage.getItem("addressData")));
@@ -75,22 +136,22 @@ export class GetStartedHouseInfo extends Component {
       "twenty_percent_of_property_price",
       twenty_percent_of_property_price
     );
-    if (
-      name === "property_price" ||
-      name === "downpayment_amount" ||
-      name === "area_of_the_house" ||
-      name == "annual_property_tax" ||
-      name == "annual_home_owner_association_dues" ||
-      name == "home_owner_insurance"
-    ) {
-      console.log(this.state.home_price_growth);
-      updateValidators(this.validators, event.target.name, event.target.value);
-      const validationErrorLength = this.validators[event.target.name].errors
-        .length;
-      console.log(this.validators[event.target.name]);
-      this.props.getValidationError(validationErrorLength);
-      console.log(this.state.home_price_growth);
-    }
+    // if (
+    //   name === "property_price" ||
+    //   name === "downpayment_amount" ||
+    //   name === "area_of_the_house" ||
+    //   name == "annual_property_tax" ||
+    //   name == "annual_home_owner_association_dues" ||
+    //   name == "home_owner_insurance"
+    // ) {
+    //   console.log(this.state.home_price_growth);
+    //   updateValidators(this.validators, event.target.name, event.target.value);
+    //   const validationErrorLength = this.validators[event.target.name].errors
+    //     .length;
+    //   console.log(this.validators[event.target.name]);
+    //   this.props.getValidationError(validationErrorLength);
+    //   console.log(this.state.home_price_growth);
+    // }
     console.log(this.state);
     this.props.handleHouseInfo(downpayment, this.state);
   }
@@ -171,7 +232,14 @@ export class GetStartedHouseInfo extends Component {
             <MapWithASearchBox />
           </MDBCol>
         </MDBRow>
-        <br /><br /><br /><br /><br /><br /><br /> <br /> <br /><br /> <br /> <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br /> <br /> <br />
+        <br /> <br /> <br />
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -213,7 +281,7 @@ export class GetStartedHouseInfo extends Component {
               }}
             />
           </MDBCol>
-          {displayValidationErrors(this.validators, "property_price")}
+          {/* {displayValidationErrors(this.validators, "property_price")} */}
         </MDBRow>
         {/* New field add */}
         <MDBRow className="margin20">
@@ -222,7 +290,8 @@ export class GetStartedHouseInfo extends Component {
             <div className="tooltip-img">
               <img src={quss} className="tool-img"></img>
               <span className="tooltip-img-text">
-              Enter the growth in the home price per year for the duration of stay.
+                Enter the growth in the home price per year for the duration of
+                stay.
               </span>
             </div>
             <br />
@@ -259,13 +328,10 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">
               What is the downpayment amount?
-            </span> 
+            </span>
             <div className="tooltip-img">
               <img src={quss} className="tool-img"></img>
-              <span className="tooltip-img-text">
-                {" "}
-                Enter your downpayment. 
-              </span>
+              <span className="tooltip-img-text"> Enter your downpayment.</span>
             </div>
             <br />
             <NumberFormat
@@ -294,7 +360,7 @@ export class GetStartedHouseInfo extends Component {
             /> */}
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "downpayment_amount")}
+        {/* {displayValidationErrors(this.validators, "downpayment_amount")} */}
         <MDBRow className="margin20" center>
           <MDBCol md="12">
             <span className="get-started-label">
@@ -323,8 +389,9 @@ export class GetStartedHouseInfo extends Component {
             <span className="get-started-long-question">Bedrooms</span>
           </MDBCol>
           <MDBCol md="5" sm="6" xs="6" size="6">
+            {console.log(this.state.no_of_bathrooms)}
             <NumberSpinner
-              count={0}
+              count={this.state.no_of_bedrooms}
               onRoomCount={this.handleBedroomRoomCount}
             />
           </MDBCol>
@@ -334,7 +401,7 @@ export class GetStartedHouseInfo extends Component {
             <span className="get-started-long-question">Bathrooms</span>
           </MDBCol>
           <MDBCol md="5" sm="6" xs="6" size="6">
-            <NumberSpinner count={0} onRoomCount={this.handleBathRoomCount} />
+            <NumberSpinner count={this.state.no_of_bathrooms} onRoomCount={this.handleBathRoomCount} />
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -350,7 +417,7 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "area_of_the_house")}
+        {/* {displayValidationErrors(this.validators, "area_of_the_house")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>
@@ -389,7 +456,7 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "annual_property_tax")}
+        {/* {displayValidationErrors(this.validators, "annual_property_tax")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -469,7 +536,7 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "home_owner_insurance")}
+        {/* {displayValidationErrors(this.validators, "home_owner_insurance")} */}
       </Fragment>
     );
   }

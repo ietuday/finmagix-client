@@ -3,6 +3,9 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
+
+import Axios from "axios";
+
 import GetStartedHouseInfo from "../PropertyFormWizard/houseInfo";
 import PersonalFinance from "../PropertyFormWizard/personalFinance";
 import RentvsBuy from "../PropertyFormWizard/rentvsBuy";
@@ -32,9 +35,10 @@ import {
   detail_expense_create,
   update_detail_expense,
 } from "../redux/actions/PropertyReport/personalFinance";
-import { rent_vs_buy_create } from "../redux/actions/PropertyReport/rentvsBuy";
+import { rent_vs_buy_create, rent_vs_buy_update } from "../redux/actions/PropertyReport/rentvsBuy";
 import {
   property_info_create,
+  property_info_update,
   survey_create,
 } from "../redux/actions/PropertyReport/propertyInfo";
 import { isFormValid } from "../../common/ValidatorFunction";
@@ -44,6 +48,9 @@ import FirstLoanScenario from "./firstLoanScenario";
 import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";
 import { savePropertyId } from "../../../src/routes/utils";
+
+import { config } from "../config/default";
+const { baseURL } = config;
 
 export class StepperComponent extends Component {
   constructor(props) {
@@ -160,7 +167,7 @@ export class StepperComponent extends Component {
     await this.setState((prevState) => {
       let propertyInfo = Object.assign({}, prevState.propertyInfo);
       propertyInfo = data;
-     
+
       return { propertyInfo };
     });
     this.setState({
@@ -187,9 +194,7 @@ export class StepperComponent extends Component {
       });
       NotificationManager.error("Please Validate Fields", "Error");
     }
-    // localStorage.setItem("personal_finance_array", JSON.stringify(this.state));
-    // console.log(JSON.parse(localStorage.getItem("personal_finance_array")))
-   
+
     {
       Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
         .length !== 0
@@ -258,7 +263,6 @@ export class StepperComponent extends Component {
     });
   };
   getHouseInfoValidationError = (error) => {
-    console.log("getHouseInfoValidationError------------",error)
     this.setState({
       houseInofValidationErrors: error,
     });
@@ -326,7 +330,7 @@ export class StepperComponent extends Component {
             getRentvsBuyFilledStatus={this.getRentvsBuyFilledStatus}
             goToTaxfromRentvsBuyModal={this.goToTaxfromRentvsBuyModal}
             showStep={(step) => {
-             this.handleStep(step);
+              this.handleStep(step);
             }}
             getValidationError={this.getRentvsBuyValidationError}
           />
@@ -380,11 +384,13 @@ export class StepperComponent extends Component {
     return this.completedSteps === this.totalSteps;
   };
 
-    handleNext() {
+  handleNext() {
     const {
       PersonalFinanceUpdate,
       RentvsBuyCreate,
+      RentvsBuyUpdate,
       PropertyInfoCreate,
+      PropertyInfoUpdate,
       SurveyCreate,
       PersonalFinanceCreate,
     } = this.props;
@@ -394,30 +400,35 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
-      console.log(this.state.houseInofValidationErrors,isFormValid("house_info") )
-      this.state.houseInofValidationErrors === 0 && isFormValid("house_info")
-        ? this.setState({
-            activeStep: newActiveStep,
-          })
-        : this.setState({
-            activeStep: this.state.activeStep,
-          });
-      this.state.houseInofValidationErrors === 0 && isFormValid("house_info")
-        ? this.setState({
-            activeStep: newActiveStep,
-          })
-        : NotificationManager.error("Please Validate Fields", "Error");
-      this.state.propertyInfo['home_price_growth'] = String(
+      console.log(
+        this.state.houseInofValidationErrors,
+        isFormValid("house_info")
+      );
+
+      this.setState({
+        activeStep: newActiveStep,
+      });
+      this.state.propertyInfo["home_price_growth"] = String(
         Number(this.state.propertyInfo["home_price_growth"]) / 100
       );
-      console.log(this.state)
 
-      PropertyInfoCreate(
-        this.state.propertyInfo,
-        this.onSuccessHouseInfo,
-        this.onFailureHouseInfo
-      );
-     
+      if (this.state.propertyInfo.is_update) {
+        this.state.propertyInfo["id"] = JSON.parse(
+          localStorage.getItem("property_id")
+        );
+        PropertyInfoUpdate(
+          this.state.propertyInfo,
+          this.onSuccessHouseInfo,
+          this.onFailureHouseInfo
+        );
+      } else {
+        PropertyInfoCreate(
+          this.state.propertyInfo,
+          this.onSuccessHouseInfo,
+          this.onFailureHouseInfo
+        );
+      }
+
       if (this.props.location.surveyData) {
         this.props.location.surveyData.property_obj = localStorage.getItem(
           "property_id"
@@ -425,9 +436,16 @@ export class StepperComponent extends Component {
         // SurveyCreate(this.props.location.surveyData);
       }
     } else if (this.state.activeStep === 1) {
-      const personal_finance_data = JSON.parse(localStorage.getItem("personal_finance_array"))
-      personal_finance_data.marginal_tax_rate = String(Number(personal_finance_data.marginal_tax_rate))
-      localStorage.setItem("personal_finance_array", JSON.stringify(personal_finance_data));
+      const personal_finance_data = JSON.parse(
+        localStorage.getItem("personal_finance_array")
+      );
+      personal_finance_data.marginal_tax_rate = String(
+        Number(personal_finance_data.marginal_tax_rate)
+      );
+      localStorage.setItem(
+        "personal_finance_array",
+        JSON.stringify(personal_finance_data)
+      );
       this.setState({
         activeStep: newActiveStep,
       });
@@ -436,26 +454,30 @@ export class StepperComponent extends Component {
         activeStep: newActiveStep,
       });
     } else if (this.state.activeStep === 3) {
-      this.state.rentvsBuyValidationErrors === 0 && isFormValid("rent_vs_buy")
-        ? this.setState({
-            activeStep: newActiveStep,
-          })
-        : this.setState({
-            activeStep: this.state.activeStep,
-          });
-      this.state.rentvsBuyValidationErrors === 0 && isFormValid("rent_vs_buy")
-        ? this.setState({
-            activeStep: newActiveStep,
-          })
-        : NotificationManager.error("Please Validate Fields", "Error");
-        this.state.RentvsBuy['rate_of_investment'] = String(
-          Number(this.state.RentvsBuy["rate_of_investment"]) / 100
-        );
-        this.state.RentvsBuy['rentinflation'] = String(
-          Number(this.state.RentvsBuy["rentinflation"]) / 100
-        );
-        
-      RentvsBuyCreate(this.state.RentvsBuy);
+      this.setState({
+        activeStep: newActiveStep,
+      });
+      this.state.RentvsBuy["rate_of_investment"] = String(
+        parseFloat(
+          String(this.state.RentvsBuy["rate_of_investment_percentage"]).replace(
+            /,/g,
+            ""
+          )
+        ) / 100
+      );
+      this.state.RentvsBuy["rentinflation"] = String(
+        parseFloat(
+          String(this.state.RentvsBuy["rentinflation_percentage"]).replace(
+            /,/g,
+            ""
+          )
+        ) / 100
+      );
+      if (this.state.RentvsBuy.is_update && this.state.RentvsBuy.id) {
+        RentvsBuyUpdate(this.state.RentvsBuy)
+      } else {
+        RentvsBuyCreate(this.state.RentvsBuy);
+      }
     } else if (this.state.activeStep === 4) {
       this.setState({
         activeStep: newActiveStep,
@@ -745,7 +767,9 @@ const mapStateToProps = (state) => {
   return {
     PersonalFinanceCreateResponse: state.PersonalFinanceCreateResponse,
     RentvsBuyCreateResponse: state.RentvsBuyCreateResponse,
+    RentvsBuyUpdateResponse: state.RentvsBuyUpdateResponse,
     PropertyInfoCreateResponse: state.PropertyInfoCreateResponse,
+    PropertyInfoUpdateResponse: state.PropertyInfoUpdateResponse,
     PerosnalFinanceUpdateResponse: state.PersonalFinanceUpdateResponse,
     DetailExpenseCreateResponse: state.DetailExpenseCreateResponse,
     DetailExpenseUpdateResponse: state.DetailExpenseUpdateResponse,
@@ -757,9 +781,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     PersonalFinanceCreate: (data) => dispatch(personal_finance_create(data)),
     RentvsBuyCreate: (data) => dispatch(rent_vs_buy_create(data)),
+    RentvsBuyUpdate: (data) => dispatch(rent_vs_buy_update(data)),
     PropertyInfoCreate: (data, onSuccessHouseInfo, onFailureHouseInfo) =>
       dispatch(
         property_info_create(data, onSuccessHouseInfo, onFailureHouseInfo)
+      ),
+
+    PropertyInfoUpdate: (data, onSuccessHouseInfo, onFailureHouseInfo) =>
+      dispatch(
+        property_info_update(data, onSuccessHouseInfo, onFailureHouseInfo)
       ),
     PersonalFinanceUpdate: (data) => dispatch(personal_finance_update(data)),
     DetailExpenseCreate: (data) => dispatch(detail_expense_create(data)),

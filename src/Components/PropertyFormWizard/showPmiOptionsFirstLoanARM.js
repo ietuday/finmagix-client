@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
+import Axios from "axios";
 import { Input } from "antd";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -8,6 +9,9 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 import quss from "../../assets/images/que.png";
 import NumberFormat from "react-number-format";
+
+import { config } from '../config/default';
+const { baseURL } = config;
 
 export class ShowPmiOptionsFirstLoanARM extends Component {
   constructor() {
@@ -48,9 +52,71 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
       periodicadjcap2: "0",
       rateadd2: "0",
       second_mortgage_points_percentage: "0",
+      is_update: false,
+      id:""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.checkProperty()
   }
+
+  checkProperty(){
+    const propertyId = JSON.parse(localStorage.getItem('property_id'))
+    if(propertyId){
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0]
+          this.setState({
+            pmi_amount: propertyDetail.first_arm.pmi,
+            pmi_amount_number: propertyDetail.first_arm.pmi,
+            second_mortgage_loan_amount: propertyDetail.first_arm.loanamountsecond1,
+            second_mortgage_loan_term: propertyDetail.first_arm.second_mortgage_loan_term,
+            second_mortgage_interest: propertyDetail.first_arm.second_mortgage_interest,
+            second_mortgage_interest_percentage: Number(propertyDetail.first_arm.second_mortgage_interest)*100,
+            second_mortgage_points: propertyDetail.first_arm.second_mortgage_points,
+            second_mortgage_closing_costs:propertyDetail.first_arm.second_mortgage_closing_costs,
+            second_mortgage_closing_costs_number:propertyDetail.first_arm.second_mortgage_closing_costs,
+            PMIOptions: "PMI",
+            showSecondloanOption: false,
+            secondmtgpmichoice1: propertyDetail.first_arm.secondmtgpmichoice1,
+            PMIfirst1: propertyDetail.first_arm.PMIfirst1,
+            loanamountsecond1: propertyDetail.first_arm.loanamountsecond1,
+            loanamountsecond1_number: propertyDetail.first_arm.loanamountsecond1,
+            Pmtsecond1: propertyDetail.first_arm.Pmtsecond1,
+            ARMtype1: propertyDetail.first_arm.ARMtype1,
+            ARM1rate: propertyDetail.first_arm.ARM1rate,
+            ARMfirstadjin1: propertyDetail.first_arm.ARMfirstadjin1,
+            floor1: propertyDetail.first_arm.floor1,
+            ceiling1: propertyDetail.first_arm.ceiling1,
+            periodicadjcap1: propertyDetail.first_arm.periodicadjcap1,
+            rateadd1: propertyDetail.first_arm.rateadd1,
+            secondmtgpmichoice2: propertyDetail.first_arm.secondmtgpmichoice2,
+            PMIfirst2: propertyDetail.first_arm.PMIfirst2,
+            loanamountsecond2: propertyDetail.first_arm.loanamountsecond2,
+            Pmtsecond2: propertyDetail.first_arm.Pmtsecond2,
+            ARM2rate: propertyDetail.first_arm.ARM2rate,
+            ARMfirstadjin2: propertyDetail.first_arm.ARMfirstadjin2,
+            floor2: propertyDetail.first_arm.floor2,
+            ceiling2: propertyDetail.first_arm.ceiling2,
+            periodicadjcap2: propertyDetail.first_arm.periodicadjcap2,
+            rateadd2: propertyDetail.first_arm.rateadd2,
+            second_mortgage_points_percentage: parseInt(Number(propertyDetail.first_arm.second_mortgage_points)*100),
+            is_update:true,
+            id: propertyDetail.first_arm.id
+          })
+          console.log(this.state);
+          this.props.handleDownpaymentData(this.state);
+        })
+        .catch((err) => {
+         
+        });
+    }
+  }
+
   showPmiSecondloan = (event, value) => {
     this.setState({
       PMIOptions: value,

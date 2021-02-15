@@ -120,7 +120,7 @@ function CheatSheet(props) {
             CalculatorResponse.ARM2
               ? CalculatorResponse.ARM2.loanamountsecond2
               : CalculatorResponse.FRM2
-              ? CalculatorResponse.FRM2.loanamountsecond2
+              ? CalculatorResponse.FRM2.loanamountsecond1
               : 0
           }`
         ).replace(/,/g, "")
@@ -179,7 +179,7 @@ function CheatSheet(props) {
             CalculatorResponse.ARM2
               ? CalculatorResponse.ARM2.Paymentsecond2
               : CalculatorResponse.FRM2
-              ? CalculatorResponse.FRM2.Paymentsecond1
+              ? CalculatorResponse.FRM2.Paymentsecond2
               : 0
           }`
         ).replace(/,/g, "")

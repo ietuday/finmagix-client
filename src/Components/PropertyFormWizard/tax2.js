@@ -8,6 +8,7 @@ import {
 } from "mdbreact";
 import { Radio, Input } from "antd";
 import Button from "@material-ui/core/Button";
+import Axios from "axios";
 import { withRouter, Redirect } from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
@@ -23,16 +24,48 @@ import {
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
+
+import { config } from '../config/default';
+const { baseURL } = config;
+
+
+
 export class Tax2 extends Component {
   constructor() {
     super();
     this.state = {
-      avg_loan_balance_for_grandfathered_debt: "",
-      avg_loan_balance_for_grandfathered_debt_number: "",
-      avg_loan_balance_for_home_acquisition_debt: "",
-      avg_loan_balance_for_home_acquisition_debt_number: "",
-      paid_mortgage_on_gf_ha_debt: "",
-      paid_mortgage_on_gf_ha_debt_number:"",
+      avg_loan_balance_for_grandfathered_debt: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_grandfathered_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_grandfathered_debt
+        : "",
+      avg_loan_balance_for_grandfathered_debt_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_grandfathered_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_grandfathered_debt
+        : "",
+      avg_loan_balance_for_home_acquisition_debt: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_home_acquisition_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_home_acquisition_debt : "",
+      avg_loan_balance_for_home_acquisition_debt_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_home_acquisition_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_home_acquisition_debt : "",
+      paid_mortgage_on_gf_ha_debt: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).paid_mortgage_on_gf_ha_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .paid_mortgage_on_gf_ha_debt : "",
+      paid_mortgage_on_gf_ha_debt_number:JSON.parse(
+        localStorage.getItem("tax_array")
+      ).paid_mortgage_on_gf_ha_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .paid_mortgage_on_gf_ha_debt : "",
       previous_balance: "N",
       showDetailedDeductionOption: false,
       showPreviousLoanBalanceButton: false,
@@ -40,6 +73,40 @@ export class Tax2 extends Component {
     this.validators = Tax2Validator;
     resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
+    this.checkProperty()
+  }
+
+  checkProperty() {
+    console.log("ncbncbz");
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId && JSON.parse(localStorage.getItem("tax_array")) && JSON.parse(localStorage.getItem("tax_array")).id) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+          if(propertyDetail.taxes.id){
+            this.setState({
+              avg_loan_balance_for_grandfathered_debt:propertyDetail.taxes.avg_loan_balance_for_grandfathered_debt,  
+              avg_loan_balance_for_grandfathered_debt_number:propertyDetail.taxes.avg_loan_balance_for_grandfathered_debt,   
+              avg_loan_balance_for_home_acquisition_debt: propertyDetail.taxes.avg_loan_balance_for_home_acquisition_debt,
+              avg_loan_balance_for_home_acquisition_debt_number: propertyDetail.taxes.avg_loan_balance_for_home_acquisition_debt,
+              paid_mortgage_on_gf_ha_debt: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt,
+              paid_mortgage_on_gf_ha_debt_number: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt
+            });
+            console.log(this.state)
+            this.props.getData("tax2", this.state);
+          }else{
+            this.props.getData("tax2", this.state);
+          }
+         
+          
+        })
+        .catch((err) => {});
+    }
   }
   componentDidMount() {}
   previousBalanceChange = async (event, value) => {
