@@ -400,10 +400,7 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
-      console.log(
-        this.state.houseInofValidationErrors,
-        isFormValid("house_info")
-      );
+  
 
       this.setState({
         activeStep: newActiveStep,

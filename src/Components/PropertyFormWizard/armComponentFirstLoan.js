@@ -99,7 +99,7 @@ export class ARMComponentFirstLoan extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
-          console.log(propertyDetail)
+          
           this.setState({
             mortgage_program_type: propertyDetail.first_arm.mortage_program_type,
             loan_amount: propertyDetail.first_arm.loan_amount,
@@ -681,7 +681,7 @@ export class ARMComponentFirstLoan extends Component {
                 await this.setState({
                   period_cap_percentage: formattedValue,
                 });
-                console.log(this.state)
+                
               }}
             />
           </MDBCol>

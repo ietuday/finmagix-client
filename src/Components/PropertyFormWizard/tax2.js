@@ -77,7 +77,7 @@ export class Tax2 extends Component {
   }
 
   checkProperty() {
-    console.log("ncbncbz");
+    
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId && JSON.parse(localStorage.getItem("tax_array")) && JSON.parse(localStorage.getItem("tax_array")).id) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -97,7 +97,7 @@ export class Tax2 extends Component {
               paid_mortgage_on_gf_ha_debt: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt,
               paid_mortgage_on_gf_ha_debt_number: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt
             });
-            console.log(this.state)
+            
             this.props.getData("tax2", this.state);
           }else{
             this.props.getData("tax2", this.state);

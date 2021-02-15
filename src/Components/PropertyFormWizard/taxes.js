@@ -159,7 +159,7 @@ export class Taxes extends Component {
 
       // pub936_line_13a:JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a ? JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a : "",
     };
-    console.log(JSON.parse(localStorage.getItem('tax_array')))
+    
     this.Tax1YesValidators = Tax1YesValidator;
     resetValidators(this.Tax1YesValidators);
     this.handleChange = this.handleChange.bind(this);
@@ -167,7 +167,7 @@ export class Taxes extends Component {
   }
 
   checkProperty() {
-    console.log("ncbncbz");
+    
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId && JSON.parse(localStorage.getItem("tax_array")) && JSON.parse(localStorage.getItem("tax_array")).id) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -203,7 +203,6 @@ export class Taxes extends Component {
           }
           this.props.getData("tax1", this.state);
          
-          console.log(this.state)
           
         })
         .catch((err) => {});

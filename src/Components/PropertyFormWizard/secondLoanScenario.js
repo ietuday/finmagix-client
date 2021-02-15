@@ -71,7 +71,7 @@ export class SecondLoanScenario extends Component {
 
   checkproperty(){
     const propertyId = JSON.parse(localStorage.getItem('property_id'))
-    console.log(propertyId)
+    
     if(propertyId){
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {

@@ -104,7 +104,7 @@ export const get_personal_finance_data = () => {
   };
 };
 export const personal_finance_update = (data) => {
-  console.log(data)
+  
   if(data && data.marginal_tax_rate){
     data.marginal_tax_rate = String(Number(data.marginal_tax_rate/100))
   }

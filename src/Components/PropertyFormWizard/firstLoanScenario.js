@@ -90,7 +90,7 @@ export class FirstLoanScenario extends Component {
 
   checkproperty(){
     const propertyId = JSON.parse(localStorage.getItem('property_id'))
-    console.log(propertyId)
+    
     if(propertyId){
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {
@@ -666,7 +666,7 @@ export class FirstLoanScenario extends Component {
                 handleDownpaymentData={this.handleDownpaymentData}
               />
             ) : null}
-            {console.log("this.props.downpayment", this.props.downpayment)}
+            
           </div>
         )}
       </Fragment>

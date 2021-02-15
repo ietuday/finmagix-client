@@ -63,7 +63,7 @@ export class GetStartedHouseInfo extends Component {
   }
 
   checkProperty(){
-    console.log("ncbncbz");
+    
     const propertyId = JSON.parse(localStorage.getItem('property_id'))
     if(propertyId){
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -74,7 +74,7 @@ export class GetStartedHouseInfo extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
-          console.log(propertyDetail)
+          
           this.setState({
             house_address: propertyDetail.house_address,
             house_state: propertyDetail.house_state,
@@ -122,7 +122,7 @@ export class GetStartedHouseInfo extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    console.log(this.state.home_price_growth);
+    
     let twenty_percent_of_property_price =
       (this.state.property_price * 20) / 100;
     if (this.state.downpayment_amount < twenty_percent_of_property_price) {
@@ -130,12 +130,7 @@ export class GetStartedHouseInfo extends Component {
     } else {
       downpayment = "greaterthan20";
     }
-    console.log("this.state.property_price", this.state.property_price_number);
-
-    console.log(
-      "twenty_percent_of_property_price",
-      twenty_percent_of_property_price
-    );
+    
     // if (
     //   name === "property_price" ||
     //   name === "downpayment_amount" ||
@@ -144,15 +139,15 @@ export class GetStartedHouseInfo extends Component {
     //   name == "annual_home_owner_association_dues" ||
     //   name == "home_owner_insurance"
     // ) {
-    //   console.log(this.state.home_price_growth);
+    
     //   updateValidators(this.validators, event.target.name, event.target.value);
     //   const validationErrorLength = this.validators[event.target.name].errors
     //     .length;
-    //   console.log(this.validators[event.target.name]);
+    
     //   this.props.getValidationError(validationErrorLength);
-    //   console.log(this.state.home_price_growth);
+    
     // }
-    console.log(this.state);
+    
     this.props.handleHouseInfo(downpayment, this.state);
   }
   handleBedroomRoomCount(count) {
@@ -172,7 +167,7 @@ export class GetStartedHouseInfo extends Component {
       house_zip_code: data.house_zip_code,
     });
     localStorage.setItem("changeAddress", false);
-    console.log(this.state);
+    
   };
   handleBack = () => {
     this.props.history.push("/select-modules");
@@ -186,13 +181,13 @@ export class GetStartedHouseInfo extends Component {
         "administrative_area_level_2" === addressArray[i].types[0]
       ) {
         city = addressArray[i].long_name;
-        console.log(city);
+        
         return city;
       }
     }
   };
   getArea = (addressArray) => {
-    console.log(addressArray);
+    
     let area = "";
     for (let i = 0; i < addressArray.length; i++) {
       if (addressArray[i].types[0]) {
@@ -389,7 +384,7 @@ export class GetStartedHouseInfo extends Component {
             <span className="get-started-long-question">Bedrooms</span>
           </MDBCol>
           <MDBCol md="5" sm="6" xs="6" size="6">
-            {console.log(this.state.no_of_bathrooms)}
+            
             <NumberSpinner
               count={this.state.no_of_bedrooms}
               onRoomCount={this.handleBedroomRoomCount}
@@ -451,7 +446,7 @@ export class GetStartedHouseInfo extends Component {
                 await this.setState({
                   annual_property_tax: value,
                 });
-                console.log(this.state);
+                
               }}
             />
           </MDBCol>
@@ -495,7 +490,7 @@ export class GetStartedHouseInfo extends Component {
                 await this.setState({
                   annual_home_owner_association_dues: value,
                 });
-                console.log("nnual_home_owner_association_dues", this.state);
+                
               }}
             />
           </MDBCol>
@@ -531,7 +526,7 @@ export class GetStartedHouseInfo extends Component {
                 await this.setState({
                   home_owner_insurance: value,
                 });
-                console.log("home_owner_insurance", this.state);
+                
               }}
             />
           </MDBCol>
