@@ -200,8 +200,8 @@ export class Taxes extends Component {
               tax_deductible_casualty_and_theft_losses: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
               tax_deductible_casualty_and_theft_losses_number: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
             });
-            this.props.getData("tax1", this.state);
           }
+          this.props.getData("tax1", this.state);
          
           console.log(this.state)
           

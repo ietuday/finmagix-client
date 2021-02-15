@@ -34,12 +34,38 @@ export class Tax2 extends Component {
   constructor() {
     super();
     this.state = {
-      avg_loan_balance_for_grandfathered_debt: "",
-      avg_loan_balance_for_grandfathered_debt_number: "",
-      avg_loan_balance_for_home_acquisition_debt: "",
-      avg_loan_balance_for_home_acquisition_debt_number: "",
-      paid_mortgage_on_gf_ha_debt: "",
-      paid_mortgage_on_gf_ha_debt_number:"",
+      avg_loan_balance_for_grandfathered_debt: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_grandfathered_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_grandfathered_debt
+        : "",
+      avg_loan_balance_for_grandfathered_debt_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_grandfathered_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_grandfathered_debt
+        : "",
+      avg_loan_balance_for_home_acquisition_debt: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_home_acquisition_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_home_acquisition_debt : "",
+      avg_loan_balance_for_home_acquisition_debt_number: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).avg_loan_balance_for_home_acquisition_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .avg_loan_balance_for_home_acquisition_debt : "",
+      paid_mortgage_on_gf_ha_debt: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).paid_mortgage_on_gf_ha_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .paid_mortgage_on_gf_ha_debt : "",
+      paid_mortgage_on_gf_ha_debt_number:JSON.parse(
+        localStorage.getItem("tax_array")
+      ).paid_mortgage_on_gf_ha_debt
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .paid_mortgage_on_gf_ha_debt : "",
       previous_balance: "N",
       showDetailedDeductionOption: false,
       showPreviousLoanBalanceButton: false,
@@ -72,7 +98,9 @@ export class Tax2 extends Component {
               paid_mortgage_on_gf_ha_debt_number: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt
             });
             console.log(this.state)
-            this.props.getData("tax1", this.state);
+            this.props.getData("tax2", this.state);
+          }else{
+            this.props.getData("tax2", this.state);
           }
          
           

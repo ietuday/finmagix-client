@@ -167,7 +167,7 @@ export class Tax1 extends Component {
   checkProperty() {
     console.log("ncbncbz");
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
-    if (propertyId && JSON.parse(localStorage.getItem("tax_array")) && JSON.parse(localStorage.getItem("tax_array")).id) {
+    if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {
           "Content-type": "Application/json",
@@ -200,16 +200,16 @@ export class Tax1 extends Component {
             });
             console.log(this.state)
             this.props.getData("tax1", this.state);
+          }else{
+            this.props.getData("tax1", this.state);
           }
-         
+          
           
         })
         .catch((err) => {});
-    }
+      }
+      
   }
-
-
-
 
 
   componentDidMount() {}
@@ -249,29 +249,29 @@ export class Tax1 extends Component {
       [e.target.name]: e.target.value,
     });
 
-    if (this.state.detailed_tax_expenses === "Y") {
-      if (
-        name === "medical_and_dental_expenses" ||
-        name === "state_local_generalsales_taxes" ||
-        name === "other_taxes" ||
-        name == "tax_deductive_investment_interest" ||
-        name === "tax_deductible_charitable_donations" ||
-        name === "tax_deductible_casualty_and_theft_losses"
-      ) {
-        updateValidators(this.Tax1YesValidators, e.target.name, e.target.value);
-        const validationErrorLength = this.Tax1YesValidators[e.target.name]
-          .errors.length;
+    // if (this.state.detailed_tax_expenses === "Y") {
+    //   if (
+    //     name === "medical_and_dental_expenses" ||
+    //     name === "state_local_generalsales_taxes" ||
+    //     name === "other_taxes" ||
+    //     name == "tax_deductive_investment_interest" ||
+    //     name === "tax_deductible_charitable_donations" ||
+    //     name === "tax_deductible_casualty_and_theft_losses"
+    //   ) {
+    //     updateValidators(this.Tax1YesValidators, e.target.name, e.target.value);
+    //     const validationErrorLength = this.Tax1YesValidators[e.target.name]
+    //       .errors.length;
 
-        this.props.getValidationErrorTax1Yes(validationErrorLength);
-      }
-    }
+    //     this.props.getValidationErrorTax1Yes(validationErrorLength);
+    //   }
+    // }
 
     if (this.state.detailed_tax_expenses === "N") {
       if (name === "fedral_adjusted_gross_income") {
-        updateValidators(this.Tax1NoValidators, e.target.name, e.target.value);
-        const validationErrorLength = this.Tax1NoValidators[e.target.name]
-          .errors.length;
-        this.props.getValidationErrorTax1No(validationErrorLength);
+        // updateValidators(this.Tax1NoValidators, e.target.name, e.target.value);
+        // const validationErrorLength = this.Tax1NoValidators[e.target.name]
+        //   .errors.length;
+        // this.props.getValidationErrorTax1No(validationErrorLength);
       }
     }
     this.props.getData("tax1", this.state);
