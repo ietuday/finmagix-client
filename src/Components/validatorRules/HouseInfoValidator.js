@@ -69,6 +69,13 @@ const   HouseInfoValidator = {
         },
         message: "Annual Property Tax cannot be empty",
       },
+
+      {
+        test: (value) => {
+          return parseInt(String(value).replace(/,/g, '')) <= (parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, '')) * 10) / 100;
+        },
+        message: "Annual Property tax cannot exceed 10% of home price",
+      },
       // {
       //   // test: /^[0-9,]*$/,
       //   test:/^(\d{1,3}(\,?\d{2,3}){1,2})$/,
@@ -103,10 +110,17 @@ const   HouseInfoValidator = {
         test: (value) => {
           return Object.keys(value).length !== 0;
         },
-        message: "Home owner insurance cannot be empty",
+        message: "Annual Property Tax cannot be empty",
+      },
+
+      {
+        test: (value) => {
+          return parseInt(String(value).replace(/,/g, '')) <= (parseFloat(String(HouseInfoValidator.property_price.state).replace(/,/g, '')) * 3) / 100;
+        },
+        message: "Cannot exceed 3% of property price",
       },
       // {
-        
+      //   // test: /^[0-9,]*$/,
       //   test:/^(\d{1,3}(\,?\d{2,3}){1,2})$/,
       //   message: "only numbers are allowed!",
       // },
@@ -118,25 +132,33 @@ const   HouseInfoValidator = {
 
 /* add new validations  */ 
 
-  // home_price_growth: {
-  //   rules: [
-  //     {
-  //       test: (value) => {
-  //         return Object.keys(value).length !== 0;
-  //       },
-  //       message: "Home Price growth cannot be empty",
-  //     },
-  //     // {
+  home_price_growth: {
+    rules: [
+      {
+        test: (value) => {
+          return Object.keys(value).length !== 0;
+        },
+        message: "Home Price growth cannot be empty",
+      },
+      {
+        test: (value) => {
+          return (
+            parseInt(String(value).replace(/%/g, '')) < 20
+          );
+        },
+        message: "Home Price growth cannot exceed 20%",
+      },
+      // {
        
-  //     //   test: /^[0-9]\d*(\.\d+)*$/,
-  //     //   // test:/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/,
-  //     //   message: "only numbers are allowed!",
-  //     // },
-  //   ],
-  //   errors: [],
-  //   valid: false,
-  //   state: "",
-  // },
+      //   test: /^[0-9]\d*(\.\d+)*$/,
+      //   // test:/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/,
+      //   message: "only numbers are allowed!",
+      // },
+    ],
+    errors: [],
+    valid: false,
+    state: "",
+  },
 
 
 

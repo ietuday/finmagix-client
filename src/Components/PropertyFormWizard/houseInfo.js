@@ -131,22 +131,24 @@ export class GetStartedHouseInfo extends Component {
       downpayment = "greaterthan20";
     }
     
-    // if (
-    //   name === "property_price" ||
-    //   name === "downpayment_amount" ||
-    //   name === "area_of_the_house" ||
-    //   name == "annual_property_tax" ||
-    //   name == "annual_home_owner_association_dues" ||
-    //   name == "home_owner_insurance"
-    // ) {
+    if (
+      name === "property_price" ||
+      name === "downpayment_amount" ||
+      name === "home_price_growth"  || 
+      name === "area_of_the_house" ||
+      name == "annual_property_tax" ||
+      name == "annual_home_owner_association_dues" ||
+      name == "home_owner_insurance"
+    ) { 
+      console.log(name)
     
-    //   updateValidators(this.validators, event.target.name, event.target.value);
-    //   const validationErrorLength = this.validators[event.target.name].errors
-    //     .length;
+      updateValidators(this.validators, event.target.name, event.target.value);
+      const validationErrorLength = this.validators[event.target.name].errors
+        .length;
     
-    //   this.props.getValidationError(validationErrorLength);
+      this.props.getValidationError(validationErrorLength);
     
-    // }
+    }
     
     this.props.handleHouseInfo(downpayment, this.state);
   }
@@ -276,7 +278,7 @@ export class GetStartedHouseInfo extends Component {
               }}
             />
           </MDBCol>
-          {/* {displayValidationErrors(this.validators, "property_price")} */}
+          {displayValidationErrors(this.validators, "property_price")}
         </MDBRow>
         {/* New field add */}
         <MDBRow className="margin20">
@@ -300,8 +302,8 @@ export class GetStartedHouseInfo extends Component {
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount in Percentage"
-              name="home_price_growth_percentage"
-              value={this.state.home_price_growth_percentage}
+              name="home_price_growth"
+              value={this.state.home_price_growth}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -316,7 +318,7 @@ export class GetStartedHouseInfo extends Component {
               }}
             />
           </MDBCol>
-          {/* {displayValidationErrors(this.validators, "home_price_growth")} */}
+          {displayValidationErrors(this.validators, "home_price_growth")}
         </MDBRow>
         {/* End */}
         <MDBRow className="margin20">
@@ -355,7 +357,7 @@ export class GetStartedHouseInfo extends Component {
             /> */}
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "downpayment_amount")} */}
+        {displayValidationErrors(this.validators, "downpayment_amount")}
         <MDBRow className="margin20" center>
           <MDBCol md="12">
             <span className="get-started-label">
@@ -412,7 +414,7 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "area_of_the_house")} */}
+        {displayValidationErrors(this.validators, "area_of_the_house")}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>
@@ -451,7 +453,8 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "annual_property_tax")} */}
+        {displayValidationErrors(this.validators, "annual_property_tax")}
+
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -494,14 +497,14 @@ export class GetStartedHouseInfo extends Component {
               }}
             />
           </MDBCol>
+          {displayValidationErrors(this.validators,"annual_home_owner_association_dues")}
         </MDBRow>
-        {displayValidationErrors(
-          this.validators,
-          "annual_home_owner_association_dues"
-        )}
+
+       
+
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
-            <span className="get-started-label">Annual Home Insurance</span>
+            <span className="get-started-label">Home Owner's Insurance</span>
             <br />
             {/* <Input
               className="input-class-mdb"
@@ -531,7 +534,7 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "home_owner_insurance")} */}
+        {displayValidationErrors(this.validators, "home_owner_insurance")}
       </Fragment>
     );
   }

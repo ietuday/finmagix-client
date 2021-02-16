@@ -33,10 +33,14 @@ export class PersonalFinance extends Component {
         Object.entries(
           JSON.parse(localStorage.getItem("personal_finance_array"))
         ).length !== 0
-          ? 
-          parseInt(String(Number(JSON.parse(localStorage.getItem("personal_finance_array"))
-          .marginal_tax_rate)*100))
-           + "%"
+          ? parseInt(
+              String(
+                Number(
+                  JSON.parse(localStorage.getItem("personal_finance_array"))
+                    .marginal_tax_rate
+                ) * 100
+              )
+            ) + "%"
           : "",
       annual_gross_income:
         Object.entries(
@@ -86,7 +90,6 @@ export class PersonalFinance extends Component {
     this.validators = PersonaLFinanceValidator;
     resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
- 
   }
   handleRangeData = (data) => {
     this.setState({
@@ -99,8 +102,7 @@ export class PersonalFinance extends Component {
 
     this.props.handleContinue();
   };
-  componentDidMount() {
-  }
+  componentDidMount() {}
   async handleChange(event) {
     const { name } = event.target;
     event.persist();
@@ -111,8 +113,8 @@ export class PersonalFinance extends Component {
       name === "marginal_tax_rate" ||
       name === "annual_gross_income" ||
       name === "monthly_debt_payments" ||
-      name == "monthly_non_housing_expenses" ||
-      name == "federal_income"
+      name === "monthly_non_housing_expenses" ||
+      name === "federal_income"
       // ||
       // name == "total_non_housing"
     ) {
@@ -195,27 +197,40 @@ export class PersonalFinance extends Component {
             </Select>
           </MDBCol>
         </MDBRow>
-        {/* <MDBRow className="margin20">
+
+        <MDBRow className="margin20">
           <MDBCol md="12">
-            <span className="get-started-label">Annual gross income</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Annual Gross income is your total gross income
-              before any deductions such as income taxes. If you have other sources
-              other than salary & wages, please include them as well. </span>
-            </div>
+            <span className="get-started-label">Federal Income</span>
             <br />
-            <Input
-              type="number"
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="annual_gross_income"
-              value={this.state.annual_gross_income}
+              name="federal_income"
+              value={this.state.federal_income}
               onChange={this.handleChange}
-            />
+            /> */}
 
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="federal_income"
+              value={this.state.federal_income}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  federal_income_number: formattedValue,
+                });
+                await this.setState({
+                  federal_income: value,
+                });
+              }}
+            />
           </MDBCol>
+          {displayValidationErrors(this.validators, "federal_income")}
         </MDBRow>
-        {displayValidationErrors(this.validators, "annual_gross_income")} */}
+
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Monthly debt payments</span>
@@ -256,6 +271,7 @@ export class PersonalFinance extends Component {
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(this.validators, "monthly_debt_payments")}
+
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -297,7 +313,12 @@ export class PersonalFinance extends Component {
               }}
             />
           </MDBCol>
+          {displayValidationErrors(
+            this.validators,
+            "monthly_non_housing_expenses"
+          )}
         </MDBRow>
+
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Marginal tax rate</span>
@@ -338,39 +359,6 @@ export class PersonalFinance extends Component {
               }}
             />
           </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">Federal Income</span>
-            <br />
-            {/* <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="federal_income"
-              value={this.state.federal_income}
-              onChange={this.handleChange}
-            /> */}
-
-            <NumberFormat
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="federal_income"
-              value={this.state.federal_income}
-              onChange={this.handleChange}
-              thousandSeparator={true}
-              onValueChange={async (values) => {
-                const { formattedValue, value } = values;
-                await this.setState({
-                  federal_income_number: formattedValue,
-                });
-                await this.setState({
-                  federal_income: value,
-                });
-              }}
-            />
-          </MDBCol>
-          {displayValidationErrors(this.validators, "federal_income")}
         </MDBRow>
 
         {this.props.saveButtonforPersonalFinance &&
