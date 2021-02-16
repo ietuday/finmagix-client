@@ -52,7 +52,10 @@ export class ShowPmiOptionsSecondLoan extends Component {
       second_mortgage_points_percentage: "0",
       loanamountsecond2_number:"0",
       is_update: false,
-      id:""
+      id:"",
+      loanAmountValidationError: "",
+      interestrateValidationError: "",
+      pointsValidationError: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty();
@@ -134,6 +137,46 @@ export class ShowPmiOptionsSecondLoan extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
+    if(event.target.name == "loanamountsecond2"){
+      if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          loanAmountValidationError: "Cannot exceed first mortgage amount"
+        }) 
+      }else{
+        this.setState({
+          loanAmountValidationError: ""
+        }) 
+      }
+      
+  }
+
+  if(event.target.name == "second_mortgage_interest"){
+    if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
+      this.setState({
+        interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+      }) 
+    }else{
+      this.setState({
+        interestrateValidationError: ""
+      }) 
+    }
+    
+}
+
+
+if(event.target.name == "second_mortgage_points"){
+  if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+    this.setState({
+      pointsValidationError: "If the points are greater than 5%, ask 'Is the input for points accurate?''"
+    }) 
+  }else{
+    this.setState({
+      pointsValidationError: ""
+    }) 
+  }
+  
+}
+
     this.props.handleDownpaymentData(this.state);
   }
   componentDidMount() {}
@@ -207,6 +250,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
               }}
             />
           </MDBCol>
+          {this.state.loanAmountValidationError}
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -244,8 +288,8 @@ export class ShowPmiOptionsSecondLoan extends Component {
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="second_mortgage_interest_percentage"
-              value={this.state.second_mortgage_interest_percentage}
+              name="second_mortgage_interest"
+              value={this.state.second_mortgage_interest}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -260,6 +304,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
               }}
             />
           </MDBCol>
+          {this.state.interestrateValidationError}
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -284,8 +329,8 @@ export class ShowPmiOptionsSecondLoan extends Component {
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="second_mortgage_points_percentage"
-              value={this.state.second_mortgage_points_percentage}
+              name="second_mortgage_points"
+              value={this.state.second_mortgage_points}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {
@@ -299,6 +344,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
               }}
             />
           </MDBCol>
+          {this.state.pointsValidationError}  
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">

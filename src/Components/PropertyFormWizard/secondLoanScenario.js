@@ -61,10 +61,12 @@ export class SecondLoanScenario extends Component {
       closing_costs_percentage: 0,
       points_percentage: 0,
       is_update:false,
-      id: ""
+      id: "",
+      interestrateValidationError: "",
+      pointsValidationError: ""
     };
-    // this.validators = FrmMortgageProgramValidator;
-    // resetValidators(this.validators);
+    this.validators = FrmMortgageProgramValidator;
+    resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
   }
@@ -154,23 +156,61 @@ export class SecondLoanScenario extends Component {
   };
   async handleChange(event) {
     const { name } = event.target;
+    if(event.target.name == "interest_only_period"){
+      if(this.state.loan_term < event.target.value){
+        this.setState({
+          interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
+        }) 
+      }else{
+        this.setState({
+          interestOnlyPeriodValidationError: ""
+        }) 
+      }
+  }
+  
+  if(event.target.name == "interest"){
+    if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
+      this.setState({
+        interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+      }) 
+    }else{
+      this.setState({
+        interestrateValidationError: ""
+      }) 
+    }
+    
+}
+
+if(event.target.name == "points"){
+  if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+    this.setState({
+      pointsValidationError: "If the points are greater than 5%, ask 'Is the input for points accurate?''"
+    }) 
+  }else{
+    this.setState({
+      pointsValidationError: ""
+    }) 
+  }
+  
+}
+
 
     event.persist();
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    // if (
-    //   (this.state.mortgage_program_type_value === 1 &&
-    //     name === "loan_amount") ||
-    //   name === "interest" ||
-    //   name === "points" ||
-    //   name == "closing_costs"
-    // ) {
-    //   updateValidators(this.validators, event.target.name, event.target.value);
-    //   const validationErrorLength = this.validators[event.target.name].errors
-    //     .length;
-    //   this.props.getValidationError(validationErrorLength);
-    // }
+    if (
+      (this.state.mortgage_program_type_value === 1 &&
+        name === "loan_amount") ||
+      name === "interest" ||
+      name === "points" ||
+      name == "closing_costs"
+    ) {
+      updateValidators(this.validators, event.target.name, event.target.value);
+      const validationErrorLength = this.validators[event.target.name].errors
+        .length;
+      this.props.getValidationError(validationErrorLength);
+    }
     const dataObject = {
       mortage_program_type: this.state.mortage_program_type,
       mortgage_program_type_value: 1,
@@ -183,7 +223,8 @@ export class SecondLoanScenario extends Component {
       interest_only_period: this.state.interest_only_period,
       property_obj: localStorage.getItem("property_id"),
       is_update: this.state.is_update,
-      id: this.state.id
+      id: this.state.id,
+      interestOnlyPeriodValidationError: ""
     };
     this.props.handleSecondloanMortgageInfo(dataObject, null);
   }
@@ -293,6 +334,7 @@ export class SecondLoanScenario extends Component {
             onChange={this.handleChange}
           />
         </MDBCol>
+        {this.state.interestOnlyPeriodValidationError}
       </MDBRow>
     );
 
@@ -414,8 +456,8 @@ export class SecondLoanScenario extends Component {
                 <NumberFormat
                   className="input-class-mdb"
                   placeholder="Enter amount here"
-                  name="interest_percentage"
-                  value={this.state.interest_percentage}
+                  name="interest"
+                  value={this.state.interest}
                   onChange={this.handleChange}
                   // thousandSeparator={true}
                   suffix={"%"}
@@ -430,8 +472,9 @@ export class SecondLoanScenario extends Component {
                   }}
                 />
               </MDBCol>
+              {this.state.interestrateValidationError}
             </MDBRow>
-            {/* {displayValidationErrors(this.validators, "interest")} */}
+           
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Points</span>
@@ -456,8 +499,8 @@ export class SecondLoanScenario extends Component {
                 <NumberFormat
                   className="input-class-mdb"
                   placeholder="Enter amount here"
-                  name="points_percentage"
-                  value={this.state.points_percentage}
+                  name="points"
+                  value={this.state.points}
                   onChange={this.handleChange}
                   suffix={"%"}
                   onValueChange={async (values) => {
@@ -471,6 +514,7 @@ export class SecondLoanScenario extends Component {
                   }}
                 />
               </MDBCol>
+              {this.state.pointsValidationError}  
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "points")} */}
             <MDBRow className="margin20">
@@ -540,6 +584,7 @@ export class SecondLoanScenario extends Component {
             <br />
             {this.props.downpayment === "lessthan20" ? (
               <ShowPmiOptionsSecondLoan
+              loanAmount={this.state.loan_amount}
                 handleDownpaymentData={this.handleDownpaymentData}
               />
             ) : null}

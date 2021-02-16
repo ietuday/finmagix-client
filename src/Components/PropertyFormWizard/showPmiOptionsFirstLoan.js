@@ -14,7 +14,7 @@ import { config } from '../config/default';
 const { baseURL } = config;
 
 export class ShowPmiOptionsFirstLoan extends Component {
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
@@ -54,9 +54,13 @@ export class ShowPmiOptionsFirstLoan extends Component {
       second_mortgage_points_percentage: "",
       is_update:false,
       id:"",
+      loanAmountValidationError: "",
+      interestrateValidationError: "",
+      pointsValidationError: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
+    console.log(this.props)
   }
 
   checkProperty(){
@@ -132,10 +136,52 @@ export class ShowPmiOptionsFirstLoan extends Component {
     }
   };
   async handleChange(event) {
+   
+    if(event.target.name == "interest"){
+      if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
+        this.setState({
+          interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+        }) 
+      }else{
+        this.setState({
+          interestrateValidationError: ""
+        }) 
+      }
+      
+  }
+
+  if(event.target.name == "second_mortgage_points"){
+    if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+      this.setState({
+        pointsValidationError: "If the points are greater than 5%, ask 'Is the input for points accurate?''"
+      }) 
+    }else{
+      this.setState({
+        pointsValidationError: ""
+      }) 
+    }
+    
+  }
+
+
+
     event.persist();
     await this.setState({
       [event.target.name]: event.target.value,
     });
+   
+    if(event.target.name == "loanamountsecond1"){
+        if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
+          this.setState({
+            loanAmountValidationError: "Cannot exceed first mortgage amount"
+          }) 
+        }else{
+          this.setState({
+            loanAmountValidationError: ""
+          }) 
+        }
+      
+    }
     this.props.handleDownpaymentData(this.state);
   }
   componentDidMount() {}
@@ -145,13 +191,6 @@ export class ShowPmiOptionsFirstLoan extends Component {
         <MDBCol md="12">
           <span className="get-started-label">Monthly PMI Amount</span>
           <br />
-          {/* <Input
-            className="input-class-mdb"
-            placeholder="Enter amount here"
-            name="pmi_amount"
-            value={this.state.pmi_amount}
-            onChange={this.handleChange}
-          /> */}
 
           <NumberFormat
             className="input-class-mdb"
@@ -212,7 +251,9 @@ export class ShowPmiOptionsFirstLoan extends Component {
               }}
             />
           </MDBCol>
+          {this.state.loanAmountValidationError}
         </MDBRow>
+        
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Select Loan term</span>
@@ -266,6 +307,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
               }}
             />
           </MDBCol>
+          {this.state.interestOnlyPeriodValidationError}
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -290,8 +332,8 @@ export class ShowPmiOptionsFirstLoan extends Component {
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="second_mortgage_points_percentage"
-              value={this.state.second_mortgage_points_percentage}
+              name="second_mortgage_points"
+              value={this.state.second_mortgage_points}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {
@@ -305,6 +347,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
               }}
             />
           </MDBCol>
+          {this.state.pointsValidationError}  
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
