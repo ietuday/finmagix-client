@@ -77,12 +77,9 @@ export class PersonalFinance extends Component {
           ? JSON.parse(localStorage.getItem("personal_finance_array"))
               .federal_income
           : "",
-      // total_non_housing: Object.entries(
-      //   JSON.parse(localStorage.getItem("personal_finance_array"))
-      // ).length !== 0
-      //   ? JSON.parse(localStorage.getItem("personal_finance_array"))
-      //       .total_non_housing
-      //   : "",
+          monthlydebtPaymentValidationError:"",
+          monthlynonhousingExpensesValidationError:"",
+
       detail_non_housing_expenses: {},
       openModal: false,
       showModal: false,
@@ -106,6 +103,38 @@ export class PersonalFinance extends Component {
   async handleChange(event) {
     const { name } = event.target;
     event.persist();
+
+
+    
+
+
+    if(event.target.name == "monthly_debt_payments"){
+      if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          monthlydebtPaymentValidationError: " Cannot exceed Federal Income"
+        }) 
+      }else{
+        this.setState({
+          monthlydebtPaymentValidationError: ""
+        }) 
+      }
+    }
+    
+    
+
+    if(event.target.name == "monthly_non_housing_expenses"){
+      if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          monthlynonhousingExpensesValidationError: " Cannot exceed Federal Income"
+        }) 
+      }else{
+        this.setState({
+          monthlynonhousingExpensesValidationError: ""
+        }) 
+      }
+    }
+    
+
     await this.setState({
       [event.target.name]: event.target.value,
     });
@@ -269,8 +298,9 @@ export class PersonalFinance extends Component {
               }}
             />
           </MDBCol>
+          {this.state.monthlydebtPaymentValidationError}
         </MDBRow>
-        {displayValidationErrors(this.validators, "monthly_debt_payments")}
+      
 
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -313,10 +343,7 @@ export class PersonalFinance extends Component {
               }}
             />
           </MDBCol>
-          {displayValidationErrors(
-            this.validators,
-            "monthly_non_housing_expenses"
-          )}
+          {this.state.monthlynonhousingExpensesValidationError}
         </MDBRow>
 
         <MDBRow className="margin20">

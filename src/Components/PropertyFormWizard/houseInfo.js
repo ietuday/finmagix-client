@@ -51,7 +51,11 @@ export class GetStartedHouseInfo extends Component {
         ? JSON.parse(localStorage.getItem("address"))
         : "",
       downpayment: "",
-      is_update: false
+      is_update: false,
+      homepriceGrowthValidationError: "",
+      downpaymentnewValidationError: "",
+      annualPropertytaxValidationError: "",
+      homeownerInsuranceValidationError:""
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -119,6 +123,70 @@ export class GetStartedHouseInfo extends Component {
     this.selectAddress(JSON.parse(localStorage.getItem("addressData")));
     event.persist();
     let downpayment;
+
+
+    if(event.target.name == "home_price_growth_percentage"){
+      if(parseInt(String(event.target.value).replace(/%/g, '')) > 20){
+        this.setState({
+          homepriceGrowthValidationError: "Home Price growth cannot exceed 20%"
+        }) 
+      }else{
+        this.setState({
+          homepriceGrowthValidationError: ""
+        }) 
+      }
+      
+    }
+
+
+
+
+
+    
+
+if(event.target.name == "downpayment_amount"){
+  if(this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))){
+    this.setState({
+      downpaymentnewValidationError: " Downpayment amount can never exceed home price"
+    }) 
+  }else{
+    this.setState({
+      downpaymentnewValidationError: ""
+    }) 
+  }
+}
+
+
+if(event.target.name == "annual_property_tax"){
+  if(parseInt(String(event.target.value).replace(/,/g, '')) >  (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 10) / 100){
+    
+    this.setState({
+      annualPropertytaxValidationError: " Annual Property tax cannot exceed 10% of home price"
+    }) 
+  }else{
+    this.setState({
+      annualPropertytaxValidationError: ""
+    }) 
+  }
+}
+
+if(event.target.name == "home_owner_insurance"){
+  if(parseInt(String(event.target.value).replace(/,/g, '')) >  (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 3) / 100){
+    
+    this.setState({
+      homeownerInsuranceValidationError: " Annual Property tax cannot exceed 10% of home price"
+    }) 
+  }else{
+    this.setState({
+      homeownerInsuranceValidationError:""
+    }) 
+  }
+}
+
+
+
+
+
     await this.setState({
       [event.target.name]: event.target.value,
     });
@@ -302,8 +370,8 @@ export class GetStartedHouseInfo extends Component {
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount in Percentage"
-              name="home_price_growth"
-              value={this.state.home_price_growth}
+              name="home_price_growth_percentage"
+              value={this.state.home_price_growth_percentage}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -318,7 +386,7 @@ export class GetStartedHouseInfo extends Component {
               }}
             />
           </MDBCol>
-          {displayValidationErrors(this.validators, "home_price_growth")}
+        {this.state.homepriceGrowthValidationError}
         </MDBRow>
         {/* End */}
         <MDBRow className="margin20">
@@ -356,8 +424,9 @@ export class GetStartedHouseInfo extends Component {
               onChange={this.handleChange}
             /> */}
           </MDBCol>
+          {this.state.downpaymentnewValidationError}
         </MDBRow>
-        {displayValidationErrors(this.validators, "downpayment_amount")}
+       
         <MDBRow className="margin20" center>
           <MDBCol md="12">
             <span className="get-started-label">
@@ -452,8 +521,9 @@ export class GetStartedHouseInfo extends Component {
               }}
             />
           </MDBCol>
+          {this.state.annualPropertytaxValidationError}
         </MDBRow>
-        {displayValidationErrors(this.validators, "annual_property_tax")}
+       
 
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -534,7 +604,7 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "home_owner_insurance")}
+        {this.state.homeownerInsuranceValidationError}
       </Fragment>
     );
   }
