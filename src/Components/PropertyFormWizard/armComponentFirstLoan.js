@@ -83,7 +83,10 @@ export class ARMComponentFirstLoan extends Component {
       rateAdjustmentCapValidationError: "",
       floorinterestrateValidationError:"",
       periodCapValidationError:"",
-      rateAddValidationError:""
+      rateAddValidationError:"",
+      property_price: "",
+      loan_amount_validation_error: "",
+      interestrateValidationError: ""
     };
     // this.validators = ArmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -94,6 +97,7 @@ export class ARMComponentFirstLoan extends Component {
   checkProperty(){
     
     const propertyId = JSON.parse(localStorage.getItem('property_id'))
+
     if(propertyId){
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {
@@ -103,63 +107,70 @@ export class ARMComponentFirstLoan extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
-          
+          console.log(propertyDetail.property_price)
           this.setState({
-            mortgage_program_type: propertyDetail.first_arm.mortage_program_type,
-            loan_amount: propertyDetail.first_arm.loan_amount,
-            loan_amount_number: propertyDetail.first_arm.loan_amount,
-            loan_term: propertyDetail.first_arm.loan_term,
-            select_loan_program: propertyDetail.first_arm.select_loan_program,
-            initial_interest_rate: propertyDetail.first_arm.initial_interest_rate,
-            initial_interest_rate_percentage: Number(propertyDetail.first_arm.initial_interest_rate)*100,
-            first_interest_rate_adj_cap: propertyDetail.first_arm.first_interest_rate_adj_cap,
-            first_interest_rate_adj_cap_percentage: Number(propertyDetail.first_arm.first_interest_rate_adj_cap)*100,
-            floor_interest_rate: propertyDetail.first_arm.floor_interest_rate,
-            floor_interest_rate_percentage: Number(propertyDetail.first_arm.floor_interest_rate)*100,
-            ceiling_interest_rate: propertyDetail.first_arm.ceiling_interest_rate,
-            ceiling_interest_rate_percentage: Number(propertyDetail.first_arm.ceiling_interest_rate)*100,
-            period_cap: propertyDetail.first_arm.period_cap,
-            rate_add: propertyDetail.first_arm.rate_add,
-            rate_add_percentage: Number(propertyDetail.first_arm.rate_add)*100,
-            points: propertyDetail.first_arm.points,
-            closing_costs: propertyDetail.first_arm.closing_costs,
-            closing_costs_number:propertyDetail.first_arm.closing_costs,
-            interest_only_option: propertyDetail.first_arm.interest_only_option,
-            interest_only_period: propertyDetail.first_arm.interest_only_period,
-            pmi: propertyDetail.first_arm.pmi,
-            second_mortgage_loan_amount: propertyDetail.first_arm.second_mortgage_loan_amount,
-            second_mortgage_loan_term: propertyDetail.first_arm.second_mortgage_loan_term,
-            second_mortgage_interest: propertyDetail.first_arm.second_mortgage_interest,
-            second_mortgage_points: propertyDetail.first_arm.second_mortgage_points,
-            second_mortgage_closing_costs: propertyDetail.first_arm.second_mortgage_closing_costs,
-            showInterestOnlyPeriodOption: false,
-            secondmtgpmichoice1: propertyDetail.first_arm.secondmtgpmichoice1,
-            PMIfirst1: propertyDetail.first_arm.PMIfirst1,
-            loanamountsecond1: propertyDetail.first_arm.loanamountsecond1,
-            Pmtsecond1: propertyDetail.first_arm.Pmtsecond1,
-            ARMtype1: propertyDetail.first_arm.ARMtype1,
-            ARM1rate: propertyDetail.first_arm.ARM1rate,
-            ARMfirstadjin1: propertyDetail.first_arm.ARMfirstadjin1,
-            floor1: propertyDetail.first_arm.floor1,
-            ceiling1: propertyDetail.first_arm.ceiling1,
-            periodicadjcap1: propertyDetail.first_arm.periodicadjcap1,
-            rateadd1: propertyDetail.first_arm.rateadd1,
-            secondmtgpmichoice2: propertyDetail.first_arm.secondmtgpmichoice2,
-            PMIfirst2: propertyDetail.first_arm.PMIfirst2,
-            loanamountsecond2: propertyDetail.first_arm.loanamountsecond2,
-            Pmtsecond2: propertyDetail.first_arm.Pmtsecond2,
-            ARM2rate: propertyDetail.first_arm.ARM2rate,
-            ARMfirstadjin2: propertyDetail.first_arm.ARMfirstadjin2,
-            floor2: propertyDetail.first_arm.floor2,
-            ceiling2: propertyDetail.first_arm.ceiling2,
-            periodicadjcap2: propertyDetail.first_arm.periodicadjcap2,
-            rateadd2: propertyDetail.first_arm.rateadd2,
-            points_percentage: Number(propertyDetail.first_arm.points)*100,
-            closing_costs_percentage: Number(propertyDetail.first_arm.closing_costs)*100,
-            period_cap_percentage: Number(propertyDetail.first_arm.period_cap)*100,
-            is_update: true,
-            id: propertyDetail.first_arm.id
+            'property_price': propertyDetail.property_price
           })
+          if (propertyDetail.first_arm && propertyDetail.first_arm.id) {
+            this.setState({
+              mortgage_program_type: propertyDetail.first_arm.mortage_program_type,
+              loan_amount: propertyDetail.first_arm.loan_amount,
+              loan_amount_number: propertyDetail.first_arm.loan_amount,
+              loan_term: propertyDetail.first_arm.loan_term,
+              select_loan_program: propertyDetail.first_arm.select_loan_program,
+              initial_interest_rate: propertyDetail.first_arm.initial_interest_rate,
+              initial_interest_rate_percentage: Number(propertyDetail.first_arm.initial_interest_rate)*100,
+              first_interest_rate_adj_cap: propertyDetail.first_arm.first_interest_rate_adj_cap,
+              first_interest_rate_adj_cap_percentage: Number(propertyDetail.first_arm.first_interest_rate_adj_cap)*100,
+              floor_interest_rate: propertyDetail.first_arm.floor_interest_rate,
+              floor_interest_rate_percentage: Number(propertyDetail.first_arm.floor_interest_rate)*100,
+              ceiling_interest_rate: propertyDetail.first_arm.ceiling_interest_rate,
+              ceiling_interest_rate_percentage: Number(propertyDetail.first_arm.ceiling_interest_rate)*100,
+              period_cap: propertyDetail.first_arm.period_cap,
+              rate_add: propertyDetail.first_arm.rate_add,
+              rate_add_percentage: Number(propertyDetail.first_arm.rate_add)*100,
+              points: propertyDetail.first_arm.points,
+              closing_costs: propertyDetail.first_arm.closing_costs,
+              closing_costs_number:propertyDetail.first_arm.closing_costs,
+              interest_only_option: propertyDetail.first_arm.interest_only_option,
+              interest_only_period: propertyDetail.first_arm.interest_only_period,
+              pmi: propertyDetail.first_arm.pmi,
+              second_mortgage_loan_amount: propertyDetail.first_arm.second_mortgage_loan_amount,
+              second_mortgage_loan_term: propertyDetail.first_arm.second_mortgage_loan_term,
+              second_mortgage_interest: propertyDetail.first_arm.second_mortgage_interest,
+              second_mortgage_points: propertyDetail.first_arm.second_mortgage_points,
+              second_mortgage_closing_costs: propertyDetail.first_arm.second_mortgage_closing_costs,
+              showInterestOnlyPeriodOption: false,
+              secondmtgpmichoice1: propertyDetail.first_arm.secondmtgpmichoice1,
+              PMIfirst1: propertyDetail.first_arm.PMIfirst1,
+              loanamountsecond1: propertyDetail.first_arm.loanamountsecond1,
+              Pmtsecond1: propertyDetail.first_arm.Pmtsecond1,
+              ARMtype1: propertyDetail.first_arm.ARMtype1,
+              ARM1rate: propertyDetail.first_arm.ARM1rate,
+              ARMfirstadjin1: propertyDetail.first_arm.ARMfirstadjin1,
+              floor1: propertyDetail.first_arm.floor1,
+              ceiling1: propertyDetail.first_arm.ceiling1,
+              periodicadjcap1: propertyDetail.first_arm.periodicadjcap1,
+              rateadd1: propertyDetail.first_arm.rateadd1,
+              secondmtgpmichoice2: propertyDetail.first_arm.secondmtgpmichoice2,
+              PMIfirst2: propertyDetail.first_arm.PMIfirst2,
+              loanamountsecond2: propertyDetail.first_arm.loanamountsecond2,
+              Pmtsecond2: propertyDetail.first_arm.Pmtsecond2,
+              ARM2rate: propertyDetail.first_arm.ARM2rate,
+              ARMfirstadjin2: propertyDetail.first_arm.ARMfirstadjin2,
+              floor2: propertyDetail.first_arm.floor2,
+              ceiling2: propertyDetail.first_arm.ceiling2,
+              periodicadjcap2: propertyDetail.first_arm.periodicadjcap2,
+              rateadd2: propertyDetail.first_arm.rateadd2,
+              points_percentage: Number(propertyDetail.first_arm.points)*100,
+              closing_costs_percentage: Number(propertyDetail.first_arm.closing_costs)*100,
+              period_cap_percentage: Number(propertyDetail.first_arm.period_cap)*100,
+              is_update: true,
+              id: propertyDetail.first_arm.id
+            })
+          }
+          
+
         
           this.props.handleArmData(this.state);
         })
@@ -173,6 +184,30 @@ export class ARMComponentFirstLoan extends Component {
     const { name } = event.target;
     event.persist();
     let downpayment;
+
+    if (event.target.name == "loan_amount") {
+      if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
+        this.setState({
+          loan_amount_validation_error: "Cannot exceed Property price"
+        })
+      } else {
+        this.setState({
+          loan_amount_validation_error: ""
+        })
+      }
+    }
+    if (event.target.name == "initial_interest_rate_percentage") {
+      if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
+        this.setState({
+          interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+        })
+      } else {
+        this.setState({
+          interestrateValidationError: ""
+        })
+      }
+
+    }
 
     if(event.target.name == "first_interest_rate_adj_cap_percentage"){
       if(this.state.initial_interest_rate > event.target.value){
@@ -501,7 +536,7 @@ if(event.target.name == "rate_add_percentage"){
                 });
               }}
             />
-            
+            {this.state.loan_amount_validation_error}
           </MDBCol>
 
         </MDBRow>
@@ -572,6 +607,7 @@ if(event.target.name == "rate_add_percentage"){
                 });
               }}
             />
+            {this.state.interestrateValidationError}
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "initial_interest_rate")} */}
