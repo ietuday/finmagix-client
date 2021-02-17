@@ -109,7 +109,7 @@ export class FirstLoanScenario extends Component {
           this.setState({
             'property_price': propertyDetail.property_price
           })
-          if(propertyDetail.first_frm && propertyDetail.first_frm.id){
+          if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             this.setState({
               mortgage_program_type: propertyDetail.first_frm.mortage_program_type,
               mortgage_program_type_value: 1,
@@ -132,7 +132,7 @@ export class FirstLoanScenario extends Component {
               ceiling_interest_rate: 0,
               period_cap: propertyDetail.first_frm.periodicadjcap1,
               rate_add: propertyDetail.first_frm.rateadd1,
-  
+
               second_mortgage_loan_amount: propertyDetail.first_frm.loanamountsecond1,
               second_mortgage_loan_term: propertyDetail.first_frm.second_mortgage_loan_term,
               second_mortgage_interest: propertyDetail.first_frm.second_mortgage_interest,
@@ -167,12 +167,9 @@ export class FirstLoanScenario extends Component {
               points_percentage: Number(propertyDetail.first_frm.points) * 100,
               is_update: true,
               id: propertyDetail.first_frm.id
-            }) 
+            })
           }
           this.props.handleFirstloanMortgageInfo(this.state, null);
-         
-
-
         })
         .catch((err) => {
 
@@ -187,7 +184,7 @@ export class FirstLoanScenario extends Component {
   async handleChange(event) {
     const { name } = event.target;
     event.persist();
-    
+
     if (event.target.name == "loan_amount") {
       if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
         this.setState({
@@ -199,8 +196,6 @@ export class FirstLoanScenario extends Component {
         })
       }
     }
-
-
 
     if (event.target.name == "interest_only_period") {
       if (this.state.loan_term < event.target.value) {
@@ -215,7 +210,7 @@ export class FirstLoanScenario extends Component {
 
     }
 
-    if (event.target.name == "interest") {
+    if (event.target.name == "interest_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
         this.setState({
           interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
@@ -229,7 +224,7 @@ export class FirstLoanScenario extends Component {
     }
 
 
-    if (event.target.name == "points") {
+    if (event.target.name == "points_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 5) {
         this.setState({
           pointsValidationError: "If the points are greater than 5%, ask 'Is the input for points accurate?''"
@@ -559,8 +554,8 @@ export class FirstLoanScenario extends Component {
                   />
                 </MDBCol>
               </MDBRow>
-                {this.state.loan_amount_validation_error}
-               
+              {this.state.loan_amount_validation_error}
+
               <MDBRow className="margin20">
                 <MDBCol md="12">
                   <span className="get-started-label">Select loan term </span>
@@ -597,8 +592,8 @@ export class FirstLoanScenario extends Component {
                   <NumberFormat
                     className="input-class-mdb"
                     placeholder="Enter amount here"
-                    name="interest"
-                    value={this.state.interest}
+                    name="interest_percentage"
+                    value={this.state.interest_percentage}
                     onChange={this.handleChange}
                     // thousandSeparator={true}
                     suffix={"%"}
@@ -641,8 +636,8 @@ export class FirstLoanScenario extends Component {
                   <NumberFormat
                     className="input-class-mdb"
                     placeholder="Enter amount here"
-                    name="points"
-                    value={this.state.points}
+                    name="points_percentage"
+                    value={this.state.points_percentage}
                     onChange={this.handleChange}
                     suffix={"%"}
                     onValueChange={async (values) => {
@@ -702,7 +697,7 @@ export class FirstLoanScenario extends Component {
                   />
                 </MDBCol>
               </MDBRow>
-              
+
               <MDBRow className="margin20">
                 <MDBCol md="12">
                   <span className="get-started-label">Interest only option</span>

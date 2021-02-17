@@ -174,7 +174,7 @@ export class ARMComponentFirstLoan extends Component {
     event.persist();
     let downpayment;
 
-    if(event.target.name == "first_interest_rate_adj_cap"){
+    if(event.target.name == "first_interest_rate_adj_cap_percentage"){
       if(this.state.initial_interest_rate > event.target.value){
         this.setState({
           rateAdjustmentCapValidationError: "First interest rate adjustment cap cannot be less than initial interest rate"
@@ -186,7 +186,7 @@ export class ARMComponentFirstLoan extends Component {
       }
   }
 
-  if(event.target.name == "floor_interest_rate"){
+  if(event.target.name == "floor_interest_rate_percentage"){
     if(this.state.initial_interest_rate < event.target.value){
       this.setState({
         floorinterestrateValidationError: "Floor interest rate cannot be greater than initial interest rate"
@@ -199,7 +199,7 @@ export class ARMComponentFirstLoan extends Component {
 }
 
 
-if(event.target.name == "period_cap"){
+if(event.target.name == "period_cap_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 3){
     this.setState({
       periodCapValidationError: "If the Period cap input is greater than 3%, ask ' Is the period cap input accurate?"
@@ -212,7 +212,7 @@ if(event.target.name == "period_cap"){
   
 }
 
-if(event.target.name == "rate_add"){
+if(event.target.name == "rate_add_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 3){
     this.setState({
       rateAddValidationError: "If the Rate add input is greater than 3%, ask 'Is the rate add input accurate?'"
@@ -419,7 +419,8 @@ if(event.target.name == "rate_add"){
         periodicadjcap2: this.state.periodicadjcap2,
         rateadd2: this.state.rateadd2,
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        loan_amount_validation_error: ""
       };
       this.props.handleArmData(dataWithSecondMortgage);
     }
@@ -500,9 +501,11 @@ if(event.target.name == "rate_add"){
                 });
               }}
             />
+            
           </MDBCol>
+
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "loan_amount")} */}
+        
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Select Loan Term</span>
@@ -554,8 +557,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="initial_interest_rate"
-              value={this.state.initial_interest_rate}
+              name="initial_interest_rate_percentage"
+              value={this.state.initial_interest_rate_percentage}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -601,8 +604,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="first_interest_rate_adj_cap"
-              value={this.state.first_interest_rate_adj_cap}
+              name="first_interest_rate_adj_cap_percentage"
+              value={this.state.first_interest_rate_adj_cap_percentage}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {
@@ -648,8 +651,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="floor_interest_rate"
-              value={this.state.floor_interest_rate}
+              name="floor_interest_rate_percentage"
+              value={this.state.floor_interest_rate_percentage}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {
@@ -731,8 +734,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="period_cap"
-              value={this.state.period_cap}
+              name="period_cap_percentage"
+              value={this.state.period_cap_percentage}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {
@@ -773,8 +776,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="rate_add"
-              value={this.state.rate_add}
+              name="rate_add_percentage"
+              value={this.state.rate_add_percentage}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {

@@ -150,7 +150,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       
   }
 
-  if(event.target.name == "second_mortgage_interest"){
+  if(event.target.name == "second_mortgage_interest_percentage"){
     if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
       this.setState({
         interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
@@ -164,7 +164,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
 }
 
 
-if(event.target.name == "second_mortgage_points"){
+if(event.target.name == "second_mortgage_points_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
     this.setState({
       pointsValidationError: "If the points are greater than 5%, ask 'Is the input for points accurate?''"
@@ -288,8 +288,8 @@ if(event.target.name == "second_mortgage_points"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="second_mortgage_interest"
-              value={this.state.second_mortgage_interest}
+              name="second_mortgage_interest_percentage"
+              value={this.state.second_mortgage_interest_percentage}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -329,8 +329,8 @@ if(event.target.name == "second_mortgage_points"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="second_mortgage_points"
-              value={this.state.second_mortgage_points}
+              name="second_mortgage_points_percentage"
+              value={this.state.second_mortgage_points_percentage}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {

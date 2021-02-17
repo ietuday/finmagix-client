@@ -137,7 +137,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
   };
   async handleChange(event) {
    
-    if(event.target.name == "interest"){
+    if(event.target.name == "second_mortgage_interest_percentage"){
       if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
         this.setState({
           interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
@@ -332,8 +332,8 @@ export class ShowPmiOptionsFirstLoan extends Component {
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="second_mortgage_points"
-              value={this.state.second_mortgage_points}
+              name="second_mortgage_points_percentage"
+              value={this.state.second_mortgage_points_percentage}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {

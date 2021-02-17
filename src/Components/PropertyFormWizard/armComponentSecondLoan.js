@@ -171,7 +171,7 @@ export class ARMComponentSecondLoan extends Component {
     const { name } = event.target;
     event.persist();
 
-    if(event.target.name == "first_interest_rate_adj_cap"){
+    if(event.target.name == "first_interest_rate_adj_cap_percentage"){
       if(this.state.initial_interest_rate > event.target.value){
         this.setState({
           rateAdjustmentCapValidationError: "First interest rate adjustment cap cannot be less than initial interest rate"
@@ -183,7 +183,7 @@ export class ARMComponentSecondLoan extends Component {
       }
   }
 
-  if(event.target.name == "floor_interest_rate"){
+  if(event.target.name == "floor_interest_rate_percentage"){
     if(this.state.initial_interest_rate < event.target.value){
       this.setState({
         floorinterestrateValidationError: "Floor interest rate cannot be greater than initial interest rate"
@@ -196,7 +196,7 @@ export class ARMComponentSecondLoan extends Component {
 }
 
 
-if(event.target.name == "period_cap"){
+if(event.target.name == "period_cap_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 3){
     this.setState({
       periodCapValidationError: "If the Period cap input is greater than 3%, ask ' Is the period cap input accurate?"
@@ -209,7 +209,7 @@ if(event.target.name == "period_cap"){
   
 }
 
-if(event.target.name == "rate_add"){
+if(event.target.name == "rate_add_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 3){
     this.setState({
       rateAddValidationError: "If the Rate add input is greater than 3%, ask 'Is the rate add input accurate?'"
@@ -550,8 +550,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="initial_interest_rate"
-              value={this.state.initial_interest_rate}
+              name="initial_interest_rate_percentage"
+              value={this.state.initial_interest_rate_percentage}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -595,8 +595,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="first_interest_rate_adj_cap"
-              value={this.state.first_interest_rate_adj}
+              name="first_interest_rate_adj_cap_percentage"
+              value={this.state.first_interest_rate_adj_cap_percentage}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -641,8 +641,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="floor_interest_rate"
-              value={this.state.floor_interest_rate}
+              name="floor_interest_rate_percentage"
+              value={this.state.floor_interest_rate_percentage}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -727,8 +727,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="period_cap"
-              value={this.state.period_cap}
+              name="period_cap_percentage"
+              value={this.state.period_cap_percentage}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {
@@ -767,8 +767,8 @@ if(event.target.name == "rate_add"){
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="rate_add"
-              value={this.state.rate_add}
+              name="rate_add_percentage"
+              value={this.state.rate_add_percentage}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
