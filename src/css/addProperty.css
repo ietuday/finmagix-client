@@ -1,0 +1,90 @@
+.MuiOutlinedInput-root {
+    position: relative !important;
+    background: #ffffff80 0% 0% no-repeat padding-box !important;
+    border-radius: 10px !important;
+  }
+  .MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedStart.MuiOutlinedInput-inputAdornedStart{
+      height:0px !important;
+  }
+  .dashboard-cover-img{
+      width:100% !important;
+  }
+  
+  .add-property-container {
+      border:1px solid lightgrey;
+      /* width:40% !important; */
+    }
+  .input-class-mdb {
+    width: -webkit-fill-available;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid black;
+  }
+  .signup-signin-label {
+    font-weight: 700;
+  }
+  .signuplastsentence {
+    margin-bottom: 20px;
+  }
+  .sign-up-back-arrow {
+    float: left;
+    color: black;
+    cursor: pointer;
+    font-size: x-large;
+    font-weight: 700px;
+  }
+  .modal-text {
+    cursor: pointer;
+    font-weight: 700px;
+    margin-left: 30px;
+  }
+  .navbar-icon {
+    float: right;
+    margin-top: -31px;
+    color: white;
+  }
+  .marginbottom20 {
+    margin-bottom: 20px;
+  }
+  .sign-up-small-label {
+    color: #7f8586;
+  }
+  
+  @media only screen and (max-width: 760px),
+    (min-width: 768px) and (max-width: 1024px) {
+    .add-property-container {
+      width: 100% !important;
+    }
+  }
+
+.tool-img{
+  width: 18px;
+  margin-left: 7px;
+
+}
+
+  .tooltip-img {
+    position: relative;
+    display: inline-block;
+    color: blue;
+  }
+  
+  .tooltip-img .tooltip-img-text {
+    visibility: hidden;
+    max-width:100%;
+    min-width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    font-size: 14px;
+    font-weight: normal;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip-img:hover .tooltip-img-text {
+    visibility: visible;
+  }

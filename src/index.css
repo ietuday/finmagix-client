@@ -1,0 +1,38 @@
+
+@import url("../src/sf-webfont/style.css");
+
+body {
+  margin: 0;
+  font-family: 'SF Pro Display Regular' !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'SF Pro Display Regular' !important;
+}
+h2{
+  font-family: 'SF UI Display Heavy' !important;
+}
+
+h5{
+  font-family: 'SF Pro Display Regular' !important;
+  font-size: 24px !important;
+  line-height: 27px !important;
+  padding-top: 5px;
+}
+
+.rec-pagination{
+  z-index: 111 !important;
+  margin-top: -50px !important;
+}
+
+
+.rec-pagination{
+    z-index: 111 !important;
+    margin-top: -50px !important;
+}
+
+
+
+

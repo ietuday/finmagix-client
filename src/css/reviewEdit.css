@@ -1,0 +1,23 @@
+.review-edit-container {
+    /* width: 40% !important; */
+    border:1px solid lightgrey;
+  }
+  .margin20{
+      margin-top:30px;
+  } 
+  .marginbottom20{
+      margin-bottom: 20px;
+  }
+  .get-started-label {
+    font-weight: 700;
+  }
+  .summary-title{
+      font-weight:700;
+  }
+
+  @media only screen and (max-width: 760px),
+  (min-width: 768px) and (max-width: 1024px) {
+  .review-edit-container {
+    width: 100% !important;
+  }
+}
