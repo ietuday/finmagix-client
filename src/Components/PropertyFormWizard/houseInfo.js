@@ -55,7 +55,7 @@ export class GetStartedHouseInfo extends Component {
       homepriceGrowthValidationError: "",
       downpaymentnewValidationError: "",
       annualPropertytaxValidationError: "",
-      homeownerInsuranceValidationError:""
+      homeownerInsuranceValidationError: ""
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -66,10 +66,10 @@ export class GetStartedHouseInfo extends Component {
     this.checkProperty()
   }
 
-  checkProperty(){
-    
+  checkProperty() {
+
     const propertyId = JSON.parse(localStorage.getItem('property_id'))
-    if(propertyId){
+    if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {
           "Content-type": "Application/json",
@@ -78,7 +78,7 @@ export class GetStartedHouseInfo extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
-          
+
           this.setState({
             house_address: propertyDetail.house_address,
             house_state: propertyDetail.house_state,
@@ -98,21 +98,21 @@ export class GetStartedHouseInfo extends Component {
             home_owner_insurance: propertyDetail.home_owner_insurance,
             home_owner_insurance_number: propertyDetail.home_owner_insurance,
             home_price_growth: propertyDetail.home_price_growth,
-            home_price_growth_percentage: Number(propertyDetail.home_price_growth)*100,
+            home_price_growth_percentage: Number(propertyDetail.home_price_growth) * 100,
             is_update: true
           })
           let downpayment
           let twenty_percent_of_property_price =
-          (this.state.property_price * 20) / 100;
-        if (this.state.downpayment_amount < twenty_percent_of_property_price) {
-          downpayment = "lessthan20";
-        } else {
-          downpayment = "greaterthan20";
-        }
+            (this.state.property_price * 20) / 100;
+          if (this.state.downpayment_amount < twenty_percent_of_property_price) {
+            downpayment = "lessthan20";
+          } else {
+            downpayment = "greaterthan20";
+          }
           this.props.handleHouseInfo(downpayment, this.state);
         })
         .catch((err) => {
-         
+
         });
     }
   }
@@ -125,63 +125,57 @@ export class GetStartedHouseInfo extends Component {
     let downpayment;
 
 
-    if(event.target.name == "home_price_growth_percentage"){
-      if(parseInt(String(event.target.value).replace(/%/g, '')) > 20){
+    if (event.target.name == "home_price_growth_percentage") {
+      if (parseInt(String(event.target.value).replace(/%/g, '')) > 20) {
         this.setState({
           homepriceGrowthValidationError: "Home Price growth cannot exceed 20%"
-        }) 
-      }else{
+        })
+      } else {
         this.setState({
           homepriceGrowthValidationError: ""
-        }) 
+        })
       }
-      
+
+    }
+
+    if (event.target.name == "downpayment_amount") {
+      if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
+        this.setState({
+          downpaymentnewValidationError: " Downpayment amount can never exceed home price"
+        })
+      } else {
+        this.setState({
+          downpaymentnewValidationError: ""
+        })
+      }
     }
 
 
+    if (event.target.name == "annual_property_tax") {
+      if (parseInt(String(event.target.value).replace(/,/g, '')) > (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 10) / 100) {
 
+        this.setState({
+          annualPropertytaxValidationError: " Annual Property tax cannot exceed 10% of home price"
+        })
+      } else {
+        this.setState({
+          annualPropertytaxValidationError: ""
+        })
+      }
+    }
 
+    if (event.target.name == "home_owner_insurance") {
+      if (parseInt(String(event.target.value).replace(/,/g, '')) > (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 3) / 100) {
 
-    
-
-if(event.target.name == "downpayment_amount"){
-  if(this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))){
-    this.setState({
-      downpaymentnewValidationError: " Downpayment amount can never exceed home price"
-    }) 
-  }else{
-    this.setState({
-      downpaymentnewValidationError: ""
-    }) 
-  }
-}
-
-
-if(event.target.name == "annual_property_tax"){
-  if(parseInt(String(event.target.value).replace(/,/g, '')) >  (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 10) / 100){
-    
-    this.setState({
-      annualPropertytaxValidationError: " Annual Property tax cannot exceed 10% of home price"
-    }) 
-  }else{
-    this.setState({
-      annualPropertytaxValidationError: ""
-    }) 
-  }
-}
-
-if(event.target.name == "home_owner_insurance"){
-  if(parseInt(String(event.target.value).replace(/,/g, '')) >  (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 3) / 100){
-    
-    this.setState({
-      homeownerInsuranceValidationError: " Annual Property tax cannot exceed 10% of home price"
-    }) 
-  }else{
-    this.setState({
-      homeownerInsuranceValidationError:""
-    }) 
-  }
-}
+        this.setState({
+          homeownerInsuranceValidationError: " Annual Property tax cannot exceed 3% of home price"
+        })
+      } else {
+        this.setState({
+          homeownerInsuranceValidationError: ""
+        })
+      }
+    }
 
 
 
@@ -190,7 +184,7 @@ if(event.target.name == "home_owner_insurance"){
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    
+
     let twenty_percent_of_property_price =
       (this.state.property_price * 20) / 100;
     if (this.state.downpayment_amount < twenty_percent_of_property_price) {
@@ -198,26 +192,26 @@ if(event.target.name == "home_owner_insurance"){
     } else {
       downpayment = "greaterthan20";
     }
-    
+
     if (
       name === "property_price" ||
       name === "downpayment_amount" ||
-      name === "home_price_growth"  || 
+      name === "home_price_growth" ||
       name === "area_of_the_house" ||
       name == "annual_property_tax" ||
       name == "annual_home_owner_association_dues" ||
       name == "home_owner_insurance"
-    ) { 
+    ) {
       console.log(name)
-    
+
       updateValidators(this.validators, event.target.name, event.target.value);
       const validationErrorLength = this.validators[event.target.name].errors
         .length;
-    
+
       this.props.getValidationError(validationErrorLength);
-    
+
     }
-    
+
     this.props.handleHouseInfo(downpayment, this.state);
   }
   handleBedroomRoomCount(count) {
@@ -237,7 +231,7 @@ if(event.target.name == "home_owner_insurance"){
       house_zip_code: data.house_zip_code,
     });
     localStorage.setItem("changeAddress", false);
-    
+
   };
   handleBack = () => {
     this.props.history.push("/select-modules");
@@ -251,13 +245,13 @@ if(event.target.name == "home_owner_insurance"){
         "administrative_area_level_2" === addressArray[i].types[0]
       ) {
         city = addressArray[i].long_name;
-        
+
         return city;
       }
     }
   };
   getArea = (addressArray) => {
-    
+
     let area = "";
     for (let i = 0; i < addressArray.length; i++) {
       if (addressArray[i].types[0]) {
@@ -285,9 +279,9 @@ if(event.target.name == "home_owner_insurance"){
     }
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUpdate(nextProps, nextState) {}
+  componentWillUpdate(nextProps, nextState) { }
   render() {
     return (
       <Fragment>
@@ -386,7 +380,7 @@ if(event.target.name == "home_owner_insurance"){
               }}
             />
           </MDBCol>
-        {this.state.homepriceGrowthValidationError}
+          {this.state.homepriceGrowthValidationError}
         </MDBRow>
         {/* End */}
         <MDBRow className="margin20">
@@ -426,7 +420,7 @@ if(event.target.name == "home_owner_insurance"){
           </MDBCol>
           {this.state.downpaymentnewValidationError}
         </MDBRow>
-       
+
         <MDBRow className="margin20" center>
           <MDBCol md="12">
             <span className="get-started-label">
@@ -455,7 +449,7 @@ if(event.target.name == "home_owner_insurance"){
             <span className="get-started-long-question">Bedrooms</span>
           </MDBCol>
           <MDBCol md="5" sm="6" xs="6" size="6">
-            
+
             <NumberSpinner
               count={this.state.no_of_bedrooms}
               onRoomCount={this.handleBedroomRoomCount}
@@ -517,13 +511,13 @@ if(event.target.name == "home_owner_insurance"){
                 await this.setState({
                   annual_property_tax: value,
                 });
-                
+
               }}
             />
           </MDBCol>
           {this.state.annualPropertytaxValidationError}
         </MDBRow>
-       
+
 
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -563,14 +557,14 @@ if(event.target.name == "home_owner_insurance"){
                 await this.setState({
                   annual_home_owner_association_dues: value,
                 });
-                
+
               }}
             />
           </MDBCol>
-          {displayValidationErrors(this.validators,"annual_home_owner_association_dues")}
+          {displayValidationErrors(this.validators, "annual_home_owner_association_dues")}
         </MDBRow>
 
-       
+
 
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
@@ -599,7 +593,7 @@ if(event.target.name == "home_owner_insurance"){
                 await this.setState({
                   home_owner_insurance: value,
                 });
-                
+
               }}
             />
           </MDBCol>
