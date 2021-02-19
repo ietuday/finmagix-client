@@ -168,7 +168,7 @@ export class GetStartedHouseInfo extends Component {
       if (parseInt(String(event.target.value).replace(/,/g, '')) > (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 3) / 100) {
 
         this.setState({
-          homeownerInsuranceValidationError: " Annual Property tax cannot exceed 3% of home price"
+          homeownerInsuranceValidationError: "Home Owner's insurance cannot exceed 3% of home price"
         })
       } else {
         this.setState({
