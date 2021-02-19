@@ -36,8 +36,8 @@ export class GetStartedHouseInfo extends Component {
       downpayment_amount: "",
       downpayment_amount_number: "",
       stay_duration: "",
-      no_of_bedrooms: 0,
-      no_of_bathrooms: 0,
+      no_of_bedrooms: localStorage.getItem('no_of_bedrooms') ? localStorage.getItem('no_of_bedrooms') : 0,
+      no_of_bathrooms: localStorage.getItem('no_of_bathrooms') ? localStorage.getItem('no_of_bathrooms') : 0,
       area_of_the_house: "",
       annual_property_tax: "",
       annual_property_tax_number: "",
@@ -64,6 +64,7 @@ export class GetStartedHouseInfo extends Component {
     this.handleBedroomRoomCount = this.handleBedroomRoomCount.bind(this);
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
     this.checkProperty()
+    console.log(localStorage)
   }
 
   checkProperty() {
@@ -101,6 +102,8 @@ export class GetStartedHouseInfo extends Component {
             home_price_growth_percentage: Number(propertyDetail.home_price_growth) * 100,
             is_update: true
           })
+          this.handleBedroomRoomCount(this.state.no_of_bedrooms)
+          this.handleBathRoomCount(this.state.no_of_bathrooms)
           let downpayment
           let twenty_percent_of_property_price =
             (this.state.property_price * 20) / 100;
@@ -215,14 +218,18 @@ export class GetStartedHouseInfo extends Component {
     this.props.handleHouseInfo(downpayment, this.state);
   }
   handleBedroomRoomCount(count) {
-    this.setState({
+     this.setState({
       no_of_bedrooms: count,
     });
+    console.log(this.state)
+    localStorage.setItem('no_of_bedrooms',count)
   }
   handleBathRoomCount(count) {
     this.setState({
       no_of_bathrooms: count,
     });
+    console.log(this.state)
+    localStorage.setItem('no_of_bathrooms',count)
   }
   selectAddress = (data) => {
     this.setState({
@@ -446,24 +453,30 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        <MDBRow className="margin20">
+        
+          <MDBRow className="margin20">
           <MDBCol md="7" sm="6" xs="6" size="6">
             <span className="get-started-long-question">Bedrooms</span>
           </MDBCol>
           <MDBCol md="5" sm="6" xs="6" size="6">
-
+            
             <NumberSpinner
               count={this.state.no_of_bedrooms}
               onRoomCount={this.handleBedroomRoomCount}
             />
           </MDBCol>
         </MDBRow>
+
+
         <MDBRow className="margin20">
           <MDBCol md="7" sm="6" xs="6" size="6">
             <span className="get-started-long-question">Bathrooms</span>
           </MDBCol>
           <MDBCol md="5" sm="6" xs="6" size="6">
-            <NumberSpinner count={this.state.no_of_bathrooms} onRoomCount={this.handleBathRoomCount} />
+            <NumberSpinner 
+              count={this.state.no_of_bathrooms}
+              onRoomCount={this.handleBathRoomCount} 
+            />
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">

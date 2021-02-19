@@ -413,12 +413,18 @@ export class StepperComponent extends Component {
         this.state.propertyInfo["id"] = JSON.parse(
           localStorage.getItem("property_id")
         );
+        localStorage.setItem('no_of_bathrooms',this.state.propertyInfo.no_of_bathrooms)
+        localStorage.setItem('no_of_bedrooms',this.state.propertyInfo.no_of_bedrooms)
+        debugger
         PropertyInfoUpdate(
           this.state.propertyInfo,
           this.onSuccessHouseInfo,
           this.onFailureHouseInfo
         );
       } else {
+        localStorage.setItem('no_of_bathrooms',this.state.propertyInfo.no_of_bathrooms)
+        localStorage.setItem('no_of_bedrooms',this.state.propertyInfo.no_of_bedrooms)
+        debugger
         PropertyInfoCreate(
           this.state.propertyInfo,
           this.onSuccessHouseInfo,
