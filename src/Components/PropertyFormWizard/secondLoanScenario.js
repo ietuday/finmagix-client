@@ -100,7 +100,7 @@ export class SecondLoanScenario extends Component {
               points: propertyDetail.second_frm.points,
               closing_costs: propertyDetail.second_frm.closing_costs,
               closing_costs_number:propertyDetail.second_frm.closing_costs,
-              interest_only_option:propertyDetail.second_frm.interest_only_option,
+              interest_only_option:propertyDetail.second_frm.interest_only_period ? "Y" : "N",
               interest_only_period: propertyDetail.second_frm.interest_only_period,
               downpayment: 0,
               pmi: propertyDetail.second_frm.mpi,

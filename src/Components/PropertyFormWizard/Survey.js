@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol, MDBContainer } from "mdbreact";
+import Axios from "axios";
 import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -7,6 +8,10 @@ import { Redirect, withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Header from "../../common/header";
 import "../../css/propertyFormWizard.css";
+
+import { config } from '../config/default';
+const { baseURL } = config;
+
 
 export class Survey extends Component {
   constructor() {
@@ -39,9 +44,22 @@ export class Survey extends Component {
   };
   goToNextPage = async () => {
     localStorage.setItem('basic-info', JSON.stringify(this.state))
-    this.setState({
-      goToNextPage: !this.state.goToNextPage,
-    });
+    Axios.post(`${baseURL}/survey/list_or_create`, this.state, {
+      headers: {
+        "Content-type": "Application/json",
+        Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((surveyCreateResponse) => {
+        this.setState({
+          goToNextPage: !this.state.goToNextPage,
+        });
+      })
+      .catch((err) => {
+        
+      });
+
+
   };
   async onChange(event) {
     await this.setState({

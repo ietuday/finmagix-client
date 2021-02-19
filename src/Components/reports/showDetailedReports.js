@@ -303,56 +303,56 @@ export class ShowDetailedReports extends Component {
       Nonhousingoption: this.state.personalFinace.monthly_non_housing_expenses
         ? Number(this.state.personalFinace.monthly_non_housing_expenses)
         : 0,
-      Mtlyutilities:
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses &&
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses.id
-          ? Number(
-              data.GetSinglePropertyResponse["data"][0].personal_finances
-                .detail_non_housing_expenses.utilities
-            )
-          : 0,
-      Mtlytelinternet:
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses &&
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses.id
-          ? Number(
-              data.GetSinglePropertyResponse["data"][0].personal_finances
-                .detail_non_housing_expenses.telephone_internet
-            )
-          : 0,
-      MtlyTE:
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses &&
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses.id
-          ? Number(
-              data.GetSinglePropertyResponse["data"][0].personal_finances
-                .detail_non_housing_expenses.travel_entertainment
-            )
-          : 0,
-      Mtlyeducation:
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses &&
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses.id
-          ? Number(
-              data.GetSinglePropertyResponse["data"][0].personal_finances
-                .detail_non_housing_expenses.education
-            )
-          : 0,
-      Mtlyotherexpenses:
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses &&
-        data.GetSinglePropertyResponse["data"][0].personal_finances
-          .detail_non_housing_expenses.id
-          ? Number(
-              data.GetSinglePropertyResponse["data"][0].personal_finances
-                .detail_non_housing_expenses.other_expenses
-            )
-          : 0,
+      // Mtlyutilities:
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses &&
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses.id
+      //     ? Number(
+      //         data.GetSinglePropertyResponse["data"][0].personal_finances
+      //           .detail_non_housing_expenses.utilities
+      //       )
+      //     : 0,
+      // Mtlytelinternet:
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses &&
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses.id
+      //     ? Number(
+      //         data.GetSinglePropertyResponse["data"][0].personal_finances
+      //           .detail_non_housing_expenses.telephone_internet
+      //       )
+      //     : 0,
+      // MtlyTE:
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses &&
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses.id
+      //     ? Number(
+      //         data.GetSinglePropertyResponse["data"][0].personal_finances
+      //           .detail_non_housing_expenses.travel_entertainment
+      //       )
+      //     : 0,
+      // Mtlyeducation:
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses &&
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses.id
+      //     ? Number(
+      //         data.GetSinglePropertyResponse["data"][0].personal_finances
+      //           .detail_non_housing_expenses.education
+      //       )
+      //     : 0,
+      // Mtlyotherexpenses:
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses &&
+      //   data.GetSinglePropertyResponse["data"][0].personal_finances
+      //     .detail_non_housing_expenses.id
+      //     ? Number(
+      //         data.GetSinglePropertyResponse["data"][0].personal_finances
+      //           .detail_non_housing_expenses.other_expenses
+      //       )
+      //     : 0,
       _Totalnonhousing: this.state.personalFinace.monthly_non_housing_expenses
         ? Number(this.state.personalFinace.monthly_non_housing_expenses)
         : 0,
