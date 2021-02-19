@@ -56,7 +56,8 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
       id:"",
       loanAmountValidationError: "",
       pmiValidationError:"",
-      interestrateValidationError:""
+      interestrateValidationError:"",
+      pointsValidationError:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
@@ -177,9 +178,24 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
         pmiValidationError: ""
       }) 
     }
-    this.props.handleDownpaymentData(this.state);
     
   }
+
+  if(event.target.name == "second_mortgage_points_percentage"){
+    if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+      this.setState({
+        pointsValidationError: "If the points are greater than 5%, ask 'Is the input for points accurate?''"
+      }) 
+    }else{
+      this.setState({
+        pointsValidationError: ""
+      }) 
+    }
+    
+  }
+  
+  this.props.handleDownpaymentData(this.state);
+
   
 
   }
@@ -350,6 +366,8 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
                 });
               }}
             />
+
+            {this.state.pointsValidationError}
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
