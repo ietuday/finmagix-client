@@ -213,7 +213,7 @@ export class FirstLoanScenario extends Component {
     if (event.target.name == "interest_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
         this.setState({
-          interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+          interestrateValidationError: "Is the interest rate input accurate?"
         })
       } else {
         this.setState({
@@ -474,8 +474,9 @@ export class FirstLoanScenario extends Component {
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
-        </MDBCol>
         {this.state.interestOnlyPeriodValidationError}
+        </MDBCol>
+       
       </MDBRow>
     );
 
@@ -552,9 +553,10 @@ export class FirstLoanScenario extends Component {
                       });
                     }}
                   />
+              {this.state.loan_amount_validation_error}
                 </MDBCol>
               </MDBRow>
-              {this.state.loan_amount_validation_error}
+            
 
               <MDBRow className="margin20">
                 <MDBCol md="12">
@@ -607,8 +609,9 @@ export class FirstLoanScenario extends Component {
                       });
                     }}
                   />
-                </MDBCol>
                 {this.state.interestrateValidationError}
+                </MDBCol>
+               
               </MDBRow>
               {/* new fields */}
 
@@ -650,8 +653,9 @@ export class FirstLoanScenario extends Component {
                       });
                     }}
                   />
-                </MDBCol>
                 {this.state.pointsValidationError}
+                </MDBCol>
+              
               </MDBRow>
 
               <MDBRow className="margin20">

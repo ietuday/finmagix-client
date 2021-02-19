@@ -140,7 +140,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
     if(event.target.name == "second_mortgage_interest_percentage"){
       if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
         this.setState({
-          interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+          interestrateValidationError: " Is the interest rate input accurate?"
         }) 
       }else{
         this.setState({
@@ -250,8 +250,9 @@ export class ShowPmiOptionsFirstLoan extends Component {
                 });
               }}
             />
-          </MDBCol>
           {this.state.loanAmountValidationError}
+          </MDBCol>
+         
         </MDBRow>
         
         <MDBRow className="margin20">
@@ -306,8 +307,9 @@ export class ShowPmiOptionsFirstLoan extends Component {
                 });
               }}
             />
-          </MDBCol>
           {this.state.interestOnlyPeriodValidationError}
+          </MDBCol>
+         
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -346,8 +348,9 @@ export class ShowPmiOptionsFirstLoan extends Component {
                 });
               }}
             />
-          </MDBCol>
           {this.state.pointsValidationError}  
+          </MDBCol>
+          
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">

@@ -199,7 +199,7 @@ export class ARMComponentFirstLoan extends Component {
     if (event.target.name == "initial_interest_rate_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
         this.setState({
-          interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+          interestrateValidationError: "Is the interest rate input accurate?"
         })
       } else {
         this.setState({
@@ -655,12 +655,10 @@ if(event.target.name == "rate_add_percentage"){
               }}
             />
 
-            {/* {displayValidationErrors(
-              this.validators,
-              "first_interest_rate_adj_cap"
-            )} */}
+           
+{this.state.rateAdjustmentCapValidationError}
           </MDBCol>
-          {this.state.rateAdjustmentCapValidationError}
+         
         </MDBRow>
 
         <MDBRow className="margin20">
@@ -701,8 +699,9 @@ if(event.target.name == "rate_add_percentage"){
                 });
               }}
             />
-          </MDBCol>
           {this.state.floorinterestrateValidationError}
+          </MDBCol>
+       
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "floor_interest_rate")} */}
         <MDBRow className="margin20">
@@ -745,7 +744,7 @@ if(event.target.name == "rate_add_percentage"){
             />
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "ceiling_interest_rate")} */}
+       
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Period cap</span>
@@ -785,8 +784,9 @@ if(event.target.name == "rate_add_percentage"){
                 
               }}
             />
-          </MDBCol>
           {this.state.periodCapValidationError}
+          </MDBCol>
+         
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "period_cap")} */}
 

@@ -340,7 +340,7 @@ export class GetStartedHouseInfo extends Component {
               }}
             />
           </MDBCol>
-          {displayValidationErrors(this.validators, "property_price")}
+          {/* {displayValidationErrors(this.validators, "property_price")} */}
         </MDBRow>
         {/* New field add */}
         <MDBRow className="margin20">
@@ -379,8 +379,9 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-          </MDBCol>
           {this.state.homepriceGrowthValidationError}
+          </MDBCol>
+         
         </MDBRow>
         {/* End */}
         <MDBRow className="margin20">
@@ -417,8 +418,9 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.downpayment_amount}
               onChange={this.handleChange}
             /> */}
-          </MDBCol>
           {this.state.downpaymentnewValidationError}
+          </MDBCol>
+         
         </MDBRow>
 
         <MDBRow className="margin20" center>
@@ -514,8 +516,9 @@ export class GetStartedHouseInfo extends Component {
 
               }}
             />
-          </MDBCol>
           {this.state.annualPropertytaxValidationError}
+          </MDBCol>
+          
         </MDBRow>
 
 
@@ -561,7 +564,7 @@ export class GetStartedHouseInfo extends Component {
               }}
             />
           </MDBCol>
-          {displayValidationErrors(this.validators, "annual_home_owner_association_dues")}
+          {/* {displayValidationErrors(this.validators, "annual_home_owner_association_dues")} */}
         </MDBRow>
 
 
@@ -596,9 +599,10 @@ export class GetStartedHouseInfo extends Component {
 
               }}
             />
+        {this.state.homeownerInsuranceValidationError}
           </MDBCol>
         </MDBRow>
-        {this.state.homeownerInsuranceValidationError}
+      
       </Fragment>
     );
   }

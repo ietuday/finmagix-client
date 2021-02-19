@@ -153,7 +153,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
   if(event.target.name == "second_mortgage_interest_percentage"){
     if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
       this.setState({
-        interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+        interestrateValidationError: " Is the interest rate input accurate?"
       }) 
     }else{
       this.setState({

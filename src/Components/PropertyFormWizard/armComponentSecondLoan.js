@@ -195,7 +195,7 @@ export class ARMComponentSecondLoan extends Component {
     if (event.target.name == "initial_interest_rate_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
         this.setState({
-          interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+          interestrateValidationError: "Is the interest rate input accurate?"
         })
       } else {
         this.setState({
@@ -645,8 +645,9 @@ if(event.target.name == "rate_add_percentage"){
                 });
               }}
             />
+             {this.state.rateAdjustmentCapValidationError}
           </MDBCol>
-          {this.state.rateAdjustmentCapValidationError}
+         
         </MDBRow>
         {/* {displayValidationErrors(
           this.validators,
@@ -691,8 +692,9 @@ if(event.target.name == "rate_add_percentage"){
                 });
               }}
             />
+              {this.state.floorinterestrateValidationError}
           </MDBCol>
-          {this.state.floorinterestrateValidationError}
+        
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "floor_interest_rate")} */}
         <MDBRow className="margin20">
@@ -776,8 +778,9 @@ if(event.target.name == "rate_add_percentage"){
                 });
               }}
             />
-          </MDBCol>
           {this.state.periodCapValidationError}
+          </MDBCol>
+         
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "period_cap")} */}
         <MDBRow className="margin20">

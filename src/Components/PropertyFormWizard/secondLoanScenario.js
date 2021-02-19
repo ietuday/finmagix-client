@@ -192,7 +192,7 @@ export class SecondLoanScenario extends Component {
   if(event.target.name == "interest_percentage"){
     if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
       this.setState({
-        interestrateValidationError: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'"
+        interestrateValidationError: "Is the interest rate input accurate?"
       }) 
     }else{
       this.setState({
@@ -354,8 +354,9 @@ if(event.target.name == "points_percentage"){
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
-        </MDBCol>
         {this.state.interestOnlyPeriodValidationError}
+        </MDBCol>
+      
       </MDBRow>
     );
 
@@ -493,8 +494,9 @@ if(event.target.name == "points_percentage"){
                     });
                   }}
                 />
-              </MDBCol>
               {this.state.interestrateValidationError}
+              </MDBCol>
+          
             </MDBRow>
            
             <MDBRow className="margin20">
@@ -535,8 +537,9 @@ if(event.target.name == "points_percentage"){
                     });
                   }}
                 />
-              </MDBCol>
               {this.state.pointsValidationError}  
+              </MDBCol>
+              
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "points")} */}
             <MDBRow className="margin20">

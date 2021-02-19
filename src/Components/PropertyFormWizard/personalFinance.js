@@ -257,7 +257,7 @@ export class PersonalFinance extends Component {
               }}
             />
           </MDBCol>
-          {displayValidationErrors(this.validators, "federal_income")}
+          {/* {displayValidationErrors(this.validators, "federal_income")} */}
         </MDBRow>
 
         <MDBRow className="margin20">
@@ -297,8 +297,9 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
-          </MDBCol>
           {this.state.monthlydebtPaymentValidationError}
+          </MDBCol>
+         
         </MDBRow>
       
 
@@ -342,8 +343,9 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
-          </MDBCol>
           {this.state.monthlynonhousingExpensesValidationError}
+          </MDBCol>
+         
         </MDBRow>
 
         <MDBRow className="margin20">
