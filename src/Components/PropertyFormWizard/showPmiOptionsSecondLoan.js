@@ -319,8 +319,9 @@ if(event.target.name == "second_mortgage_points_percentage"){
                 });
               }}
             />
+            {this.state.interestrateValidationError}
           </MDBCol>
-          {this.state.interestrateValidationError}
+          
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">

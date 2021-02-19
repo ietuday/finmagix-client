@@ -55,7 +55,8 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       is_update: false,
       id:"",
       pmiValidationError:"",
-      loanAmountValidationError:""
+      loanAmountValidationError:"",
+      interestrateValidationError:""
 
     };
     this.handleChange = this.handleChange.bind(this);
@@ -163,6 +164,19 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       }
       
   }
+  
+  if(event.target.name == "second_mortgage_interest_percentage"){
+    if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
+      this.setState({
+        interestrateValidationError: " Is the interest rate input accurate?"
+      }) 
+    }else{
+      this.setState({
+        interestrateValidationError: ""
+      }) 
+    }
+    
+}
     this.props.handleDownpaymentData(this.state);
   }
   componentDidMount() {}
@@ -290,6 +304,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
                 });
               }}
             />
+            {this.state.interestrateValidationError}
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">

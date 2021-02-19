@@ -137,7 +137,12 @@ export class ShowPmiOptionsFirstLoan extends Component {
     }
   };
   async handleChange(event) {
-   
+
+    event.persist();
+    await this.setState({
+      [event.target.name]: event.target.value,
+    });
+
     if(event.target.name == "second_mortgage_interest_percentage"){
       if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
         this.setState({
@@ -166,10 +171,6 @@ export class ShowPmiOptionsFirstLoan extends Component {
 
 
 
-    event.persist();
-    await this.setState({
-      [event.target.name]: event.target.value,
-    });
    
     if(event.target.name == "loanamountsecond1"){
         if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
@@ -325,7 +326,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
                 });
               }}
             />
-          {this.state.interestOnlyPeriodValidationError}
+          {this.state.interestrateValidationError}
           </MDBCol>
          
         </MDBRow>
