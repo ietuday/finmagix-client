@@ -64,7 +64,7 @@ export class GetStartedBasicInfo extends Component {
         <MDBRow className="margin50" center>
           <MDBCol md="10">
             <span className="get-started-label">
-              When do you want to buy your home?#############################
+              When do you want to buy your home?
             </span>
             <br />
             <Select
