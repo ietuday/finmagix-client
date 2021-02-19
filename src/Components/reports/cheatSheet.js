@@ -69,6 +69,11 @@ function CheatSheet(props) {
     );
   }
 
+ 
+
+
+
+
   const loandata = [
     {
       name: "Loan Amount First",  
@@ -85,14 +90,14 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Loan Amount Second",
+      name: ((CalculatorResponse.ARM1 && CalculatorResponse.ARM1.loanamountsecond1) || (CalculatorResponse.FRM1 && CalculatorResponse.FRM1.loanamountsecond1)) ? "Loan Amount Second" : "PMI Amount",
       Amount: parseFloat(
         String(
           `${
             CalculatorResponse.ARM1
-              ? CalculatorResponse.ARM1.loanamountsecond1
+              ? (CalculatorResponse.ARM1.loanamountsecond1 ? CalculatorResponse.ARM1.loanamountsecond1 :CalculatorResponse.ARM1.pmi)
               : CalculatorResponse.FRM1
-              ? CalculatorResponse.FRM1.loanamountsecond1
+              ? (CalculatorResponse.FRM1.loanamountsecond1 ? CalculatorResponse.FRM1.loanamountsecond1 :CalculatorResponse.FRM1.pmi)
               : 0
           }`
         ).replace(/,/g, "")
@@ -113,14 +118,14 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Loan Amount Second",
+      name: ((CalculatorResponse.ARM2 && CalculatorResponse.ARM2.loanamountsecond2) || (CalculatorResponse.FRM2 && CalculatorResponse.FRM2.loanamountsecond1)) ? "Loan Amount Second" : "PMI Amount",
       Amount: parseFloat(
         String(
           `${
             CalculatorResponse.ARM2
-              ? CalculatorResponse.ARM2.loanamountsecond2
+              ? (CalculatorResponse.ARM2.loanamountsecond2 ? CalculatorResponse.ARM2.loanamountsecond2 :CalculatorResponse.ARM2.pmi)
               : CalculatorResponse.FRM2
-              ? CalculatorResponse.FRM2.loanamountsecond1
+              ? (CalculatorResponse.FRM2.loanamountsecond1 ? CalculatorResponse.FRM2.loanamountsecond1 :CalculatorResponse.FRM2.pmi)
               : 0
           }`
         ).replace(/,/g, "")
@@ -313,6 +318,7 @@ function CheatSheet(props) {
 
   const xKey = "name";
   const yKey = "Amount";
+
   const maxTextWidthLoan = useMemo(
     () =>
       loandata.reduce((acc, cur) => {
@@ -461,7 +467,6 @@ function CheatSheet(props) {
           </MDBCol>
         </MDBRow>
         <h6 class="CardTitle">Loan Program Comparison</h6>
-        
         <ResponsiveContainer
           width={"100%"}
           height={50 * loandata.length}
