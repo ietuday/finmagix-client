@@ -55,7 +55,8 @@ export class ShowPmiOptionsSecondLoan extends Component {
       id:"",
       loanAmountValidationError: "",
       interestrateValidationError: "",
-      pointsValidationError: ""
+      pointsValidationError: "",
+      pmiValidationError: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty();
@@ -137,6 +138,20 @@ export class ShowPmiOptionsSecondLoan extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
+
+    if(event.target.name == "pmi_amount"){
+      const checkloanprice = parseInt(Number(this.props.loanAmount) * 3 )/100
+      if(checkloanprice < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          pmiValidationError: "Shouldn't exceed 3% of first loan amount"
+        }) 
+      }else{
+        this.setState({
+          pmiValidationError: ""
+        }) 
+      }
+    }
+
     if(event.target.name == "loanamountsecond2"){
       if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
@@ -210,6 +225,7 @@ if(event.target.name == "second_mortgage_points_percentage"){
                 });
               }}
             />
+            {this.state.pmiValidationError}
         </MDBCol>
       </MDBRow>
     );

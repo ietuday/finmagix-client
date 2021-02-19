@@ -53,7 +53,10 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       second_mortgage_closing_costs_percentage: 0,
       loanamountsecond2_number: "0",
       is_update: false,
-      id:""
+      id:"",
+      pmiValidationError:"",
+      loanAmountValidationError:""
+
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty();
@@ -135,6 +138,31 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
+    if(event.target.name == "pmi_amount"){
+      const checkloanprice = parseInt(Number(this.props.loanAmount) * 3 )/100
+      if(checkloanprice < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          pmiValidationError: "Shouldn't exceed 3% of first loan amount"
+        }) 
+      }else{
+        this.setState({
+          pmiValidationError: ""
+        }) 
+      }
+    }
+
+    if(event.target.name == "loanamountsecond2"){
+      if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          loanAmountValidationError: "Cannot exceed first mortgage amount"
+        }) 
+      }else{
+        this.setState({
+          loanAmountValidationError: ""
+        }) 
+      }
+      
+  }
     this.props.handleDownpaymentData(this.state);
   }
   componentDidMount() {}
@@ -168,6 +196,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
               });
             }}
           />
+          {this.state.pmiValidationError}
         </MDBCol>
       </MDBRow>
     );

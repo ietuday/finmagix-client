@@ -56,7 +56,9 @@ export class Survey extends Component {
         });
       })
       .catch((err) => {
-        
+        this.setState({
+          goToNextPage: !this.state.goToNextPage,
+        });
       });
 
 

@@ -938,6 +938,7 @@ if(event.target.name == "rate_add_percentage"){
         <br />
         {this.props.downpayment === "lessthan20" ? (
           <ShowPmiOptionsFirstLoanARM
+          loanAmount={this.state.loan_amount}
             handleDownpaymentData={this.handleDownpaymentData}
           />
         ) : null}

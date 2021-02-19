@@ -56,7 +56,8 @@ export class ShowPmiOptionsFirstLoan extends Component {
       id:"",
       loanAmountValidationError: "",
       interestrateValidationError: "",
-      pointsValidationError: ""
+      pointsValidationError: "",
+      pmiValidationError: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
@@ -182,6 +183,22 @@ export class ShowPmiOptionsFirstLoan extends Component {
         }
       
     }
+
+
+    if(event.target.name == "pmi_amount"){
+      const checkloanprice = parseInt(Number(this.props.loanAmount) * 3 )/100
+      if(checkloanprice < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          pmiValidationError: "Shouldn't exceed 3% of first loan amount"
+        }) 
+      }else{
+        this.setState({
+          pmiValidationError: ""
+        }) 
+      }
+    
+  }
+
     this.props.handleDownpaymentData(this.state);
   }
   componentDidMount() {}
@@ -209,6 +226,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
               });
             }}
           />
+          {this.state.pmiValidationError}
         </MDBCol>
       </MDBRow>
     );
