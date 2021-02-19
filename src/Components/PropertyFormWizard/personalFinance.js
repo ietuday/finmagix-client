@@ -79,6 +79,7 @@ export class PersonalFinance extends Component {
           : "",
           monthlydebtPaymentValidationError:"",
           monthlynonhousingExpensesValidationError:"",
+          marginal_tax_rate_ValidationError: "",
 
       detail_non_housing_expenses: {},
       openModal: false,
@@ -134,7 +135,22 @@ export class PersonalFinance extends Component {
       }
     }
     
+    if (event.target.name == "marginal_tax_rate_percentage") {
+      if (parseInt(String(event.target.value).replace(/%/g, '')) > 37) {
+        this.setState({
+          marginal_tax_rate_ValidationError: "Cannot exceed 37%"
+        })
+      } else {
+        this.setState({
+          marginal_tax_rate_ValidationError: ""
+        })
+      }
 
+    }
+
+
+
+    
     await this.setState({
       [event.target.name]: event.target.value,
     });
@@ -387,6 +403,7 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
+            {this.state.marginal_tax_rate_ValidationError}
           </MDBCol>
         </MDBRow>
 
