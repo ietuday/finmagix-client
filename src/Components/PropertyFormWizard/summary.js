@@ -77,7 +77,7 @@ export class Summary extends Component {
                   icon="angle-right"
                   size="large"
                   onClick={() => this.props.history.push({pathname: '/property-information-review-edit',
-                  getId : PropertyInfoCreateResponse.data.id  })}
+                  getId : localStorage.getItem('property_id')  })}
                 />
               </div>
             </MDBCol>
