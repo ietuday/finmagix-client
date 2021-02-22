@@ -21,7 +21,7 @@ export class Summary extends Component {
     this.props.history.push("/show-detailed-reports");
   };
   componentDidMount() {
-    debugger
+    
   }
   render() {
     const{PropertyInfoCreateResponse,FRMMortgageCreateResponseFirst,ARMMortgageCreateResponseFirst,FRMMortgageCreateResponseSecond,ARMMortgageCreateResponseSecond, PersonalFinanceUpdateResponse,TaxUpdateResponse, PersonalFinanceCreateResponse,RentvsBuyCreateResponse,TaxCreateResponse} = this.props;
