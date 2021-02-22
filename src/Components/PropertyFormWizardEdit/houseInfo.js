@@ -58,8 +58,8 @@ export class GetStartedHouseInfo extends Component {
     annualPropertytaxValidationError: "",
     homeownerInsuranceValidationError: ""
     };
-    this.validators = HouseInfoValidator;
-    resetValidators(this.validators);
+    // this.validators = HouseInfoValidator;
+    // resetValidators(this.validators);
     this.houseInfo = "";
     this.handleChange = this.handleChange.bind(this);
     this.handleBedroomRoomCount = this.handleBedroomRoomCount.bind(this);
@@ -197,24 +197,24 @@ export class GetStartedHouseInfo extends Component {
       downpayment = "greaterthan20";
     }
 
-    if (
-      name === "property_price" ||
-      name === "downpayment_amount" ||
-      name === "home_price_growth" ||
-      name === "area_of_the_house" ||
-      name == "annual_property_tax" ||
-      name == "annual_home_owner_association_dues" ||
-      name == "home_owner_insurance"
-    ) {
-      console.log(name)
+    // if (
+    //   name === "property_price" ||
+    //   name === "downpayment_amount" ||
+    //   name === "home_price_growth" ||
+    //   name === "area_of_the_house" ||
+    //   name == "annual_property_tax" ||
+    //   name == "annual_home_owner_association_dues" ||
+    //   name == "home_owner_insurance"
+    // ) {
+    //   console.log(name)
 
-      updateValidators(this.validators, event.target.name, event.target.value);
-      const validationErrorLength = this.validators[event.target.name].errors
-        .length;
+    //   updateValidators(this.validators, event.target.name, event.target.value);
+    //   const validationErrorLength = this.validators[event.target.name].errors
+    //     .length;
 
-      this.props.getValidationError(validationErrorLength);
+      // this.props.getValidationError(validationErrorLength);
 
-    }
+    // }
 
     this.props.handleHouseInfo(downpayment, this.state);
   }

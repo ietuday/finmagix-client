@@ -192,6 +192,7 @@ export class StepperComponent extends Component {
   };
 
   handleHouseInfo = async (downpayment, data,id) => {
+    id = localStorage.getItem('property_id')
     await this.setState((prevState) => {
       let propertyInfo = Object.assign({}, prevState.propertyInfo);
       propertyInfo = data;
@@ -291,7 +292,7 @@ export class StepperComponent extends Component {
     switch (step) {
       case 0:
         return <GetStartedHouseInfo getValidationError = {this.getHouseInfoValidationError}
-         getId={this.props.location.state.property_info_edit_id} handleHouseInfo={this.handleHouseInfo} />;
+         getId={undefined} handleHouseInfo={this.handleHouseInfo} />;
       case 1:
         return (
           <PersonalFinance
@@ -381,17 +382,17 @@ export class StepperComponent extends Component {
 
     if (this.state.activeStep === 0) {
       
-    if(this.state.houseInfoValidationErrors !== 0 &&
-      !isFormValid("house_info")){
-       this.setState({
-         activeStep: this.state.activeStep,
-       });
-       NotificationManager.error("Please Validate Fields", "Error");
-       }else{
+    // if(this.state.houseInfoValidationErrors !== 0 &&
+    //   !isFormValid("house_info")){
+    //    this.setState({
+    //      activeStep: this.state.activeStep,
+    //    });
+    //    NotificationManager.error("Please Validate Fields", "Error");
+    //    }else{
         PropertyInfoUpdate(this.state.propertyInfo);
          this.props.history.push({pathname: '/property-form',
        returnBackFromreviewEdit : true})
-       }
+      //  }
        
 
     } else if (this.state.activeStep === 1) {

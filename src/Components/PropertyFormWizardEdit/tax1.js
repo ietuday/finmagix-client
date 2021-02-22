@@ -8,14 +8,12 @@ import Button from "@material-ui/core/Button";
 import { withRouter, Redirect } from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import { 
   resetValidators,
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
 import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import Tax1YesValidator from "../validatorRules/Tax1YesValidator";
 import Tax1NoValidator from "../validatorRules/Tax1NoValidator";
 import quss from "../../assets/images/que.png";
