@@ -5,7 +5,7 @@ import {
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
-  MDBModalFooter,
+  MDBModalFooter, 
 } from "mdbreact";
 import Button from "@material-ui/core/Button";
 

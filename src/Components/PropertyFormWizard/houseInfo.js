@@ -217,6 +217,7 @@ export class GetStartedHouseInfo extends Component {
 
     this.props.handleHouseInfo(downpayment, this.state);
   }
+  
   handleBedroomRoomCount(count) {
      this.setState({
       no_of_bedrooms: count,

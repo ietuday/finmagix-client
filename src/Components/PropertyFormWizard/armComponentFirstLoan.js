@@ -936,15 +936,19 @@ if(event.target.name == "rate_add_percentage"){
           ? showInterestOnlyPeriodButton
           : null}
         <br />
-        {this.props.downpayment === "lessthan20" ? (
+
+        {this.props.ArmGetResponse.pmi !== "null" || (this.props.ArmGetResponse.second_mortgage_loan_amount !=="null") || this.props.downpayment === "lessthan20" ? (
           <ShowPmiOptionsFirstLoanARM
+          handleDownpaymentData={this.handleDownpaymentData}
+          frmResponse = {this.props.FrmGetResponse}
           loanAmount={this.state.loan_amount}
-            handleDownpaymentData={this.handleDownpaymentData}
+          armResponse = {this.props.ArmGetResponse}
+          mortgageProgramType={this.state.mortgage_program_type}
           />
-        ) : null}
+          ) : null}
       </Fragment>
     );
   }
 }
 
-export default ARMComponentFirstLoan;
+export default ARMComponentFirstLoan; 
