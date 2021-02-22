@@ -95,9 +95,9 @@ function CheatSheet(props) {
         String(
           `${
             CalculatorResponse.ARM1
-              ? (CalculatorResponse.ARM1.loanamountsecond1 ? CalculatorResponse.ARM1.loanamountsecond1 :CalculatorResponse.ARM1.pmi)
+              ? (CalculatorResponse.ARM1.loanamountsecond1 ? CalculatorResponse.ARM1.loanamountsecond1 :CalculatorResponse.ARM1['mth-pmi'])
               : CalculatorResponse.FRM1
-              ? (CalculatorResponse.FRM1.loanamountsecond1 ? CalculatorResponse.FRM1.loanamountsecond1 :CalculatorResponse.FRM1.pmi)
+              ? (CalculatorResponse.FRM1.loanamountsecond1 ? CalculatorResponse.FRM1.loanamountsecond1 :CalculatorResponse.FRM1['mth-pmi'])
               : 0
           }`
         ).replace(/,/g, "")
@@ -123,9 +123,9 @@ function CheatSheet(props) {
         String(
           `${
             CalculatorResponse.ARM2
-              ? (CalculatorResponse.ARM2.loanamountsecond2 ? CalculatorResponse.ARM2.loanamountsecond2 :CalculatorResponse.ARM2.pmi)
+              ? (CalculatorResponse.ARM2.loanamountsecond2 ? CalculatorResponse.ARM2.loanamountsecond2 :CalculatorResponse.ARM2['mth-pmi'])
               : CalculatorResponse.FRM2
-              ? (CalculatorResponse.FRM2.loanamountsecond1 ? CalculatorResponse.FRM2.loanamountsecond1 :CalculatorResponse.FRM2.pmi)
+              ? (CalculatorResponse.FRM2.loanamountsecond1 ? CalculatorResponse.FRM2.loanamountsecond1 :CalculatorResponse.FRM2['mth-pmi'])
               : 0
           }`
         ).replace(/,/g, "")
