@@ -86,11 +86,11 @@ function RentBuySummary(props) {
                   : CalculatorResponse.FRM1
                   ? CalculatorResponse.FRM1.Rent
                   : 0}</b>{" "}
-                      {CalculatorResponse.ARM1
+                    <span className="rent_by_amount">     {CalculatorResponse.ARM1
                   ? CalculatorResponse.ARM1["better-renting-by"]
                   : CalculatorResponse.FRM1
                   ? CalculatorResponse.FRM1["better-renting-by"]
-                  : 0}
+                  : 0}</span>
               </MDBCol>
             </MDBRow>
 
@@ -111,17 +111,17 @@ function RentBuySummary(props) {
 
               <MDBCol col="10" md="10">
                 <br></br>
-                {CalculatorResponse.ARM2
+               <b> {CalculatorResponse.ARM2
                   ? CalculatorResponse.ARM2.Rent
                   : CalculatorResponse.FRM2
                   ? CalculatorResponse.FRM2.Rent
-                  : 0}{" "}
-                {CalculatorResponse.ARM2
+                  : 0}{" "}</b>
+               <span className="rent_by_amount"> {CalculatorResponse.ARM2
                   ? CalculatorResponse.ARM2["better-renting-by"]
                   : CalculatorResponse.FRM2
                   ? CalculatorResponse.FRM2["better-renting-by"]
                   : 0}
-                <br />
+                <br /></span>
               
               </MDBCol>
             </MDBRow>
