@@ -618,6 +618,6 @@ if(event.target.name == "points_percentage"){
       </Fragment>
     );
   }
-}
+} 
 
 export default SecondLoanScenario;
