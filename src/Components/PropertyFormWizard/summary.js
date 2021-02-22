@@ -3,7 +3,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-
+ 
 export class Summary extends Component {
   constructor(props) {
     super(props);

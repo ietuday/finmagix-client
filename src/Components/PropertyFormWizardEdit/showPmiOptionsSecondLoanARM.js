@@ -5,23 +5,26 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+
+import NumberFormat from "react-number-format";
+ 
 import quss from "../../assets/images/que.png";
-
-
-
-
-
+import { config } from '../config/default';
+const { baseURL } = config;
 
 export class ShowPmiOptionsSecondLoanARM extends Component {
   constructor(props) {
     super(props);
     this.state = {
       pmi_amount: props.mortgageProgramType === 1 ? props.frmResponse.pmi : props.mortgageProgramType === 2 ? props.armResponse.pmi : "",
+      pmi_amount_number: props.mortgageProgramType === 1 ? props.frmResponse.pmi : props.mortgageProgramType === 2 ? props.armResponse.pmi : "",
       second_mortgage_loan_amount: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_loan_amount : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_loan_amount : "",
       second_mortgage_loan_term: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_loan_term : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_loan_term : "",
       second_mortgage_interest: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_interest : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_interest : "",
-      second_mortgage_points: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_interest : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_interest : "",
+      second_mortgage_interest_percentage: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_interest : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_interest : "",
+      second_mortgage_points: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_points : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_points : "",
       second_mortgage_closing_costs: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_closing_costs : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_closing_costs : "",
+      second_mortgage_closing_costs_number: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_closing_costs : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_closing_costs : "",
       PMIOptions: props.mortgageProgramType === 1 && props.frmResponse.pmi === "null" ? "Second Loan" : props.mortgageProgramType === 2 && props.armResponse.pmi === "null" ? "Second Loan" : "PMI",
       showSecondloanOption: props.mortgageProgramType === 1 && props.frmResponse.pmi !== "null" ? "PMI" : props.mortgageProgramType === 1 && props.frmResponse.pmi !== "null" ? false : props.mortgageProgramType === 2 && props.armResponse.pmi !== "null" ? false : true,
       secondmtgpmichoice1: props.mortgageProgramType === 1 ? props.frmResponse.secondmtgpmichoice1 : props.mortgageProgramType === 2 ? props.armResponse.secondmtgpmichoice1 : "",
@@ -45,8 +48,76 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       ceiling2: props.mortgageProgramType === 1 ? props.frmResponse.ceiling2 : props.mortgageProgramType === 2 ? props.armResponse.ceiling2 : "",
       periodicadjcap2: props.mortgageProgramType === 1 ? props.frmResponse.periodicadjcap2 : props.mortgageProgramType === 2 ? props.armResponse.periodicadjcap2 : "",
       rateadd2: props.mortgageProgramType === 1 ? props.frmResponse.rateadd2 : props.mortgageProgramType === 2 ? props.armResponse.rateadd2 : "",
+      second_mortgage_points_percentage: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_points : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_points : "",
+      second_mortgage_closing_costs_percentage: props.mortgageProgramType === 1 ? props.frmResponse.second_mortgage_closing_costs : props.mortgageProgramType === 2 ? props.armResponse.second_mortgage_closing_costs : "",
+      loanamountsecond2_number: props.mortgageProgramType === 1 ? props.frmResponse.loanamountsecond2 : props.mortgageProgramType === 2 ? props.armResponse.loanamountsecond2 : "",
+      is_update: false,
+      id:"",
+      pmiValidationError:"",
+      loanAmountValidationError:"",
+      interestrateValidationError:"",
+      pointsValidationError:""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.checkProperty();
+  }
+
+  checkProperty(){
+    const propertyId = JSON.parse(localStorage.getItem('property_id'))
+    if(propertyId){
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0]
+          this.setState({
+            pmi_amount: propertyDetail.second_arm.pmi,
+            pmi_amount_number: propertyDetail.second_arm.pmi,
+            second_mortgage_loan_amount: propertyDetail.second_arm.loanamountsecond1,
+            second_mortgage_loan_term: propertyDetail.second_arm.second_mortgage_loan_term,
+            second_mortgage_interest: propertyDetail.second_arm.second_mortgage_interest,
+            second_mortgage_interest_percentage: Number(propertyDetail.second_arm.second_mortgage_interest)*100,
+            second_mortgage_points: propertyDetail.second_arm.second_mortgage_points,
+            second_mortgage_closing_costs:propertyDetail.second_arm.second_mortgage_closing_costs,
+            second_mortgage_closing_costs_number:propertyDetail.second_arm.second_mortgage_closing_costs,
+            PMIOptions: "PMI",
+            showSecondloanOption: false,
+            secondmtgpmichoice1: propertyDetail.second_arm.secondmtgpmichoice1,
+            PMIfirst1: propertyDetail.second_arm.PMIfirst1,
+            loanamountsecond1: propertyDetail.second_arm.loanamountsecond1,
+            loanamountsecond1_number: propertyDetail.second_arm.loanamountsecond1,
+            Pmtsecond1: propertyDetail.second_arm.Pmtsecond1,
+            ARMtype1: propertyDetail.second_arm.ARMtype1,
+            ARM1rate: propertyDetail.second_arm.ARM1rate,
+            ARMfirstadjin1: propertyDetail.second_arm.ARMfirstadjin1,
+            floor1: propertyDetail.second_arm.floor1,
+            ceiling1: propertyDetail.second_arm.ceiling1,
+            periodicadjcap1: propertyDetail.second_arm.periodicadjcap1,
+            rateadd1: propertyDetail.second_arm.rateadd1,
+            secondmtgpmichoice2: propertyDetail.second_arm.secondmtgpmichoice2,
+            PMIfirst2: propertyDetail.second_arm.PMIfirst2,
+            loanamountsecond2: propertyDetail.second_arm.loanamountsecond2,
+            Pmtsecond2: propertyDetail.second_arm.Pmtsecond2,
+            ARM2rate: propertyDetail.second_arm.ARM2rate,
+            ARMfirstadjin2: propertyDetail.second_arm.ARMfirstadjin2,
+            floor2: propertyDetail.second_arm.floor2,
+            ceiling2: propertyDetail.second_arm.ceiling2,
+            periodicadjcap2: propertyDetail.second_arm.periodicadjcap2,
+            rateadd2: propertyDetail.second_arm.rateadd2,
+            second_mortgage_points_percentage: Number(propertyDetail.second_arm.second_mortgage_points)*100,
+            is_update: true,
+            id:propertyDetail.second_arm.id
+          })
+          
+          this.props.handleDownpaymentData(this.state);
+        })
+        .catch((err) => {
+         
+        });
+    }
   }
   showPmiSecondloan = (event, value) => {
     this.setState({
@@ -67,7 +138,58 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    this.props.handleDownpaymentData(this.state);
+    if(event.target.name == "pmi_amount"){
+      const checkloanprice = parseInt(Number(this.props.loanAmount) * 3 )/100
+      if(checkloanprice < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          pmiValidationError: "Shouldn't exceed 3% of first loan amount"
+        }) 
+      }else{
+        this.setState({
+          pmiValidationError: ""
+        }) 
+      }
+    }
+
+    if(event.target.name == "loanamountsecond2"){
+      if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          loanAmountValidationError: "Cannot exceed first mortgage amount"
+        }) 
+      }else{
+        this.setState({
+          loanAmountValidationError: ""
+        }) 
+      }
+      
+  }
+  
+  if(event.target.name == "second_mortgage_interest_percentage"){
+    if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
+      this.setState({
+        interestrateValidationError: " Is the interest rate input accurate?"
+      }) 
+    }else{
+      this.setState({
+        interestrateValidationError: ""
+      }) 
+    }
+  }
+
+    if(event.target.name == "second_mortgage_points_percentage"){
+      if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+        this.setState({
+          pointsValidationError: "Is the input for points accurate?"
+        }) 
+      }else{
+        this.setState({
+          pointsValidationError: ""
+        }) 
+      }
+      
+    }
+  
+  this.props.handleDownpaymentData(this.state);
   }
   componentDidMount() { }
   render() {
@@ -76,13 +198,24 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
         <MDBCol md="12">
           <span className="get-started-label">Monthly PMI Amount</span>
           <br />
-          <Input
+          <NumberFormat
             className="input-class-mdb"
             placeholder="Enter amount here"
             name="pmi_amount"
             value={this.state.pmi_amount}
             onChange={this.handleChange}
+            thousandSeparator={true}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                pmi_amount_number: formattedValue,
+              });
+              await this.setState({
+                pmi_amount: value,
+              });
+            }}
           />
+          {this.state.pmiValidationError}
         </MDBCol>
       </MDBRow>
     );
@@ -95,12 +228,22 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
 <span className="tooltip-img-text">Enter the amount you plan to borrow for this mortgage </span>
 </div>
             <br />
-            <Input
+            <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
-              name="second_mortgage_loan_amount"
-              value={this.state.second_mortgage_loan_amount}
+              name="loanamountsecond2"
+              value={this.state.loanamountsecond2}
               onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  loanamountsecond2_number: formattedValue,
+                });
+                await this.setState({
+                  loanamountsecond2: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -130,13 +273,24 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
               Interest on your second mortgage
             </span>
             <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="second_mortgage_interest"
-              value={this.state.second_mortgage_interest}
-              onChange={this.handleChange}
-            />
+            <NumberFormat
+            className="input-class-mdb"
+            placeholder="Enter amount here"
+            name="second_mortgage_interest_percentage"
+            value={this.state.second_mortgage_interest_percentage}
+            onChange={this.handleChange}
+            suffix={"%"}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                second_mortgage_interest: value,
+              });
+              await this.setState({
+                second_mortgage_interest_percentage: formattedValue,
+              });
+            }}
+          />
+          {this.state.interestrateValidationError}
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -147,13 +301,24 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
  For e.g. 2 points is 2% of the loan amount. Points are levied to cover origination costs or reduce interest rate. </span>
 </div>
             <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="second_mortgage_points"
-              value={this.state.second_mortgage_points}
-              onChange={this.handleChange}
-            />
+            <NumberFormat
+            className="input-class-mdb"
+            placeholder="Enter amount here"
+            name="second_mortgage_points_percentage"
+            value={this.state.second_mortgage_points_percentage}
+            onChange={this.handleChange}
+            suffix={"%"}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                second_mortgage_points: value,
+              });
+              await this.setState({
+                second_mortgage_points_percentage: formattedValue,
+              });
+            }}
+          />
+          {this.state.pointsValidationError}
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -169,158 +334,25 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
              amount or slightly higher based on the lender.</span>
             </div>
             <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="second_mortgage_closing_costs"
-              value={this.state.second_mortgage_closing_costs}
-              onChange={this.handleChange}
-            />
+            <NumberFormat
+            className="input-class-mdb"
+            placeholder="Enter amount here"
+            name="second_mortgage_closing_costs"
+            value={this.state.second_mortgage_closing_costs}
+            onChange={this.handleChange}
+            thousandSeparator={true}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                second_mortgage_closing_costs_number: formattedValue,
+              });
+              await this.setState({
+                second_mortgage_closing_costs: value,
+              });
+            }}
+          />
           </MDBCol>
         </MDBRow>
-
-
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">Secondmtgpmichoice2</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="secondmtgpmichoice2"
-              value={this.state.secondmtgpmichoice2}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">PMIfirst2</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="PMIfirst2"
-              value={this.state.PMIfirst2}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">loanamountsecond2</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="loanamountsecond2"
-              value={this.state.loanamountsecond2}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">Pmtsecond2</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="Pmtsecond2"
-              value={this.state.Pmtsecond2}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">ARM2rate</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="ARM2rate"
-              value={this.state.ARM2rate}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">ARMfirstadjin2</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="ARMfirstadjin2"
-              value={this.state.ARMfirstadjin2}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">floor2</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="floor2"
-              value={this.state.floor2}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">periodicadjcap2</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="periodicadjcap2"
-              value={this.state.periodicadjcap2}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">rateadd2</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="rateadd2"
-              value={this.state.rateadd2}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">ceiling2</span>
-            <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="ceiling2"
-              value={this.state.ceiling2}
-              onChange={this.handleChange}
-            />
-          </MDBCol>
-        </MDBRow>
-
 
       </div>
     );
