@@ -14,7 +14,7 @@ import { log_out } from "../redux/actions/signinSignup.js";
 import { logout } from "../../routes/utils";
 import { Redirect, withRouter } from "react-router-dom";
 
-import {
+ import {
   MDBContainer,
   MDBRow,
   MDBCol,

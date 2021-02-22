@@ -1,17 +1,21 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
-import { Radio, Input } from "antd";
-import GetStartedHouseInfo from "../PropertyFormWizardEdit/houseInfo";
-import PersonalFinance from "../PropertyFormWizardEdit/personalFinance";
-import RentvsBuy from "../PropertyFormWizardEdit/rentvsBuy";
-import Summary from "../PropertyFormWizardEdit/summary";
+
+import Axios from "axios";
+
+import GetStartedHouseInfo from "../PropertyFormWizard/houseInfo";
+import PersonalFinance from "../PropertyFormWizard/personalFinance";
+import RentvsBuy from "../PropertyFormWizard/rentvsBuy";
+import Summary from "../PropertyFormWizard/summary";
 import { log_out } from "../redux/actions/signinSignup.js";
 import { logout } from "../../routes/utils";
-import { Redirect,withRouter } from "react-router-dom";
-import {
+import { Redirect, withRouter } from "react-router-dom";
+
+ import {
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -21,19 +25,33 @@ import {
   MDBModalHeader,
 } from "mdbreact";
 import "../../css/propertyFormWizard.css";
+import "../../css/signup-signin.css";
 import PropertyMortgageHOC from "./propertyMortgageHoc";
 import TaxHoc from "./taxHoc";
 import Tax1 from "./tax1";
 import Tax2 from "./tax2";
-import { personal_finance_update } from "../redux/actions/PropertyReport/personalFinance";
-import { rent_vs_buy_update } from "../redux/actions/PropertyReport/rentvsBuy";
-import { property_info_update } from "../redux/actions/PropertyReport/propertyInfo";
+import {
+  personal_finance_create,
+  personal_finance_update,
+  detail_expense_create,
+  update_detail_expense,
+} from "../redux/actions/PropertyReport/personalFinance";
+import { rent_vs_buy_create, rent_vs_buy_update } from "../redux/actions/PropertyReport/rentvsBuy";
+import {
+  property_info_create,
+  property_info_update,
+  survey_create,
+} from "../redux/actions/PropertyReport/propertyInfo";
 import { isFormValid } from "../../common/ValidatorFunction";
-import { connect } from "react-redux";
+// import { connect } from "react-redux"; 
 import Header from "../../common/header";
 import FirstLoanScenario from "./firstLoanScenario";
 import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";
+import { savePropertyId } from "../../../src/routes/utils";
+
+import { config } from "../config/default";
+const { baseURL } = config;
 
 export class StepperComponent extends Component {
   constructor(props) {
@@ -42,12 +60,12 @@ export class StepperComponent extends Component {
       activeStep: 0,
       completed: "",
       propertyInfo: {id:""},
-      personalFinance: {id:""},
+      personalFinance: {id:"", property_obj: localStorage.getItem("property_id"),},
       RentvsBuy: {id:""},
       Taxes: {},
       personalFinanceValidationErros: 0,
       rentvsBuyValidationErrors: 0,
-      houseInfoValidationErrors : 0,
+      houseInofValidationErrors : 0,
       isselectloanScenarionModalOpen: true,
       isOpen: false,
       modal: false,
@@ -55,6 +73,16 @@ export class StepperComponent extends Component {
       backButton: false,
       radioValue: "",
       downpayment: "",
+      saveButtonforPersonalFinance: false,
+      personalFinanceUpdate: {
+        property_obj: localStorage.getItem("property_id"),
+        id: JSON.parse(localStorage.getItem("personal_finance_array")).id,
+      },
+      isRentvsBuyFilled: false,
+      isTaxFilled: false,
+      selectLoanScenarioOption: "",
+      previousForFirstPage: false,
+      goToSurvey: false,
     };
     this.handleRentvsBuyData = this.handleRentvsBuyData.bind(this);
     this.onRadioChange = this.onRadioChange.bind(this);
@@ -72,6 +100,12 @@ export class StepperComponent extends Component {
   componentDidMount(){
   }
   componentWillMount(){
+    if (this.props.location.returnBackFromreviewEdit === true) {
+      this.setState({
+        activeStep: 5,
+      });
+    }
+
     if(this.props.location.state.property_id === 0){
       this.setState({
         activeStep :0
@@ -94,6 +128,41 @@ export class StepperComponent extends Component {
       })
     }
   }
+
+  goToSurvey = () => {
+    this.setState({
+      goToSurvey: !this.state.goToSurvey,
+    });
+  };
+
+  goToTaxfromRentvsBuyModal = async () => {
+    await this.setState({
+      activeStep: 4,
+    });
+  };
+
+  getTaxFilledStataus = (getTaxFillStatus) => {
+    this.setState({
+      isTaxFilled: getTaxFillStatus,
+    });
+  };
+  
+  onSuccessHouseInfo = async (data) => {
+    savePropertyId(data.id);
+    if (
+      localStorage.getItem("property_id") &&
+      localStorage.getItem("basic-info")
+    ) {
+      const property = { property_obj: localStorage.getItem("property_id") };
+      const basicInfo = JSON.parse(localStorage.getItem("basic-info"));
+      // const SurveyData = { ...property, ...basicInfo };
+      // this.props.SurveyCreate(SurveyData);
+    }
+  };
+  onFailureHouseInfo = () => {
+    // NotificationManager.error("Invalid Credentials", "error");
+  };
+
   totalSteps = () => {
     return this.steps.length;
   };
@@ -115,7 +184,15 @@ export class StepperComponent extends Component {
       backButton: !this.state.backButton,
     });
   };
+
+  handlePreviousForFirstpage = () => {
+    this.setState({
+      previousForFirstPage: !this.state.previousForFirstPage,
+    });
+  };
+
   handleHouseInfo = async (downpayment, data,id) => {
+    id = localStorage.getItem('property_id')
     await this.setState((prevState) => {
       let propertyInfo = Object.assign({}, prevState.propertyInfo);
       propertyInfo = data;
@@ -133,6 +210,20 @@ export class StepperComponent extends Component {
       personalFinance.id = JSON.parse(localStorage.getItem("personal_finance_array")).id;
       return { personalFinance };
     });
+
+    const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
+    const newActiveStep =
+      this.isLastStep && !this.allStepsCompleted
+        ? this.steps.findIndex((step, i) => !(i in this.state.completed))
+        : this.state.activeStep + 1;
+
+ 
+      this.setState({
+        saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
+      });
+    
+
+   
   };
   async handleRentvsBuyData(data) {
     await this.setState((prevState) => {
@@ -142,6 +233,14 @@ export class StepperComponent extends Component {
       return { RentvsBuy };
     });
   }
+
+
+
+  getRentvsBuyFilledStatus = async (status) => {
+    await this.setState({
+      isRentvsBuyFilled: status,
+    });
+  };
   getPersonalFinanceValidationError = (error) => {
     this.setState({
       personalFinanceValidationErros: error,
@@ -174,7 +273,7 @@ export class StepperComponent extends Component {
     switch (step) {
       case 0:
         return <GetStartedHouseInfo getValidationError = {this.getHouseInfoValidationError}
-         getId={this.props.location.state.property_info_edit_id} handleHouseInfo={this.handleHouseInfo} />;
+         getId={undefined} handleHouseInfo={this.handleHouseInfo} />;
       case 1:
         return (
           <PersonalFinance
@@ -256,6 +355,7 @@ export class StepperComponent extends Component {
       PersonalFinanceUpdate,
       RentvsBuyUpdate,
       PropertyInfoUpdate,
+      PersonalFinanceCreate
     } = this.props;
     const newActiveStep =
       this.isLastStep && !this.allStepsCompleted
@@ -264,32 +364,31 @@ export class StepperComponent extends Component {
 
     if (this.state.activeStep === 0) {
       
-    if(this.state.houseInfoValidationErrors !== 0 &&
-      !isFormValid("house_info")){
-       this.setState({
-         activeStep: this.state.activeStep,
-       });
-       NotificationManager.error("Please Validate Fields", "Error");
-       }else{
+    // if(this.state.houseInfoValidationErrors !== 0 &&
+    //   !isFormValid("house_info")){
+    //    this.setState({
+    //      activeStep: this.state.activeStep,
+    //    });
+    //    NotificationManager.error("Please Validate Fields", "Error");
+    //    }else{
         PropertyInfoUpdate(this.state.propertyInfo);
          this.props.history.push({pathname: '/property-form',
        returnBackFromreviewEdit : true})
-       }
+      //  }
        
 
     } else if (this.state.activeStep === 1) {
       
-      if(this.state.personalFinanceValidationErros !== 0 &&
-       !isFormValid("personal_finance")){
-        this.setState({
-          activeStep: this.state.activeStep,
-        });
-        NotificationManager.error("Please Validate Fields", "Error");
-        }else{
           this.props.history.push({pathname: '/property-form',
         returnBackFromreviewEdit : true})
+      
+        {
+          Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+            .length !== 0
+            ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+            : PersonalFinanceCreate(this.state.personalFinance);
         }
-      PersonalFinanceUpdate(this.state.personalFinance);
+      // PersonalFinanceUpdate(this.state.personalFinance);
     
 
     } else if (this.state.activeStep === 2) {

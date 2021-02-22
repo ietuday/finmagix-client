@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
+import Axios from "axios";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { Input } from "antd";
@@ -9,6 +10,11 @@ import ShowPmiOptionsSecondLoan from "./showPmiOptionsSecondLoan";
 import ARMComponentSecondLoan from "./armComponentSecondLoan";
 import quss from "../../assets/images/que.png";
 
+import NumberFormat from "react-number-format";
+
+import { config } from '../config/default';
+const { baseURL } = config;
+
 
 export class SecondLoanScenario extends Component {
   constructor(props) {
@@ -16,10 +22,13 @@ export class SecondLoanScenario extends Component {
     this.state = {
       mortgage_program_type: props.Frm === "true" ? 1 : 2,
       loan_amount: this.props.FrmGetResponse ? props.FrmGetResponse.loan_amount : "",
+      loan_amount_number: this.props.FrmGetResponse ? props.FrmGetResponse.loan_amount : "",
       loan_term: this.props.FrmGetResponse ? props.FrmGetResponse.loan_term : "",
       interest: this.props.FrmGetResponse ? props.FrmGetResponse.interest : "",
+      interest_percentage: this.props.FrmGetResponse ? props.FrmGetResponse.interest : "",
       points:this.props.FrmGetResponse ? props.FrmGetResponse.points : "",
       closing_costs:this.props.FrmGetResponse ? props.FrmGetResponse.closing_costs : "",
+      closing_costs_number: this.props.FrmGetResponse ? props.FrmGetResponse.closing_costs : "",
       interest_only_option:this.props.FrmGetResponse ? props.FrmGetResponse.interest_only_option : "N",
       interest_only_period: this.props.FrmGetResponse && props.FrmGetResponse.interest_only_option === "Y" ? props.FrmGetResponse.interest_only_period : "",
       downpayment: this.props.FrmGetResponse ? props.FrmGetResponse.downpayment : "",
@@ -39,20 +48,184 @@ export class SecondLoanScenario extends Component {
       showInterestOnlyPeriodOption:this.props.FrmGetResponse && props.FrmGetResponse.interest_only_option === "Y" ? true : false,
       showMortgageTypeChangeOption: false,
       PMIOptions: "PMI",
+      armValidationErrors: 0,
+      
+      points_percentage: this.props.FrmGetResponse ? props.FrmGetResponse.points : "",
+      is_update:false,
+      id: "",
+      interestrateValidationError: "",
+      pointsValidationError: "",
+      property_price: "",
+      loan_amount_validation_error: ""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.checkproperty()
   }
-  async handleChange(event) { 
-    event.persist();
-    if (event.target.name == 'interest'){
-      let data = Number(event.target.value)/100
-      event.target.value = String(data)
+
+  checkproperty(){
+    const propertyId = JSON.parse(localStorage.getItem('property_id'))
+    
+    if(propertyId){
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0]
+          this.setState({
+            'property_price': propertyDetail.property_price
+          })
+          if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
+            this.setState({
+              mortgage_program_type:propertyDetail.second_frm.mortage_program_type,
+              mortgage_program_type_value: 1,
+              loan_amount:propertyDetail.second_frm.loan_amount,
+              loan_amount_number:propertyDetail.second_frm.loan_amount,
+              loan_term: propertyDetail.second_frm.loan_term,
+              interest: propertyDetail.second_frm.interest,
+              interest_percentage: Number(propertyDetail.second_frm.interest)*100,
+              points: propertyDetail.second_frm.points,
+              closing_costs: propertyDetail.second_frm.closing_costs,
+              closing_costs_number:propertyDetail.second_frm.closing_costs,
+              interest_only_option:propertyDetail.second_frm.interest_only_period ? "Y" : "N",
+              interest_only_period: propertyDetail.second_frm.interest_only_period,
+              downpayment: 0,
+              pmi: propertyDetail.second_frm.mpi,
+              select_loan_program: "",
+              initial_interest_rate: propertyDetail.second_frm.interest,
+              first_interest_rate_adj_cap: 0,
+              floor_interest_rate: 0,
+              ceiling_interest_rate: 0,
+              period_cap:propertyDetail.second_frm.periodicadjcap1,
+              rate_add:propertyDetail.second_frm.rateadd1,
+  
+              second_mortgage_loan_amount:propertyDetail.second_frm.loanamountsecond1,
+              second_mortgage_loan_term:propertyDetail.second_frm.second_mortgage_loan_term,
+              second_mortgage_interest: propertyDetail.second_frm.second_mortgage_interest,
+              second_mortgage_points:propertyDetail.second_frm.second_mortgage_points,
+              second_mortgage_closing_costs:propertyDetail.second_frm.second_mortgage_closing_costs,
+              showInterestOnlyPeriodOption: false,
+              showMortgageTypeChangeOption: false,
+              PMIOptions: "PMI",
+              armValidationErrors: "",
+              secondmtgpmichoice1: "0",
+              PMIfirst1: "0",
+              loanamountsecond1: "0",
+              Pmtsecond1: "0",
+              ARMtype1: 0,
+              ARM1rate: 0,
+              ARMfirstadjin1: "0",
+              floor1: "0",
+              ceiling1: "0",
+              periodicadjcap1: "0",
+              rateadd1: "0",
+              secondmtgpmichoice2: "0",
+              PMIfirst2: "0",
+              loanamountsecond2: "0",
+              Pmtsecond2: "0",
+              ARM2rate: "0",
+              ARMfirstadjin2: "0",
+              floor2: "0",
+              ceiling2: "0",
+              periodicadjcap2: "0",
+              rateadd2: "0",
+              closing_costs_percentage: Number(propertyDetail.second_frm.closing_costs)*100,
+              points_percentage: Number(propertyDetail.second_frm.points)*100,
+              is_update: true,
+              id: propertyDetail.second_frm.id
+            })
+          }
+          this.props.handleSecondloanMortgageInfo(this.state, null);
+        })
+        .catch((err) => {
+         
+        });
     }
+  }
+
+  getArmValidationError = (error) => {
+    this.setState({
+      armValidationErrors: error,
+    });
+  };
+
+
+  async handleChange(event) { 
+    const { name } = event.target;
+
+    if (event.target.name == "loan_amount") {
+      if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
+        this.setState({
+          loan_amount_validation_error: "Cannot exceed Property price"
+        })
+      } else {
+        this.setState({
+          loan_amount_validation_error: ""
+        })
+      }
+    }
+
+
+    if(event.target.name == "interest_only_period"){
+      if(this.state.loan_term < event.target.value){
+        this.setState({
+          interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
+        }) 
+      }else{
+        this.setState({
+          interestOnlyPeriodValidationError: ""
+        }) 
+      }
+  }
+  
+  if(event.target.name == "interest_percentage"){
+    if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
+      this.setState({
+        interestrateValidationError: "Is the interest rate input accurate?"
+      }) 
+    }else{
+      this.setState({
+        interestrateValidationError: ""
+      }) 
+    }
+    
+}
+
+if(event.target.name == "points_percentage"){
+  if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+    this.setState({
+      pointsValidationError: "Is the input for points accurate?"
+    }) 
+  }else{
+    this.setState({
+      pointsValidationError: ""
+    }) 
+  }
+  
+}
+
+
+    event.persist();
     await this.setState({
       [event.target.name]: event.target.value,
     });
+    // if (
+    //   (this.state.mortgage_program_type_value === 1 &&
+    //     name === "loan_amount") ||
+    //   name === "interest" ||
+    //   name === "points" ||
+    //   name == "closing_costs"
+    // ) {
+    //   updateValidators(this.validators, event.target.name, event.target.value);
+    //   const validationErrorLength = this.validators[event.target.name].errors
+    //     .length;
+    //   this.props.getValidationError(validationErrorLength);
+    // }
     const dataObject = {
-      mortgage_program_type: this.state.mortgage_program_type,
+      mortage_program_type: this.state.mortage_program_type,
+      mortgage_program_type_value: 1,
       loan_amount: this.state.loan_amount,
       loan_term: this.state.loan_term,
       interest: this.state.interest,
@@ -60,21 +233,28 @@ export class SecondLoanScenario extends Component {
       closing_costs: this.state.closing_costs,
       interest_only_option: this.state.interest_only_option,
       interest_only_period: this.state.interest_only_period,
+      property_obj: localStorage.getItem("property_id"),
+      is_update: this.state.is_update,
+      id: this.state.id,
+      interestOnlyPeriodValidationError: ""
     };
-    this.props.handleSecondloanMortgageInfo(dataObject);
+    this.props.handleSecondloanMortgageInfo(dataObject, null);
   }
   handleDownpaymentData = async (data) => {
     await this.setState({
       pmi: data.pmi_amount,
-      second_mortgage_loan_amount: data.second_mortgage_loan_amount,
+      loanamountsecond2: data.loanamountsecond2,
       second_mortgage_loan_term: data.second_mortgage_loan_term,
       second_mortgage_interest: data.second_mortgage_interest,
       second_mortgage_points: data.second_mortgage_points,
       second_mortgage_closing_costs: data.second_mortgage_closing_costs,
+      is_update: this.state.is_update,
+      id: this.state.id
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
-        mortgage_program_type: this.state.mortgage_program_type,
+        mortage_program_type: this.state.mortage_program_type,
+        mortgage_program_type_value: 1,
         loan_amount: this.state.loan_amount,
         loan_term: this.state.loan_term,
         interest: this.state.interest,
@@ -83,11 +263,15 @@ export class SecondLoanScenario extends Component {
         interest_only_option: this.state.interest_only_option,
         interest_only_period: this.state.interest_only_period,
         pmi: this.state.pmi,
+        property_obj: localStorage.getItem("property_id"),
+        is_update: this.state.is_update,
+        id: this.state.id
       };
-      this.props.handleSecondloanMortgageInfo(dataWithPmi);
+      this.props.handleSecondloanMortgageInfo(dataWithPmi, null);
     } else {
       const dataWithSecondMortgage = {
-        mortgage_program_type: this.state.mortgage_program_type,
+        mortage_program_type: this.state.mortage_program_type,
+        mortgage_program_type_value: 1,
         loan_amount: this.state.loan_amount,
         loan_term: this.state.loan_term,
         interest: this.state.interest,
@@ -95,17 +279,24 @@ export class SecondLoanScenario extends Component {
         closing_costs: this.state.closing_costs,
         interest_only_option: this.state.interest_only_option,
         interest_only_period: this.state.interest_only_period,
-        second_mortgage_loan_amount: this.state.second_mortgage_loan_amount,
+        loanamountsecond2: this.state.loanamountsecond2,
         second_mortgage_loan_term: this.state.second_mortgage_loan_term,
         second_mortgage_interest: this.state.second_mortgage_interest,
         second_mortgage_points: this.state.second_mortgage_points,
         second_mortgage_closing_costs: this.state.second_mortgage_closing_costs,
+        property_obj: localStorage.getItem("property_id"),
+        is_update: this.state.is_update,
+        id: this.state.id
       };
-      this.props.handleSecondloanMortgageInfo(dataWithSecondMortgage);
+      this.props.handleSecondloanMortgageInfo(dataWithSecondMortgage, null);
     }
   };
   handleArmData = async (data) => {
-    this.props.handleSecondloanMortgageInfo(data);
+    // this.props.handleSecondloanMortgageInfo(data);
+    this.props.handleSecondloanMortgageInfo(
+      data,
+      this.state.armValidationErrors
+    );
   };
   showInterestOnlyPeriodChange = (event, value) => {
     this.setState({
@@ -193,6 +384,7 @@ export class SecondLoanScenario extends Component {
             downpayment={this.props.downpayment}
             handleArmData={this.handleArmData}
             ArmGetResponse = {this.props.ArmGetResponse}
+            getArmValidationError={this.getArmValidationError}
           />
         ) : (
           <div>
@@ -203,13 +395,24 @@ export class SecondLoanScenario extends Component {
 <span className="tooltip-img-text">Enter the amount you plan to borrow for this mortgage </span>
 </div>
                 <br />
-                <Input
+                <NumberFormat
                   className="input-class-mdb"
                   placeholder="Enter amount here"
                   name="loan_amount"
                   value={this.state.loan_amount}
                   onChange={this.handleChange}
+                  thousandSeparator={true}
+                  onValueChange={async (values) => {
+                    const { formattedValue, value } = values;
+                    await this.setState({
+                      loan_amount_number: formattedValue,
+                    });
+                    await this.setState({
+                      loan_amount: value,
+                    });
+                  }}
                 />
+                {this.state.loan_amount_validation_error}
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20">
@@ -240,13 +443,25 @@ export class SecondLoanScenario extends Component {
             <span className="tooltip-img-text">Interest rate is the cost of borrowing or the amount charged on the first mortgage. Enter Interest % and not APR %. </span>
             </div>
                 <br />
-                <Input
-                  className="input-class-mdb"
-                  placeholder="Enter amount here"
-                  name="interest"
-                  value={this.state.interest}
-                  onChange={this.handleChange}
-                />
+                <NumberFormat
+                className="input-class-mdb"
+                placeholder="Enter amount here"
+                name="interest_percentage"
+                value={this.state.interest_percentage}
+                onChange={this.handleChange}
+                // thousandSeparator={true}
+                suffix={"%"}
+                onValueChange={async (values) => {
+                  const { formattedValue, value } = values;
+                  await this.setState({
+                    interest: value,
+                  });
+                  await this.setState({
+                    interest_percentage: formattedValue,
+                  });
+                }}
+              />
+            {this.state.interestrateValidationError}
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20">
@@ -257,13 +472,26 @@ export class SecondLoanScenario extends Component {
  For e.g. 2 points is 2% of the loan amount. Points are levied to cover origination costs or reduce interest rate. </span>
 </div>
                 <br />
-                <Input
-                  className="input-class-mdb"
-                  placeholder="Enter amount here"
-                  name="points"
-                  value={this.state.points}
-                  onChange={this.handleChange}
-                />
+               
+                <NumberFormat
+                className="input-class-mdb"
+                placeholder="Enter amount here"
+                name="points_percentage"
+                value={this.state.points_percentage}
+                onChange={this.handleChange}
+                suffix={"%"}
+                onValueChange={async (values) => {
+                  const { formattedValue, value } = values;
+                  await this.setState({
+                    points: value,
+                  });
+                  await this.setState({
+                    points_percentage: formattedValue,
+                  });
+                }}
+              />
+            {this.state.pointsValidationError}
+
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20">
@@ -279,13 +507,25 @@ export class SecondLoanScenario extends Component {
              amount or slightly higher based on the lender.</span>
             </div>
                 <br />
-                <Input
-                  className="input-class-mdb"
-                  placeholder="Enter amount here"
-                  name="closing_costs"
-                  value={this.state.closing_costs}
-                  onChange={this.handleChange}
-                />
+                
+                <NumberFormat
+                className="input-class-mdb"
+                placeholder="Enter amount here"
+                name="closing_costs"
+                value={this.state.closing_costs}
+                onChange={this.handleChange}
+                thousandSeparator={true}
+                onValueChange={async (values) => {
+                  const { formattedValue, value } = values;
+                  await this.setState({
+                    closing_costs_number: formattedValue,
+                  });
+                  await this.setState({
+                    closing_costs: value,
+                  });
+                }}
+              />
+
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20">
@@ -315,6 +555,7 @@ export class SecondLoanScenario extends Component {
                 frmResponse = {this.props.FrmGetResponse}
                 armResponse = {this.props.ArmGetResponse}
                 mortgageProgramType={this.state.mortgage_program_type}
+                loanAmount={this.state.loan_amount}
               />
             ) : null}
           </div>

@@ -20,11 +20,12 @@ export class PropertyInformationReviewEdit extends Component {
   componentDidMount() {
     
     const { GetPropertyinfo, PropertyInfoCreateResponse } = this.props;
+    console.log(this.props)
     if(PropertyInfoCreateResponse && PropertyInfoCreateResponse.data){
 
-      GetPropertyinfo(PropertyInfoCreateResponse.data.id);
+      GetPropertyinfo(localStorage.getItem('property_id'));
     }else{
-      GetPropertyinfo(this.props.location.state.propertyId)
+      GetPropertyinfo(localStorage.getItem('property_id'))
     }
   }
   goToEdit = () => {
