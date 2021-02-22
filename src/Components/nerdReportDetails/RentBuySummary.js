@@ -20,6 +20,8 @@ import Header from "../../common/header";
 import "./nerdReportDetails.css";
 import renthouse from "../../assets/images/rent-house.png";
 import buyhouse from "../../assets/images/buy-home.png";
+import renthouseactive from "../../assets/images/rent-house_active.png";
+import buyhouseactive from "../../assets/images/buy-home_active.png";
 
 import { Button } from "@material-ui/core";
 
@@ -74,51 +76,25 @@ function RentBuySummary(props) {
               </MDBCol>
               <MDBCol col="4" md="5">
                 {" "}
-                <img src={renthouse} className=""></img>
+                <img src={renthouseactive} className=""></img>
               </MDBCol>
-              <MDBCol col="4" md="5">
-                {" "}
-                <img src={buyhouse} className=""></img>
-              </MDBCol>
-
+        
               <MDBCol col="10" md="10">
                 <br></br>
-                Renting may be a better option by{" "}
-                {CalculatorResponse.ARM1
+             <b> {CalculatorResponse.ARM1
+                  ? CalculatorResponse.ARM1.Rent
+                  : CalculatorResponse.FRM1
+                  ? CalculatorResponse.FRM1.Rent
+                  : 0}</b>{" "}
+                      {CalculatorResponse.ARM1
                   ? CalculatorResponse.ARM1["better-renting-by"]
                   : CalculatorResponse.FRM1
                   ? CalculatorResponse.FRM1["better-renting-by"]
                   : 0}
-                <br />
-                For the duration of stay and based on your assumptions
               </MDBCol>
             </MDBRow>
 
-            <MDBRow className="margin_30">
-              <MDBCol col="10" md="10">
-                <h3>Buy</h3>
-              </MDBCol>
-              <MDBCol col="4" md="5">
-                {" "}
-                <img src={renthouse} className=""></img>
-              </MDBCol>
-              <MDBCol col="4" md="5">
-                {" "}
-                <img src={buyhouse} className=""></img>
-              </MDBCol>
-
-              <MDBCol col="10" md="10">
-                <br></br>
-                Buying may be a better option by{" "}
-                {CalculatorResponse.ARM1
-                  ? CalculatorResponse.ARM1["better-buying-by"]
-                  : CalculatorResponse.FRM1
-                  ? CalculatorResponse.FRM1["better-buying-by"]
-                  : 0}
-                <br />
-                For the duration of stay and based on your assumptions
-              </MDBCol>
-            </MDBRow>
+         
             <br></br>
           </TabPanel>
 
@@ -131,55 +107,28 @@ function RentBuySummary(props) {
                 {" "}
                 <img src={renthouse} className=""></img>
               </MDBCol>
-              <MDBCol col="4" md="5">
-                {" "}
-                <img src={buyhouse} className=""></img>
-              </MDBCol>
+         
 
               <MDBCol col="10" md="10">
                 <br></br>
-                Renting may be a better option by{" "}
-                {CalculatorResponse.ARM1
-                  ? CalculatorResponse.ARM1["better-buying-by"]
-                  : CalculatorResponse.FRM1
-                  ? CalculatorResponse.FRM1["better-buying-by"]
-                  : 0}
-                <br />
-                For the duration of stay and based on your assumptions
-              </MDBCol>
-            </MDBRow>
-
-            <MDBRow className="margin_30">
-              <MDBCol col="10" md="10">
-                <h3>Buy</h3>
-              </MDBCol>
-              <MDBCol col="4" md="5">
-                {" "}
-                <img src={renthouse} className=""></img>
-              </MDBCol>
-              <MDBCol col="4" md="5">
-                {" "}
-                <img src={buyhouse} className=""></img>
-              </MDBCol>
-
-              <MDBCol col="10" md="10">
-                <br></br>
-                Buying may be a better option by{" "}
                 {CalculatorResponse.ARM2
-                  ? CalculatorResponse.ARM2["better-buying-by"]
+                  ? CalculatorResponse.ARM2.Rent
                   : CalculatorResponse.FRM2
-                  ? CalculatorResponse.FRM2["better-buying-by"]
+                  ? CalculatorResponse.FRM2.Rent
+                  : 0}{" "}
+                {CalculatorResponse.ARM2
+                  ? CalculatorResponse.ARM2["better-renting-by"]
+                  : CalculatorResponse.FRM2
+                  ? CalculatorResponse.FRM2["better-renting-by"]
                   : 0}
                 <br />
-                For the duration of stay and based on your assumptions
+              
               </MDBCol>
             </MDBRow>
-            <br></br>
+
 
             <br></br>
-            <h4>
-              Rent and Buy scenarios are the same based on current assumptions
-            </h4>
+
           </TabPanel>
         </MDBCard>
       </MDBContainer>
