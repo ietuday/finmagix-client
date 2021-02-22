@@ -40,8 +40,8 @@ export class PersonalFinance extends Component {
       monthlynonhousingExpensesValidationError:"",
       marginal_tax_rate_ValidationError: ""
     };
-    this.validators = PersonaLFinanceValidator;
-    resetValidators(this.validators);
+    // this.validators = PersonaLFinanceValidator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
   }
   handleRangeData = (data) => {
@@ -132,21 +132,7 @@ export class PersonalFinance extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    if (
-      name === "marginal_tax_rate" ||
-      name === "annual_gross_income" ||
-      name === "monthly_debt_payments" ||
-      name === "monthly_non_housing_expenses" ||
-      name === "federal_income"
-      // ||
-      // name == "total_non_housing"
-    ) {
-      updateValidators(this.validators, event.target.name, event.target.value);
-      const validationErrorLength = this.validators[event.target.name].errors
-        .length;
-      this.props.getValidationError(validationErrorLength);
-    }
-
+    
     this.props.getPersonalFinanceData(this.state);
   }
   toggle = () => {
@@ -370,49 +356,6 @@ export class PersonalFinance extends Component {
         {this.state.marginal_tax_rate_ValidationError}
       </MDBCol>
     </MDBRow>
-
-
-        {this.props.PersonalFinanaceGetResponse &&
-        Object.entries(
-          this.props.PersonalFinanaceGetResponse.detail_non_housing_expenses
-        ).length !== 0 ? (
-
-          <div>
-            {/* <MDBRow className="margin20">
-              <MDBCol md="8"></MDBCol>
-              <MDBCol md="4">
-                <span className="link" onClick={this.toggle}>
-                  Enter Detailed Expenses {`>`}
-                </span>
-              </MDBCol>
-            </MDBRow> */}
-            {this.state.showModal ? (
-              <DetailedExpenseModal
-                toggle={this.toggle}
-                openModal={this.state.openModal}
-                calculateNonHousingExpense={this.calculateNonHousingExpense}
-              />
-            ) : null}
-            <MDBRow className="margin20" className="text-center">
-              <MDBCol md="12">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  className="button-inner-class"
-                  onClick={this.goToNextPage}
-                >
-                  {" "}
-                  Save and Continue
-                </Button>
-              </MDBCol>
-            </MDBRow>
-
-            <br />
-            <br />
-            <br />
-          </div>
-        ) : null}
 
         <br />
       </Fragment>

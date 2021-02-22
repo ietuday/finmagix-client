@@ -79,26 +79,27 @@ export class PersonalFinanceReviewEdit extends Component {
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
+
           <MDBRow className="margin20">
-            <MDBCol md="1" size="1"></MDBCol>
-            <MDBCol md="6" size="6">
-              <div className="">
-                <span className="get-started-label">Annual Gross Income</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Annual Gross income is your total gross income
-              before any deductions such as income taxes. If you have other sources
-              other than salary & wages, please include them as well. </span>
+          <MDBCol md="1" size="1"></MDBCol>
+          <MDBCol md="6" size="6">
+            <div className="">
+              <span className="get-started-label">
+              Federal Income
+
+              </span>
+             
             </div>
-              </div>
-            </MDBCol>
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
-                {PeronalFinanceData.annual_gross_income}
-              </div>
-            </MDBCol>
-            <MDBCol md="2"></MDBCol>
-          </MDBRow>
+          </MDBCol>
+          &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+          <MDBCol md="3" size="3">
+            <div className="get-started-label text-center">
+              {PeronalFinanceData.federal_income}
+            </div>
+          </MDBCol>
+          <MDBCol md="2"></MDBCol>
+        </MDBRow>
+
           <MDBRow className="margin20">
             <MDBCol md="1" size="1"></MDBCol>
             <MDBCol md="6" size="6">
@@ -154,7 +155,7 @@ export class PersonalFinanceReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-                {PeronalFinanceData.marginal_tax_rate}
+                {PeronalFinanceData.marginal_tax_rate*100}%
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>

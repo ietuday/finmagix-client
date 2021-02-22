@@ -217,32 +217,13 @@ export class StepperComponent extends Component {
         ? this.steps.findIndex((step, i) => !(i in this.state.completed))
         : this.state.activeStep + 1;
 
-    if (
-      this.state.personalFinanceValidationErros == 0 &&
-      isFormValid("personal_finance") === true
-    ) {
+ 
       this.setState({
         saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
       });
-    } else {
-      this.setState({
-        activeStep: this.state.activeStep,
-      });
-      NotificationManager.error("Please Validate Fields", "Error");
-    }
+    
 
-    {
-      Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-        .length !== 0
-        ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-        : PersonalFinanceCreate(this.state.personalFinance);
-    }
-    if (
-      Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-        .length !== 0
-    ) {
-      this.handleNext();
-    }
+   
   };
   async handleRentvsBuyData(data) {
     await this.setState((prevState) => {
@@ -374,6 +355,7 @@ export class StepperComponent extends Component {
       PersonalFinanceUpdate,
       RentvsBuyUpdate,
       PropertyInfoUpdate,
+      PersonalFinanceCreate
     } = this.props;
     const newActiveStep =
       this.isLastStep && !this.allStepsCompleted
@@ -397,17 +379,16 @@ export class StepperComponent extends Component {
 
     } else if (this.state.activeStep === 1) {
       
-      if(this.state.personalFinanceValidationErros !== 0 &&
-       !isFormValid("personal_finance")){
-        this.setState({
-          activeStep: this.state.activeStep,
-        });
-        NotificationManager.error("Please Validate Fields", "Error");
-        }else{
           this.props.history.push({pathname: '/property-form',
         returnBackFromreviewEdit : true})
+      
+        {
+          Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+            .length !== 0
+            ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+            : PersonalFinanceCreate(this.state.personalFinance);
         }
-      PersonalFinanceUpdate(this.state.personalFinance);
+      // PersonalFinanceUpdate(this.state.personalFinance);
     
 
     } else if (this.state.activeStep === 2) {

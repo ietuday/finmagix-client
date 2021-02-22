@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
+import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 
@@ -17,7 +18,9 @@ export class Summary extends Component {
   showReports = () => {
     this.props.history.push("/show-detailed-reports");
   };
-  componentDidMount() {}
+  componentDidMount() {
+    debugger
+  }
   render() {
     const{PropertyInfoCreateResponse,FRMMortgageCreateResponseFirst,ARMMortgageCreateResponseFirst,FRMMortgageCreateResponseSecond,ARMMortgageCreateResponseSecond, PersonalFinanceUpdateResponse,TaxUpdateResponse, PersonalFinanceCreateResponse,RentvsBuyCreateResponse,TaxCreateResponse} = this.props;
     return (
