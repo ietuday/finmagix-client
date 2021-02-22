@@ -173,14 +173,15 @@ export class FirstLoanScenario extends Component {
 
   async handleChange(event) {
     event.persist();
-    if (event.target.name == 'interest'){
-      let data = Number(event.target.value)/100
-      event.target.value = String(data)
-    }
+    // if (event.target.name == 'interest'){
+    //   let data = Number(event.target.value)/100
+    //   event.target.value = String(data)
+    // }
     await this.setState({
-      const { name } = event.target;
-      event.persist();
-   
+      // const { name } = event.target;
+      // event.persist();
+      [event.target.name]: event.target.value,
+    })
       if (event.target.name == "loan_amount") {
         if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
           this.setState({

@@ -10,10 +10,10 @@ import {
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  arm_mortgage_create_first,
-  arm_mortgage_create_second,
-  frm_mortgage_create_first,
-  frm_mortgage_create_second,
+  frm_mortgage_get_first,
+  arm_mortgage_get_first,
+  frm_mortgage_get_second,
+  arm_mortgage_get_second,
 
   arm_mortgage_update_first,
   arm_mortgage_update_second,
@@ -304,7 +304,17 @@ handleNext = () => {
     }
   };
   goToNextPage = () => {
-    const {FRMMortgageUpdateFirst,ARMMortgageUpdateFirst,FRMMortgageUpdateSecond,ARMMortgageUpdateSecond} = this.props;
+    const {
+      FRMMortgageCreateFirst,
+      ARMMortgageCreateFirst,
+      FRMMortgageCreateSecond,
+      ARMMortgageCreateSecond,
+      FRMMortgageUpdateFirst,
+      ARMMortgageUpdateFirst,
+      FRMMortgageUpdateSecond,
+      ARMMortgageUpdateSecond,
+  
+    } = this.props;
     if(this.state.firstLoanScenario && this.state.firstLoanScenario.mortgage_program_type === 1){
       FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.props.FrmMortgageFirstEditId)
     }
@@ -319,17 +329,6 @@ handleNext = () => {
     }
     this.props.handleContinue();
 
-    const {
-      FRMMortgageCreateFirst,
-      ARMMortgageCreateFirst,
-      FRMMortgageCreateSecond,
-      ARMMortgageCreateSecond,
-      FRMMortgageUpdateFirst,
-      ARMMortgageUpdateFirst,
-      FRMMortgageUpdateSecond,
-      ARMMortgageUpdateSecond,
-
-    } = this.props;
     if (
       this.state.secondLoanScenario.secondloanarmvalidationerror === 0 ||
       this.state.SecondloanscenarioValidationErrors === 0
