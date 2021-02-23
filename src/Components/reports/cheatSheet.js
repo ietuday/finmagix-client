@@ -27,8 +27,19 @@ const blues = [
   ["#00aff0"],
   ['#97d24f']
 ];
+
+const mortgageBlues = [
+  ["#00aff0"],
+  ["#00aff0"],
+  ['#97d24f'],
+  ['#97d24f']
+];
 const getColor = (length, index) => {
   return blues[index];
+};
+
+const getMortageColor = (length, index) => {
+  return mortgageBlues[index];
 };
 
 const YAxisLeftTick = ({ y, payload: { value } }) => {
@@ -90,14 +101,14 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: ((CalculatorResponse.ARM1 && CalculatorResponse.ARM1.loanamountsecond1) || (CalculatorResponse.FRM1 && CalculatorResponse.FRM1.loanamountsecond1)) ? "Loan Amount Second" : "PMI Amount",
+      name: "Loan Amount Second",
       Amount: parseFloat(
         String(
           `${
             CalculatorResponse.ARM1
-              ? (CalculatorResponse.ARM1.loanamountsecond1 ? CalculatorResponse.ARM1.loanamountsecond1 :CalculatorResponse.ARM1['mth-pmi'])
+              ? CalculatorResponse.ARM1.loanamountsecond1 
               : CalculatorResponse.FRM1
-              ? (CalculatorResponse.FRM1.loanamountsecond1 ? CalculatorResponse.FRM1.loanamountsecond1 :CalculatorResponse.FRM1['mth-pmi'])
+              ? CalculatorResponse.FRM1.loanamountsecond1
               : 0
           }`
         ).replace(/,/g, "")
@@ -118,14 +129,14 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: ((CalculatorResponse.ARM2 && CalculatorResponse.ARM2.loanamountsecond2) || (CalculatorResponse.FRM2 && CalculatorResponse.FRM2.loanamountsecond1)) ? "Loan Amount Second" : "PMI Amount",
+      name: "Loan Amount Second", 
       Amount: parseFloat(
         String(
           `${
             CalculatorResponse.ARM2
-              ? (CalculatorResponse.ARM2.loanamountsecond2 ? CalculatorResponse.ARM2.loanamountsecond2 :CalculatorResponse.ARM2['mth-pmi'])
+              ? CalculatorResponse.ARM2.loanamountsecond2 
               : CalculatorResponse.FRM2
-              ? (CalculatorResponse.FRM2.loanamountsecond1 ? CalculatorResponse.FRM2.loanamountsecond1 :CalculatorResponse.FRM2['mth-pmi'])
+              ? CalculatorResponse.FRM2.loanamountsecond1 
               : 0
           }`
         ).replace(/,/g, "")
@@ -149,14 +160,14 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Second Mortage payment",
+      name: ((CalculatorResponse.ARM1 && CalculatorResponse.ARM1.Paymentsecond1) || (CalculatorResponse.FRM1 && CalculatorResponse.FRM1.Paymentsecond1)) ? "Second Mortage payment" : "PMI",
       Amount: parseFloat(
         String(
           `${
             CalculatorResponse.ARM1
-              ? CalculatorResponse.ARM1.Paymentsecond1
+              ? (CalculatorResponse.ARM1.Paymentsecond1 ? CalculatorResponse.ARM1.Paymentsecond1 :CalculatorResponse.ARM1['mth-pmi'])
               : CalculatorResponse.FRM1
-              ? CalculatorResponse.FRM1.Paymentsecond1
+              ? (CalculatorResponse.FRM1.Paymentsecond1 ? CalculatorResponse.FRM1.Paymentsecond1 :CalculatorResponse.FRM1['mth-pmi'])
               : 0
           }`
         ).replace(/,/g, "")
@@ -177,14 +188,14 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Second Mortage payment",
+      name: ((CalculatorResponse.ARM1 && CalculatorResponse.ARM1.Paymentsecond1) || (CalculatorResponse.FRM1 && CalculatorResponse.FRM1.Paymentsecond1)) ? "Second Mortage payment" : "PMI",
       Amount: parseFloat(
         String(
           `${
             CalculatorResponse.ARM2
-              ? CalculatorResponse.ARM2.Paymentsecond2
+              ? (CalculatorResponse.ARM2.Paymentsecond2 ? CalculatorResponse.ARM2.Paymentsecond2 :CalculatorResponse.ARM2['mth-pmi'])
               : CalculatorResponse.FRM2
-              ? CalculatorResponse.FRM2.Paymentsecond2
+              ? (CalculatorResponse.FRM2.Paymentsecond2 ? CalculatorResponse.FRM2.Paymentsecond2 :CalculatorResponse.FRM2['mth-pmi'])
               : 0
           }`
         ).replace(/,/g, "")
@@ -506,7 +517,7 @@ function CheatSheet(props) {
             <Bar dataKey={yKey} minPointSize={2} barSize={32}>
               {loandata.map((d, idx) => {
                 return (
-                  <Cell key={d[xKey]} fill={getColor(loandata.length, idx)} />
+                  <Cell key={d[xKey]} fill={getMortageColor(loandata.length, idx)} />
                 );
               })}
             </Bar>
@@ -558,7 +569,7 @@ function CheatSheet(props) {
                 return (
                   <Cell
                     key={d[xKey]}
-                    fill={getColor(paymentdata.length, idx)}
+                    fill={getMortageColor(paymentdata.length, idx)}
                   />
                 );
               })}
