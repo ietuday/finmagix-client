@@ -174,10 +174,7 @@ export class FirstLoanScenario extends Component {
 
   async handleChange(event) {
     event.persist();
-    // if (event.target.name == 'interest'){
-    //   let data = Number(event.target.value)/100
-    //   event.target.value = String(data)
-    // }
+
     await this.setState({
       // const { name } = event.target;
       // event.persist();
