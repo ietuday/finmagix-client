@@ -203,13 +203,15 @@ export class StepperComponent extends Component {
       downpayment: downpayment,
     });
   };
-  handlePersonalFinance = (data,id) => {
-    this.setState((prevState) => {
+  handlePersonalFinance = async (data,id) => {
+  
+    await this.setState((prevState) => {
       let personalFinance = Object.assign({}, prevState.personalFinance);
       personalFinance = data;
       personalFinance.id = JSON.parse(localStorage.getItem("personal_finance_array")).id;
       return { personalFinance };
     });
+    console.log(this.state)
 
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
     const newActiveStep =
@@ -221,8 +223,15 @@ export class StepperComponent extends Component {
       this.setState({
         saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
       });
-    
 
+      {
+        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+          .length !== 0
+          ? PersonalFinanceUpdate(this.state.personalFinance)
+          : PersonalFinanceCreate(this.state.personalFinance);
+      }
+
+      
    
   };
   async handleRentvsBuyData(data) {
@@ -380,15 +389,15 @@ export class StepperComponent extends Component {
     } else if (this.state.activeStep === 1) {
       
           this.props.history.push({pathname: '/property-form',
-        returnBackFromreviewEdit : true})
-      
+        returnBackFromreviewEdit : true}) 
+        console.log(this.state)
         {
           Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
             .length !== 0
             ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
             : PersonalFinanceCreate(this.state.personalFinance);
         }
-      // PersonalFinanceUpdate(this.state.personalFinance);
+      
     
 
     } else if (this.state.activeStep === 2) {
