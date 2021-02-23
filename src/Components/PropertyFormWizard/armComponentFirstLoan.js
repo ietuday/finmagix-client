@@ -86,7 +86,8 @@ export class ARMComponentFirstLoan extends Component {
       rateAddValidationError:"",
       property_price: "",
       loan_amount_validation_error: "",
-      interestrateValidationError: ""
+      interestrateValidationError: "",
+      closingCostsValidationError: "",
     };
     // this.validators = ArmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -258,6 +259,23 @@ if(event.target.name == "rate_add_percentage"){
     }) 
   }
   
+}
+
+if (event.target.name == "closing_costs") {
+  if (
+    parseInt(String(event.target.value).replace(/,/g, "")) >
+    (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
+      100
+  ) {
+    this.setState({
+      closingCostsValidationError:
+        " Closing costs cannot exceed 5% of loan amount",
+    });
+  } else {
+    this.setState({
+      closingCostsValidationError: "",
+    });
+  }
 }
 
 
@@ -911,6 +929,7 @@ if(event.target.name == "rate_add_percentage"){
                 });
               }}
             />
+            {this.state.closingCostsValidationError}
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "closing_costs")} */}
@@ -937,15 +956,7 @@ if(event.target.name == "rate_add_percentage"){
           : null}
         <br />
 
-        {this.props.ArmGetResponse.pmi !== "null" || (this.props.ArmGetResponse.second_mortgage_loan_amount !=="null") || this.props.downpayment === "lessthan20" ? (
-          <ShowPmiOptionsFirstLoanARM
-          handleDownpaymentData={this.handleDownpaymentData}
-          frmResponse = {this.props.FrmGetResponse}
-          loanAmount={this.state.loan_amount}
-          armResponse = {this.props.ArmGetResponse}
-          mortgageProgramType={this.state.mortgage_program_type}
-          />
-          ) : null}
+
       </Fragment>
     );
   }

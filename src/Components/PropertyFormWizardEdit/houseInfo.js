@@ -40,6 +40,7 @@ export class GetStartedHouseInfo extends Component {
       no_of_bedrooms: props.PropertyInfoGetDataResponse.no_of_bedrooms,
       no_of_bathrooms: props.PropertyInfoGetDataResponse.no_of_bathrooms,
       area_of_the_house: props.PropertyInfoGetDataResponse.area_of_the_house,
+      area_of_the_house_number:props.PropertyInfoGetDataResponse.area_of_the_house,
       annual_property_tax: props.PropertyInfoGetDataResponse.annual_property_tax,
       annual_property_tax_number:  props.PropertyInfoGetDataResponse.annual_property_tax,
       annual_home_owner_association_dues: props.PropertyInfoGetDataResponse.annual_home_owner_association_dues,
@@ -169,10 +170,10 @@ export class GetStartedHouseInfo extends Component {
     }
 
     if (event.target.name == "home_owner_insurance") {
-      if (parseInt(String(event.target.value).replace(/,/g, '')) > (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 3) / 100) {
+      if (parseInt(String(event.target.value).replace(/,/g, '')) > (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 2) / 100) {
 
         this.setState({
-          homeownerInsuranceValidationError: "Home Owner's insurance cannot exceed 3% of home price"
+          homeownerInsuranceValidationError: "Home Owner's insurance cannot exceed 2% of home price"
         })
       } else {
         this.setState({
@@ -490,12 +491,30 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Area of House</span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter Area in Sq.Ft"
               name="area_of_the_house"
               value={this.state.area_of_the_house}
               onChange={this.handleChange}
+            /> */}
+
+<NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter Area in Sq.Ft"
+              name="area_of_the_house"
+              value={this.state.area_of_the_house}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  area_of_the_house_number: formattedValue,
+                });
+                await this.setState({
+                  area_of_the_house: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>

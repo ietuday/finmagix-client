@@ -21,7 +21,7 @@ import {
 
 import HouseInfoValidator from "../validatorRules/HouseInfoValidator";
 
-import { config } from '../config/default';
+import { config } from "../config/default";
 const { baseURL } = config;
 
 export class GetStartedHouseInfo extends Component {
@@ -36,8 +36,12 @@ export class GetStartedHouseInfo extends Component {
       downpayment_amount: "",
       downpayment_amount_number: "",
       stay_duration: "",
-      no_of_bedrooms: localStorage.getItem('no_of_bedrooms') ? localStorage.getItem('no_of_bedrooms') : 0,
-      no_of_bathrooms: localStorage.getItem('no_of_bathrooms') ? localStorage.getItem('no_of_bathrooms') : 0,
+      no_of_bedrooms: localStorage.getItem("no_of_bedrooms")
+        ? localStorage.getItem("no_of_bedrooms")
+        : 0,
+      no_of_bathrooms: localStorage.getItem("no_of_bathrooms")
+        ? localStorage.getItem("no_of_bathrooms")
+        : 0,
       area_of_the_house: "",
       annual_property_tax: "",
       annual_property_tax_number: "",
@@ -55,7 +59,7 @@ export class GetStartedHouseInfo extends Component {
       homepriceGrowthValidationError: "",
       downpaymentnewValidationError: "",
       annualPropertytaxValidationError: "",
-      homeownerInsuranceValidationError: ""
+      homeownerInsuranceValidationError: "",
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -63,13 +67,12 @@ export class GetStartedHouseInfo extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleBedroomRoomCount = this.handleBedroomRoomCount.bind(this);
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
-    this.checkProperty()
-    console.log(localStorage)
+    this.checkProperty();
+    console.log(localStorage);
   }
 
   checkProperty() {
-
-    const propertyId = JSON.parse(localStorage.getItem('property_id'))
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {
@@ -78,7 +81,7 @@ export class GetStartedHouseInfo extends Component {
         },
       })
         .then((propertyInfo) => {
-          const propertyDetail = propertyInfo.data.data[0]
+          const propertyDetail = propertyInfo.data.data[0];
 
           this.setState({
             house_address: propertyDetail.house_address,
@@ -92,34 +95,37 @@ export class GetStartedHouseInfo extends Component {
             no_of_bedrooms: Number(propertyDetail.no_of_bedrooms),
             no_of_bathrooms: Number(propertyDetail.no_of_bathrooms),
             area_of_the_house: propertyDetail.area_of_the_house,
+            area_of_the_house_number: propertyDetail.area_of_the_house,
             annual_property_tax: propertyDetail.annual_property_tax,
             annual_property_tax_number: propertyDetail.annual_property_tax,
-            annual_home_owner_association_dues: propertyDetail.annual_home_owner_association_dues,
-            annual_home_owner_association_dues_number: propertyDetail.annual_home_owner_association_dues,
+            annual_home_owner_association_dues:
+              propertyDetail.annual_home_owner_association_dues,
+            annual_home_owner_association_dues_number:
+              propertyDetail.annual_home_owner_association_dues,
             home_owner_insurance: propertyDetail.home_owner_insurance,
             home_owner_insurance_number: propertyDetail.home_owner_insurance,
             home_price_growth: propertyDetail.home_price_growth,
-            home_price_growth_percentage: Number(propertyDetail.home_price_growth) * 100,
-            is_update: true
-          })
-          this.handleBedroomRoomCount(this.state.no_of_bedrooms)
-          this.handleBathRoomCount(this.state.no_of_bathrooms)
-          let downpayment
+            home_price_growth_percentage:
+              Number(propertyDetail.home_price_growth) * 100,
+            is_update: true,
+          });
+          this.handleBedroomRoomCount(this.state.no_of_bedrooms);
+          this.handleBathRoomCount(this.state.no_of_bathrooms);
+          let downpayment;
           let twenty_percent_of_property_price =
             (this.state.property_price * 20) / 100;
-          if (this.state.downpayment_amount < twenty_percent_of_property_price) {
+          if (
+            this.state.downpayment_amount < twenty_percent_of_property_price
+          ) {
             downpayment = "lessthan20";
           } else {
             downpayment = "greaterthan20";
           }
           this.props.handleHouseInfo(downpayment, this.state);
         })
-        .catch((err) => {
-
-        });
+        .catch((err) => {});
     }
   }
-
 
   async handleChange(event) {
     const { name } = event.target;
@@ -127,62 +133,67 @@ export class GetStartedHouseInfo extends Component {
     event.persist();
     let downpayment;
 
-
     if (event.target.name == "home_price_growth_percentage") {
-      if (parseInt(String(event.target.value).replace(/%/g, '')) > 20) {
+      if (parseInt(String(event.target.value).replace(/%/g, "")) > 20) {
         this.setState({
-          homepriceGrowthValidationError: "Home Price growth cannot exceed 20%"
-        })
+          homepriceGrowthValidationError: "Home Price growth cannot exceed 20%",
+        });
       } else {
         this.setState({
-          homepriceGrowthValidationError: ""
-        })
+          homepriceGrowthValidationError: "",
+        });
       }
-
     }
 
     if (event.target.name == "downpayment_amount") {
-      if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
+      if (
+        this.state.property_price <
+        parseInt(String(event.target.value).replace(/,/g, ""))
+      ) {
         this.setState({
-          downpaymentnewValidationError: " Downpayment amount can never exceed home price"
-        })
+          downpaymentnewValidationError:
+            " Downpayment amount can never exceed home price",
+        });
       } else {
         this.setState({
-          downpaymentnewValidationError: ""
-        })
+          downpaymentnewValidationError: "",
+        });
       }
     }
 
-
     if (event.target.name == "annual_property_tax") {
-      if (parseInt(String(event.target.value).replace(/,/g, '')) > (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 10) / 100) {
-
+      if (
+        parseInt(String(event.target.value).replace(/,/g, "")) >
+        (parseFloat(String(this.state.property_price).replace(/,/g, "")) * 10) /
+          100
+      ) {
         this.setState({
-          annualPropertytaxValidationError: " Annual Property tax cannot exceed 10% of home price"
-        })
+          annualPropertytaxValidationError:
+            " Annual Property tax cannot exceed 10% of home price",
+        });
       } else {
         this.setState({
-          annualPropertytaxValidationError: ""
-        })
+          annualPropertytaxValidationError: "",
+        });
       }
     }
 
     if (event.target.name == "home_owner_insurance") {
-      if (parseInt(String(event.target.value).replace(/,/g, '')) > (parseFloat(String(this.state.property_price).replace(/,/g, '')) * 3) / 100) {
-
+      if (
+        parseInt(String(event.target.value).replace(/,/g, "")) >
+        (parseFloat(String(this.state.property_price).replace(/,/g, "")) * 2) /
+          100
+      ) {
         this.setState({
-          homeownerInsuranceValidationError: "Home Owner's insurance cannot exceed 3% of home price"
-        })
+          homeownerInsuranceValidationError:
+            "Home Owner's insurance cannot exceed 2% of home price",
+        });
       } else {
         this.setState({
-          homeownerInsuranceValidationError: ""
-        })
+          homeownerInsuranceValidationError: "",
+        });
       }
     }
-
-
-
-
 
     await this.setState({
       [event.target.name]: event.target.value,
@@ -205,32 +216,31 @@ export class GetStartedHouseInfo extends Component {
       name == "annual_home_owner_association_dues" ||
       name == "home_owner_insurance"
     ) {
-      console.log(name)
+      console.log(name);
 
       updateValidators(this.validators, event.target.name, event.target.value);
       const validationErrorLength = this.validators[event.target.name].errors
         .length;
 
       this.props.getValidationError(validationErrorLength);
-
     }
 
     this.props.handleHouseInfo(downpayment, this.state);
   }
-  
+
   handleBedroomRoomCount(count) {
-     this.setState({
+    this.setState({
       no_of_bedrooms: count,
     });
-    console.log(this.state)
-    localStorage.setItem('no_of_bedrooms',count)
+    console.log(this.state);
+    localStorage.setItem("no_of_bedrooms", count);
   }
   handleBathRoomCount(count) {
     this.setState({
       no_of_bathrooms: count,
     });
-    console.log(this.state)
-    localStorage.setItem('no_of_bathrooms',count)
+    console.log(this.state);
+    localStorage.setItem("no_of_bathrooms", count);
   }
   selectAddress = (data) => {
     this.setState({
@@ -239,7 +249,6 @@ export class GetStartedHouseInfo extends Component {
       house_zip_code: data.house_zip_code,
     });
     localStorage.setItem("changeAddress", false);
-
   };
   handleBack = () => {
     this.props.history.push("/select-modules");
@@ -259,7 +268,6 @@ export class GetStartedHouseInfo extends Component {
     }
   };
   getArea = (addressArray) => {
-
     let area = "";
     for (let i = 0; i < addressArray.length; i++) {
       if (addressArray[i].types[0]) {
@@ -287,9 +295,9 @@ export class GetStartedHouseInfo extends Component {
     }
   };
 
-  componentDidMount() { }
+  componentDidMount() {}
 
-  componentWillUpdate(nextProps, nextState) { }
+  componentWillUpdate(nextProps, nextState) {}
   render() {
     return (
       <Fragment>
@@ -387,9 +395,8 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-          {this.state.homepriceGrowthValidationError}
+            {this.state.homepriceGrowthValidationError}
           </MDBCol>
-         
         </MDBRow>
         {/* End */}
         <MDBRow className="margin20">
@@ -426,11 +433,9 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.downpayment_amount}
               onChange={this.handleChange}
             /> */}
-          {this.state.downpaymentnewValidationError}
+            {this.state.downpaymentnewValidationError}
           </MDBCol>
-         
         </MDBRow>
-
         <MDBRow className="margin20" center>
           <MDBCol md="12">
             <span className="get-started-label">
@@ -454,29 +459,25 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        
-          <MDBRow className="margin20">
+        <MDBRow className="margin20">
           <MDBCol md="7" sm="6" xs="6" size="6">
             <span className="get-started-long-question">Bedrooms</span>
           </MDBCol>
           <MDBCol md="5" sm="6" xs="6" size="6">
-            
             <NumberSpinner
               count={this.state.no_of_bedrooms}
               onRoomCount={this.handleBedroomRoomCount}
             />
           </MDBCol>
         </MDBRow>
-
-
         <MDBRow className="margin20">
           <MDBCol md="7" sm="6" xs="6" size="6">
             <span className="get-started-long-question">Bathrooms</span>
           </MDBCol>
           <MDBCol md="5" sm="6" xs="6" size="6">
-            <NumberSpinner 
+            <NumberSpinner
               count={this.state.no_of_bathrooms}
-              onRoomCount={this.handleBathRoomCount} 
+              onRoomCount={this.handleBathRoomCount}
             />
           </MDBCol>
         </MDBRow>
@@ -484,12 +485,30 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Area of House</span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter Area in Sq.Ft"
               name="area_of_the_house"
               value={this.state.area_of_the_house}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter Area in Sq.Ft"
+              name="area_of_the_house"
+              value={this.state.area_of_the_house}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  area_of_the_house_number: formattedValue,
+                });
+                await this.setState({
+                  area_of_the_house: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -527,15 +546,11 @@ export class GetStartedHouseInfo extends Component {
                 await this.setState({
                   annual_property_tax: value,
                 });
-
               }}
             />
-          {this.state.annualPropertytaxValidationError}
+            {this.state.annualPropertytaxValidationError}
           </MDBCol>
-          
         </MDBRow>
-
-
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -574,15 +589,11 @@ export class GetStartedHouseInfo extends Component {
                 await this.setState({
                   annual_home_owner_association_dues: value,
                 });
-
               }}
             />
           </MDBCol>
           {/* {displayValidationErrors(this.validators, "annual_home_owner_association_dues")} */}
         </MDBRow>
-
-
-
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
             <span className="get-started-label">Home Owner's Insurance</span>
@@ -610,13 +621,11 @@ export class GetStartedHouseInfo extends Component {
                 await this.setState({
                   home_owner_insurance: value,
                 });
-
               }}
             />
-        {this.state.homeownerInsuranceValidationError}
+            {this.state.homeownerInsuranceValidationError}
           </MDBCol>
         </MDBRow>
-      
       </Fragment>
     );
   }
