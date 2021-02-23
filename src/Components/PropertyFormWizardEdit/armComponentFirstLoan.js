@@ -242,7 +242,7 @@ export class ARMComponentFirstLoan extends Component {
 
 
     if (event.target.name == "period_cap_percentage") {
-      if (parseInt(String(event.target.value).replace(/%/g, '')) > 3) {
+      if (parseInt(String(event.target.value).replace(/%/g, '')) > 4) {
         this.setState({
           periodCapValidationError: "Is the period cap input accurate?"
         })

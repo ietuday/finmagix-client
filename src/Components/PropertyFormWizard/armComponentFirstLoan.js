@@ -252,7 +252,7 @@ if(event.target.name == "floor_interest_rate_percentage"){
 
 
 if(event.target.name == "period_cap_percentage"){
-  if(parseInt(String(event.target.value).replace(/%/g, '')) > 3){
+  if(parseInt(String(event.target.value).replace(/%/g, '')) > 4){
     this.setState({
       periodCapValidationError: "Is the period cap input accurate?"
     }) 

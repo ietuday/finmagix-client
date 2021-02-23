@@ -370,7 +370,7 @@ export class ARMComponentSecondLoan extends Component {
     if (event.target.name == "rate_add_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 3) {
         this.setState({
-          rateAddValidationError: "If the Rate add input is greater than 3%, ask 'Is the rate add input accurate?'"
+          rateAddValidationError: "Is the rate add input accurate?"
         })
       } else {
         this.setState({
@@ -544,7 +544,7 @@ export class ARMComponentSecondLoan extends Component {
 
 
     if (event.target.name == "period_cap_percentage") {
-      if (parseInt(String(event.target.value).replace(/%/g, '')) > 3) {
+      if (parseInt(String(event.target.value).replace(/%/g, '')) > 4) {
         this.setState({
           periodCapValidationError: "Is the period cap input accurate?"
         })
@@ -559,7 +559,7 @@ export class ARMComponentSecondLoan extends Component {
     if (event.target.name == "rate_add_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 3) {
         this.setState({
-          rateAddValidationError: "If the Rate add input is greater than 3%, ask 'Is the rate add input accurate?'"
+          rateAddValidationError: "Is the rate add input accurate?"
         })
       } else {
         this.setState({
