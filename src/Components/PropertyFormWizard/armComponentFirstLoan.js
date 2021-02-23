@@ -224,7 +224,7 @@ export class ARMComponentFirstLoan extends Component {
   }
 
   if(event.target.name == "floor_interest_rate_percentage"){
-    if(this.state.initial_interest_rate < event.target.value){
+    if(this.state.initial_interest_rate < parseInt(String(event.target.value).replace(/%/g, '')) ){
       this.setState({
         floorinterestrateValidationError: "Floor interest rate cannot be greater than initial interest rate"
       }) 
@@ -234,6 +234,21 @@ export class ARMComponentFirstLoan extends Component {
       }) 
     }
 }
+
+
+if(event.target.name == "floor_interest_rate_percentage"){
+  if(this.state.ceiling_interest_rate < parseInt(String(event.target.value).replace(/%/g, ''))){
+    this.setState({
+      floorinterestrateValidationError: "Floor interest rate cannot exceed Ceiling interest rate"
+    }) 
+  }else{
+    this.setState({
+      floorinterestrateValidationError: ""
+    }) 
+  }
+}
+
+
 
 
 if(event.target.name == "period_cap_percentage"){

@@ -23,16 +23,16 @@ import {
 
 const blues = [
   ["#00aff0"],
-  ['#97d24f'],
+  ['#85bb43'],
   ["#00aff0"],
-  ['#97d24f']
+  ['#85bb43']
 ];
 
 const mortgageBlues = [
   ["#00aff0"],
   ["#00aff0"],
-  ['#97d24f'],
-  ['#97d24f']
+  ['#85bb43'],
+  ['#85bb43']
 ];
 const getColor = (length, index) => {
   return blues[index];
@@ -219,7 +219,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Total Housing Payment",
+      name: "Housing Payment",
       Amount: parseFloat(
         String(
           `${
@@ -454,7 +454,7 @@ function CheatSheet(props) {
               style={{
                 width: "150px",
                 height: "20px",
-                backgroundColor: "#97d24f",
+                backgroundColor: "#85bb43",
               }}
             ></div>
           </MDBCol>
@@ -735,7 +735,7 @@ function CheatSheet(props) {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        <h6 className="CardTitle">Tax Impact</h6>
+        <h6 className="CardTitle">Tax Benefit in first year of home purchase</h6>
 
         <ResponsiveContainer
           width={"100%"}
