@@ -88,6 +88,7 @@ export class ARMComponentFirstLoan extends Component {
       loan_amount_validation_error: "",
       interestrateValidationError: "",
       closingCostsValidationError: "",
+      interestOnlyPeriodValidationError: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
@@ -270,6 +271,21 @@ export class ARMComponentFirstLoan extends Component {
         });
       }
     }
+
+      
+    if (event.target.name == "interest_only_period") {
+      if (this.state.loan_term < event.target.value) {
+        this.setState({
+          interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
+        })
+      } else {
+        this.setState({
+          interestOnlyPeriodValidationError: ""
+        })
+      }
+
+    }
+
 
     await this.setState({
       [event.target.name]: event.target.value,
@@ -487,6 +503,7 @@ export class ARMComponentFirstLoan extends Component {
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
+          {this.state.interestOnlyPeriodValidationError}
         </MDBCol>
       </MDBRow>
     );
