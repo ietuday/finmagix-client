@@ -380,6 +380,8 @@ export class StepperComponent extends Component {
     //    });
     //    NotificationManager.error("Please Validate Fields", "Error");
     //    }else{
+      this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, ""))/100)
+      
         PropertyInfoUpdate(this.state.propertyInfo);
          this.props.history.push({pathname: '/property-form',
        returnBackFromreviewEdit : true})

@@ -405,9 +405,13 @@ export class StepperComponent extends Component {
       this.setState({
         activeStep: newActiveStep,
       });
-      this.state.propertyInfo["home_price_growth"] = String(
-        Number(this.state.propertyInfo["home_price_growth"]) / 100
-      );
+      console.log(this.state.propertyInfo)
+      // debugger
+      // this.state.propertyInfo["home_price_growth"] = String(
+      //   Number(this.state.propertyInfo["home_price_growth"]) / 100
+      // );
+        this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, ""))/100)
+      
 
       if (this.state.propertyInfo.is_update) {
         this.state.propertyInfo["id"] = JSON.parse(
