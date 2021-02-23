@@ -86,7 +86,9 @@ export class ARMComponentFirstLoan extends Component {
       rateAddValidationError:"",
       property_price: "",
       loan_amount_validation_error: "",
-      interestrateValidationError: ""
+      interestrateValidationError: "",
+      closingCostsValidationError: "",
+      interestOnlyPeriodValidationError:""
     };
     // this.validators = ArmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -222,7 +224,7 @@ export class ARMComponentFirstLoan extends Component {
   }
 
   if(event.target.name == "floor_interest_rate_percentage"){
-    if(this.state.initial_interest_rate < event.target.value){
+    if(this.state.initial_interest_rate < parseInt(String(event.target.value).replace(/%/g, '')) ){
       this.setState({
         floorinterestrateValidationError: "Floor interest rate cannot be greater than initial interest rate"
       }) 
@@ -234,8 +236,23 @@ export class ARMComponentFirstLoan extends Component {
 }
 
 
+if(event.target.name == "floor_interest_rate_percentage"){
+  if(this.state.ceiling_interest_rate < parseInt(String(event.target.value).replace(/%/g, ''))){
+    this.setState({
+      floorinterestrateValidationError: "Floor interest rate cannot exceed Ceiling interest rate"
+    }) 
+  }else{
+    this.setState({
+      floorinterestrateValidationError: ""
+    }) 
+  }
+}
+
+
+
+
 if(event.target.name == "period_cap_percentage"){
-  if(parseInt(String(event.target.value).replace(/%/g, '')) > 3){
+  if(parseInt(String(event.target.value).replace(/%/g, '')) > 4){
     this.setState({
       periodCapValidationError: "Is the period cap input accurate?"
     }) 
@@ -260,6 +277,35 @@ if(event.target.name == "rate_add_percentage"){
   
 }
 
+if (event.target.name == "closing_costs") {
+  if (
+    parseInt(String(event.target.value).replace(/,/g, "")) >
+    (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
+      100
+  ) {
+    this.setState({
+      closingCostsValidationError:
+        " Closing costs cannot exceed 5% of loan amount",
+    });
+  } else {
+    this.setState({
+      closingCostsValidationError: "",
+    });
+  }
+}
+
+if (event.target.name == "interest_only_period") {
+  if (this.state.loan_term < event.target.value) {
+    this.setState({
+      interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
+    })
+  } else {
+    this.setState({
+      interestOnlyPeriodValidationError: ""
+    })
+  }
+
+}
 
 
 
@@ -496,6 +542,7 @@ if(event.target.name == "rate_add_percentage"){
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
+          {this.state.interestOnlyPeriodValidationError}
         </MDBCol>
       </MDBRow>
     );
@@ -911,6 +958,7 @@ if(event.target.name == "rate_add_percentage"){
                 });
               }}
             />
+            {this.state.closingCostsValidationError}
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "closing_costs")} */}
@@ -937,15 +985,7 @@ if(event.target.name == "rate_add_percentage"){
           : null}
         <br />
 
-        {this.props.ArmGetResponse.pmi !== "null" || (this.props.ArmGetResponse.second_mortgage_loan_amount !=="null") || this.props.downpayment === "lessthan20" ? (
-          <ShowPmiOptionsFirstLoanARM
-          handleDownpaymentData={this.handleDownpaymentData}
-          frmResponse = {this.props.FrmGetResponse}
-          loanAmount={this.state.loan_amount}
-          armResponse = {this.props.ArmGetResponse}
-          mortgageProgramType={this.state.mortgage_program_type}
-          />
-          ) : null}
+
       </Fragment>
     );
   }

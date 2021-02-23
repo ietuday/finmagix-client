@@ -53,7 +53,8 @@ export class RentvsBuy extends Component {
       rentinflation_percentage: props.GetRentvsBuyResponse.rentinflation,
       annual_rent_insurance_number: props.GetRentvsBuyResponse.annual_rent_insurance,
       is_update:false,
-      id: ""
+      id: "",
+      annual_rent_insuranceValidationError: ""
     };
     // this.validators = RentvsBuyValidator;
     // resetValidators(this.validators);
@@ -97,6 +98,19 @@ export class RentvsBuy extends Component {
 
   async handleChange(e, value) {
     const {name} = e.target
+
+    if (e.target.name == "annual_rent_insurance") {
+      if (parseInt(String(e.target.value).replace(/,/g, '')) > (parseFloat(String(this.state.current_monthly_rent_payment).replace(/,/g, '')) * 3) / 100) {
+
+        this.setState({
+          annual_rent_insuranceValidationError: "cannot exceed 3% of monthly rent"
+        })
+      } else {
+        this.setState({
+          annual_rent_insuranceValidationError: ""
+        })
+      }
+    }
 
     e.persist();
     await this.setState({
@@ -230,6 +244,7 @@ export class RentvsBuy extends Component {
                   });
                 }}
               />
+              {this.state. annual_rent_insuranceValidationError}
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20 marginbottom20">
