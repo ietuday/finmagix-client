@@ -86,7 +86,8 @@ export class ARMComponentFirstLoan extends Component {
       rateAddValidationError:"",
       property_price: "",
       loan_amount_validation_error: "",
-      interestrateValidationError: ""
+      interestrateValidationError: "",
+      closingCostsValidationError: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
@@ -252,6 +253,24 @@ export class ARMComponentFirstLoan extends Component {
       }
 
     }
+
+    if (event.target.name == "closing_costs") {
+      if (
+        parseInt(String(event.target.value).replace(/,/g, "")) >
+        (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
+          100
+      ) {
+        this.setState({
+          closingCostsValidationError:
+            " Closing costs cannot exceed 5% of loan amount",
+        });
+      } else {
+        this.setState({
+          closingCostsValidationError: "",
+        });
+      }
+    }
+
     await this.setState({
       [event.target.name]: event.target.value,
     });
@@ -883,6 +902,7 @@ export class ARMComponentFirstLoan extends Component {
                 });
               }}
             />
+            {this.state.closingCostsValidationError}
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "closing_costs")} */}

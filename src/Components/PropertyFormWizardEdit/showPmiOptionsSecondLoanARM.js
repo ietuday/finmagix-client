@@ -57,7 +57,8 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       pmiValidationError:"",
       loanAmountValidationError:"",
       interestrateValidationError:"",
-      pointsValidationError:""
+      pointsValidationError:"",
+      closingCostsValidationError: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty();
@@ -189,6 +190,23 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       }
       
     }
+
+    if (event.target.name == "second_mortgage_closing_costs") {
+      if (
+        parseInt(String(event.target.value).replace(/,/g, "")) >
+        (parseFloat(String(this.state.loanamountsecond2).replace(/,/g, "")) * 5) /
+          100
+      ) {
+        this.setState({
+          closingCostsValidationError:
+            " Closing costs cannot exceed 5% of loan amount",
+        });
+      } else {
+        this.setState({
+          closingCostsValidationError: "",
+        });
+      }
+    }    
   
   this.props.handleDownpaymentData(this.state);
   }
@@ -352,6 +370,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
               });
             }}
           />
+          {this.state.closingCostsValidationError}
           </MDBCol>
         </MDBRow>
 

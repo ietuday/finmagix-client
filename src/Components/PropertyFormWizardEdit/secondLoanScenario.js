@@ -56,7 +56,8 @@ export class SecondLoanScenario extends Component {
       interestrateValidationError: "",
       pointsValidationError: "",
       property_price: "",
-      loan_amount_validation_error: ""
+      loan_amount_validation_error: "",
+      closingCostsValidationError: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
@@ -204,6 +205,23 @@ if(event.target.name == "points_percentage"){
     }) 
   }
   
+}
+
+if (event.target.name == "closing_costs") {
+  if (
+    parseInt(String(event.target.value).replace(/,/g, "")) >
+    (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
+      100
+  ) {
+    this.setState({
+      closingCostsValidationError:
+        " Closing costs cannot exceed 5% of loan amount",
+    });
+  } else {
+    this.setState({
+      closingCostsValidationError: "",
+    });
+  }
 }
 
 
@@ -525,7 +543,7 @@ if(event.target.name == "points_percentage"){
                   });
                 }}
               />
-
+{this.state.closingCostsValidationError}
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20">
