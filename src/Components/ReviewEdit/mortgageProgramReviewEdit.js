@@ -14,7 +14,9 @@ import Tabs from "../../common/tabs";
 import "../../css/reviewEdit.css";
 import quss from "../../assets/images/que.png";
 
-
+import Axios from "axios";
+import { config } from '../config/default';
+const { baseURL } = config;
 
 
 
@@ -26,8 +28,33 @@ export class MortgageProgramReviewEdit extends Component {
       goToEditFirstArm: false,
       goToEditSecondFrm: false,
       goToEditSecondArm: false,
+      propertyDetail: {}
     };
+    this.checkProperty()
   }
+
+  checkProperty(){
+    const propertyId = JSON.parse(localStorage.getItem('property_id'))
+
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0]
+          this.setState({propertyDetail: propertyDetail})
+          console.log(this.state)
+
+        })
+        .catch((er) => {
+          console.log(er)
+        })
+    }
+  }
+  
   componentDidMount() {
     const {
       FRMMortgageCreateResponseFirst,
@@ -39,7 +66,7 @@ export class MortgageProgramReviewEdit extends Component {
       ARMMortgageGetFirst,
       ARMMortgageGetSecond,
     } = this.props;
-
+    console.log(this.props)
     if (FRMMortgageCreateResponseFirst && FRMMortgageCreateResponseFirst.data) {
       FRMMortgageGetFirst(FRMMortgageCreateResponseFirst.data.id);
     }
@@ -195,9 +222,9 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data.loan_amount
+                        {this.state.propertyDetail &&
+                          this.state.propertyDetail.first_frm
+                          ? this.state.propertyDetail.first_frm.loan_amount || 0
                           : null}
                       </div>
                     </MDBCol>
@@ -214,10 +241,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data.loan_term
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.loan_term || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -233,10 +261,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data.interest
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.interest || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -256,10 +285,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data.points
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.points || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -283,10 +313,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data.closing_costs
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.closing_costs || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -304,11 +335,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data
-                              .interest_only_period
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.interest_only_period || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -324,10 +355,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data.pmi
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.pmi || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -345,11 +377,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data
-                              .second_mortgage_loan_amount
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.loanamountsecond1 || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -367,11 +399,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data
-                              .second_mortgage_loan_term
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.second_mortgage_loan_term || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -389,11 +421,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data
-                              .second_mortgage_interest
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.second_mortgage_interest || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -411,11 +443,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data
-                              .second_mortgage_points
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.second_mortgage_points || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -433,17 +465,16 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseFirst &&
-                        FRMMortgageCreateResponseFirst.data
-                          ? FRMMortgageCreateResponseFirst.data
-                              .second_mortgage_closing_costs
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_frm
+                        ? this.state.propertyDetail.first_frm.second_mortgage_closing_costs || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
                   </MDBRow>
-                  {FRMMortgageCreateResponseFirst &&
-                  FRMMortgageCreateResponseFirst.data ? (
+
                     <MDBRow className="margin20 marginbottom20">
                       <MDBCol md="12" className="text-center">
                         <Button
@@ -458,7 +489,7 @@ export class MortgageProgramReviewEdit extends Component {
                         </Button>
                       </MDBCol>
                     </MDBRow>
-                  ) : null}
+                  
                 </div>
                 <div label="First ARM">
 
@@ -472,10 +503,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.loan_amount
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.loan_amount || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -491,10 +523,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.loan_term
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.loan_term || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -510,10 +543,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.select_loan_program
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.select_loan_program || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -529,10 +563,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.initial_interest_rate
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.initial_interest_rate || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -548,10 +583,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.first_interest_rate_adj_cap
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.first_interest_rate_adj_cap || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -573,10 +609,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.floor_interest_rate
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.floor_interest_rate || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -592,10 +629,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.ceiling_interest_rate
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.ceiling_interest_rate || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -616,10 +654,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.period_cap
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.period_cap || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -640,10 +679,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.rate_add
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.rate_add || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -663,10 +703,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.points
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.points || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -690,10 +731,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.closing_costs
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.closing_costs
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -711,11 +753,12 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data
-                              .interest_only_period
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.interest_only_period || 0
+                        : null}
+
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -731,10 +774,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data.pmi
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.pmi || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -752,11 +796,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data
-                              .second_mortgage_loan_amount
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.second_mortgage_loan_amount || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -774,11 +818,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data
-                              .second_mortgage_loan_term
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.second_mortgage_loan_term || 0
+                        : null}
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -796,11 +839,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data
-                              .second_mortgage_interest
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.second_mortgage_interest || 0
+                        : null}
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -818,11 +860,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data
-                              .second_mortgage_points
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.second_mortgage_points || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -840,19 +882,15 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseFirst &&
-                        ARMMortgageCreateResponseFirst.data
-                          ? ARMMortgageCreateResponseFirst.data
-                              .second_mortgage_closing_costs
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.first_arm
+                        ? this.state.propertyDetail.first_arm.second_mortgage_closing_costs || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
                   </MDBRow>
-
-                
-                  {ARMMortgageCreateResponseFirst &&
-                  ARMMortgageCreateResponseFirst.data ? (
                     <MDBRow className="margin20 marginbottom20">
                       <MDBCol md="12" className="text-center">
                         <Button
@@ -867,7 +905,6 @@ export class MortgageProgramReviewEdit extends Component {
                         </Button>
                       </MDBCol>
                     </MDBRow>
-                  ) : null}
                 </div>
                 <div label="Second FRM">
                   
@@ -882,10 +919,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data.loan_amount
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.loan_amount || 0
+                        : null}
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -901,10 +938,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data.loan_term
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.loan_term || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -920,10 +958,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data.interest
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.interest || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -943,10 +982,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data.points
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.points || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -970,10 +1010,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data.closing_costs
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.closing_costs || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -991,11 +1032,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data
-                              .interest_only_period
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.interest_only_period || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1011,10 +1052,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data.pmi
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.pmi || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1032,11 +1074,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data
-                              .second_mortgage_loan_amount
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.second_mortgage_loan_amount || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1054,11 +1096,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data
-                              .second_mortgage_loan_term
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.second_mortgage_loan_term || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1076,11 +1118,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data
-                              .second_mortgage_interest
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.second_mortgage_interest || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1098,11 +1140,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data
-                              .second_mortgage_points
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.second_mortgage_points || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1120,17 +1162,16 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {FRMMortgageCreateResponseSecond &&
-                        FRMMortgageCreateResponseSecond.data
-                          ? FRMMortgageCreateResponseSecond.data
-                              .second_mortgage_closing_costs
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_frm
+                        ? this.state.propertyDetail.second_frm.second_mortgage_closing_costs || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
                   </MDBRow>
-                  {FRMMortgageCreateResponseSecond &&
-                  FRMMortgageCreateResponseSecond.data ? (
+                 
                     <MDBRow className="margin20 marginbottom20">
                       <MDBCol md="12" className="text-center">
                         <Button
@@ -1145,7 +1186,7 @@ export class MortgageProgramReviewEdit extends Component {
                         </Button>
                       </MDBCol>
                     </MDBRow>
-                  ) : null}
+                  
                 </div>
                 <div label="Second ARM">
                   
@@ -1159,10 +1200,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.loan_amount
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.loan_amount || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1178,10 +1220,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.loan_term
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.loan_term || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1197,10 +1240,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.select_loan_program
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.select_loan_program || 0
+                        : null}
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1216,10 +1259,12 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.initial_interest_rate
-                          : null}
+
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.initial_interest_rate || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1235,10 +1280,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.first_interest_rate_adj_cap
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.first_interest_rate_adj_cap || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1255,10 +1301,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.floor_interest_rate
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.floor_interest_rate || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1274,10 +1321,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.ceiling_interest_rate
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.ceiling_interest_rate || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1293,10 +1341,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.period_cap
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.period_cap || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1316,10 +1365,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.rate_add
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.rate_add || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1339,10 +1389,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.points
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.points || 0
+                        : null}
+                       
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1366,10 +1417,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.closing_costs
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.closing_costs || 0
+                        : null}
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1387,11 +1438,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data
-                              .interest_only_period
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.interest_only_period || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1407,10 +1458,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data.pmi
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.pmi || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1428,11 +1480,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data
-                              .second_mortgage_loan_amount
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.second_mortgage_loan_amount || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1450,11 +1502,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data
-                              .second_mortgage_loan_term
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.second_mortgage_loan_term || 0
+                        : null}
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1472,11 +1523,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data
-                              .second_mortgage_interest
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.second_mortgage_interest || 0
+                        : null}
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1494,11 +1545,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data
-                              .second_mortgage_points
-                          : null}
+
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.second_mortgage_points || 0
+                        : null}
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1516,18 +1567,16 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {ARMMortgageCreateResponseSecond &&
-                        ARMMortgageCreateResponseSecond.data
-                          ? ARMMortgageCreateResponseSecond.data
-                              .second_mortgage_closing_costs
-                          : null}
+                      {this.state.propertyDetail &&
+                        this.state.propertyDetail.second_arm
+                        ? this.state.propertyDetail.second_arm.second_mortgage_closing_costs || 0
+                        : null}
+
+                        
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
                   </MDBRow>
-
-                  {ARMMortgageCreateResponseSecond &&
-                  ARMMortgageCreateResponseSecond.data ? (
                     <MDBRow className="margin20 marginbottom20">
                       <MDBCol md="12" className="text-center">
                         <Button
@@ -1542,7 +1591,7 @@ export class MortgageProgramReviewEdit extends Component {
                         </Button>
                       </MDBCol>
                     </MDBRow>
-                  ) : null}
+                 
                 </div>
               </Tabs>
             </MDBCol>
