@@ -419,9 +419,6 @@ export class StepperComponent extends Component {
               return {propertyInfo}
             })
           }
-        
-      console.log(this.state)
-      debugger
 
       if (this.state.propertyInfo.is_update) {
         this.state.propertyInfo["id"] = JSON.parse(
