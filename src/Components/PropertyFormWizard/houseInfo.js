@@ -60,7 +60,7 @@ export class GetStartedHouseInfo extends Component {
       downpaymentnewValidationError: "",
       annualPropertytaxValidationError: "",
       homeownerInsuranceValidationError: "",
-      mapContainer: ""
+      mapContainer: <MapWithASearchBox  />
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -134,6 +134,11 @@ export class GetStartedHouseInfo extends Component {
           this.props.handleHouseInfo(downpayment, this.state);
         })
         .catch((err) => {});
+    }else{
+      // this.setState({
+      //   mapContainer: <MapWithASearchBox  />
+      // })
+      
     }
   }
 
@@ -323,8 +328,9 @@ export class GetStartedHouseInfo extends Component {
       <Fragment>
         <MDBRow className="margin20">
           <MDBCol>
+          
             {this.state.mapContainer}
-          </MDBCol>
+          </MDBCol> 
         </MDBRow>
         <br />
         <br />
