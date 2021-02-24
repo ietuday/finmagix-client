@@ -1,8 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
+import Axios from "axios";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
+
+import { config } from "../config/default";
+const { baseURL } = config;
 
 export class Summary extends Component {
   constructor(props) {
@@ -11,8 +15,31 @@ export class Summary extends Component {
       loading: false,
       showReports: false,
       isRentvsBuyFilled : props.isRentvsBuyFilled,
-      isTaxFilled : props.isTaxFilled
+      isTaxFilled : props.isTaxFilled,
+      propertyDetail: {}
     };
+    this.checkProperty()
+  }
+
+  checkProperty() {
+    
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+
+          this.setState({
+            propertyDetail: propertyInfo.data.data[0]
+          });
+        })
+        .catch((err) => {});
+    }
   }
 
   showReports = () => {
@@ -141,7 +168,7 @@ export class Summary extends Component {
                   onClick={() =>
                     this.props.history.push({pathname: 'rent-vs-buy-review-edit',
                     state: {isRentvsBuyFilled:true, 
-                      getId : RentvsBuyCreateResponse.data.id 
+                      getId : this.state.propertyDetail.rent_vs_buy.id 
                      }})
                   }
                 />
