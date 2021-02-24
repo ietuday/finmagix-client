@@ -242,6 +242,8 @@ export class GetStartedHouseInfo extends Component {
     console.log(this.state);
     localStorage.setItem("no_of_bathrooms", count);
   }
+
+  
   selectAddress = (data) => {
     this.setState({
       house_address: data.house_address,
@@ -262,7 +264,9 @@ export class GetStartedHouseInfo extends Component {
         "administrative_area_level_2" === addressArray[i].types[0]
       ) {
         city = addressArray[i].long_name;
-
+        // localStorage.getItem("addressData") 
+        // ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
+        // : null
         return city;
       }
     }
@@ -274,6 +278,9 @@ export class GetStartedHouseInfo extends Component {
         for (let j = 0; j < addressArray[i].types.length; j++) {
           if (addressArray[i].types[j] == "postal_code") {
             area = addressArray[i].long_name;
+            // localStorage.getItem("addressData") 
+            // ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
+            // : null
             return area;
           }
         }
@@ -289,6 +296,9 @@ export class GetStartedHouseInfo extends Component {
           "administrative_area_level_1" === addressArray[i].types[0]
         ) {
           state = addressArray[i].long_name;
+          // localStorage.getItem("addressData") 
+          //   ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
+          //   : null
           return state;
         }
       }

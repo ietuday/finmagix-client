@@ -384,7 +384,7 @@ export class StepperComponent extends Component {
     return this.completedSteps === this.totalSteps;
   };
 
-  handleNext() {
+  async handleNext() {
     const {
       PersonalFinanceUpdate,
       RentvsBuyCreate,
@@ -405,13 +405,23 @@ export class StepperComponent extends Component {
       this.setState({
         activeStep: newActiveStep,
       });
-      console.log(this.state.propertyInfo)
- 
-      // this.state.propertyInfo["home_price_growth"] = String(
-      //   Number(this.state.propertyInfo["home_price_growth"]) / 100
-      // );
         this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, ""))/100)
       
+          if(localStorage.getItem('addressData')){
+            
+            const addressData = JSON.parse(localStorage.getItem('addressData'))
+            await this.setState((prevState) => {
+              let propertyInfo = Object.assign({}, prevState.propertyInfo);
+              propertyInfo.house_address = addressData.house_address;
+              propertyInfo.house_state = addressData.house_state;
+              propertyInfo.house_zip_code = addressData.house_zip_code;
+              console.log("propertyInfo",propertyInfo)
+              return {propertyInfo}
+            })
+          }
+        
+      console.log(this.state)
+      debugger
 
       if (this.state.propertyInfo.is_update) {
         this.state.propertyInfo["id"] = JSON.parse(
