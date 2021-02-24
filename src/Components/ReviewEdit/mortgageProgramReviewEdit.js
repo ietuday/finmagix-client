@@ -125,9 +125,8 @@ export class MortgageProgramReviewEdit extends Component {
             state: {
               property_id: 2,
               frm_first_edit_id:
-                FRMMortgageCreateResponseFirst &&
-                FRMMortgageCreateResponseFirst.data
-                  ? FRMMortgageCreateResponseFirst.data.id
+                this.state.propertyDetail.first_frm.id 
+                  ? this.state.propertyDetail.first_frm.id 
                   : null,
             },
           }}
@@ -142,10 +141,10 @@ export class MortgageProgramReviewEdit extends Component {
             state: {
               property_id: 2,
               arm_first_edit_id:
-                ARMMortgageCreateResponseFirst &&
-                ARMMortgageCreateResponseFirst.data
-                  ? ARMMortgageCreateResponseFirst.data.id
+              this.state.propertyDetail.first_arm.id 
+                  ? this.state.propertyDetail.first_arm.id 
                   : null,
+          
             },
           }}
         />
@@ -159,10 +158,10 @@ export class MortgageProgramReviewEdit extends Component {
             state: {
               property_id: 2,
               frm_second_edit_id:
-                FRMMortgageCreateResponseSecond &&
-                FRMMortgageCreateResponseSecond.data
-                  ? FRMMortgageCreateResponseSecond.data.id
-                  : null,
+              this.state.propertyDetail.second_frm.id 
+              ? this.state.propertyDetail.second_frm.id 
+              : null,
+                
             },
           }}
         />
@@ -176,10 +175,9 @@ export class MortgageProgramReviewEdit extends Component {
             state: {
               property_id: 2,
               arm_second_edit_id:
-                ARMMortgageCreateResponseSecond &&
-                ARMMortgageCreateResponseSecond.data
-                  ? ARMMortgageCreateResponseSecond.data.id
-                  : null,
+              this.state.propertyDetail.second_arm.id 
+              ? this.state.propertyDetail.second_arm.id 
+              : null,
             },
           }}
         />

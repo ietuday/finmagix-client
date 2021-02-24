@@ -93,6 +93,7 @@ export class PropertyMortgageHOC extends Component {
 handleNext = () => {
     const { FRMMortgageCreateFirst, ARMMortgageCreateFirst,FRMMortgageUpdateFirst,
       ARMMortgageUpdateFirst  } = this.props;
+      debugger
     if (
       this.state.firstLoanScenario.firstloanarmvalidationerror === 0 ||
       this.state.FirstloanscenarioValidationErrors === 0
@@ -124,7 +125,7 @@ handleNext = () => {
           );
         }
 
-        if(this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id){
+        if(this.state.firstLoanScenario.id){
           FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )
         }else{
           FRMMortgageCreateFirst(this.state.firstLoanScenario);
@@ -192,7 +193,7 @@ handleNext = () => {
           );
         }
 
-        if(this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id){
+        if(this.state.firstLoanScenario.id){
           ARMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )
         }else{
           ARMMortgageCreateFirst(this.state.firstLoanScenario);
@@ -224,7 +225,7 @@ handleNext = () => {
             Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
           );
         }
-        if(this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id){
+        if(this.state.firstLoanScenario.id){
           FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )
         }else{
           FRMMortgageCreateFirst(this.state.firstLoanScenario);
@@ -291,7 +292,7 @@ handleNext = () => {
           );
         }
 
-        if(this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id){
+        if(this.state.firstLoanScenario.id){
           ARMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )
         }else{
           ARMMortgageCreateFirst(this.state.firstLoanScenario);
@@ -304,6 +305,7 @@ handleNext = () => {
     }
   };
   goToNextPage = () => {
+    debugger
     const {
       FRMMortgageCreateFirst,
       ARMMortgageCreateFirst,
@@ -315,16 +317,16 @@ handleNext = () => {
       ARMMortgageUpdateSecond,
   
     } = this.props;
-    if(this.state.firstLoanScenario && this.state.firstLoanScenario.mortgage_program_type === 1){
+    if(this.state.firstLoanScenario && (this.state.firstLoanScenario.mortgage_program_type === 1 || this.state.firstLoanScenario.mortgage_program_type == "FIRST")){
       FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.props.FrmMortgageFirstEditId)
     }
-    if(this.state.firstLoanScenario && this.state.firstLoanScenario.mortgage_program_type === 2){
+    if(this.state.firstLoanScenario && (this.state.firstLoanScenario.mortgage_program_type === 2 || this.state.firstLoanScenario.mortgage_program_type == "SECOND")){
       ARMMortgageUpdateFirst(this.state.firstLoanScenario,this.props.ArmMortgageFirstEditId)
     }
-    if(this.state.secondLoanScenario && this.state.secondLoanScenario.mortgage_program_type === 1){
+    if(this.state.secondLoanScenario && (this.state.secondLoanScenario.mortgage_program_type === 1 || this.state.secondLoanScenario.mortgage_program_type == "FIRST")){
       FRMMortgageUpdateSecond(this.state.secondLoanScenario,this.props.FrmMortgageSecondEditId)
     }
-    if(this.state.secondLoanScenario && this.state.secondLoanScenario.mortgage_program_type === 2){
+    if(this.state.secondLoanScenario && (this.state.secondLoanScenario.mortgage_program_type === 2 || this.state.secondLoanScenario.mortgage_program_type == "SECOND")){
       ARMMortgageUpdateSecond(this.state.secondLoanScenario,this.props.ArmMortgageSecondEditId)
     }
     this.props.handleContinue();
@@ -361,7 +363,7 @@ handleNext = () => {
           );
         }
        
-        if(this.state.secondLoanScenario.is_update && this.state.secondLoanScenario.id){
+        if(this.state.secondLoanScenario.id){
           FRMMortgageUpdateSecond(this.state.secondLoanScenario,this.state.secondLoanScenario.id )
         }else{
           FRMMortgageCreateSecond(this.state.secondLoanScenario);
@@ -431,7 +433,7 @@ handleNext = () => {
             Number(this.state.secondLoanScenario["initial_interest_rate"]) / 100
           );
         }
-        if(this.state.secondLoanScenario.is_update && this.state.secondLoanScenario.id){
+        if(this.state.secondLoanScenario.id){
           ARMMortgageUpdateSecond(this.state.secondLoanScenario,this.state.secondLoanScenario.id )
         }else{
           ARMMortgageCreateSecond(this.state.secondLoanScenario);
@@ -441,8 +443,9 @@ handleNext = () => {
         // ARMMortgageCreateSecond(this.state.secondLoanScenario);
       } else if (
         !this.state.radioValue &&
-        this.state.firstLoanScenario.mortgage_program_type_value === 1
+        this.state.secondLoanScenario.mortgage_program_type_value === 1
       ) {
+        
         if (this.state.secondLoanScenario["interest"]) {
           this.state.secondLoanScenario["interest"] = String(
             Number(this.state.secondLoanScenario["interest"]) / 100
@@ -466,7 +469,7 @@ handleNext = () => {
               100
           );
         }
-        if(this.state.secondLoanScenario.is_update && this.state.secondLoanScenario.id){
+        if( this.state.secondLoanScenario.id){
           FRMMortgageUpdateFirst(this.state.secondLoanScenario,this.state.secondLoanScenario.id )
         }else{
           FRMMortgageCreateFirst(this.state.secondLoanScenario);
@@ -533,7 +536,7 @@ handleNext = () => {
             Number(this.state.secondLoanScenario["initial_interest_rate"]) / 100
           );
         }
-        if(this.state.secondLoanScenario.is_update && this.state.secondLoanScenario.id){
+        if(this.state.secondLoanScenario.id){
           ARMMortgageUpdateFirst(this.state.secondLoanScenario,this.state.secondLoanScenario.id )
         }else{
           ARMMortgageCreateFirst(this.state.secondLoanScenario);
