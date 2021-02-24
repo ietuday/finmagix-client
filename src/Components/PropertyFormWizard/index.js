@@ -406,7 +406,7 @@ export class StepperComponent extends Component {
         activeStep: newActiveStep,
       });
       console.log(this.state.propertyInfo)
-      // debugger
+ 
       // this.state.propertyInfo["home_price_growth"] = String(
       //   Number(this.state.propertyInfo["home_price_growth"]) / 100
       // );

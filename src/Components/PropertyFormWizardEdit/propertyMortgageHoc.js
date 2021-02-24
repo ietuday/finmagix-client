@@ -93,7 +93,7 @@ export class PropertyMortgageHOC extends Component {
 handleNext = () => {
     const { FRMMortgageCreateFirst, ARMMortgageCreateFirst,FRMMortgageUpdateFirst,
       ARMMortgageUpdateFirst  } = this.props;
-      debugger
+
     if (
       this.state.firstLoanScenario.firstloanarmvalidationerror === 0 ||
       this.state.FirstloanscenarioValidationErrors === 0
@@ -305,7 +305,7 @@ handleNext = () => {
     }
   };
   goToNextPage = () => {
-    debugger
+ 
     const {
       FRMMortgageCreateFirst,
       ARMMortgageCreateFirst,
