@@ -12,8 +12,8 @@ export class Summary extends Component {
     this.state = {
       loading: false,
       showReports: false,
-      isRentvsBuyFilled : props.isRentvsBuyFilled,
-      isTaxFilled : props.isTaxFilled
+      isRentvsBuyFilled: props.isRentvsBuyFilled,
+      isTaxFilled: props.isTaxFilled
     };
   }
 
@@ -21,10 +21,10 @@ export class Summary extends Component {
     this.props.history.push("/show-detailed-reports");
   };
   componentDidMount() {
-    
+
   }
   render() {
-    const{PropertyInfoCreateResponse,FRMMortgageCreateResponseFirst,ARMMortgageCreateResponseFirst,FRMMortgageCreateResponseSecond,ARMMortgageCreateResponseSecond, PersonalFinanceUpdateResponse,TaxUpdateResponse, PersonalFinanceCreateResponse,RentvsBuyCreateResponse,TaxCreateResponse} = this.props;
+    const { PropertyInfoCreateResponse, FRMMortgageCreateResponseFirst, ARMMortgageCreateResponseFirst, FRMMortgageCreateResponseSecond, ARMMortgageCreateResponseSecond, PersonalFinanceUpdateResponse, TaxUpdateResponse, PersonalFinanceCreateResponse, RentvsBuyCreateResponse, TaxCreateResponse } = this.props;
     return (
       <Fragment>
         <MDBContainer>
@@ -36,10 +36,10 @@ export class Summary extends Component {
                   alt="report"
                   onClick={this.showReports}
                 />
-                
+
               </div>
               <div className="text-center">
-              <Button size="medium" className="btn btn-primary btn-sm waves-effect waves-light" onClick={this.showReports}>
+                <Button size="medium" className="btn btn-primary btn-sm waves-effect waves-light" onClick={this.showReports}>
                   Show Report
               </Button>
               </div>
@@ -76,8 +76,10 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() => this.props.history.push({pathname: '/property-information-review-edit',
-                  getId : localStorage.getItem('property_id')  })}
+                  onClick={() => this.props.history.push({
+                    pathname: '/property-information-review-edit',
+                    getId: localStorage.getItem('property_id')
+                  })}
                 />
               </div>
             </MDBCol>
@@ -96,8 +98,10 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() => this.props.history.push({pathname: '/personalfinance-review-edit',
-                  getId :JSON.parse(localStorage.getItem('personal_finance_array')).id })}
+                  onClick={() => this.props.history.push({
+                    pathname: '/personalfinance-review-edit',
+                    getId: JSON.parse(localStorage.getItem('personal_finance_array')).id
+                  })}
                 />
               </div>
             </MDBCol>
@@ -116,19 +120,19 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() => this.props.history.push({pathname: '/mortgage-programs-review-edit',
-                  getFRMDataResponseFirst : FRMMortgageCreateResponseFirst , 
-                  getARMDataResponseFirst : ARMMortgageCreateResponseFirst,
-                getARMDataResponseSecond: ARMMortgageCreateResponseSecond ,
-                getFRMDataResponseSecond: FRMMortgageCreateResponseSecond ,
-              })}
+                  onClick={() => this.props.history.push({
+                    pathname: '/mortgage-programs-review-edit',
+                    getFRMDataResponseFirst: FRMMortgageCreateResponseFirst,
+                    getARMDataResponseFirst: ARMMortgageCreateResponseFirst,
+                    getARMDataResponseSecond: ARMMortgageCreateResponseSecond,
+                    getFRMDataResponseSecond: FRMMortgageCreateResponseSecond,
+                  })}
                 />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
-          {localStorage.getItem("is_rent_vs_buy_filled") === "true"?
-          (<MDBRow className="margin20">
+          <MDBRow className="margin20">
             <MDBCol md="1"></MDBCol>
             <MDBCol md="8" size="8">
               <div className="">
@@ -142,17 +146,20 @@ export class Summary extends Component {
                   icon="angle-right"
                   size="large"
                   onClick={() =>
-                    this.props.history.push({pathname: 'rent-vs-buy-review-edit',
-                    state: {isRentvsBuyFilled:true, 
-                      getId : RentvsBuyCreateResponse.data.id 
-                     }})
+                    this.props.history.push({
+                      pathname: 'rent-vs-buy-review-edit',
+                      state: {
+                        isRentvsBuyFilled: true,
+                        getId: RentvsBuyCreateResponse.data.id
+                      }
+                    })
                   }
                 />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
-          </MDBRow>) : null }
-          {this.state.isTaxFilled === true ||this.props.isTaxFilled || Object.entries(JSON.parse(localStorage.getItem('tax_array'))).length !== 0 ?
+          </MDBRow>
+
           <MDBRow className="margin20 marginbottom50">
             <MDBCol md="1"></MDBCol>
             <MDBCol md="8" size="8">
@@ -167,17 +174,21 @@ export class Summary extends Component {
                   icon="angle-right"
                   size="large"
                   onClick={() =>
-                    this.props.history.push({pathname: '/taxes-review-edit',
-                    state: {isTaxFilled : true,
-                      getId :JSON.parse(localStorage.getItem('tax_array')).id }})
+                    this.props.history.push({
+                      pathname: '/taxes-review-edit',
+                      state: {
+                        isTaxFilled: true,
+                        getId: JSON.parse(localStorage.getItem('tax_array')).id
+                      }
+                    })
                   }
                 />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
-          </MDBRow> : null }
-                </MDBContainer>
-      </Fragment> 
+          </MDBRow>
+        </MDBContainer>
+      </Fragment>
     );
   }
 }
@@ -186,13 +197,13 @@ const mapStateToProps = (state) => {
     PersonalFinanceCreateResponse: state.PersonalFinanceCreateResponse,
     PropertyInfoCreateResponse: state.PropertyInfoCreateResponse,
     RentvsBuyCreateResponse: state.RentvsBuyCreateResponse,
-    TaxCreateResponse : state.TaxCreateResponse,
+    TaxCreateResponse: state.TaxCreateResponse,
     PersonalFinanceUpdateResponse: state.PersonalFinanceUpdateResponse,
-    FRMMortgageCreateResponseFirst : state.FRMMortgageCreateResponseFirst,
-    ARMMortgageCreateResponseFirst : state.ARMMortgageCreateResponseFirst,
-    FRMMortgageCreateResponseSecond : state.FRMMortgageCreateResponseSecond,
-    ARMMortgageCreateResponseSecond : state.ARMMortgageCreateResponseSecond,
-    TaxUpdateResponse : state.TaxUpdateResponse
+    FRMMortgageCreateResponseFirst: state.FRMMortgageCreateResponseFirst,
+    ARMMortgageCreateResponseFirst: state.ARMMortgageCreateResponseFirst,
+    FRMMortgageCreateResponseSecond: state.FRMMortgageCreateResponseSecond,
+    ARMMortgageCreateResponseSecond: state.ARMMortgageCreateResponseSecond,
+    TaxUpdateResponse: state.TaxUpdateResponse
   };
 };
 
