@@ -254,7 +254,7 @@ export class TaxHoc extends Component {
     });
     
     
-    this.props.getTaxFilledStataus(this.state.isTaxFilled);
+    // this.props.getTaxFilledStataus(this.state.isTaxFilled);
   };
   toggle = () => {
     this.setState({ openModal: !this.state.openModal });
