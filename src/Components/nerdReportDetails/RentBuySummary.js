@@ -72,25 +72,37 @@ function RentBuySummary(props) {
           <TabPanel value={value} index={0}>
             <MDBRow className="margin_30">
               <MDBCol col="10" md="10">
-                <h3>Rent</h3>
+              
               </MDBCol>
               <MDBCol col="4" md="5">
                 {" "}
                 <img src={renthouseactive} className=""></img>
+
+
+
+                
               </MDBCol>
         
               <MDBCol col="10" md="10">
                 <br></br>
-             <b> {CalculatorResponse.ARM1
-                  ? CalculatorResponse.ARM1.Rent
-                  : CalculatorResponse.FRM1
-                  ? CalculatorResponse.FRM1.Rent
-                  : 0}</b>{" "}
-                    <span className="rent_by_amount">     {CalculatorResponse.ARM1
-                  ? CalculatorResponse.ARM1["better-renting-by"]
-                  : CalculatorResponse.FRM1
-                  ? CalculatorResponse.FRM1["better-renting-by"]
-                  : 0}</span>
+             <b> 
+                  {
+                     CalculatorResponse && CalculatorResponse.ARM1
+                     ? CalculatorResponse.ARM1.Rent
+                     : CalculatorResponse && CalculatorResponse.FRM1
+                     ? CalculatorResponse.FRM1.Buy
+                     : 0
+                  }
+
+                  
+                  </b>{" "}
+                    <span className="rent_by_amount">      {
+                     CalculatorResponse && CalculatorResponse.ARM1
+                     ? CalculatorResponse.ARM1["better-renting-by"]
+                     : CalculatorResponse && CalculatorResponse.FRM1
+                     ? CalculatorResponse.FRM1["better-buying-by"]
+                     : 0
+                  }</span>
               </MDBCol>
             </MDBRow>
 
@@ -101,26 +113,33 @@ function RentBuySummary(props) {
           <TabPanel value={value} index={1}>
             <MDBRow className="margin_30">
               <MDBCol col="10" md="10">
-                <h3>Rent</h3>
+             
               </MDBCol>
               <MDBCol col="4" md="5">
                 {" "}
-                <img src={renthouse} className=""></img>
+                <img src={buyhouseactive} className=""></img>
+            
+
+
               </MDBCol>
          
 
               <MDBCol col="10" md="10">
                 <br></br>
-               <b> {CalculatorResponse.ARM2
-                  ? CalculatorResponse.ARM2.Rent
-                  : CalculatorResponse.FRM2
-                  ? CalculatorResponse.FRM2.Rent
-                  : 0}{" "}</b>
-               <span className="rent_by_amount"> {CalculatorResponse.ARM2
-                  ? CalculatorResponse.ARM2["better-renting-by"]
-                  : CalculatorResponse.FRM2
-                  ? CalculatorResponse.FRM2["better-renting-by"]
-                  : 0}
+               <b> {
+                     CalculatorResponse && CalculatorResponse.ARM2
+                     ? CalculatorResponse.ARM2.Rent
+                     : CalculatorResponse && CalculatorResponse.FRM2
+                     ? CalculatorResponse.FRM2.Buy
+                     : 0
+                  }{" "}</b>
+               <span className="rent_by_amount">  {
+                     CalculatorResponse && CalculatorResponse.ARM2
+                     ? CalculatorResponse.ARM2["better-renting-by"]
+                     : CalculatorResponse && CalculatorResponse.FRM1
+                     ? CalculatorResponse.FRM2["better-buying-by"]
+                     : 0
+                  }
                 <br /></span>
               
               </MDBCol>
