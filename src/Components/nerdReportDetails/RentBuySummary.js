@@ -99,16 +99,33 @@ function RentBuySummary(props) {
                      ? CalculatorResponse.FRM1.Buy
                      : 0
                   }
-
+               {
+                     CalculatorResponse && CalculatorResponse.FRM1
+                     ? CalculatorResponse.FRM1.Rent
+                     : CalculatorResponse && CalculatorResponse.ARM1
+                     ? CalculatorResponse.ARM1.Buy
+                     : 0
+                  }
                   
                   </b>{" "}
-                    <span className="rent_by_amount">      {
+                    <span className="rent_by_amount">   
+                       {
                      CalculatorResponse && CalculatorResponse.ARM1
                      ? CalculatorResponse.ARM1["better-renting-by"]
                      : CalculatorResponse && CalculatorResponse.FRM1
                      ? CalculatorResponse.FRM1["better-buying-by"]
                      : 0
-                  }</span>
+                  }
+                        {
+                     CalculatorResponse && CalculatorResponse.FRM1
+                     ? CalculatorResponse.FRM1["better-renting-by"]
+                     : CalculatorResponse && CalculatorResponse.ARM1
+                     ? CalculatorResponse.ARM1["better-buying-by"]
+                     : 0
+                  }
+                  
+                  
+                  </span>
               </MDBCol>
             </MDBRow>
 
@@ -139,18 +156,36 @@ function RentBuySummary(props) {
 
               <MDBCol col="10" md="10">
                 <br></br>
-               <b> {
+               <b>  {
                      CalculatorResponse && CalculatorResponse.ARM2
                      ? CalculatorResponse.ARM2.Rent
                      : CalculatorResponse && CalculatorResponse.FRM2
                      ? CalculatorResponse.FRM2.Buy
                      : 0
-                  }{" "}</b>
-               <span className="rent_by_amount">  {
+                  }
+               {
+                     CalculatorResponse && CalculatorResponse.FRM2
+                     ? CalculatorResponse.FRM2.Rent
+                     : CalculatorResponse && CalculatorResponse.ARM2
+                     ? CalculatorResponse.ARM2.Buy
+                     : 0
+                  }
+                  
+                  {" "}
+                  
+                  </b>
+               <span className="rent_by_amount">            {
                      CalculatorResponse && CalculatorResponse.ARM2
                      ? CalculatorResponse.ARM2["better-renting-by"]
-                     : CalculatorResponse && CalculatorResponse.FRM1
+                     : CalculatorResponse && CalculatorResponse.FRM2
                      ? CalculatorResponse.FRM2["better-buying-by"]
+                     : 0
+                  }
+                        {
+                     CalculatorResponse && CalculatorResponse.FRM2
+                     ? CalculatorResponse.FRM2["better-renting-by"]
+                     : CalculatorResponse && CalculatorResponse.ARM2
+                     ? CalculatorResponse.ARM2["better-buying-by"]
                      : 0
                   }
                 <br /></span>
