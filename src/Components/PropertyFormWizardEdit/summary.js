@@ -125,8 +125,7 @@ export class Summary extends Component {
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
-          {localStorage.getItem("is_rent_vs_buy_filled") === "true"?
-          (<MDBRow className="margin20">
+          <MDBRow className="margin20">
             <MDBCol md="1"></MDBCol>
             <MDBCol md="8" size="8">
               <div className="">
@@ -149,8 +148,7 @@ export class Summary extends Component {
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
-          </MDBRow>) : null }
-          {this.state.isTaxFilled === true ||this.props.isTaxFilled || Object.entries(JSON.parse(localStorage.getItem('tax_array'))).length !== 0 ?
+          </MDBRow>
           <MDBRow className="margin20 marginbottom50">
             <MDBCol md="1"></MDBCol>
             <MDBCol md="8" size="8">
@@ -173,8 +171,8 @@ export class Summary extends Component {
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
-          </MDBRow> : null }
-                </MDBContainer>
+          </MDBRow> 
+        </MDBContainer>
       </Fragment> 
     );
   }
