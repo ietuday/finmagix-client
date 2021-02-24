@@ -415,7 +415,6 @@ export class StepperComponent extends Component {
               propertyInfo.house_address = addressData.house_address;
               propertyInfo.house_state = addressData.house_state;
               propertyInfo.house_zip_code = addressData.house_zip_code;
-              console.log("propertyInfo",propertyInfo)
               return {propertyInfo}
             })
           }

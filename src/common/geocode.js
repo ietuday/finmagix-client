@@ -24,7 +24,7 @@ const MapWithASearchBox = compose(
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyCZSPd5v-HBJQRBSVdu5ZubIh9APtio6jU&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
+    mapElement: <div style={{ height: `100%` }} />
   }),
   lifecycle({
     componentWillMount() {
@@ -152,6 +152,7 @@ const MapWithASearchBox = compose(
   withGoogleMap
 )((props) => (
   <>
+  {console.log(props)}
     <GoogleMap
       ref={props.onMapMounted}
       defaultZoom={15}
@@ -185,7 +186,7 @@ const MapWithASearchBox = compose(
             name="house_address"
             disabled={true}
             onChange={props.onChange}
-            value={props.house_address}
+            value={props.hosue_info_house_address ? props.hosue_info_house_address : props.house_address}
           />
         </MDBCol>
       </MDBRow>
@@ -199,7 +200,7 @@ const MapWithASearchBox = compose(
             name="house_state"
             disabled={true}
             onChange={props.getState}
-            value={props.house_state}
+            value={props.hosue_info_house_state ? props.hosue_info_house_state : props.house_state}
           />
         </MDBCol>
       </MDBRow>
@@ -213,7 +214,7 @@ const MapWithASearchBox = compose(
             name="house_zip_code"
             disabled={true}
             onChange={props.onChange}
-            value={props.house_zip_code}
+            value={props.hosue_info_house_zip_code ? props.hosue_info_house_zip_code : props.house_zip_code}
           />
         </MDBCol>
       </MDBRow>

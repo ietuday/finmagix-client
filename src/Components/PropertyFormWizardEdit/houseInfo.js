@@ -57,7 +57,8 @@ export class GetStartedHouseInfo extends Component {
     homepriceGrowthValidationError: "",
     downpaymentnewValidationError: "",
     annualPropertytaxValidationError: "",
-    homeownerInsuranceValidationError: ""
+    homeownerInsuranceValidationError: "",
+    mapContainer: ""
     };
     // this.validators = HouseInfoValidator;
     // resetValidators(this.validators);
@@ -102,7 +103,15 @@ export class GetStartedHouseInfo extends Component {
             home_owner_insurance_number: propertyDetail.home_owner_insurance,
             home_price_growth: propertyDetail.home_price_growth,
             home_price_growth_percentage: Number(propertyDetail.home_price_growth) * 100,
-            is_update: true
+            is_update: true,
+            mapContainer:propertyDetail.id  ? 
+              <MapWithASearchBox 
+                hosue_info_house_address = {propertyDetail.house_address}
+                hosue_info_house_state = {propertyDetail.house_state}
+                hosue_info_house_zip_code = {propertyDetail.house_zip_code}  
+              /> 
+              : 
+              <MapWithASearchBox  />
           })
           this.handleBedroomRoomCount(this.state.no_of_bedrooms)
           this.handleBathRoomCount(this.state.no_of_bathrooms)
@@ -302,8 +311,7 @@ export class GetStartedHouseInfo extends Component {
       <Fragment>
         <MDBRow className="margin20">
           <MDBCol>
-            {/* <MapContainer type="home" onSelectAddress={this.selectAddress} /> */}
-            <MapWithASearchBox />
+          {this.state.mapContainer}
           </MDBCol>
         </MDBRow>
         <br />
