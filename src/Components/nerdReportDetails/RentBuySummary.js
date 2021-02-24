@@ -96,12 +96,12 @@ function RentBuySummary(props) {
                      CalculatorResponse && CalculatorResponse.ARM1
                      ? CalculatorResponse.ARM1.Rent
                      : CalculatorResponse && CalculatorResponse.FRM1
-                     ? CalculatorResponse.FRM1.Buy
+                     ? CalculatorResponse.FRM1.Rent
                      : 0
                   }
                {
                      CalculatorResponse && CalculatorResponse.FRM1
-                     ? CalculatorResponse.FRM1.Rent
+                     ? CalculatorResponse.FRM1.Buy
                      : CalculatorResponse && CalculatorResponse.ARM1
                      ? CalculatorResponse.ARM1.Buy
                      : 0
@@ -113,12 +113,12 @@ function RentBuySummary(props) {
                      CalculatorResponse && CalculatorResponse.ARM1
                      ? CalculatorResponse.ARM1["better-renting-by"]
                      : CalculatorResponse && CalculatorResponse.FRM1
-                     ? CalculatorResponse.FRM1["better-buying-by"]
+                     ? CalculatorResponse.FRM1["better-renting-by"]
                      : 0
                   }
                         {
                      CalculatorResponse && CalculatorResponse.FRM1
-                     ? CalculatorResponse.FRM1["better-renting-by"]
+                     ? CalculatorResponse.FRM1["better-buying-by"]
                      : CalculatorResponse && CalculatorResponse.ARM1
                      ? CalculatorResponse.ARM1["better-buying-by"]
                      : 0
@@ -160,12 +160,12 @@ function RentBuySummary(props) {
                      CalculatorResponse && CalculatorResponse.ARM2
                      ? CalculatorResponse.ARM2.Rent
                      : CalculatorResponse && CalculatorResponse.FRM2
-                     ? CalculatorResponse.FRM2.Buy
+                     ? CalculatorResponse.FRM2.Rent
                      : 0
                   }
                {
                      CalculatorResponse && CalculatorResponse.FRM2
-                     ? CalculatorResponse.FRM2.Rent
+                     ? CalculatorResponse.FRM2.Buy
                      : CalculatorResponse && CalculatorResponse.ARM2
                      ? CalculatorResponse.ARM2.Buy
                      : 0
