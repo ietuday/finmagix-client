@@ -53,7 +53,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       loanamountsecond2_number:"0",
       is_update: false,
       id:"",
-      loanAmountValidationError: "",
+      secondloanAmountValidationError: "",
       interestrateValidationError: "",
       pointsValidationError: "",
       pmiValidationError: "",
@@ -110,7 +110,9 @@ export class ShowPmiOptionsSecondLoan extends Component {
             rateadd2: propertyDetail.second_frm.rateadd2,
             second_mortgage_points_percentage: Number(propertyDetail.second_frm.second_mortgage_points)*100,
             is_update: true,
-            id:propertyDetail.second_frm.id
+            id:propertyDetail.second_frm.id,
+            secondloanAmountValidationError: this.state.secondloanAmountValidationError
+            
           })
           this.props.handleDownpaymentData(this.state);
         })
@@ -156,11 +158,11 @@ export class ShowPmiOptionsSecondLoan extends Component {
     if(event.target.name == "loanamountsecond2"){
       if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
-          loanAmountValidationError: "Cannot exceed first mortgage amount"
+          secondloanAmountValidationError: "Cannot exceed first mortgage amount"
         }) 
       }else{
         this.setState({
-          loanAmountValidationError: ""
+          secondloanAmountValidationError: ""
         }) 
       }
       

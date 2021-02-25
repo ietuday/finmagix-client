@@ -14,7 +14,7 @@ import ARMComponentFirstLoan from "./armComponentFirstLoan";
 //   resetValidators,
 //   displayValidationErrors,
 // } from "../../common/ValidatorFunction";
-
+ 
 import quss from "../../assets/images/que.png";
 
 import NumberFormat from "react-number-format";
@@ -84,7 +84,7 @@ export class FirstLoanScenario extends Component {
       interestOnlyPeriodValidationError: "",
       interestrateValidationError: "",
       pointsValidationError: "",
-      property_price: "",
+      property_price: "", 
       loan_amount_validation_error: "",
       closingCostsValidationError: "",
       property_downpayment: ""
@@ -150,7 +150,7 @@ export class FirstLoanScenario extends Component {
               loanamountsecond1: "0",
               Pmtsecond1: "0",
               ARMtype1: 0,
-              ARM1rate: 0,
+              ARM1rate: 0, 
               ARMfirstadjin1: "0",
               floor1: "0",
               ceiling1: "0",
@@ -178,7 +178,6 @@ export class FirstLoanScenario extends Component {
             })
           }
           console.log(this.state)
-          debugger
           this.props.handleFirstloanMortgageInfo(this.state, null);
         })
         .catch((err) => {
@@ -555,6 +554,7 @@ export class FirstLoanScenario extends Component {
             </ToggleButtonGroup>
           </MDBCol>
         </MDBRow>
+        {console.log(this.props)}
         {this.state.mortgage_program_type_value === 2 ? (
           <ARMComponentFirstLoan
             downpayment={this.props.downpayment}
