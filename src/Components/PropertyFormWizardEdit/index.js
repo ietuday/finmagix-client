@@ -15,7 +15,7 @@ import { log_out } from "../redux/actions/signinSignup.js";
 import { logout } from "../../routes/utils";
 import { Redirect, withRouter } from "react-router-dom";
 
- import {
+import {
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -59,13 +59,13 @@ export class StepperComponent extends Component {
     this.state = {
       activeStep: 0,
       completed: "",
-      propertyInfo: {id:""},
-      personalFinance: {id:"", property_obj: localStorage.getItem("property_id"),},
-      RentvsBuy: {id:""},
+      propertyInfo: { id: "" },
+      personalFinance: { id: "", property_obj: localStorage.getItem("property_id"), },
+      RentvsBuy: { id: "" },
       Taxes: {},
       personalFinanceValidationErros: 0,
       rentvsBuyValidationErrors: 0,
-      houseInofValidationErrors : 0,
+      houseInofValidationErrors: 0,
       isselectloanScenarionModalOpen: true,
       isOpen: false,
       modal: false,
@@ -97,34 +97,34 @@ export class StepperComponent extends Component {
       "Summary",
     ];
   }
-  componentDidMount(){
+  componentDidMount() {
   }
-  componentWillMount(){
+  componentWillMount() {
     if (this.props.location.returnBackFromreviewEdit === true) {
       this.setState({
         activeStep: 5,
       });
     }
 
-    if(this.props.location.state.property_id === 0){
+    if (this.props.location.state.property_id === 0) {
       this.setState({
-        activeStep :0
+        activeStep: 0
       })
-    }else if(this.props.location.state.property_id === 1){
+    } else if (this.props.location.state.property_id === 1) {
       this.setState({
-        activeStep :1
+        activeStep: 1
       })
-    }else if(this.props.location.state.property_id === 2){
+    } else if (this.props.location.state.property_id === 2) {
       this.setState({
-        activeStep :2
+        activeStep: 2
       })
-    }else if(this.props.location.state.property_id === 3){
+    } else if (this.props.location.state.property_id === 3) {
       this.setState({
-        activeStep :3
+        activeStep: 3
       })
-    }else if(this.props.location.state.property_id === 4){
+    } else if (this.props.location.state.property_id === 4) {
       this.setState({
-        activeStep :4
+        activeStep: 4
       })
     }
   }
@@ -146,7 +146,7 @@ export class StepperComponent extends Component {
       isTaxFilled: getTaxFillStatus,
     });
   };
-  
+
   onSuccessHouseInfo = async (data) => {
     savePropertyId(data.id);
     if (
@@ -191,7 +191,7 @@ export class StepperComponent extends Component {
     });
   };
 
-  handleHouseInfo = async (downpayment, data,id) => {
+  handleHouseInfo = async (downpayment, data, id) => {
     id = localStorage.getItem('property_id')
     await this.setState((prevState) => {
       let propertyInfo = Object.assign({}, prevState.propertyInfo);
@@ -203,8 +203,8 @@ export class StepperComponent extends Component {
       downpayment: downpayment,
     });
   };
-  handlePersonalFinance = async (data,id) => {
-  
+  handlePersonalFinance = async (data, id) => {
+
     await this.setState((prevState) => {
       let personalFinance = Object.assign({}, prevState.personalFinance);
       personalFinance = data;
@@ -219,20 +219,20 @@ export class StepperComponent extends Component {
         ? this.steps.findIndex((step, i) => !(i in this.state.completed))
         : this.state.activeStep + 1;
 
- 
-      this.setState({
-        saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-      });
 
-      {
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-          ? PersonalFinanceUpdate(this.state.personalFinance)
-          : PersonalFinanceCreate(this.state.personalFinance);
-      }
+    this.setState({
+      saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
+    });
 
-      
-   
+    {
+      Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+        .length !== 0
+        ? PersonalFinanceUpdate(this.state.personalFinance)
+        : PersonalFinanceCreate(this.state.personalFinance);
+    }
+
+
+
   };
   async handleRentvsBuyData(data) {
     await this.setState((prevState) => {
@@ -255,9 +255,9 @@ export class StepperComponent extends Component {
       personalFinanceValidationErros: error,
     });
   };
-  getHouseInfoValidationError = (error) =>{
+  getHouseInfoValidationError = (error) => {
     this.setState({
-      houseInfoValidationErrors : error,
+      houseInfoValidationErrors: error,
     });
   }
   getRentvsBuyValidationError = (error) => {
@@ -281,8 +281,8 @@ export class StepperComponent extends Component {
   getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <GetStartedHouseInfo getValidationError = {this.getHouseInfoValidationError}
-         getId={undefined} handleHouseInfo={this.handleHouseInfo} />;
+        return <GetStartedHouseInfo getValidationError={this.getHouseInfoValidationError}
+          getId={undefined} handleHouseInfo={this.handleHouseInfo} />;
       case 1:
         return (
           <PersonalFinance
@@ -296,14 +296,14 @@ export class StepperComponent extends Component {
           <PropertyMortgageHOC
             handleContinue={this.handleNext}
             showStep={(step) => {
-            this.handleStep(step);
+              this.handleStep(step);
             }}
             downpayment={this.state.downpayment}
-            FrmMortgageFirstEditId = {this.props.location.state.frm_first_edit_id}
-            ArmMortgageFirstEditId = {this.props.location.state.arm_first_edit_id}
-            FrmMortgageSecondEditId = {this.props.location.state.frm_second_edit_id}
-            ArmMortgageSecondEditId = {this.props.location.state.arm_second_edit_id}
-            
+            FrmMortgageFirstEditId={this.props.location.state.frm_first_edit_id}
+            ArmMortgageFirstEditId={this.props.location.state.arm_first_edit_id}
+            FrmMortgageSecondEditId={this.props.location.state.frm_second_edit_id}
+            ArmMortgageSecondEditId={this.props.location.state.arm_second_edit_id}
+
           >
             <FirstLoanScenario />
             <SecondLoanScenario />
@@ -315,16 +315,16 @@ export class StepperComponent extends Component {
             getRentvsBuyData={this.handleRentvsBuyData}
             showNext={this.handleNext}
             showStep={(step) => {
-            this.handleStep(step);
+              this.handleStep(step);
             }}
             getId={this.props.location.state.rent_vs_buy_edit_id}
-            isRentvsBuyFilled = {true}
+            isRentvsBuyFilled={true}
             getValidationError={this.getRentvsBuyValidationError}
           />
         );
       case 4:
         return (
-          <TaxHoc handleContinue={this.handleNext}  getId={this.props.location.state.tax_edit_id} isTaxFilled = {true}>
+          <TaxHoc handleContinue={this.handleNext} getId={this.props.location.state.tax_edit_id} isTaxFilled={true}>
             <Tax1 />
             <Tax2 />
           </TaxHoc>
@@ -372,67 +372,86 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
-      
-    // if(this.state.houseInfoValidationErrors !== 0 &&
-    //   !isFormValid("house_info")){
-    //    this.setState({
-    //      activeStep: this.state.activeStep,
-    //    });
-    //    NotificationManager.error("Please Validate Fields", "Error");
-    //    }else{
-      this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, ""))/100)
-      
+
+      console.log(this.state)
+      if (this.state.propertyInfo.homepriceGrowthValidationError ||
+        this.state.propertyInfo.downpaymentnewValidationError ||
+        this.state.propertyInfo.annualPropertytaxValidationError ||
+        this.state.propertyInfo.homeownerInsuranceValidationError
+      ) {
+        NotificationManager.error("Error", "Validation Error");
+      } else {
+
+        this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)
+
         PropertyInfoUpdate(this.state.propertyInfo);
-         this.props.history.push({pathname: '/property-form',
-       returnBackFromreviewEdit : true})
-      //  }
-       
+        this.props.history.push({
+          pathname: '/property-form',
+          returnBackFromreviewEdit: true
+        })
+
+      }
+
+
+
+
+
 
     } else if (this.state.activeStep === 1) {
-      
-          this.props.history.push({pathname: '/property-form',
-        returnBackFromreviewEdit : true}) 
-        console.log(this.state)
-        {
-          Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-            .length !== 0
-            ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-            : PersonalFinanceCreate(this.state.personalFinance);
-        }
-      
-    
+
+      this.props.history.push({
+        pathname: '/property-form',
+        returnBackFromreviewEdit: true
+      })
+      console.log(this.state)
+      {
+        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+          .length !== 0
+          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+          : PersonalFinanceCreate(this.state.personalFinance);
+      }
+
+
 
     } else if (this.state.activeStep === 2) {
-      this.props.history.push({pathname: '/property-form',
-      returnBackFromreviewEdit : true})
+      this.props.history.push({
+        pathname: '/property-form',
+        returnBackFromreviewEdit: true
+      })
     } else if (this.state.activeStep === 3) {
 
-      if(this.state.rentvsBuyValidationErrors !== 0 &&
-      !isFormValid("rent_vs_buy")){
+      if (this.state.rentvsBuyValidationErrors !== 0 &&
+        !isFormValid("rent_vs_buy")) {
         this.setState({
           activeStep: this.state.activeStep,
         });
         NotificationManager.error("Please Validate Fields", "Error");
-        }else{
-          this.state.RentvsBuy['rate_of_investment'] = String(
-            Number(this.state.RentvsBuy["rate_of_investment"]) / 100
-          );
-          this.state.RentvsBuy['rentinflation'] = String(
-            Number(this.state.RentvsBuy["rentinflation"]) / 100
-          );
-          RentvsBuyUpdate(this.state.RentvsBuy);
-          this.props.history.push({pathname: '/property-form',
-        returnBackFromreviewEdit : true})
-        }
+      } else {
+        this.state.RentvsBuy['rate_of_investment'] = String(
+          Number(this.state.RentvsBuy["rate_of_investment"]) / 100
+        );
+        this.state.RentvsBuy['rentinflation'] = String(
+          Number(this.state.RentvsBuy["rentinflation"]) / 100
+        );
+        RentvsBuyUpdate(this.state.RentvsBuy);
+        this.props.history.push({
+          pathname: '/property-form',
+          returnBackFromreviewEdit: true
+        })
+      }
 
 
 
     } else if (this.state.activeStep === 4) {
-      this.props.history.push({pathname: '/property-form',
-      returnBackFromreviewEdit : true})
+      this.props.history.push({
+        pathname: '/property-form',
+        returnBackFromreviewEdit: true
+      })
     } else if (this.state.activeStep === 5) {
-      this.props.history.push({pathname: '/property-form',
-      returnBackFromreviewEdit : true})
+      this.props.history.push({
+        pathname: '/property-form',
+        returnBackFromreviewEdit: true
+      })
     }
   }
 
@@ -479,14 +498,14 @@ export class StepperComponent extends Component {
                 {activeStep === 0
                   ? "Property Information"
                   : activeStep === 1
-                  ? "Personal Finance"
-                  : activeStep === 2
-                  ? "Mortgage Programs"
-                  : activeStep === 3
-                  ? "Rent vs Buy"
-                  : activeStep === 4
-                  ? "Taxes"
-                  : "Summary"}
+                    ? "Personal Finance"
+                    : activeStep === 2
+                      ? "Mortgage Programs"
+                      : activeStep === 3
+                        ? "Rent vs Buy"
+                        : activeStep === 4
+                          ? "Taxes"
+                          : "Summary"}
               </span>
               <br />
               <Stepper
@@ -578,14 +597,14 @@ export class StepperComponent extends Component {
                 Back
               </Button>
             ) : (
-              <Button
-                className="back-arrow"
-                size="large"
-                onClick={() => this.props.history.push("/taxes-review-edit")}
-              >
-                Back
-              </Button>
-            )}
+                        <Button
+                          className="back-arrow"
+                          size="large"
+                          onClick={() => this.props.history.push("/taxes-review-edit")}
+                        >
+                          Back
+                        </Button>
+                      )}
 
             <br />
             {this.allStepsCompleted() ? (
@@ -594,27 +613,27 @@ export class StepperComponent extends Component {
                 <Button onClick={this.handleReset}>Reset</Button>
               </div>
             ) : (
-              <div>
-                {this.getStepContent(activeStep)}
-                <div className="text-center">
-                  {activeStep === 2 || activeStep === 4 || activeStep === 5 ? (
-                    ""
-                  ) : (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="large"
-                      className="button-inner-class"
-                      onClick={this.handleNext}
-                    >
-                      {" "}
+                <div>
+                  {this.getStepContent(activeStep)}
+                  <div className="text-center">
+                    {activeStep === 2 || activeStep === 4 || activeStep === 5 ? (
+                      ""
+                    ) : (
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          size="large"
+                          className="button-inner-class"
+                          onClick={this.handleNext}
+                        >
+                          {" "}
                       Continue
-                    </Button>
-                  )}
+                        </Button>
+                      )}
+                  </div>
+                  <br />
                 </div>
-                <br />
-              </div>
-            )}
+              )}
           </div>
         </MDBContainer>
       </Fragment>
