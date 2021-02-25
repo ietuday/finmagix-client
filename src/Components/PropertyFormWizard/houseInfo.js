@@ -488,10 +488,17 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="7" sm="6" xs="6" size="6">
             <span className="get-started-long-question">Bedrooms</span>
           </MDBCol>
-          <MDBCol md="5" sm="6" xs="6" size="6">
-            <NumberSpinner
+          <MDBCol md="1" sm="1" xs="1" size="1">
+            {/* <NumberSpinner
               count={this.state.no_of_bedrooms}
               onRoomCount={this.handleBedroomRoomCount}
+            /> */}
+             <Input
+              className="input-class-mdb"
+              placeholder="Enter no of bedrooms "
+              value={this.state.no_of_bedrooms}
+              name="no_of_bedrooms"
+              onChange={this.handleChange}
             />
           </MDBCol>
         </MDBRow>
@@ -499,10 +506,18 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="7" sm="6" xs="6" size="6">
             <span className="get-started-long-question">Bathrooms</span>
           </MDBCol>
-          <MDBCol md="5" sm="6" xs="6" size="6">
-            <NumberSpinner
+          <MDBCol md="1" sm="1" xs="1" size="1">
+            {/* <NumberSpinner
               count={this.state.no_of_bathrooms}
               onRoomCount={this.handleBathRoomCount}
+            /> */}
+
+<Input
+              className="input-class-mdb"
+              placeholder="Enter no of Bathrooms "
+              value={this.state.no_of_bathrooms}
+              name="no_of_bathrooms"
+              onChange={this.handleChange}
             />
           </MDBCol>
         </MDBRow>
