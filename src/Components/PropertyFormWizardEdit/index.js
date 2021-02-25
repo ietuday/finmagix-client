@@ -220,16 +220,44 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
 
-    this.setState({
-      saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-    });
+      if (
+      this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
+      this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
+      this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
 
-    {
-      Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-        .length !== 0
-        ? PersonalFinanceUpdate(this.state.personalFinance)
-        : PersonalFinanceCreate(this.state.personalFinance);
+    ) {
+      NotificationManager.error('Error', 'Validation Error')
     }
+    else {
+      this.setState({
+        saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
+      });
+
+      {
+        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+          .length !== 0
+          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+          : PersonalFinanceCreate(this.state.personalFinance);
+      }
+      if (
+        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+          .length !== 0
+      ) {
+        this.handleNext();
+      }
+    }
+
+
+    // this.setState({
+    //   saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
+    // });
+
+    // {
+    //   Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+    //     .length !== 0
+    //     ? PersonalFinanceUpdate(this.state.personalFinance)
+    //     : PersonalFinanceCreate(this.state.personalFinance);
+    // }
 
 
 

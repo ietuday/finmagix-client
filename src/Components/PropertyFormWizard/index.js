@@ -180,33 +180,33 @@ export class StepperComponent extends Component {
       this.isLastStep && !this.allStepsCompleted
         ? this.steps.findIndex((step, i) => !(i in this.state.completed))
         : this.state.activeStep + 1;
-
     if (
-      this.state.personalFinanceValidationErros == 0 &&
-      isFormValid("personal_finance") === true
+      this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
+      this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
+      this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
+
     ) {
+      NotificationManager.error('Error', 'Validation Error')
+    }
+    else {
       this.setState({
         saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
       });
-    } else {
-      this.setState({
-        activeStep: this.state.activeStep,
-      });
-      NotificationManager.error("Please Validate Fields", "Error");
+
+      {
+        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+          .length !== 0
+          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+          : PersonalFinanceCreate(this.state.personalFinance);
+      }
+      if (
+        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+          .length !== 0
+      ) {
+        this.handleNext();
+      }
     }
 
-    {
-      Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-        .length !== 0
-        ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-        : PersonalFinanceCreate(this.state.personalFinance);
-    }
-    if (
-      Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-        .length !== 0
-    ) {
-      this.handleNext();
-    }
   };
   saveDetailExpenses = (data) => {
     const { DetailExpenseCreate } = this.props;
@@ -465,10 +465,11 @@ export class StepperComponent extends Component {
       localStorage.setItem(
         "personal_finance_array",
         JSON.stringify(personal_finance_data)
-      );
+      ); 
       this.setState({
         activeStep: newActiveStep,
       });
+
     } else if (this.state.activeStep === 2) {
       this.setState({
         activeStep: newActiveStep,
