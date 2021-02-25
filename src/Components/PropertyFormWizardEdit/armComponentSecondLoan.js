@@ -13,7 +13,7 @@ import ArmMortgageProgramValidator from "../validatorRules/ArmMortgageProgramVal
 import { updateValidators } from "../../common/ValidatorFunction";
 import {
   resetValidators,
-  displayValidationErrors,
+  displayValidationErrors, 
 } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
 
@@ -210,7 +210,8 @@ export class ARMComponentSecondLoan extends Component {
       loan_amount_validation_error: "",
       interestrateValidationError: "",
       closingCostsValidationError:"",
-      interestOnlyPeriodValidationError:""
+      interestOnlyPeriodValidationError:"",
+      property_downpayment: ""
       
     };
     this.handleChange = this.handleChange.bind(this);
@@ -231,7 +232,8 @@ export class ARMComponentSecondLoan extends Component {
           const propertyDetail = propertyInfo.data.data[0]
           console.log(propertyDetail.property_price)
           this.setState({
-            'property_price': propertyDetail.property_price
+            'property_price': propertyDetail.property_price,
+            'property_downpayment': propertyDetail.downpayment_amount
           })
           if (propertyDetail.second_arm && propertyDetail.second_arm.id) {
             this.setState({
@@ -288,7 +290,16 @@ export class ARMComponentSecondLoan extends Component {
               closing_costs_percentage: Number(propertyDetail.second_arm.closing_costs) * 100,
               period_cap_percentage: Number(propertyDetail.second_arm.period_cap) * 100,
               is_update: true,
-              id: propertyDetail.second_arm.id
+              id: propertyDetail.second_arm.id,
+              interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+              interestrateValidationError: this.state.interestrateValidationError,
+              pointsValidationError: this.state.pointsValidationError,
+              loan_amount_validation_error: this.state.loan_amount_validation_error,
+              closingCostsValidationError: this.state.closingCostsValidationError,
+              rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+              floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+              periodCapValidationError:this.state.periodCapValidationError,
+              rateAddValidationError:this.state.rateAddValidationError,
             })
           }
 
@@ -471,7 +482,18 @@ export class ARMComponentSecondLoan extends Component {
       periodicadjcap2: this.state.periodicadjcap2,
       rateadd2: this.state.rateadd2,
       is_update: this.state.is_update,
-      id: this.state.id
+      id: this.state.id,
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment,
+      rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+      floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+      periodCapValidationError:this.state.periodCapValidationError,
+      rateAddValidationError:this.state.rateAddValidationError,
     };
     this.props.handleArmData(dataObject);
   }
@@ -631,7 +653,18 @@ export class ARMComponentSecondLoan extends Component {
       periodicadjcap2: this.state.periodicadjcap2,
       rateadd2: this.state.rateadd2,
       is_update: this.state.is_update,
-      id: this.state.id
+      id: this.state.id,
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment,
+      rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+      floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+      periodCapValidationError:this.state.periodCapValidationError,
+      rateAddValidationError:this.state.rateAddValidationError,
     };
     this.props.handleArmData(dataObject);
   };

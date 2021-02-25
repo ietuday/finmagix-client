@@ -137,7 +137,10 @@ export class PropertyMortgageHOC extends Component {
 
         if(
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
-          this.state.firstLoanScenario.loan_amount_validation_error 
+          this.state.firstLoanScenario.loan_amount_validation_error  ||
+          this.state.firstLoanScenario.rateAdjustmentCapValidationError ||
+          this.state.firstLoanScenario.floorinterestrateValidationError ||
+          this.state.firstLoanScenario.periodCapValidationError 
           ){
             NotificationManager.error('error', 'Validation Error')
           }else{
@@ -266,7 +269,10 @@ export class PropertyMortgageHOC extends Component {
        
         if(
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
-          this.state.firstLoanScenario.loan_amount_validation_error 
+          this.state.firstLoanScenario.loan_amount_validation_error  ||
+          this.state.firstLoanScenario.rateAdjustmentCapValidationError ||
+          this.state.firstLoanScenario.floorinterestrateValidationError ||
+          this.state.firstLoanScenario.periodCapValidationError 
           ){
             NotificationManager.error('error', 'Validation Error')
           }else{
@@ -422,8 +428,12 @@ export class PropertyMortgageHOC extends Component {
       ) {
 
         if(
+          
           this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
-          this.state.secondLoanScenario.loan_amount_validation_error 
+          this.state.secondLoanScenario.loan_amount_validation_error  ||
+          this.state.secondLoanScenario.rateAdjustmentCapValidationError ||
+          this.state.secondLoanScenario.floorinterestrateValidationError ||
+          this.state.secondLoanScenario.periodCapValidationError 
           ){
             NotificationManager.error('error', 'Validation Error')
           }else{
@@ -560,7 +570,11 @@ export class PropertyMortgageHOC extends Component {
  
            if(
           this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
-          this.state.secondLoanScenario.loan_amount_validation_error 
+          this.state.secondLoanScenario.loan_amount_validation_error  ||
+          this.state.secondLoanScenario.rateAdjustmentCapValidationError ||
+          this.state.secondLoanScenario.floorinterestrateValidationError ||
+          this.state.secondLoanScenario.periodCapValidationError 
+          
           ){
             NotificationManager.error('error', 'Validation Error')
           }else{

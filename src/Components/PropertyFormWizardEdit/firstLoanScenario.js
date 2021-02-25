@@ -13,7 +13,7 @@ import quss from "../../assets/images/que.png";
 import NumberFormat from "react-number-format";
 import { config } from '../config/default';
 const { baseURL } = config;
-
+ 
 
 export class FirstLoanScenario extends Component {
   constructor(props) {
@@ -78,6 +78,7 @@ export class FirstLoanScenario extends Component {
       property_price: "",
       loan_amount_validation_error: "",
       closingCostsValidationError: "",
+      property_downpayment: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
@@ -97,7 +98,8 @@ export class FirstLoanScenario extends Component {
           const propertyDetail = propertyInfo.data.data[0]
           console.log(propertyDetail.property_price)
           this.setState({
-            'property_price': propertyDetail.property_price
+            'property_price': propertyDetail.property_price,
+            'property_downpayment': propertyDetail.downpayment_amount
           })
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             this.setState({
@@ -156,7 +158,12 @@ export class FirstLoanScenario extends Component {
               closing_costs_percentage: Number(propertyDetail.first_frm.closing_costs) * 100,
               points_percentage: Number(propertyDetail.first_frm.points) * 100,
               is_update: true,
-              id: propertyDetail.first_frm.id
+              id: propertyDetail.first_frm.id,
+              interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+              interestrateValidationError: this.state.interestrateValidationError,
+              pointsValidationError: this.state.pointsValidationError,
+              loan_amount_validation_error: this.state.loan_amount_validation_error,
+              closingCostsValidationError: this.state.closingCostsValidationError
             })
           }
           this.props.handleFirstloanMortgageInfo(this.state, null);
@@ -299,7 +306,14 @@ export class FirstLoanScenario extends Component {
         periodicadjcap2: this.state.periodicadjcap2,
         rateadd2: this.state.rateadd2,
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment
       };
       this.props.handleFirstloanMortgageInfo(dataObject, null);
     }
@@ -337,7 +351,14 @@ export class FirstLoanScenario extends Component {
       periodicadjcap2: data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
       rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
       is_update: this.state.is_update,
-      id: this.state.id
+      id: this.state.id,
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -380,7 +401,14 @@ export class FirstLoanScenario extends Component {
           data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
         rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment
       };
       this.props.handleFirstloanMortgageInfo(dataWithPmi);
     } else {
@@ -428,7 +456,14 @@ export class FirstLoanScenario extends Component {
           data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
         rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment
       };
       this.props.handleFirstloanMortgageInfo(dataWithSecondMortgage);
     }
@@ -734,6 +769,7 @@ export class FirstLoanScenario extends Component {
               ? showInterestOnlyPeriodButton
               : null}
             <br />
+            {console.log(this.props)}
             {this.props.FrmGetResponse.pmi !== "null" || (this.props.FrmGetResponse.second_mortgage_loan_amount !=="null") || this.props.downpayment === "lessthan20" ? (
               <ShowPmiOptionsFirstLoan
                 handleDownpaymentData={this.handleDownpaymentData}

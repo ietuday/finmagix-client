@@ -14,7 +14,7 @@ import NumberFormat from "react-number-format";
 
 import { config } from '../config/default';
 const { baseURL } = config;
-
+ 
 
 export class SecondLoanScenario extends Component {
   constructor(props) {
@@ -58,6 +58,7 @@ export class SecondLoanScenario extends Component {
       property_price: "",
       loan_amount_validation_error: "",
       closingCostsValidationError: "",
+      property_downpayment: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
@@ -76,7 +77,8 @@ export class SecondLoanScenario extends Component {
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
           this.setState({
-            'property_price': propertyDetail.property_price
+            'property_price': propertyDetail.property_price,
+            'property_downpayment': propertyDetail.downpayment_amount
           })
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             this.setState({
@@ -135,7 +137,12 @@ export class SecondLoanScenario extends Component {
               closing_costs_percentage: Number(propertyDetail.second_frm.closing_costs)*100,
               points_percentage: Number(propertyDetail.second_frm.points)*100,
               is_update: true,
-              id: propertyDetail.second_frm.id
+              id: propertyDetail.second_frm.id,
+              interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+              interestrateValidationError: this.state.interestrateValidationError,
+              pointsValidationError: this.state.pointsValidationError,
+              loan_amount_validation_error: this.state.loan_amount_validation_error,
+              closingCostsValidationError: this.state.closingCostsValidationError
             })
           }
           this.props.handleSecondloanMortgageInfo(this.state, null);
@@ -254,7 +261,13 @@ if (event.target.name == "closing_costs") {
       property_obj: localStorage.getItem("property_id"),
       is_update: this.state.is_update,
       id: this.state.id,
-      interestOnlyPeriodValidationError: ""
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment
     };
     this.props.handleSecondloanMortgageInfo(dataObject, null);
   }
@@ -267,7 +280,14 @@ if (event.target.name == "closing_costs") {
       second_mortgage_points: data.second_mortgage_points,
       second_mortgage_closing_costs: data.second_mortgage_closing_costs,
       is_update: this.state.is_update,
-      id: this.state.id
+      id: this.state.id,
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -283,7 +303,14 @@ if (event.target.name == "closing_costs") {
         pmi: this.state.pmi,
         property_obj: localStorage.getItem("property_id"),
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment
       };
       this.props.handleSecondloanMortgageInfo(dataWithPmi, null);
     } else {
@@ -304,7 +331,14 @@ if (event.target.name == "closing_costs") {
         second_mortgage_closing_costs: this.state.second_mortgage_closing_costs,
         property_obj: localStorage.getItem("property_id"),
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment
       };
       this.props.handleSecondloanMortgageInfo(dataWithSecondMortgage, null);
     }
