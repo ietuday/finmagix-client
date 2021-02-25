@@ -107,9 +107,10 @@ export class FirstLoanScenario extends Component {
       })
         .then(async (propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
-          console.log(propertyDetail.property_price)
+          console.log(propertyDetail)
           this.setState({
-            'property_price': propertyDetail.property_price
+            'property_price': propertyDetail.property_price,
+            'property_downpayment': propertyDetail.downpayment_amount
           })
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             await this.setState({
@@ -173,10 +174,10 @@ export class FirstLoanScenario extends Component {
               interestrateValidationError: this.state.interestrateValidationError,
               pointsValidationError: this.state.pointsValidationError,
               loan_amount_validation_error: this.state.loan_amount_validation_error,
-              closingCostsValidationError: this.state.closingCostsValidationError,
-              property_downpayment: propertyDetail.downpayment_amount
+              closingCostsValidationError: this.state.closingCostsValidationError
             })
           }
+          console.log(this.state)
           debugger
           this.props.handleFirstloanMortgageInfo(this.state, null);
         })
