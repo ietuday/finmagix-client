@@ -240,14 +240,14 @@ export class GetStartedHouseInfo extends Component {
      no_of_bedrooms: count,
    });
    console.log(this.state)
-   localStorage.setItem('no_of_bedrooms',count)
+  //  localStorage.setItem('no_of_bedrooms',count)
  }
  handleBathRoomCount(count) {
    this.setState({
      no_of_bathrooms: count,
    });
    console.log(this.state)
-   localStorage.setItem('no_of_bathrooms',count)
+  //  localStorage.setItem('no_of_bathrooms',count)
  }
  selectAddress = (data) => {
    this.setState({
@@ -470,31 +470,58 @@ export class GetStartedHouseInfo extends Component {
           </MDBCol>
         </MDBRow>
         
-          <MDBRow className="margin20">
-          <MDBCol md="7" sm="6" xs="6" size="6">
-            <span className="get-started-long-question">Bedrooms</span>
-          </MDBCol>
-          <MDBCol md="5" sm="6" xs="6" size="6">
-            
-            <NumberSpinner
-              count={this.state.no_of_bedrooms}
-              onRoomCount={this.handleBedroomRoomCount}
-            />
-          </MDBCol>
-        </MDBRow>
-
-
         <MDBRow className="margin20">
-          <MDBCol md="7" sm="6" xs="6" size="6">
-            <span className="get-started-long-question">Bathrooms</span>
-          </MDBCol>
-          <MDBCol md="5" sm="6" xs="6" size="6">
-            <NumberSpinner 
-              count={this.state.no_of_bathrooms}
-              onRoomCount={this.handleBathRoomCount} 
-            />
-          </MDBCol>
-        </MDBRow>
+        <MDBCol md="7" sm="6" xs="6" size="6">
+          <span className="get-started-long-question">Bedrooms</span>
+        </MDBCol>
+        <MDBCol md="6" sm="6" xs="6" size="6">
+          {/* <NumberSpinner
+            count={this.state.no_of_bedrooms}
+            onRoomCount={this.handleBedroomRoomCount}
+          /> */}
+
+          <NumberFormat
+            className="input-class-mdb"
+            placeholder="Bedroom"
+            name="no_of_bedrooms"
+            value={this.state.no_of_bedrooms}
+            onChange={this.handleChange}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                no_of_bedrooms: value,
+              });
+            }}
+          />
+          
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className="margin20">
+        <MDBCol md="7" sm="6" xs="6" size="6">
+          <span className="get-started-long-question">Bathrooms</span>
+        </MDBCol>
+        <MDBCol md="6" sm="6" xs="6" size="6">
+          {/* <NumberSpinner
+            count={this.state.no_of_bathrooms}
+            onRoomCount={this.handleBathRoomCount}
+          /> */}
+
+          <NumberFormat
+            className="input-class-mdb"
+            placeholder="Bathroom"
+            name="no_of_bathrooms"
+            value={this.state.no_of_bathrooms}
+            onChange={this.handleChange}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                no_of_bathrooms: value,
+              });
+            }}
+          />
+
+        </MDBCol>
+      </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Area of House</span>
