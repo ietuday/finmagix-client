@@ -87,6 +87,7 @@ export class FirstLoanScenario extends Component {
       property_price: "",
       loan_amount_validation_error: "",
       closingCostsValidationError: "",
+      property_downpayment: ""
     };
     // this.validators = FrmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -94,7 +95,7 @@ export class FirstLoanScenario extends Component {
     this.checkproperty()
   }
 
-  checkproperty() {
+   checkproperty() {
     const propertyId = JSON.parse(localStorage.getItem('property_id'))
 
     if (propertyId) {
@@ -104,14 +105,14 @@ export class FirstLoanScenario extends Component {
           Authorization: `JWT ${localStorage.getItem("accessToken")}`,
         },
       })
-        .then((propertyInfo) => {
+        .then(async (propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
           console.log(propertyDetail.property_price)
           this.setState({
             'property_price': propertyDetail.property_price
           })
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
-            this.setState({
+            await this.setState({
               mortgage_program_type: propertyDetail.first_frm.mortage_program_type,
               mortgage_program_type_value: 1,
               loan_amount: propertyDetail.first_frm.loan_amount,
@@ -167,9 +168,16 @@ export class FirstLoanScenario extends Component {
               closing_costs_percentage: Number(propertyDetail.first_frm.closing_costs) * 100,
               points_percentage: Number(propertyDetail.first_frm.points) * 100,
               is_update: true,
-              id: propertyDetail.first_frm.id
+              id: propertyDetail.first_frm.id,
+              interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+              interestrateValidationError: this.state.interestrateValidationError,
+              pointsValidationError: this.state.pointsValidationError,
+              loan_amount_validation_error: this.state.loan_amount_validation_error,
+              closingCostsValidationError: this.state.closingCostsValidationError,
+              property_downpayment: propertyDetail.downpayment_amount
             })
           }
+          debugger
           this.props.handleFirstloanMortgageInfo(this.state, null);
         })
         .catch((err) => {
@@ -259,18 +267,6 @@ export class FirstLoanScenario extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    // if (
-    //   (this.state.mortgage_program_type_value === 1 &&
-    //     name === "loan_amount") ||
-    //   name === "interest" ||
-    //   name === "points" ||
-    //   name == "closing_costs"
-    // ) {
-    //   updateValidators(this.validators, event.target.name, event.target.value);
-    //   const validationErrorLength = this.validators[event.target.name].errors
-    //     .length;
-    //   this.props.getValidationError(validationErrorLength);
-    // }
 
     const dataObject = {
       mortgage_program_type: this.state.mortgage_program_type,
@@ -305,7 +301,15 @@ export class FirstLoanScenario extends Component {
       periodicadjcap2: this.state.periodicadjcap2,
       rateadd2: this.state.rateadd2,
       is_update: this.state.is_update,
-      id: this.state.id
+      id: this.state.id,
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment
+
     };
     this.props.handleFirstloanMortgageInfo(dataObject, null);
   }
@@ -343,7 +347,14 @@ export class FirstLoanScenario extends Component {
       periodicadjcap2: data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
       rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
       is_update: this.state.is_update,
-      id: this.state.id
+      id: this.state.id,
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -386,7 +397,14 @@ export class FirstLoanScenario extends Component {
           data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
         rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment
       };
       this.props.handleFirstloanMortgageInfo(dataWithPmi, null);
     } else {
@@ -434,7 +452,14 @@ export class FirstLoanScenario extends Component {
           data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
         rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment
       };
       this.props.handleFirstloanMortgageInfo(dataWithSecondMortgage, null);
     }

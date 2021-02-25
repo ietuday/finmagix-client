@@ -74,6 +74,8 @@ export class PropertyMortgageHOC extends Component {
   handleNext = () => {
     const { FRMMortgageCreateFirst, ARMMortgageCreateFirst,FRMMortgageUpdateFirst,
       ARMMortgageUpdateFirst  } = this.props;
+    console.log(this.state)
+    debugger
     if (
       this.state.firstLoanScenario.firstloanarmvalidationerror === 0 ||
       this.state.FirstloanscenarioValidationErrors === 0
@@ -82,34 +84,46 @@ export class PropertyMortgageHOC extends Component {
         this.state.radioValue &&
         this.state.firstLoanScenario.mortgage_program_type_value === 1
       ) {
-        if (this.state.firstLoanScenario["interest"]) {
-          this.state.firstLoanScenario["interest"] = String(
-            Number(this.state.firstLoanScenario["interest"]) / 100
-          );
-        }
-        if (this.state.firstLoanScenario["second_mortgage_interest"]) {
-          this.state.firstLoanScenario["second_mortgage_interest"] = String(
-            Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
-              100
-          );
-        }
-        if (this.state.firstLoanScenario["points"]) {
-          this.state.firstLoanScenario["points"] = String(
-            Number(this.state.firstLoanScenario["points"]) / 100
-          );
-        }
 
-        if (this.state.firstLoanScenario["second_mortgage_points"]) {
-          this.state.firstLoanScenario["second_mortgage_points"] = String(
-            Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
-          );
-        }
-
-        if(this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id){
-          FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )
-        }else{
-          FRMMortgageCreateFirst(this.state.firstLoanScenario);
-        }
+        if(
+          this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
+          this.state.firstLoanScenario.interestrateValidationError ||
+          this.state.firstLoanScenario.pointsValidationError ||
+          this.state.firstLoanScenario.loan_amount_validation_error ||
+          this.state.firstLoanScenario.closingCostsValidationError 
+          ){
+            NotificationManager.error('error', 'Validation Error')
+          }else{
+            if (this.state.firstLoanScenario["interest"]) {
+              this.state.firstLoanScenario["interest"] = String(
+                Number(this.state.firstLoanScenario["interest"]) / 100
+              );
+            }
+            if (this.state.firstLoanScenario["second_mortgage_interest"]) {
+              this.state.firstLoanScenario["second_mortgage_interest"] = String(
+                Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
+                  100
+              );
+            }
+            if (this.state.firstLoanScenario["points"]) {
+              this.state.firstLoanScenario["points"] = String(
+                Number(this.state.firstLoanScenario["points"]) / 100
+              );
+            }
+    
+            if (this.state.firstLoanScenario["second_mortgage_points"]) {
+              this.state.firstLoanScenario["second_mortgage_points"] = String(
+                Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+              );
+            }
+    
+            if(this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id){
+              FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )
+            }else{
+              FRMMortgageCreateFirst(this.state.firstLoanScenario);
+            }
+          }
+        
         // FRMMortgageCreateFirst(this.state.firstLoanScenario);
       } else if (
         this.state.radioValue &&
@@ -184,32 +198,44 @@ export class PropertyMortgageHOC extends Component {
         !this.state.radioValue &&
         this.state.firstLoanScenario.mortgage_program_type_value === 1
       ) {
-        if (this.state.firstLoanScenario["interest"]) {
-          this.state.firstLoanScenario["interest"] = String(
-            Number(this.state.firstLoanScenario["interest"]) / 100
-          );
-        }
-        if (this.state.firstLoanScenario["second_mortgage_interest"]) {
-          this.state.firstLoanScenario["second_mortgage_interest"] = String(
-            Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
-              100
-          );
-        }
-        if (this.state.firstLoanScenario["points"]) {
-          this.state.firstLoanScenario["points"] = String(
-            Number(this.state.firstLoanScenario["points"]) / 100
-          );
-        }
-        if (this.state.firstLoanScenario["second_mortgage_points"]) {
-          this.state.firstLoanScenario["second_mortgage_points"] = String(
-            Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
-          );
-        }
-        if(this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id){
-          FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )
-        }else{
-          FRMMortgageCreateFirst(this.state.firstLoanScenario);
-        }
+
+        if(
+          this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
+          this.state.firstLoanScenario.interestrateValidationError ||
+          this.state.firstLoanScenario.pointsValidationError ||
+          this.state.firstLoanScenario.loan_amount_validation_error ||
+          this.state.firstLoanScenario.closingCostsValidationError 
+          ){
+            NotificationManager.error('error', 'Validation Error')
+          }else{
+            if (this.state.firstLoanScenario["interest"]) {
+              this.state.firstLoanScenario["interest"] = String(
+                Number(this.state.firstLoanScenario["interest"]) / 100
+              );
+            }
+            if (this.state.firstLoanScenario["second_mortgage_interest"]) {
+              this.state.firstLoanScenario["second_mortgage_interest"] = String(
+                Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
+                  100
+              );
+            }
+            if (this.state.firstLoanScenario["points"]) {
+              this.state.firstLoanScenario["points"] = String(
+                Number(this.state.firstLoanScenario["points"]) / 100
+              );
+            }
+            if (this.state.firstLoanScenario["second_mortgage_points"]) {
+              this.state.firstLoanScenario["second_mortgage_points"] = String(
+                Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+              );
+            }
+            if(this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id){
+              FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )
+            }else{
+              FRMMortgageCreateFirst(this.state.firstLoanScenario);
+            }
+          }
+        
         // FRMMortgageCreateFirst(this.state.firstLoanScenario);
       } else if (
         !this.state.radioValue &&
@@ -334,7 +360,7 @@ export class PropertyMortgageHOC extends Component {
           FRMMortgageCreateSecond(this.state.secondLoanScenario);
         }
 
-        // FRMMortgageCreateSecond(this.state.secondLoanScenario);
+    
 
       } else if (
         this.state.radioValue &&
