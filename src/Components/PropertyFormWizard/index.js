@@ -400,7 +400,14 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
-  
+      console.log(this.state)
+      if(this.state.propertyInfo.homepriceGrowthValidationError || 
+        this.state.propertyInfo.downpaymentnewValidationError ||
+        this.state.propertyInfo.annualPropertytaxValidationError || 
+        this.state.propertyInfo.homeownerInsuranceValidationError  
+        ){
+          NotificationManager.error("Error", "Validation Error");
+        }else{
 
       this.setState({
         activeStep: newActiveStep,
@@ -446,6 +453,8 @@ export class StepperComponent extends Component {
         );
         // SurveyCreate(this.props.location.surveyData);
       }
+        }
+
     } else if (this.state.activeStep === 1) {
       const personal_finance_data = JSON.parse(
         localStorage.getItem("personal_finance_array")
