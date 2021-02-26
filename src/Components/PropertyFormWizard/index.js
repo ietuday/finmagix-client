@@ -408,67 +408,82 @@ export class StepperComponent extends Component {
       ) {
         NotificationManager.error("Error", "Validation Error");
       } else {
+        console.log(this.state.propertyInfo)
+        debugger
+        if (
+          this.state.propertyInfo.property_price &&
+          this.state.propertyInfo.downpayment_amount &&
+          this.state.propertyInfo.annual_property_tax &&
+          this.state.propertyInfo.home_owner_insurance
+        ) {
+          this.setState({
+            activeStep: newActiveStep,
+          });
+          this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)
 
-        this.setState({
-          activeStep: newActiveStep,
-        });
-        this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)
+          if (localStorage.getItem('addressData')) {
 
-        if (localStorage.getItem('addressData')) {
+            const addressData = JSON.parse(localStorage.getItem('addressData'))
+            await this.setState((prevState) => {
+              let propertyInfo = Object.assign({}, prevState.propertyInfo);
+              propertyInfo.house_address = addressData.house_address;
+              propertyInfo.house_state = addressData.house_state;
+              propertyInfo.house_zip_code = addressData.house_zip_code;
+              return { propertyInfo }
+            })
+          }
 
-          const addressData = JSON.parse(localStorage.getItem('addressData'))
-          await this.setState((prevState) => {
-            let propertyInfo = Object.assign({}, prevState.propertyInfo);
-            propertyInfo.house_address = addressData.house_address;
-            propertyInfo.house_state = addressData.house_state;
-            propertyInfo.house_zip_code = addressData.house_zip_code;
-            return { propertyInfo }
-          })
-        }
+          if (this.state.propertyInfo.is_update) {
+            this.state.propertyInfo["id"] = JSON.parse(
+              localStorage.getItem("property_id")
+            );
+            // localStorage.setItem('no_of_bathrooms', this.state.propertyInfo.no_of_bathrooms)
+            // localStorage.setItem('no_of_bedrooms', this.state.propertyInfo.no_of_bedrooms)
+            PropertyInfoUpdate(
+              this.state.propertyInfo,
+              this.onSuccessHouseInfo,
+              this.onFailureHouseInfo
+            );
+          } else {
+            // localStorage.setItem('no_of_bathrooms', this.state.propertyInfo.no_of_bathrooms)
+            // localStorage.setItem('no_of_bedrooms', this.state.propertyInfo.no_of_bedrooms)
+            PropertyInfoCreate(
+              this.state.propertyInfo,
+              this.onSuccessHouseInfo,
+              this.onFailureHouseInfo
+            );
+          }
 
-        if (this.state.propertyInfo.is_update) {
-          this.state.propertyInfo["id"] = JSON.parse(
-            localStorage.getItem("property_id")
-          );
-          // localStorage.setItem('no_of_bathrooms', this.state.propertyInfo.no_of_bathrooms)
-          // localStorage.setItem('no_of_bedrooms', this.state.propertyInfo.no_of_bedrooms)
-          PropertyInfoUpdate(
-            this.state.propertyInfo,
-            this.onSuccessHouseInfo,
-            this.onFailureHouseInfo
-          );
+          if (this.props.location.surveyData) {
+            this.props.location.surveyData.property_obj = localStorage.getItem(
+              "property_id"
+            );
+          }
         } else {
-          // localStorage.setItem('no_of_bathrooms', this.state.propertyInfo.no_of_bathrooms)
-          // localStorage.setItem('no_of_bedrooms', this.state.propertyInfo.no_of_bedrooms)
-          PropertyInfoCreate(
-            this.state.propertyInfo,
-            this.onSuccessHouseInfo,
-            this.onFailureHouseInfo
-          );
-        }
-
-        if (this.props.location.surveyData) {
-          this.props.location.surveyData.property_obj = localStorage.getItem(
-            "property_id"
-          );
-          // SurveyCreate(this.props.location.surveyData);
+          NotificationManager.error('Validation error', 'Please fill required fields')
         }
       }
 
     } else if (this.state.activeStep === 1) {
-      const personal_finance_data = JSON.parse(
-        localStorage.getItem("personal_finance_array")
-      );
-      personal_finance_data.marginal_tax_rate = String(
-        Number(personal_finance_data.marginal_tax_rate)
-      );
-      localStorage.setItem(
-        "personal_finance_array",
-        JSON.stringify(personal_finance_data)
-      ); 
-      this.setState({
-        activeStep: newActiveStep,
-      });
+      console.log(this.state)
+      if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments){
+        const personal_finance_data = JSON.parse(
+          localStorage.getItem("personal_finance_array")
+        );
+        personal_finance_data.marginal_tax_rate = String(
+          Number(personal_finance_data.marginal_tax_rate)
+        );
+        localStorage.setItem(
+          "personal_finance_array",
+          JSON.stringify(personal_finance_data)
+        );
+        this.setState({
+          activeStep: newActiveStep,
+        });
+      }else{
+        NotificationManager.error('Validation error', 'Please fill required fields')
+      }
+
 
     } else if (this.state.activeStep === 2) {
       this.setState({
