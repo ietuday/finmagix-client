@@ -237,7 +237,13 @@ export class StepperComponent extends Component {
         let personalFinance = Object.assign({}, prevState.personalFinance);
         personalFinance = data;
         personalFinance.property_obj = localStorage.getItem("property_id");
-        return { personalFinance };
+        let personalFinanceUpdate = Object.assign(
+          {},
+          prevState.personalFinanceUpdate
+        );
+        personalFinanceUpdate = data;
+        personalFinanceUpdate.property_obj = localStorage.getItem("property_id");
+        return { personalFinance, personalFinanceUpdate };
       });
   };
   handleRentvsBuyData(data) {
@@ -409,7 +415,6 @@ export class StepperComponent extends Component {
         NotificationManager.error("Error", "Validation Error");
       } else {
         console.log(this.state.propertyInfo)
-        debugger
         if (
           this.state.propertyInfo.property_price &&
           this.state.propertyInfo.downpayment_amount &&
@@ -466,7 +471,7 @@ export class StepperComponent extends Component {
 
     } else if (this.state.activeStep === 1) {
       console.log(this.state)
-      if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments){
+      if(this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments){
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
         );
@@ -480,6 +485,21 @@ export class StepperComponent extends Component {
         this.setState({
           activeStep: newActiveStep,
         });
+      }else if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments){
+        const personal_finance_data = JSON.parse(
+          localStorage.getItem("personal_finance_array")
+        );
+        personal_finance_data.marginal_tax_rate = String(
+          Number(personal_finance_data.marginal_tax_rate)
+        );
+        localStorage.setItem(
+          "personal_finance_array",
+          JSON.stringify(personal_finance_data)
+        );
+        this.setState({
+          activeStep: newActiveStep,
+        });
+       
       }else{
         NotificationManager.error('Validation error', 'Please fill required fields')
       }
