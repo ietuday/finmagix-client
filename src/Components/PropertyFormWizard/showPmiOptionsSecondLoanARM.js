@@ -180,7 +180,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
     if(event.target.name == "second_mortgage_points_percentage"){
       if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
         this.setState({
-          pointsValidationError: "Is the input for points accurate?"
+          pointsValidationError: "Points cannot exceed 5%"
         }) 
       }else{
         this.setState({
@@ -361,7 +361,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
               onChange={this.handleChange}
             /> */}
 
-            <NumberFormat
+<NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="second_mortgage_points_percentage"
@@ -378,12 +378,12 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
                 });
               }}
             />
-            {this.state.pointsValidationError}
+          {this.state.pointsValidationError}  
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
-            {/* <span className="get-started-label">Closing costs</span> */}
+          
             <span className="get-started-label">Closing costs</span>
             <div className="tooltip-img">
               <img src={quss} className="tool-img"></img>
@@ -422,7 +422,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
                 });
               }}
             />
-            {this.state.second_mortgage_closing_costs}
+            {this.state.closingCostsValidationError}
           </MDBCol>
         </MDBRow>
       </div>

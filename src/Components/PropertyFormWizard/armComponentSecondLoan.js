@@ -88,7 +88,8 @@ export class ARMComponentSecondLoan extends Component {
       interestrateValidationError: "",
       closingCostsValidationError:"",
       interestOnlyPeriodValidationError: "",
-      property_downpayment: ""
+      property_downpayment: "",
+      pointsValidationError: ""
     };
     // this.validators = ArmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -310,6 +311,19 @@ export class ARMComponentSecondLoan extends Component {
         })
       }
 
+    }
+
+    if(event.target.name == "points_percentage"){
+      if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+        this.setState({
+          pointsValidationError: "Points cannot exceed 5%"
+        }) 
+      }else{
+        this.setState({
+          pointsValidationError: ""
+        }) 
+      }
+      
     }
 
 
@@ -749,10 +763,47 @@ export class ARMComponentSecondLoan extends Component {
           </MDBCol>
 
         </MDBRow>
-        {/* {displayValidationErrors(
-          this.validators,
-          "first_interest_rate_adj_cap"
-        )} */}
+        <MDBRow className="margin20">
+          <MDBCol md="12">
+            <span className="get-started-label">Ceiling interest rate</span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img"></img>
+              <span className="tooltip-img-text">
+                This is the maximum interest rate that a lender can charge for
+                an ARM. If the index rate on the loan continues to go up, the
+                interest rate on the ARM can go up. The ceiling interest rate
+                caps the maximum interest a lender can charge
+              </span>
+            </div>
+            <br />
+            {/* <Input
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="ceiling_interest_rate"
+              value={this.state.ceiling_interest_rate}
+              onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="ceiling_interest_rate_percentage"
+              value={this.state.ceiling_interest_rate_percentage}
+              onChange={this.handleChange}
+              // thousandSeparator={true}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  ceiling_interest_rate: value,
+                });
+                await this.setState({
+                  ceiling_interest_rate_percentage: formattedValue,
+                });
+              }}
+            />
+          </MDBCol>
+        </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Floor interest rate</span>
@@ -796,49 +847,7 @@ export class ARMComponentSecondLoan extends Component {
           </MDBCol>
 
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "floor_interest_rate")} */}
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">Ceiling interest rate</span>
-            <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
-              <span className="tooltip-img-text">
-                This is the maximum interest rate that a lender can charge for
-                an ARM. If the index rate on the loan continues to go up, the
-                interest rate on the ARM can go up. The ceiling interest rate
-                caps the maximum interest a lender can charge
-              </span>
-            </div>
-            <br />
-            {/* <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="ceiling_interest_rate"
-              value={this.state.ceiling_interest_rate}
-              onChange={this.handleChange}
-            /> */}
 
-            <NumberFormat
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="ceiling_interest_rate_percentage"
-              value={this.state.ceiling_interest_rate_percentage}
-              onChange={this.handleChange}
-              // thousandSeparator={true}
-              suffix={"%"}
-              onValueChange={async (values) => {
-                const { formattedValue, value } = values;
-                await this.setState({
-                  ceiling_interest_rate: value,
-                });
-                await this.setState({
-                  ceiling_interest_rate_percentage: formattedValue,
-                });
-              }}
-            />
-          </MDBCol>
-        </MDBRow>
-        {/* {displayValidationErrors(this.validators, "ceiling_interest_rate")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Period cap</span>
@@ -958,6 +967,7 @@ export class ARMComponentSecondLoan extends Component {
                     });
                   }}
                 />
+                {this.state.pointsValidationError}
               </MDBCol>
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "points")} */}
