@@ -220,7 +220,7 @@ export class SecondLoanScenario extends Component {
 if(event.target.name == "points_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
     this.setState({
-      pointsValidationError: "Is the input for points accurate?"
+      pointsValidationError: "Points cannot exceed 5%"
     }) 
   }else{
     this.setState({

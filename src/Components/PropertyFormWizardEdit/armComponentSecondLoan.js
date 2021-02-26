@@ -211,7 +211,8 @@ export class ARMComponentSecondLoan extends Component {
       interestrateValidationError: "",
       closingCostsValidationError:"",
       interestOnlyPeriodValidationError:"",
-      property_downpayment: ""
+      property_downpayment: "",
+      pointsValidationError: ""
       
     };
     this.handleChange = this.handleChange.bind(this);
@@ -431,7 +432,18 @@ export class ARMComponentSecondLoan extends Component {
       }
 
     }
-
+    if(event.target.name == "points_percentage"){
+      if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+        this.setState({
+          pointsValidationError: "Points cannot exceed 5%"
+        }) 
+      }else{
+        this.setState({
+          pointsValidationError: ""
+        }) 
+      }
+      
+    }
 
     await this.setState({
       [event.target.name]: event.target.value,
@@ -1063,6 +1075,7 @@ export class ARMComponentSecondLoan extends Component {
                     });
                   }}
                 />
+                {this.state.pointsValidationError}
               </MDBCol>
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "points")} */}

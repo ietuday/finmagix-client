@@ -298,8 +298,8 @@ function HomeAffordability(props) {
             <MDBRow>
               <MDBCol md="12">
                 <div className="tab_contnt">
-                  <h6 className="box">Housing Ratio 28%</h6>
-                  <h6 className="box-1">Housing Ratio 36%</h6>
+                 
+                
                 </div>
               </MDBCol>
             </MDBRow>
@@ -327,19 +327,19 @@ function HomeAffordability(props) {
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-green"></span>
-                    <div>Affordable</div>
+                    <div>Housing to Income Ratio less than equal to 36%</div>
                   </div>
                 </MDBCol>
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-yelow"></span>
-                    <div>High, but Affordable</div>
+                    <div>Housing to Income Ratio 37-42%</div>
                   </div>
                 </MDBCol>
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-red"></span>
-                    <div>May not be affordable</div>
+                    <div>High, may not be affordable 42%</div>
                   </div>
                 </MDBCol>
               </MDBCol>
@@ -493,8 +493,7 @@ function HomeAffordability(props) {
             <MDBRow>
               <MDBCol md="12">
                 <div className="tab_contnt">
-                  <h6 className="box">Housing Ratio 28%</h6>
-                  <h6 className="box-1">Housing Ratio 36%</h6>
+   
                 </div>
               </MDBCol>
             </MDBRow>
@@ -522,19 +521,19 @@ function HomeAffordability(props) {
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-green"></span>
-                    <div>Affordable</div>
+                    <div>Housing to Income Ratio less than equal to 36%</div>
                   </div>
                 </MDBCol>
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-yelow"></span>
-                    <div>High, but Affordable</div>
+                    <div>Housing to Income Ratio 37-42%</div>
                   </div>
                 </MDBCol>
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-red"></span>
-                    <div>  May not be affordable</div>
+                    <div> High, may not be affordable 42%</div>
                   </div>
                 </MDBCol>
               </MDBCol>
