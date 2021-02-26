@@ -485,10 +485,10 @@ export class GetStartedHouseInfo extends Component {
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
-          <MDBCol md="7" sm="6" xs="6" size="6">
+          <MDBCol md="12" sm="12" xs="12" size="12">
             <span className="get-started-long-question">Bedrooms</span>
           </MDBCol>
-          <MDBCol md="6" sm="6" xs="6" size="6">
+          <MDBCol md="12" sm="12" xs="12" size="12">
             {/* <NumberSpinner
               count={this.state.no_of_bedrooms}
               onRoomCount={this.handleBedroomRoomCount}
@@ -511,10 +511,10 @@ export class GetStartedHouseInfo extends Component {
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
-          <MDBCol md="7" sm="6" xs="6" size="6">
+          <MDBCol md="12" sm="12" xs="12" size="12">
             <span className="get-started-long-question">Bathrooms</span>
           </MDBCol>
-          <MDBCol md="6" sm="6" xs="6" size="6">
+          <MDBCol md="12" sm="12" xs="12" size="12">
             {/* <NumberSpinner
               count={this.state.no_of_bathrooms}
               onRoomCount={this.handleBathRoomCount}
