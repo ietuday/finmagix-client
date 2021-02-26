@@ -83,6 +83,7 @@ export class FirstLoanScenario extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
+    console.log(props)
   }
 
   checkproperty() {
@@ -104,7 +105,7 @@ export class FirstLoanScenario extends Component {
           })
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             this.setState({
-              mortgage_program_type: propertyDetail.first_frm.mortage_program_type,
+              mortgage_program_type: this.state.mortgage_program_type,
               mortgage_program_type_value: 1,
               loan_amount: propertyDetail.first_frm.loan_amount,
               loan_amount_number: propertyDetail.first_frm.loan_amount,
@@ -577,7 +578,7 @@ export class FirstLoanScenario extends Component {
             </ToggleButtonGroup>
           </MDBCol>
         </MDBRow>
-        {console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", this.state, this.props)}
+        
         {(this.state.mortgage_program_type_value == 2 || this.state.mortgage_program_type == 2) ? (
           <ARMComponentFirstLoan
             downpayment={this.state.downpaymentCheck}
@@ -796,7 +797,7 @@ export class FirstLoanScenario extends Component {
               <br />
               {console.log(this.props)}
 
-              {this.props.downpayment === "lessthan20" ? (
+              {this.state.downpaymentCheck === "lessthan20" ? (
 
                 <ShowPmiOptionsFirstLoan
                   handleDownpaymentData={this.handleDownpaymentData}

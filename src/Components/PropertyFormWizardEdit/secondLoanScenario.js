@@ -83,7 +83,7 @@ export class SecondLoanScenario extends Component {
           })
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             this.setState({
-              mortgage_program_type:propertyDetail.second_frm.mortage_program_type,
+              mortgage_program_type:this.state.mortgage_program_type,
               mortgage_program_type_value: this.state.mortgage_program_type,
               loan_amount:propertyDetail.second_frm.loan_amount,
               loan_amount_number:propertyDetail.second_frm.loan_amount,
@@ -252,18 +252,7 @@ if (event.target.name == "closing_costs") {
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    // if (
-    //   (this.state.mortgage_program_type_value === 1 &&
-    //     name === "loan_amount") ||
-    //   name === "interest" ||
-    //   name === "points" ||
-    //   name == "closing_costs"
-    // ) {
-    //   updateValidators(this.validators, event.target.name, event.target.value);
-    //   const validationErrorLength = this.validators[event.target.name].errors
-    //     .length;
-    //   this.props.getValidationError(validationErrorLength);
-    // }
+
     const dataObject = {
       mortage_program_type: this.state.mortage_program_type,
       mortgage_program_type_value: 1,
@@ -350,7 +339,7 @@ if (event.target.name == "closing_costs") {
         second_mortgage_closing_costs: this.state.second_mortgage_closing_costs,
         property_obj: localStorage.getItem("property_id"),
         is_update: this.state.is_update,
-        id: this.state.id,
+        id: this.state.id, 
         property_price: this.state.property_price,
         interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
         interestrateValidationError: this.state.interestrateValidationError,
@@ -623,7 +612,7 @@ if (event.target.name == "closing_costs") {
               ? showInterestOnlyPeriodButton
               : null}
             <br />
-            {this.props.downpayment === "lessthan20" ? (
+            {this.state.downpaymentCheck === "lessthan20" ? (
               <ShowPmiOptionsSecondLoan
                 handleDownpaymentData={this.handleDownpaymentData}
                 frmResponse = {this.props.FrmGetResponse}

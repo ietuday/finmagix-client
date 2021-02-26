@@ -372,7 +372,7 @@ export class PropertyMortgageHOC extends Component {
   
     } = this.props;
     console.log(this.state)
-    debugger
+    
     // if(this.state.firstLoanScenario && (this.state.firstLoanScenario.mortgage_program_type === 1 || this.state.firstLoanScenario.mortgage_program_type == "FIRST")){
     //   FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.props.FrmMortgageFirstEditId)
     // }
@@ -522,7 +522,7 @@ export class PropertyMortgageHOC extends Component {
     // ARMMortgageCreateSecond(this.state.secondLoanScenario);
         } else if (
           !this.state.radioValue &&
-          this.state.firstLoanScenario.mortgage_program_type_value === 1
+          this.state.secondLoanScenario.mortgage_program_type_value === 1
         ) {
           if(
             this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
