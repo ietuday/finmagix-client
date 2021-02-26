@@ -22,8 +22,8 @@ const { baseURL } = config;
 
 
 export class ARMComponentSecondLoan extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       mortgage_program_type: 2,
       loan_amount: this.props.ArmGetResponse
@@ -313,7 +313,7 @@ export class ARMComponentSecondLoan extends Component {
   async handleChange(event) {
     const { name } = event.target;
     event.persist();
-
+    
     if (event.target.name == "loan_amount") {
       if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
         this.setState({
@@ -325,196 +325,6 @@ export class ARMComponentSecondLoan extends Component {
         })
       }
     }
-
-
-    if (event.target.name == "initial_interest_rate_percentage") {
-      if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
-        this.setState({
-          interestrateValidationError: "Is the interest rate input accurate?"
-        })
-      } else {
-        this.setState({
-          interestrateValidationError: ""
-        })
-      }
-
-    }
-
-    if (event.target.name == "first_interest_rate_adj_cap_percentage") {
-      if (this.state.initial_interest_rate > event.target.value) {
-        this.setState({
-          rateAdjustmentCapValidationError: "First interest rate adjustment cap cannot be less than initial interest rate"
-        })
-      } else {
-        this.setState({
-          rateAdjustmentCapValidationError: ""
-        })
-      }
-    }
-
-    if (event.target.name == "floor_interest_rate_percentage") {
-      if (this.state.initial_interest_rate < event.target.value) {
-        this.setState({
-          floorinterestrateValidationError: "Floor interest rate cannot be greater than initial interest rate"
-        })
-      } else {
-        this.setState({
-          floorinterestrateValidationError: ""
-        })
-      }
-    }
-
-
-    if (event.target.name == "period_cap_percentage") {
-      if (parseInt(String(event.target.value).replace(/%/g, '')) > 3) {
-        this.setState({
-          periodCapValidationError: "Is the period cap input accurate?"
-        })
-      } else {
-        this.setState({
-          periodCapValidationError: ""
-        })
-      }
-
-    }
-
-    if (event.target.name == "rate_add_percentage") {
-      if (parseInt(String(event.target.value).replace(/%/g, '')) > 3) {
-        this.setState({
-          rateAddValidationError: "Is the rate add input accurate?"
-        })
-      } else {
-        this.setState({
-          rateAddValidationError: ""
-        })
-      }
-
-    }
-
-    if (event.target.name == "closing_costs") {
-      if (
-        parseInt(String(event.target.value).replace(/,/g, "")) >
-        (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
-          100
-      ) {
-        this.setState({
-          closingCostsValidationError:
-            " Closing costs cannot exceed 5% of loan amount",
-        });
-      } else {
-        this.setState({
-          closingCostsValidationError: "",
-        });
-      }
-    }
-
-    if (event.target.name == "interest_only_period") {
-      if (this.state.loan_term < event.target.value) {
-        this.setState({
-          interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
-        })
-      } else {
-        this.setState({
-          interestOnlyPeriodValidationError: ""
-        })
-      }
-
-    }
-
-
-    await this.setState({
-      [event.target.name]: event.target.value,
-    });
-
-    // if (
-    //   (this.state.mortgage_program_type_value === 2 &&
-    //     name === "loan_amount") ||
-    //   // name === "initial_interest_rate" ||
-    //   name === "first_interest_rate_adj_cap" ||
-    //   name === "floor_interest_rate" ||
-    //   name === "ceiling_interest_rate" ||
-    //   name === "period_cap" ||
-    //   name === "rate_add" ||
-    //   name === "points" ||
-    //   name == "closing_costs"
-    // ) {
-    //   updateValidators(this.validators, event.target.name, event.target.value);
-    //   const validationErrorLength = this.validators[event.target.name].errors
-    //     .length;
-    //   this.props.getArmValidationError(validationErrorLength);
-    // }
-    const dataObject = {
-      mortage_program_type: this.state.mortage_program_type,
-      mortgage_program_type_value: 2,
-      loan_amount: this.state.loan_amount,
-      loan_term: this.state.loan_term,
-      select_loan_program: this.state.select_loan_program,
-      initial_interest_rate: this.state.initial_interest_rate,
-      first_interest_rate_adj_cap: this.state.first_interest_rate_adj_cap,
-      floor_interest_rate: this.state.floor_interest_rate,
-      ceiling_interest_rate: this.state.ceiling_interest_rate,
-      period_cap: this.state.period_cap,
-      rate_add: this.state.rate_add,
-      points: this.state.points,
-      closing_costs: this.state.closing_costs,
-      interest_only_option: this.state.interest_only_option,
-      interest_only_period: this.state.interest_only_period,
-      property_obj: localStorage.getItem("property_id"),
-      secondmtgpmichoice1: this.state.secondmtgpmichoice1,
-      PMIfirst1: this.state.PMIfirst1,
-      loanamountsecond1: this.state.loanamountsecond1,
-      Pmtsecond1: this.state.Pmtsecond1,
-      ARMtype1: this.state.ARMtype1,
-      ARM1rate: this.state.ARM1rate,
-      ARMfirstadjin1: this.state.ARMfirstadjin1,
-      floor1: this.state.floor1,
-      ceiling1: this.state.ceiling1,
-      periodicadjcap1: this.state.periodicadjcap1,
-      rateadd1: this.state.rateadd1,
-      secondmtgpmichoice2: this.state.secondmtgpmichoice2,
-      PMIfirst2: this.state.PMIfirst2,
-      loanamountsecond2: this.state.loanamountsecond2,
-      Pmtsecond2: this.state.Pmtsecond2,
-      ARM2rate: this.state.ARM2rate,
-      ARMfirstadjin2: this.state.ARMfirstadjin2,
-      floor2: this.state.floor2,
-      ceiling2: this.state.ceiling2,
-      periodicadjcap2: this.state.periodicadjcap2,
-      rateadd2: this.state.rateadd2,
-      is_update: this.state.is_update,
-      id: this.state.id,
-      property_price: this.state.property_price,
-      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
-      interestrateValidationError: this.state.interestrateValidationError,
-      pointsValidationError: this.state.pointsValidationError,
-      loan_amount_validation_error: this.state.loan_amount_validation_error,
-      closingCostsValidationError: this.state.closingCostsValidationError,
-      property_downpayment: this.state.property_downpayment,
-      rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
-      floorinterestrateValidationError:this.state.floorinterestrateValidationError,
-      periodCapValidationError:this.state.periodCapValidationError,
-      rateAddValidationError:this.state.rateAddValidationError,
-    };
-    this.props.handleArmData(dataObject);
-  }
-
-  handleDownpaymentData = async (event) => {
-    const { name } = event.target;
-    event.persist();
-
-    if (event.target.name == "loan_amount") {
-      if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
-        this.setState({
-          loan_amount_validation_error: "Cannot exceed Property price"
-        })
-      } else {
-        this.setState({
-          loan_amount_validation_error: ""
-        })
-      }
-    }
-
-
     if (event.target.name == "initial_interest_rate_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
         this.setState({
@@ -591,31 +401,44 @@ export class ARMComponentSecondLoan extends Component {
 
     }
 
+    if (event.target.name == "closing_costs") {
+      if (
+        parseInt(String(event.target.value).replace(/,/g, "")) >
+        (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
+          100
+      ) {
+        this.setState({
+          closingCostsValidationError:
+            " Closing costs cannot exceed 5% of loan amount",
+        });
+      } else {
+        this.setState({
+          closingCostsValidationError: "",
+        });
+      }
+    }
+
+      
+    if (event.target.name == "interest_only_period") {
+      if (this.state.loan_term < event.target.value) {
+        this.setState({
+          interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
+        })
+      } else {
+        this.setState({
+          interestOnlyPeriodValidationError: ""
+        })
+      }
+
+    }
 
 
     await this.setState({
       [event.target.name]: event.target.value,
     });
 
-    // if (
-    //   (this.state.mortgage_program_type_value === 2 &&
-    //     name === "loan_amount") ||
-    //   // name === "initial_interest_rate" ||
-    //   name === "first_interest_rate_adj_cap" ||
-    //   name === "floor_interest_rate" ||
-    //   name === "ceiling_interest_rate" ||
-    //   name === "period_cap" ||
-    //   name === "rate_add" ||
-    //   name === "points" ||
-    //   name == "closing_costs"
-    // ) {
-    //   updateValidators(this.validators, event.target.name, event.target.value);
-    //   const validationErrorLength = this.validators[event.target.name].errors
-    //     .length;
-    //   this.props.getArmValidationError(validationErrorLength);
-    // }
     const dataObject = {
-      mortage_program_type: this.state.mortage_program_type,
+      mortgage_program_type: this.state.mortgage_program_type,
       mortgage_program_type_value: 2,
       loan_amount: this.state.loan_amount,
       loan_term: this.state.loan_term,
@@ -667,7 +490,174 @@ export class ARMComponentSecondLoan extends Component {
       rateAddValidationError:this.state.rateAddValidationError,
     };
     this.props.handleArmData(dataObject);
-  };
+    // this.props.handleArmData(dataObject);
+  }
+
+  handleDownpaymentData = async (data) => {
+    
+    await this.setState({
+      pmi: data.pmi_amount,
+      second_mortgage_loan_amount: data.second_mortgage_loan_amount,
+      second_mortgage_loan_term: data.second_mortgage_loan_term,
+      second_mortgage_interest: data.second_mortgage_interest,
+      second_mortgage_points: data.second_mortgage_points,
+      second_mortgage_closing_costs: data.second_mortgage_closing_costs,
+      secondmtgpmichoice1:
+        data && data.secondmtgpmichoice1 ? data.secondmtgpmichoice1 : "",
+      PMIfirst1: data && data.PMIfirst1 ? data.PMIfirst1 : "",
+      loanamountsecond1:
+        data && data.loanamountsecond1 ? data.loanamountsecond1 : "",
+      Pmtsecond1: data && data.Pmtsecond1 ? data.Pmtsecond1 : "",
+      ARMtype1: data && data.ARMtype1 ? data.ARMtype1 : "",
+      ARM1rate: data && data.ARM1rate ? data.ARM1rate : "",
+      ARMfirstadjin1: data && data.ARMfirstadjin1 ? data.ARMfirstadjin1 : "",
+      floor1: data && data.floor1 ? data.floor1 : "",
+      ceiling1: data && data.ceiling1 ? data.ceiling1 : "",
+      periodicadjcap1: data && data.periodicadjcap1 ? data.periodicadjcap1 : "",
+      rateadd1: data && data.rateadd1 ? data.rateadd1 : "",
+      secondmtgpmichoice2:
+        data && data.secondmtgpmichoice2 ? data.secondmtgpmichoice2 : "",
+      PMIfirst2: data && data.PMIfirst2 ? data.PMIfirst2 : "",
+      loanamountsecond2:
+        data && data.loanamountsecond2 ? data.loanamountsecond2 : "",
+      Pmtsecond2: data && data.Pmtsecond2 ? data.Pmtsecond2 : "",
+      ARM2rate: data && data.ARM2rate ? data.ARM2rate : "",
+      ARMfirstadjin2: data && data.ARMfirstadjin2 ? data.ARMfirstadjin2 : "",
+      floor2: data && data.floor2 ? data.floor2 : "",
+      ceiling2: data && data.ceiling2 ? data.ceiling2 : "",
+      periodicadjcap2: data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
+      rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
+      is_update: this.state.is_update,
+      id: this.state.id,
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment,
+      rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+      floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+      periodCapValidationError:this.state.periodCapValidationError,
+      rateAddValidationError:this.state.rateAddValidationError,
+    });
+    if (data.PMIOptions === "PMI") {
+      const dataWithPmi = {
+        mortgage_program_type: this.state.mortgage_program_type,
+        mortgage_program_type_value: 2,
+        loan_amount: this.state.loan_amount,
+        loan_term: this.state.loan_term,
+        select_loan_program: this.state.select_loan_program,
+        initial_interest_rate: this.state.initial_interest_rate,
+        first_interest_rate_adj_cap: this.state.first_interest_rate_adj_cap,
+        floor_interest_rate: this.state.floor_interest_rate,
+        ceiling_interest_rate: this.state.ceiling_interest_rate,
+        period_cap: this.state.period_cap,
+        rate_add: this.state.rate_add,
+        points: this.state.points,
+        closing_costs: this.state.closing_costs,
+        interest_only_option: this.state.interest_only_option,
+        interest_only_period: this.state.interest_only_period,
+        pmi: this.state.pmi,
+        property_obj: localStorage.getItem("property_id"),
+        secondmtgpmichoice1: this.state.secondmtgpmichoice1,
+        PMIfirst1: this.state.PMIfirst1,
+        loanamountsecond1: this.state.loanamountsecond1,
+        Pmtsecond1: this.state.Pmtsecond1,
+        ARMtype1: this.state.ARMtype1,
+        ARM1rate: this.state.ARM1rate,
+        ARMfirstadjin1: this.state.ARMfirstadjin1,
+        floor1: this.state.floor1,
+        ceiling1: this.state.ceiling1,
+        periodicadjcap1: this.state.periodicadjcap1,
+        rateadd1: this.state.rateadd1,
+        secondmtgpmichoice2: this.state.secondmtgpmichoice2,
+        PMIfirst2: this.state.PMIfirst2,
+        loanamountsecond2: this.state.loanamountsecond2,
+        Pmtsecond2: this.state.Pmtsecond2,
+        ARM2rate: this.state.ARM2rate,
+        ARMfirstadjin2: this.state.ARMfirstadjin2,
+        floor2: this.state.floor2,
+        ceiling2: this.state.ceiling2,
+        periodicadjcap2: this.state.periodicadjcap2,
+        rateadd2: this.state.rateadd2,
+        is_update: this.state.is_update,
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment,
+        rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+        floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+        periodCapValidationError:this.state.periodCapValidationError,
+        rateAddValidationError:this.state.rateAddValidationError,
+      };
+      this.props.handleArmData(dataWithPmi);
+    } else {
+      const dataWithSecondMortgage = {
+    mortgage_program_type: this.state.mortgage_program_type,
+        mortgage_program_type_value: 2,
+        loan_amount: this.state.loan_amount,
+        loan_term: this.state.loan_term,
+        select_loan_program: this.state.select_loan_program,
+        initial_interest_rate: this.state.initial_interest_rate,
+        first_interest_rate_adj_cap: this.state.first_interest_rate_adj_cap,
+        floor_interest_rate: this.state.floor_interest_rate,
+        ceiling_interest_rate: this.state.ceiling_interest_rate,
+        period_cap: this.state.period_cap,
+        rate_add: this.state.rate_add,
+        points: this.state.points,
+        closing_costs: this.state.closing_costs,
+        interest_only_option: this.state.interest_only_option,
+        interest_only_period: this.state.interest_only_period,
+        second_mortgage_loan_amount: this.state.second_mortgage_loan_amount,
+        second_mortgage_loan_term: this.state.second_mortgage_loan_term,
+        second_mortgage_interest: this.state.second_mortgage_interest,
+        second_mortgage_points: this.state.second_mortgage_points,
+        second_mortgage_closing_costs: this.state.second_mortgage_closing_costs,
+        property_obj: localStorage.getItem("property_id"),
+        secondmtgpmichoice1: this.state.secondmtgpmichoice1,
+        PMIfirst1: this.state.PMIfirst1,
+        loanamountsecond1: this.state.loanamountsecond1,
+        Pmtsecond1: this.state.Pmtsecond1,
+        ARMtype1: this.state.ARMtype1,
+        ARM1rate: this.state.ARM1rate,
+        ARMfirstadjin1: this.state.ARMfirstadjin1,
+        floor1: this.state.floor1,
+        ceiling1: this.state.ceiling1,
+        periodicadjcap1: this.state.periodicadjcap1,
+        rateadd1: this.state.rateadd1,
+        secondmtgpmichoice2: this.state.secondmtgpmichoice2,
+        PMIfirst2: this.state.PMIfirst2,
+        loanamountsecond2: this.state.loanamountsecond2,
+        Pmtsecond2: this.state.Pmtsecond2,
+        ARM2rate: this.state.ARM2rate,
+        ARMfirstadjin2: this.state.ARMfirstadjin2,
+        floor2: this.state.floor2,
+        ceiling2: this.state.ceiling2,
+        periodicadjcap2: this.state.periodicadjcap2,
+        rateadd2: this.state.rateadd2,
+        is_update: this.state.is_update,
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment,
+        rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+        floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+        periodCapValidationError:this.state.periodCapValidationError,
+        rateAddValidationError:this.state.rateAddValidationError,
+      };
+      
+      this.props.handleArmData(dataWithSecondMortgage);
+    };
+  }
 
   showInterestOnlyPeriodChange = (event, value) => {
     this.setState({
@@ -1147,9 +1137,7 @@ export class ARMComponentSecondLoan extends Component {
           : null}
         <br />
 
-        {this.props.ArmGetResponse.pmi !== "null" ||
-        this.props.ArmGetResponse.second_mortgage_loan_amount !== "null" ||
-        this.props.downpayment === "lessthan20" ? (
+        {this.props.downpayment === "lessthan20" ? (
           <ShowPmiOptionsSecondLoanARM
             handleDownpaymentData={this.handleDownpaymentData}
             loanAmount={this.state.loan_amount}

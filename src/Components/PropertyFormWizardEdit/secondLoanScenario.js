@@ -58,7 +58,8 @@ export class SecondLoanScenario extends Component {
       property_price: "",
       loan_amount_validation_error: "",
       closingCostsValidationError: "",
-      property_downpayment: ""
+      property_downpayment: "",
+      downpaymentCheck: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
@@ -83,7 +84,7 @@ export class SecondLoanScenario extends Component {
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             this.setState({
               mortgage_program_type:propertyDetail.second_frm.mortage_program_type,
-              mortgage_program_type_value: 1,
+              mortgage_program_type_value: this.state.mortgage_program_type,
               loan_amount:propertyDetail.second_frm.loan_amount,
               loan_amount_number:propertyDetail.second_frm.loan_amount,
               loan_term: propertyDetail.second_frm.loan_term,
@@ -144,6 +145,21 @@ export class SecondLoanScenario extends Component {
               loan_amount_validation_error: this.state.loan_amount_validation_error,
               closingCostsValidationError: this.state.closingCostsValidationError
             })
+          }
+
+          if(this.state.property_price){
+            let twenty_percent_of_property_price =
+              (this.state.property_price * 20) / 100;
+            if (this.state.property_downpayment < twenty_percent_of_property_price) {
+              this.setState({
+                downpaymentCheck: "lessthan20"
+              })
+            } else {
+              this.setState({
+                downpaymentCheck: "greaterthan20"
+              })
+              // downpayment = "greaterthan20";
+            }
           }
           this.props.handleSecondloanMortgageInfo(this.state, null);
         })
@@ -267,7 +283,8 @@ if (event.target.name == "closing_costs") {
       pointsValidationError: this.state.pointsValidationError,
       loan_amount_validation_error: this.state.loan_amount_validation_error,
       closingCostsValidationError: this.state.closingCostsValidationError,
-      property_downpayment: this.state.property_downpayment
+      property_downpayment: this.state.property_downpayment,
+      downpaymentCheck: this.state.downpaymentCheck,
     };
     this.props.handleSecondloanMortgageInfo(dataObject, null);
   }
@@ -287,7 +304,8 @@ if (event.target.name == "closing_costs") {
       pointsValidationError: this.state.pointsValidationError,
       loan_amount_validation_error: this.state.loan_amount_validation_error,
       closingCostsValidationError: this.state.closingCostsValidationError,
-      property_downpayment: this.state.property_downpayment
+      property_downpayment: this.state.property_downpayment,
+      downpaymentCheck: this.state.downpaymentCheck,
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -310,7 +328,8 @@ if (event.target.name == "closing_costs") {
         pointsValidationError: this.state.pointsValidationError,
         loan_amount_validation_error: this.state.loan_amount_validation_error,
         closingCostsValidationError: this.state.closingCostsValidationError,
-        property_downpayment: this.state.property_downpayment
+        property_downpayment: this.state.property_downpayment,
+        downpaymentCheck: this.state.downpaymentCheck,
       };
       this.props.handleSecondloanMortgageInfo(dataWithPmi, null);
     } else {
@@ -338,7 +357,8 @@ if (event.target.name == "closing_costs") {
         pointsValidationError: this.state.pointsValidationError,
         loan_amount_validation_error: this.state.loan_amount_validation_error,
         closingCostsValidationError: this.state.closingCostsValidationError,
-        property_downpayment: this.state.property_downpayment
+        property_downpayment: this.state.property_downpayment,
+        downpaymentCheck: this.state.downpaymentCheck,
       };
       this.props.handleSecondloanMortgageInfo(dataWithSecondMortgage, null);
     }
@@ -431,9 +451,11 @@ if (event.target.name == "closing_costs") {
             </ToggleButtonGroup>
           </MDBCol>
         </MDBRow>
+
+       
         {this.state.mortgage_program_type === 2 && this.props.armDisabled !== true ? (
           <ARMComponentSecondLoan
-            downpayment={this.props.downpayment}
+            downpayment={this.state.downpaymentCheck}
             handleArmData={this.handleArmData}
             ArmGetResponse = {this.props.ArmGetResponse}
             getArmValidationError={this.getArmValidationError}
@@ -601,7 +623,7 @@ if (event.target.name == "closing_costs") {
               ? showInterestOnlyPeriodButton
               : null}
             <br />
-            {this.props.FrmGetResponse.pmi !== "null" || (this.props.FrmGetResponse.second_mortgage_loan_amount !=="null") || this.props.downpayment === "lessthan20" ? (
+            {this.props.downpayment === "lessthan20" ? (
               <ShowPmiOptionsSecondLoan
                 handleDownpaymentData={this.handleDownpaymentData}
                 frmResponse = {this.props.FrmGetResponse}

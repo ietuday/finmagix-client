@@ -44,6 +44,7 @@ export class PropertyMortgageHOC extends Component {
       FirstloanscenarioValidationErrors: 0,
       SecondloanscenarioValidationErrors: 0,
     };
+    console.log(props)
   }
   getFirstloanScenarioValidationError = (error) => {
     this.setState({
@@ -371,6 +372,7 @@ export class PropertyMortgageHOC extends Component {
   
     } = this.props;
     console.log(this.state)
+    debugger
     // if(this.state.firstLoanScenario && (this.state.firstLoanScenario.mortgage_program_type === 1 || this.state.firstLoanScenario.mortgage_program_type == "FIRST")){
     //   FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.props.FrmMortgageFirstEditId)
     // }
@@ -564,7 +566,7 @@ export class PropertyMortgageHOC extends Component {
             }
         } else if (
           !this.state.radioValue &&
-          this.state.firstLoanScenario.mortgage_program_type_value === 2
+          this.state.secondLoanScenario.mortgage_program_type_value === 2
         ) {
   
    
