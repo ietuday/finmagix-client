@@ -78,7 +78,8 @@ export class FirstLoanScenario extends Component {
       property_price: "",
       loan_amount_validation_error: "",
       closingCostsValidationError: "",
-      property_downpayment: ""
+      property_downpayment: "",
+     
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()

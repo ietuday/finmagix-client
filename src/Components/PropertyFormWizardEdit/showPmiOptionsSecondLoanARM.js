@@ -181,7 +181,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
     if(event.target.name == "second_mortgage_points_percentage"){
       if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
         this.setState({
-          pointsValidationError: "Is the input for points accurate?"
+          pointsValidationError: " Points cannot exceed 5%"
         }) 
       }else{
         this.setState({
