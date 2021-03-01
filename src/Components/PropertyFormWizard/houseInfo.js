@@ -265,7 +265,6 @@ export class GetStartedHouseInfo extends Component {
       house_state: data.house_state,
       house_zip_code: data.house_zip_code,
     });
-    localStorage.setItem("changeAddress", false);
   };
   handleBack = () => {
     this.props.history.push("/select-modules");
@@ -328,8 +327,7 @@ export class GetStartedHouseInfo extends Component {
       <Fragment>
         <MDBRow className="margin20">
           <MDBCol>
-          
-            {this.state.mapContainer}
+          <MapWithASearchBox  />
           </MDBCol> 
         </MDBRow>
         <br />
