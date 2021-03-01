@@ -397,8 +397,8 @@ export class PropertyMortgageHOC extends Component {
             NotificationManager.error('Validation error', 'Please fill required fields')
           }
         }
-        this.setState({ onClick: !this.state.onClick });
       }
+      this.setState({ onClick: !this.state.onClick });
     } else {
       NotificationManager.error("Please Validate Fields", "Error");
     }
@@ -734,10 +734,12 @@ export class PropertyMortgageHOC extends Component {
             NotificationManager.error('Validation error', 'Please fill required fields')
           }
         }
-        this.props.handleContinue();
       } else {
         NotificationManager.error("Please Validate Fields", "Error");
       }
+      this.props.handleContinue();
+    }else {
+      NotificationManager.error("Please Validate Fields", "Error");
     }
   };
   toggle = () => {
