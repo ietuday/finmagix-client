@@ -246,9 +246,16 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           className="property-finance-logo"
                         />
                         <div>
-                        <NumberFormat value={this.state.personalFinanace
+                        {/* <NumberFormat value={this.state.personalFinanace
                             ? this.state[this.state.personalFinanace.fico_score_range]
-                            : 0} displayType={'text'} thousandSeparator={true} />
+                            : 0} displayType={'text'}/> */}
+                            {
+                            this.state.personalFinanace && this.state.personalFinanace.fico_score_range
+                             ? 
+                             this.state[this.state.personalFinanace.fico_score_range]
+                             : 
+                             ""
+                             }
                           </div>
                       </div>
                     </MDBCol>

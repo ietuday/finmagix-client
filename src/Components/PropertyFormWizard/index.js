@@ -186,7 +186,7 @@ export class StepperComponent extends Component {
       this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
 
     ) {
-      NotificationManager.error('Error', 'Validation Error')
+      return NotificationManager.error('Error', 'Validation Error')
     }
     else {
       this.setState({
@@ -412,7 +412,7 @@ export class StepperComponent extends Component {
         this.state.propertyInfo.annualPropertytaxValidationError ||
         this.state.propertyInfo.homeownerInsuranceValidationError
       ) {
-        NotificationManager.error("Error", "Validation Error");
+        return NotificationManager.error("Error", "Validation Error");
       } else {
         console.log(this.state.propertyInfo)
         if (
@@ -465,7 +465,7 @@ export class StepperComponent extends Component {
             );
           }
         } else {
-          NotificationManager.error('Validation error', 'Please fill required fields')
+          return NotificationManager.error('Validation error', 'Please fill required fields')
         }
       }
 
@@ -501,7 +501,7 @@ export class StepperComponent extends Component {
         });
        
       }else{
-        NotificationManager.error('Validation error', 'Please fill required fields')
+        return NotificationManager.error('Validation error', 'Please fill required fields')
       }
 
 

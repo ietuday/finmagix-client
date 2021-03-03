@@ -327,19 +327,19 @@ function HomeAffordability(props) {
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-green"></span>
-                    <div>Housing to Income Ratio less than equal to 36%</div>
+                    <div><strong>Affordable</strong>: Housing to Income Ratio less than equal to 36%</div>
                   </div>
                 </MDBCol>
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-yelow"></span>
-                    <div>Housing to Income Ratio 37-42%</div>
+                    <div><strong>High But affordable</strong>: Housing to Income Ratio 37-42%</div>
                   </div>
                 </MDBCol>
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-red"></span>
-                    <div>High, may not be affordable 42%</div>
+                    <div><strong>High, may not be affordable</strong>: Greater than 42%</div>
                   </div>
                 </MDBCol>
               </MDBCol>

@@ -75,7 +75,7 @@ export class PropertyMortgageHOC extends Component {
     const { FRMMortgageCreateFirst, ARMMortgageCreateFirst, FRMMortgageUpdateFirst,
       ARMMortgageUpdateFirst } = this.props;
     console.log(this.state)
-    debugger
+    
     if (
       this.state.firstLoanScenario.firstloanarmvalidationerror === 0 ||
       this.state.FirstloanscenarioValidationErrors === 0
@@ -416,7 +416,7 @@ export class PropertyMortgageHOC extends Component {
       ARMMortgageUpdateSecond,
 
     } = this.props;
-    debugger
+   
     if (
       this.state.secondLoanScenario.secondloanarmvalidationerror === 0 ||
       this.state.SecondloanscenarioValidationErrors === 0

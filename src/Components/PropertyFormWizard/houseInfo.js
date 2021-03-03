@@ -36,6 +36,7 @@ export class GetStartedHouseInfo extends Component {
       downpayment_amount: "",
       downpayment_amount_number: "",
       stay_duration: "",
+      stay_duration_number: "",
       no_of_bedrooms: localStorage.getItem("no_of_bedrooms")
         ? localStorage.getItem("no_of_bedrooms")
         : 0,
@@ -60,7 +61,8 @@ export class GetStartedHouseInfo extends Component {
       downpaymentnewValidationError: "",
       annualPropertytaxValidationError: "",
       homeownerInsuranceValidationError: "",
-      mapContainer: <MapWithASearchBox  />
+      mapContainer: <MapWithASearchBox />,
+      annualHomeOwnerAssociationValidationError: ""
     };
     this.validators = HouseInfoValidator;
     resetValidators(this.validators);
@@ -109,14 +111,16 @@ export class GetStartedHouseInfo extends Component {
             home_price_growth_percentage:
               Number(propertyDetail.home_price_growth) * 100,
             is_update: true,
-            mapContainer:propertyDetail.id  ? 
-              <MapWithASearchBox 
-                hosue_info_house_address = {propertyDetail.house_address}
-                hosue_info_house_state = {propertyDetail.house_state}
-                hosue_info_house_zip_code = {propertyDetail.house_zip_code}  
-              /> 
-              : 
-              <MapWithASearchBox  />
+            mapContainer: propertyDetail.id ? (
+              <MapWithASearchBox
+                hosue_info_house_address={propertyDetail.house_address}
+                hosue_info_house_state={propertyDetail.house_state}
+                hosue_info_house_zip_code={propertyDetail.house_zip_code}
+              />
+            ) : (
+              <MapWithASearchBox />
+            ),
+            annualHomeOwnerAssociationValidationError: ""
           });
           this.handleBedroomRoomCount(this.state.no_of_bedrooms);
           this.handleBathRoomCount(this.state.no_of_bathrooms);
@@ -130,15 +134,14 @@ export class GetStartedHouseInfo extends Component {
           } else {
             downpayment = "greaterthan20";
           }
-          console.log(this.state)
+          console.log(this.state);
           this.props.handleHouseInfo(downpayment, this.state);
         })
         .catch((err) => {});
-    }else{
+    } else {
       // this.setState({
       //   mapContainer: <MapWithASearchBox  />
       // })
-      
     }
   }
 
@@ -210,6 +213,23 @@ export class GetStartedHouseInfo extends Component {
       }
     }
 
+    if (event.target.name == "annual_home_owner_association_dues") {
+      if (
+        parseInt(String(event.target.value).replace(/,/g, "")) >
+        (parseFloat(String(this.state.property_price).replace(/,/g, "")) * 5) /
+          100
+      ) {
+        this.setState({
+          annualHomeOwnerAssociationValidationError:
+            "Annual Home owner association dues cannot exceed 5% of home price",
+        });
+      } else {
+        this.setState({
+          annualHomeOwnerAssociationValidationError: "",
+        });
+      }
+    }
+
     await this.setState({
       [event.target.name]: event.target.value,
     });
@@ -258,7 +278,6 @@ export class GetStartedHouseInfo extends Component {
     // localStorage.setItem("no_of_bathrooms", count);
   }
 
-  
   selectAddress = (data) => {
     this.setState({
       house_address: data.house_address,
@@ -278,7 +297,7 @@ export class GetStartedHouseInfo extends Component {
         "administrative_area_level_2" === addressArray[i].types[0]
       ) {
         city = addressArray[i].long_name;
-        // localStorage.getItem("addressData") 
+        // localStorage.getItem("addressData")
         // ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
         // : null
         return city;
@@ -292,7 +311,7 @@ export class GetStartedHouseInfo extends Component {
         for (let j = 0; j < addressArray[i].types.length; j++) {
           if (addressArray[i].types[j] == "postal_code") {
             area = addressArray[i].long_name;
-            // localStorage.getItem("addressData") 
+            // localStorage.getItem("addressData")
             // ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
             // : null
             return area;
@@ -310,7 +329,7 @@ export class GetStartedHouseInfo extends Component {
           "administrative_area_level_1" === addressArray[i].types[0]
         ) {
           state = addressArray[i].long_name;
-          // localStorage.getItem("addressData") 
+          // localStorage.getItem("addressData")
           //   ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
           //   : null
           return state;
@@ -327,8 +346,8 @@ export class GetStartedHouseInfo extends Component {
       <Fragment>
         <MDBRow className="margin20">
           <MDBCol>
-          <MapWithASearchBox  />
-          </MDBCol> 
+            <MapWithASearchBox />
+          </MDBCol>
         </MDBRow>
         <br />
         <br />
@@ -473,12 +492,29 @@ export class GetStartedHouseInfo extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Duration of stay"
               value={this.state.stay_duration}
               name="stay_duration"
               onChange={this.handleChange}
+            /> */}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Duration of stay"
+              value={this.state.stay_duration}
+              name="stay_duration"
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  stay_duration_number: formattedValue,
+                });
+                await this.setState({
+                  stay_duration: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
@@ -505,7 +541,6 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -531,7 +566,6 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -644,8 +678,10 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
+
+            {this.state.annualHomeOwnerAssociationValidationError}
           </MDBCol>
-          {/* {displayValidationErrors(this.validators, "annual_home_owner_association_dues")} */}
+         
         </MDBRow>
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
