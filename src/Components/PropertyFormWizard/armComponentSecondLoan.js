@@ -136,7 +136,7 @@ export class ARMComponentSecondLoan extends Component {
               closing_costs: propertyDetail.second_arm.closing_costs,
               closing_costs_number: propertyDetail.second_arm.closing_costs,
               interest_only_option: propertyDetail.second_arm.interest_only_period ? "Y" : "N",
-              interest_only_period: propertyDetail.second_arm.interest_only_period,
+              interest_only_period: propertyDetail.second_arm.interest_only_period ? propertyDetail.second_arm.interest_only_period : 0,
               pmi: propertyDetail.second_arm.pmi,
               second_mortgage_loan_amount: propertyDetail.second_arm.second_mortgage_loan_amount,
               second_mortgage_loan_term: propertyDetail.second_arm.second_mortgage_loan_term,

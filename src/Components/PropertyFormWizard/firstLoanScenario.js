@@ -125,7 +125,7 @@ export class FirstLoanScenario extends Component {
               closing_costs: propertyDetail.first_frm.closing_costs,
               closing_costs_number: propertyDetail.first_frm.closing_costs,
               interest_only_option: propertyDetail.first_frm.interest_only_period ? "Y" : "N",
-              interest_only_period: propertyDetail.first_frm.interest_only_period,
+              interest_only_period: propertyDetail.first_frm.interest_only_period ? propertyDetail.first_frm.interest_only_period : 0,
               downpayment: 0,
               pmi: propertyDetail.first_frm.mpi,
               select_loan_program: "",

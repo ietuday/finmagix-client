@@ -138,7 +138,7 @@ export class ARMComponentFirstLoan extends Component {
               closing_costs: propertyDetail.first_arm.closing_costs,
               closing_costs_number:propertyDetail.first_arm.closing_costs,
               interest_only_option: propertyDetail.first_arm.interest_only_period ? "Y" : "N",
-              interest_only_period: propertyDetail.first_arm.interest_only_period,
+              interest_only_period: propertyDetail.first_arm.interest_only_period ? propertyDetail.first_arm.interest_only_period : 0,
               pmi: propertyDetail.first_arm.pmi,
               second_mortgage_loan_amount: propertyDetail.first_arm.second_mortgage_loan_amount,
               second_mortgage_loan_term: propertyDetail.first_arm.second_mortgage_loan_term,
