@@ -148,7 +148,7 @@ export class GetStartedHouseInfo extends Component {
     event.persist();
     let downpayment;
 
-    if (event.target.name == "home_price_growth_percentage") {
+    if (event.target.name === "home_price_growth_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, "")) > 20) {
         this.setState({
           homepriceGrowthValidationError: "Home Price growth cannot exceed 20%",
@@ -160,7 +160,7 @@ export class GetStartedHouseInfo extends Component {
       }
     }
 
-    if (event.target.name == "downpayment_amount") {
+    if (event.target.name === "downpayment_amount") {
       if (
         this.state.property_price <
         parseInt(String(event.target.value).replace(/,/g, ""))
@@ -176,7 +176,7 @@ export class GetStartedHouseInfo extends Component {
       }
     }
 
-    if (event.target.name == "annual_property_tax") {
+    if (event.target.name === "annual_property_tax") {
       if (
         parseInt(String(event.target.value).replace(/,/g, "")) >
         (parseFloat(String(this.state.property_price).replace(/,/g, "")) * 10) /
@@ -193,7 +193,7 @@ export class GetStartedHouseInfo extends Component {
       }
     }
 
-    if (event.target.name == "home_owner_insurance") {
+    if (event.target.name === "home_owner_insurance") {
       if (
         parseInt(String(event.target.value).replace(/,/g, "")) >
         (parseFloat(String(this.state.property_price).replace(/,/g, "")) * 2) /
@@ -210,7 +210,7 @@ export class GetStartedHouseInfo extends Component {
       }
     }
 
-    if (event.target.name == "annual_home_owner_association_dues") {
+    if (event.target.name === "annual_home_owner_association_dues") {
       if (
         parseInt(String(event.target.value).replace(/,/g, "")) >
         (parseFloat(String(this.state.property_price).replace(/,/g, "")) * 5) /
@@ -244,9 +244,9 @@ export class GetStartedHouseInfo extends Component {
       name === "downpayment_amount" ||
       name === "home_price_growth" ||
       name === "area_of_the_house" ||
-      name == "annual_property_tax" ||
-      name == "annual_home_owner_association_dues" ||
-      name == "home_owner_insurance"
+      name === "annual_property_tax" ||
+      name === "annual_home_owner_association_dues" ||
+      name === "home_owner_insurance"
     ) {
       console.log(name);
 
@@ -306,7 +306,7 @@ export class GetStartedHouseInfo extends Component {
     for (let i = 0; i < addressArray.length; i++) {
       if (addressArray[i].types[0]) {
         for (let j = 0; j < addressArray[i].types.length; j++) {
-          if (addressArray[i].types[j] == "postal_code") {
+          if (addressArray[i].types[j] === "postal_code") {
             area = addressArray[i].long_name;
             // localStorage.getItem("addressData")
             // ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
@@ -360,7 +360,7 @@ export class GetStartedHouseInfo extends Component {
               What is the price of the property?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the price of the house requested by the seller or the
                 current appraised value of the house. If both prices are
@@ -402,7 +402,7 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Home Price Growth</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the growth in the home price per year for the duration of
                 stay.
@@ -444,7 +444,7 @@ export class GetStartedHouseInfo extends Component {
               What is the downpayment amount?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text"> Enter your downpayment.</span>
             </div>
             <br />
@@ -481,7 +481,7 @@ export class GetStartedHouseInfo extends Component {
               How long do you intend to stay in this house?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the number of years you intend to stay in this house, or
                 the number of years after which you intend to refinance the
@@ -601,7 +601,7 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the annual property tax in number not %. Typically these
                 range between 1-2% of the home price.{" "}
@@ -640,7 +640,7 @@ export class GetStartedHouseInfo extends Component {
             <span className="get-started-label">
               Monthly Home Owner's Association dues (if applicable)
               <div className="tooltip-img">
-                <img src={quss} className="tool-img"></img>
+                <img src={quss} className="tool-img" alt="" />
                 <span className="tooltip-img-text">
                   Enter the monthly association dues that you expect to pay the
                   home owner's association of your residential complex. These

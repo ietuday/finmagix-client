@@ -361,10 +361,7 @@ export class PropertyMortgageHOC extends Component {
   goToNextPage = () => {
  
     const {
-      FRMMortgageCreateFirst,
-      ARMMortgageCreateFirst,
-      FRMMortgageCreateSecond,
-      ARMMortgageCreateSecond,
+ 
       FRMMortgageUpdateFirst,
       ARMMortgageUpdateFirst,
       FRMMortgageUpdateSecond,

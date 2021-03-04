@@ -564,7 +564,7 @@ export class ARMComponentFirstLoan extends Component {
         <MDBCol md="12">
           <span className="get-started-label">Interest only period</span>
           <div className="tooltip-img">
-            <img src={quss} className="tool-img"></img>
+            <img src={quss} className="tool-img"alt="" />
             <span className="tooltip-img-text">
               This is the # of years for which you won't pay principal on the
               loan and will pay only the interest amount on a loan{" "}
@@ -588,7 +588,7 @@ export class ARMComponentFirstLoan extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Loan Amount</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 Enter the amount you plan to borrow for this mortgage{" "}
               </span>
@@ -701,7 +701,7 @@ export class ARMComponentFirstLoan extends Component {
               First interest rate adjustment cap
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 This is the maximum interest that you can be charged after an
                 ARM mortgages resets its interest rate for the first time. For
@@ -748,7 +748,7 @@ export class ARMComponentFirstLoan extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Floor interest rate</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 This is the lowest interest rate or 'floor' for an ARM. If the
                 index rate continues to decrease, the 'floor interest rate'
@@ -791,7 +791,7 @@ export class ARMComponentFirstLoan extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Ceiling interest rate</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 This is the maximum interest rate that a lender can charge for
                 an ARM. If the index rate on the loan continues to go up, the
@@ -832,7 +832,7 @@ export class ARMComponentFirstLoan extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Period cap</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 This is the maximum amount an interest rate can increase by when
                 the ARM interest rate resets. For e.g. on a 5/1 ARM mortgage,
@@ -877,7 +877,7 @@ export class ARMComponentFirstLoan extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Rate add</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 This field allows you to model an increase or a decrease in your
                 index ARM rate every year
@@ -916,7 +916,7 @@ export class ARMComponentFirstLoan extends Component {
               <MDBCol md="12">
                 <span className="get-started-label">Points</span>
                 <div className="tooltip-img">
-                  <img src={quss} className="tool-img"></img>
+                  <img src={quss} className="tool-img"alt="" />
                   <span className="tooltip-img-text">
                     Input the points you may need to pay on your loan expressed
                     as a % of the loan amount. For e.g. 2 points is 2% of the
@@ -959,7 +959,7 @@ export class ARMComponentFirstLoan extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Closing costs</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 These are fees charged by the lender to the borrower for
                 offering the loan. These may include home appraisal fees, credit

@@ -124,7 +124,7 @@ export class TaxReviewEdit extends Component {
             <MDBCol md="6" size="6">
               <div className="">
                 <span className="get-started-label">Tax deductive investment interest</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">Investment interest is interest paid on money you borrowed
              that is allocable to property held for investment. It doesn't include any interest 
              allocable to passive activities or to securities that generate tax-exempt income.

@@ -132,19 +132,19 @@ export class ShowDetailedReports extends Component {
             survey: {
               whenbuyhome: Number(surveyData.data.data[0]["when_buy_home"]),
               Homeidentified:
-                surveyData.data.data[0]["home_identified"] == true ? "Y" : "N",
+                surveyData.data.data[0]["home_identified"] === true ? "Y" : "N",
               Lenderidentified:
-                surveyData.data.data[0]["lender_identified"] == true
+                surveyData.data.data[0]["lender_identified"] === true
                   ? "Y"
                   : "N",
               Realtoridentified:
-                surveyData.data.data[0]["realtor_identified"] == true
+                surveyData.data.data[0]["realtor_identified"] === true
                   ? "Y"
                   : "N",
               Veteranstatus:
-                surveyData.data.data[0]["veteran_status"] == true ? "Y" : "N",
+                surveyData.data.data[0]["veteran_status"] === true ? "Y" : "N",
               Firsttimehomebuyer:
-                surveyData.data.data[0]["first_time_home_buyer"] == true
+                surveyData.data.data[0]["first_time_home_buyer"] === true
                   ? "Y"
                   : "N",
             },
@@ -270,11 +270,11 @@ export class ShowDetailedReports extends Component {
   calculateScreen7() {
     return {
       Taxmoduleoption:
-        JSON.parse(localStorage.getItem("is_tax_selected")) == false
+        JSON.parse(localStorage.getItem("is_tax_selected")) === false
           ? "N"
           : "Y",
       RvBuymoduleoption:
-        JSON.parse(localStorage.getItem("is_rent_vs_buy_selected")) == false
+        JSON.parse(localStorage.getItem("is_rent_vs_buy_selected")) === false
           ? "N"
           : "Y",
     };

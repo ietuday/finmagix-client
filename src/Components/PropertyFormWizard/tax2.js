@@ -154,7 +154,7 @@ export class Tax2 extends Component {
               Average loan balance for grandfathered debt
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 If you took out a mortgage on your home before October 14, 1987,
                 or you refinanced such a mortgage, it may qualify as
@@ -203,7 +203,7 @@ export class Tax2 extends Component {
               Average loan balance for home acquisition debt
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Home acquisition debt is a mortgage you took out after October
                 13, 1987, to buy, build, or substantially improve a qualified

@@ -352,7 +352,7 @@ export class GetStartedHouseInfo extends Component {
               What is the price of the property?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the price of the house requested by the seller or the
                 current appraised value of the house. If both prices are
@@ -394,7 +394,7 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Home Price Growth</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the growth in the home price per year for the duration of
                 stay.
@@ -436,7 +436,7 @@ export class GetStartedHouseInfo extends Component {
               What is the downpayment amount?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text"> Enter your downpayment.</span>
             </div>
             <br />
@@ -473,7 +473,7 @@ export class GetStartedHouseInfo extends Component {
               How long do you intend to stay in this house?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the number of years you intend to stay in this house, or
                 the number of years after which you intend to refinance the
@@ -593,7 +593,7 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the annual property tax in number not %. Typically these
                 range between 1-2% of the home price.{" "}
@@ -632,7 +632,7 @@ export class GetStartedHouseInfo extends Component {
             <span className="get-started-label">
               Monthly Home Owner's Association dues (if applicable)
               <div className="tooltip-img">
-                <img src={quss} className="tool-img"></img>
+                <img src={quss} className="tool-img" alt="" />
                 <span className="tooltip-img-text">
                   Enter the monthly association dues that you expect to pay the
                   home owner's association of your residential complex. These

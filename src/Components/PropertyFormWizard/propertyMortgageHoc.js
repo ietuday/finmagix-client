@@ -71,7 +71,7 @@ export class PropertyMortgageHOC extends Component {
       return { secondLoanScenario };
     });
   };
-  handleNext = () => {
+  handleNext = async () => {
     const { FRMMortgageCreateFirst, ARMMortgageCreateFirst, FRMMortgageUpdateFirst,
       ARMMortgageUpdateFirst } = this.props;
     console.log(this.state)
@@ -98,15 +98,25 @@ export class PropertyMortgageHOC extends Component {
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
-              if (checkSum != Number(this.state.firstLoanScenario.property_price)) {
+              if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
                 return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
 
               }
             }
             if (this.state.firstLoanScenario["interest"]) {
-              this.state.firstLoanScenario["interest"] = String(
-                Number(this.state.firstLoanScenario["interest"]) / 100
-              );
+              await this.setState((prevState) => {
+                let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                firstLoanScenario.interest = String(
+                  Number(this.state.firstLoanScenario["interest"]) / 100
+                );
+                return { firstLoanScenario };
+              });
+              // this.setState({
+              //   firstLoanScenario.interest: String(
+              //     Number(this.state.firstLoanScenario["interest"]) / 100
+              //   );
+              // })
+              
             }
             if (this.state.firstLoanScenario["second_mortgage_interest"]) {
               this.state.firstLoanScenario["second_mortgage_interest"] = String(
@@ -406,12 +416,10 @@ export class PropertyMortgageHOC extends Component {
   };
   handleSubmit = () => {
     const {
-      FRMMortgageCreateFirst,
-      ARMMortgageCreateFirst,
+
       FRMMortgageCreateSecond,
       ARMMortgageCreateSecond,
-      FRMMortgageUpdateFirst,
-      ARMMortgageUpdateFirst,
+ 
       FRMMortgageUpdateSecond,
       ARMMortgageUpdateSecond,
 

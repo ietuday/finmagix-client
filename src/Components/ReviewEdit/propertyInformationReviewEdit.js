@@ -140,7 +140,7 @@ export class PropertyInformationReviewEdit extends Component {
             <MDBCol md="6" size="6">
               <div className="">
                 <span className="get-started-label">Downpayment Amount</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">Money you intend to pay i.s. 
             difference between the purchase price and loan amount.</span>
             </div>
@@ -227,7 +227,7 @@ export class PropertyInformationReviewEdit extends Component {
             <MDBCol md="6" size="6">
               <div className="">
                 <span className="get-started-label">Annual Property Tax</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">The annual property tax in number not %. 
             Typically these range between 1-2% of the home price. </span>
             </div>

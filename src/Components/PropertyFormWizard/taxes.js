@@ -439,7 +439,7 @@ export class Taxes extends Component {
               Eligible medical and dental expenses
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 If you itemize your deductions for a taxable year on Schedule A
                 (Form 1040 or 1040-SR), Itemized Deductions PDF, you may be able
@@ -485,7 +485,7 @@ export class Taxes extends Component {
               Eligible state and local taxes or general sales taxes
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 If you itemize deductions on Schedule A, your total deduction
                 for state and local income, sales and property taxes is limited
@@ -529,7 +529,7 @@ export class Taxes extends Component {
               Other state,local or personal taxes
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Deductible personal property taxes are those based only on the
                 value of personal property such as a boat or car. The tax must
@@ -571,7 +571,7 @@ export class Taxes extends Component {
               Tax deductive investment interest
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 Investment interest is interest paid on money you borrowed that
                 is allocable to property held for investment. It doesn't include
@@ -683,7 +683,7 @@ export class Taxes extends Component {
               Average loan balance for grandfathered debt
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 If you took out a mortgage on your home before October 14, 1987,
                 or you refinanced such a mortgage, it may qualify as
@@ -728,7 +728,7 @@ export class Taxes extends Component {
               Average loan balance for home acquisition debt
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
                 Home acquisition debt is a mortgage you took out after October
                 13, 1987, to buy, build, or substantially improve a qualified

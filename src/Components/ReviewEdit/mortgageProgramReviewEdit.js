@@ -108,14 +108,7 @@ export class MortgageProgramReviewEdit extends Component {
   };
   render() {
     const {
-      FRMMortgageCreateResponseFirst,
-      FRMMortgageCreateResponseSecond,
-      ARMMortgageCreateResponseFirst,
-      ARMMortgageCreateResponseSecond,
-      FRMMortgageGetFirst,
-      FRMMortgageGetSecond,
-      ARMMortgageGetFirst,
-      ARMMortgageGetSecond,
+
     } = this.props;
     if (this.state.goToEditFirstFrm) {
       return (
@@ -274,7 +267,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Points</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
 <span className="tooltip-img-text">Input the points you may need to pay on your loan expressed as a % of the loan amount.
  For e.g. 2 points is 2% of the loan amount. Points are levied to cover origination costs or reduce interest rate. </span>
 </div>
@@ -298,7 +291,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Closing costs</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">These are fees charged by the lender to the
              borrower for offering the loan. These may include home appraisal fees, 
              credit appraisal fees etc. Do not include any 'points' you have to pay on 
@@ -597,7 +590,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Floor interest rate</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">
             This is the lowest interest rate or 'floor' for an ARM. If the index rate continues to decrease, the 'floor interest rate' gives the lender a floor interest that the lender can levy even if the calculated interest rate is below that floor
             </span>
@@ -642,7 +635,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Period cap</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">
             This is the maximum amount an interest rate can increase by when the ARM interest rate resets. For e.g. on a 5/1 ARM mortgage, after 5 years, the interest rate can reset every year '1'. The period cap denotes that maximum amount it can go up by when it resets every year after the first 5 years.
             </span>
@@ -667,7 +660,7 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="">
                         <span className="get-started-label">Rate add</span>
 
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">
             This is the maximum interest rate that a lender can charge for an ARM. If the index rate on the loan continues to go up, the interest rate on the ARM can go up. The ceiling interest rate caps the maximum interest a lender can charge
             </span>
@@ -692,7 +685,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Points</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
 <span className="tooltip-img-text">Input the points you may need to pay on your loan expressed as a % of the loan amount.
  For e.g. 2 points is 2% of the loan amount. Points are levied to cover origination costs or reduce interest rate. </span>
 </div>
@@ -716,7 +709,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Closing costs</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">These are fees charged by the lender to the
              borrower for offering the loan. These may include home appraisal fees, 
              credit appraisal fees etc. Do not include any 'points' you have to pay on 
@@ -971,7 +964,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Points</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
 <span className="tooltip-img-text">Input the points you may need to pay on your loan expressed as a % of the loan amount.
  For e.g. 2 points is 2% of the loan amount. Points are levied to cover origination costs or reduce interest rate. </span>
 </div>
@@ -995,7 +988,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Closing costs</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">These are fees charged by the lender to the
              borrower for offering the loan. These may include home appraisal fees, 
              credit appraisal fees etc. Do not include any 'points' you have to pay on 
@@ -1353,7 +1346,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Rate add</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">
             This field allows you to model an increase or a decrease in your index ARM rate every year  
             </span>
@@ -1378,7 +1371,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Points</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
 <span className="tooltip-img-text">Input the points you may need to pay on your loan expressed as a % of the loan amount.
  For e.g. 2 points is 2% of the loan amount. Points are levied to cover origination costs or reduce interest rate. </span>
 </div>
@@ -1402,7 +1395,7 @@ export class MortgageProgramReviewEdit extends Component {
                     <MDBCol md="6" size="6">
                       <div className="">
                         <span className="get-started-label">Closing costs</span>
-                        <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                        <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">These are fees charged by the lender to the
              borrower for offering the loan. These may include home appraisal fees, 
              credit appraisal fees etc. Do not include any 'points' you have to pay on 

@@ -274,7 +274,7 @@ export class PersonalFinance extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Monthly debt payments</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Monthly debt payments are all your NON-HOUSING debt payments
                 such as credit cards, car loans etc.{" "}
@@ -319,7 +319,7 @@ export class PersonalFinance extends Component {
               Monthly non-housing expenses
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 These are all of the non-housing expenses except Taxes such as
                 Food, Utilities, Entertainment etc. This input is used to
@@ -362,7 +362,7 @@ export class PersonalFinance extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Marginal tax rate</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Note that we have to build a check here that the interest only
                 period cannot be equal to the loan term or greater than the loan

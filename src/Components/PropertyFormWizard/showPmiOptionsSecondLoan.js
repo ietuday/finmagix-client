@@ -255,7 +255,7 @@ if (event.target.name == "second_mortgage_closing_costs") {
           <MDBCol md="12">
             <span className="get-started-label">Loan Amount</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the amount you plan to borrow for this mortgage{" "}
               </span>
@@ -347,7 +347,7 @@ if (event.target.name == "second_mortgage_closing_costs") {
           <MDBCol md="12">
             <span className="get-started-label">Points</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Input the points you may need to pay on your loan expressed as a
                 % of the loan amount. For e.g. 2 points is 2% of the loan
@@ -389,7 +389,7 @@ if (event.target.name == "second_mortgage_closing_costs") {
             {/* <span className="get-started-label">Closing costs</span> */}
             <span className="get-started-label">Closing costs</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 These are fees charged by the lender to the borrower for
                 offering the loan. These may include home appraisal fees, credit

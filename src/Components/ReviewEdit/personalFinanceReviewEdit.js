@@ -107,7 +107,7 @@ export class PersonalFinanceReviewEdit extends Component {
                 <span className="get-started-label">
                   Your monthly debt payments
                 </span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt=""/>
             <span className="tooltip-img-text">Monthly debt payments are all your NON-HOUSING 
             debt payments such as credit cards, car loans etc. </span>
             </div>
@@ -145,7 +145,7 @@ export class PersonalFinanceReviewEdit extends Component {
                 <span className="get-started-label">
                   Marginal tax Rate
                 </span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt=""/>
             <span className="tooltip-img-text">Note that we have to build a check here that the
              interest only period cannot be equal to the loan term or greater 
              than the loan term. </span>

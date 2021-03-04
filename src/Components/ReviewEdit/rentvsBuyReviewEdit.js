@@ -114,7 +114,7 @@ export class RentvsBuyReviewEdit extends Component {
             <MDBCol md="6" size="6">
               <div className="">
                 <span className="get-started-label">Annual Rent Insurance</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
                   <span className="tooltip-img-text">This is the insurance that covers a rental property. Different landlords may
  require different levels of coverage from a tenant.</span>
                 </div>
@@ -137,7 +137,7 @@ export class RentvsBuyReviewEdit extends Component {
             <MDBCol md="6" size="6">
               <div className="">
                 <span className="get-started-label">Rate of Investment</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
                   <span className="tooltip-img-text">This is your average annualized 'rate of return' on your investments.
               This input is used in the 'rent vs. buy' comparison.</span>
                 </div>

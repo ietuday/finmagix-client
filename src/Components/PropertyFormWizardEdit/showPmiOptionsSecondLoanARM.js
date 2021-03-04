@@ -243,7 +243,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Loan Amount</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+            <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
 <span className="tooltip-img-text">Enter the amount you plan to borrow for this mortgage </span>
 </div>
             <br />
@@ -315,7 +315,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Points</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+            <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
 <span className="tooltip-img-text">Input the points you may need to pay on your loan expressed as a % of the loan amount.
  For e.g. 2 points is 2% of the loan amount. Points are levied to cover origination costs or reduce interest rate. </span>
 </div>
@@ -344,7 +344,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
           <MDBCol md="12">
             {/* <span className="get-started-label">Closing costs</span> */}
             <span className="get-started-label">Closing costs</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+            <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">These are fees charged by the lender to the
              borrower for offering the loan. These may include home appraisal fees, 
              credit appraisal fees etc. Do not include any 'points' you have to pay on 

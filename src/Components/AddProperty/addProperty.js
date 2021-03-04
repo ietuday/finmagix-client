@@ -94,7 +94,7 @@ export class AddProperty extends Component {
               <span className="get-started-label">
                 What is the price of the property? 
                             </span>
-                            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                            <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">Enter the price of the house requested by the seller or the current appraised value of the house.
              If both prices are available, please enter the appraised value of the house.</span>
             </div>
@@ -111,7 +111,7 @@ export class AddProperty extends Component {
           <MDBRow className="margin20">
             <MDBCol md="12">
               <span className="get-started-label">DownPayment Amount</span>
-              <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+              <div className="tooltip-img"><img src={quss} className="tool-img"alt="" />
             <span className="tooltip-img-text"> Enter the amount (Money) you intend to pay i.e. 
             difference between the purchase price and loan amount.</span>
             </div>
@@ -130,7 +130,7 @@ export class AddProperty extends Component {
             <span className="get-started-label">
               How long do you intend to stay in this house?
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+            <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
 <span className="tooltip-img-text">Enter the number of years you intend to stay in this house,
  or the number of years after which you intend to refinance the mortgage on this house. </span>
 </div>
@@ -177,7 +177,7 @@ export class AddProperty extends Component {
           <MDBRow className="margin20">
             <MDBCol md="12">
               <span className="get-started-label">Annual Property Tax</span>
-              <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+              <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">Enter the annual property tax in number not %. 
             Typically these range between 1-2% of the home price. </span>
             </div>
@@ -212,7 +212,7 @@ export class AddProperty extends Component {
               <span className="get-started-label">
               Monthly Home Owner's Association dues (if applicable)
               </span>
-              <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+              <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">Enter the monthly association dues that you expect to pay the home owner's association of your residential complex. 
             These dues are levied for the services or amenities provided by the HOA. </span>
             </div>

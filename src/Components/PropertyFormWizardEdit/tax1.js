@@ -358,7 +358,7 @@ export class Tax1 extends Component {
               Eligible medical and dental expenses
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 If you itemize your deductions for a taxable year on Schedule A
                 (Form 1040 or 1040-SR), Itemized Deductions PDF, you may be able
@@ -408,7 +408,7 @@ export class Tax1 extends Component {
               Eligible state and local taxes or general sales taxes
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 If you itemize deductions on Schedule A, your total deduction
                 for state and local income, sales and property taxes is limited
@@ -455,7 +455,7 @@ export class Tax1 extends Component {
               Other state,local or personal taxes
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Deductible personal property taxes are those based only on the
                 value of personal property such as a boat or car. The tax must
@@ -498,7 +498,7 @@ export class Tax1 extends Component {
               Tax deductive investment interest
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Investment interest is interest paid on money you borrowed that
                 is allocable to property held for investment. It doesn't include
