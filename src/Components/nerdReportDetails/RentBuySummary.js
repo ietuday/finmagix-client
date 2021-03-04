@@ -1,16 +1,13 @@
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import React, { Fragment } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import {
-  MDBBtn,
+
   MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
+
   MDBCol,
   MDBRow,
   MDBContainer,
@@ -18,8 +15,7 @@ import {
 // import { Button } from "@material-ui/core";
 import Header from "../../common/header";
 import "./nerdReportDetails.css";
-import renthouse from "../../assets/images/rent-house.png";
-import buyhouse from "../../assets/images/buy-home.png";
+
 import renthouseactive from "../../assets/images/rent-house_active.png";
 import buyhouseactive from "../../assets/images/buy-home_active.png";
 

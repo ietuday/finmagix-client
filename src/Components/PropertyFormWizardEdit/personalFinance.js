@@ -1,20 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
-import Button from "@material-ui/core/Button";
+
 import RangeSlider from "../../common/RangeSilder";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import NumberFormat from "react-number-format";
 import "react-rangeslider/lib/index.css";
-import PersonaLFinanceValidator from "../validatorRules/PersonalFinanceValidatorRules";
-import { updateValidators } from "../../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
-import DetailedExpenseModal from "../../common/detailedExpense";
+
 import quss from "../../assets/images/que.png";
 
 export class PersonalFinance extends Component {

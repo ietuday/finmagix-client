@@ -1,15 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
 import Axios from "axios";
-import { Input } from "antd";
-import Button from "@material-ui/core/Button";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+
 import NumberFormat from "react-number-format";
 
-import MapContainer from "../../common/googleMap";
+
 import MapWithASearchBox from "../../common/geocode";
-import NumberSpinner from "../../common/inputNumberSpinner";
+
 import { updateValidators } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
 import "../../css/addProperty.css";

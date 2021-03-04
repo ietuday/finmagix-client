@@ -1,4 +1,4 @@
-import { withRouter, Redirect, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 import { MDBContainer } from "mdbreact";
 import React, { Fragment } from "react";
 import { Button } from "@material-ui/core";

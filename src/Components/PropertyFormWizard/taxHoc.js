@@ -7,10 +7,10 @@ import {
   MDBModalHeader,
   MDBModalFooter
 } from "mdbreact";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { tax_create, tax_update } from "../redux/actions/PropertyReport/taxes";
-import { NotificationManager } from "react-notifications";
+
 import { Radio, Input } from "antd";
 import { Button } from "@material-ui/core";
 import { isFormValid } from "../../common/ValidatorFunction";

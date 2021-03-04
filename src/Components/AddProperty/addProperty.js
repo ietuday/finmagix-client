@@ -7,8 +7,7 @@ import { Redirect } from "react-router-dom";
 import "../../css/addProperty.css";
 import { Input } from "antd";
 import MapContainer from "../../common/googleMap";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+
 import NumberSpinner from "../../common/inputNumberSpinner";
 import quss from "../../assets/images/que.png";
 

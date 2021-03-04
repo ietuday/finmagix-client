@@ -4,8 +4,6 @@ import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
 
-import Axios from "axios";
-
 import GetStartedHouseInfo from "../PropertyFormWizard/houseInfo";
 import PersonalFinance from "../PropertyFormWizard/personalFinance";
 import RentvsBuy from "../PropertyFormWizard/rentvsBuy";
@@ -41,9 +39,9 @@ import {
   property_info_update,
   survey_create,
 } from "../redux/actions/PropertyReport/propertyInfo";
-import { isFormValid } from "../../common/ValidatorFunction";
+
 import { connect } from "react-redux";
-import Header from "../../common/header";
+
 import FirstLoanScenario from "./firstLoanScenario";
 import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";

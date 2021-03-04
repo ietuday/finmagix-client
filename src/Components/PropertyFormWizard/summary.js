@@ -6,7 +6,7 @@ import Axios from "axios";
 import Button from "@material-ui/core/Button";
 
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 
 
 import { config } from "../config/default";

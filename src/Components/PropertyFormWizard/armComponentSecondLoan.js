@@ -9,12 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import NumberFormat from "react-number-format";
 import ShowPmiOptionsSecondLoanARM from "./showPmiOptionsSecondLoanARM";
-import ArmMortgageProgramValidator from "../validatorRules/ArmMortgageProgramValidator";
-import { updateValidators } from "../../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
+
 import quss from "../../assets/images/que.png";
 
 import { config } from '../config/default';

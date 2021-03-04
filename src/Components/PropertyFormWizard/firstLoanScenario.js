@@ -8,13 +8,6 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import ShowPmiOptionsFirstLoan from "./showPmiOptionsFirstLoan";
 import ARMComponentFirstLoan from "./armComponentFirstLoan";
-// import FrmMortgageProgramValidator from "../validatorRules/FrmMortgageProgramValidator";
-// import { updateValidators } from "../../common/ValidatorFunction";
-// import {
-//   resetValidators,
-//   displayValidationErrors,
-// } from "../../common/ValidatorFunction";
- 
 import quss from "../../assets/images/que.png";
 
 import NumberFormat from "react-number-format";

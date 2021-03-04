@@ -1,18 +1,12 @@
-import { withRouter, Redirect, Link } from "react-router-dom";
-import React, { Fragment, PureComponent } from "react";
+import { withRouter, Link } from "react-router-dom";
+import React, { Fragment} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import {
-  MDBBtn,
   MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText, 
-  MDBCol,
-  MDBRow,
+
   MDBContainer,
 } from "mdbreact";
 import { Button } from "@material-ui/core";

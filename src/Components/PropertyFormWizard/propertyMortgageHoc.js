@@ -26,7 +26,7 @@ import { Button } from "@material-ui/core";
 import SecondLoanScenario from "./secondLoanScenario";
 import FirstLoanScenario from "./firstLoanScenario";
 import { NotificationManager } from "react-notifications";
-import { isFormValid } from "../../common/ValidatorFunction";
+
 
 export class PropertyMortgageHOC extends Component {
   constructor(props) {

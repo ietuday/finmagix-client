@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import {
-  MDBBtn,
+  
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
+  
   MDBCardTitle,
   MDBCardText,
   MDBCol,

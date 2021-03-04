@@ -2,18 +2,14 @@ import React, { Component, Fragment } from "react";
 import {
   MDBRow,
   MDBCol,
-  MDBModal,
-  MDBModalBody,
-  MDBModalHeader, 
+
 } from "mdbreact";
-import { Radio, Input } from "antd";
-import Button from "@material-ui/core/Button";
+
 import Axios from "axios";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+
 import Tax2Validator from "../validatorRules/Tax2Validator";
 import { updateValidators } from "../../common/ValidatorFunction";
 

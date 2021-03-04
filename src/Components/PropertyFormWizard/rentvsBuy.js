@@ -11,14 +11,9 @@ import Button from "@material-ui/core/Button";
 
 import Axios from "axios";
 
-import { Radio, Input } from "antd";
-import { withRouter, Redirect } from "react-router-dom";
-import RentvsBuyValidator from "../validatorRules/RentvsBuyValidatorRules";
-import { updateValidators } from "../../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
+import { Radio} from "antd";
+import { withRouter} from "react-router-dom";
+
 import { setRentvsBuyFilledStatus } from "../../routes/utils";
 import NumberFormat from "react-number-format";
 
