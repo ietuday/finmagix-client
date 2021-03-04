@@ -10,7 +10,7 @@ import {
   MDBCardBody,
   MDBCardImage,
   MDBCardTitle,
-  MDBCardText,
+  MDBCardText, 
   MDBCol,
   MDBRow,
   MDBContainer,
@@ -68,7 +68,8 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return <div {...other}>{value === index && <Box p={3}>{children}</Box>}</div>;
 }
-let data = [];
+let data1 = [];
+let data2 = [];
 
 function EquityProjection(props) {
   let singlePropertyResponse;
@@ -128,7 +129,9 @@ function EquityProjection(props) {
         ? CalculatorResponse.FRM2.ProjectedequityFRMOption2
         : 0;
       ct2 = parseFloat(String(ct2).replace(/,/g, ''))
-    data = [
+  console.log("@@@@@@@@@@@@2",ct1)
+  console.log("@@@@@@@@@@@@2",ct2)
+    data1 = [
       {
         name: "Projected home price",
         pv:
@@ -163,8 +166,35 @@ function EquityProjection(props) {
             : 0
       },
     ];
+
+    data2 = [
+      {
+        name: "Projected home price",
+        pv:
+           (CalculatorResponse && CalculatorResponse.ARM2) ||
+              (CalculatorResponse && CalculatorResponse.FRM2)
+            ? pv2
+            : 0
+      },
+      {
+        name: "Loan Balance",
+        at:
+          (CalculatorResponse && CalculatorResponse.ARM2) ||
+              (CalculatorResponse && CalculatorResponse.FRM2)
+            ? at2
+            : 0
+      },
+      {
+        name: "Equity",
+        ct:
+          (CalculatorResponse && CalculatorResponse.ARM2) ||
+              (CalculatorResponse && CalculatorResponse.FRM2)
+            ? ct2
+            : 0
+      },
+    ];
   }
-  
+
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -206,7 +236,7 @@ function EquityProjection(props) {
               <BarChart
                 width={300}
                 height={400}
-                data={data}
+                data={data1}
                 margin={{
                   top: 5,
                   right: 30,
@@ -242,7 +272,7 @@ function EquityProjection(props) {
               <BarChart
                 width={300}
                 height={300}
-                data={data}
+                data={data2}
                 margin={{
                   top: 5,
                   right: 30,
