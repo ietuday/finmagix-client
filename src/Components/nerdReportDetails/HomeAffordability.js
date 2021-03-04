@@ -169,7 +169,7 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.ARM1.Housingpmtaffordableoption1
                   ).replace(/%/g, "")
-                ) <= 28 ? (
+                ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -186,7 +186,7 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.FRM1.Housingpmtaffordableoption1
                   ).replace(/%/g, "")
-                ) <= 28 ? (
+                ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -212,12 +212,12 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.ARM1.Housingpmtaffordableoption1
                   ).replace(/%/g, "")
-                ) > 28 &&
+                ) > 36 &&
                 parseInt(
                   String(
                     CalculatorResponse.ARM1.Housingpmtaffordableoption1
                   ).replace(/%/g, "")
-                ) <= 36 ? (
+                ) <= 42 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -234,12 +234,12 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.FRM1.Housingpmtaffordableoption1
                   ).replace(/%/g, "")
-                ) > 28 &&
+                ) > 36 &&
                 parseInt(
                   String(
                     CalculatorResponse.FRM1.Housingpmtaffordableoption1
                   ).replace(/%/g, "")
-                ) <= 36 ? (
+                ) <= 42 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -265,7 +265,7 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.ARM1.Housingpmtaffordableoption1
                   ).replace(/%/g, "")
-                ) > 36 ? (
+                ) > 42 ? (
                   <MDBRow className="housing-ratio">
                     <MDBCol md="12">
                       <div>
@@ -282,7 +282,7 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.FRM1.Housingpmtaffordableoption1
                   ).replace(/%/g, "")
-                ) > 36 ? (
+                ) > 42 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -294,15 +294,6 @@ function HomeAffordability(props) {
                 ) : null}
               </div>
             </div>
-
-            <MDBRow>
-              <MDBCol md="12">
-                <div className="tab_contnt">
-                 
-                
-                </div>
-              </MDBCol>
-            </MDBRow>
 
             <MDBRow>
               <MDBCol md="12">
@@ -363,7 +354,7 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.ARM2.Housingpmtaffordableoption2
                   ).replace(/%/g, "")
-                ) <= 28 ? (
+                ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -380,7 +371,7 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.FRM2.Housingpmtaffordableoption2
                   ).replace(/%/g, "")
-                ) <= 28 ? (
+                ) <= 36 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -406,12 +397,12 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.ARM2.Housingpmtaffordableoption2
                   ).replace(/%/g, "")
-                ) > 28 &&
+                ) > 36 &&
                 parseInt(
                   String(
                     CalculatorResponse.ARM2.Housingpmtaffordableoption2
                   ).replace(/%/g, "")
-                ) <= 36 ? (
+                ) <= 42 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -428,12 +419,12 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.FRM2.Housingpmtaffordableoption2
                   ).replace(/%/g, "")
-                ) > 28 &&
+                ) > 36 &&
                 parseInt(
                   String(
                     CalculatorResponse.FRM2.Housingpmtaffordableoption2
                   ).replace(/%/g, "")
-                ) <= 36 ? (
+                ) <= 42 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -459,7 +450,7 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.ARM2.Housingpmtaffordableoption2
                   ).replace(/%/g, "")
-                ) > 36 ? (
+                ) > 42 ? (
                   <MDBRow className="housing-ratio">
                     <MDBCol md="12">
                       <div>
@@ -476,7 +467,7 @@ function HomeAffordability(props) {
                   String(
                     CalculatorResponse.FRM2.Housingpmtaffordableoption2
                   ).replace(/%/g, "")
-                ) > 36 ? (
+                ) > 42 ? (
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
@@ -488,15 +479,6 @@ function HomeAffordability(props) {
                 ) : null}
               </div>
             </div>
-
-
-            <MDBRow>
-              <MDBCol md="12">
-                <div className="tab_contnt">
-   
-                </div>
-              </MDBCol>
-            </MDBRow>
 
             <MDBRow>
               <MDBCol md="12">
