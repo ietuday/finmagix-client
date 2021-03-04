@@ -6,6 +6,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.validation_red{
+color: red;
+}
 
 .geocode-style{
   background: none padding-box rgb(255, 255, 255);

@@ -154,7 +154,7 @@ export class GetStartedHouseInfo extends Component {
     if (event.target.name == "home_price_growth_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, "")) > 20) {
         this.setState({
-          homepriceGrowthValidationError: "Home Price growth cannot exceed 20%",
+          homepriceGrowthValidationError: " *Home Price growth cannot exceed 20% ",
         });
       } else {
         this.setState({
@@ -437,7 +437,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            {this.state.homepriceGrowthValidationError}
+            <span className="validation_red">{this.state.homepriceGrowthValidationError}</span>
           </MDBCol>
         </MDBRow>
         {/* End */}
