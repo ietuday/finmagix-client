@@ -64,7 +64,7 @@ class Map extends Component {
   }
   initMap = () => {
     let { lat, lng } = this.state;
-    var map = new window.google.maps.Map(document.getElementById("map"), {
+    new window.google.maps.Map(document.getElementById("map"), {
       center: { lat, lng },
       zoom: 8,
     });
@@ -104,7 +104,7 @@ class Map extends Component {
           if (
             // "sublocality_level_1" === addressArray[i].types[j] ||
             // "locality" === addressArray[i].types[j] ||
-            addressArray[i].types[j] == "postal_code"
+            addressArray[i].types[j] === "postal_code"
           ) {
             area = addressArray[i].long_name;
             return area;

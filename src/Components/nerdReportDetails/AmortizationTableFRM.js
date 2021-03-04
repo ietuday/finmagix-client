@@ -140,6 +140,7 @@ class AmortizationTableFRM extends React.Component {
             TotalPayment: objTotalPayment[index].TotalPayment || "N/A",
             InterestRate: objInterestRate[index].InterestRate || "N/A",
           });
+          return 0
         });
         if (this.state.dfrm1.length > 0) {
           this.state.scenarioData1 = this.state.dfrm1;

@@ -3,7 +3,7 @@ import { savePersonalFinanace } from "../../../../routes/utils";
 import Axios from "axios";
 import { config } from "../../../config/default";
 const { baseURL } = config;
-const token = window.localStorage.getItem('accessToken')
+
 export const personal_finance_create = (data) => {
   if(data && data.marginal_tax_rate){
     data.marginal_tax_rate = String(parseInt(String(data.marginal_tax_rate_percentage).replace(/%/g, ""))/100)

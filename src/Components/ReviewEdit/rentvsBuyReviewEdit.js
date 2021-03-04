@@ -39,7 +39,7 @@ export class RentvsBuyReviewEdit extends Component {
         },
       })
         .then((propertyInfo) => {
-          const propertyDetail = propertyInfo.data.data[0];
+          // const propertyDetail = propertyInfo.data.data[0];
 
           this.setState({
             propertyDetail: propertyInfo.data.data[0]
@@ -54,7 +54,7 @@ export class RentvsBuyReviewEdit extends Component {
     });
   };
   render() {
-    const { GetRentvsBuyResponse } = this.props;
+    // const { GetRentvsBuyResponse } = this.props;
     // console.log(this.props);
     if (this.state.goToEdit) {
       return (

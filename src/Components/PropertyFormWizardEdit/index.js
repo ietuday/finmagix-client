@@ -49,8 +49,8 @@ import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";
 import { savePropertyId } from "../../../src/routes/utils";
 
-import { config } from "../config/default";
-const { baseURL } = config;
+
+
 
 export class StepperComponent extends Component {
   constructor(props) {

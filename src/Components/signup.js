@@ -24,7 +24,6 @@ import {
 
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { IconButton } from '@material-ui/core';
-import FacebookIcon from '@material-ui/icons/Facebook';
 
 
 
@@ -60,7 +59,7 @@ export class Signup extends Component {
     return status;
   }
   signUpGoogleFacebbok(res, type) {
-    const { SignUp, SignupRequestData } = this.props;
+    const { SignUp } = this.props;
     let response;
     if (type === "google") {
       response = {

@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Header from "../../common/header";
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import "../../css/reports.css";
 // import "./nerdReportDetails.css";
 import {
@@ -15,8 +15,7 @@ import {
   XAxis,
   YAxis,
   Cell,
-  Text,
-  Tooltip
+  Text
 } from "recharts";
 
 // import "./styles.css";

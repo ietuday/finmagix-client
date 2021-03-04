@@ -10,8 +10,7 @@ import "react-rangeslider/lib/index.css";
 import PersonaLFinanceValidator from "../validatorRules/PersonalFinanceValidatorRules";
 import { updateValidators } from "../../common/ValidatorFunction";
 import {
-  resetValidators,
-  displayValidationErrors,
+  resetValidators
 } from "../../common/ValidatorFunction";
 import DetailedExpenseModal from "../../common/detailedExpense";
 import quss from "../../assets/images/que.png";
@@ -103,7 +102,7 @@ export class PersonalFinance extends Component {
   async handleChange(event) {
     const { name } = event.target;
     event.persist();
-    if(event.target.name == "monthly_debt_payments"){
+    if(event.target.name === "monthly_debt_payments"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
           monthlydebtPaymentValidationError: " Cannot exceed Federal Income"
@@ -117,7 +116,7 @@ export class PersonalFinance extends Component {
     
     
 
-    if(event.target.name == "monthly_non_housing_expenses"){
+    if(event.target.name === "monthly_non_housing_expenses"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
           monthlynonhousingExpensesValidationError: " Cannot exceed Federal Income"
@@ -129,7 +128,7 @@ export class PersonalFinance extends Component {
       }
     }
     
-    if (event.target.name == "marginal_tax_rate_percentage") {
+    if (event.target.name === "marginal_tax_rate_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 37) {
         this.setState({
           marginal_tax_rate_ValidationError: "Cannot exceed 37%"

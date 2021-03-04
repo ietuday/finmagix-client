@@ -47,8 +47,6 @@ import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";
 import { savePropertyId } from "../../../src/routes/utils";
 
-import { config } from "../config/default";
-
 
 export class StepperComponent extends Component {
   constructor(props) {
@@ -121,8 +119,8 @@ export class StepperComponent extends Component {
       localStorage.getItem("property_id") &&
       localStorage.getItem("basic-info")
     ) {
-      const property = { property_obj: localStorage.getItem("property_id") };
-      const basicInfo = JSON.parse(localStorage.getItem("basic-info"));
+      // const property = { property_obj: localStorage.getItem("property_id") };
+      // const basicInfo = JSON.parse(localStorage.getItem("basic-info"));
       // const SurveyData = { ...property, ...basicInfo };
       // this.props.SurveyCreate(SurveyData);
     }
@@ -174,10 +172,10 @@ export class StepperComponent extends Component {
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
-    const newActiveStep =
-      this.isLastStep && !this.allStepsCompleted
-        ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-        : this.state.activeStep + 1;
+    // const newActiveStep =
+    //   this.isLastStep && !this.allStepsCompleted
+    //     ? this.steps.findIndex((step, i) => !(i in this.state.completed))
+    //     : this.state.activeStep + 1;
     if (
       this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
       this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
@@ -390,13 +388,13 @@ export class StepperComponent extends Component {
 
   async handleNext() {
     const {
-      PersonalFinanceUpdate,
+      // PersonalFinanceUpdate,
       RentvsBuyCreate,
       RentvsBuyUpdate,
       PropertyInfoCreate,
       PropertyInfoUpdate,
-      SurveyCreate,
-      PersonalFinanceCreate,
+      // SurveyCreate,
+      // PersonalFinanceCreate,
     } = this.props;
     const newActiveStep =
       this.isLastStep && !this.allStepsCompleted

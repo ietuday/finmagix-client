@@ -107,9 +107,9 @@ export class MortgageProgramReviewEdit extends Component {
     });
   };
   render() {
-    const {
+    // const {
 
-    } = this.props;
+    // } = this.props;
     if (this.state.goToEditFirstFrm) {
       return (
         <Redirect

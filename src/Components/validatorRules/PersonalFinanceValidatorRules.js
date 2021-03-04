@@ -106,24 +106,24 @@ const PersonalFinanceValidator = {
     state: "",
   },
 
-  federal_income: {
-    rules: [
-      {
-        test: (value) => {
-          return Object.keys(value).length !== 0;
-        },
-        message: "Federal income cannot be empty",
-      },
-      {
-        // test: /^[0-9,]*$/,
-        test: /^(\d{1,3}(\,?\d{3}){1,2})$/,
-        message: "only numbers are allowed!",
-      },
-    ],
-    errors: [],
-    valid: false,
-    state: "",
-  },
+  // federal_income: {
+  //   rules: [
+  //     {
+  //       test: (value) => {
+  //         return Object.keys(value).length !== 0;
+  //       },
+  //       message: "Federal income cannot be empty",
+  //     },
+  //     {
+  //       // test: /^[0-9,]*$/,
+  //       test: /^(\d{1,3}(\,?\d{3}){1,2})$/,
+  //       message: "only numbers are allowed!",
+  //     },
+  //   ],
+  //   errors: [],
+  //   valid: false,
+  //   state: "",
+  // },
 };
 
 export default PersonalFinanceValidator;

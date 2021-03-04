@@ -185,7 +185,7 @@ export class ShowDetailedReports extends Component {
         screen12: this.calculateScreen12(prevProps),
       };
 
-      const data = this.props.GetCalculator(calculatorInputObj);
+      this.props.GetCalculator(calculatorInputObj);
     }
   }
 
@@ -281,9 +281,9 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateScreen8(data) {
-    const personal_finance = JSON.parse(
-      localStorage.getItem("personal_finance_array")
-    ).marginal_tax_rate;
+    // const personal_finance = JSON.parse(
+    //   localStorage.getItem("personal_finance_array")
+    // ).marginal_tax_rate;
     return {
       FICOscore: this.state.personalFinace.fico_score_range
         ? this.state.personalFinace.fico_score_range

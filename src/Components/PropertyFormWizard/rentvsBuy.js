@@ -81,10 +81,10 @@ export class RentvsBuy extends Component {
     }
   }
   async handleChange(e, value) {
-    const { name } = e.target;
+    // const { name } = e.target;
     e.persist();
 
-    if (e.target.name == "annual_rent_insurance") {
+    if (e.target.name === "annual_rent_insurance") {
       const yearly_rent = Number(this.state.current_monthly_rent_payment)*12;
       if (parseInt(String(e.target.value).replace(/,/g, '')) > (parseFloat(String(yearly_rent).replace(/,/g, '')) * 3) / 100) {
 

@@ -524,7 +524,7 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.no_of_bedrooms}
               onChange={this.handleChange}
               onValueChange={async (values) => {
-                const { formattedValue, value } = values;
+                const { value } = values;
                 await this.setState({
                   no_of_bedrooms: value,
                 });
@@ -549,7 +549,7 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.no_of_bathrooms}
               onChange={this.handleChange}
               onValueChange={async (values) => {
-                const { formattedValue, value } = values;
+                const { value } = values;
                 await this.setState({
                   no_of_bathrooms: value,
                 });

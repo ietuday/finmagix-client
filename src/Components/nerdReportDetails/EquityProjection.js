@@ -17,10 +17,10 @@ import {
   BarChart,
   Bar,
   XAxis,
-  YAxis,
-  CartesianGrid,
+  // YAxis,
+  // CartesianGrid,
   Tooltip,
-  Legend,
+  // Legend,
 } from "recharts";
 
 const getIntroOfPage = (label) => {

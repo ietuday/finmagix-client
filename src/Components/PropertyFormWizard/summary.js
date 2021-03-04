@@ -36,9 +36,7 @@ export class Summary extends Component {
         },
       })
         .then((propertyInfo) => {
-          const propertyDetail = propertyInfo.data.data[0];
-
-          this.setState({
+            this.setState({
             propertyDetail: propertyInfo.data.data[0]
           });
         })
@@ -53,7 +51,7 @@ export class Summary extends Component {
 
   }
   render() {
-    const { PropertyInfoCreateResponse, FRMMortgageCreateResponseFirst, ARMMortgageCreateResponseFirst, FRMMortgageCreateResponseSecond, ARMMortgageCreateResponseSecond, PersonalFinanceUpdateResponse, TaxUpdateResponse, PersonalFinanceCreateResponse, RentvsBuyCreateResponse, TaxCreateResponse } = this.props;
+    const { FRMMortgageCreateResponseFirst, ARMMortgageCreateResponseFirst, FRMMortgageCreateResponseSecond, ARMMortgageCreateResponseSecond } = this.props;
     return (
       <Fragment>
         <MDBContainer>
@@ -236,10 +234,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//   };
+// };
 export default withRouter(
   connect(mapStateToProps, null)(Summary)
 );

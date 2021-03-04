@@ -13,8 +13,7 @@ import ARMComponentSecondLoan from "./armComponentSecondLoan";
 import FrmMortgageProgramValidator from "../validatorRules/FrmMortgageProgramValidator";
 import { updateValidators } from "../../common/ValidatorFunction";
 import {
-  resetValidators,
-  displayValidationErrors,
+  resetValidators
 } from "../../common/ValidatorFunction";
 
 import quss from "../../assets/images/que.png";
@@ -251,7 +250,7 @@ if (event.target.name === "closing_costs") {
         name === "loan_amount") ||
       name === "interest" ||
       name === "points" ||
-      name == "closing_costs"
+      name === "closing_costs"
     ) {
       updateValidators(this.validators, event.target.name, event.target.value);
       const validationErrorLength = this.validators[event.target.name].errors

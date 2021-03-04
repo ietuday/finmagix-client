@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
-import RangeSlider from "../../../common/RangeSilder";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Select from "@material-ui/core/Select";

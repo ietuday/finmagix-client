@@ -87,20 +87,19 @@ export const measureText14HelveticaNeue = (text) => {
 const BAR_AXIS_SPACE = 100;
 
 function PostMortgagePurchaseProfile(props) {
-  let singlePropertyResponse;
   let CalculatorResponse;
   if (
     props.location.state &&
     props.location.state.singlePropertyResponse &&
     props.location.state.GetSinglePropertyResponse
   ) {
-    singlePropertyResponse = props.location.state.singlePropertyResponse;
+    // singlePropertyResponse = props.location.state.singlePropertyResponse;
     CalculatorResponse = props.location.state.GetSinglePropertyResponse;
   } else {
     CalculatorResponse = JSON.parse(localStorage.getItem("calculatorResponse"));
-    singlePropertyResponse = JSON.parse(
-      localStorage.getItem("GetSinglePropertyResponse")
-    );
+    // singlePropertyResponse = JSON.parse(
+    //   localStorage.getItem("GetSinglePropertyResponse")
+    // );
   }
 
   const data2 = [

@@ -5,7 +5,7 @@ import { FRM_MORTGAGE_CREATE_FIRST, ARM_MORTGAGE_CREATE_FIRST,FRM_MORTGAGE_GET_F
 import Axios from "axios";
 import { config } from "../../../config/default";
 const { baseURL } = config;
-const token = localStorage.getItem('accessToken')
+// const token = localStorage.getItem('accessToken')
 export const frm_mortgage_create_first = (data) => {
   return (dispatch) => {
     Axios.post(`${baseURL}/mortgage_programs/frm/list_or_create`, data, {

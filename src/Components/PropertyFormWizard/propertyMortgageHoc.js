@@ -172,7 +172,7 @@ export class PropertyMortgageHOC extends Component {
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
-              if (checkSum != Number(this.state.firstLoanScenario.property_price)) {
+              if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
                 return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
 
               }
@@ -269,7 +269,7 @@ export class PropertyMortgageHOC extends Component {
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
-              if (checkSum != Number(this.state.firstLoanScenario.property_price)) {
+              if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
                 return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
 
               }
@@ -334,7 +334,7 @@ export class PropertyMortgageHOC extends Component {
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
-              if (checkSum != Number(this.state.firstLoanScenario.property_price)) {
+              if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
                 return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
 
               }

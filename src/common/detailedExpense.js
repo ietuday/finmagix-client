@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import {
-  MDBContainer,
   MDBRow,
   MDBCol,
   MDBModal,
@@ -11,7 +10,7 @@ import { Button } from "@material-ui/core";
 import {get_detail_expense} from "../../src/Components/redux/actions/PropertyReport/personalFinance"
 import { Input } from "antd";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 export class DetailedExpenseModal extends Component {
   constructor(props) {
@@ -73,7 +72,7 @@ export class DetailedExpenseModal extends Component {
     });
     
   }
-  componentDidMount() {}
+
   render() {
     return (
       <Fragment>

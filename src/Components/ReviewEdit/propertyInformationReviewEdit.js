@@ -3,7 +3,6 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { connect } from "react-redux";
 import Header from "../../common/header";
 import { Button } from "@material-ui/core";
-import { get_personal_finance_data } from "../redux/actions/PropertyReport/personalFinance";
 import { Redirect, withRouter } from "react-router-dom";
 import "../../css/reviewEdit.css";
 import { get_property_info } from "../redux/actions/PropertyReport/propertyInfo";
