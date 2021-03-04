@@ -142,7 +142,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       [event.target.name]: event.target.value,
     });
 
-    if(event.target.name == "pmi_amount"){
+    if(event.target.name === "pmi_amount"){
       const checkloanprice = parseInt(Number(this.props.loanAmount) * 3 )/100
       if(checkloanprice < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
@@ -155,7 +155,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       }
     }
 
-    if(event.target.name == "loanamountsecond2"){
+    if(event.target.name === "loanamountsecond2"){
       if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
           secondloanAmountValidationError: "Cannot exceed first mortgage amount"
@@ -168,7 +168,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       
   }
 
-  if(event.target.name == "second_mortgage_interest_percentage"){
+  if(event.target.name === "second_mortgage_interest_percentage"){
     if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
       this.setState({
         interestrateValidationError: " Is the interest rate input accurate?"
@@ -182,7 +182,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
 }
 
 
-if(event.target.name == "second_mortgage_points_percentage"){
+if(event.target.name === "second_mortgage_points_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
     this.setState({
       pointsValidationError: "Points cannot exceed 5%"
@@ -195,7 +195,7 @@ if(event.target.name == "second_mortgage_points_percentage"){
   
 }
 
-if (event.target.name == "second_mortgage_closing_costs") {
+if (event.target.name === "second_mortgage_closing_costs") {
   if (
     parseInt(String(event.target.value).replace(/,/g, "")) >
     (parseFloat(String(this.state.loanamountsecond2).replace(/,/g, "")) * 5) /

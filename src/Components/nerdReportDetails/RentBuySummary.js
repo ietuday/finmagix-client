@@ -73,13 +73,13 @@ function RentBuySummary(props) {
               <MDBCol col="4" md="5">
                 {
                   (CalculatorResponse && CalculatorResponse.FRM1 && CalculatorResponse.FRM1.Buy) || (CalculatorResponse && CalculatorResponse.ARM1 && CalculatorResponse.ARM1.Buy)
-                   ? <img src={buyhouseactive} className="" /> 
+                   ? <img src={buyhouseactive} className="" alt="" /> 
                    : null
                 }
 
                 {
                   (CalculatorResponse && CalculatorResponse.FRM1 && CalculatorResponse.FRM1.Rent) || (CalculatorResponse && CalculatorResponse.ARM1 && CalculatorResponse.ARM1.Rent)
-                   ? <img src={renthouseactive} className="" /> 
+                   ? <img src={renthouseactive} className="" alt="" /> 
                    : null
                 }
                              
@@ -137,13 +137,13 @@ function RentBuySummary(props) {
               <MDBCol col="4" md="5">
                 {
                   (CalculatorResponse && CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Buy) || (CalculatorResponse && CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Buy)
-                   ? <img src={buyhouseactive} className="" /> 
+                   ? <img src={buyhouseactive} className="" alt="" /> 
                    : null
                 }
 
                 {
                   (CalculatorResponse && CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Rent) || (CalculatorResponse && CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Rent)
-                   ? <img src={renthouseactive} className="" /> 
+                   ? <img src={renthouseactive} className="" alt="" /> 
                    : null
                 }
                              
