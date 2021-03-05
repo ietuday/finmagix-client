@@ -8,10 +8,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import NumberFormat from "react-number-format";
 import "react-rangeslider/lib/index.css";
 import PersonaLFinanceValidator from "../validatorRules/PersonalFinanceValidatorRules";
-import { updateValidators } from "../../common/ValidatorFunction";
-import {
-  resetValidators
-} from "../../common/ValidatorFunction";
+// import { updateValidators } from "../../common/ValidatorFunction";
+// import {
+//   resetValidators
+// } from "../../common/ValidatorFunction";
 import DetailedExpenseModal from "../../common/detailedExpense";
 import quss from "../../assets/images/que.png";
 
@@ -83,8 +83,8 @@ export class PersonalFinance extends Component {
       openModal: false,
       showModal: false,
     };
-    this.validators = PersonaLFinanceValidator;
-    resetValidators(this.validators);
+    // this.validators = PersonaLFinanceValidator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
   }
   handleRangeData = (data) => {
@@ -144,9 +144,9 @@ export class PersonalFinance extends Component {
 
 
     
-    // await this.setState({
-    //   [event.target.name]: event.target.value,
-    // });
+    await this.setState({
+      [event.target.name]: event.target.value,
+    });
     // if (
     //   name === "marginal_tax_rate" ||
     //   name === "annual_gross_income" ||
@@ -161,7 +161,7 @@ export class PersonalFinance extends Component {
     //   this.props.getValidationError(validationErrorLength);
     // }
 
-    // this.props.getPersonalFinanceData(this.state);
+    this.props.getPersonalFinanceData(this.state);
   }
 
   calculateNonHousingExpense = async (data) => {
