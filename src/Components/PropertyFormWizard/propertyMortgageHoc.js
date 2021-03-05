@@ -74,7 +74,7 @@ export class PropertyMortgageHOC extends Component {
   handleNext = async () => {
     const { FRMMortgageCreateFirst, ARMMortgageCreateFirst, FRMMortgageUpdateFirst,
       ARMMortgageUpdateFirst } = this.props;
-    console.log(this.state)
+    
     
     if (
       this.state.firstLoanScenario.firstloanarmvalidationerror === 0 ||
@@ -414,14 +414,17 @@ export class PropertyMortgageHOC extends Component {
       NotificationManager.error("Please Validate Fields", "Error");
     }
   };
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const {
 
       FRMMortgageCreateSecond,
       ARMMortgageCreateSecond,
- 
       FRMMortgageUpdateSecond,
       ARMMortgageUpdateSecond,
+      FRMMortgageCreateFirst, 
+      ARMMortgageCreateFirst, 
+      FRMMortgageUpdateFirst,
+      ARMMortgageUpdateFirst
 
     } = this.props;
    
@@ -585,7 +588,7 @@ export class PropertyMortgageHOC extends Component {
         }
       } else if (
         !this.state.radioValue &&
-        this.state.firstLoanScenario.mortgage_program_type_value === 1
+        this.state.secondLoanScenario.mortgage_program_type_value === 1
       ) {
 
         if (
@@ -643,7 +646,7 @@ export class PropertyMortgageHOC extends Component {
         }
       } else if (
         !this.state.radioValue &&
-        this.state.firstLoanScenario.mortgage_program_type_value === 2
+        this.state.secondLoanScenario.mortgage_program_type_value === 2
       ) {
 
 
@@ -741,7 +744,344 @@ export class PropertyMortgageHOC extends Component {
           }
         }
       } else {
-        return NotificationManager.error("Please Validate Fields", "Error");
+        // return NotificationManager.error("Please Validate Fields", "Error");
+        if (
+          this.state.firstLoanScenario.firstloanarmvalidationerror === 0 ||
+          this.state.FirstloanscenarioValidationErrors === 0
+        ) {
+          if (
+            this.state.radioValue &&
+            this.state.firstLoanScenario.mortgage_program_type_value === 1
+          ) {
+    
+            if (
+              this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
+              this.state.firstLoanScenario.loan_amount_validation_error
+            ) {
+              NotificationManager.error('error', 'Validation Error')
+            } else {
+    
+              if (
+                this.state.firstLoanScenario["interest_only_period"] &&
+                this.state.firstLoanScenario['loan_amount']
+              ) {
+                if (this.state.firstLoanScenario.loanamountsecond1) {
+                  const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
+                  if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+    
+                  }
+                }
+                if (this.state.firstLoanScenario["interest"]) {
+                  await this.setState((prevState) => {
+                    let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                    firstLoanScenario.interest = String(
+                      Number(this.state.firstLoanScenario["interest"]) / 100
+                    );
+                    return { firstLoanScenario };
+                  });
+                  // this.setState({
+                  //   firstLoanScenario.interest: String(
+                  //     Number(this.state.firstLoanScenario["interest"]) / 100
+                  //   );
+                  // })
+                  
+                }
+                if (this.state.firstLoanScenario["second_mortgage_interest"]) {
+                  this.state.firstLoanScenario["second_mortgage_interest"] = String(
+                    Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
+                    100
+                  );
+                }
+                if (this.state.firstLoanScenario["points"]) {
+                  this.state.firstLoanScenario["points"] = String(
+                    Number(this.state.firstLoanScenario["points"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["second_mortgage_points"]) {
+                  this.state.firstLoanScenario["second_mortgage_points"] = String(
+                    Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
+                  FRMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
+                } else {
+                  FRMMortgageCreateFirst(this.state.firstLoanScenario);
+                }
+    
+              }
+              else {
+                NotificationManager.error('Validation error', 'Please fill required fields')
+              }
+            }
+          } else if (
+            this.state.radioValue &&
+            this.state.firstLoanScenario.mortgage_program_type_value === 2
+          ) {
+    
+    
+            if (
+              this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
+              this.state.firstLoanScenario.loan_amount_validation_error ||
+              this.state.firstLoanScenario.rateAdjustmentCapValidationError ||
+              this.state.firstLoanScenario.floorinterestrateValidationError ||
+              this.state.firstLoanScenario.periodCapValidationError
+            ) {
+              NotificationManager.error('error', 'Validation Error')
+            } else {
+    
+              if (
+                this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
+                this.state.firstLoanScenario['loan_amount'] &&
+                this.state.firstLoanScenario['floor_interest_rate'] &&
+                this.state.firstLoanScenario['celing_interest_rate'] &&
+                this.state.firstLoanScenario['interest_only_period']
+              ) {
+                if (this.state.firstLoanScenario.loanamountsecond1) {
+                  const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
+                  if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+    
+                  }
+                }
+    
+                if (this.state.firstLoanScenario["ARM1rate"]) {
+                  this.state.firstLoanScenario["ARM1rate"] = String(
+                    Number(this.state.firstLoanScenario["ARM1rate"]) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["first_interest_rate_adj_cap"]) {
+                  this.state.firstLoanScenario["first_interest_rate_adj_cap"] = String(
+                    Number(
+                      this.state.firstLoanScenario["first_interest_rate_adj_cap"]
+                    ) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["floor_interest_rate"]) {
+                  this.state.firstLoanScenario["floor_interest_rate"] = String(
+                    Number(this.state.firstLoanScenario["floor_interest_rate"]) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["ceiling_interest_rate"]) {
+                  this.state.firstLoanScenario["ceiling_interest_rate"] = String(
+                    Number(this.state.firstLoanScenario["ceiling_interest_rate"]) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["period_cap"]) {
+                  this.state.firstLoanScenario["period_cap"] = String(
+                    Number(this.state.firstLoanScenario["period_cap"]) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["rate_add"]) {
+                  this.state.firstLoanScenario["rate_add"] = String(
+                    Number(this.state.firstLoanScenario["rate_add"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["points"]) {
+                  this.state.firstLoanScenario["points"] = String(
+                    Number(this.state.firstLoanScenario["points"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["second_mortgage_interest"]) {
+                  this.state.firstLoanScenario["second_mortgage_interest"] = String(
+                    Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
+                    100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["second_mortgage_points"]) {
+                  this.state.firstLoanScenario["second_mortgage_points"] = String(
+                    Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["initial_interest_rate"]) {
+                  this.state.firstLoanScenario["initial_interest_rate"] = String(
+                    Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
+                  ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
+                } else {
+                  ARMMortgageCreateFirst(this.state.firstLoanScenario);
+                }
+    
+              } else {
+                NotificationManager.error('Validation error', 'Please fill required fields')
+              }
+            }
+    
+    
+    
+            // ARMMortgageCreateFirst(this.state.firstLoanScenario);
+          } else if (
+            !this.state.radioValue &&
+            this.state.firstLoanScenario.mortgage_program_type_value === 1
+          ) {
+    
+            if (
+              this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
+    
+              this.state.firstLoanScenario.loan_amount_validation_error
+    
+            ) {
+              NotificationManager.error('error', 'Validation Error')
+            } else {
+              if (
+                this.state.firstLoanScenario["interest_only_period"] &&
+                this.state.firstLoanScenario['loan_amount']
+              ) {
+                if (this.state.firstLoanScenario.loanamountsecond1) {
+                  const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
+                  if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+    
+                  }
+                }
+                if (this.state.firstLoanScenario["interest"]) {
+                  this.state.firstLoanScenario["interest"] = String(
+                    Number(this.state.firstLoanScenario["interest"]) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["second_mortgage_interest"]) {
+                  this.state.firstLoanScenario["second_mortgage_interest"] = String(
+                    Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
+                    100
+                  );
+                }
+                if (this.state.firstLoanScenario["points"]) {
+                  this.state.firstLoanScenario["points"] = String(
+                    Number(this.state.firstLoanScenario["points"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["second_mortgage_points"]) {
+                  this.state.firstLoanScenario["second_mortgage_points"] = String(
+                    Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
+                  FRMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
+                } else {
+                  FRMMortgageCreateFirst(this.state.firstLoanScenario);
+                }
+    
+              }
+              else {
+                NotificationManager.error('Validation error', 'Please fill required fields')
+              }
+            }
+    
+            // FRMMortgageCreateFirst(this.state.firstLoanScenario);
+          } else if (
+            !this.state.radioValue &&
+            this.state.firstLoanScenario.mortgage_program_type_value === 2
+          ) {
+    
+            if (
+              this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
+              this.state.firstLoanScenario.loan_amount_validation_error ||
+              this.state.firstLoanScenario.rateAdjustmentCapValidationError ||
+              this.state.firstLoanScenario.floorinterestrateValidationError ||
+              this.state.firstLoanScenario.periodCapValidationError
+            ) {
+              NotificationManager.error('error', 'Validation Error')
+            } else {
+    
+              if (
+                this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
+                this.state.firstLoanScenario['loan_amount'] &&
+                this.state.firstLoanScenario['floor_interest_rate'] &&
+                this.state.firstLoanScenario['celing_interest_rate'] &&
+                this.state.firstLoanScenario['interest_only_period']
+              ) {
+                if (this.state.firstLoanScenario.loanamountsecond1) {
+                  const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
+                  if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+    
+                  }
+                }
+    
+                if (this.state.firstLoanScenario["ARM1rate"]) {
+                  this.state.firstLoanScenario["ARM1rate"] = String(
+                    Number(this.state.firstLoanScenario["ARM1rate"]) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["first_interest_rate_adj_cap"]) {
+                  this.state.firstLoanScenario["first_interest_rate_adj_cap"] = String(
+                    Number(
+                      this.state.firstLoanScenario["first_interest_rate_adj_cap"]
+                    ) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["floor_interest_rate"]) {
+                  this.state.firstLoanScenario["floor_interest_rate"] = String(
+                    Number(this.state.firstLoanScenario["floor_interest_rate"]) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["ceiling_interest_rate"]) {
+                  this.state.firstLoanScenario["ceiling_interest_rate"] = String(
+                    Number(this.state.firstLoanScenario["ceiling_interest_rate"]) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["period_cap"]) {
+                  this.state.firstLoanScenario["period_cap"] = String(
+                    Number(this.state.firstLoanScenario["period_cap"]) / 100
+                  );
+                }
+                if (this.state.firstLoanScenario["rate_add"]) {
+                  this.state.firstLoanScenario["rate_add"] = String(
+                    Number(this.state.firstLoanScenario["rate_add"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["points"]) {
+                  this.state.firstLoanScenario["points"] = String(
+                    Number(this.state.firstLoanScenario["points"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["second_mortgage_interest"]) {
+                  this.state.firstLoanScenario["second_mortgage_interest"] = String(
+                    Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
+                    100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["second_mortgage_points"]) {
+                  this.state.firstLoanScenario["second_mortgage_points"] = String(
+                    Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario["initial_interest_rate"]) {
+                  this.state.firstLoanScenario["initial_interest_rate"] = String(
+                    Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
+                  );
+                }
+    
+                if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
+                  ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
+                } else {
+                  ARMMortgageCreateFirst(this.state.firstLoanScenario);
+                }
+    
+              } else {
+                NotificationManager.error('Validation error', 'Please fill required fields')
+              }
+            }
+          }
+          
+        } else {
+          NotificationManager.error("Please Validate Fields", "Error");
+        }
       }
       this.props.handleContinue();
     }else {

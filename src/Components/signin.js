@@ -72,11 +72,11 @@ export class Signin extends Component {
       password: SHA256(JSON.stringify(this.state.password)).toString(),
       
     };
-    if (this.isFormValid()) {
+    // if (this.isFormValid()) {
       SignIn(signinDataObject, this.onSuccess, this.onFailure);
-    } else {
-      NotificationManager.error("some error", "Error");
-    }
+    // } else {
+      // NotificationManager.error("some error", "Error");
+    // }
   };
   signUpGoogleFacebbok(res, type) {
     const { SignIn } = this.props;
