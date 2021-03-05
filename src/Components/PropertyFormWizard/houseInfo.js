@@ -7,7 +7,7 @@ import NumberFormat from "react-number-format";
 
 import MapWithASearchBox from "../../common/geocode";
 
-import { updateValidators } from "../../common/ValidatorFunction";
+
 import quss from "../../assets/images/que.png";
 import "../../css/addProperty.css";
 

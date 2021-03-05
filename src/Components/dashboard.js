@@ -49,6 +49,13 @@ export class Dashboard extends Component {
     this.handleDelete = this.handleDelete.bind(this);
 
     this.toggle = this.toggle.bind(this);
+    this.cleanPreviousPropertyDetail()
+  }
+  cleanPreviousPropertyDetail(){
+    if(localStorage.getItem('addressData')) localStorage.removeItem('addressData')
+    if(localStorage.getItem('GetSinglePropertyResponse'))localStorage.removeItem('GetSinglePropertyResponse')
+    if(localStorage.getItem('calculatorResponse'))localStorage.removeItem('calculatorResponse')
+    
   }
   toggle = (item) => {
     if (item && item.id) {
