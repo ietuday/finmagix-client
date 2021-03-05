@@ -179,7 +179,7 @@ export class SecondLoanScenario extends Component {
   async handleChange(event) { 
     const { name } = event.target;
 
-    if (event.target.name == "loan_amount") {
+    if (event.target.name === "loan_amount") {
       if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
         this.setState({
           loan_amount_validation_error: "Cannot exceed Property price"
@@ -192,7 +192,7 @@ export class SecondLoanScenario extends Component {
     }
 
 
-    if(event.target.name == "interest_only_period"){
+    if(event.target.name === "interest_only_period"){
       if(this.state.loan_term < event.target.value){
         this.setState({
           interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
@@ -204,7 +204,7 @@ export class SecondLoanScenario extends Component {
       }
   }
   
-  if(event.target.name == "interest_percentage"){
+  if(event.target.name === "interest_percentage"){
     if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
       this.setState({
         interestrateValidationError: "Is the interest rate input accurate?"
@@ -217,7 +217,7 @@ export class SecondLoanScenario extends Component {
     
 }
 
-if(event.target.name == "points_percentage"){
+if(event.target.name === "points_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
     this.setState({
       pointsValidationError: "Points cannot exceed 5%"
@@ -230,7 +230,7 @@ if(event.target.name == "points_percentage"){
   
 }
 
-if (event.target.name == "closing_costs") {
+if (event.target.name === "closing_costs") {
   if (
     parseInt(String(event.target.value).replace(/,/g, "")) >
     (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /

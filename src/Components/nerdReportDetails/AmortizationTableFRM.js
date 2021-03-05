@@ -210,6 +210,9 @@ class AmortizationTableFRM extends React.Component {
             TotalPayment: objTotalPayment[index].TotalPayment,
             Interestrate: objInterestrate[index].Interestrate,
           });
+          return{
+            
+          }
         });
         if (this.state.dfrm2.length > 0) {
           this.state.scenarioData2 = this.state.dfrm2;

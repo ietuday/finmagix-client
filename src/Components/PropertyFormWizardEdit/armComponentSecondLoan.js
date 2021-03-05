@@ -310,7 +310,7 @@ export class ARMComponentSecondLoan extends Component {
     const { name } = event.target;
     event.persist();
     
-    if (event.target.name == "loan_amount") {
+    if (event.target.name === "loan_amount") {
       if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
         this.setState({
           loan_amount_validation_error: "Cannot exceed Property price"
@@ -321,7 +321,7 @@ export class ARMComponentSecondLoan extends Component {
         })
       }
     }
-    if (event.target.name == "initial_interest_rate_percentage") {
+    if (event.target.name === "initial_interest_rate_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
         this.setState({
           interestrateValidationError: "Is the interest rate input accurate?"
@@ -334,7 +334,7 @@ export class ARMComponentSecondLoan extends Component {
 
     }
 
-    if (event.target.name == "first_interest_rate_adj_cap_percentage") {
+    if (event.target.name === "first_interest_rate_adj_cap_percentage") {
       if (this.state.initial_interest_rate > event.target.value) {
         this.setState({
           rateAdjustmentCapValidationError: "First interest rate adjustment cap cannot be less than initial interest rate"
@@ -346,7 +346,7 @@ export class ARMComponentSecondLoan extends Component {
       }
     }
 
-    if (event.target.name == "floor_interest_rate_percentage") {
+    if (event.target.name === "floor_interest_rate_percentage") {
       if (this.state.initial_interest_rate < event.target.value) {
         this.setState({
           floorinterestrateValidationError: "Floor interest rate cannot be greater than initial interest rate"
@@ -358,7 +358,7 @@ export class ARMComponentSecondLoan extends Component {
       }
     }
 
-    if(event.target.name == "floor_interest_rate_percentage"){
+    if(event.target.name === "floor_interest_rate_percentage"){
       if(this.state.ceiling_interest_rate < parseInt(String(event.target.value).replace(/%/g, ''))){
         this.setState({
           floorinterestrateValidationError: "Floor interest rate cannot exceed Ceiling interest rate"
@@ -371,7 +371,7 @@ export class ARMComponentSecondLoan extends Component {
     }
 
 
-    if (event.target.name == "period_cap_percentage") {
+    if (event.target.name === "period_cap_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 4) {
         this.setState({
           periodCapValidationError: "Is the period cap input accurate?"
@@ -384,7 +384,7 @@ export class ARMComponentSecondLoan extends Component {
 
     }
 
-    if (event.target.name == "rate_add_percentage") {
+    if (event.target.name === "rate_add_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 3) {
         this.setState({
           rateAddValidationError: "Is the rate add input accurate?"
@@ -397,7 +397,7 @@ export class ARMComponentSecondLoan extends Component {
 
     }
 
-    if (event.target.name == "closing_costs") {
+    if (event.target.name === "closing_costs") {
       if (
         parseInt(String(event.target.value).replace(/,/g, "")) >
         (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
@@ -415,7 +415,7 @@ export class ARMComponentSecondLoan extends Component {
     }
 
       
-    if (event.target.name == "interest_only_period") {
+    if (event.target.name === "interest_only_period") {
       if (this.state.loan_term < event.target.value) {
         this.setState({
           interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
@@ -427,7 +427,7 @@ export class ARMComponentSecondLoan extends Component {
       }
 
     }
-    if(event.target.name == "points_percentage"){
+    if(event.target.name === "points_percentage"){
       if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
         this.setState({
           pointsValidationError: "Points cannot exceed 5%"

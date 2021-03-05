@@ -446,7 +446,7 @@ export class PropertyMortgageHOC extends Component {
           ) {
             if (this.state.secondLoanScenario.loanamountsecond2) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
-              if (checkSum != Number(this.state.secondLoanScenario.property_price)) {
+              if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
                 return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
 
               }
@@ -509,7 +509,7 @@ export class PropertyMortgageHOC extends Component {
           ) {
             if (this.state.secondLoanScenario.loanamountsecond2) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
-              if (checkSum != Number(this.state.secondLoanScenario.property_price)) {
+              if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
                 return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
 
               }
@@ -602,7 +602,7 @@ export class PropertyMortgageHOC extends Component {
             ) {
               if (this.state.secondLoanScenario.loanamountsecond2) {
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
-                if (checkSum != Number(this.state.secondLoanScenario.property_price)) {
+                if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
                   return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
 
                 }
@@ -666,7 +666,7 @@ export class PropertyMortgageHOC extends Component {
           ) {
             if (this.state.secondLoanScenario.loanamountsecond2) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
-              if (checkSum != Number(this.state.secondLoanScenario.property_price)) {
+              if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
                 return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
 
               }
