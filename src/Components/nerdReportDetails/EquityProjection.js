@@ -218,7 +218,7 @@ function EquityProjection(props) {
                 price and your total mortgage loan balance at the end of your
                 duration of stay of {singlePropertyResponse.stay_duration} years
               </p>
-              <h6>Equity represents the difference between your projected</h6>
+              
               <h4>
                 
               {CalculatorResponse.ARM1
@@ -255,7 +255,7 @@ function EquityProjection(props) {
                 price and your total mortgage loan balance at the end of your
                 duration of stay of {singlePropertyResponse.stay_duration} years
               </p>
-              <h6>Equity represents the difference between your projected</h6>
+              
               <h4>
                 {CalculatorResponse.ARM2
                   ? "ARM"

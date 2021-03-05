@@ -68,7 +68,7 @@ function MortgageSummary(props) {
                     <div className="tab_contnt">
                       <h6 className="box">Monthly Payments</h6>
                       <h6 className="box-1">First Mortgage</h6>
-                      <h6 className="box-1">Second</h6>
+                      <h6 className="box-1">Second Mortgage</h6>
                     </div>
                   </MDBCol>
                 </MDBRow>
