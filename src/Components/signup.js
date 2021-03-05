@@ -15,12 +15,12 @@ import {
 } from "../Components/redux/actions/signinSignup.js/index";
 import SHA256 from "crypto-js/sha256";
 import "react-notifications/lib/notifications.css";
-import SignupValidator from "../Components/validatorRules/SignupValidatorRules";
-import { updateValidators } from "../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../common/ValidatorFunction";
+// import SignupValidator from "../Components/validatorRules/SignupValidatorRules";
+// import { updateValidators } from "../common/ValidatorFunction";
+// import {
+//   resetValidators,
+//   displayValidationErrors,
+// } from "../common/ValidatorFunction";
 
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { IconButton } from '@material-ui/core';

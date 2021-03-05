@@ -11,12 +11,12 @@ import { updateValidators } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
 import "../../css/addProperty.css";
 
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
+// import {
+//   resetValidators,
+//   displayValidationErrors,
+// } from "../../common/ValidatorFunction";
 
-import HouseInfoValidator from "../validatorRules/HouseInfoValidator";
+// import HouseInfoValidator from "../validatorRules/HouseInfoValidator";
 
 import { config } from "../config/default";
 const { baseURL } = config;
@@ -62,7 +62,7 @@ export class GetStartedHouseInfo extends Component {
       annualHomeOwnerAssociationValidationError: ""
     };
     this.validators = HouseInfoValidator;
-    resetValidators(this.validators);
+    //resetValidators(this.validators);
     this.houseInfo = "";
     this.handleChange = this.handleChange.bind(this);
     this.handleBedroomRoomCount = this.handleBedroomRoomCount.bind(this);
@@ -250,11 +250,10 @@ export class GetStartedHouseInfo extends Component {
     ) {
       console.log(name);
 
-      updateValidators(this.validators, event.target.name, event.target.value);
-      const validationErrorLength = this.validators[event.target.name].errors
-        .length;
+      //updateValidators(this.validators, event.target.name, event.target.value);
+      //const validationErrorLength = this.validators[event.target.name].errors.length;
 
-      this.props.getValidationError(validationErrorLength);
+     // this.props.getValidationError(validationErrorLength);
     }
 
     this.props.handleHouseInfo(downpayment, this.state);

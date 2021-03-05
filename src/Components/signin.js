@@ -10,12 +10,12 @@ import { Input } from "antd";
 import { NotificationManager } from "react-notifications";
 import { connect } from "react-redux";
 import { sign_in } from "../Components/redux/actions/signinSignup.js/index";
-import SigninValidator from "../Components/validatorRules/SigninValidatorRules";
-import { updateValidators } from "../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../common/ValidatorFunction";
+// import SigninValidator from "../Components/validatorRules/SigninValidatorRules";
+// import { updateValidators } from "../common/ValidatorFunction";
+// import {
+//   resetValidators,
+//   displayValidationErrors,
+// } from "../common/ValidatorFunction";
 import { login } from "../routes/utils";
 
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";

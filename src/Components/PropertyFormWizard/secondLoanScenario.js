@@ -241,22 +241,22 @@ if (event.target.name === "closing_costs") {
   }
 }
 
-    event.persist();
-    await this.setState({
-      [event.target.name]: event.target.value,
-    });
-    if (
-      (this.state.mortgage_program_type_value === 1 &&
-        name === "loan_amount") ||
-      name === "interest" ||
-      name === "points" ||
-      name === "closing_costs"
-    ) {
-      updateValidators(this.validators, event.target.name, event.target.value);
-      const validationErrorLength = this.validators[event.target.name].errors
-        .length;
-      this.props.getValidationError(validationErrorLength);
-    }
+    // event.persist();
+    // await this.setState({
+    //   [event.target.name]: event.target.value,
+    // });
+    // if (
+    //   (this.state.mortgage_program_type_value === 1 &&
+    //     name === "loan_amount") ||
+    //   name === "interest" ||
+    //   name === "points" ||
+    //   name === "closing_costs"
+    // ) {
+    //   updateValidators(this.validators, event.target.name, event.target.value);
+    //   const validationErrorLength = this.validators[event.target.name].errors
+    //     .length;
+    //   this.props.getValidationError(validationErrorLength);
+    // }
     const dataObject = {
       mortage_program_type: this.state.mortage_program_type,
       mortgage_program_type_value: 1,

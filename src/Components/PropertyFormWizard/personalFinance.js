@@ -144,25 +144,24 @@ export class PersonalFinance extends Component {
 
 
     
-    await this.setState({
-      [event.target.name]: event.target.value,
-    });
-    if (
-      name === "marginal_tax_rate" ||
-      name === "annual_gross_income" ||
-      name === "monthly_debt_payments" ||
-      name === "monthly_non_housing_expenses" ||
-      name === "federal_income"
-      // ||
-      // name == "total_non_housing"
-    ) {
-      updateValidators(this.validators, event.target.name, event.target.value);
-      const validationErrorLength = this.validators[event.target.name].errors
-        .length;
-      this.props.getValidationError(validationErrorLength);
-    }
+    // await this.setState({
+    //   [event.target.name]: event.target.value,
+    // });
+    // if (
+    //   name === "marginal_tax_rate" ||
+    //   name === "annual_gross_income" ||
+    //   name === "monthly_debt_payments" ||
+    //   name === "monthly_non_housing_expenses" ||
+    //   name === "federal_income"
+      
+    // ) {
+    //   updateValidators(this.validators, event.target.name, event.target.value);
+    //   const validationErrorLength = this.validators[event.target.name].errors
+    //     .length;
+    //   this.props.getValidationError(validationErrorLength);
+    // }
 
-    this.props.getPersonalFinanceData(this.state);
+    // this.props.getPersonalFinanceData(this.state);
   }
 
   calculateNonHousingExpense = async (data) => {

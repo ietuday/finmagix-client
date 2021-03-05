@@ -8,13 +8,13 @@ import "../css/signup-signin.css";
 import { withRouter } from "react-router-dom";
 import { Input } from "antd";
 import { NotificationManager } from "react-notifications";
-import ForgotPasswordValidator from "../Components/validatorRules/ForgotPasswordValidator";
+// import ForgotPasswordValidator from "../Components/validatorRules/ForgotPasswordValidator";
 
-import { updateValidators } from "../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../common/ValidatorFunction";
+// import { updateValidators } from "../common/ValidatorFunction";
+// import {
+//   resetValidators,
+//   displayValidationErrors,
+// } from "../common/ValidatorFunction";
 import forgot from "../assets/images/forgot.svg";
 import Axios from "axios";
 import { config } from "./config/default";

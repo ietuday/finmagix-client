@@ -10,15 +10,15 @@ import { withRouter} from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
-import Tax2Validator from "../validatorRules/Tax2Validator";
-import { updateValidators } from "../../common/ValidatorFunction";
+// import Tax2Validator from "../validatorRules/Tax2Validator";
+// import { updateValidators } from "../../common/ValidatorFunction";
 
 import NumberFormat from "react-number-format";
 
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
+// import {
+//   resetValidators,
+//   displayValidationErrors,
+// } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
 
 import { config } from '../config/default';

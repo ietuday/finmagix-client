@@ -7,12 +7,12 @@ import "../css/signup-signin.css";
 import { Input } from "antd";
 import { NotificationManager } from "react-notifications";
 
-import CreatePasswordValidator from "../Components/validatorRules/CreatePasswordValidator";
-import { updateValidators } from "../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../common/ValidatorFunction";
+// import CreatePasswordValidator from "../Components/validatorRules/CreatePasswordValidator";
+// import { updateValidators } from "../common/ValidatorFunction";
+// import {
+//   resetValidators,
+//   displayValidationErrors,
+// } from "../common/ValidatorFunction";
 
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { IconButton } from "@material-ui/core";
