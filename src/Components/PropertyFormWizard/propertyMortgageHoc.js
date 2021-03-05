@@ -437,7 +437,6 @@ export class PropertyMortgageHOC extends Component {
       ARMMortgageUpdateFirst
 
     } = this.props;
-    debugger
     if (
       this.state.secondLoanScenario.secondloanarmvalidationerror === 0 ||
       this.state.SecondloanscenarioValidationErrors === 0
@@ -830,7 +829,6 @@ export class PropertyMortgageHOC extends Component {
             this.state.radioValue &&
             this.state.firstLoanScenario.mortgage_program_type_value === 2
           ) {
-            debugger
     
             if (
               this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
