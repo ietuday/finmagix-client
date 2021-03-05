@@ -89,7 +89,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error
         ) {
-          NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error')
         } else {
 
           if (
@@ -144,7 +144,7 @@ export class PropertyMortgageHOC extends Component {
 
           }
           else {
-            NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields')
           }
         }
       } else if (
@@ -160,14 +160,14 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.floorinterestrateValidationError ||
           this.state.firstLoanScenario.periodCapValidationError
         ) {
-          NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error')
         } else {
 
           if (
             this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.firstLoanScenario['loan_amount'] &&
             this.state.firstLoanScenario['floor_interest_rate'] &&
-            this.state.firstLoanScenario['celing_interest_rate'] &&
+            this.state.firstLoanScenario['ceiling_interest_rate'] &&
             this.state.firstLoanScenario['interest_only_period']
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
@@ -243,7 +243,7 @@ export class PropertyMortgageHOC extends Component {
             }
 
           } else {
-            NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields')
           }
         }
 
@@ -261,7 +261,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.loan_amount_validation_error
 
         ) {
-          NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error')
         } else {
           if (
             this.state.firstLoanScenario["interest_only_period"] &&
@@ -305,7 +305,7 @@ export class PropertyMortgageHOC extends Component {
 
           }
           else {
-            NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields')
           }
         }
 
@@ -322,14 +322,14 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.floorinterestrateValidationError ||
           this.state.firstLoanScenario.periodCapValidationError
         ) {
-          NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error')
         } else {
 
           if (
             this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.firstLoanScenario['loan_amount'] &&
             this.state.firstLoanScenario['floor_interest_rate'] &&
-            this.state.firstLoanScenario['celing_interest_rate'] &&
+            this.state.firstLoanScenario['ceiling_interest_rate'] &&
             this.state.firstLoanScenario['interest_only_period']
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
@@ -405,13 +405,13 @@ export class PropertyMortgageHOC extends Component {
             }
 
           } else {
-            NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields')
           }
         }
       }
       this.setState({ onClick: !this.state.onClick });
     } else {
-      NotificationManager.error("Please Validate Fields", "Error");
+      return NotificationManager.error("Please Validate Fields", "Error");
     }
   };
   handleSubmit = async () => {
@@ -427,7 +427,7 @@ export class PropertyMortgageHOC extends Component {
       ARMMortgageUpdateFirst
 
     } = this.props;
-   
+    debugger
     if (
       this.state.secondLoanScenario.secondloanarmvalidationerror === 0 ||
       this.state.SecondloanscenarioValidationErrors === 0
@@ -507,7 +507,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.secondLoanScenario['loan_amount'] &&
             this.state.secondLoanScenario['floor_interest_rate'] &&
-            this.state.secondLoanScenario['celing_interest_rate'] &&
+            this.state.secondLoanScenario['ceiling_interest_rate'] &&
             this.state.secondLoanScenario['interest_only_period']
           ) {
             if (this.state.secondLoanScenario.loanamountsecond2) {
@@ -582,7 +582,7 @@ export class PropertyMortgageHOC extends Component {
               ARMMortgageCreateSecond(this.state.secondLoanScenario);
             }
           } else {
-            NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields')
           }
 
         }
@@ -664,7 +664,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.secondLoanScenario['loan_amount'] &&
             this.state.secondLoanScenario['floor_interest_rate'] &&
-            this.state.secondLoanScenario['celing_interest_rate'] &&
+            this.state.secondLoanScenario['ceiling_interest_rate'] &&
             this.state.secondLoanScenario['interest_only_period']
           ) {
             if (this.state.secondLoanScenario.loanamountsecond2) {
@@ -758,7 +758,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
               this.state.firstLoanScenario.loan_amount_validation_error
             ) {
-              NotificationManager.error('error', 'Validation Error')
+              return NotificationManager.error('error', 'Validation Error')
             } else {
     
               if (
@@ -813,14 +813,14 @@ export class PropertyMortgageHOC extends Component {
     
               }
               else {
-                NotificationManager.error('Validation error', 'Please fill required fields')
+                return NotificationManager.error('Validation error', 'Please fill required fields')
               }
             }
           } else if (
             this.state.radioValue &&
             this.state.firstLoanScenario.mortgage_program_type_value === 2
           ) {
-    
+            debugger
     
             if (
               this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
@@ -829,15 +829,22 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.floorinterestrateValidationError ||
               this.state.firstLoanScenario.periodCapValidationError
             ) {
-              NotificationManager.error('error', 'Validation Error')
+              return NotificationManager.error('error', 'Validation Error')
             } else {
-    
+              console.log("this.state.firstLoanScenario['first_interest_rate_adj_cap']",this.state.firstLoanScenario['first_interest_rate_adj_cap'])
+              console.log("this.state.firstLoanScenario['loan_amount']",this.state.firstLoanScenario['loan_amount'])
+              console.log("this.state.firstLoanScenario['floor_interest_rate']",this.state.firstLoanScenario['floor_interest_rate'])
+              console.log("this.state.firstLoanScenario['ceiling_interest_rate']",this.state.firstLoanScenario['ceiling_interest_rate'])
+              console.log("this.state.firstLoanScenario['first_interest_rate_adj_cap'] && this.state.firstLoanScenario['loan_amount'] && this.state.firstLoanScenario['floor_interest_rate'] && this.state.firstLoanScenario['ceiling_interest_rate']",this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
+              this.state.firstLoanScenario['loan_amount'] &&
+              this.state.firstLoanScenario['floor_interest_rate'] &&
+              this.state.firstLoanScenario['ceiling_interest_rate'])
+              
               if (
                 this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
                 this.state.firstLoanScenario['loan_amount'] &&
                 this.state.firstLoanScenario['floor_interest_rate'] &&
-                this.state.firstLoanScenario['celing_interest_rate'] &&
-                this.state.firstLoanScenario['interest_only_period']
+                this.state.firstLoanScenario['ceiling_interest_rate']
               ) {
                 if (this.state.firstLoanScenario.loanamountsecond1) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -912,7 +919,7 @@ export class PropertyMortgageHOC extends Component {
                 }
     
               } else {
-                NotificationManager.error('Validation error', 'Please fill required fields')
+                return NotificationManager.error('Validation error', 'Please fill required fields')
               }
             }
     
@@ -930,7 +937,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.loan_amount_validation_error
     
             ) {
-              NotificationManager.error('error', 'Validation Error')
+              return NotificationManager.error('error', 'Validation Error')
             } else {
               if (
                 this.state.firstLoanScenario["interest_only_period"] &&
@@ -974,7 +981,7 @@ export class PropertyMortgageHOC extends Component {
     
               }
               else {
-                NotificationManager.error('Validation error', 'Please fill required fields')
+                return NotificationManager.error('Validation error', 'Please fill required fields')
               }
             }
     
@@ -983,7 +990,7 @@ export class PropertyMortgageHOC extends Component {
             !this.state.radioValue &&
             this.state.firstLoanScenario.mortgage_program_type_value === 2
           ) {
-    
+            
             if (
               this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
               this.state.firstLoanScenario.loan_amount_validation_error ||
@@ -991,15 +998,22 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.floorinterestrateValidationError ||
               this.state.firstLoanScenario.periodCapValidationError
             ) {
-              NotificationManager.error('error', 'Validation Error')
+              return NotificationManager.error('error', 'Validation Error')
             } else {
-    
+              console.log("this.state.firstLoanScenario['first_interest_rate_adj_cap']",this.state.firstLoanScenario['first_interest_rate_adj_cap'])
+              console.log("this.state.firstLoanScenario['loan_amount']",this.state.firstLoanScenario['loan_amount'])
+              console.log("this.state.firstLoanScenario['floor_interest_rate']",this.state.firstLoanScenario['floor_interest_rate'])
+              console.log("this.state.firstLoanScenario['ceiling_interest_rate']",this.state.firstLoanScenario['ceiling_interest_rate'])
+              console.log("this.state.firstLoanScenario['first_interest_rate_adj_cap'] && this.state.firstLoanScenario['loan_amount'] && this.state.firstLoanScenario['floor_interest_rate'] && this.state.firstLoanScenario['ceiling_interest_rate']",this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
+              this.state.firstLoanScenario['loan_amount'] &&
+              this.state.firstLoanScenario['floor_interest_rate'] &&
+              this.state.firstLoanScenario['ceiling_interest_rate'])
+
               if (
                 this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
                 this.state.firstLoanScenario['loan_amount'] &&
                 this.state.firstLoanScenario['floor_interest_rate'] &&
-                this.state.firstLoanScenario['celing_interest_rate'] &&
-                this.state.firstLoanScenario['interest_only_period']
+                this.state.firstLoanScenario['ceiling_interest_rate'] 
               ) {
                 if (this.state.firstLoanScenario.loanamountsecond1) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -1074,13 +1088,13 @@ export class PropertyMortgageHOC extends Component {
                 }
     
               } else {
-                NotificationManager.error('Validation error', 'Please fill required fields')
+                return NotificationManager.error('Validation error', 'Please fill required fields')
               }
             }
           }
           
         } else {
-          NotificationManager.error("Please Validate Fields", "Error");
+          return NotificationManager.error("Please Validate Fields", "Error");
         }
       }
       this.props.handleContinue();
