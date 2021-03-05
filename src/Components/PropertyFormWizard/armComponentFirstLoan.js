@@ -77,6 +77,7 @@ export class ARMComponentFirstLoan extends Component {
       id: "",
       rateAdjustmentCapValidationError: "",
       floorinterestrateValidationError:"",
+      ceilinginterestrateValidationError:"",
       periodCapValidationError:"",
       rateAddValidationError:"",
       property_price: "",
@@ -176,6 +177,7 @@ export class ARMComponentFirstLoan extends Component {
               floorinterestrateValidationError:this.state.floorinterestrateValidationError,
               periodCapValidationError:this.state.periodCapValidationError,
               rateAddValidationError:this.state.rateAddValidationError,
+              ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError
             })
           }
           this.props.handleArmData(this.state);
@@ -252,7 +254,17 @@ if(event.target.name === "floor_interest_rate_percentage"){
   }
 }
 
-
+if(event.target.name === "ceiling_interest_rate_percentage"){
+  if(this.state.ceiling_interest_rate < 15){
+    this.setState({
+      ceilinginterestrateValidationError: "Ceiling interest is greater than 15%"
+    }) 
+  }else{
+    this.setState({
+      ceilinginterestrateValidationError: ""
+    }) 
+  }
+}
 
 
 if(event.target.name === "period_cap_percentage"){
@@ -397,6 +409,7 @@ if(event.target.name === "points_percentage"){
       floorinterestrateValidationError:this.state.floorinterestrateValidationError,
       periodCapValidationError:this.state.periodCapValidationError,
       rateAddValidationError:this.state.rateAddValidationError,
+      ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError
     };
     this.props.handleArmData(dataObject);
   }
@@ -447,6 +460,7 @@ if(event.target.name === "points_percentage"){
       floorinterestrateValidationError:this.state.floorinterestrateValidationError,
       periodCapValidationError:this.state.periodCapValidationError,
       rateAddValidationError:this.state.rateAddValidationError,
+      ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -501,6 +515,7 @@ if(event.target.name === "points_percentage"){
         floorinterestrateValidationError:this.state.floorinterestrateValidationError,
         periodCapValidationError:this.state.periodCapValidationError,
         rateAddValidationError:this.state.rateAddValidationError,
+        ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError
       };
       this.props.handleArmData(dataWithPmi);
     } else {
@@ -560,6 +575,7 @@ if(event.target.name === "points_percentage"){
         floorinterestrateValidationError:this.state.floorinterestrateValidationError,
         periodCapValidationError:this.state.periodCapValidationError,
         rateAddValidationError:this.state.rateAddValidationError,
+        ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError
       };
       this.props.handleArmData(dataWithSecondMortgage);
     }
@@ -806,6 +822,7 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
+            {this.state.ceilinginterestrateValidationError}
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">

@@ -406,6 +406,7 @@ export class PropertyMortgageHOC extends Component {
                    
                 }
               }
+              
               if (this.state.secondLoanScenario["interest"]) {
                 this.state.secondLoanScenario["interest"] = String(
                   Number(this.state.secondLoanScenario["interest"]) / 100

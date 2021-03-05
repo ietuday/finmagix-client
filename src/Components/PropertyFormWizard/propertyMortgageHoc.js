@@ -158,7 +158,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.loan_amount_validation_error ||
           this.state.firstLoanScenario.rateAdjustmentCapValidationError ||
           this.state.firstLoanScenario.floorinterestrateValidationError ||
-          this.state.firstLoanScenario.periodCapValidationError
+          this.state.firstLoanScenario.periodCapValidationError 
         ) {
           return NotificationManager.error('error', 'Validation Error')
         } else {
