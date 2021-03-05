@@ -86,7 +86,7 @@ export class Summary extends Component {
           <MDBRow className="margin20">
             <MDBCol>
               <div className="text-center">
-                <p>Do you want to Edit or Review inputs?</p>
+                <p>Do you want to review or edit your inputs? Click  below!</p>
               </div>
             </MDBCol>
           </MDBRow>

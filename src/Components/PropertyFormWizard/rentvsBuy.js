@@ -304,6 +304,12 @@ export class RentvsBuy extends Component {
             <MDBRow className="margin20 marginbottom20">
               <MDBCol md="12">
                 <span className="get-started-label">Rate Inflation</span>
+                <div className="tooltip-img">
+                  <img src={quss} className="tool-img" alt="" />
+                  <span className="tooltip-img-text">
+                  Rate inflation is the estimated annual increase in your rent
+                  </span>
+                </div>
                 <br />
                 {/* <Input
                   type="text"

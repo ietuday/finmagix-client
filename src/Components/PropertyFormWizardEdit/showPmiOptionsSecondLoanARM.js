@@ -216,6 +216,12 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       <MDBRow className="margin20">
         <MDBCol md="12">
           <span className="get-started-label">Monthly PMI Amount</span>
+          <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+              PMI, is a type of mortgage insurance you might be required to pay for if you have a conventional loan. PMI is usually required when you have a conventional loan and make a down payment of less than 20 percent of the home's purchase price. You can pay PMI in lieu of a second mortgage
+              </span>
+            </div>
           <br />
           <NumberFormat
             className="input-class-mdb"

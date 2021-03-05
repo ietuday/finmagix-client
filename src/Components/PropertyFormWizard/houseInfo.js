@@ -682,6 +682,12 @@ export class GetStartedHouseInfo extends Component {
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
             <span className="get-started-label">Home Owner's Insurance</span>
+            <div className="tooltip-img">
+            <img src={quss} className="tool-img" alt="" />
+            <span className="tooltip-img-text">
+            Home Owner's insurance is a form of property insurance that covers losses and damages to an individual's house and assets in the home.{" "}
+            </span>
+          </div>
             <br />
             {/* <Input
               className="input-class-mdb"

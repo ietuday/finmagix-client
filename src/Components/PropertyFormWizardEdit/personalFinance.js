@@ -187,37 +187,43 @@ export class PersonalFinance extends Component {
       
      
       <MDBRow className="margin20">
-      <MDBCol md="12">
-        <span className="get-started-label">Federal Income</span>
-        <br />
-        {/* <Input
-          className="input-class-mdb"
-          placeholder="Enter amount here"
-          name="federal_income"
-          value={this.state.federal_income}
-          onChange={this.handleChange}
-        /> */}
+          <MDBCol md="12">
+            <span className="get-started-label">Adjusted Gross Income</span>
+            <div className="tooltip-img">
+            <img src={quss} className="tool-img" alt="" />
+            <span className="tooltip-img-text">
+            AGI calculation is equal to the total income you report that's subject to income tax—such as earnings from your job, self-employment, dividends and interest —minus specific deductions, or “adjustments” that you're eligible to take. This refers to line 11 from 1040 tax form.{" "}
+            </span>
+          </div>
+            <br />
+            {/* <Input
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="federal_income"
+              value={this.state.federal_income}
+              onChange={this.handleChange}
+            /> */}
 
-        <NumberFormat
-          className="input-class-mdb"
-          placeholder="Enter amount here"
-          name="federal_income"
-          value={this.state.federal_income}
-          onChange={this.handleChange}
-          thousandSeparator={true}
-          onValueChange={async (values) => {
-            const { formattedValue, value } = values;
-            await this.setState({
-              federal_income_number: formattedValue,
-            });
-            await this.setState({
-              federal_income: value,
-            });
-          }}
-        />
-      </MDBCol>
-      {/* {displayValidationErrors(this.validators, "federal_income")} */}
-    </MDBRow>
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="federal_income"
+              value={this.state.federal_income}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  federal_income_number: formattedValue,
+                });
+                await this.setState({
+                  federal_income: value,
+                });
+              }}
+            />
+          </MDBCol>
+          {/* {displayValidationErrors(this.validators, "federal_income")} */}
+        </MDBRow>
 
     <MDBRow className="margin20">
       <MDBCol md="12">

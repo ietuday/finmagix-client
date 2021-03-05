@@ -275,26 +275,42 @@ export class RentvsBuy extends Component {
             <MDBRow className="margin20 marginbottom20">
             <MDBCol md="12">
               <span className="get-started-label">Rate Inflation</span>
+              <div className="tooltip-img">
+                <img src={quss} className="tool-img" alt="" />
+                <span className="tooltip-img-text">
+                Rate inflation is the estimated annual increase in your rent
+                </span>
+              </div>
               <br />
+              {/* <Input
+                type="text"
+                className="input-class-mdb"
+                placeholder="Enter amount here %"
+                name="rentinflation"
+                value={this.state.rentinflation}
+                onChange={this.handleChange}
+              /> */}
+
               <NumberFormat
-                  className="input-class-mdb"
-                  placeholder="Enter amount here %"
-                  name="rentinflation"
-                  value={this.state.rentinflation}
-                  onChange={this.handleChange}
-                  // thousandSeparator={true}
-                  suffix={"%"}
-                  onValueChange={async (values) => {
-                    const { formattedValue, value } = values;
-                    await this.setState({
-                      rentinflation: value,
-                    });
-                    await this.setState({
-                      rentinflation_percentage: formattedValue,
-                    });
-                  }}
-                />
+                className="input-class-mdb"
+                placeholder="Enter amount here %"
+                name="rentinflation_percentage"
+                value={this.state.rentinflation_percentage}
+                onChange={this.handleChange}
+                // thousandSeparator={true}
+                suffix={"%"}
+                onValueChange={async (values) => {
+                  const { formattedValue, value } = values;
+                  await this.setState({
+                    rentinflation: value,
+                  });
+                  await this.setState({
+                    rentinflation_percentage: formattedValue,
+                  });
+                }}
+              />
             </MDBCol>
+            {/* {displayValidationErrors(this.validators, "rentinflation")} */}
           </MDBRow>
 
           </div>
