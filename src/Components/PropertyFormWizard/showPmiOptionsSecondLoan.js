@@ -285,8 +285,9 @@ if (event.target.name === "second_mortgage_closing_costs") {
                 });
               }}
             />
+            {this.state.secondloanAmountValidationError}
           </MDBCol>
-          {this.state.loanAmountValidationError}
+          
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">

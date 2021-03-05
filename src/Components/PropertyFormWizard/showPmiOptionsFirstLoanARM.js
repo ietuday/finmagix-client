@@ -292,6 +292,7 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
                 });
               }}
             />
+            {this.state.loanAmountValidationError}
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
