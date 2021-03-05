@@ -89,7 +89,7 @@ export class RentvsBuy extends Component {
       if (parseInt(String(e.target.value).replace(/,/g, '')) > (parseFloat(String(yearly_rent).replace(/,/g, '')) * 3) / 100) {
 
         this.setState({
-          annual_rent_insuranceValidationError: "cannot exceed 3% of monthly rent"
+          annual_rent_insuranceValidationError: "Shouldn't exceed 3% of annual rent"
         })
       } else {
         this.setState({

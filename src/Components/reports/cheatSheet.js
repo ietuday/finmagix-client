@@ -209,9 +209,9 @@ function CheatSheet(props) {
         String(
           `${
             CalculatorResponse.ARM1
-              ? CalculatorResponse.ARM1.HousingpaymentcomboARM
+              ? CalculatorResponse.ARM1['total-mth-hsg-pay']
               : CalculatorResponse.FRM1
-              ? CalculatorResponse.FRM1.HousingpaymentcomboFRM
+              ? CalculatorResponse.FRM1['total-mth-hsg-pay']
               : 0
           }`
         ).replace(/,/g, "")

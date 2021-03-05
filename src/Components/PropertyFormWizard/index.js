@@ -94,6 +94,14 @@ export class StepperComponent extends Component {
       "Taxes",
       "Summary",
     ];
+    this.cleanPreviousPropertyDetail()
+  }
+
+  cleanPreviousPropertyDetail(){
+    if(localStorage.getItem('addressData')) localStorage.removeItem('addressData')
+    if(localStorage.getItem('GetSinglePropertyResponse'))localStorage.removeItem('GetSinglePropertyResponse')
+    if(localStorage.getItem('calculatorResponse'))localStorage.removeItem('calculatorResponse')
+    
   }
   componentWillMount() {
     if (this.props.location.returnBackFromreviewEdit === true) {
