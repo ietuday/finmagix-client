@@ -86,7 +86,8 @@ export class ARMComponentFirstLoan extends Component {
       interestOnlyPeriodValidationError: "",
       property_downpayment: "" ,
       pointsValidationError: "",
-      ceilinginterestrateValidationError:""
+      ceilinginterestrateValidationError:"",
+      floorinterestrateCheckValidationError: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
@@ -174,7 +175,8 @@ export class ARMComponentFirstLoan extends Component {
               floorinterestrateValidationError:this.state.floorinterestrateValidationError,
               periodCapValidationError:this.state.periodCapValidationError,
               rateAddValidationError:this.state.rateAddValidationError,
-              ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError
+              ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError,
+              floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError,
             })
           }
           this.props.handleArmData(this.state);
@@ -230,11 +232,11 @@ export class ARMComponentFirstLoan extends Component {
     if (event.target.name === "floor_interest_rate_percentage") {
       if (this.state.initial_interest_rate < event.target.value) {
         this.setState({
-          floorinterestrateValidationError: "Floor interest rate cannot be greater than initial interest rate"
+          floorinterestrateCheckValidationError: "Floor interest rate cannot be greater than initial interest rate"
         })
       } else {
         this.setState({
-          floorinterestrateValidationError: ""
+          floorinterestrateCheckValidationError: ""
         })
       }
     }
@@ -389,7 +391,8 @@ export class ARMComponentFirstLoan extends Component {
       floorinterestrateValidationError:this.state.floorinterestrateValidationError,
       periodCapValidationError:this.state.periodCapValidationError,
       rateAddValidationError:this.state.rateAddValidationError,
-      ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError
+      ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError,
+      floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError,
     };
     this.props.handleArmData(dataObject);
   }
@@ -440,7 +443,8 @@ export class ARMComponentFirstLoan extends Component {
       floorinterestrateValidationError:this.state.floorinterestrateValidationError,
       periodCapValidationError:this.state.periodCapValidationError,
       rateAddValidationError:this.state.rateAddValidationError,
-      ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError
+      ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError,
+      floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError,
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -495,7 +499,8 @@ export class ARMComponentFirstLoan extends Component {
         floorinterestrateValidationError:this.state.floorinterestrateValidationError,
         periodCapValidationError:this.state.periodCapValidationError,
         rateAddValidationError:this.state.rateAddValidationError,
-        ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError
+        ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError,
+        floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError,
       };
       this.props.handleArmData(dataWithPmi);
     } else {
@@ -555,7 +560,8 @@ export class ARMComponentFirstLoan extends Component {
         floorinterestrateValidationError:this.state.floorinterestrateValidationError,
         periodCapValidationError:this.state.periodCapValidationError,
         rateAddValidationError:this.state.rateAddValidationError,
-        ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError
+        ceilinginterestrateValidationError:this.state.ceilinginterestrateValidationError,
+        floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError,
       };
       this.props.handleArmData(dataWithSecondMortgage);
     }

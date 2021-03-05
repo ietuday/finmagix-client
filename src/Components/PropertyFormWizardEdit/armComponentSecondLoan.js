@@ -373,7 +373,8 @@ export class ARMComponentSecondLoan extends Component {
     }
 
     if(event.target.name === "ceiling_interest_rate_percentage"){
-      if(this.state.ceiling_interest_rate < 15){
+      const ceil_data = parseInt(String(event.target.value).replace(/%/g, ''))
+      if(ceil_data < 15){
         this.setState({
           ceilinginterestrateValidationError: "Ceiling interest is greater than 15%"
         }) 
