@@ -254,7 +254,10 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
-                {this.state.annual_rent_insuranceValidationError}
+                 <span className="validation-text-color">
+                 {this.state.annual_rent_insuranceValidationError}
+                 </span>
+               
               </MDBCol>
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "annual_rent_insurance")} */}

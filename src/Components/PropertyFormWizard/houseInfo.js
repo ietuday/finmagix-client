@@ -433,7 +433,10 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
+            <span className="validation-text-color">
             {this.state.homepriceGrowthValidationError}
+            </span>
+           
           </MDBCol>
         </MDBRow>
         {/* End */}
@@ -471,7 +474,10 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.downpayment_amount}
               onChange={this.handleChange}
             /> */}
-            {this.state.downpaymentnewValidationError}
+             <span className="validation-text-color">
+             {this.state.downpaymentnewValidationError}
+             </span>
+           
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20" center>
@@ -631,7 +637,10 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            {this.state.annualPropertytaxValidationError}
+             <span className="validation-text-color">
+             {this.state.annualPropertytaxValidationError}
+             </span>
+           
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -674,8 +683,10 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-
-            {this.state.annualHomeOwnerAssociationValidationError}
+ <span className="validation-text-color">
+ {this.state.annualHomeOwnerAssociationValidationError}
+ </span>
+           
           </MDBCol>
          
         </MDBRow>
@@ -714,7 +725,10 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            {this.state.homeownerInsuranceValidationError}
+             <span className="validation-text-color">
+             {this.state.homeownerInsuranceValidationError}
+             </span>
+           
           </MDBCol>
         </MDBRow>
       </Fragment>

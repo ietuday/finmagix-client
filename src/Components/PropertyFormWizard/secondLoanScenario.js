@@ -408,7 +408,10 @@ if (event.target.name == "closing_costs") {
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
-        {this.state.interestOnlyPeriodValidationError}
+           <span className="validation-text-color">
+           {this.state.interestOnlyPeriodValidationError}
+           </span>
+       
         </MDBCol>
       
       </MDBRow>
@@ -487,7 +490,10 @@ if (event.target.name == "closing_costs") {
                     });
                   }}
                 />
+                <span className="validation-text-color">
                 {this.state.loan_amount_validation_error}
+                </span>
+               
               </MDBCol>
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "loan_amount")} */}
@@ -548,7 +554,10 @@ if (event.target.name == "closing_costs") {
                     });
                   }}
                 />
-              {this.state.interestrateValidationError}
+                 <span className="validation-text-color">
+                 {this.state.interestrateValidationError}
+                 </span>
+              
               </MDBCol>
           
             </MDBRow>
@@ -591,7 +600,10 @@ if (event.target.name == "closing_costs") {
                     });
                   }}
                 />
-              {this.state.pointsValidationError}  
+                  <span className="validation-text-color">
+                  {this.state.pointsValidationError}  
+                  </span>
+             
               </MDBCol>
               
             </MDBRow>
@@ -637,7 +649,10 @@ if (event.target.name == "closing_costs") {
                     });
                   }}
                 />
-                {this.state.closingCostsValidationError}
+                  <span className="validation-text-color">
+                  {this.state.closingCostsValidationError}
+                  </span>
+               
               </MDBCol>
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "closing_costs")} */}

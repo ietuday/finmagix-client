@@ -616,7 +616,10 @@ if(event.target.name === "points_percentage"){
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
-          {this.state.interestOnlyPeriodValidationError}
+           <span className="validation-text-color">
+           {this.state.interestOnlyPeriodValidationError}
+           </span>
+        
         </MDBCol>
       </MDBRow>
     );
@@ -657,7 +660,10 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
-            {this.state.loan_amount_validation_error}
+               <span className="validation-text-color">
+               {this.state.loan_amount_validation_error}
+               </span>
+          
           </MDBCol>
 
         </MDBRow>
@@ -736,7 +742,10 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
+            <span className="validation-text-color">
             {this.state.interestrateValidationError}
+            </span>
+            
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "initial_interest_rate")} */}
@@ -784,8 +793,10 @@ if(event.target.name === "points_percentage"){
               }}
             />
 
-           
-{this.state.rateAdjustmentCapValidationError}
+<span className="validation-text-color">
+  {this.state.rateAdjustmentCapValidationError}
+</span>     
+
           </MDBCol>
          
         </MDBRow>
@@ -830,7 +841,10 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
-            {this.state.ceilinginterestrateValidationError}
+             <span className="validation-text-color">
+             {this.state.ceilinginterestrateValidationError}
+             </span>
+           
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -871,7 +885,10 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
-          {this.state.floorinterestrateValidationError}
+             <span className="validation-text-color">
+             {this.state.floorinterestrateValidationError}
+             </span>
+          
           </MDBCol>
        
         </MDBRow>
@@ -915,7 +932,10 @@ if(event.target.name === "points_percentage"){
                 
               }}
             />
-          {this.state.periodCapValidationError}
+             <span className="validation-text-color">
+             {this.state.periodCapValidationError}
+             </span>
+          
           </MDBCol>
          
         </MDBRow>
@@ -957,8 +977,10 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
-
-           {this.state.rateAddValidationError}
+ <span className="validation-text-color">
+ {this.state.rateAddValidationError}
+ </span>
+          
 
             <MDBRow className="margin20">
               <MDBCol md="12">
@@ -997,7 +1019,10 @@ if(event.target.name === "points_percentage"){
                     });
                   }}
                 />
+                <span className="validation-text-color">
                 {this.state.pointsValidationError}
+                </span>
+                
               </MDBCol>
             </MDBRow>
            
@@ -1043,7 +1068,10 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
+            <span className="validation-text-color">
             {this.state.closingCostsValidationError}
+            </span>
+          
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "closing_costs")} */}

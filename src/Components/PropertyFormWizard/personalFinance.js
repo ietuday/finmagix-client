@@ -271,7 +271,7 @@ export class PersonalFinance extends Component {
               }}
             />
           </MDBCol>
-          {/* {displayValidationErrors(this.validators, "federal_income")} */}
+         
         </MDBRow>
 
         <MDBRow className="margin20">
@@ -311,7 +311,10 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
-          {this.state.monthlydebtPaymentValidationError}
+            <span className="validation-text-color">
+            {this.state.monthlydebtPaymentValidationError}
+            </span>
+         
           </MDBCol>
          
         </MDBRow>
@@ -357,7 +360,10 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
-          {this.state.monthlynonhousingExpensesValidationError}
+            <span className="validation-text-color">
+            {this.state.monthlynonhousingExpensesValidationError}
+            </span>
+         
           </MDBCol>
          
         </MDBRow>
@@ -401,7 +407,10 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
-            {this.state.marginal_tax_rate_ValidationError}
+             <span className="validation-text-color">
+             {this.state.marginal_tax_rate_ValidationError}
+             </span>
+           
           </MDBCol>
         </MDBRow>
 
