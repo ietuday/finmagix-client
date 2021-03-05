@@ -162,13 +162,24 @@ export class PropertyMortgageHOC extends Component {
         ) {
           return NotificationManager.error('error', 'Validation Error')
         } else {
+            console.log(this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
+            this.state.firstLoanScenario['loan_amount'] &&
+            this.state.firstLoanScenario['floor_interest_rate'] &&
+            this.state.firstLoanScenario['ceiling_interest_rate'] &&
+            this.state.firstLoanScenario['interest_only_period'])
+
+            console.log(this.state.firstLoanScenario['first_interest_rate_adj_cap'])
+
+            console.log(this.state.firstLoanScenario['loan_amount'])
+
+            console.log(this.state.firstLoanScenario['floor_interest_rate'])
+            console.log(this.state.firstLoanScenario['floor_interest_rate'])
 
           if (
             this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.firstLoanScenario['loan_amount'] &&
             this.state.firstLoanScenario['floor_interest_rate'] &&
-            this.state.firstLoanScenario['ceiling_interest_rate'] &&
-            this.state.firstLoanScenario['interest_only_period']
+            this.state.firstLoanScenario['ceiling_interest_rate'] 
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -329,8 +340,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.firstLoanScenario['loan_amount'] &&
             this.state.firstLoanScenario['floor_interest_rate'] &&
-            this.state.firstLoanScenario['ceiling_interest_rate'] &&
-            this.state.firstLoanScenario['interest_only_period']
+            this.state.firstLoanScenario['ceiling_interest_rate'] 
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
