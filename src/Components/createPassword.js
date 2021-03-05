@@ -36,8 +36,8 @@ class createPassword extends Component {
       valid: false,
       match: false
     };
-    this.validators = CreatePasswordValidator;
-    resetValidators(this.validators);
+    // this.validators = CreatePasswordValidator;
+    // resetValidators(this.validators);
   }
 
 
@@ -46,7 +46,7 @@ class createPassword extends Component {
       ...this.state,
       [e.target.name]: e.target.value,
     });
-    updateValidators(this.validators, e.target.name, e.target.value);
+    // updateValidators(this.validators, e.target.name, e.target.value);
   }
 
   goToPreviousPage = () => {
@@ -142,7 +142,7 @@ class createPassword extends Component {
               />
             </MDBCol>
           </MDBRow>
-          {displayValidationErrors(this.validators, "password")}
+          
 
           <MDBRow className="margin20">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
@@ -158,7 +158,7 @@ class createPassword extends Component {
               />
             </MDBCol>
           </MDBRow>
-          {displayValidationErrors(this.validators, "confirmPassword")}
+          
 
           <MDBRow className="margin20">
             <MDBCol md="12" className="text-center">

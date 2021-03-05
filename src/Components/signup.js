@@ -37,9 +37,9 @@ export class Signup extends Component {
       backButton: false,
       goToNextPage: false,
     };
-    this.validators = SignupValidator;
-    resetValidators(this.validators);
-    this.isFormValid = this.isFormValid.bind(this);
+    // this.validators = SignupValidator;
+    // resetValidators(this.validators);
+    // this.isFormValid = this.isFormValid.bind(this);
     this.signUpGoogleFacebbok = this.signUpGoogleFacebbok.bind(this);
   }
   handleChange = (e) => {
@@ -47,17 +47,17 @@ export class Signup extends Component {
       ...this.state,
       [e.target.name]: e.target.value,
     });
-    updateValidators(this.validators, e.target.name, e.target.value);
+    // updateValidators(this.validators, e.target.name, e.target.value);
   };
-  isFormValid() {
-    let status = true;
-    Object.keys(this.validators).forEach((field) => {
-      if (!this.validators[field].valid) {
-        status = false;
-      }
-    });
-    return status;
-  }
+  // isFormValid() {
+  //   let status = true;
+  //   Object.keys(this.validators).forEach((field) => {
+  //     if (!this.validators[field].valid) {
+  //       status = false;
+  //     }
+  //   });
+  //   return status;
+  // }
   signUpGoogleFacebbok(res, type) {
     const { SignUp } = this.props;
     let response;
@@ -163,7 +163,7 @@ export class Signup extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "namefield")}
+        
         <MDBRow className="margin20">
           <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <span className="signup-signin-label">Email</span>
@@ -178,7 +178,7 @@ export class Signup extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "email")}
+        
         <MDBRow className="margin20">
           <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <span className="signup-signin-label">Password</span>
@@ -193,7 +193,7 @@ export class Signup extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "password")}
+        
         <MDBRow className="margin20">
           <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <div className="custom-control custom-checkbox">

@@ -61,7 +61,7 @@ export class GetStartedHouseInfo extends Component {
       mapContainer: <MapWithASearchBox />,
       annualHomeOwnerAssociationValidationError: ""
     };
-    this.validators = HouseInfoValidator;
+    // this.validators = HouseInfoValidator;
     //resetValidators(this.validators);
     this.houseInfo = "";
     this.handleChange = this.handleChange.bind(this);
@@ -595,7 +595,7 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "area_of_the_house")}
+
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>

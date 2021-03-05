@@ -30,8 +30,8 @@ class ForgotPassword extends Component {
       email: "",
       goToNextPage: false,
     };
-    this.validators = ForgotPasswordValidator;
-    resetValidators(this.validators);
+    // this.validators = ForgotPasswordValidator;
+    // resetValidators(this.validators);
   }
 
   handleChange = (e) => {
@@ -39,19 +39,19 @@ class ForgotPassword extends Component {
       ...this.state,
       [e.target.name]: e.target.value,
     });
-    updateValidators(this.validators, e.target.name, e.target.value);
+    // updateValidators(this.validators, e.target.name, e.target.value);
   };
-  isFormValid = () => {
-    let status = true;
-    Object.keys(this.validators).forEach((field) => {
-      if (!this.validators[field].valid) {
-        status = false;
-      } else {
-        status = true;
-      }
-    });
-    return status;
-  };
+  // isFormValid = () => {
+  //   let status = true;
+  //   Object.keys(this.validators).forEach((field) => {
+  //     if (!this.validators[field].valid) {
+  //       status = false;
+  //     } else {
+  //       status = true;
+  //     }
+  //   });
+  //   return status;
+  // };
 
   goToPreviousPage = () => {
     this.props.history.push('/signin');   
@@ -141,7 +141,7 @@ class ForgotPassword extends Component {
               />
             </MDBCol>
           </MDBRow>
-          {displayValidationErrors(this.validators, "email")}
+          
 
           <MDBRow className="margin20">
             <MDBCol md="12" className="text-center">

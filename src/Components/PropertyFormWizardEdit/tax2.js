@@ -66,8 +66,8 @@ export class Tax2 extends Component {
       showDetailedDeductionOption: false,
       showPreviousLoanBalanceButton: false,
     };
-    this.validators = Tax2Validator;
-    resetValidators(this.validators);
+    // this.validators = Tax2Validator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
   }
@@ -130,18 +130,7 @@ export class Tax2 extends Component {
       [e.target.name]: e.target.value,
     });
 
-    if (this.state.previous_balance === "Y") {
-      if (
-        name === "avg_loan_balance_for_grandfathered_debt" ||
-        name === "avg_loan_balance_for_home_acquisition_debt" ||
-        name === "paid_mortgage_on_gf_ha_debt"
-      ) {
-        updateValidators(this.validators, e.target.name, e.target.value);
-        const validationErrorLength = this.validators[e.target.name].errors
-          .length;
-        this.props.getValidationError(validationErrorLength);
-      }
-    }
+
 
     this.props.getData("tax2", this.state);
   }
@@ -193,10 +182,7 @@ export class Tax2 extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.validators,
-          "avg_loan_balance_for_grandfathered_debt"
-        )}
+       
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -239,10 +225,7 @@ export class Tax2 extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.validators,
-          "avg_loan_balance_for_home_acquisition_debt"
-        )}
+        
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -277,10 +260,7 @@ export class Tax2 extends Component {
      
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.validators,
-          "paid_mortgage_on_gf_ha_debt"
-        )}
+        
       </div>
     );
 

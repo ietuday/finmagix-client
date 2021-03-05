@@ -10,10 +10,7 @@ import MapWithASearchBox from "../../common/geocode";
 import quss from "../../assets/images/que.png";
 import "../../css/addProperty.css";
 
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
+
 
 
 
@@ -588,7 +585,7 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "area_of_the_house")}
+        
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>
