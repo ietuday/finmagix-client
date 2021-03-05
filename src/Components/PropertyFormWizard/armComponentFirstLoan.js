@@ -702,6 +702,14 @@ if(event.target.name === "points_percentage"){
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Initial Interest Rate</span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+              Initial interest rate is the 'starter' interest rate on your ARM 
+              for the fixed period of our ARM.
+              </span>
+            </div>
+            <br/>
             {/* <Input
               className="input-class-mdb"
               placeholder="Enter here"
