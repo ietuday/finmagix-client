@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
 import { connect } from "react-redux";
+import { NotificationManager } from "react-notifications";
 import Header from "../../common/header";
 import { withRouter, Redirect } from "react-router-dom";
 import store from "../redux/store/index";
@@ -32,6 +33,7 @@ export class ShowDetailedReports extends Component {
       disabled: true,
       calculateCalled: false,
       calculateResponse: false,
+      CalculatorResponseData:[]
     };
   }
 
@@ -90,26 +92,25 @@ export class ShowDetailedReports extends Component {
           personalFinace: userData.data.data["personal_finances"],
           taxes: userData.data.data["taxes"],
         });
+        // this.calculateSurvey(prevProps);
       })
       .catch((err) => {});
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (
-      !this.state.calculateResponse &&
-      store.getState().CalculatorResponse &&
-      store.getState().CalculatorResponse.success
+      !this.state.calculateResponse
+      // store.getState().CalculatorResponse &&
+      // store.getState().CalculatorResponse.success
     ) {
       this.setState({
         disabled: false,
         loading: false,
         calculateResponse: true,
       });
-      localStorage.setItem(
-        "calculatorResponse",
-        JSON.stringify(store.getState().CalculatorResponse.output)
-      );
+      
     }
+
     this.calculateSurvey(prevProps);
   }
 
@@ -154,7 +155,7 @@ export class ShowDetailedReports extends Component {
     }
   }
 
-  calculateAPI(prevProps) {
+  async calculateAPI(prevProps) {
     if (
       this.state.survey &&
       this.state.survey["whenbuyhome"] &&
@@ -185,7 +186,29 @@ export class ShowDetailedReports extends Component {
         screen12: this.calculateScreen12(prevProps),
       };
 
-      this.props.GetCalculator(calculatorInputObj);
+      // const data = await this.props.GetCalculator(calculatorInputObj);
+      // console.log(data)
+      Axios.post(
+        `${baseURL}/calculator/`,calculatorInputObj,
+        {
+          headers: {
+            "Content-type": "Application/json",
+            Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+        .then((calRes) => {
+          this.setState({'CalculatorResponseData': calRes.data.output})
+          console.log(this.state)
+          localStorage.setItem(
+            "calculatorResponse",
+            JSON.stringify(calRes.data.output)
+          );
+
+          // NotificationManager.success('Success', 'Calculator Response feached');
+          
+        })
+        .catch((err) => {});
     }
   }
 
