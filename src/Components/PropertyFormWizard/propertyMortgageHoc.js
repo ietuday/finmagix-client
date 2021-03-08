@@ -93,7 +93,7 @@ export class PropertyMortgageHOC extends Component {
         } else {
 
           if (
-            this.state.firstLoanScenario["interest_only_period"] &&
+            
             this.state.firstLoanScenario['loan_amount']
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
@@ -165,8 +165,7 @@ export class PropertyMortgageHOC extends Component {
             console.log(this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.firstLoanScenario['loan_amount'] &&
             this.state.firstLoanScenario['floor_interest_rate'] &&
-            this.state.firstLoanScenario['ceiling_interest_rate'] &&
-            this.state.firstLoanScenario['interest_only_period'])
+            this.state.firstLoanScenario['ceiling_interest_rate'])
 
             console.log(this.state.firstLoanScenario['first_interest_rate_adj_cap'])
 
@@ -275,7 +274,6 @@ export class PropertyMortgageHOC extends Component {
           return NotificationManager.error('error', 'Validation Error')
         } else {
           if (
-            this.state.firstLoanScenario["interest_only_period"] &&
             this.state.firstLoanScenario['loan_amount']
           ) {
             if (this.state.firstLoanScenario.loanamountsecond1) {
@@ -437,6 +435,7 @@ export class PropertyMortgageHOC extends Component {
       ARMMortgageUpdateFirst
 
     } = this.props;
+    debugger
     if (
       this.state.secondLoanScenario.secondloanarmvalidationerror === 0 ||
       this.state.SecondloanscenarioValidationErrors === 0
@@ -516,8 +515,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.secondLoanScenario['loan_amount'] &&
             this.state.secondLoanScenario['floor_interest_rate'] &&
-            this.state.secondLoanScenario['ceiling_interest_rate'] &&
-            this.state.secondLoanScenario['interest_only_period']
+            this.state.secondLoanScenario['ceiling_interest_rate'] 
           ) {
             if (this.state.secondLoanScenario.loanamountsecond2) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
@@ -673,8 +671,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.secondLoanScenario['loan_amount'] &&
             this.state.secondLoanScenario['floor_interest_rate'] &&
-            this.state.secondLoanScenario['ceiling_interest_rate'] &&
-            this.state.secondLoanScenario['interest_only_period']
+            this.state.secondLoanScenario['ceiling_interest_rate']
           ) {
             if (this.state.secondLoanScenario.loanamountsecond2) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
@@ -771,7 +768,7 @@ export class PropertyMortgageHOC extends Component {
             } else {
     
               if (
-                this.state.firstLoanScenario["interest_only_period"] &&
+                
                 this.state.firstLoanScenario['loan_amount']
               ) {
                 if (this.state.firstLoanScenario.loanamountsecond1) {
@@ -948,7 +945,7 @@ export class PropertyMortgageHOC extends Component {
               return NotificationManager.error('error', 'Validation Error')
             } else {
               if (
-                this.state.firstLoanScenario["interest_only_period"] &&
+                
                 this.state.firstLoanScenario['loan_amount']
               ) {
                 if (this.state.firstLoanScenario.loanamountsecond1) {
