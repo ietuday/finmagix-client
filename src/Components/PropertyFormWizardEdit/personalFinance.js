@@ -75,11 +75,6 @@ export class PersonalFinance extends Component {
   async handleChange(event) {
     const { name } = event.target;
     event.persist();
-
-
-    
-
-
     if(event.target.name == "monthly_debt_payments"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
@@ -118,9 +113,6 @@ export class PersonalFinance extends Component {
       }
 
     }
-
-
-
     
     await this.setState({
       [event.target.name]: event.target.value,

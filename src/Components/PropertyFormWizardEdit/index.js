@@ -203,48 +203,75 @@ export class StepperComponent extends Component {
     });
   };
   handlePersonalFinance = async (data, id) => {
-
-    await this.setState((prevState) => {
+    Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+    .length !== 0
+    ? this.setState((prevState) => {
+      let personalFinanceUpdate = Object.assign(
+        {},
+        prevState.personalFinanceUpdate
+      );
+      personalFinanceUpdate = data;
+      personalFinanceUpdate.property_obj = localStorage.getItem(
+        "property_id"
+      );
+      personalFinanceUpdate.id = JSON.parse(
+        localStorage.getItem("personal_finance_array")
+      ).id;
+      return { personalFinanceUpdate };
+    })
+    : this.setState((prevState) => {
       let personalFinance = Object.assign({}, prevState.personalFinance);
       personalFinance = data;
-      personalFinance.id = JSON.parse(localStorage.getItem("personal_finance_array")).id;
-      return { personalFinance };
+      personalFinance.property_obj = localStorage.getItem("property_id");
+      let personalFinanceUpdate = Object.assign(
+        {},
+        prevState.personalFinanceUpdate
+      );
+      personalFinanceUpdate = data;
+      personalFinanceUpdate.property_obj = localStorage.getItem("property_id");
+      return { personalFinance, personalFinanceUpdate };
     });
-    console.log(this.state)
+    // await this.setState((prevState) => {
+    //   let personalFinance = Object.assign({}, prevState.personalFinance);
+    //   personalFinance = data;
+    //   personalFinance.id = JSON.parse(localStorage.getItem("personal_finance_array")).id;
+    //   return { personalFinance };
+    // });
+    // console.log(this.state)
 
-    const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
-    const newActiveStep =
-      this.isLastStep && !this.allStepsCompleted
-        ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-        : this.state.activeStep + 1;
+    // const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
+    // const newActiveStep =
+    //   this.isLastStep && !this.allStepsCompleted
+    //     ? this.steps.findIndex((step, i) => !(i in this.state.completed))
+    //     : this.state.activeStep + 1;
 
 
-      if (
-      this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
-      this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
-      this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
+    //   if (
+    //   this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
+    //   this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
+    //   this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
 
-    ) {
-      NotificationManager.error('Error', 'Validation Error')
-    }
-    else {
-      this.setState({
-        saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-      });
+    // ) {
+    //   NotificationManager.error('Error', 'Validation Error')
+    // }
+    // else {
+    //   this.setState({
+    //     saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
+    //   });
 
-      {
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-          : PersonalFinanceCreate(this.state.personalFinance);
-      }
-      if (
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-      ) {
-        this.handleNext();
-      }
-    }
+    //   {
+    //     Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+    //       .length !== 0
+    //       ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+    //       : PersonalFinanceCreate(this.state.personalFinance);
+    //   }
+    //   if (
+    //     Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+    //       .length !== 0
+    //   ) {
+    //     this.handleNext();
+    //   }
+    // }
 
 
     // this.setState({
