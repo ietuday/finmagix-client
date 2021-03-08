@@ -105,7 +105,7 @@ export class PersonalFinance extends Component {
     if(event.target.name === "monthly_debt_payments"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
-          monthlydebtPaymentValidationError: " Cannot exceed Federal Income"
+          monthlydebtPaymentValidationError: " Cannot exceed Adjusted Gross Income"
         }) 
       }else{
         this.setState({
@@ -119,7 +119,7 @@ export class PersonalFinance extends Component {
     if(event.target.name === "monthly_non_housing_expenses"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
-          monthlynonhousingExpensesValidationError: " Cannot exceed Federal Income"
+          monthlynonhousingExpensesValidationError: " 'Cannot exceed Adjusted Gross Income"
         }) 
       }else{
         this.setState({
@@ -374,9 +374,8 @@ export class PersonalFinance extends Component {
             <div className="tooltip-img">
               <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
-                Note that we have to build a check here that the interest only
-                period cannot be equal to the loan term or greater than the loan
-                term.{" "}
+              Marginal Tax rate refers to the rate you pay  on the amount of your income that falls into a certain range. 
+              We use to estimate monthly taxes you may pay on your income.{" "}
               </span>
             </div>
             <br />

@@ -83,7 +83,7 @@ export class PersonalFinance extends Component {
     if(event.target.name == "monthly_debt_payments"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
-          monthlydebtPaymentValidationError: " Cannot exceed Federal Income"
+          monthlydebtPaymentValidationError: " Cannot exceed Adjusted Gross Income"
         }) 
       }else{
         this.setState({
@@ -97,7 +97,7 @@ export class PersonalFinance extends Component {
     if(event.target.name == "monthly_non_housing_expenses"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
-          monthlynonhousingExpensesValidationError: " Cannot exceed Federal Income"
+          monthlynonhousingExpensesValidationError: " 'Cannot exceed Adjusted Gross Income"
         }) 
       }else{
         this.setState({

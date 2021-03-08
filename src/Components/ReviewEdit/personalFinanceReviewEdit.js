@@ -146,9 +146,8 @@ export class PersonalFinanceReviewEdit extends Component {
                   Marginal tax Rate
                 </span>
                 <div className="tooltip-img"><img src={quss} className="tool-img" alt=""/>
-            <span className="tooltip-img-text">Note that we have to build a check here that the
-             interest only period cannot be equal to the loan term or greater 
-             than the loan term. </span>
+            <span className="tooltip-img-text">  Marginal Tax rate refers to the rate you pay  on the amount of your income that falls into a certain range. 
+              We use to estimate monthly taxes you may pay on your income.</span>
             </div>
               </div>
             </MDBCol>
