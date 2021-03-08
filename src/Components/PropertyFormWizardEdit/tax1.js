@@ -279,40 +279,8 @@ export class Tax1 extends Component {
   render() {
     const showGrossIncome = (
       <div>
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">
-              Federal adjusted gross income
-            </span>
-            <br />
-            {/* <Input
-            className="input-class-mdb"
-            name="fedral_adjusted_gross_income"
-            value={this.state.fedral_adjusted_gross_income}
-            onChange={this.handleChange}
-            placeholder="Enter amount here"
-          /> */}
 
-            <NumberFormat
-              className="input-class-mdb"
-              name="fedral_adjusted_gross_income"
-              value={this.state.fedral_adjusted_gross_income}
-              onChange={this.handleChange}
-              placeholder="Enter amount here"
-              thousandSeparator={true}
-              onValueChange={async (values) => {
-                const { formattedValue, value } = values;
-                await this.setState({
-                  fedral_adjusted_gross_income_number: formattedValue,
-                });
-                await this.setState({
-                  fedral_adjusted_gross_income: value,
-                });
-              }}
-            />
-          </MDBCol>
-        </MDBRow>
-        {/* {displayValidationErrors(this.Tax1NoValidators, "fedral_adjusted_gross_income")} */}
+       
       </div>
     );
 
