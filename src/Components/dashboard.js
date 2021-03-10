@@ -151,7 +151,8 @@ export class Dashboard extends Component {
       return (
         <Redirect
           to={{
-            pathname: "/property-information-review-edit",
+            pathname: "/property-form",
+            returnBackFromreviewEdit: true,
             state: { propertyId: this.state.singleid },
           }}
         />

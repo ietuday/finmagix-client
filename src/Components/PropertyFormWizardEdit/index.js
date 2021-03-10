@@ -445,12 +445,6 @@ export class StepperComponent extends Component {
         })
 
       }
-
-
-
-
-
-
     } else if (this.state.activeStep === 1) {
 
       this.props.history.push({
