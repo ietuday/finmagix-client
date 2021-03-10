@@ -90,6 +90,34 @@ function MortgageSummary(props) {
                 <MDBRow>
                   <MDBCol md="12">
                     <div className="tab_contnt">
+                      <div className="box">Loan Term</div>
+                      <div className="box-1">
+                      { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""}
+                      </div>
+                      <div className="box-1">
+                        {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
+                      </div>
+                    </div>
+                  </MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  <MDBCol md="12">
+                    <div className="tab_contnt">
+                      <div className="box">Loan Amount</div>
+                      <div className="box-1">
+                      { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""}
+                      </div>
+                      <div className="box-1">
+                        {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
+                      </div>
+                    </div>
+                  </MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  <MDBCol md="12">
+                    <div className="tab_contnt">
                       <div className="box">Interest rate</div>
                       <div className="box-1">
                         {CalculatorResponse.ARM1
@@ -334,6 +362,35 @@ function MortgageSummary(props) {
                     </div>
                   </MDBCol>
                 </MDBRow>
+
+                <MDBRow>
+                  <MDBCol md="12">
+                    <div className="tab_contnt">
+                      <div className="box">Loan Term</div>
+                      <div className="box-1">
+                      { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""}
+                      </div>
+                      <div className="box-1">
+                        {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
+                      </div>
+                    </div>
+                  </MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  <MDBCol md="12">
+                    <div className="tab_contnt">
+                      <div className="box">Loan Amount</div>
+                      <div className="box-1">
+                      { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""}
+                      </div>
+                      <div className="box-1">
+                        {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
+                      </div>
+                    </div>
+                  </MDBCol>
+                </MDBRow>
+                
                 <MDBRow>
                   <MDBCol md="12">
                     <div className="tab_contnt">

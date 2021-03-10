@@ -235,7 +235,7 @@ function CheatSheet(props) {
 
   const projectedEquitydata = [
     {
-      name: "Scenario1",
+      name: "First Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -249,7 +249,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenario2",
+      name: "Second Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -266,7 +266,7 @@ function CheatSheet(props) {
 
   const afterHomedata = [
     {
-      name: "Scenario1",
+      name: "First Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -280,7 +280,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenerio2",
+      name: "Second Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -297,7 +297,7 @@ function CheatSheet(props) {
 
   const taxImpact = [
     {
-      name: "Scenario1",
+      name: "First Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -311,7 +311,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenario2",
+      name: "Second Scenario",
       Amount: parseFloat(
         String(
           `${
