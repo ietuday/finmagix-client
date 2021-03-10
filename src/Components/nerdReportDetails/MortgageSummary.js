@@ -92,10 +92,14 @@ function MortgageSummary(props) {
                     <div className="tab_contnt">
                       <div className="box">Loan Term</div>
                       <div className="box-1">
-                      { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""}
+                      {CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1.termfirst1
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1.termfirst1 
+                          : 0}
                       </div>
                       <div className="box-1">
-                        {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
+                 
                       </div>
                     </div>
                   </MDBCol>
@@ -106,10 +110,18 @@ function MortgageSummary(props) {
                     <div className="tab_contnt">
                       <div className="box">Loan Amount</div>
                       <div className="box-1">
-                      { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""}
+                      {CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1.loanamountfirst1
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1.loanamountfirst1 
+                          : 0}
                       </div>
                       <div className="box-1">
-                        {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
+                      {CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1.loanamountsecond1
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1.loanamountsecond1 
+                          : 0}
                       </div>
                     </div>
                   </MDBCol>
@@ -368,7 +380,11 @@ function MortgageSummary(props) {
                     <div className="tab_contnt">
                       <div className="box">Loan Term</div>
                       <div className="box-1">
-                      { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""}
+                      {CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2.termfirst2
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2.termfirst2 
+                          : 0}
                       </div>
                       <div className="box-1">
                         {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
@@ -382,10 +398,18 @@ function MortgageSummary(props) {
                     <div className="tab_contnt">
                       <div className="box">Loan Amount</div>
                       <div className="box-1">
-                      { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""}
+                      {CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2.loanamountfirst2
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2.loanamountfirst2 
+                          : 0}
                       </div>
                       <div className="box-1">
-                        {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
+                      {CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2.loanamountsecond2
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2.loanamountsecond1 
+                          : 0}
                       </div>
                     </div>
                   </MDBCol>
