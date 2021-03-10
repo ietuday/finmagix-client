@@ -750,7 +750,7 @@ class AmortizationTableFRM extends React.Component {
                         return (
                           <tr key={index}>
                             <td>{listValue.Year}</td>
-                            <td>{listValue.Interestrate}</td>
+                            <td>{listValue.InterestRate}</td>
                             <td>{listValue.Priorbalance}</td>
                             <td>{listValue.Payment}</td>
                             <td>{listValue.Principalpaid}</td>
