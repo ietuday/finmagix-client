@@ -59,21 +59,7 @@ export class TaxReviewEdit extends Component {
               </h4>
             </MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
-            <MDBCol md="1" size="1"></MDBCol>
-            <MDBCol md="6" size="6">
-              <div className="">
-                <span className="get-started-label">Fedral adjusted gross income</span>
-              </div>
-            </MDBCol>
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
-                {GetTaxResponse ? GetTaxResponse.fedral_adjusted_gross_income : "no data"}
-              </div>
-            </MDBCol>
-            <MDBCol md="2"></MDBCol>
-          </MDBRow>
+    
           <MDBRow className="margin20">
             <MDBCol md="1" size="1"></MDBCol>
             <MDBCol md="6" size="6">

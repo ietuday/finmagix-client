@@ -85,7 +85,7 @@ export class PersonalFinanceReviewEdit extends Component {
           <MDBCol md="6" size="6">
             <div className="">
               <span className="get-started-label">
-              Federal Income
+              Adjusted Gross Income
 
               </span>
              
