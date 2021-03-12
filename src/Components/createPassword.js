@@ -1,19 +1,21 @@
-import React, { Component} from "react";
+import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { Button } from "@material-ui/core";
-
+import { Redirect, Link } from "react-router-dom";
 import SHA256 from "crypto-js/sha256";
 import "../css/signup-signin.css";
 import { Input } from "antd";
 import { NotificationManager } from "react-notifications";
-
-// import CreatePasswordValidator from "../Components/validatorRules/CreatePasswordValidator";
-// import { updateValidators } from "../common/ValidatorFunction";
-// import {
-//   resetValidators,
-//   displayValidationErrors,
-// } from "../common/ValidatorFunction";
-
+import { connect } from "react-redux";
+import { sign_in } from "../Components/redux/actions/signinSignup.js/index";
+import SigninValidator from "../Components/validatorRules/SigninValidatorRules";
+import CreatePasswordValidator from "../Components/validatorRules/CreatePasswordValidator";
+import { updateValidators } from "../common/ValidatorFunction";
+import {
+  resetValidators,
+  displayValidationErrors,
+} from "../common/ValidatorFunction";
+import { login } from "../routes/utils";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { IconButton } from "@material-ui/core";
 
@@ -36,8 +38,8 @@ class createPassword extends Component {
       valid: false,
       match: false
     };
-    // this.validators = CreatePasswordValidator;
-    // resetValidators(this.validators);
+    this.validators = CreatePasswordValidator;
+    resetValidators(this.validators);
   }
 
 
@@ -46,7 +48,7 @@ class createPassword extends Component {
       ...this.state,
       [e.target.name]: e.target.value,
     });
-    // updateValidators(this.validators, e.target.name, e.target.value);
+    updateValidators(this.validators, e.target.name, e.target.value);
   }
 
   goToPreviousPage = () => {
@@ -122,7 +124,7 @@ class createPassword extends Component {
             xs="12"
             className="text-center"
           >
-            <img src={padlock} className="for-img" alt="" />
+            <img src={padlock} className="for-img"></img>
             <h4>Create New Password</h4>
             {/* <p>
             Lost your password? Please enter your email address. You will receive a link to create a new password via email.
@@ -142,7 +144,7 @@ class createPassword extends Component {
               />
             </MDBCol>
           </MDBRow>
-          
+          {displayValidationErrors(this.validators, "password")}
 
           <MDBRow className="margin20">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
@@ -158,7 +160,7 @@ class createPassword extends Component {
               />
             </MDBCol>
           </MDBRow>
-          
+          {displayValidationErrors(this.validators, "confirmPassword")}
 
           <MDBRow className="margin20">
             <MDBCol md="12" className="text-center">
