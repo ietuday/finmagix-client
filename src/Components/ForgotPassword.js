@@ -1,20 +1,20 @@
-import React, { Component} from "react";
+import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { IconButton } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import SHA256 from "crypto-js/sha256";
 import "../css/signup-signin.css";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link, Redirect } from "react-router-dom";
 import { Input } from "antd";
 import { NotificationManager } from "react-notifications";
-// import ForgotPasswordValidator from "../Components/validatorRules/ForgotPasswordValidator";
-
-// import { updateValidators } from "../common/ValidatorFunction";
-// import {
-//   resetValidators,
-//   displayValidationErrors,
-// } from "../common/ValidatorFunction";
+import ForgotPasswordValidator from "../Components/validatorRules/ForgotPasswordValidator";
+import Loader from "../Components/reports/loader";
+import { updateValidators } from "../common/ValidatorFunction";
+import {
+  resetValidators,
+  displayValidationErrors,
+} from "../common/ValidatorFunction";
 import forgot from "../assets/images/forgot.svg";
 import Axios from "axios";
 import { config } from "./config/default";
@@ -30,8 +30,8 @@ class ForgotPassword extends Component {
       email: "",
       goToNextPage: false,
     };
-    // this.validators = ForgotPasswordValidator;
-    // resetValidators(this.validators);
+    this.validators = ForgotPasswordValidator;
+    resetValidators(this.validators);
   }
 
   handleChange = (e) => {
@@ -39,19 +39,19 @@ class ForgotPassword extends Component {
       ...this.state,
       [e.target.name]: e.target.value,
     });
-    // updateValidators(this.validators, e.target.name, e.target.value);
+    updateValidators(this.validators, e.target.name, e.target.value);
   };
-  // isFormValid = () => {
-  //   let status = true;
-  //   Object.keys(this.validators).forEach((field) => {
-  //     if (!this.validators[field].valid) {
-  //       status = false;
-  //     } else {
-  //       status = true;
-  //     }
-  //   });
-  //   return status;
-  // };
+  isFormValid = () => {
+    let status = true;
+    Object.keys(this.validators).forEach((field) => {
+      if (!this.validators[field].valid) {
+        status = false;
+      } else {
+        status = true;
+      }
+    });
+    return status;
+  };
 
   goToPreviousPage = () => {
     this.props.history.push('/signin');   
@@ -121,7 +121,7 @@ class ForgotPassword extends Component {
             xs="12"
             className="text-center"
           >
-            <img src={forgot} className="for-img" alt="" />
+            <img src={forgot} className="for-img"></img>
             <h4>You Forgot Your Password</h4>
             <p>
             Forgot your password? No problem! Please enter your email below, and press <b>SEND</b>
@@ -141,7 +141,7 @@ class ForgotPassword extends Component {
               />
             </MDBCol>
           </MDBRow>
-          
+          {displayValidationErrors(this.validators, "email")}
 
           <MDBRow className="margin20">
             <MDBCol md="12" className="text-center">
