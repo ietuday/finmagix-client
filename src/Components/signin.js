@@ -10,12 +10,12 @@ import { Input } from "antd";
 import { NotificationManager } from "react-notifications";
 import { connect } from "react-redux";
 import { sign_in } from "../Components/redux/actions/signinSignup.js/index";
-// import SigninValidator from "../Components/validatorRules/SigninValidatorRules";
-// import { updateValidators } from "../common/ValidatorFunction";
-// import {
-//   resetValidators,
-//   displayValidationErrors,
-// } from "../common/ValidatorFunction";
+import SigninValidator from "../Components/validatorRules/SigninValidatorRules";
+import { updateValidators } from "../common/ValidatorFunction";
+import {
+  resetValidators,
+  displayValidationErrors,
+} from "../common/ValidatorFunction";
 import { login } from "../routes/utils";
 
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -31,8 +31,8 @@ export class Signin extends Component {
       password: "",
       goToNextPage: false,
     };
-    // this.validators = SigninValidator;
-    // resetValidators(this.validators);
+    this.validators = SigninValidator;
+    resetValidators(this.validators);
   }
   componentWillUnmount() {
     this.setState = (state, callback) => {
@@ -49,19 +49,19 @@ export class Signin extends Component {
       ...this.state,
       [e.target.name]: e.target.value,
     });
-    // updateValidators(this.validators, e.target.name, e.target.value);
+    updateValidators(this.validators, e.target.name, e.target.value);
   };
-  // isFormValid = () => {
-  //   let status = true;
-  //   Object.keys(this.validators).forEach((field) => {
-  //     if (!this.validators[field].valid) {
-  //       status = false;
-  //     } else {
-  //       status = true;
-  //     }
-  //   });
-  //   return status;
-  // };
+  isFormValid = () => {
+    let status = true;
+    Object.keys(this.validators).forEach((field) => {
+      if (!this.validators[field].valid) {
+        status = false;
+      } else {
+        status = true;
+      }
+    });
+    return status;
+  };
   handleSubmit = () => {
     const { SignIn } = this.props;
     this.setState({
@@ -72,14 +72,14 @@ export class Signin extends Component {
       password: SHA256(JSON.stringify(this.state.password)).toString(),
       
     };
-    // if (this.isFormValid()) {
+    if (this.isFormValid()) {
       SignIn(signinDataObject, this.onSuccess, this.onFailure);
-    // } else {
-      // NotificationManager.error("some error", "Error");
-    // }
+    } else {
+      NotificationManager.error("some error", "Error");
+    }
   };
   signUpGoogleFacebbok(res, type) {
-    const { SignIn } = this.props;
+    const { SignIn, SignInRequestData } = this.props;
     let response;
     if (type === "google") {
       response = {
@@ -163,7 +163,7 @@ export class Signin extends Component {
               />
             </MDBCol>
           </MDBRow>
-          
+          {displayValidationErrors(this.validators, "email")}
           <MDBRow className="margin20">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <span className="signup-signin-label">Password</span>
@@ -178,7 +178,7 @@ export class Signin extends Component {
               />
             </MDBCol>
           </MDBRow>
-          
+          {displayValidationErrors(this.validators, "password")}
 
 
 
