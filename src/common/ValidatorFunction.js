@@ -8,24 +8,24 @@ import Tax1YesValidator from "../Components/validatorRules/Tax1YesValidator";
 import Tax1NoValidator from "../Components/validatorRules/Tax1NoValidator";
 import Tax2Validator from "../Components/validatorRules/Tax2Validator";
 
-// export function updateValidators(validatorField, fieldName, value) {
-//   validatorField[fieldName].errors = [];
-//   validatorField[fieldName].state = value;
-//   validatorField[fieldName].valid = true;
-//   validatorField[fieldName].rules.forEach((rule) => {
-//     if (rule.test instanceof RegExp) {
-//       if (!rule.test.test(value)) {
-//         validatorField[fieldName].errors.push(rule.message);
-//         validatorField[fieldName].valid = false;
-//       }
-//     } else if (typeof rule.test === "function") {
-//       if (!rule.test(value)) {
-//         validatorField[fieldName].errors.push(rule.message);
-//         validatorField[fieldName].valid = false;
-//       }
-//     }
-//   });
-// }
+export function updateValidators(validatorField, fieldName, value) {
+  validatorField[fieldName].errors = [];
+  validatorField[fieldName].state = value;
+  validatorField[fieldName].valid = true;
+  validatorField[fieldName].rules.forEach((rule) => {
+    if (rule.test instanceof RegExp) {
+      if (!rule.test.test(value)) {
+        validatorField[fieldName].errors.push(rule.message);
+        validatorField[fieldName].valid = false;
+      }
+    } else if (typeof rule.test === "function") {
+      if (!rule.test(value)) {
+        validatorField[fieldName].errors.push(rule.message);
+        validatorField[fieldName].valid = false;
+      }
+    }
+  });
+}
 
 export function resetValidators(validatorField) {
   Object.keys(validatorField).forEach((fieldName) => {
