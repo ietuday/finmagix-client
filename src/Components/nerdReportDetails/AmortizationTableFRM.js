@@ -150,6 +150,7 @@ class AmortizationTableFRM extends React.Component {
         }
       }
       if (this.CalculatorResponse && this.CalculatorResponse.dFRM2) {
+        debugger
         const Years = this.CalculatorResponse.dFRM2.Year;
         const Interestrate = this.CalculatorResponse.dFRM2.InterestRate;
         const Priorbalances = this.CalculatorResponse.dFRM2.Priorbalance;
@@ -202,7 +203,7 @@ class AmortizationTableFRM extends React.Component {
         objYear.map((yr, index) => {
           this.state.dfrm2.push({
             Year: yr.Year,
-            Interestrate: objInterestrate[index].Interestrate,
+            InterestRate: objInterestrate[index].Interestrate,
             Endingbalance: objEndingbalances[index].Endingbalance,
             Priorbalance: objPriorbalance[index].Priorbalance,
             Principalpaid: objPrincipalpaid[index].Principalpaid,
