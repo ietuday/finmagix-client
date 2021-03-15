@@ -150,7 +150,6 @@ class AmortizationTableFRM extends React.Component {
         }
       }
       if (this.CalculatorResponse && this.CalculatorResponse.dFRM2) {
-        debugger
         const Years = this.CalculatorResponse.dFRM2.Year;
         const Interestrate = this.CalculatorResponse.dFRM2.InterestRate;
         const Priorbalances = this.CalculatorResponse.dFRM2.Priorbalance;
