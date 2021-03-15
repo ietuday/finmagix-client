@@ -187,7 +187,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: ((CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Paymentsecond1) || (CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Paymentsecond1)) ? "Second Mortage payment" : "PMI",
+      name: ((CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Paymentsecond2) || (CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Paymentsecond2)) ? "Second Mortage payment" : "PMI",
       Amount: parseFloat(
         String(
           `${
