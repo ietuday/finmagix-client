@@ -231,62 +231,6 @@ export class StepperComponent extends Component {
       personalFinanceUpdate.property_obj = localStorage.getItem("property_id");
       return { personalFinance, personalFinanceUpdate };
     });
-    // await this.setState((prevState) => {
-    //   let personalFinance = Object.assign({}, prevState.personalFinance);
-    //   personalFinance = data;
-    //   personalFinance.id = JSON.parse(localStorage.getItem("personal_finance_array")).id;
-    //   return { personalFinance };
-    // });
-    // console.log(this.state)
-
-    // const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
-    // const newActiveStep =
-    //   this.isLastStep && !this.allStepsCompleted
-    //     ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-    //     : this.state.activeStep + 1;
-
-
-    //   if (
-    //   this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
-    //   this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
-    //   this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
-
-    // ) {
-    //   NotificationManager.error('Error', 'Validation Error')
-    // }
-    // else {
-    //   this.setState({
-    //     saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-    //   });
-
-    //   {
-    //     Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-    //       .length !== 0
-    //       ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-    //       : PersonalFinanceCreate(this.state.personalFinance);
-    //   }
-    //   if (
-    //     Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-    //       .length !== 0
-    //   ) {
-    //     this.handleNext();
-    //   }
-    // }
-
-
-    // this.setState({
-    //   saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-    // });
-
-    // {
-    //   Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-    //     .length !== 0
-    //     ? PersonalFinanceUpdate(this.state.personalFinance)
-    //     : PersonalFinanceCreate(this.state.personalFinance);
-    // }
-
-
-
   };
   async handleRentvsBuyData(data) {
     await this.setState((prevState) => {
@@ -426,8 +370,6 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
-
-      console.log(this.state)
       if (this.state.propertyInfo.homepriceGrowthValidationError ||
         this.state.propertyInfo.downpaymentnewValidationError ||
         this.state.propertyInfo.annualPropertytaxValidationError ||
@@ -451,7 +393,7 @@ export class StepperComponent extends Component {
         pathname: '/property-form',
         returnBackFromreviewEdit: true
       })
-      console.log(this.state)
+      
       {
         Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
           .length !== 0

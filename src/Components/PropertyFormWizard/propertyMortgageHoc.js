@@ -166,18 +166,7 @@ export class PropertyMortgageHOC extends Component {
         ) {
           return NotificationManager.error('error', 'Validation Error')
         } else {
-            console.log(this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
-            this.state.firstLoanScenario['loan_amount'] &&
-            this.state.firstLoanScenario['floor_interest_rate'] &&
-            this.state.firstLoanScenario['ceiling_interest_rate'])
-
-            console.log(this.state.firstLoanScenario['first_interest_rate_adj_cap'])
-
-            console.log(this.state.firstLoanScenario['loan_amount'])
-
-            console.log(this.state.firstLoanScenario['floor_interest_rate'])
-            console.log(this.state.firstLoanScenario['floor_interest_rate'])
-
+            
           if (
             this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.firstLoanScenario['loan_amount'] &&
@@ -887,14 +876,6 @@ export class PropertyMortgageHOC extends Component {
             ) {
               return NotificationManager.error('error', 'Validation Error')
             } else {
-              console.log("this.state.firstLoanScenario['first_interest_rate_adj_cap']",this.state.firstLoanScenario['first_interest_rate_adj_cap'])
-              console.log("this.state.firstLoanScenario['loan_amount']",this.state.firstLoanScenario['loan_amount'])
-              console.log("this.state.firstLoanScenario['floor_interest_rate']",this.state.firstLoanScenario['floor_interest_rate'])
-              console.log("this.state.firstLoanScenario['ceiling_interest_rate']",this.state.firstLoanScenario['ceiling_interest_rate'])
-              console.log("this.state.firstLoanScenario['first_interest_rate_adj_cap'] && this.state.firstLoanScenario['loan_amount'] && this.state.firstLoanScenario['floor_interest_rate'] && this.state.firstLoanScenario['ceiling_interest_rate']",this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
-              this.state.firstLoanScenario['loan_amount'] &&
-              this.state.firstLoanScenario['floor_interest_rate'] &&
-              this.state.firstLoanScenario['ceiling_interest_rate'])
               
               if (
                 this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
@@ -1068,15 +1049,7 @@ export class PropertyMortgageHOC extends Component {
             ) {
               return NotificationManager.error('error', 'Validation Error')
             } else {
-              console.log("this.state.firstLoanScenario['first_interest_rate_adj_cap']",this.state.firstLoanScenario['first_interest_rate_adj_cap'])
-              console.log("this.state.firstLoanScenario['loan_amount']",this.state.firstLoanScenario['loan_amount'])
-              console.log("this.state.firstLoanScenario['floor_interest_rate']",this.state.firstLoanScenario['floor_interest_rate'])
-              console.log("this.state.firstLoanScenario['ceiling_interest_rate']",this.state.firstLoanScenario['ceiling_interest_rate'])
-              console.log("this.state.firstLoanScenario['first_interest_rate_adj_cap'] && this.state.firstLoanScenario['loan_amount'] && this.state.firstLoanScenario['floor_interest_rate'] && this.state.firstLoanScenario['ceiling_interest_rate']",this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
-              this.state.firstLoanScenario['loan_amount'] &&
-              this.state.firstLoanScenario['floor_interest_rate'] &&
-              this.state.firstLoanScenario['ceiling_interest_rate'])
-
+              
               if (
                 this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
                 this.state.firstLoanScenario['loan_amount'] &&

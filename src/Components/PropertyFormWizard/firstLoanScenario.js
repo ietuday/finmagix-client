@@ -100,7 +100,7 @@ export class FirstLoanScenario extends Component {
       })
         .then(async (propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0];
-          console.log(propertyDetail);
+          
           this.setState({
             property_price: propertyDetail.property_price,
             property_downpayment: propertyDetail.downpayment_amount,
@@ -188,7 +188,7 @@ export class FirstLoanScenario extends Component {
                 .closingCostsValidationError,
             });
           }
-          console.log(this.state);
+          
           this.props.handleFirstloanMortgageInfo(this.state, null);
         })
         .catch((err) => {});
@@ -576,7 +576,7 @@ export class FirstLoanScenario extends Component {
             </ToggleButtonGroup>
           </MDBCol>
         </MDBRow>
-        {console.log(this.props)}
+        
         {this.state.mortgage_program_type_value === 2 ? (
           <ARMComponentFirstLoan
             downpayment={this.props.downpayment}

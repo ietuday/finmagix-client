@@ -19,7 +19,7 @@ export class PropertyInformationReviewEdit extends Component {
   componentDidMount() {
     
     const { GetPropertyinfo, PropertyInfoCreateResponse } = this.props;
-    console.log(this.props)
+    
     if(PropertyInfoCreateResponse && PropertyInfoCreateResponse.data){
 
       GetPropertyinfo(localStorage.getItem('property_id'));

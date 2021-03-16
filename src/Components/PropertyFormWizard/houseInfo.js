@@ -69,7 +69,7 @@ export class GetStartedHouseInfo extends Component {
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
     this.recommended_info = this.recommended_info.bind(this);
     this.checkProperty();
-    console.log(localStorage);
+    
   }
 
   checkProperty() {
@@ -132,7 +132,7 @@ export class GetStartedHouseInfo extends Component {
           } else {
             downpayment = "greaterthan20";
           }
-          console.log(this.state);
+          
           this.props.handleHouseInfo(downpayment, this.state);
         })
         .catch((err) => { });
@@ -250,7 +250,7 @@ export class GetStartedHouseInfo extends Component {
       name === "annual_home_owner_association_dues" ||
       name === "home_owner_insurance"
     ) {
-      console.log(name);
+      
 
       //updateValidators(this.validators, event.target.name, event.target.value);
       //const validationErrorLength = this.validators[event.target.name].errors.length;
@@ -265,9 +265,8 @@ export class GetStartedHouseInfo extends Component {
   }
 
   recommended_info(){
-    // console.log(property_price);
-    // console.log(state);
-    console.log(this.state)
+    
+    
     if(this.state.house_state && this.state.property_price){
       
       Axios.post(`${baseURL}/property_listings/recommend`, 
@@ -283,12 +282,12 @@ export class GetStartedHouseInfo extends Component {
       },
     })
       .then(async (recc_info) => {
-        console.log(Number(recc_info.data.data['recommended_HOI']))
+        
         await this.setState({
           'home_owner_insurance': recc_info.data.data['recommended_HOI'],
           'annual_property_tax': recc_info.data.data['recommended_Annual_Property_Tax']
         })
-        console.log(this.state)
+        
              
       })
       .catch((err) => { });
@@ -300,14 +299,14 @@ export class GetStartedHouseInfo extends Component {
     this.setState({
       no_of_bedrooms: count,
     });
-    console.log(this.state);
+    
     // localStorage.setItem("no_of_bedrooms", count);
   }
   handleBathRoomCount(count) {
     this.setState({
       no_of_bathrooms: count,
     });
-    console.log(this.state);
+    
     // localStorage.setItem("no_of_bathrooms", count);
   }
 

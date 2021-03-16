@@ -8,11 +8,6 @@ const FrmMortgageProgramValidator = {
           },
           message: "Loan amount cannot be empty",
         },
-        // {
-        //   // test: /^[0-9,]*$/,
-        //   test:/^(\d{1,3}(\,?\d{3}){1,2})$/,
-        //   message: "only numbers are allowed!",
-        // },
         {
           test: (value) => {
             return (
@@ -36,22 +31,6 @@ const FrmMortgageProgramValidator = {
           },
           message: "interest cannot be empty",
         },
-        // {
-        //   test: (value) => {
-        //     return (
-        //       console.log("lkjlgsjgsljsgl",  parseInt(String(value).replace(/%/g, '')) < 10),
-        //       parseInt(String(value).replace(/%/g, '')) < 10
-        //     );
-           
-        //   },
-        //   message: "If the interest rate is greater than 10%, ask ' Is the interest rate input accurate?'",
-        // },
-        // {
-         
-        //   //test: /^[0-9]\d*(\.\d+)*$/,
-        //   test:/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/,
-        //   message: "only numbers are allowed!",
-        // },
       ],
       errors: [],
       valid: false,

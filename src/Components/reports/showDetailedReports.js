@@ -186,8 +186,6 @@ export class ShowDetailedReports extends Component {
         screen12: this.calculateScreen12(prevProps),
       };
 
-      // const data = await this.props.GetCalculator(calculatorInputObj);
-      // console.log(data)
       Axios.post(
         `${baseURL}/calculator/`,calculatorInputObj,
         {
@@ -199,7 +197,7 @@ export class ShowDetailedReports extends Component {
       )
         .then((calRes) => {
           this.setState({'CalculatorResponseData': calRes.data.output})
-          console.log(this.state)
+          
           localStorage.setItem(
             "calculatorResponse",
             JSON.stringify(calRes.data.output)

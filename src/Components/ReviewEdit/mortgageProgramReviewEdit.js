@@ -46,11 +46,11 @@ export class MortgageProgramReviewEdit extends Component {
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
           this.setState({propertyDetail: propertyDetail})
-          console.log(this.state)
+          
 
         })
         .catch((er) => {
-          console.log(er)
+          
         })
     }
   }
@@ -66,7 +66,7 @@ export class MortgageProgramReviewEdit extends Component {
       ARMMortgageGetFirst,
       ARMMortgageGetSecond,
     } = this.props;
-    console.log(this.props)
+    
     if (FRMMortgageCreateResponseFirst && FRMMortgageCreateResponseFirst.data) {
       FRMMortgageGetFirst(FRMMortgageCreateResponseFirst.data.id);
     }

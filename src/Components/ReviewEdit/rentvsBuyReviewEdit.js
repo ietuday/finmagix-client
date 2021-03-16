@@ -54,8 +54,6 @@ export class RentvsBuyReviewEdit extends Component {
     });
   };
   render() {
-    // const { GetRentvsBuyResponse } = this.props;
-    // console.log(this.props);
     if (this.state.goToEdit) {
       return (
         <Redirect

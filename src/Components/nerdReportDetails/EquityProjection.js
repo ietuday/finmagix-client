@@ -123,8 +123,6 @@ function EquityProjection(props) {
         ? CalculatorResponse.FRM2.ProjectedequityFRMOption2
         : 0;
       ct2 = parseFloat(String(ct2).replace(/,/g, ''))
-  // console.log("@@@@@@@@@@@@2",ct1)
-  // console.log("@@@@@@@@@@@@2",ct2)
     data1 = [
       {
         name: "Projected home price",

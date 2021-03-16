@@ -36,19 +36,6 @@ class Map extends Component {
     };
   }
   componentDidMount() {
-    // Geocode.fromLatLng(
-    //   this.state.mapPosition.lat,
-    //   this.state.mapPosition.lng
-    // ).then(
-    //   (response) => {
-    //     console.log(response);
-    //     const address = response.results[0].formatted_address,
-    //       addressArray = response.results[0].address_components,
-    //       city = this.getCity(addressArray),
-    //       area = this.getArea(addressArray),
-    //       state = this.getState(addressArray);
-
-    //     console.log("city", address, city, area, state);
 
     this.setState({
       address: this.props.apiData ? this.props.apiData.house_address : "",
@@ -56,11 +43,6 @@ class Map extends Component {
       city: "",
       state: this.props.apiData ? this.props.apiData.house_state : "",
     });
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
   }
   initMap = () => {
     let { lat, lng } = this.state;
@@ -90,13 +72,13 @@ class Map extends Component {
         "administrative_area_level_2" === addressArray[i].types[0]
       ) {
         city = addressArray[i].long_name;
-        console.log(city);
+        
         return city;
       }
     }
   };
   getArea = (addressArray) => {
-    console.log(addressArray);
+    
     let area = "";
     for (let i = 0; i < addressArray.length; i++) {
       if (addressArray[i].types[0]) {

@@ -83,7 +83,7 @@ export class FirstLoanScenario extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
-    console.log(props)
+    
   }
 
   checkproperty() {
@@ -98,7 +98,7 @@ export class FirstLoanScenario extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
-          console.log(propertyDetail.property_price)
+          
           this.setState({
             'property_price': propertyDetail.property_price,
             'property_downpayment': propertyDetail.downpayment_amount
@@ -588,7 +588,7 @@ export class FirstLoanScenario extends Component {
         ) : (
 
             <div>
-              {console.log}
+              
               <MDBRow className="margin20">
                 <MDBCol md="12">
                   <span className="get-started-label">Loan Amount</span>
@@ -795,7 +795,7 @@ export class FirstLoanScenario extends Component {
                 ? showInterestOnlyPeriodButton
                 : null}
               <br />
-              {console.log(this.props)}
+              
 
               {this.state.downpaymentCheck === "lessthan20" ? (
 

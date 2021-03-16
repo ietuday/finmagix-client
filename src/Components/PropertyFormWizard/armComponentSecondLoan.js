@@ -105,7 +105,7 @@ export class ARMComponentSecondLoan extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0];
-          console.log(propertyDetail.property_price);
+          
           this.setState({
             property_price: propertyDetail.property_price,
             property_downpayment: propertyDetail.downpayment_amount,

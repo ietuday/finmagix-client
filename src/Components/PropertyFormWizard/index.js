@@ -410,7 +410,7 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
-      console.log(this.state)
+      
       if (this.state.propertyInfo.homepriceGrowthValidationError ||
         this.state.propertyInfo.downpaymentnewValidationError ||
         this.state.propertyInfo.annualPropertytaxValidationError ||
@@ -418,7 +418,7 @@ export class StepperComponent extends Component {
       ) {
         return NotificationManager.error("Error", "Validation Error");
       } else {
-        console.log(this.state.propertyInfo)
+        
         if (
           this.state.propertyInfo.property_price &&
           this.state.propertyInfo.downpayment_amount &&
@@ -474,7 +474,7 @@ export class StepperComponent extends Component {
       }
 
     } else if (this.state.activeStep === 1) {
-      console.log(this.state)
+      
       if(this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments){
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")

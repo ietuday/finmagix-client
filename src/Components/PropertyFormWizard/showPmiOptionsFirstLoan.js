@@ -61,7 +61,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
-    console.log(this.props)
+    
   }
 
   checkProperty(){
