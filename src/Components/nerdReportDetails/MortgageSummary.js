@@ -333,11 +333,7 @@ function MortgageSummary(props) {
                           : 0}
                       </div>
                       <div className="box-1">
-                        {CalculatorResponse.ARM2
-                          ? CalculatorResponse.ARM2["PMI-Stop-Year"] // we don't have PMI or PMI-Stop-Year for second mortgage
-                          : CalculatorResponse.FRM2
-                          ? CalculatorResponse.FRM2["PMI-Stop-Year"] // we don't have PMI or PMI-Stop-Year for second mortgage
-                          : 0}
+               
                       </div>
                     </div>
                   </MDBCol>
