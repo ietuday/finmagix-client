@@ -123,8 +123,8 @@ function EquityProjection(props) {
         ? CalculatorResponse.FRM2.ProjectedequityFRMOption2
         : 0;
       ct2 = parseFloat(String(ct2).replace(/,/g, ''))
-  console.log("@@@@@@@@@@@@2",ct1)
-  console.log("@@@@@@@@@@@@2",ct2)
+  // console.log("@@@@@@@@@@@@2",ct1)
+  // console.log("@@@@@@@@@@@@2",ct2)
     data1 = [
       {
         name: "Projected home price",
@@ -264,8 +264,8 @@ function EquityProjection(props) {
                   : ""}
               </h4>
               <BarChart
-                width={300}
-                height={300}
+                  width={300}
+                  height={400}
                 data={data2}
                 margin={{
                   top: 5,
