@@ -191,9 +191,9 @@ export class ARMComponentFirstLoan extends Component {
   }
 
   async handleChange(event) {
-    const { name } = event.target;
+    // const { name } = event.target;
     event.persist();
-    let downpayment;
+    // let downpayment;
 
     if (event.target.name === "loan_amount") {
       if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {

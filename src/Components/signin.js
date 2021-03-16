@@ -79,7 +79,7 @@ export class Signin extends Component {
     }
   };
   signUpGoogleFacebbok(res, type) {
-    const { SignIn, SignInRequestData } = this.props;
+    const { SignIn } = this.props;
     let response;
     if (type === "google") {
       response = {

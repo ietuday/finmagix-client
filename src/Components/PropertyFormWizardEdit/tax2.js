@@ -124,7 +124,7 @@ export class Tax2 extends Component {
     this.props.showNext();
   };
   async handleChange(e) {
-    const { name } = e.target;
+    // const { name } = e.target;
     e.persist();
     await this.setState({
       [e.target.name]: e.target.value,

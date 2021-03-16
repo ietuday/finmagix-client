@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import NumberFormat from "react-number-format";
 import "react-rangeslider/lib/index.css";
-import PersonaLFinanceValidator from "../validatorRules/PersonalFinanceValidatorRules";
+// import PersonaLFinanceValidator from "../validatorRules/PersonalFinanceValidatorRules";
 // import { updateValidators } from "../../common/ValidatorFunction";
 // import {
 //   resetValidators
@@ -100,7 +100,7 @@ export class PersonalFinance extends Component {
   };
   componentDidMount() {}
   async handleChange(event) {
-    const { name } = event.target;
+    // const { name } = event.target;
     event.persist();
     if(event.target.name === "monthly_debt_payments"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){

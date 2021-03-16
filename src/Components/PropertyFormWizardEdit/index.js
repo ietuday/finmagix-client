@@ -152,8 +152,8 @@ export class StepperComponent extends Component {
       localStorage.getItem("property_id") &&
       localStorage.getItem("basic-info")
     ) {
-      const property = { property_obj: localStorage.getItem("property_id") };
-      const basicInfo = JSON.parse(localStorage.getItem("basic-info"));
+      // const property = { property_obj: localStorage.getItem("property_id") };
+      // const basicInfo = JSON.parse(localStorage.getItem("basic-info"));
       // const SurveyData = { ...property, ...basicInfo };
       // this.props.SurveyCreate(SurveyData);
     }

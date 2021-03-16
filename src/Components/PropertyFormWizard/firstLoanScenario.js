@@ -3,7 +3,7 @@ import Axios from "axios";
 import { MDBRow, MDBCol } from "mdbreact";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import { Input } from "antd";
+// import { Input } from "antd";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import ShowPmiOptionsFirstLoan from "./showPmiOptionsFirstLoan";
@@ -200,7 +200,7 @@ export class FirstLoanScenario extends Component {
     });
   };
   async handleChange(event) {
-    const { name } = event.target;
+    // const { name } = event.target;
     event.persist();
 
     if (event.target.name === "loan_amount") {

@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
 import { connect } from "react-redux";
-import { NotificationManager } from "react-notifications";
+// import { NotificationManager } from "react-notifications";
 import Header from "../../common/header";
 import { withRouter, Redirect } from "react-router-dom";
-import store from "../redux/store/index";
+// import store from "../redux/store/index";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";

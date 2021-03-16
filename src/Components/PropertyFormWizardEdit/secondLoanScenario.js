@@ -177,7 +177,7 @@ export class SecondLoanScenario extends Component {
 
 
   async handleChange(event) { 
-    const { name } = event.target;
+    // const { name } = event.target;
 
     if (event.target.name === "loan_amount") {
       if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {

@@ -309,7 +309,7 @@ export class ARMComponentSecondLoan extends Component {
     }
   }
   async handleChange(event) {
-    const { name } = event.target;
+    // const { name } = event.target;
     event.persist();
     
     if (event.target.name === "loan_amount") {

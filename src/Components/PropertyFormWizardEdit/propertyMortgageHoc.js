@@ -124,26 +124,30 @@ export class PropertyMortgageHOC extends Component {
               }
             }
             if (this.state.firstLoanScenario["interest"]) {
-              this.state.firstLoanScenario["interest"] = String(
+              const firstLoanScenario = this.state.firstLoanScenario;
+              this.setState({ [firstLoanScenario.interest] : String(
                 Number(this.state.firstLoanScenario["interest"]) / 100
-              );
+              )});
             }
             if (this.state.firstLoanScenario["second_mortgage_interest"]) {
-              this.state.firstLoanScenario["second_mortgage_interest"] = String(
+              const firstLoanScenario = this.state.firstLoanScenario;
+              this.setState({ [firstLoanScenario.second_mortgage_interest] : String(
                 Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
                   100
-              );
+              )});
             }
             if (this.state.firstLoanScenario["points"]) {
-              this.state.firstLoanScenario["points"] = String(
+              const firstLoanScenario = this.state.firstLoanScenario;
+              this.setState({ [firstLoanScenario.points] : String(
                 Number(this.state.firstLoanScenario["points"]) / 100
-              );
+              )});
             }
     
             if (this.state.firstLoanScenario["second_mortgage_points"]) {
-              this.state.firstLoanScenario["second_mortgage_points"] = String(
+              const firstLoanScenario = this.state.firstLoanScenario;
+              this.setState({ [firstLoanScenario.second_mortgage_points] : String(
                 Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
-              );
+              )});
             }
     
             
@@ -179,26 +183,30 @@ export class PropertyMortgageHOC extends Component {
             }
 
             if (this.state.firstLoanScenario["ARM1rate"]) {
-              this.state.firstLoanScenario["ARM1rate"] = String(
+              const firstLoanScenario = this.state.firstLoanScenario;
+              this.setState({ [firstLoanScenario.ARM1rate] : String(
                 Number(this.state.firstLoanScenario["ARM1rate"]) / 100
-              );
+              )});
             }
             if (this.state.firstLoanScenario["first_interest_rate_adj_cap"]) {
-              this.state.firstLoanScenario["first_interest_rate_adj_cap"] = String(
+              const firstLoanScenario = this.state.firstLoanScenario;
+              this.setState({ [firstLoanScenario.first_interest_rate_adj_cap] : String(
                 Number(
                   this.state.firstLoanScenario["first_interest_rate_adj_cap"]
                 ) / 100
-              );
+              )});
             }
             if (this.state.firstLoanScenario["floor_interest_rate"]) {
-              this.state.firstLoanScenario["floor_interest_rate"] = String(
+              const firstLoanScenario = this.state.firstLoanScenario;
+              this.setState({ [firstLoanScenario.floor_interest_rate] : String(
                 Number(this.state.firstLoanScenario["floor_interest_rate"]) / 100
-              );
+              )});
             }
             if (this.state.firstLoanScenario["ceiling_interest_rate"]) {
-              this.state.firstLoanScenario["ceiling_interest_rate"] = String(
+              const firstLoanScenario = this.state.firstLoanScenario;
+              this.setState({ [firstLoanScenario.ceiling_interest_rate] : String(
                 Number(this.state.firstLoanScenario["ceiling_interest_rate"]) / 100
-              );
+              )});
             }
             if (this.state.firstLoanScenario["period_cap"]) {
               this.state.firstLoanScenario["period_cap"] = String(

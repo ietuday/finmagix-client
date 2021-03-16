@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
+// import { Input } from "antd";
 import Axios from "axios";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
@@ -221,7 +221,7 @@ export class ARMComponentSecondLoan extends Component {
   }
 
   async handleChange(event) {
-    const { name } = event.target;
+    // const { name } = event.target;
     event.persist();
 
     if (event.target.name === "loan_amount") {

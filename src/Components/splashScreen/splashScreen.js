@@ -14,7 +14,6 @@ export class SplashScreen extends Component {
     };
   }
   componentDidMount() {
-    localStorage.clear();
   }
   render() {
     return (

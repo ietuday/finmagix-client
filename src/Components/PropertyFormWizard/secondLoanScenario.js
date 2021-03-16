@@ -171,9 +171,9 @@ export class SecondLoanScenario extends Component {
     });
   };
   async handleChange(event) {
-    const { name } = event.target;
+    // const { name } = event.target;
 
-    if (event.target.name == "loan_amount") {
+    if (event.target.name === "loan_amount") {
       if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
         this.setState({
           loan_amount_validation_error: "Cannot exceed Property price"
@@ -186,7 +186,7 @@ export class SecondLoanScenario extends Component {
     }
 
 
-    if(event.target.name == "interest_only_period"){
+    if(event.target.name === "interest_only_period"){
       if(this.state.loan_term < event.target.value){
         this.setState({
           interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
@@ -198,7 +198,7 @@ export class SecondLoanScenario extends Component {
       }
   }
   
-  if(event.target.name == "interest_percentage"){
+  if(event.target.name === "interest_percentage"){
     if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
       this.setState({
         interestrateValidationError: "Is the interest rate input accurate?"
@@ -211,7 +211,7 @@ export class SecondLoanScenario extends Component {
     
 }
 
-if(event.target.name == "points_percentage"){
+if(event.target.name === "points_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
     this.setState({
       pointsValidationError: "Points cannot exceed 5%"
@@ -225,7 +225,7 @@ if(event.target.name == "points_percentage"){
 }
 
 
-if (event.target.name == "closing_costs") {
+if (event.target.name === "closing_costs") {
   if (
     parseInt(String(event.target.value).replace(/,/g, "")) >
     (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
@@ -394,7 +394,7 @@ if (event.target.name == "closing_costs") {
         <MDBCol md="12">
           <span className="get-started-label">Interest only period</span>
           <div className="tooltip-img">
-            <img src={quss} className="tool-img"></img>
+            <img src={quss} alt="" className="tool-img"></img>
             <span className="tooltip-img-text">
               This is the # of years for which you won't pay principal on the
               loan and will pay only the interest amount on a loan{" "}
@@ -459,7 +459,7 @@ if (event.target.name == "closing_costs") {
               <MDBCol md="12">
                 <span className="get-started-label">Loan Amount</span>
                 <div className="tooltip-img">
-                  <img src={quss} className="tool-img"></img>
+                  <img src={quss} alt="" className="tool-img"></img>
                   <span className="tooltip-img-text">
                     Enter the amount you plan to borrow for this mortgage{" "}
                   </span>
@@ -522,7 +522,7 @@ if (event.target.name == "closing_costs") {
                   Interest on your first mortgage
                 </span>
                 <div className="tooltip-img">
-                  <img src={quss} className="tool-img"></img>
+                  <img src={quss} alt="" className="tool-img"></img>
                   <span className="tooltip-img-text">
                     Interest rate is the cost of borrowing or the amount charged
                     on the first mortgage. Enter Interest % and not APR %.{" "}
@@ -566,7 +566,7 @@ if (event.target.name == "closing_costs") {
               <MDBCol md="12">
                 <span className="get-started-label">Points</span>
                 <div className="tooltip-img">
-                  <img src={quss} className="tool-img"></img>
+                  <img src={quss} alt="" className="tool-img"></img>
                   <span className="tooltip-img-text">
                     Input the points you may need to pay on your loan expressed
                     as a % of the loan amount. For e.g. 2 points is 2% of the
@@ -613,7 +613,7 @@ if (event.target.name == "closing_costs") {
                 {/* <span className="get-started-label">Closing costs</span> */}
                 <span className="get-started-label">Closing costs</span>
                 <div className="tooltip-img">
-                  <img src={quss} className="tool-img"></img>
+                  <img src={quss} alt="" className="tool-img"></img>
                   <span className="tooltip-img-text">
                     These are fees charged by the lender to the borrower for
                     offering the loan. These may include home appraisal fees,
