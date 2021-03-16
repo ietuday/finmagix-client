@@ -97,13 +97,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }
@@ -187,13 +187,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }
@@ -289,13 +289,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }
@@ -359,13 +359,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }
@@ -479,13 +479,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }else{
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }
@@ -547,13 +547,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }else{
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }
@@ -646,13 +646,13 @@ export class PropertyMortgageHOC extends Component {
               if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
                 if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
                 }
               }else{
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
                 if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
   
                 }
               }
@@ -715,13 +715,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }else{
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
 
               }
             }
@@ -819,13 +819,13 @@ export class PropertyMortgageHOC extends Component {
                 if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
     
                   }
                 }else{
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
     
                   }
                 }
@@ -905,13 +905,13 @@ export class PropertyMortgageHOC extends Component {
                 if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
     
                   }
                 }else{
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
     
                   }
                 }
@@ -1008,13 +1008,13 @@ export class PropertyMortgageHOC extends Component {
                 if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
     
                   }
                 }else{
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
     
                   }
                 }
@@ -1086,13 +1086,13 @@ export class PropertyMortgageHOC extends Component {
                 if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
     
                   }
                 }else{
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
     
                   }
                 }
