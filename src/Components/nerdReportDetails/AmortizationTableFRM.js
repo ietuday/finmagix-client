@@ -275,6 +275,7 @@ class AmortizationTableFRM extends React.Component {
           };
         });
         objYear.map((yr, index) => {
+          return (
           this.state.darm1.push({
             Year: yr.Year,
             InterestRate: objInterestRate[index].InterestRate || "N/A",
@@ -287,7 +288,8 @@ class AmortizationTableFRM extends React.Component {
               objTotalPayment.length > 0
                 ? objTotalPayment[index].TotalPayment
                 : "N/A",
-          });
+          })
+          )
         });
         if (this.state.darm1.length > 0) {
           this.state.scenarioData1 = this.state.darm1;
@@ -348,6 +350,7 @@ class AmortizationTableFRM extends React.Component {
           };
         });
         objYear.map((yr, index) => {
+          return (
           this.state.darm2.push({
             Year: yr.Year,
             Interestpaid: objInterestpaid[index].Interestpaid,
@@ -363,7 +366,8 @@ class AmortizationTableFRM extends React.Component {
                 objInterestRate.length > 0
                   ? objInterestRate[index].InterestRate
                   : "N/A",
-          });
+          })
+          )
           
         });
         if (this.state.darm2.length > 0) {
@@ -426,7 +430,7 @@ class AmortizationTableFRM extends React.Component {
           };
         });
 
-        objYear.map((yr, index) => {
+        objYear.forEach((yr, index) => {
           this.state.dsecond1.push({
             Year: yr.Year,
             InterestRate: objInterestRate[index].InterestRate || "N/A",
@@ -439,7 +443,7 @@ class AmortizationTableFRM extends React.Component {
               objTotalPayment.length > 0
                 ? objTotalPayment[index].TotalPayment
                 : "N/A",
-          });
+          })
 
           if (this.state.dsecond1.length > 0) {
             this.state.scenariodescond1 = this.state.dsecond1;
@@ -505,6 +509,7 @@ class AmortizationTableFRM extends React.Component {
         });
 
         objYear.map((yr, index) => {
+          return (
           this.state.dsecond2.push({
             Year: yr.Year,
             InterestRate: objInterestRate[index].InterestRate || "N/A",
@@ -517,7 +522,8 @@ class AmortizationTableFRM extends React.Component {
               objTotalPayment.length > 0
                 ? objTotalPayment[index].TotalPayment
                 : "N/A",
-          });
+          })
+          )
         });
         if (this.state.dsecond2.length > 0) {
           this.state.scenariodsecond2 = this.state.dsecond2;
@@ -536,15 +542,15 @@ class AmortizationTableFRM extends React.Component {
   };
 
   dropChange = (event, value) => {
-    if (event.target.value == 2) {
+    if (event.target.value === 2) {
       if (this.CalculatorResponse && this.CalculatorResponse.dsecond1) {
-        this.state.scenarioData1 = this.state.dsecond1;
+        this.setState({ scenarioData1 : [this.state.dsecond1]});
         this.setState((prevState, props) => ({
           scenarioData1: [this.state.dsecond1, ...prevState.scenarioData1],
         }));
       }
       if (this.CalculatorResponse && this.CalculatorResponse.dsecond2) {
-        this.state.scenarioData2 = this.state.dsecond2;
+        this.setState({ scenarioData2 : [this.state.dsecond2]});
         this.setState((prevState, props) => ({
           scenarioData2: [this.state.dsecond2, ...prevState.scenarioData2],
         }));
@@ -553,33 +559,33 @@ class AmortizationTableFRM extends React.Component {
         !(this.CalculatorResponse && this.CalculatorResponse.dsecond2) ||
         !(this.CalculatorResponse && this.CalculatorResponse.dsecond1)
       ) {
-        this.state.scenarioData1 = [];
+        this.setState({ scenarioData1 : []});
         this.setState((prevState, props) => ({
           scenarioData1: [this.state.dsecond1, ...prevState.scenarioData1],
         }));
-        this.state.scenarioData1 = [];
+        this.setState({ scenarioData1 : []});
         this.setState((prevState, props) => ({
           scenarioData1: [this.state.dsecond1, ...prevState.scenarioData1],
         }));
       }
     } else {
       if (this.CalculatorResponse && this.CalculatorResponse.dFRM1) {
-        this.state.scenarioData1 = this.state.dfrm1;
+        this.setState({ scenarioData1 : [this.state.dfrm1]});
         this.setState((prevState, props) => ({
           scenarioData1: [this.state.dfrm1, ...prevState.scenarioData1],
         }));
       } else if (this.CalculatorResponse && this.CalculatorResponse.dARM1) {
-        this.state.scenarioData1 = this.state.darm1;
+        this.setState({ scenarioData1 : [this.state.darm1]});
         this.setState((prevState, props) => ({
           scenarioData1: [this.state.darm1, ...prevState.scenarioData1],
         }));
       } else if (this.CalculatorResponse && this.CalculatorResponse.dFRM2) {
-        this.state.scenarioData2 = this.state.dfrm2;
+        this.setState({ scenarioData2 : [this.state.dfrm2]});
         this.setState((prevState, props) => ({
           scenarioData2: [this.state.dfrm2, ...prevState.scenarioData2],
         }));
       } else if (this.CalculatorResponse && this.CalculatorResponse.dARM2) {
-        this.state.scenarioData2 = this.state.darm2;
+        this.setState({ scenarioData2 : [this.state.darm2]});
         this.setState((prevState, props) => ({
           scenarioData2: [this.state.darm2, ...prevState.scenarioData2],
         }));
@@ -609,6 +615,9 @@ class AmortizationTableFRM extends React.Component {
       : "";
 
     const label4 = "Second Mortgage";
+    const getClassName = () => {
+      return `${classes.root} margin10`
+    }
     return (
       <Fragment>
         <Header type={name} className="header-row" />
@@ -619,7 +628,7 @@ class AmortizationTableFRM extends React.Component {
           >
             <Link to="/nerd-report">Go to Nerd Report</Link>
           </Button>
-          <div className={classes.root} className="margin10">
+          <div className={getClassName()}>
             <AppBar position="static" color="default">
               <Tabs
                 value={value}

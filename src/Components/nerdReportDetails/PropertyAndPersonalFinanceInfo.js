@@ -43,12 +43,12 @@ export class PropertyAndPersonalFinanceInfo extends Component {
   }
 
   componentDidMount() {
-    this.state.CalculatorResponse = JSON.parse(
+    this.setState({ CalculatorResponse : JSON.parse(
       localStorage.getItem("calculatorResponse")
-    );
-    this.state.singlePropertyResponse = JSON.parse(
+    )});
+    this.setState({ singlePropertyResponse : JSON.parse(
       localStorage.getItem("GetSinglePropertyResponse")
-    );
+    )});
 
     if(this.state.CalculatorResponse){
       // const data = parseInt(String(Number(this.state.personalFinanace.marginal_tax_rate)*100))

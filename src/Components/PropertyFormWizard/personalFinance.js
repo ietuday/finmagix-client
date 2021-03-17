@@ -433,7 +433,7 @@ export class PersonalFinance extends Component {
                 calculateNonHousingExpense={this.calculateNonHousingExpense}
               />
             ) : null}
-            <MDBRow className="margin20" className="text-center">
+            <MDBRow className="margin20 text-center">
               <MDBCol md="12">
                 <Button
                   variant="contained"

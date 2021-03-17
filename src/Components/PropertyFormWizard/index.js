@@ -197,12 +197,12 @@ export class StepperComponent extends Component {
         saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
       });
 
-      {
+      
         Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
           .length !== 0
           ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
           : PersonalFinanceCreate(this.state.personalFinance);
-      }
+      
       if (
         Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
           .length !== 0

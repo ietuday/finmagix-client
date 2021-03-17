@@ -364,10 +364,10 @@ export class StepperComponent extends Component {
       PropertyInfoUpdate,
       PersonalFinanceCreate
     } = this.props;
-    const newActiveStep =
-      this.isLastStep && !this.allStepsCompleted
-        ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-        : this.state.activeStep + 1;
+    // const newActiveStep =
+    //   this.isLastStep && !this.allStepsCompleted
+    //     ? this.steps.findIndex((step, i) => !(i in this.state.completed))
+    //     : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
       if (this.state.propertyInfo.homepriceGrowthValidationError ||
@@ -378,7 +378,7 @@ export class StepperComponent extends Component {
         NotificationManager.error("Error", "Validation Error");
       } else {
 
-        this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)
+        this.setState({ [this.state.propertyInfo.home_price_growth] : String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)})
 
         PropertyInfoUpdate(this.state.propertyInfo);
         this.props.history.push({
@@ -394,12 +394,12 @@ export class StepperComponent extends Component {
         returnBackFromreviewEdit: true
       })
       
-      {
+      
         Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
           .length !== 0
           ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
           : PersonalFinanceCreate(this.state.personalFinance);
-      }
+      
 
 
 
@@ -417,12 +417,12 @@ export class StepperComponent extends Component {
         });
         NotificationManager.error("Please Validate Fields", "Error");
       } else {
-        this.state.RentvsBuy['rate_of_investment'] = String(
+        this.setState({ [this.state.RentvsBuy.rate_of_investment] : String(
           Number(this.state.RentvsBuy["rate_of_investment"]) / 100
-        );
-        this.state.RentvsBuy['rentinflation'] = String(
+        )});
+        this.setState({ [this.state.RentvsBuy.rentinflation] : String(
           Number(this.state.RentvsBuy["rentinflation"]) / 100
-        );
+        )});
         RentvsBuyUpdate(this.state.RentvsBuy);
         this.props.history.push({
           pathname: '/property-form',
