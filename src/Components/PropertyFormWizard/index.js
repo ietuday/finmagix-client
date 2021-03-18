@@ -103,7 +103,7 @@ export class StepperComponent extends Component {
     if(localStorage.getItem('calculatorResponse'))localStorage.removeItem('calculatorResponse')
     
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.location.returnBackFromreviewEdit === true) {
       this.setState({
         activeStep: 5,
