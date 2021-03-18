@@ -372,7 +372,7 @@ export class GetStartedHouseInfo extends Component {
 
   componentDidMount() { }
 
-  componentWillUpdate(nextProps, nextState) { }
+  UNSAFE_componentWillUpdate(nextProps, nextState) { }
   render() {
     return (
       <Fragment>
