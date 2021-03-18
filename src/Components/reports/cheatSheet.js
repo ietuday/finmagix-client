@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Header from "../../common/header";
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import "../../css/reports.css";
 // import "./nerdReportDetails.css";
 import {
@@ -15,8 +15,7 @@ import {
   XAxis,
   YAxis,
   Cell,
-  Text,
-  Tooltip
+  Text
 } from "recharts";
 
 // import "./styles.css";
@@ -188,7 +187,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: ((CalculatorResponse.ARM1 && CalculatorResponse.ARM1.Paymentsecond1) || (CalculatorResponse.FRM1 && CalculatorResponse.FRM1.Paymentsecond1)) ? "Second Mortage payment" : "PMI",
+      name: ((CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Paymentsecond2) || (CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Paymentsecond2)) ? "Second Mortage payment" : "PMI",
       Amount: parseFloat(
         String(
           `${
@@ -210,9 +209,9 @@ function CheatSheet(props) {
         String(
           `${
             CalculatorResponse.ARM1
-              ? CalculatorResponse.ARM1.HousingpaymentcomboARM
+              ? CalculatorResponse.ARM1['total-mth-hsg-pay']
               : CalculatorResponse.FRM1
-              ? CalculatorResponse.FRM1.HousingpaymentcomboFRM
+              ? CalculatorResponse.FRM1['total-mth-hsg-pay']
               : 0
           }`
         ).replace(/,/g, "")
@@ -236,7 +235,7 @@ function CheatSheet(props) {
 
   const projectedEquitydata = [
     {
-      name: "Scenario1",
+      name: "First Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -250,7 +249,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenario2",
+      name: "Second Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -267,7 +266,7 @@ function CheatSheet(props) {
 
   const afterHomedata = [
     {
-      name: "Scenario1",
+      name: "First Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -281,7 +280,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenerio2",
+      name: "Second Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -298,7 +297,7 @@ function CheatSheet(props) {
 
   const taxImpact = [
     {
-      name: "Scenario1",
+      name: "First Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -312,7 +311,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenario2",
+      name: "Second Scenario",
       Amount: parseFloat(
         String(
           `${

@@ -3,7 +3,6 @@ import {
   MDBContainer,
   MDBRow,
   MDBCol,
-  MDBBtn,
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
@@ -12,7 +11,7 @@ import {
 import { Button } from "@material-ui/core";
 import NumberFormat from "react-number-format";
 import Header from "../common/header";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Card from "@material-ui/core/Card";
 import { NotificationManager } from "react-notifications";
@@ -50,6 +49,13 @@ export class Dashboard extends Component {
     this.handleDelete = this.handleDelete.bind(this);
 
     this.toggle = this.toggle.bind(this);
+    this.cleanPreviousPropertyDetail()
+  }
+  cleanPreviousPropertyDetail(){
+    if(localStorage.getItem('addressData')) localStorage.removeItem('addressData')
+    if(localStorage.getItem('GetSinglePropertyResponse'))localStorage.removeItem('GetSinglePropertyResponse')
+    if(localStorage.getItem('calculatorResponse'))localStorage.removeItem('calculatorResponse')
+    
   }
   toggle = (item) => {
     if (item && item.id) {
@@ -63,9 +69,9 @@ export class Dashboard extends Component {
   };
 
   handleDelete = (data) => {
-    if (data == "Yes") {
+    if (data ===   "Yes") {
       //127.0.0.1:8000/property_listings/737
-      http: Axios.delete(
+       Axios.delete(
         `${baseURL}/property_listings/${this.state.deleteItem}`,
         {
           headers: {
@@ -106,7 +112,7 @@ export class Dashboard extends Component {
     });
   };
   goToReportScreen(data) {
-    const { GetSingleProperty } = this.props;
+    // const { GetSingleProperty } = this.props;
     this.setState({
       reportButton: !this.state.reportButton,
       singleid: data.id,
@@ -123,8 +129,7 @@ export class Dashboard extends Component {
   render() {
     const {
       PropertyListResponse,
-      GetSinglePropertyResponse,
-      PropertyInfoCreateResponse,
+
     } = this.props;
     if (this.state.nextButton) {
       return <Redirect to="/select-modules" />;
@@ -146,7 +151,8 @@ export class Dashboard extends Component {
       return (
         <Redirect
           to={{
-            pathname: "/property-information-review-edit",
+            pathname: "/property-form",
+            returnBackFromreviewEdit: true,
             state: { propertyId: this.state.singleid },
           }}
         />

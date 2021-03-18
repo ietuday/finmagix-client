@@ -1,4 +1,4 @@
-import { withRouter, Redirect, Link, PureComponent } from "react-router-dom";
+import { withRouter,Link } from "react-router-dom";
 import React, { Fragment, useMemo } from "react";
 import {
   ResponsiveContainer,
@@ -10,21 +10,16 @@ import {
   Text,
   PieChart,
   Pie,
-  Sector,
+  
 } from "recharts";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import {
-  MDBBtn,
+
   MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-  MDBRow,
+
   MDBContainer,
 } from "mdbreact";
 import { Button } from "@material-ui/core";
@@ -92,20 +87,19 @@ export const measureText14HelveticaNeue = (text) => {
 const BAR_AXIS_SPACE = 100;
 
 function PostMortgagePurchaseProfile(props) {
-  let singlePropertyResponse;
   let CalculatorResponse;
   if (
     props.location.state &&
     props.location.state.singlePropertyResponse &&
     props.location.state.GetSinglePropertyResponse
   ) {
-    singlePropertyResponse = props.location.state.singlePropertyResponse;
+    // singlePropertyResponse = props.location.state.singlePropertyResponse;
     CalculatorResponse = props.location.state.GetSinglePropertyResponse;
   } else {
     CalculatorResponse = JSON.parse(localStorage.getItem("calculatorResponse"));
-    singlePropertyResponse = JSON.parse(
-      localStorage.getItem("GetSinglePropertyResponse")
-    );
+    // singlePropertyResponse = JSON.parse(
+    //   localStorage.getItem("GetSinglePropertyResponse")
+    // );
   }
 
   const data2 = [

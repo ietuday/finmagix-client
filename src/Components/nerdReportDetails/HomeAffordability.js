@@ -1,16 +1,13 @@
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import React, { Fragment } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import {
-  MDBBtn,
+
   MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
+
   MDBCol,
   MDBRow,
   MDBContainer,
@@ -26,20 +23,20 @@ function TabPanel(props) {
 }
 
 function HomeAffordability(props) {
-  let singlePropertyResponse;
+  // let singlePropertyResponse;
   let CalculatorResponse;
   if (
     props.location.state &&
     props.location.state.singlePropertyResponse &&
     props.location.state.GetSinglePropertyResponse
   ) {
-    singlePropertyResponse = props.location.state.singlePropertyResponse;
+    // singlePropertyResponse = props.location.state.singlePropertyResponse;
     CalculatorResponse = props.location.state.GetSinglePropertyResponse;
   } else {
     CalculatorResponse = JSON.parse(localStorage.getItem("calculatorResponse"));
-    singlePropertyResponse = JSON.parse(
-      localStorage.getItem("GetSinglePropertyResponse")
-    );
+    // singlePropertyResponse = JSON.parse(
+    //   localStorage.getItem("GetSinglePropertyResponse")
+    // );
     
     
     if (
@@ -173,7 +170,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.ARM1.Housingpmtaffordableoption1}
                       </div>
                     </MDBCol>
@@ -190,7 +187,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.FRM1.Housingpmtaffordableoption1}
                       </div>
                     </MDBCol>
@@ -221,7 +218,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.ARM1.Housingpmtaffordableoption1}
                       </div>
                     </MDBCol>
@@ -243,7 +240,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.FRM1.Housingpmtaffordableoption1}
                       </div>
                     </MDBCol>
@@ -269,7 +266,7 @@ function HomeAffordability(props) {
                   <MDBRow className="housing-ratio">
                     <MDBCol md="12">
                       <div>
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.ARM1.Housingpmtaffordableoption1}
                       </div>
                     </MDBCol>
@@ -286,7 +283,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.FRM1.Housingpmtaffordableoption1}
                       </div>
                     </MDBCol>
@@ -358,7 +355,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.ARM2.Housingpmtaffordableoption2}
                       </div>
                     </MDBCol>
@@ -375,7 +372,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.FRM2.Housingpmtaffordableoption2}
                       </div>
                     </MDBCol>
@@ -406,7 +403,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.ARM2.Housingpmtaffordableoption2}
                       </div>
                     </MDBCol>
@@ -428,7 +425,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.FRM2.Housingpmtaffordableoption2}
                       </div>
                     </MDBCol>
@@ -454,7 +451,7 @@ function HomeAffordability(props) {
                   <MDBRow className="housing-ratio">
                     <MDBCol md="12">
                       <div>
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.ARM2.Housingpmtaffordableoption2}
                       </div>
                     </MDBCol>
@@ -471,7 +468,7 @@ function HomeAffordability(props) {
                   <MDBRow>
                     <MDBCol md="12">
                       <div className="housing-ratio">
-                        <img src={down} className="home-afer"></img>
+                        <img src={down} className="home-afer"  alt="downarrow"  />
                         {CalculatorResponse.FRM2.Housingpmtaffordableoption2}
                       </div>
                     </MDBCol>
@@ -499,23 +496,23 @@ function HomeAffordability(props) {
             </MDBRow>
 
             <MDBRow>
-              <MDBCol>
+            <MDBCol>
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-green"></span>
-                    <div>Housing to Income Ratio less than equal to 36%</div>
+                    <div><strong>Affordable</strong>: Housing to Income Ratio less than equal to 36%</div>
                   </div>
                 </MDBCol>
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-yelow"></span>
-                    <div>Housing to Income Ratio 37-42%</div>
+                    <div><strong>High But affordable</strong>: Housing to Income Ratio 37-42%</div>
                   </div>
                 </MDBCol>
                 <MDBCol md="6" className="margin20">
                   <div className="property-finance-get-started-label">
                     <span className="box-red"></span>
-                    <div> High, may not be affordable 42%</div>
+                    <div><strong>High, may not be affordable</strong>: Greater than 42%</div>
                   </div>
                 </MDBCol>
               </MDBCol>

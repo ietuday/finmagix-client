@@ -5,7 +5,7 @@ import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
 
-import Axios from "axios";
+
 
 import GetStartedHouseInfo from "../PropertyFormWizard/houseInfo";
 import PersonalFinance from "../PropertyFormWizard/personalFinance";
@@ -31,27 +31,26 @@ import TaxHoc from "./taxHoc";
 import Tax1 from "./tax1";
 import Tax2 from "./tax2";
 import {
-  personal_finance_create,
+
   personal_finance_update,
-  detail_expense_create,
-  update_detail_expense,
+
 } from "../redux/actions/PropertyReport/personalFinance";
-import { rent_vs_buy_create, rent_vs_buy_update } from "../redux/actions/PropertyReport/rentvsBuy";
+import {rent_vs_buy_update } from "../redux/actions/PropertyReport/rentvsBuy";
 import {
-  property_info_create,
+
   property_info_update,
-  survey_create,
+ 
 } from "../redux/actions/PropertyReport/propertyInfo";
 import { isFormValid } from "../../common/ValidatorFunction";
 // import { connect } from "react-redux"; 
-import Header from "../../common/header";
+
 import FirstLoanScenario from "./firstLoanScenario";
 import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";
 import { savePropertyId } from "../../../src/routes/utils";
 
-import { config } from "../config/default";
-const { baseURL } = config;
+
+
 
 export class StepperComponent extends Component {
   constructor(props) {
@@ -153,8 +152,8 @@ export class StepperComponent extends Component {
       localStorage.getItem("property_id") &&
       localStorage.getItem("basic-info")
     ) {
-      const property = { property_obj: localStorage.getItem("property_id") };
-      const basicInfo = JSON.parse(localStorage.getItem("basic-info"));
+      // const property = { property_obj: localStorage.getItem("property_id") };
+      // const basicInfo = JSON.parse(localStorage.getItem("basic-info"));
       // const SurveyData = { ...property, ...basicInfo };
       // this.props.SurveyCreate(SurveyData);
     }
@@ -204,63 +203,34 @@ export class StepperComponent extends Component {
     });
   };
   handlePersonalFinance = async (data, id) => {
-
-    await this.setState((prevState) => {
+    Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+    .length !== 0
+    ? this.setState((prevState) => {
+      let personalFinanceUpdate = Object.assign(
+        {},
+        prevState.personalFinanceUpdate
+      );
+      personalFinanceUpdate = data;
+      personalFinanceUpdate.property_obj = localStorage.getItem(
+        "property_id"
+      );
+      personalFinanceUpdate.id = JSON.parse(
+        localStorage.getItem("personal_finance_array")
+      ).id;
+      return { personalFinanceUpdate };
+    })
+    : this.setState((prevState) => {
       let personalFinance = Object.assign({}, prevState.personalFinance);
       personalFinance = data;
-      personalFinance.id = JSON.parse(localStorage.getItem("personal_finance_array")).id;
-      return { personalFinance };
+      personalFinance.property_obj = localStorage.getItem("property_id");
+      let personalFinanceUpdate = Object.assign(
+        {},
+        prevState.personalFinanceUpdate
+      );
+      personalFinanceUpdate = data;
+      personalFinanceUpdate.property_obj = localStorage.getItem("property_id");
+      return { personalFinance, personalFinanceUpdate };
     });
-    console.log(this.state)
-
-    const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
-    const newActiveStep =
-      this.isLastStep && !this.allStepsCompleted
-        ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-        : this.state.activeStep + 1;
-
-
-      if (
-      this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
-      this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
-      this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
-
-    ) {
-      NotificationManager.error('Error', 'Validation Error')
-    }
-    else {
-      this.setState({
-        saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-      });
-
-      {
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-          : PersonalFinanceCreate(this.state.personalFinance);
-      }
-      if (
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-      ) {
-        this.handleNext();
-      }
-    }
-
-
-    // this.setState({
-    //   saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-    // });
-
-    // {
-    //   Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-    //     .length !== 0
-    //     ? PersonalFinanceUpdate(this.state.personalFinance)
-    //     : PersonalFinanceCreate(this.state.personalFinance);
-    // }
-
-
-
   };
   async handleRentvsBuyData(data) {
     await this.setState((prevState) => {
@@ -394,14 +364,12 @@ export class StepperComponent extends Component {
       PropertyInfoUpdate,
       PersonalFinanceCreate
     } = this.props;
-    const newActiveStep =
-      this.isLastStep && !this.allStepsCompleted
-        ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-        : this.state.activeStep + 1;
+    // const newActiveStep =
+    //   this.isLastStep && !this.allStepsCompleted
+    //     ? this.steps.findIndex((step, i) => !(i in this.state.completed))
+    //     : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
-
-      console.log(this.state)
       if (this.state.propertyInfo.homepriceGrowthValidationError ||
         this.state.propertyInfo.downpaymentnewValidationError ||
         this.state.propertyInfo.annualPropertytaxValidationError ||
@@ -410,7 +378,7 @@ export class StepperComponent extends Component {
         NotificationManager.error("Error", "Validation Error");
       } else {
 
-        this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)
+        this.setState({ [this.state.propertyInfo.home_price_growth] : String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)})
 
         PropertyInfoUpdate(this.state.propertyInfo);
         this.props.history.push({
@@ -419,25 +387,19 @@ export class StepperComponent extends Component {
         })
 
       }
-
-
-
-
-
-
     } else if (this.state.activeStep === 1) {
 
       this.props.history.push({
         pathname: '/property-form',
         returnBackFromreviewEdit: true
       })
-      console.log(this.state)
-      {
+      
+      
         Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
           .length !== 0
           ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
           : PersonalFinanceCreate(this.state.personalFinance);
-      }
+      
 
 
 
@@ -455,12 +417,12 @@ export class StepperComponent extends Component {
         });
         NotificationManager.error("Please Validate Fields", "Error");
       } else {
-        this.state.RentvsBuy['rate_of_investment'] = String(
+        this.setState({ [this.state.RentvsBuy.rate_of_investment] : String(
           Number(this.state.RentvsBuy["rate_of_investment"]) / 100
-        );
-        this.state.RentvsBuy['rentinflation'] = String(
+        )});
+        this.setState({ [this.state.RentvsBuy.rentinflation] : String(
           Number(this.state.RentvsBuy["rentinflation"]) / 100
-        );
+        )});
         RentvsBuyUpdate(this.state.RentvsBuy);
         this.props.history.push({
           pathname: '/property-form',

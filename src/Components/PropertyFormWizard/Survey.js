@@ -4,7 +4,7 @@ import Axios from "axios";
 import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Header from "../../common/header";
 import "../../css/propertyFormWizard.css";

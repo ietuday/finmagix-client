@@ -1,16 +1,13 @@
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import React, { Fragment } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import {
-  MDBBtn,
+
   MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
+
   MDBCol,
   MDBRow,
   MDBContainer,
@@ -18,8 +15,7 @@ import {
 // import { Button } from "@material-ui/core";
 import Header from "../../common/header";
 import "./nerdReportDetails.css";
-import renthouse from "../../assets/images/rent-house.png";
-import buyhouse from "../../assets/images/buy-home.png";
+
 import renthouseactive from "../../assets/images/rent-house_active.png";
 import buyhouseactive from "../../assets/images/buy-home_active.png";
 
@@ -31,20 +27,20 @@ function TabPanel(props) {
 }
 
 function RentBuySummary(props) {
-  let singlePropertyResponse;
+  // let singlePropertyResponse;
   let CalculatorResponse;
   if (
     props.location.state &&
     props.location.state.singlePropertyResponse &&
     props.location.state.GetSinglePropertyResponse
   ) {
-    singlePropertyResponse = props.location.state.singlePropertyResponse;
+    // singlePropertyResponse = props.location.state.singlePropertyResponse;
     CalculatorResponse = props.location.state.GetSinglePropertyResponse;
   } else {
     CalculatorResponse = JSON.parse(localStorage.getItem("calculatorResponse"));
-    singlePropertyResponse = JSON.parse(
-      localStorage.getItem("GetSinglePropertyResponse")
-    );
+    // singlePropertyResponse = JSON.parse(
+    //   localStorage.getItem("GetSinglePropertyResponse")
+    // );
   }
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -77,13 +73,13 @@ function RentBuySummary(props) {
               <MDBCol col="4" md="5">
                 {
                   (CalculatorResponse && CalculatorResponse.FRM1 && CalculatorResponse.FRM1.Buy) || (CalculatorResponse && CalculatorResponse.ARM1 && CalculatorResponse.ARM1.Buy)
-                   ? <img src={buyhouseactive} className="" /> 
+                   ? <img src={buyhouseactive} className="" alt="" /> 
                    : null
                 }
 
                 {
                   (CalculatorResponse && CalculatorResponse.FRM1 && CalculatorResponse.FRM1.Rent) || (CalculatorResponse && CalculatorResponse.ARM1 && CalculatorResponse.ARM1.Rent)
-                   ? <img src={renthouseactive} className="" /> 
+                   ? <img src={renthouseactive} className="" alt="" /> 
                    : null
                 }
                              
@@ -141,13 +137,13 @@ function RentBuySummary(props) {
               <MDBCol col="4" md="5">
                 {
                   (CalculatorResponse && CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Buy) || (CalculatorResponse && CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Buy)
-                   ? <img src={buyhouseactive} className="" /> 
+                   ? <img src={buyhouseactive} className="" alt="" /> 
                    : null
                 }
 
                 {
                   (CalculatorResponse && CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Rent) || (CalculatorResponse && CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Rent)
-                   ? <img src={renthouseactive} className="" /> 
+                   ? <img src={renthouseactive} className="" alt="" /> 
                    : null
                 }
                              

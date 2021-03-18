@@ -1,21 +1,21 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { Button } from "@material-ui/core";
-import { Redirect, Link } from "react-router-dom";
+// import { Redirect, Link } from "react-router-dom";
 import SHA256 from "crypto-js/sha256";
 import "../css/signup-signin.css";
 import { Input } from "antd";
 import { NotificationManager } from "react-notifications";
-import { connect } from "react-redux";
-import { sign_in } from "../Components/redux/actions/signinSignup.js/index";
-import SigninValidator from "../Components/validatorRules/SigninValidatorRules";
+// import { connect } from "react-redux";
+// import { sign_in } from "../Components/redux/actions/signinSignup.js/index";
+// import SigninValidator from "../Components/validatorRules/SigninValidatorRules";
 import CreatePasswordValidator from "../Components/validatorRules/CreatePasswordValidator";
 import { updateValidators } from "../common/ValidatorFunction";
 import {
   resetValidators,
   displayValidationErrors,
 } from "../common/ValidatorFunction";
-import { login } from "../routes/utils";
+// import { login } from "../routes/utils";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { IconButton } from "@material-ui/core";
 
@@ -124,7 +124,7 @@ class createPassword extends Component {
             xs="12"
             className="text-center"
           >
-            <img src={padlock} className="for-img"></img>
+            <img src={padlock} alt ="" className="for-img"></img>
             <h4>Create New Password</h4>
             {/* <p>
             Lost your password? Please enter your email address. You will receive a link to create a new password via email.

@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
 import { connect } from "react-redux";
+// import { NotificationManager } from "react-notifications";
 import Header from "../../common/header";
 import { withRouter, Redirect } from "react-router-dom";
-import store from "../redux/store/index";
+// import store from "../redux/store/index";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -32,6 +33,7 @@ export class ShowDetailedReports extends Component {
       disabled: true,
       calculateCalled: false,
       calculateResponse: false,
+      CalculatorResponseData:[]
     };
   }
 
@@ -90,26 +92,25 @@ export class ShowDetailedReports extends Component {
           personalFinace: userData.data.data["personal_finances"],
           taxes: userData.data.data["taxes"],
         });
+        // this.calculateSurvey(prevProps);
       })
       .catch((err) => {});
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (
-      !this.state.calculateResponse &&
-      store.getState().CalculatorResponse &&
-      store.getState().CalculatorResponse.success
+      !this.state.calculateResponse
+      // store.getState().CalculatorResponse &&
+      // store.getState().CalculatorResponse.success
     ) {
       this.setState({
         disabled: false,
         loading: false,
         calculateResponse: true,
       });
-      localStorage.setItem(
-        "calculatorResponse",
-        JSON.stringify(store.getState().CalculatorResponse.output)
-      );
+      
     }
+
     this.calculateSurvey(prevProps);
   }
 
@@ -132,19 +133,19 @@ export class ShowDetailedReports extends Component {
             survey: {
               whenbuyhome: Number(surveyData.data.data[0]["when_buy_home"]),
               Homeidentified:
-                surveyData.data.data[0]["home_identified"] == true ? "Y" : "N",
+                surveyData.data.data[0]["home_identified"] === true ? "Y" : "N",
               Lenderidentified:
-                surveyData.data.data[0]["lender_identified"] == true
+                surveyData.data.data[0]["lender_identified"] === true
                   ? "Y"
                   : "N",
               Realtoridentified:
-                surveyData.data.data[0]["realtor_identified"] == true
+                surveyData.data.data[0]["realtor_identified"] === true
                   ? "Y"
                   : "N",
               Veteranstatus:
-                surveyData.data.data[0]["veteran_status"] == true ? "Y" : "N",
+                surveyData.data.data[0]["veteran_status"] === true ? "Y" : "N",
               Firsttimehomebuyer:
-                surveyData.data.data[0]["first_time_home_buyer"] == true
+                surveyData.data.data[0]["first_time_home_buyer"] === true
                   ? "Y"
                   : "N",
             },
@@ -154,7 +155,7 @@ export class ShowDetailedReports extends Component {
     }
   }
 
-  calculateAPI(prevProps) {
+  async calculateAPI(prevProps) {
     if (
       this.state.survey &&
       this.state.survey["whenbuyhome"] &&
@@ -185,7 +186,27 @@ export class ShowDetailedReports extends Component {
         screen12: this.calculateScreen12(prevProps),
       };
 
-      const data = this.props.GetCalculator(calculatorInputObj);
+      Axios.post(
+        `${baseURL}/calculator/`,calculatorInputObj,
+        {
+          headers: {
+            "Content-type": "Application/json",
+            Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+        .then((calRes) => {
+          this.setState({'CalculatorResponseData': calRes.data.output})
+          
+          localStorage.setItem(
+            "calculatorResponse",
+            JSON.stringify(calRes.data.output)
+          );
+
+          // NotificationManager.success('Success', 'Calculator Response feached');
+          
+        })
+        .catch((err) => {});
     }
   }
 
@@ -270,20 +291,20 @@ export class ShowDetailedReports extends Component {
   calculateScreen7() {
     return {
       Taxmoduleoption:
-        JSON.parse(localStorage.getItem("is_tax_selected")) == false
+        JSON.parse(localStorage.getItem("is_tax_selected")) === false
           ? "N"
           : "Y",
       RvBuymoduleoption:
-        JSON.parse(localStorage.getItem("is_rent_vs_buy_selected")) == false
+        JSON.parse(localStorage.getItem("is_rent_vs_buy_selected")) === false
           ? "N"
           : "Y",
     };
   }
 
   calculateScreen8(data) {
-    const personal_finance = JSON.parse(
-      localStorage.getItem("personal_finance_array")
-    ).marginal_tax_rate;
+    // const personal_finance = JSON.parse(
+    //   localStorage.getItem("personal_finance_array")
+    // ).marginal_tax_rate;
     return {
       FICOscore: this.state.personalFinace.fico_score_range
         ? this.state.personalFinace.fico_score_range

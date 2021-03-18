@@ -11,15 +11,10 @@ import Button from "@material-ui/core/Button";
 
 import Axios from "axios";
 
-import { Radio, Input } from "antd";
+import { Radio} from "antd";
 import { withRouter, Redirect } from "react-router-dom";
-import RentvsBuyValidator from "../validatorRules/RentvsBuyValidatorRules";
-import { updateValidators } from "../../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
-import { setRentvsBuyFilledStatus } from "../../routes/utils";
+
+
 import NumberFormat from "react-number-format";
 
 import quss from "../../assets/images/que.png";
@@ -223,7 +218,7 @@ export class RentvsBuy extends Component {
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Annual rent insurance</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
 <span className="tooltip-img-text">This is the insurance that covers a rental property. Different landlords may
  require different levels of coverage from a tenant.</span>
 </div>
@@ -251,7 +246,7 @@ export class RentvsBuy extends Component {
             <MDBRow className="margin20 marginbottom20">
               <MDBCol md="12">
                 <span className="get-started-label">Rate of investment</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">This is your average annualized 'rate of return' on your investments. 
             This input is used in the 'rent vs. buy' comparison.</span>
             </div>
@@ -279,27 +274,43 @@ export class RentvsBuy extends Component {
           
             <MDBRow className="margin20 marginbottom20">
             <MDBCol md="12">
-              <span className="get-started-label">Rate Inflation</span>
+              <span className="get-started-label">Rent Rate Inflation</span>
+              <div className="tooltip-img">
+                <img src={quss} className="tool-img" alt="" />
+                <span className="tooltip-img-text">
+                Rate inflation is the estimated annual increase in your rent
+                </span>
+              </div>
               <br />
+              {/* <Input
+                type="text"
+                className="input-class-mdb"
+                placeholder="Enter amount here %"
+                name="rentinflation"
+                value={this.state.rentinflation}
+                onChange={this.handleChange}
+              /> */}
+
               <NumberFormat
-                  className="input-class-mdb"
-                  placeholder="Enter amount here %"
-                  name="rentinflation"
-                  value={this.state.rentinflation}
-                  onChange={this.handleChange}
-                  // thousandSeparator={true}
-                  suffix={"%"}
-                  onValueChange={async (values) => {
-                    const { formattedValue, value } = values;
-                    await this.setState({
-                      rentinflation: value,
-                    });
-                    await this.setState({
-                      rentinflation_percentage: formattedValue,
-                    });
-                  }}
-                />
+                className="input-class-mdb"
+                placeholder="Enter amount here %"
+                name="rentinflation_percentage"
+                value={this.state.rentinflation_percentage}
+                onChange={this.handleChange}
+                // thousandSeparator={true}
+                suffix={"%"}
+                onValueChange={async (values) => {
+                  const { formattedValue, value } = values;
+                  await this.setState({
+                    rentinflation: value,
+                  });
+                  await this.setState({
+                    rentinflation_percentage: formattedValue,
+                  });
+                }}
+              />
             </MDBCol>
+            {/* {displayValidationErrors(this.validators, "rentinflation")} */}
           </MDBRow>
 
           </div>

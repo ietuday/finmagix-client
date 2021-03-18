@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
 import { Input } from "antd";
-import Button from "@material-ui/core/Button";
-import { withRouter, Redirect } from "react-router-dom";
+
+import { withRouter} from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import { updateValidators } from "../../common/ValidatorFunction";
+
 import Axios from "axios";
 import NumberFormat from "react-number-format";
 
@@ -13,8 +13,7 @@ import {
   resetValidators,
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+
 import Tax1YesValidator from "../validatorRules/Tax1YesValidator";
 import Tax1NoValidator from "../validatorRules/Tax1NoValidator";
 import quss from "../../assets/images/que.png";
@@ -277,40 +276,7 @@ export class Tax1 extends Component {
   render() {
     const showGrossIncome = (
       <div>
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">
-              Federal adjusted gross income
-            </span>
-            <br />
-            {/* <Input
-            className="input-class-mdb"
-            name="fedral_adjusted_gross_income"
-            value={this.state.fedral_adjusted_gross_income}
-            onChange={this.handleChange}
-            placeholder="Enter amount here"
-          /> */}
-
-            <NumberFormat
-              className="input-class-mdb"
-              name="fedral_adjusted_gross_income"
-              value={this.state.fedral_adjusted_gross_income}
-              onChange={this.handleChange}
-              placeholder="Enter amount here"
-              thousandSeparator={true}
-              onValueChange={async (values) => {
-                const { formattedValue, value } = values;
-                await this.setState({
-                  fedral_adjusted_gross_income_number: formattedValue,
-                });
-                await this.setState({
-                  fedral_adjusted_gross_income: value,
-                });
-              }}
-            />
-          </MDBCol>
-        </MDBRow>
-        {/* {displayValidationErrors(this.Tax1NoValidators, "fedral_adjusted_gross_income")} */}
+      
       </div>
     );
 
@@ -356,7 +322,7 @@ export class Tax1 extends Component {
               Eligible medical and dental expenses
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 If you itemize your deductions for a taxable year on Schedule A
                 (Form 1040 or 1040-SR), Itemized Deductions PDF, you may be able
@@ -406,7 +372,7 @@ export class Tax1 extends Component {
               Eligible state and local taxes or general sales taxes
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 If you itemize deductions on Schedule A, your total deduction
                 for state and local income, sales and property taxes is limited
@@ -453,7 +419,7 @@ export class Tax1 extends Component {
               Other state,local or personal taxes
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Deductible personal property taxes are those based only on the
                 value of personal property such as a boat or car. The tax must
@@ -496,7 +462,7 @@ export class Tax1 extends Component {
               Tax deductive investment interest
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Investment interest is interest paid on money you borrowed that
                 is allocable to property held for investment. It doesn't include

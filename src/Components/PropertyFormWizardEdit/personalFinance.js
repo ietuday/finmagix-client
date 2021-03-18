@@ -1,20 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
-import Button from "@material-ui/core/Button";
+
 import RangeSlider from "../../common/RangeSilder";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import NumberFormat from "react-number-format";
 import "react-rangeslider/lib/index.css";
-import PersonaLFinanceValidator from "../validatorRules/PersonalFinanceValidatorRules";
-import { updateValidators } from "../../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
-import DetailedExpenseModal from "../../common/detailedExpense";
+
 import quss from "../../assets/images/que.png";
 
 export class PersonalFinance extends Component {
@@ -82,15 +75,10 @@ export class PersonalFinance extends Component {
   async handleChange(event) {
     const { name } = event.target;
     event.persist();
-
-
-    
-
-
     if(event.target.name == "monthly_debt_payments"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
-          monthlydebtPaymentValidationError: " Cannot exceed Federal Income"
+          monthlydebtPaymentValidationError: " Cannot exceed Adjusted Gross Income"
         }) 
       }else{
         this.setState({
@@ -104,7 +92,7 @@ export class PersonalFinance extends Component {
     if(event.target.name == "monthly_non_housing_expenses"){
       if(this.state.federal_income < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
-          monthlynonhousingExpensesValidationError: " Cannot exceed Federal Income"
+          monthlynonhousingExpensesValidationError: " 'Cannot exceed Adjusted Gross Income"
         }) 
       }else{
         this.setState({
@@ -125,9 +113,6 @@ export class PersonalFinance extends Component {
       }
 
     }
-
-
-
     
     await this.setState({
       [event.target.name]: event.target.value,
@@ -194,43 +179,49 @@ export class PersonalFinance extends Component {
       
      
       <MDBRow className="margin20">
-      <MDBCol md="12">
-        <span className="get-started-label">Federal Income</span>
-        <br />
-        {/* <Input
-          className="input-class-mdb"
-          placeholder="Enter amount here"
-          name="federal_income"
-          value={this.state.federal_income}
-          onChange={this.handleChange}
-        /> */}
+          <MDBCol md="12">
+            <span className="get-started-label">Adjusted Gross Income</span>
+            <div className="tooltip-img">
+            <img src={quss} className="tool-img" alt="" />
+            <span className="tooltip-img-text">
+            AGI calculation is equal to the total income you report that's subject to income tax—such as earnings from your job, self-employment, dividends and interest —minus specific deductions, or “adjustments” that you're eligible to take. This refers to line 11 from 1040 tax form.{" "}
+            </span>
+          </div>
+            <br />
+            {/* <Input
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="federal_income"
+              value={this.state.federal_income}
+              onChange={this.handleChange}
+            /> */}
 
-        <NumberFormat
-          className="input-class-mdb"
-          placeholder="Enter amount here"
-          name="federal_income"
-          value={this.state.federal_income}
-          onChange={this.handleChange}
-          thousandSeparator={true}
-          onValueChange={async (values) => {
-            const { formattedValue, value } = values;
-            await this.setState({
-              federal_income_number: formattedValue,
-            });
-            await this.setState({
-              federal_income: value,
-            });
-          }}
-        />
-      </MDBCol>
-      {/* {displayValidationErrors(this.validators, "federal_income")} */}
-    </MDBRow>
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="federal_income"
+              value={this.state.federal_income}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  federal_income_number: formattedValue,
+                });
+                await this.setState({
+                  federal_income: value,
+                });
+              }}
+            />
+          </MDBCol>
+          {/* {displayValidationErrors(this.validators, "federal_income")} */}
+        </MDBRow>
 
     <MDBRow className="margin20">
       <MDBCol md="12">
         <span className="get-started-label">Monthly debt payments</span>
         <div className="tooltip-img">
-          <img src={quss} className="tool-img"></img>
+          <img src={quss} className="tool-img" alt="" />
           <span className="tooltip-img-text">
             Monthly debt payments are all your NON-HOUSING debt payments
             such as credit cards, car loans etc.{" "}
@@ -275,7 +266,7 @@ export class PersonalFinance extends Component {
           Monthly non-housing expenses
         </span>
         <div className="tooltip-img">
-          <img src={quss} className="tool-img"></img>
+          <img src={quss} className="tool-img" alt="" />
           <span className="tooltip-img-text">
             These are all of the non-housing expenses except Taxes such as
             Food, Utilities, Entertainment etc. This input is used to
@@ -318,7 +309,7 @@ export class PersonalFinance extends Component {
       <MDBCol md="12">
         <span className="get-started-label">Marginal tax rate</span>
         <div className="tooltip-img">
-          <img src={quss} className="tool-img"></img>
+          <img src={quss} className="tool-img" alt="" />
           <span className="tooltip-img-text">
             Note that we have to build a check here that the interest only
             period cannot be equal to the loan term or greater than the loan

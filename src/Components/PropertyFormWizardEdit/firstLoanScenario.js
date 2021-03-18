@@ -83,7 +83,7 @@ export class FirstLoanScenario extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkproperty()
-    console.log(props)
+    
   }
 
   checkproperty() {
@@ -98,7 +98,7 @@ export class FirstLoanScenario extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
-          console.log(propertyDetail.property_price)
+          
           this.setState({
             'property_price': propertyDetail.property_price,
             'property_downpayment': propertyDetail.downpayment_amount
@@ -204,7 +204,7 @@ export class FirstLoanScenario extends Component {
       // event.persist();
       [event.target.name]: event.target.value,
     })
-    if (event.target.name == "loan_amount") {
+    if (event.target.name === "loan_amount") {
       if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
         this.setState({
           loan_amount_validation_error: "Cannot exceed Property price"
@@ -216,7 +216,7 @@ export class FirstLoanScenario extends Component {
       }
     }
 
-    if (event.target.name == "interest_only_period") {
+    if (event.target.name === "interest_only_period") {
       if (this.state.loan_term < event.target.value) {
         this.setState({
           interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
@@ -229,7 +229,7 @@ export class FirstLoanScenario extends Component {
 
     }
 
-    if (event.target.name == "interest_percentage") {
+    if (event.target.name === "interest_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
         this.setState({
           interestrateValidationError: "Is the interest rate input accurate?"
@@ -243,7 +243,7 @@ export class FirstLoanScenario extends Component {
     }
 
 
-    if (event.target.name == "points_percentage") {
+    if (event.target.name === "points_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, '')) > 5) {
         this.setState({
           pointsValidationError: "Is the input for points accurate?"
@@ -255,7 +255,7 @@ export class FirstLoanScenario extends Component {
       }
 
     }
-    if (event.target.name == "closing_costs") {
+    if (event.target.name === "closing_costs") {
       if (
         parseInt(String(event.target.value).replace(/,/g, "")) >
         (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
@@ -528,7 +528,7 @@ export class FirstLoanScenario extends Component {
         <MDBCol md="12">
           <span className="get-started-label">Interest only period</span>
           <div className="tooltip-img">
-            <img src={quss} className="tool-img"></img>
+            <img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">
               This is the # of years for which you won't pay principal on the
               loan and will pay only the interest amount on a loan{" "}
@@ -579,7 +579,7 @@ export class FirstLoanScenario extends Component {
           </MDBCol>
         </MDBRow>
         
-        {(this.state.mortgage_program_type_value == 2 || this.state.mortgage_program_type == 2) ? (
+        {(this.state.mortgage_program_type_value === 2 || this.state.mortgage_program_type === 2) ? (
           <ARMComponentFirstLoan
             downpayment={this.state.downpaymentCheck}
             handleArmData={this.handleArmData}
@@ -588,12 +588,12 @@ export class FirstLoanScenario extends Component {
         ) : (
 
             <div>
-              {console.log}
+              
               <MDBRow className="margin20">
                 <MDBCol md="12">
                   <span className="get-started-label">Loan Amount</span>
                   <div className="tooltip-img">
-                    <img src={quss} className="tool-img"></img>
+                    <img src={quss} className="tool-img" alt="" />
                     <span className="tooltip-img-text">
                       Enter the amount you plan to borrow for this mortgage{" "}
                     </span>
@@ -654,7 +654,7 @@ export class FirstLoanScenario extends Component {
                     Interest on your first mortgage
                 </span>
                   <div className="tooltip-img">
-                    <img src={quss} className="tool-img"></img>
+                    <img src={quss} className="tool-img" alt="" />
                     <span className="tooltip-img-text">
                       Interest rate is the cost of borrowing or the amount charged
                     on the first mortgage. Enter Interest % and not APR %.{" "}
@@ -690,7 +690,7 @@ export class FirstLoanScenario extends Component {
                 <MDBCol md="12">
                   <span className="get-started-label">Points</span>
                   <div className="tooltip-img">
-                    <img src={quss} className="tool-img"></img>
+                    <img src={quss} className="tool-img" alt="" />
                     <span className="tooltip-img-text">
                       Input the points you may need to pay on your loan expressed
                       as a % of the loan amount. For e.g. 2 points is 2% of the
@@ -734,7 +734,7 @@ export class FirstLoanScenario extends Component {
                   {/* <span className="get-started-label">Closing costs</span> */}
                   <span className="get-started-label">Closing costs</span>
                   <div className="tooltip-img">
-                    <img src={quss} className="tool-img"></img>
+                    <img src={quss} className="tool-img" alt="" />
                     <span className="tooltip-img-text">
                       These are fees charged by the lender to the borrower for
                       offering the loan. These may include home appraisal fees,
@@ -795,7 +795,7 @@ export class FirstLoanScenario extends Component {
                 ? showInterestOnlyPeriodButton
                 : null}
               <br />
-              {console.log(this.props)}
+              
 
               {this.state.downpaymentCheck === "lessthan20" ? (
 

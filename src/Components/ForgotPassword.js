@@ -1,15 +1,15 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { IconButton } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import SHA256 from "crypto-js/sha256";
 import "../css/signup-signin.css";
-import { withRouter, Link, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Input } from "antd";
 import { NotificationManager } from "react-notifications";
 import ForgotPasswordValidator from "../Components/validatorRules/ForgotPasswordValidator";
-import Loader from "../Components/reports/loader";
+// import Loader from "../Components/reports/loader";
 import { updateValidators } from "../common/ValidatorFunction";
 import {
   resetValidators,
@@ -121,7 +121,7 @@ class ForgotPassword extends Component {
             xs="12"
             className="text-center"
           >
-            <img src={forgot} className="for-img"></img>
+            <img src={forgot} alt="" className="for-img"></img>
             <h4>You Forgot Your Password</h4>
             <p>
             Forgot your password? No problem! Please enter your email below, and press <b>SEND</b>

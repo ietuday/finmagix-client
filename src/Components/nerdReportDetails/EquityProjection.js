@@ -1,18 +1,12 @@
-import { withRouter, Redirect, Link } from "react-router-dom";
-import React, { Fragment, PureComponent } from "react";
+import { withRouter, Link } from "react-router-dom";
+import React, { Fragment} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import {
-  MDBBtn,
   MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText, 
-  MDBCol,
-  MDBRow,
+
   MDBContainer,
 } from "mdbreact";
 import { Button } from "@material-ui/core";
@@ -23,10 +17,10 @@ import {
   BarChart,
   Bar,
   XAxis,
-  YAxis,
-  CartesianGrid,
+  // YAxis,
+  // CartesianGrid,
   Tooltip,
-  Legend,
+  // Legend,
 } from "recharts";
 
 const getIntroOfPage = (label) => {
@@ -129,8 +123,6 @@ function EquityProjection(props) {
         ? CalculatorResponse.FRM2.ProjectedequityFRMOption2
         : 0;
       ct2 = parseFloat(String(ct2).replace(/,/g, ''))
-  console.log("@@@@@@@@@@@@2",ct1)
-  console.log("@@@@@@@@@@@@2",ct2)
     data1 = [
       {
         name: "Projected home price",
@@ -224,7 +216,7 @@ function EquityProjection(props) {
                 price and your total mortgage loan balance at the end of your
                 duration of stay of {singlePropertyResponse.stay_duration} years
               </p>
-              <h6>Equity represents the difference between your projected</h6>
+              
               <h4>
                 
               {CalculatorResponse.ARM1
@@ -261,7 +253,7 @@ function EquityProjection(props) {
                 price and your total mortgage loan balance at the end of your
                 duration of stay of {singlePropertyResponse.stay_duration} years
               </p>
-              <h6>Equity represents the difference between your projected</h6>
+              
               <h4>
                 {CalculatorResponse.ARM2
                   ? "ARM"
@@ -270,8 +262,8 @@ function EquityProjection(props) {
                   : ""}
               </h4>
               <BarChart
-                width={300}
-                height={300}
+                  width={300}
+                  height={400}
                 data={data2}
                 margin={{
                   top: 5,

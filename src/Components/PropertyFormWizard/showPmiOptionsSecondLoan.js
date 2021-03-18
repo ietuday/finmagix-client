@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
+
 import Axios from "axios";
  
 import Select from "@material-ui/core/Select";
@@ -142,7 +142,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       [event.target.name]: event.target.value,
     });
 
-    if(event.target.name == "pmi_amount"){
+    if(event.target.name === "pmi_amount"){
       const checkloanprice = parseInt(Number(this.props.loanAmount) * 3 )/100
       if(checkloanprice < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
@@ -155,7 +155,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       }
     }
 
-    if(event.target.name == "loanamountsecond2"){
+    if(event.target.name === "loanamountsecond2"){
       if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
         this.setState({
           secondloanAmountValidationError: "Cannot exceed first mortgage amount"
@@ -168,7 +168,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
       
   }
 
-  if(event.target.name == "second_mortgage_interest_percentage"){
+  if(event.target.name === "second_mortgage_interest_percentage"){
     if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
       this.setState({
         interestrateValidationError: " Is the interest rate input accurate?"
@@ -182,7 +182,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
 }
 
 
-if(event.target.name == "second_mortgage_points_percentage"){
+if(event.target.name === "second_mortgage_points_percentage"){
   if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
     this.setState({
       pointsValidationError: "Points cannot exceed 5%"
@@ -195,7 +195,7 @@ if(event.target.name == "second_mortgage_points_percentage"){
   
 }
 
-if (event.target.name == "second_mortgage_closing_costs") {
+if (event.target.name === "second_mortgage_closing_costs") {
   if (
     parseInt(String(event.target.value).replace(/,/g, "")) >
     (parseFloat(String(this.state.loanamountsecond2).replace(/,/g, "")) * 5) /
@@ -220,6 +220,12 @@ if (event.target.name == "second_mortgage_closing_costs") {
       <MDBRow className="margin20">
         <MDBCol md="12">
           <span className="get-started-label">Monthly PMI Amount</span>
+          <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+              PMI, is a type of mortgage insurance you might be required to pay for if you have a conventional loan. PMI is usually required when you have a conventional loan and make a down payment of less than 20 percent of the home's purchase price. You can pay PMI in lieu of a second mortgage
+              </span>
+            </div>
           <br />
           {/* <Input
             className="input-class-mdb"
@@ -245,7 +251,11 @@ if (event.target.name == "second_mortgage_closing_costs") {
                 });
               }}
             />
-            {this.state.pmiValidationError}
+             <span className="validation-text-color">
+
+             {this.state.pmiValidationError}
+             </span>
+           
         </MDBCol>
       </MDBRow>
     );
@@ -255,7 +265,7 @@ if (event.target.name == "second_mortgage_closing_costs") {
           <MDBCol md="12">
             <span className="get-started-label">Loan Amount</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the amount you plan to borrow for this mortgage{" "}
               </span>
@@ -285,8 +295,12 @@ if (event.target.name == "second_mortgage_closing_costs") {
                 });
               }}
             />
+              <span className="validation-text-color">
+              {this.state.secondloanAmountValidationError}
+              </span>
+           
           </MDBCol>
-          {this.state.loanAmountValidationError}
+          
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -339,7 +353,10 @@ if (event.target.name == "second_mortgage_closing_costs") {
                 });
               }}
             />
-            {this.state.interestrateValidationError}
+              <span className="validation-text-color">
+              {this.state.interestrateValidationError}
+              </span>
+            
           </MDBCol>
           
         </MDBRow>
@@ -347,7 +364,7 @@ if (event.target.name == "second_mortgage_closing_costs") {
           <MDBCol md="12">
             <span className="get-started-label">Points</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Input the points you may need to pay on your loan expressed as a
                 % of the loan amount. For e.g. 2 points is 2% of the loan
@@ -380,7 +397,10 @@ if (event.target.name == "second_mortgage_closing_costs") {
                 });
               }}
             />
+              <span className="validation-text-color">
               {this.state.pointsValidationError}  
+              </span>
+             
           </MDBCol>
         
         </MDBRow>
@@ -389,7 +409,7 @@ if (event.target.name == "second_mortgage_closing_costs") {
             {/* <span className="get-started-label">Closing costs</span> */}
             <span className="get-started-label">Closing costs</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 These are fees charged by the lender to the borrower for
                 offering the loan. These may include home appraisal fees, credit
@@ -425,7 +445,10 @@ if (event.target.name == "second_mortgage_closing_costs") {
                 });
               }}
             />
-{this.state.closingCostsValidationError}
+             <span className="validation-text-color">
+             {this.state.closingCostsValidationError}
+             </span>
+
           </MDBCol>
         </MDBRow>
       </div>

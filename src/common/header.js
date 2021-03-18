@@ -11,9 +11,6 @@ import {
   MDBModalHeader,
 } from "mdbreact";
 import { Redirect } from "react-router-dom";
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
-import SearchIcon from '@material-ui/icons/Search';
 
 class Header extends Component {
   constructor(props) {

@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import { Button } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
 import "../../css/splashScreen.css";
 
 import CssBaseline from "@material-ui/core/CssBaseline";

@@ -70,7 +70,6 @@ const MapWithASearchBox = compose(
                   Geocode.fromAddress(propertyDetail.house_address).then(
                     (response) => {
                       const { lat, lng } = response.results[0].geometry.location;
-                      console.log(lat, lng);
                       const center = {
                         lat: lat,
                         lng: lng
@@ -79,7 +78,7 @@ const MapWithASearchBox = compose(
                       this.setState({"center": center})
                     },
                     (error) => {
-                      console.error(error);
+                      
                     }
                   );
             })

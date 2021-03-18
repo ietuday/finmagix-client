@@ -4,8 +4,6 @@ import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
 
-import Axios from "axios";
-
 import GetStartedHouseInfo from "../PropertyFormWizard/houseInfo";
 import PersonalFinance from "../PropertyFormWizard/personalFinance";
 import RentvsBuy from "../PropertyFormWizard/rentvsBuy";
@@ -41,16 +39,14 @@ import {
   property_info_update,
   survey_create,
 } from "../redux/actions/PropertyReport/propertyInfo";
-import { isFormValid } from "../../common/ValidatorFunction";
+
 import { connect } from "react-redux";
-import Header from "../../common/header";
+
 import FirstLoanScenario from "./firstLoanScenario";
 import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";
 import { savePropertyId } from "../../../src/routes/utils";
 
-import { config } from "../config/default";
-const { baseURL } = config;
 
 export class StepperComponent extends Component {
   constructor(props) {
@@ -98,6 +94,14 @@ export class StepperComponent extends Component {
       "Taxes",
       "Summary",
     ];
+    this.cleanPreviousPropertyDetail()
+  }
+
+  cleanPreviousPropertyDetail(){
+    if(localStorage.getItem('addressData')) localStorage.removeItem('addressData')
+    if(localStorage.getItem('GetSinglePropertyResponse'))localStorage.removeItem('GetSinglePropertyResponse')
+    if(localStorage.getItem('calculatorResponse'))localStorage.removeItem('calculatorResponse')
+    
   }
   componentWillMount() {
     if (this.props.location.returnBackFromreviewEdit === true) {
@@ -123,8 +127,8 @@ export class StepperComponent extends Component {
       localStorage.getItem("property_id") &&
       localStorage.getItem("basic-info")
     ) {
-      const property = { property_obj: localStorage.getItem("property_id") };
-      const basicInfo = JSON.parse(localStorage.getItem("basic-info"));
+      // const property = { property_obj: localStorage.getItem("property_id") };
+      // const basicInfo = JSON.parse(localStorage.getItem("basic-info"));
       // const SurveyData = { ...property, ...basicInfo };
       // this.props.SurveyCreate(SurveyData);
     }
@@ -176,10 +180,10 @@ export class StepperComponent extends Component {
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
-    const newActiveStep =
-      this.isLastStep && !this.allStepsCompleted
-        ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-        : this.state.activeStep + 1;
+    // const newActiveStep =
+    //   this.isLastStep && !this.allStepsCompleted
+    //     ? this.steps.findIndex((step, i) => !(i in this.state.completed))
+    //     : this.state.activeStep + 1;
     if (
       this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
       this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
@@ -193,12 +197,12 @@ export class StepperComponent extends Component {
         saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
       });
 
-      {
+      
         Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
           .length !== 0
           ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
           : PersonalFinanceCreate(this.state.personalFinance);
-      }
+      
       if (
         Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
           .length !== 0
@@ -392,13 +396,13 @@ export class StepperComponent extends Component {
 
   async handleNext() {
     const {
-      PersonalFinanceUpdate,
+      // PersonalFinanceUpdate,
       RentvsBuyCreate,
       RentvsBuyUpdate,
       PropertyInfoCreate,
       PropertyInfoUpdate,
-      SurveyCreate,
-      PersonalFinanceCreate,
+      // SurveyCreate,
+      // PersonalFinanceCreate,
     } = this.props;
     const newActiveStep =
       this.isLastStep && !this.allStepsCompleted
@@ -406,7 +410,7 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
-      console.log(this.state)
+      
       if (this.state.propertyInfo.homepriceGrowthValidationError ||
         this.state.propertyInfo.downpaymentnewValidationError ||
         this.state.propertyInfo.annualPropertytaxValidationError ||
@@ -414,7 +418,7 @@ export class StepperComponent extends Component {
       ) {
         return NotificationManager.error("Error", "Validation Error");
       } else {
-        console.log(this.state.propertyInfo)
+        
         if (
           this.state.propertyInfo.property_price &&
           this.state.propertyInfo.downpayment_amount &&
@@ -470,7 +474,7 @@ export class StepperComponent extends Component {
       }
 
     } else if (this.state.activeStep === 1) {
-      console.log(this.state)
+      
       if(this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments){
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")

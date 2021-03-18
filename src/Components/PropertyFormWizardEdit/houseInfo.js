@@ -1,25 +1,18 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
 import Axios from "axios";
-import { Input } from "antd";
-import Button from "@material-ui/core/Button";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+
 import NumberFormat from "react-number-format";
 
-import MapContainer from "../../common/googleMap";
+
 import MapWithASearchBox from "../../common/geocode";
-import NumberSpinner from "../../common/inputNumberSpinner";
-import { updateValidators } from "../../common/ValidatorFunction";
+
 import quss from "../../assets/images/que.png";
 import "../../css/addProperty.css";
 
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
 
-import HouseInfoValidator from "../validatorRules/HouseInfoValidator";
+
+
 
 import { config } from "../config/default";
 const { baseURL } = config;
@@ -77,7 +70,7 @@ export class GetStartedHouseInfo extends Component {
     this.handleBedroomRoomCount = this.handleBedroomRoomCount.bind(this);
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
     this.checkProperty();
-    console.log(localStorage);
+    
   }
 
   checkProperty() {
@@ -241,25 +234,6 @@ export class GetStartedHouseInfo extends Component {
       downpayment = "greaterthan20";
     }
 
-    // if (
-    //   name === "property_price" ||
-    //   name === "downpayment_amount" ||
-    //   name === "home_price_growth" ||
-    //   name === "area_of_the_house" ||
-    //   name == "annual_property_tax" ||
-    //   name == "annual_home_owner_association_dues" ||
-    //   name == "home_owner_insurance"
-    // ) {
-    //   console.log(name)
-
-    //   updateValidators(this.validators, event.target.name, event.target.value);
-    //   const validationErrorLength = this.validators[event.target.name].errors
-    //     .length;
-
-    // this.props.getValidationError(validationErrorLength);
-
-    // }
-
     this.props.handleHouseInfo(downpayment, this.state);
   }
 
@@ -271,14 +245,14 @@ export class GetStartedHouseInfo extends Component {
     this.setState({
       no_of_bedrooms: count,
     });
-    console.log(this.state);
+    
     //  localStorage.setItem('no_of_bedrooms',count)
   }
   handleBathRoomCount(count) {
     this.setState({
       no_of_bathrooms: count,
     });
-    console.log(this.state);
+    
     //  localStorage.setItem('no_of_bathrooms',count)
   }
   selectAddress = (data) => {
@@ -356,7 +330,7 @@ export class GetStartedHouseInfo extends Component {
               What is the price of the property?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the price of the house requested by the seller or the
                 current appraised value of the house. If both prices are
@@ -398,7 +372,7 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Home Price Growth</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the growth in the home price per year for the duration of
                 stay.
@@ -440,7 +414,7 @@ export class GetStartedHouseInfo extends Component {
               What is the downpayment amount?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text"> Enter your downpayment.</span>
             </div>
             <br />
@@ -477,7 +451,7 @@ export class GetStartedHouseInfo extends Component {
               How long do you intend to stay in this house?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the number of years you intend to stay in this house, or
                 the number of years after which you intend to refinance the
@@ -528,7 +502,7 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.no_of_bedrooms}
               onChange={this.handleChange}
               onValueChange={async (values) => {
-                const { formattedValue, value } = values;
+                const { value } = values;
                 await this.setState({
                   no_of_bedrooms: value,
                 });
@@ -553,7 +527,7 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.no_of_bathrooms}
               onChange={this.handleChange}
               onValueChange={async (values) => {
-                const { formattedValue, value } = values;
+                const { value } = values;
                 await this.setState({
                   no_of_bathrooms: value,
                 });
@@ -592,12 +566,12 @@ export class GetStartedHouseInfo extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(this.validators, "area_of_the_house")}
+        
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the annual property tax in number not %. Typically these
                 range between 1-2% of the home price.{" "}
@@ -636,7 +610,7 @@ export class GetStartedHouseInfo extends Component {
             <span className="get-started-label">
               Monthly Home Owner's Association dues (if applicable)
               <div className="tooltip-img">
-                <img src={quss} className="tool-img"></img>
+                <img src={quss} className="tool-img" alt="" />
                 <span className="tooltip-img-text">
                   Enter the monthly association dues that you expect to pay the
                   home owner's association of your residential complex. These
@@ -677,6 +651,12 @@ export class GetStartedHouseInfo extends Component {
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
             <span className="get-started-label">Home Owner's Insurance</span>
+            <div className="tooltip-img">
+            <img src={quss} className="tool-img" alt="" />
+            <span className="tooltip-img-text">
+            Home Owner's insurance is a form of property insurance that covers losses and damages to an individual's house and assets in the home.{" "}
+            </span>
+          </div>
             <br />
             {/* <Input
               className="input-class-mdb"
