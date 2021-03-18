@@ -308,7 +308,7 @@ export class GetStartedHouseInfo extends Component {
     }
   };
 
-  componentWillUpdate(nextProps, nextState) {}
+  UNSAFE_componentWillUpdate(nextProps, nextState) {}
   render() {
     const { PropertyInfoGetDataResponse } = this.props;
     return (
