@@ -2,7 +2,8 @@ import { RENT_VS_BUY_CREATE, RENT_VS_BUY_GET, RENT_VS_BUY_UPDATE } from "../acti
 import Axios from "axios";
 import { config } from "../../../config/default";
 const { baseURL } = config;
-const token = localStorage.getItem('accessToken');
+
+
 export const rent_vs_buy_create = (data) => {
   return (dispatch) => {
     Axios.post(`${baseURL}/rent_vs_buy/list_or_create`, data, {

@@ -79,26 +79,27 @@ export class PersonalFinanceReviewEdit extends Component {
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
+
           <MDBRow className="margin20">
-            <MDBCol md="1" size="1"></MDBCol>
-            <MDBCol md="6" size="6">
-              <div className="">
-                <span className="get-started-label">Annual Gross Income</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Annual Gross income is your total gross income
-              before any deductions such as income taxes. If you have other sources
-              other than salary & wages, please include them as well. </span>
+          <MDBCol md="1" size="1"></MDBCol>
+          <MDBCol md="6" size="6">
+            <div className="">
+              <span className="get-started-label">
+              Adjusted Gross Income
+
+              </span>
+             
             </div>
-              </div>
-            </MDBCol>
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
-                {PeronalFinanceData.annual_gross_income}
-              </div>
-            </MDBCol>
-            <MDBCol md="2"></MDBCol>
-          </MDBRow>
+          </MDBCol>
+          &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+          <MDBCol md="3" size="3">
+            <div className="get-started-label text-center">
+              {PeronalFinanceData.federal_income}
+            </div>
+          </MDBCol>
+          <MDBCol md="2"></MDBCol>
+        </MDBRow>
+
           <MDBRow className="margin20">
             <MDBCol md="1" size="1"></MDBCol>
             <MDBCol md="6" size="6">
@@ -106,7 +107,7 @@ export class PersonalFinanceReviewEdit extends Component {
                 <span className="get-started-label">
                   Your monthly debt payments
                 </span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt=""/>
             <span className="tooltip-img-text">Monthly debt payments are all your NON-HOUSING 
             debt payments such as credit cards, car loans etc. </span>
             </div>
@@ -144,17 +145,16 @@ export class PersonalFinanceReviewEdit extends Component {
                 <span className="get-started-label">
                   Marginal tax Rate
                 </span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
-            <span className="tooltip-img-text">Note that we have to build a check here that the
-             interest only period cannot be equal to the loan term or greater 
-             than the loan term. </span>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt=""/>
+            <span className="tooltip-img-text">  Marginal Tax rate refers to the rate you pay  on the amount of your income that falls into a certain range. 
+              We use to estimate monthly taxes you may pay on your income.</span>
             </div>
               </div>
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-                {PeronalFinanceData.marginal_tax_rate}
+                {PeronalFinanceData.marginal_tax_rate*100}%
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>

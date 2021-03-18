@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import {MDBRow, MDBCol } from "mdbreact";
 import { NotificationManager } from "react-notifications";
 import { Redirect,Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
@@ -10,7 +10,7 @@ import { get_prelim_report } from "../../redux/actions/prelimReport";
 import SHA256 from "crypto-js/sha256";
 import {
   sign_up,
-  sign_up_google,
+  // sign_up_google,
 } from '../../../Components/redux/actions/signinSignup.js/index';
 
 export class PrelimReport extends Component {
@@ -35,7 +35,7 @@ export class PrelimReport extends Component {
   }
 
   signUpGoogleFacebbok(res, type) {
-    const { SignUp, SignupRequestData } = this.props;
+    const { SignUp } = this.props;
     let response;
     if (type === "google") {
       response = {
@@ -51,7 +51,7 @@ export class PrelimReport extends Component {
       };
     }
     if (response) {
-      const data = SignUp(response, this.onSuccess, this.onFailure);
+      SignUp(response, this.onSuccess, this.onFailure);
     }
   }
 

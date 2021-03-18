@@ -1,10 +1,10 @@
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import React, { Fragment } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBRow, MDBContainer } from 'mdbreact';
+import {  MDBCard,   MDBContainer } from 'mdbreact';
 import { Button } from "@material-ui/core";
 import Header from '../../common/header';
 import './nerdReportDetails.css';
@@ -17,19 +17,19 @@ function TabPanel(props) {
 }
 
 function TaxSummary(props) {
-  let singlePropertyResponse;
+  // let singlePropertyResponse;
   let CalculatorResponse;
   if (
     props.location.state &&
     props.location.state.singlePropertyResponse &&
     props.location.state.GetSinglePropertyResponse
   ) {
-    singlePropertyResponse = props.location.state.singlePropertyResponse;
+    // singlePropertyResponse = props.location.state.singlePropertyResponse;
     CalculatorResponse = props.location.state.GetSinglePropertyResponse;
   } else {
     CalculatorResponse = JSON.parse(localStorage.getItem('calculatorResponse'));
-    singlePropertyResponse = JSON.parse(localStorage.getItem('GetSinglePropertyResponse'));
-    console.log("CalculatorResponse" , CalculatorResponse);
+    // singlePropertyResponse = JSON.parse(localStorage.getItem('GetSinglePropertyResponse'));
+    
   }
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {

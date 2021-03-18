@@ -1,14 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
-import { connect } from "react-redux";
 import Header from "../../common/header";
 import { withRouter, Redirect } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
-import { get_single_property } from "../redux/actions/PropertyListing/index";
-import { get_calculator } from "../redux/actions/Calculator/index";
 import "../../css/reports.css";
 
 export class NerdReport extends Component {

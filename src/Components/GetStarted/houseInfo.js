@@ -75,7 +75,7 @@ export class GetStartedHouseInfo extends Component {
             <span className="get-started-label">
               What is the price of the property?
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+            <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">Enter the price of the house requested by the seller or the current appraised value of the house.
              If both prices are available, please enter the appraised value of the house.</span>
             </div>
@@ -121,7 +121,7 @@ export class GetStartedHouseInfo extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+            <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">Enter the annual property tax in number not %. 
             Typically these range between 1-2% of the home price. </span>
             </div>

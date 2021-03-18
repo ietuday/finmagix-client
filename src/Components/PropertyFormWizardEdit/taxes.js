@@ -1,86 +1,79 @@
 import React, { Component, Fragment } from "react";
-import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
-import Axios from "axios";
-import NumberFormat from "react-number-format";
-
-
+import {
+  MDBRow,
+  MDBCol,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+} from "mdbreact";
+import { Radio } from "antd";
 import { withRouter } from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import quss from "../../assets/images/que.png";
 
-import { 
+import NumberFormat from "react-number-format";
+import {
   resetValidators,
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
 
 import Tax1YesValidator from "../validatorRules/Tax1YesValidator";
-import Tax1NoValidator from "../validatorRules/Tax1NoValidator";
-import quss from "../../assets/images/que.png";
 
-import { config } from '../config/default';
-const { baseURL } = config;
-
-
-
-
-
-export class Tax1 extends Component {
-  constructor(props) {
-    super(props);
+export class Taxes extends Component {
+  constructor() {
+    super();
     this.state = {
       filling_status: "",
       detailed_tax_expenses: "N",
       previous_balance: "N",
-
+      showDetailedDeductionOption: false,
+      showPreviousLoanBalanceButton: false,
+      openModal: true,
+      radioValue: false,
       fedral_adjusted_gross_income: JSON.parse(
         localStorage.getItem("tax_array")
       ).fedral_adjusted_gross_income
         ? JSON.parse(localStorage.getItem("tax_array"))
             .fedral_adjusted_gross_income
         : "",
-
       fedral_adjusted_gross_income_number: JSON.parse(
         localStorage.getItem("tax_array")
       ).fedral_adjusted_gross_income
         ? JSON.parse(localStorage.getItem("tax_array"))
             .fedral_adjusted_gross_income
         : "",
-
       avg_loan_balance_for_grandfathered_debt: JSON.parse(
         localStorage.getItem("tax_array")
       ).avg_loan_balance_for_grandfathered_debt
         ? JSON.parse(localStorage.getItem("tax_array"))
             .avg_loan_balance_for_grandfathered_debt
         : "",
-
       avg_loan_balance_for_grandfathered_debt_number: JSON.parse(
         localStorage.getItem("tax_array")
       ).avg_loan_balance_for_grandfathered_debt
         ? JSON.parse(localStorage.getItem("tax_array"))
             .avg_loan_balance_for_grandfathered_debt
         : "",
-
       avg_loan_balance_for_home_acquisition_debt: JSON.parse(
         localStorage.getItem("tax_array")
       ).avg_loan_balance_for_home_acquisition_debt
         ? JSON.parse(localStorage.getItem("tax_array"))
             .avg_loan_balance_for_home_acquisition_debt
         : "",
-
       avg_loan_balance_for_home_acquisition_debt_number: JSON.parse(
         localStorage.getItem("tax_array")
       ).avg_loan_balance_for_home_acquisition_debt
         ? JSON.parse(localStorage.getItem("tax_array"))
             .avg_loan_balance_for_home_acquisition_debt
         : "",
-
       paid_mortgage_on_gf_ha_debt: JSON.parse(localStorage.getItem("tax_array"))
         .paid_mortgage_on_gf_ha_debt
         ? JSON.parse(localStorage.getItem("tax_array"))
             .paid_mortgage_on_gf_ha_debt
         : "",
-
       paid_mortgage_on_gf_ha_debt_number: JSON.parse(
         localStorage.getItem("tax_array")
       ).paid_mortgage_on_gf_ha_debt
@@ -93,6 +86,7 @@ export class Tax1 extends Component {
         ? JSON.parse(localStorage.getItem("tax_array"))
             .medical_and_dental_expenses
         : "",
+
       medical_and_dental_expenses_number: JSON.parse(
         localStorage.getItem("tax_array")
       ).medical_and_dental_expenses
@@ -116,12 +110,20 @@ export class Tax1 extends Component {
       other_taxes: JSON.parse(localStorage.getItem("tax_array")).other_taxes
         ? JSON.parse(localStorage.getItem("tax_array")).other_taxes
         : "",
+
       other_taxes_number: JSON.parse(localStorage.getItem("tax_array"))
         .other_taxes
         ? JSON.parse(localStorage.getItem("tax_array")).other_taxes
         : "",
 
       tax_deductive_investment_interest: JSON.parse(
+        localStorage.getItem("tax_array")
+      ).tax_deductive_investment_interest
+        ? JSON.parse(localStorage.getItem("tax_array"))
+            .tax_deductive_investment_interest
+        : "",
+
+      tax_deductive_investment_interest_number: JSON.parse(
         localStorage.getItem("tax_array")
       ).tax_deductive_investment_interest
         ? JSON.parse(localStorage.getItem("tax_array"))
@@ -147,28 +149,27 @@ export class Tax1 extends Component {
         ? JSON.parse(localStorage.getItem("tax_array"))
             .tax_deductible_casualty_and_theft_losses
         : "",
+
       tax_deductible_casualty_and_theft_losses_number: JSON.parse(
         localStorage.getItem("tax_array")
       ).tax_deductible_casualty_and_theft_losses
         ? JSON.parse(localStorage.getItem("tax_array"))
             .tax_deductible_casualty_and_theft_losses
-        : "",
+        : ""
 
-      showDetailedDeductionOption: false,
-      showPreviousLoanBalanceButton: false,
+      // pub936_line_13a:JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a ? JSON.parse(localStorage.getItem('tax_array')).pub936_line_13a : "",
     };
-
+    
     this.Tax1YesValidators = Tax1YesValidator;
-    this.Tax1NoValidators = Tax1NoValidator;
     resetValidators(this.Tax1YesValidators);
-    resetValidators(this.Tax1NoValidators);
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
   }
 
   checkProperty() {
+    
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
-    if (propertyId) {
+    if (propertyId && JSON.parse(localStorage.getItem("tax_array")) && JSON.parse(localStorage.getItem("tax_array")).id) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {
           "Content-type": "Application/json",
@@ -199,20 +200,26 @@ export class Tax1 extends Component {
               tax_deductible_casualty_and_theft_losses: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
               tax_deductible_casualty_and_theft_losses_number: propertyDetail.taxes.tax_deductible_casualty_and_theft_losses,
             });
-            this.props.getData("tax1", this.state);
-          }else{
-            this.props.getData("tax1", this.state);
           }
-          
+          this.props.getData("tax1", this.state);
+         
           
         })
         .catch((err) => {});
-      }
-      
+    }
   }
 
 
+
+
+
+
   componentDidMount() {}
+  async onChange(event) {
+    await this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
   detailedExpenseChange = (event, value) => {
     this.setState({
       detailed_tax_expenses: value,
@@ -241,47 +248,154 @@ export class Tax1 extends Component {
       });
     }
   };
-
+  toggle = () => {
+    this.setState({ openModal: !this.state.openModal });
+  };
+  onRadioChange = (e) => {
+    this.setState({
+      radioValue: e.target.value,
+    });
+  };
   async handleChange(e) {
-    const { name } = e.target;
     e.persist();
     await this.setState({
       [e.target.name]: e.target.value,
     });
-
-    // if (this.state.detailed_tax_expenses === "Y") {
-    //   if (
-    //     name === "medical_and_dental_expenses" ||
-    //     name === "state_local_generalsales_taxes" ||
-    //     name === "other_taxes" ||
-    //     name == "tax_deductive_investment_interest" ||
-    //     name === "tax_deductible_charitable_donations" ||
-    //     name === "tax_deductible_casualty_and_theft_losses"
-    //   ) {
-    //     updateValidators(this.Tax1YesValidators, e.target.name, e.target.value);
-    //     const validationErrorLength = this.Tax1YesValidators[e.target.name]
-    //       .errors.length;
-
-    //     this.props.getValidationErrorTax1Yes(validationErrorLength);
-    //   }
-    // }
-
-    if (this.state.detailed_tax_expenses === "N") {
-      if (name === "fedral_adjusted_gross_income") {
-        // updateValidators(this.Tax1NoValidators, e.target.name, e.target.value);
-        // const validationErrorLength = this.Tax1NoValidators[e.target.name]
-        //   .errors.length;
-        // this.props.getValidationErrorTax1No(validationErrorLength);
-      }
+    if (
+      this.state.detailed_tax_expenses === "Y" &&
+      this.state.previous_balance === "N"
+    ) {
+      const showDetailedTax = {
+        filling_status: this.state.filling_status,
+        detailed_tax_expenses: this.state.detailed_tax_expenses,
+        previous_balance: this.state.previous_balance,
+        medical_and_dental_expenses: this.state.medical_and_dental_expenses,
+        state_local_generalsales_taxes: this.state
+          .state_local_generalsales_taxes,
+        other_taxes: this.state.other_taxes,
+        tax_deductive_investment_interest: this.state
+          .tax_deductive_investment_interest,
+        tax_deductible_charitable_donations: this.state
+          .tax_deductible_charitable_donations,
+        tax_deductible_casualty_and_theft_losses: this.state
+          .tax_deductible_casualty_and_theft_losses,
+      };
+      this.props.getTaxData(showDetailedTax);
+    } else if (
+      this.state.detailed_tax_expenses === "N" &&
+      this.state.previous_balance === "N"
+    ) {
+      const hidePreviousBal = {
+        filling_status: this.state.filling_status,
+        fedral_adjusted_gross_income: this.state.fedral_adjusted_gross_income,
+        detailed_tax_expenses: this.state.detailed_tax_expenses,
+        previous_balance: this.state.previous_balance,
+      };
+      this.props.getTaxData(hidePreviousBal);
+    } else if (
+      this.state.detailed_tax_expenses === "N" &&
+      this.state.previous_balance === "Y"
+    ) {
+      const showPreviousBal = {
+        filling_status: this.state.filling_status,
+        fedral_adjusted_gross_income: this.state.fedral_adjusted_gross_income,
+        detailed_tax_expenses: this.state.detailed_tax_expenses,
+        previous_balance: this.state.previous_balance,
+        avg_loan_balance_for_grandfathered_debt: this.state
+          .avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state
+          .avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.paid_mortgage_on_gf_ha_debt,
+      };
+      this.props.getTaxData(showPreviousBal);
+    } else if (
+      this.state.detailed_tax_expenses === "Y" &&
+      this.state.previous_balance === "Y"
+    ) {
+      const showallData = {
+        filling_status: this.state.filling_status,
+        detailed_tax_expenses: this.state.detailed_tax_expenses,
+        previous_balance: this.state.previous_balance,
+        medical_and_dental_expenses: this.state.medical_and_dental_expenses,
+        state_local_generalsales_taxes: this.state
+          .state_local_generalsales_taxes,
+        other_taxes: this.state.other_taxes,
+        tax_deductive_investment_interest: this.state
+          .tax_deductive_investment_interest,
+        tax_deductible_charitable_donations: this.state
+          .tax_deductible_charitable_donations,
+        tax_deductible_casualty_and_theft_losses: this.state
+          .tax_deductible_casualty_and_theft_losses,
+        avg_loan_balance_for_grandfathered_debt: this.state
+          .avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state
+          .avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.paid_mortgage_on_gf_ha_debt,
+      };
+      this.props.getTaxData(showallData);
     }
-    this.props.getData("tax1", this.state);
   }
   render() {
     const showGrossIncome = (
-      <div>
+      <MDBRow className="margin20">
+        <MDBCol md="12">
+          <span className="get-started-label">
+            Federal adjusted gross income
+          </span>
+          <br />
+          {/* <Input
+            className="input-class-mdb"
+            name="fedral_adjusted_gross_income"
+            value={this.state.fedral_adjusted_gross_income}
+            onChange={this.handleChange}
+            placeholder="Enter amount here"
+          /> */}
 
-       
-      </div>
+          <NumberFormat
+            className="input-class-mdb"
+            name="fedral_adjusted_gross_income"
+            value={this.state.fedral_adjusted_gross_income}
+            onChange={this.handleChange}
+            placeholder="Enter amount here"
+            thousandSeparator={true}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              await this.setState({
+                fedral_adjusted_gross_income_number: formattedValue,
+              });
+              await this.setState({
+                fedral_adjusted_gross_income: value,
+              });
+            }}
+          />
+        </MDBCol>
+      </MDBRow>
+    );
+    const showSelectTaxModule = (
+      <MDBModal
+        isOpen={this.state.openModal}
+        toggle={this.toggle}
+        backdrop={true}
+      >
+        <MDBModalHeader toggle={this.toggle}>
+          <div className="popupstyle">
+            You haven't opted for this module.Do you still want to fill Tax
+            module?
+          </div>
+        </MDBModalHeader>
+        <div className="popupra">
+          <MDBModalBody>
+            <Radio.Group
+              onChange={this.onRadioChange}
+              value={this.state.radioValue}
+              className="text-center"
+            >
+              <Radio value={"y"}>Yes</Radio>
+              <Radio value={"n"}>No</Radio>
+            </Radio.Group>
+          </MDBModalBody>
+        </div>
+      </MDBModal>
     );
 
     const showDetailedDeductionRow = (
@@ -299,7 +413,6 @@ export class Tax1 extends Component {
             onChange={this.handleChange}
             placeholder="Enter amount here"
           /> */}
-
             <NumberFormat
               className="input-class-mdb"
               name="fedral_adjusted_gross_income"
@@ -366,10 +479,6 @@ export class Tax1 extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.Tax1YesValidators,
-          "medical_and_dental_expenses"
-        )}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -394,6 +503,7 @@ export class Tax1 extends Component {
               value={this.state.state_local_generalsales_taxes}
               onChange={this.handleChange}
             /> */}
+
             <NumberFormat
               className="input-class-mdb"
               placeholder="Enter amount here"
@@ -413,10 +523,6 @@ export class Tax1 extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.Tax1YesValidators,
-          "state_local_generalsales_taxes"
-        )}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -459,7 +565,6 @@ export class Tax1 extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.Tax1YesValidators, "other_taxes")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -475,19 +580,33 @@ export class Tax1 extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter amount here"
               name="tax_deductive_investment_interest"
               value={this.state.tax_deductive_investment_interest}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="tax_deductive_investment_interest"
+              value={this.state.tax_deductive_investment_interest}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  tax_deductive_investment_interest: value,
+                });
+                await this.setState({
+                  tax_deductive_investment_interest_percentage: formattedValue,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.Tax1YesValidators,
-          "tax_deductive_investment_interest"
-        )}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -520,10 +639,6 @@ export class Tax1 extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.Tax1YesValidators,
-          "tax_deductible_charitable_donations"
-        )}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -557,41 +672,212 @@ export class Tax1 extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.Tax1YesValidators, "tax_deductible_casualty_and_theft_losses")} */}
+      </div>
+    );
 
+    const showPreviousBalanceRow = (
+      <div>
+        <MDBRow className="margin20">
+          <MDBCol md="12">
+            <span className="get-started-label">
+              Average loan balance for grandfathered debt
+            </span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+                If you took out a mortgage on your home before October 14, 1987,
+                or you refinanced such a mortgage, it may qualify as
+                grandfathered debt. Grandfathered debt isn't limited. All of the
+                interest you paid on grandfathered debt is fully deductible home
+                mortgage interest. However, the amount of your grandfathered
+                debt reduces the limit for home acquisition debt. Source: IRS
+                Publication 936{" "}
+              </span>
+            </div>
+            <br />
+            {/* <Input
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="avg_loan_balance_for_grandfathered_debt"
+              value={this.state.avg_loan_balance_for_grandfathered_debt}
+              onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="avg_loan_balance_for_grandfathered_debt"
+              value={this.state.avg_loan_balance_for_grandfathered_debt}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  avg_loan_balance_for_grandfathered_debt_number: formattedValue,
+                });
+                await this.setState({
+                  avg_loan_balance_for_grandfathered_debt: value,
+                });
+              }}
+            />
+          </MDBCol>
+        </MDBRow>
+        <MDBRow className="margin20">
+          <MDBCol md="12">
+            <span className="get-started-label">
+              Average loan balance for home acquisition debt
+            </span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+                Home acquisition debt is a mortgage you took out after October
+                13, 1987, to buy, build, or substantially improve a qualified
+                home (your main or second home). It must also be secured by that
+                home. Source: IRS publication 936{" "}
+              </span>
+            </div>
+            <br />
+            {/* <Input
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="avg_loan_balance_for_home_acquisition_debt"
+              value={this.state.avg_loan_balance_for_home_acquisition_debt}
+              onChange={this.handleChange}
+            /> */}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="avg_loan_balance_for_home_acquisition_debt"
+              value={this.state.avg_loan_balance_for_home_acquisition_debt}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  avg_loan_balance_for_home_acquisition_debt_number: formattedValue,
+                });
+                await this.setState({
+                  avg_loan_balance_for_home_acquisition_debt: value,
+                });
+              }}
+            />
+          </MDBCol>
+        </MDBRow>
+        <MDBRow className="margin20 marginbottom20">
+          <MDBCol md="12">
+            <span className="get-started-label">
+              Mortgage interest you paid on your grandfathered debt and home
+              acquisition debt
+            </span>
+            <br />
+            {/* <Input
+              className="input-class-mdb"
+              placeholder="Enter amount here %"
+              name="paid_mortgage_on_gf_ha_debt"
+              value={this.state.paid_mortgage_on_gf_ha_debt}
+              onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here "
+              name="paid_mortgage_on_gf_ha_debt"
+              value={this.state.paid_mortgage_on_gf_ha_debt}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  paid_mortgage_on_gf_ha_debt_number: formattedValue,
+                });
+                await this.setState({
+                  paid_mortgage_on_gf_ha_debt: value,
+                });
+              }}
+            />
+          </MDBCol>
+        </MDBRow>
+        {displayValidationErrors(
+          this.Tax1YesValidators,
+          "paid_mortgage_on_gf_ha_debt"
+        )}
       </div>
     );
 
     return (
       <Fragment>
-        <div>
-          <MDBRow className="margin20 marginbottom20">
-            <MDBCol md="12">
-              <span className="get-started-label">
-                Do you want to provide detailed itemized deduction?
-              </span>
-              <br />
-              <ToggleButtonGroup
-                name="select_your_filling_status"
-                value={this.state.detailed_tax_expenses}
-                exclusive
-                onChange={this.detailedExpenseChange}
-                aria-label="text alignment"
-                size="large"
-              >
-                <ToggleButton value={"Y"}>Yes</ToggleButton>
-                <ToggleButton value={"N"}>No</ToggleButton>
-              </ToggleButtonGroup>
-            </MDBCol>
-          </MDBRow>
-          {this.state.showDetailedDeductionOption
-            ? showDetailedDeductionRow
-            : showGrossIncome}
-        </div>
+        {this.props.location.state.istaxChecked ? (
+          <div>
+            <MDBRow className="margin20">
+              <MDBCol md="12">
+                <span className="get-started-label">
+                  Select your filling status?
+                </span>
+                <br />
+                <Select
+                  value={this.state.filling_status}
+                  name="filling_status"
+                  onChange={this.handleChange}
+                  style={{ minWidth: "100%" }}
+                >
+                  <MenuItem value={"1"}>Single</MenuItem>
+                  <MenuItem value={"2"}>Married filling jointly</MenuItem>
+                  <MenuItem value={"3"}>Married filling seperately</MenuItem>
+                  <MenuItem value={"4"}>Head of household</MenuItem>
+                </Select>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="margin20 marginbottom20">
+              <MDBCol md="12">
+                <span className="get-started-label">
+                  Do you want to provide detailed itemized deduction?
+                </span>
+                <br />
+                <ToggleButtonGroup
+                  name="select_your_filling_status"
+                  value={this.state.detailed_tax_expenses}
+                  exclusive
+                  onChange={this.detailedExpenseChange}
+                  aria-label="text alignment"
+                  size="large"
+                >
+                  <ToggleButton value={"Y"}>Yes</ToggleButton>
+                  <ToggleButton value={"N"}>No</ToggleButton>
+                </ToggleButtonGroup>
+              </MDBCol>
+            </MDBRow>
+            {this.state.showDetailedDeductionOption
+              ? showDetailedDeductionRow
+              : showGrossIncome}
+            <MDBRow className="margin20 marginbottom20">
+              <MDBCol md="12">
+                <span className="get-started-label">
+                  Do you have any balances from previous loan?
+                </span>
+                <br />
+                <ToggleButtonGroup
+                  name="previous_balance"
+                  value={this.state.previous_balance}
+                  exclusive
+                  onChange={this.previousBalanceChange}
+                  aria-label="text alignment"
+                  size="large"
+                >
+                  <ToggleButton value={"Y"}>Yes</ToggleButton>
+                  <ToggleButton value={"N"}>No</ToggleButton>
+                </ToggleButtonGroup>
+              </MDBCol>
+            </MDBRow>
+            {this.state.showPreviousLoanBalanceButton
+              ? showPreviousBalanceRow
+              : null}
+          </div>
+        ) : (
+          showSelectTaxModule
+        )}
       </Fragment>
     );
   }
 }
 
-
-export default withRouter(Tax1);
+export default withRouter(Taxes);

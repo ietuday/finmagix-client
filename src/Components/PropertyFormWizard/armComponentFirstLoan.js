@@ -10,12 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import NumberFormat from "react-number-format";
 import ShowPmiOptionsFirstLoanARM from "./showPmiOptionsFirstLoanARM";
-import ArmMortgageProgramValidator from "../validatorRules/ArmMortgageProgramValidator";
-import { updateValidators } from "../../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
 
 
@@ -23,8 +17,8 @@ import { config } from '../config/default';
 const { baseURL } = config;
 
 export class ARMComponentFirstLoan extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       mortgage_program_type: "FIRST",
       loan_amount: 0,
@@ -79,7 +73,20 @@ export class ARMComponentFirstLoan extends Component {
       closing_costs_percentage: 0,
       period_cap_percentage: 0,
       is_update:false,
-      id: ""
+      id: "",
+      rateAdjustmentCapValidationError: "",
+      floorinterestrateValidationError:"",
+      ceilinginterestrateValidationError:"",
+      periodCapValidationError:"",
+      rateAddValidationError:"",
+      property_price: "",
+      loan_amount_validation_error: "",
+      interestrateValidationError: "",
+      closingCostsValidationError: "",
+      interestOnlyPeriodValidationError:"",
+      property_downpayment: "",
+      pointsValidationError: "",
+      floorinterestrateCheckValidationError: ""
     };
     // this.validators = ArmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -99,64 +106,80 @@ export class ARMComponentFirstLoan extends Component {
       })
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
-          console.log(propertyDetail)
+          
           this.setState({
-            mortgage_program_type: propertyDetail.first_arm.mortage_program_type,
-            loan_amount: propertyDetail.first_arm.loan_amount,
-            loan_amount_number: propertyDetail.first_arm.loan_amount,
-            loan_term: propertyDetail.first_arm.loan_term,
-            select_loan_program: propertyDetail.first_arm.select_loan_program,
-            initial_interest_rate: propertyDetail.first_arm.initial_interest_rate,
-            initial_interest_rate_percentage: Number(propertyDetail.first_arm.initial_interest_rate)*100,
-            first_interest_rate_adj_cap: propertyDetail.first_arm.first_interest_rate_adj_cap,
-            first_interest_rate_adj_cap_percentage: Number(propertyDetail.first_arm.first_interest_rate_adj_cap)*100,
-            floor_interest_rate: propertyDetail.first_arm.floor_interest_rate,
-            floor_interest_rate_percentage: Number(propertyDetail.first_arm.floor_interest_rate)*100,
-            ceiling_interest_rate: propertyDetail.first_arm.ceiling_interest_rate,
-            ceiling_interest_rate_percentage: Number(propertyDetail.first_arm.ceiling_interest_rate)*100,
-            period_cap: propertyDetail.first_arm.period_cap,
-            rate_add: propertyDetail.first_arm.rate_add,
-            rate_add_percentage: Number(propertyDetail.first_arm.rate_add)*100,
-            points: propertyDetail.first_arm.points,
-            closing_costs: propertyDetail.first_arm.closing_costs,
-            closing_costs_number:propertyDetail.first_arm.closing_costs,
-            interest_only_option: propertyDetail.first_arm.interest_only_option,
-            interest_only_period: propertyDetail.first_arm.interest_only_period,
-            pmi: propertyDetail.first_arm.pmi,
-            second_mortgage_loan_amount: propertyDetail.first_arm.second_mortgage_loan_amount,
-            second_mortgage_loan_term: propertyDetail.first_arm.second_mortgage_loan_term,
-            second_mortgage_interest: propertyDetail.first_arm.second_mortgage_interest,
-            second_mortgage_points: propertyDetail.first_arm.second_mortgage_points,
-            second_mortgage_closing_costs: propertyDetail.first_arm.second_mortgage_closing_costs,
-            showInterestOnlyPeriodOption: false,
-            secondmtgpmichoice1: propertyDetail.first_arm.secondmtgpmichoice1,
-            PMIfirst1: propertyDetail.first_arm.PMIfirst1,
-            loanamountsecond1: propertyDetail.first_arm.loanamountsecond1,
-            Pmtsecond1: propertyDetail.first_arm.Pmtsecond1,
-            ARMtype1: propertyDetail.first_arm.ARMtype1,
-            ARM1rate: propertyDetail.first_arm.ARM1rate,
-            ARMfirstadjin1: propertyDetail.first_arm.ARMfirstadjin1,
-            floor1: propertyDetail.first_arm.floor1,
-            ceiling1: propertyDetail.first_arm.ceiling1,
-            periodicadjcap1: propertyDetail.first_arm.periodicadjcap1,
-            rateadd1: propertyDetail.first_arm.rateadd1,
-            secondmtgpmichoice2: propertyDetail.first_arm.secondmtgpmichoice2,
-            PMIfirst2: propertyDetail.first_arm.PMIfirst2,
-            loanamountsecond2: propertyDetail.first_arm.loanamountsecond2,
-            Pmtsecond2: propertyDetail.first_arm.Pmtsecond2,
-            ARM2rate: propertyDetail.first_arm.ARM2rate,
-            ARMfirstadjin2: propertyDetail.first_arm.ARMfirstadjin2,
-            floor2: propertyDetail.first_arm.floor2,
-            ceiling2: propertyDetail.first_arm.ceiling2,
-            periodicadjcap2: propertyDetail.first_arm.periodicadjcap2,
-            rateadd2: propertyDetail.first_arm.rateadd2,
-            points_percentage: Number(propertyDetail.first_arm.points)*100,
-            closing_costs_percentage: Number(propertyDetail.first_arm.closing_costs)*100,
-            period_cap_percentage: Number(propertyDetail.first_arm.period_cap)*100,
-            is_update: true,
-            id: propertyDetail.first_arm.id
+            'property_price': propertyDetail.property_price,
+            'property_downpayment': propertyDetail.downpayment_amount
           })
-        
+          if (propertyDetail.first_arm && propertyDetail.first_arm.id) {
+            this.setState({
+              mortgage_program_type: propertyDetail.first_arm.mortage_program_type,
+              loan_amount: propertyDetail.first_arm.loan_amount,
+              loan_amount_number: propertyDetail.first_arm.loan_amount,
+              loan_term: propertyDetail.first_arm.loan_term,
+              select_loan_program: propertyDetail.first_arm.select_loan_program,
+              initial_interest_rate: propertyDetail.first_arm.initial_interest_rate,
+              initial_interest_rate_percentage: Number(propertyDetail.first_arm.initial_interest_rate)*100,
+              first_interest_rate_adj_cap: propertyDetail.first_arm.first_interest_rate_adj_cap,
+              first_interest_rate_adj_cap_percentage: Number(propertyDetail.first_arm.first_interest_rate_adj_cap)*100,
+              floor_interest_rate: propertyDetail.first_arm.floor_interest_rate,
+              floor_interest_rate_percentage: Number(propertyDetail.first_arm.floor_interest_rate)*100,
+              ceiling_interest_rate: propertyDetail.first_arm.ceiling_interest_rate,
+              ceiling_interest_rate_percentage: Number(propertyDetail.first_arm.ceiling_interest_rate)*100,
+              period_cap: propertyDetail.first_arm.period_cap,
+              rate_add: propertyDetail.first_arm.rate_add,
+              rate_add_percentage: Number(propertyDetail.first_arm.rate_add)*100,
+              points: propertyDetail.first_arm.points,
+              closing_costs: propertyDetail.first_arm.closing_costs,
+              closing_costs_number:propertyDetail.first_arm.closing_costs,
+              interest_only_option: propertyDetail.first_arm.interest_only_period ? "Y" : "N",
+              interest_only_period: propertyDetail.first_arm.interest_only_period ? propertyDetail.first_arm.interest_only_period : 0,
+              pmi: propertyDetail.first_arm.pmi,
+              second_mortgage_loan_amount: propertyDetail.first_arm.second_mortgage_loan_amount,
+              second_mortgage_loan_term: propertyDetail.first_arm.second_mortgage_loan_term,
+              second_mortgage_interest: propertyDetail.first_arm.second_mortgage_interest,
+              second_mortgage_points: propertyDetail.first_arm.second_mortgage_points,
+              second_mortgage_closing_costs: propertyDetail.first_arm.second_mortgage_closing_costs,
+              showInterestOnlyPeriodOption: false,
+              secondmtgpmichoice1: propertyDetail.first_arm.secondmtgpmichoice1,
+              PMIfirst1: propertyDetail.first_arm.PMIfirst1,
+              loanamountsecond1: propertyDetail.first_arm.loanamountsecond1,
+              Pmtsecond1: propertyDetail.first_arm.Pmtsecond1,
+              ARMtype1: propertyDetail.first_arm.ARMtype1,
+              ARM1rate: propertyDetail.first_arm.ARM1rate,
+              ARMfirstadjin1: propertyDetail.first_arm.ARMfirstadjin1,
+              floor1: propertyDetail.first_arm.floor1,
+              ceiling1: propertyDetail.first_arm.ceiling1,
+              periodicadjcap1: propertyDetail.first_arm.periodicadjcap1,
+              rateadd1: propertyDetail.first_arm.rateadd1,
+              secondmtgpmichoice2: propertyDetail.first_arm.secondmtgpmichoice2,
+              PMIfirst2: propertyDetail.first_arm.PMIfirst2,
+              loanamountsecond2: propertyDetail.first_arm.loanamountsecond2,
+              Pmtsecond2: propertyDetail.first_arm.Pmtsecond2,
+              ARM2rate: propertyDetail.first_arm.ARM2rate,
+              ARMfirstadjin2: propertyDetail.first_arm.ARMfirstadjin2,
+              floor2: propertyDetail.first_arm.floor2,
+              ceiling2: propertyDetail.first_arm.ceiling2,
+              periodicadjcap2: propertyDetail.first_arm.periodicadjcap2,
+              rateadd2: propertyDetail.first_arm.rateadd2,
+              points_percentage: Number(propertyDetail.first_arm.points)*100,
+              closing_costs_percentage: Number(propertyDetail.first_arm.closing_costs)*100,
+              period_cap_percentage: Number(propertyDetail.first_arm.period_cap)*100,
+              is_update: true,
+              id: propertyDetail.first_arm.id,
+              interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+              interestrateValidationError: this.state.interestrateValidationError,
+              pointsValidationError: this.state.pointsValidationError,
+              loan_amount_validation_error: this.state.loan_amount_validation_error,
+              closingCostsValidationError: this.state.closingCostsValidationError,
+              rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+              floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+              periodCapValidationError:this.state.periodCapValidationError,
+              rateAddValidationError:this.state.rateAddValidationError,
+              ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError,
+              floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError
+            })
+          }
           this.props.handleArmData(this.state);
         })
         .catch((err) => {
@@ -166,9 +189,158 @@ export class ARMComponentFirstLoan extends Component {
   }
 
   async handleChange(event) {
-    const { name } = event.target;
+    // const { name } = event.target;
     event.persist();
-    let downpayment;
+    // let downpayment;
+
+    if (event.target.name === "loan_amount") {
+      if (this.state.property_price < parseInt(String(event.target.value).replace(/,/g, ''))) {
+        this.setState({
+          loan_amount_validation_error: "Cannot exceed Property price"
+        })
+      } else {
+        this.setState({
+          loan_amount_validation_error: ""
+        })
+      }
+    }
+    if (event.target.name === "initial_interest_rate_percentage") {
+      if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
+        this.setState({
+          interestrateValidationError: "Is the interest rate input accurate?"
+        })
+      } else {
+        this.setState({
+          interestrateValidationError: ""
+        })
+      }
+
+    }
+
+    if(event.target.name === "first_interest_rate_adj_cap_percentage"){
+      if(this.state.initial_interest_rate > event.target.value){
+        this.setState({
+          rateAdjustmentCapValidationError: "First interest rate adjustment cap cannot be less than initial interest rate"
+        }) 
+      }else{
+        this.setState({
+          rateAdjustmentCapValidationError: ""
+        }) 
+      }
+  }
+
+  if(event.target.name === "floor_interest_rate_percentage"){
+    
+    if(this.state.initial_interest_rate < parseInt(String(event.target.value).replace(/%/g, '')) ){
+      this.setState({
+        
+        floorinterestrateCheckValidationError: "Floor interest rate cannot be greater than initial interest rate"
+      }) 
+    }else{
+      this.setState({
+        floorinterestrateCheckValidationError: ""
+      }) 
+    }
+}
+
+
+if(event.target.name === "floor_interest_rate_percentage"){
+  if(this.state.ceiling_interest_rate < parseInt(String(event.target.value).replace(/%/g, ''))){
+    this.setState({
+      floorinterestrateValidationError: "Floor interest rate cannot exceed Ceiling interest rate"
+    }) 
+  }else{
+    this.setState({
+      floorinterestrateValidationError: ""
+    }) 
+  }
+}
+
+if(event.target.name === "ceiling_interest_rate_percentage"){
+  const ceil_data = parseInt(String(event.target.value).replace(/%/g, ''))
+  
+  if(ceil_data > 15){
+    this.setState({
+      ceilinginterestrateValidationError: "Ceiling interest is greater than 15%"
+    }) 
+  }else{
+    this.setState({
+      ceilinginterestrateValidationError: ""
+    }) 
+  }
+}
+
+
+if(event.target.name === "period_cap_percentage"){
+  if(parseInt(String(event.target.value).replace(/%/g, '')) > 4){
+    this.setState({
+      periodCapValidationError: "Is the period cap input accurate?"
+    }) 
+  }else{
+    this.setState({
+      periodCapValidationError: ""
+    }) 
+  }
+  
+}
+
+if(event.target.name === "rate_add_percentage"){
+  if(parseInt(String(event.target.value).replace(/%/g, '')) > 3){
+    this.setState({
+      rateAddValidationError: "Is the rate add input accurate?"
+    }) 
+  }else{
+    this.setState({
+      rateAddValidationError: ""
+    }) 
+  }
+  
+}
+
+if (event.target.name === "closing_costs") {
+  if (
+    parseInt(String(event.target.value).replace(/,/g, "")) >
+    (parseFloat(String(this.state.loan_amount).replace(/,/g, "")) * 5) /
+      100
+  ) {
+    this.setState({
+      closingCostsValidationError:
+        " Closing costs cannot exceed 5% of loan amount",
+    });
+  } else {
+    this.setState({
+      closingCostsValidationError: "",
+    });
+  }
+}
+
+if (event.target.name === "interest_only_period") {
+  if (this.state.loan_term < event.target.value) {
+    this.setState({
+      interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
+    })
+  } else {
+    this.setState({
+      interestOnlyPeriodValidationError: ""
+    })
+  }
+
+}
+
+if(event.target.name === "points_percentage"){
+  if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+    this.setState({
+      pointsValidationError: "Points cannot exceed 5%"
+    }) 
+  }else{
+    this.setState({
+      pointsValidationError: ""
+    }) 
+  }
+  
+}
+
+
     await this.setState({
       [event.target.name]: event.target.value,
     });
@@ -229,7 +401,20 @@ export class ARMComponentFirstLoan extends Component {
       periodicadjcap2: this.state.periodicadjcap2,
       rateadd2: this.state.rateadd2,
       is_update: this.state.is_update,
-      id: this.state.id
+      id: this.state.id,
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment,
+      rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+      floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+      periodCapValidationError:this.state.periodCapValidationError,
+      rateAddValidationError:this.state.rateAddValidationError,
+      ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError,
+      floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError
     };
     this.props.handleArmData(dataObject);
   }
@@ -268,7 +453,20 @@ export class ARMComponentFirstLoan extends Component {
       periodicadjcap2: data && data.periodicadjcap2 ? data.periodicadjcap2 : "",
       rateadd2: data && data.rateadd2 ? data.rateadd2 : "",
       is_update: this.state.is_update,
-      id: this.state.id
+      id: this.state.id,
+      property_price: this.state.property_price,
+      interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+      interestrateValidationError: this.state.interestrateValidationError,
+      pointsValidationError: this.state.pointsValidationError,
+      loan_amount_validation_error: this.state.loan_amount_validation_error,
+      closingCostsValidationError: this.state.closingCostsValidationError,
+      property_downpayment: this.state.property_downpayment,
+      rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+      floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+      periodCapValidationError:this.state.periodCapValidationError,
+      rateAddValidationError:this.state.rateAddValidationError,
+      ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError,
+      floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError
     });
     if (data.PMIOptions === "PMI") {
       const dataWithPmi = {
@@ -311,7 +509,20 @@ export class ARMComponentFirstLoan extends Component {
         periodicadjcap2: this.state.periodicadjcap2,
         rateadd2: this.state.rateadd2,
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment,
+        rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+        floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+        periodCapValidationError:this.state.periodCapValidationError,
+        rateAddValidationError:this.state.rateAddValidationError,
+        ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError,
+        floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError
       };
       this.props.handleArmData(dataWithPmi);
     } else {
@@ -359,7 +570,20 @@ export class ARMComponentFirstLoan extends Component {
         periodicadjcap2: this.state.periodicadjcap2,
         rateadd2: this.state.rateadd2,
         is_update: this.state.is_update,
-        id: this.state.id
+        id: this.state.id,
+        property_price: this.state.property_price,
+        interestOnlyPeriodValidationError: this.state.interestOnlyPeriodValidationError,
+        interestrateValidationError: this.state.interestrateValidationError,
+        pointsValidationError: this.state.pointsValidationError,
+        loan_amount_validation_error: this.state.loan_amount_validation_error,
+        closingCostsValidationError: this.state.closingCostsValidationError,
+        property_downpayment: this.state.property_downpayment,
+        rateAdjustmentCapValidationError: this.state.rateAdjustmentCapValidationError,
+        floorinterestrateValidationError:this.state.floorinterestrateValidationError,
+        periodCapValidationError:this.state.periodCapValidationError,
+        rateAddValidationError:this.state.rateAddValidationError,
+        ceilinginterestrateValidationError: this.state.ceilinginterestrateValidationError,
+        floorinterestrateCheckValidationError: this.state.floorinterestrateCheckValidationError
       };
       this.props.handleArmData(dataWithSecondMortgage);
     }
@@ -386,7 +610,7 @@ export class ARMComponentFirstLoan extends Component {
         <MDBCol md="12">
           <span className="get-started-label">Interest only period</span>
           <div className="tooltip-img">
-            <img src={quss} className="tool-img"></img>
+            <img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">
               This is the # of years for which you won't pay principal on the
               loan and will pay only the interest amount on a loan{" "}
@@ -400,6 +624,10 @@ export class ARMComponentFirstLoan extends Component {
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
+           <span className="validation-text-color">
+           {this.state.interestOnlyPeriodValidationError}
+           </span>
+        
         </MDBCol>
       </MDBRow>
     );
@@ -409,7 +637,7 @@ export class ARMComponentFirstLoan extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Loan Amount</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the amount you plan to borrow for this mortgage{" "}
               </span>
@@ -440,9 +668,14 @@ export class ARMComponentFirstLoan extends Component {
                 });
               }}
             />
+               <span className="validation-text-color">
+               {this.state.loan_amount_validation_error}
+               </span>
+          
           </MDBCol>
+
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "loan_amount")} */}
+        
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Select Loan Term</span>
@@ -483,6 +716,14 @@ export class ARMComponentFirstLoan extends Component {
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Initial Interest Rate</span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+              Initial interest rate is the 'starter' interest rate on your ARM 
+              for the fixed period of our ARM.
+              </span>
+            </div>
+            <br/>
             {/* <Input
               className="input-class-mdb"
               placeholder="Enter here"
@@ -509,6 +750,10 @@ export class ARMComponentFirstLoan extends Component {
                 });
               }}
             />
+            <span className="validation-text-color">
+            {this.state.interestrateValidationError}
+            </span>
+            
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "initial_interest_rate")} */}
@@ -519,7 +764,7 @@ export class ARMComponentFirstLoan extends Component {
               First interest rate adjustment cap
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 This is the maximum interest that you can be charged after an
                 ARM mortgages resets its interest rate for the first time. For
@@ -556,59 +801,21 @@ export class ARMComponentFirstLoan extends Component {
               }}
             />
 
-            {/* {displayValidationErrors(
-              this.validators,
-              "first_interest_rate_adj_cap"
-            )} */}
+<span className="validation-text-color">
+  {this.state.rateAdjustmentCapValidationError}
+</span>     
+
           </MDBCol>
+         
         </MDBRow>
 
-        <MDBRow className="margin20">
-          <MDBCol md="12">
-            <span className="get-started-label">Floor interest rate</span>
-            <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
-              <span className="tooltip-img-text">
-                This is the lowest interest rate or 'floor' for an ARM. If the
-                index rate continues to decrease, the 'floor interest rate'
-                gives the lender a floor interest that the lender can levy even
-                if the calculated interest rate is below that floor
-              </span>
-            </div>
-            <br />
-            {/* <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="floor_interest_rate"
-              value={this.state.floor_interest_rate}
-              onChange={this.handleChange}
-            /> */}
 
-            <NumberFormat
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="floor_interest_rate_percentage"
-              value={this.state.floor_interest_rate_percentage}
-              onChange={this.handleChange}
-              suffix={"%"}
-              onValueChange={async (values) => {
-                const { formattedValue, value } = values;
-                await this.setState({
-                  floor_interest_rate: value,
-                });
-                await this.setState({
-                  floor_interest_rate_percentage: formattedValue,
-                });
-              }}
-            />
-          </MDBCol>
-        </MDBRow>
-        {/* {displayValidationErrors(this.validators, "floor_interest_rate")} */}
+       
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Ceiling interest rate</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 This is the maximum interest rate that a lender can charge for
                 an ARM. If the index rate on the loan continues to go up, the
@@ -642,14 +849,64 @@ export class ARMComponentFirstLoan extends Component {
                 });
               }}
             />
+             <span className="validation-text-color">
+             {this.state.ceilinginterestrateValidationError}
+             </span>
+           
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "ceiling_interest_rate")} */}
+        <MDBRow className="margin20">
+          <MDBCol md="12">
+            <span className="get-started-label">Floor interest rate</span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+                This is the lowest interest rate or 'floor' for an ARM. If the
+                index rate continues to decrease, the 'floor interest rate'
+                gives the lender a floor interest that the lender can levy even
+                if the calculated interest rate is below that floor
+              </span>
+            </div>
+            <br />
+            {/* <Input
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="floor_interest_rate"
+              value={this.state.floor_interest_rate}
+              onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter amount here"
+              name="floor_interest_rate_percentage"
+              value={this.state.floor_interest_rate_percentage}
+              onChange={this.handleChange}
+              suffix={"%"}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  floor_interest_rate: value,
+                });
+                await this.setState({
+                  floor_interest_rate_percentage: formattedValue,
+                });
+              }}
+            />
+             <span className="validation-text-color">
+             {this.state.floorinterestrateValidationError}
+             {this.state.floorinterestrateCheckValidationError}
+             </span>
+          
+          </MDBCol>
+       
+        </MDBRow>
+
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Period cap</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 This is the maximum amount an interest rate can increase by when
                 the ARM interest rate resets. For e.g. on a 5/1 ARM mortgage,
@@ -681,10 +938,15 @@ export class ARMComponentFirstLoan extends Component {
                 await this.setState({
                   period_cap_percentage: formattedValue,
                 });
-                console.log(this.state)
+                
               }}
             />
+             <span className="validation-text-color">
+             {this.state.periodCapValidationError}
+             </span>
+          
           </MDBCol>
+         
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "period_cap")} */}
 
@@ -692,7 +954,7 @@ export class ARMComponentFirstLoan extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Rate add</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 This field allows you to model an increase or a decrease in your
                 index ARM rate every year
@@ -724,14 +986,16 @@ export class ARMComponentFirstLoan extends Component {
                 });
               }}
             />
-
-            {/* {displayValidationErrors(this.validators, "rate_add")} */}
+ <span className="validation-text-color">
+ {this.state.rateAddValidationError}
+ </span>
+          
 
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Points</span>
                 <div className="tooltip-img">
-                  <img src={quss} className="tool-img"></img>
+                  <img src={quss} className="tool-img" alt="" />
                   <span className="tooltip-img-text">
                     Input the points you may need to pay on your loan expressed
                     as a % of the loan amount. For e.g. 2 points is 2% of the
@@ -764,16 +1028,20 @@ export class ARMComponentFirstLoan extends Component {
                     });
                   }}
                 />
+                <span className="validation-text-color">
+                {this.state.pointsValidationError}
+                </span>
+                
               </MDBCol>
             </MDBRow>
-            {/* {displayValidationErrors(this.validators, "points")} */}
+           
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Closing costs</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 These are fees charged by the lender to the borrower for
                 offering the loan. These may include home appraisal fees, credit
@@ -809,6 +1077,10 @@ export class ARMComponentFirstLoan extends Component {
                 });
               }}
             />
+            <span className="validation-text-color">
+            {this.state.closingCostsValidationError}
+            </span>
+          
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "closing_costs")} */}
@@ -836,12 +1108,14 @@ export class ARMComponentFirstLoan extends Component {
         <br />
         {this.props.downpayment === "lessthan20" ? (
           <ShowPmiOptionsFirstLoanARM
+            loanAmount={this.state.loan_amount}
             handleDownpaymentData={this.handleDownpaymentData}
           />
         ) : null}
+
       </Fragment>
     );
   }
 }
 
-export default ARMComponentFirstLoan;
+export default ARMComponentFirstLoan; 

@@ -2,27 +2,23 @@ import React, { Component, Fragment } from "react";
 import {
   MDBRow,
   MDBCol,
-  MDBModal,
-  MDBModalBody,
-  MDBModalHeader,
+
 } from "mdbreact";
-import { Radio, Input } from "antd";
-import Button from "@material-ui/core/Button";
+
 import Axios from "axios";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import Tax2Validator from "../validatorRules/Tax2Validator";
-import { updateValidators } from "../../common/ValidatorFunction";
+
+// import Tax2Validator from "../validatorRules/Tax2Validator";
+// import { updateValidators } from "../../common/ValidatorFunction";
 
 import NumberFormat from "react-number-format";
 
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
+// import {
+//   resetValidators,
+//   displayValidationErrors,
+// } from "../../common/ValidatorFunction";
 import quss from "../../assets/images/que.png";
 
 import { config } from '../config/default';
@@ -70,14 +66,14 @@ export class Tax2 extends Component {
       showDetailedDeductionOption: false,
       showPreviousLoanBalanceButton: false,
     };
-    this.validators = Tax2Validator;
-    resetValidators(this.validators);
+    // this.validators = Tax2Validator;
+    // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
   }
 
   checkProperty() {
-    console.log("ncbncbz");
+    
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId && JSON.parse(localStorage.getItem("tax_array")) && JSON.parse(localStorage.getItem("tax_array")).id) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -97,7 +93,7 @@ export class Tax2 extends Component {
               paid_mortgage_on_gf_ha_debt: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt,
               paid_mortgage_on_gf_ha_debt_number: propertyDetail.taxes.paid_mortgage_on_gf_ha_debt
             });
-            console.log(this.state)
+            
             this.props.getData("tax2", this.state);
           }else{
             this.props.getData("tax2", this.state);
@@ -128,24 +124,24 @@ export class Tax2 extends Component {
     this.props.showNext();
   };
   async handleChange(e) {
-    const { name } = e.target;
+    // const { name } = e.target;
     e.persist();
     await this.setState({
       [e.target.name]: e.target.value,
     });
 
-    if (this.state.previous_balance === "Y") {
-      if (
-        name === "avg_loan_balance_for_grandfathered_debt" ||
-        name === "avg_loan_balance_for_home_acquisition_debt" ||
-        name === "paid_mortgage_on_gf_ha_debt"
-      ) {
-        updateValidators(this.validators, e.target.name, e.target.value);
-        const validationErrorLength = this.validators[e.target.name].errors
-          .length;
-        this.props.getValidationError(validationErrorLength);
-      }
-    }
+    // if (this.state.previous_balance === "Y") {
+    //   if (
+    //     name === "avg_loan_balance_for_grandfathered_debt" ||
+    //     name === "avg_loan_balance_for_home_acquisition_debt" ||
+    //     name === "paid_mortgage_on_gf_ha_debt"
+    //   ) {
+    //     // updateValidators(this.validators, e.target.name, e.target.value);
+    //     // const validationErrorLength = this.validators[e.target.name].errors
+    //       // .length;
+    //     // this.props.getValidationError(validationErrorLength);
+    //   }
+    // }
 
     this.props.getData("tax2", this.state);
   }
@@ -158,7 +154,7 @@ export class Tax2 extends Component {
               Average loan balance for grandfathered debt
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 If you took out a mortgage on your home before October 14, 1987,
                 or you refinanced such a mortgage, it may qualify as
@@ -197,17 +193,14 @@ export class Tax2 extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.validators,
-          "avg_loan_balance_for_grandfathered_debt"
-        )}
+        
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
               Average loan balance for home acquisition debt
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Home acquisition debt is a mortgage you took out after October
                 13, 1987, to buy, build, or substantially improve a qualified
@@ -243,10 +236,7 @@ export class Tax2 extends Component {
             />
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.validators,
-          "avg_loan_balance_for_home_acquisition_debt"
-        )}
+       
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
             <span className="get-started-label">
@@ -281,10 +271,7 @@ export class Tax2 extends Component {
      
           </MDBCol>
         </MDBRow>
-        {displayValidationErrors(
-          this.validators,
-          "paid_mortgage_on_gf_ha_debt"
-        )}
+        
       </div>
     );
 

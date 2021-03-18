@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
-import Axios from "axios";
 
+import Axios from "axios";
+ 
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import ToggleButton from "@material-ui/lab/ToggleButton";
@@ -52,7 +52,12 @@ export class ShowPmiOptionsSecondLoan extends Component {
       second_mortgage_points_percentage: "0",
       loanamountsecond2_number:"0",
       is_update: false,
-      id:""
+      id:"",
+      secondloanAmountValidationError: "",
+      interestrateValidationError: "",
+      pointsValidationError: "",
+      pmiValidationError: "",
+      closingCostsValidationError: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty();
@@ -105,9 +110,10 @@ export class ShowPmiOptionsSecondLoan extends Component {
             rateadd2: propertyDetail.second_frm.rateadd2,
             second_mortgage_points_percentage: Number(propertyDetail.second_frm.second_mortgage_points)*100,
             is_update: true,
-            id:propertyDetail.second_frm.id
+            id:propertyDetail.second_frm.id,
+            secondloanAmountValidationError: this.state.secondloanAmountValidationError
+            
           })
-          console.log(this.state);
           this.props.handleDownpaymentData(this.state);
         })
         .catch((err) => {
@@ -135,6 +141,77 @@ export class ShowPmiOptionsSecondLoan extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
+
+    if(event.target.name === "pmi_amount"){
+      const checkloanprice = parseInt(Number(this.props.loanAmount) * 3 )/100
+      if(checkloanprice < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          pmiValidationError: "Shouldn't exceed 3% of first loan amount"
+        }) 
+      }else{
+        this.setState({
+          pmiValidationError: ""
+        }) 
+      }
+    }
+
+    if(event.target.name === "loanamountsecond2"){
+      if(this.props.loanAmount < parseInt(String(event.target.value).replace(/,/g, ''))){
+        this.setState({
+          secondloanAmountValidationError: "Cannot exceed first mortgage amount"
+        }) 
+      }else{
+        this.setState({
+          secondloanAmountValidationError: ""
+        }) 
+      }
+      
+  }
+
+  if(event.target.name === "second_mortgage_interest_percentage"){
+    if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
+      this.setState({
+        interestrateValidationError: " Is the interest rate input accurate?"
+      }) 
+    }else{
+      this.setState({
+        interestrateValidationError: ""
+      }) 
+    }
+    
+}
+
+
+if(event.target.name === "second_mortgage_points_percentage"){
+  if(parseInt(String(event.target.value).replace(/%/g, '')) > 5){
+    this.setState({
+      pointsValidationError: "Points cannot exceed 5%"
+    }) 
+  }else{
+    this.setState({
+      pointsValidationError: ""
+    }) 
+  }
+  
+}
+
+if (event.target.name === "second_mortgage_closing_costs") {
+  if (
+    parseInt(String(event.target.value).replace(/,/g, "")) >
+    (parseFloat(String(this.state.loanamountsecond2).replace(/,/g, "")) * 5) /
+      100
+  ) {
+    this.setState({
+      closingCostsValidationError:
+        " Closing costs cannot exceed 5% of loan amount",
+    });
+  } else {
+    this.setState({
+      closingCostsValidationError: "",
+    });
+  }
+}
+
     this.props.handleDownpaymentData(this.state);
   }
   componentDidMount() {}
@@ -143,6 +220,12 @@ export class ShowPmiOptionsSecondLoan extends Component {
       <MDBRow className="margin20">
         <MDBCol md="12">
           <span className="get-started-label">Monthly PMI Amount</span>
+          <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+              PMI, is a type of mortgage insurance you might be required to pay for if you have a conventional loan. PMI is usually required when you have a conventional loan and make a down payment of less than 20 percent of the home's purchase price. You can pay PMI in lieu of a second mortgage
+              </span>
+            </div>
           <br />
           {/* <Input
             className="input-class-mdb"
@@ -168,6 +251,11 @@ export class ShowPmiOptionsSecondLoan extends Component {
                 });
               }}
             />
+             <span className="validation-text-color">
+
+             {this.state.pmiValidationError}
+             </span>
+           
         </MDBCol>
       </MDBRow>
     );
@@ -177,7 +265,7 @@ export class ShowPmiOptionsSecondLoan extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Loan Amount</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the amount you plan to borrow for this mortgage{" "}
               </span>
@@ -207,7 +295,12 @@ export class ShowPmiOptionsSecondLoan extends Component {
                 });
               }}
             />
+              <span className="validation-text-color">
+              {this.state.secondloanAmountValidationError}
+              </span>
+           
           </MDBCol>
+          
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -260,13 +353,18 @@ export class ShowPmiOptionsSecondLoan extends Component {
                 });
               }}
             />
+              <span className="validation-text-color">
+              {this.state.interestrateValidationError}
+              </span>
+            
           </MDBCol>
+          
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Points</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Input the points you may need to pay on your loan expressed as a
                 % of the loan amount. For e.g. 2 points is 2% of the loan
@@ -299,14 +397,19 @@ export class ShowPmiOptionsSecondLoan extends Component {
                 });
               }}
             />
+              <span className="validation-text-color">
+              {this.state.pointsValidationError}  
+              </span>
+             
           </MDBCol>
+        
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             {/* <span className="get-started-label">Closing costs</span> */}
             <span className="get-started-label">Closing costs</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 These are fees charged by the lender to the borrower for
                 offering the loan. These may include home appraisal fees, credit
@@ -342,6 +445,9 @@ export class ShowPmiOptionsSecondLoan extends Component {
                 });
               }}
             />
+             <span className="validation-text-color">
+             {this.state.closingCostsValidationError}
+             </span>
 
           </MDBCol>
         </MDBRow>

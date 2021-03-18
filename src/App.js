@@ -6,7 +6,7 @@ import Signin from "./Components/signin";
 import SelectModule from "./Components/selectModule";
 import { NotificationContainer } from "react-notifications";
 import "./App.css";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch} from "react-router-dom";
 import PrivateRoute from "../src/routes/privateRoute";
 import PublicRoute from "../src/routes/publicRoute";
 import PropertyFormWizard from "./Components/PropertyFormWizard/index";
@@ -50,7 +50,7 @@ function App() {
             exact
           />
           <PublicRoute
-            restricted={false}
+            restricted={true}
             component={SplashScreen}
             path="/"
             exact
@@ -64,8 +64,8 @@ function App() {
           <PublicRoute component={ForgotPassword} path="/forgotpassword" exact />
           <PublicRoute component={CreatePassword} path="/create-password/:token" exact />
 
-          <PublicRoute component={Signin} path="/signin" exact />
-          <PublicRoute component={Signup} path="/signup" exact />
+          <PublicRoute restricted={true} component={Signin} path="/signin" exact />
+          <PublicRoute restricted={true} component={Signup} path="/signup" exact />
           <PrivateRoute component={SelectModule} path="/select-modules" exact />
           <PrivateRoute
             component={PropertyFormWizard}

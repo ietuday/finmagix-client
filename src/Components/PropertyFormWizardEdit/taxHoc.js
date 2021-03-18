@@ -7,11 +7,13 @@ import {
   MDBModalHeader,
   MDBModalFooter
 } from "mdbreact";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import { connect } from "react-redux";
-import { tax_update,get_tax_data } from "../redux/actions/PropertyReport/taxes";
-import { Radio, Input } from "antd";
+import { tax_create, tax_update } from "../redux/actions/PropertyReport/taxes";
+
+import { Radio} from "antd";
 import { Button } from "@material-ui/core";
+import { isFormValid } from "../../common/ValidatorFunction";
 import Tax1 from "./tax1";
 import Tax2 from "./tax2";
 
@@ -23,21 +25,47 @@ export class TaxHoc extends Component {
       openModal: true,
       radioValue: false,
       tax1: {},
+      tax1YesValidationError: 0,
+      tax1NoValidationError: 0,
+      tax2ValidationError: 0,
       tax2: {},
       tax: {},
+      isTaxFilled: false,
     };
   }
-  componentDidMount(){
-  }
+  tax1YesValidationError = (error, status) => {
+     this.setState({
+      tax1YesValidationError: error,
+    });
+  };
+  tax1NoValidationError = (error, status) => {
+    this.setState({
+      tax1NoValidationError: error,
+    });
+  };
+  tax2ValidationError = (error) => {
+    this.setState({
+      tax2ValidationError: error,
+    });
+  };
   goToNextPage = () => {
+    if (this.state.tax.previous_balance === "Y") {
+      this.saveApiData();
+    } else {
+      this.saveApiData();
+    }
+  };
+  saveApiData = () => {
+    
     if (
       this.state.tax.detailed_tax_expenses === "Y" &&
       this.state.tax.previous_balance === "N"
     ) {
-      const showDetailedTax = {
+      const showallData = {
         user_obj: localStorage.getItem("id"),
-        id:JSON.parse(localStorage.getItem('tax_array')).id,
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
+        fedral_adjusted_gross_income: this.state.tax
+        .fedral_adjusted_gross_income,
         previous_balance: this.state.tax.previous_balance,
         medical_and_dental_expenses: this.state.tax.medical_and_dental_expenses,
         state_local_generalsales_taxes: this.state.tax
@@ -49,47 +77,30 @@ export class TaxHoc extends Component {
           .tax_deductible_charitable_donations,
         tax_deductible_casualty_and_theft_losses: this.state.tax
           .tax_deductible_casualty_and_theft_losses,
+        avg_loan_balance_for_grandfathered_debt: this.state.tax
+          .avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state.tax
+          .avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
+        property_obj: localStorage.getItem("property_id"),
+        id:
+          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
+            .length !== 0
+            ? JSON.parse(localStorage.getItem("tax_array")).id
+            : null,
       };
-      this.props.TaxesUpdate(showDetailedTax);
+      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
+        ? this.props.TaxesUpdate(showallData)
+        : this.props.TaxesCreate(showallData);
     } else if (
       this.state.tax.detailed_tax_expenses === "N" &&
       this.state.tax.previous_balance === "N"
     ) {
-      const hidePreviousBal = {
-        user_obj: localStorage.getItem("id"),
-        id:JSON.parse(localStorage.getItem('tax_array')).id,
-        fedral_adjusted_gross_income: this.state.tax
-          .fedral_adjusted_gross_income,
-        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
-        previous_balance: this.state.tax.previous_balance,
-      };
-      this.props.TaxesUpdate(hidePreviousBal);
-    } else if (
-      this.state.tax.detailed_tax_expenses === "N" &&
-      this.state.tax.previous_balance === "Y"
-    ) {
-      const showPreviousBal = {
-        user_obj: localStorage.getItem("id"),
-        id:JSON.parse(localStorage.getItem('tax_array')).id,
-        fedral_adjusted_gross_income: this.state.tax
-          .fedral_adjusted_gross_income,
-        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
-        previous_balance: this.state.tax.previous_balance,
-        avg_loan_balance_for_grandfathered_debt: this.state.tax
-          .avg_loan_balance_for_grandfathered_debt,
-        avg_loan_balance_for_home_acquisition_debt: this.state.tax
-          .avg_loan_balance_for_home_acquisition_debt,
-        paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
-      };
-      this.props.TaxesUpdate(showPreviousBal);
-    } else if (
-      this.state.tax.detailed_tax_expenses === "Y" &&
-      this.state.tax.previous_balance === "Y"
-    ) {
       const showallData = {
         user_obj: localStorage.getItem("id"),
-        id:JSON.parse(localStorage.getItem('tax_array')).id,
         detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
+        fedral_adjusted_gross_income: this.state.tax
+        .fedral_adjusted_gross_income,
         previous_balance: this.state.tax.previous_balance,
         medical_and_dental_expenses: this.state.tax.medical_and_dental_expenses,
         state_local_generalsales_taxes: this.state.tax
@@ -106,30 +117,151 @@ export class TaxHoc extends Component {
         avg_loan_balance_for_home_acquisition_debt: this.state.tax
           .avg_loan_balance_for_home_acquisition_debt,
         paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
+        property_obj: localStorage.getItem("property_id"),
+        id:
+          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
+            .length !== 0
+            ? JSON.parse(localStorage.getItem("tax_array")).id
+            : null,
       };
-      this.props.TaxesUpdate(showallData);
+      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
+        ? this.props.TaxesUpdate(showallData)
+        : this.props.TaxesCreate(showallData);
+    } else if (
+      this.state.tax.detailed_tax_expenses === "N" &&
+      this.state.tax.previous_balance === "Y"
+    ) {
+      const showallData = {
+        user_obj: localStorage.getItem("id"),
+        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
+        fedral_adjusted_gross_income: this.state.tax
+        .fedral_adjusted_gross_income,
+        previous_balance: this.state.tax.previous_balance,
+        medical_and_dental_expenses: this.state.tax.medical_and_dental_expenses,
+        state_local_generalsales_taxes: this.state.tax
+          .state_local_generalsales_taxes,
+        other_taxes: this.state.tax.other_taxes,
+        tax_deductive_investment_interest: this.state.tax
+          .tax_deductive_investment_interest,
+        tax_deductible_charitable_donations: this.state.tax
+          .tax_deductible_charitable_donations,
+        tax_deductible_casualty_and_theft_losses: this.state.tax
+          .tax_deductible_casualty_and_theft_losses,
+        avg_loan_balance_for_grandfathered_debt: this.state.tax
+          .avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state.tax
+          .avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
+        property_obj: localStorage.getItem("property_id"),
+        id:
+          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
+            .length !== 0
+            ? JSON.parse(localStorage.getItem("tax_array")).id
+            : null,
+      };
+      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
+        ? this.props.TaxesUpdate(showallData)
+        : this.props.TaxesCreate(showallData);
+    } else if (
+      this.state.tax.detailed_tax_expenses === "Y" &&
+      this.state.tax.previous_balance === "Y"
+    ) {
+
+      const showallData = {
+        user_obj: localStorage.getItem("id"),
+        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
+        fedral_adjusted_gross_income: this.state.tax
+        .fedral_adjusted_gross_income,
+        previous_balance: this.state.tax.previous_balance,
+        medical_and_dental_expenses: this.state.tax.medical_and_dental_expenses,
+        state_local_generalsales_taxes: this.state.tax
+          .state_local_generalsales_taxes,
+        other_taxes: this.state.tax.other_taxes,
+        tax_deductive_investment_interest: this.state.tax
+          .tax_deductive_investment_interest,
+        tax_deductible_charitable_donations: this.state.tax
+          .tax_deductible_charitable_donations,
+        tax_deductible_casualty_and_theft_losses: this.state.tax
+          .tax_deductible_casualty_and_theft_losses,
+        avg_loan_balance_for_grandfathered_debt: this.state.tax
+          .avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state.tax
+          .avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
+        property_obj: localStorage.getItem("property_id"),
+        id:
+          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
+            .length !== 0
+            ? JSON.parse(localStorage.getItem("tax_array")).id
+            : null,
+      };
+      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
+        ? this.props.TaxesUpdate(showallData)
+        : this.props.TaxesCreate(showallData);
     }else{
-      this.props.TaxesUpdate(this.state.tax);
+      const showallData = {
+        user_obj: localStorage.getItem("id"),
+        detailed_tax_expenses: this.state.tax.detailed_tax_expenses,
+        fedral_adjusted_gross_income: this.state.tax
+        .fedral_adjusted_gross_income,
+        previous_balance: this.state.tax.previous_balance,
+        medical_and_dental_expenses: this.state.tax.medical_and_dental_expenses,
+        state_local_generalsales_taxes: this.state.tax
+          .state_local_generalsales_taxes,
+        other_taxes: this.state.tax.other_taxes,
+        tax_deductive_investment_interest: this.state.tax
+          .tax_deductive_investment_interest,
+        tax_deductible_charitable_donations: this.state.tax
+          .tax_deductible_charitable_donations,
+        tax_deductible_casualty_and_theft_losses: this.state.tax
+          .tax_deductible_casualty_and_theft_losses,
+        avg_loan_balance_for_grandfathered_debt: this.state.tax
+          .avg_loan_balance_for_grandfathered_debt,
+        avg_loan_balance_for_home_acquisition_debt: this.state.tax
+          .avg_loan_balance_for_home_acquisition_debt,
+        paid_mortgage_on_gf_ha_debt: this.state.tax.paid_mortgage_on_gf_ha_debt,
+        property_obj: localStorage.getItem("property_id"),
+        id:
+          Object.entries(JSON.parse(localStorage.getItem("tax_array")))
+            .length !== 0
+            ? JSON.parse(localStorage.getItem("tax_array")).id
+            : null,
+      };
+      
+      Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
+      ? this.props.TaxesUpdate(showallData)
+      : this.props.TaxesCreate(showallData);
     }
     this.props.handleContinue();
   };
   handleNext = () => {
-    this.setState({ onClick: !this.state.onClick });
+    (this.state.tax1YesValidationError === 0 && isFormValid("tax1Yes")) ||
+    (this.state.tax1NoValidationError === 0 && isFormValid("tax1No"))
+      ? this.setState({ onClick: !this.state.onClick })
+      : this.setState({ onClick: this.state.onClick });
+    (this.state.tax1YesValidationError === 0 && isFormValid("tax1Yes")) ||
+    (this.state.tax1NoValidationError === 0 && isFormValid("tax1No"))
+      ? this.setState({ onClick: !this.state.onClick })
+      : this.setState({ onClick: !this.state.onClick })
   };
-  getData = (name, data) => {
+  getData = async (name, data) => {
     this.setState({
       [name]: { data },
     });
-    this.setState({
+    await this.setState({
       tax: { ...this.state.tax1.data, ...this.state.tax2.data },
+      isTaxFilled: true,
     });
+    
+    
+    // this.props.getTaxFilledStataus(this.state.isTaxFilled);
   };
   toggle = () => {
     this.setState({ openModal: !this.state.openModal });
   };
   onRadioChange = (e) => {
     this.setState({
-      radioValue: !this.state.radioValue,
+      radioValue: e.target.value,
     });
     if (this.state.radioValue) {
       this.props.showStep(3);
@@ -138,12 +270,7 @@ export class TaxHoc extends Component {
   goToReport = () => {
     this.props.handleContinue();
   };
-  componentWillMount() {
-    const {TaxesGet} = this.props;
-    TaxesGet();
-  }
-  componentDidMount(){
-  }
+  componentDidMount() {}
 
   render() {
     const showSelectTaxModule = (
@@ -155,45 +282,60 @@ export class TaxHoc extends Component {
         disableBackdrop={true}
       >
         <MDBModalHeader toggle={this.toggle}>
-
         <div><h4>Rent Vs Buy</h4></div>
-        
+         
+       
         </MDBModalHeader>
        
-       
-        <MDBModalBody>
-        <p>
+        
+          <MDBModalBody>
+
+          <p>
           You haven't opted for this module. <br></br>Do you still want to fill Rent vs
             Buy module? {" "}
           </p>
-          <Radio.Group
-            onChange={this.onRadioChange}
-            value={this.state.radioValue}
-            className="text-center"
-          >
-            <Radio value={true}>Yes</Radio>
-            <Radio value={false}>No</Radio>
-          </Radio.Group>
-        </MDBModalBody>
-        <MDBModalFooter className="button-center">
-      
-        {!this.state.radioValue ? (
-          <Button size="medium"  className="btn btn-primary btn-sm waves-effect waves-light" onClick={this.goToReport}>
-            Continue
-          </Button>
-        ) : null}
-       </MDBModalFooter>
+            <Radio.Group
+              onChange={this.onRadioChange}
+              value={this.state.radioValue}
+              className="text-center"
+            >
+              <Radio value={true}>Yes</Radio>
+              <Radio value={false}>No</Radio>
+            </Radio.Group>
+          </MDBModalBody>
+
+          <MDBModalFooter className="button-center">
+          {!this.state.radioValue ? (
+            <Button size="medium" className="btn btn-primary btn-sm waves-effect waves-light" onClick={this.goToReport}>
+              Continue
+            </Button>
+          ) : null}
+        </MDBModalFooter>
       </MDBModal>
     );
 
     return (
       <Fragment>
-        {this.props.isTaxFilled && this.props.isTaxFilled === true ? (
+        {localStorage.getItem("is_tax_selected") === "true" ||
+        this.state.radioValue ||
+        Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !==
+          0 ? (
           <div>
             {!this.state.onClick ? (
-              <Tax1 getData={this.getData} taxDataResponse={this.props.TaxGetResponse} {...this.props} {...this.state} />
+              <Tax1
+                getData={this.getData}
+                getValidationErrorTax1Yes={this.tax1YesValidationError}
+                getValidationErrorTax1No={this.tax1NoValidationError}
+                {...this.props}
+                {...this.state}
+              />
             ) : (
-              <Tax2 getData={this.getData} taxDataResponse={this.props.TaxGetResponse} {...this.props} {...this.state} />
+              <Tax2
+                getData={this.getData}
+                getValidationError={this.tax2ValidationError}
+                {...this.props}
+                {...this.state}
+              />
             )}
             <div>
               {!this.state.onClick ? (
@@ -230,7 +372,7 @@ export class TaxHoc extends Component {
             </div>
           </div>
         ) : (
-          "You haven't opted for this field!"
+          showSelectTaxModule
         )}
       </Fragment>
     );
@@ -239,15 +381,15 @@ export class TaxHoc extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    TaxCreateResponse: state.TaxCreateResponse,
     TaxUpdateResponse: state.TaxUpdateResponse,
-    TaxGetResponse : state.TaxGetResponse
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    TaxesCreate: (data) => dispatch(tax_create(data)),
     TaxesUpdate: (data) => dispatch(tax_update(data)),
-    TaxesGet: (data) => dispatch(get_tax_data(data)),
   };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TaxHoc));

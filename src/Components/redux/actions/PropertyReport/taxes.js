@@ -3,7 +3,6 @@ import Axios from "axios";
 import { config } from "../../../config/default";
 import { saveTax } from "../../../../routes/utils";
 const { baseURL } = config; 
-const token = localStorage.getItem('accessToken')
 
 export const tax_create = (data) => {
   return (dispatch) => {

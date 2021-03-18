@@ -1,27 +1,24 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
 import Axios from "axios";
-import { Input } from "antd";
-import Button from "@material-ui/core/Button";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+
 import NumberFormat from "react-number-format";
 
-import MapContainer from "../../common/googleMap";
+
 import MapWithASearchBox from "../../common/geocode";
-import NumberSpinner from "../../common/inputNumberSpinner";
-import { updateValidators } from "../../common/ValidatorFunction";
+
+
 import quss from "../../assets/images/que.png";
 import "../../css/addProperty.css";
 
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
+// import {
+//   resetValidators,
+//   displayValidationErrors,
+// } from "../../common/ValidatorFunction";
 
-import HouseInfoValidator from "../validatorRules/HouseInfoValidator";
+// import HouseInfoValidator from "../validatorRules/HouseInfoValidator";
 
-import { config } from '../config/default';
+import { config } from "../config/default";
 const { baseURL } = config;
 
 export class GetStartedHouseInfo extends Component {
@@ -36,8 +33,13 @@ export class GetStartedHouseInfo extends Component {
       downpayment_amount: "",
       downpayment_amount_number: "",
       stay_duration: "",
-      no_of_bedrooms: 0,
-      no_of_bathrooms: 0,
+      stay_duration_number: "",
+      no_of_bedrooms: localStorage.getItem("no_of_bedrooms")
+        ? localStorage.getItem("no_of_bedrooms")
+        : 0,
+      no_of_bathrooms: localStorage.getItem("no_of_bathrooms")
+        ? localStorage.getItem("no_of_bathrooms")
+        : 0,
       area_of_the_house: "",
       annual_property_tax: "",
       annual_property_tax_number: "",
@@ -51,21 +53,28 @@ export class GetStartedHouseInfo extends Component {
         ? JSON.parse(localStorage.getItem("address"))
         : "",
       downpayment: "",
-      is_update: false
+      is_update: false,
+      homepriceGrowthValidationError: "",
+      downpaymentnewValidationError: "",
+      annualPropertytaxValidationError: "",
+      homeownerInsuranceValidationError: "",
+      mapContainer: <MapWithASearchBox />,
+      annualHomeOwnerAssociationValidationError: ""
     };
-    this.validators = HouseInfoValidator;
-    resetValidators(this.validators);
+    // this.validators = HouseInfoValidator;
+    //resetValidators(this.validators);
     this.houseInfo = "";
     this.handleChange = this.handleChange.bind(this);
     this.handleBedroomRoomCount = this.handleBedroomRoomCount.bind(this);
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
-    this.checkProperty()
+    this.recommended_info = this.recommended_info.bind(this);
+    this.checkProperty();
+    
   }
 
-  checkProperty(){
-    console.log("ncbncbz");
-    const propertyId = JSON.parse(localStorage.getItem('property_id'))
-    if(propertyId){
+  checkProperty() {
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {
           "Content-type": "Application/json",
@@ -73,8 +82,8 @@ export class GetStartedHouseInfo extends Component {
         },
       })
         .then((propertyInfo) => {
-          const propertyDetail = propertyInfo.data.data[0]
-          console.log(propertyDetail)
+          const propertyDetail = propertyInfo.data.data[0];
+
           this.setState({
             house_address: propertyDetail.house_address,
             house_state: propertyDetail.house_state,
@@ -87,42 +96,143 @@ export class GetStartedHouseInfo extends Component {
             no_of_bedrooms: Number(propertyDetail.no_of_bedrooms),
             no_of_bathrooms: Number(propertyDetail.no_of_bathrooms),
             area_of_the_house: propertyDetail.area_of_the_house,
+            area_of_the_house_number: propertyDetail.area_of_the_house,
             annual_property_tax: propertyDetail.annual_property_tax,
             annual_property_tax_number: propertyDetail.annual_property_tax,
-            annual_home_owner_association_dues: propertyDetail.annual_home_owner_association_dues,
-            annual_home_owner_association_dues_number: propertyDetail.annual_home_owner_association_dues,
+            annual_home_owner_association_dues:
+              propertyDetail.annual_home_owner_association_dues,
+            annual_home_owner_association_dues_number:
+              propertyDetail.annual_home_owner_association_dues,
             home_owner_insurance: propertyDetail.home_owner_insurance,
             home_owner_insurance_number: propertyDetail.home_owner_insurance,
             home_price_growth: propertyDetail.home_price_growth,
-            home_price_growth_percentage: Number(propertyDetail.home_price_growth)*100,
-            is_update: true
-          })
-          let downpayment
+            home_price_growth_percentage:
+              Number(propertyDetail.home_price_growth) * 100,
+            is_update: true,
+            mapContainer: propertyDetail.id ? (
+              <MapWithASearchBox
+                hosue_info_house_address={propertyDetail.house_address}
+                hosue_info_house_state={propertyDetail.house_state}
+                hosue_info_house_zip_code={propertyDetail.house_zip_code}
+              />
+            ) : (
+                <MapWithASearchBox />
+              ),
+            annualHomeOwnerAssociationValidationError: ""
+          });
+          this.handleBedroomRoomCount(this.state.no_of_bedrooms);
+          this.handleBathRoomCount(this.state.no_of_bathrooms);
+          let downpayment;
           let twenty_percent_of_property_price =
-          (this.state.property_price * 20) / 100;
-        if (this.state.downpayment_amount < twenty_percent_of_property_price) {
-          downpayment = "lessthan20";
-        } else {
-          downpayment = "greaterthan20";
-        }
+            (this.state.property_price * 20) / 100;
+          if (
+            this.state.downpayment_amount < twenty_percent_of_property_price
+          ) {
+            downpayment = "lessthan20";
+          } else {
+            downpayment = "greaterthan20";
+          }
+          
           this.props.handleHouseInfo(downpayment, this.state);
         })
-        .catch((err) => {
-         
-        });
+        .catch((err) => { });
+    } else {
+      // this.setState({
+      //   mapContainer: <MapWithASearchBox  />
+      // })
     }
   }
-
 
   async handleChange(event) {
     const { name } = event.target;
     this.selectAddress(JSON.parse(localStorage.getItem("addressData")));
     event.persist();
     let downpayment;
+    
+
+    if (event.target.name === "home_price_growth_percentage") {
+      if (parseInt(String(event.target.value).replace(/%/g, "")) > 20) {
+        this.setState({
+          homepriceGrowthValidationError: " *Home Price growth cannot exceed 20% ",
+        });
+      } else {
+        this.setState({
+          homepriceGrowthValidationError: "",
+        });
+      }
+    }
+
+    if (event.target.name === "downpayment_amount") {
+      if (
+        this.state.property_price <
+        parseInt(String(event.target.value).replace(/,/g, ""))
+      ) {
+        this.setState({
+          downpaymentnewValidationError:
+            " Downpayment amount can never exceed home price",
+        });
+      } else {
+        this.setState({
+          downpaymentnewValidationError: "",
+        });
+      }
+    }
+
+    if (event.target.name === "annual_property_tax") {
+      if (
+        parseInt(String(event.target.value).replace(/,/g, "")) >
+        (parseFloat(String(this.state.property_price).replace(/,/g, "")) * 10) /
+        100
+      ) {
+        this.setState({
+          annualPropertytaxValidationError:
+            " Annual Property tax cannot exceed 10% of home price",
+        });
+      } else {
+        this.setState({
+          annualPropertytaxValidationError: "",
+        });
+      }
+    }
+
+    if (event.target.name === "home_owner_insurance") {
+      if (
+        parseInt(String(event.target.value).replace(/,/g, "")) >
+        (parseFloat(String(this.state.property_price).replace(/,/g, "")) * 2) /
+        100
+      ) {
+        this.setState({
+          homeownerInsuranceValidationError:
+            "Home Owner's insurance cannot exceed 2% of home price",
+        });
+      } else {
+        this.setState({
+          homeownerInsuranceValidationError: "",
+        });
+      }
+    }
+
+    if (event.target.name === "annual_home_owner_association_dues") {
+      if (
+        parseInt(String(event.target.value).replace(/,/g, "")) >
+        (parseFloat(String(this.state.property_price).replace(/,/g, "")) * 5) /
+        100
+      ) {
+        this.setState({
+          annualHomeOwnerAssociationValidationError:
+            "Annual Home owner association dues cannot exceed 5% of home price",
+        });
+      } else {
+        this.setState({
+          annualHomeOwnerAssociationValidationError: "",
+        });
+      }
+    }
+
     await this.setState({
       [event.target.name]: event.target.value,
     });
-    console.log(this.state.home_price_growth);
+
     let twenty_percent_of_property_price =
       (this.state.property_price * 20) / 100;
     if (this.state.downpayment_amount < twenty_percent_of_property_price) {
@@ -130,49 +240,82 @@ export class GetStartedHouseInfo extends Component {
     } else {
       downpayment = "greaterthan20";
     }
-    console.log("this.state.property_price", this.state.property_price_number);
 
-    console.log(
-      "twenty_percent_of_property_price",
-      twenty_percent_of_property_price
-    );
-    // if (
-    //   name === "property_price" ||
-    //   name === "downpayment_amount" ||
-    //   name === "area_of_the_house" ||
-    //   name == "annual_property_tax" ||
-    //   name == "annual_home_owner_association_dues" ||
-    //   name == "home_owner_insurance"
-    // ) {
-    //   console.log(this.state.home_price_growth);
-    //   updateValidators(this.validators, event.target.name, event.target.value);
-    //   const validationErrorLength = this.validators[event.target.name].errors
-    //     .length;
-    //   console.log(this.validators[event.target.name]);
-    //   this.props.getValidationError(validationErrorLength);
-    //   console.log(this.state.home_price_growth);
+    if (
+      name === "property_price" ||
+      name === "downpayment_amount" ||
+      name === "home_price_growth" ||
+      name === "area_of_the_house" ||
+      name === "annual_property_tax" ||
+      name === "annual_home_owner_association_dues" ||
+      name === "home_owner_insurance"
+    ) {
+      
+
+      //updateValidators(this.validators, event.target.name, event.target.value);
+      //const validationErrorLength = this.validators[event.target.name].errors.length;
+
+      // this.props.getValidationError(validationErrorLength);
+    }
+
+    // if(name === 'property_price' && event.target.value){
+    //   this.recommended_info()
     // }
-    console.log(this.state);
     this.props.handleHouseInfo(downpayment, this.state);
   }
+
+  recommended_info(){
+    
+    
+    if(this.state.house_state && this.state.property_price){
+      
+      Axios.post(`${baseURL}/property_listings/recommend`, 
+      {
+        "state_name": this.state.house_state,
+        "property_price": this.state.property_price
+      }
+    ,
+    {
+      headers: {
+        "Content-type": "Application/json",
+        Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then(async (recc_info) => {
+        
+        await this.setState({
+          'home_owner_insurance': recc_info.data.data['recommended_HOI'],
+          'annual_property_tax': recc_info.data.data['recommended_Annual_Property_Tax']
+        })
+        
+             
+      })
+      .catch((err) => { });
+    }
+    
+  }
+
   handleBedroomRoomCount(count) {
     this.setState({
       no_of_bedrooms: count,
     });
+    
+    // localStorage.setItem("no_of_bedrooms", count);
   }
   handleBathRoomCount(count) {
     this.setState({
       no_of_bathrooms: count,
     });
+    
+    // localStorage.setItem("no_of_bathrooms", count);
   }
+
   selectAddress = (data) => {
     this.setState({
       house_address: data.house_address,
       house_state: data.house_state,
       house_zip_code: data.house_zip_code,
     });
-    localStorage.setItem("changeAddress", false);
-    console.log(this.state);
   };
   handleBack = () => {
     this.props.history.push("/select-modules");
@@ -186,19 +329,23 @@ export class GetStartedHouseInfo extends Component {
         "administrative_area_level_2" === addressArray[i].types[0]
       ) {
         city = addressArray[i].long_name;
-        console.log(city);
+        // localStorage.getItem("addressData")
+        // ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
+        // : null
         return city;
       }
     }
   };
   getArea = (addressArray) => {
-    console.log(addressArray);
     let area = "";
     for (let i = 0; i < addressArray.length; i++) {
       if (addressArray[i].types[0]) {
         for (let j = 0; j < addressArray[i].types.length; j++) {
-          if (addressArray[i].types[j] == "postal_code") {
+          if (addressArray[i].types[j] === "postal_code") {
             area = addressArray[i].long_name;
+            // localStorage.getItem("addressData")
+            // ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
+            // : null
             return area;
           }
         }
@@ -214,21 +361,23 @@ export class GetStartedHouseInfo extends Component {
           "administrative_area_level_1" === addressArray[i].types[0]
         ) {
           state = addressArray[i].long_name;
+          // localStorage.getItem("addressData")
+          //   ? this.selectAddress(JSON.parse(localStorage.getItem("addressData")))
+          //   : null
           return state;
         }
       }
     }
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUpdate(nextProps, nextState) {}
+  componentWillUpdate(nextProps, nextState) { }
   render() {
     return (
       <Fragment>
         <MDBRow className="margin20">
           <MDBCol>
-            {/* <MapContainer type="home" onSelectAddress={this.selectAddress} /> */}
             <MapWithASearchBox />
           </MDBCol>
         </MDBRow>
@@ -246,7 +395,7 @@ export class GetStartedHouseInfo extends Component {
               What is the price of the property?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the price of the house requested by the seller or the
                 current appraised value of the house. If both prices are
@@ -268,6 +417,7 @@ export class GetStartedHouseInfo extends Component {
               name="property_price"
               value={this.state.property_price}
               onChange={this.handleChange}
+              onBlur={this.recommended_info}
               thousandSeparator={true}
               // suffix={"%"}
               onValueChange={async (values) => {
@@ -288,7 +438,7 @@ export class GetStartedHouseInfo extends Component {
           <MDBCol md="12">
             <span className="get-started-label">Home Price Growth</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the growth in the home price per year for the duration of
                 stay.
@@ -320,8 +470,8 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
+            <span className="validation_red">{this.state.homepriceGrowthValidationError}</span>
           </MDBCol>
-          {/* {displayValidationErrors(this.validators, "home_price_growth")} */}
         </MDBRow>
         {/* End */}
         <MDBRow className="margin20">
@@ -330,7 +480,7 @@ export class GetStartedHouseInfo extends Component {
               What is the downpayment amount?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text"> Enter your downpayment.</span>
             </div>
             <br />
@@ -358,16 +508,19 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.downpayment_amount}
               onChange={this.handleChange}
             /> */}
+            <span className="validation-text-color">
+              {this.state.downpaymentnewValidationError}
+            </span>
+
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "downpayment_amount")} */}
         <MDBRow className="margin20" center>
           <MDBCol md="12">
             <span className="get-started-label">
               How long do you intend to stay in this house?
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the number of years you intend to stay in this house, or
                 the number of years after which you intend to refinance the
@@ -375,54 +528,119 @@ export class GetStartedHouseInfo extends Component {
               </span>
             </div>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Duration of stay"
               value={this.state.stay_duration}
               name="stay_duration"
               onChange={this.handleChange}
+            /> */}
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Duration of stay"
+              value={this.state.stay_duration}
+              name="stay_duration"
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  stay_duration_number: formattedValue,
+                });
+                await this.setState({
+                  stay_duration: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
-          <MDBCol md="7" sm="6" xs="6" size="6">
+          <MDBCol md="12" sm="12" xs="12" size="12">
             <span className="get-started-long-question">Bedrooms</span>
           </MDBCol>
-          <MDBCol md="5" sm="6" xs="6" size="6">
-            {console.log(this.state.no_of_bathrooms)}
-            <NumberSpinner
+          <MDBCol md="12" sm="12" xs="12" size="12">
+            {/* <NumberSpinner
               count={this.state.no_of_bedrooms}
               onRoomCount={this.handleBedroomRoomCount}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Bedroom"
+              name="no_of_bedrooms"
+              value={this.state.no_of_bedrooms}
+              onChange={this.handleChange}
+              onValueChange={async (values) => {
+                const { value } = values;
+                await this.setState({
+                  no_of_bedrooms: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
-          <MDBCol md="7" sm="6" xs="6" size="6">
+          <MDBCol md="12" sm="12" xs="12" size="12">
             <span className="get-started-long-question">Bathrooms</span>
           </MDBCol>
-          <MDBCol md="5" sm="6" xs="6" size="6">
-            <NumberSpinner count={this.state.no_of_bathrooms} onRoomCount={this.handleBathRoomCount} />
+          <MDBCol md="12" sm="12" xs="12" size="12">
+            {/* <NumberSpinner
+              count={this.state.no_of_bathrooms}
+              onRoomCount={this.handleBathRoomCount}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Bathroom"
+              name="no_of_bathrooms"
+              value={this.state.no_of_bathrooms}
+              onChange={this.handleChange}
+              onValueChange={async (values) => {
+                const { value } = values;
+                await this.setState({
+                  no_of_bathrooms: value,
+                });
+              }}
+            />
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Area of House</span>
             <br />
-            <Input
+            {/* <Input
               className="input-class-mdb"
               placeholder="Enter Area in Sq.Ft"
               name="area_of_the_house"
               value={this.state.area_of_the_house}
               onChange={this.handleChange}
+            /> */}
+
+            <NumberFormat
+              className="input-class-mdb"
+              placeholder="Enter Area in Sq.Ft"
+              name="area_of_the_house"
+              value={this.state.area_of_the_house}
+              onChange={this.handleChange}
+              thousandSeparator={true}
+              onValueChange={async (values) => {
+                const { formattedValue, value } = values;
+                await this.setState({
+                  area_of_the_house_number: formattedValue,
+                });
+                await this.setState({
+                  area_of_the_house: value,
+                });
+              }}
             />
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "area_of_the_house")} */}
+
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">Annual Property Tax</span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"></img>
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Enter the annual property tax in number not %. Typically these
                 range between 1-2% of the home price.{" "}
@@ -451,18 +669,20 @@ export class GetStartedHouseInfo extends Component {
                 await this.setState({
                   annual_property_tax: value,
                 });
-                console.log(this.state);
               }}
             />
+            <span className="validation-text-color">
+              {this.state.annualPropertytaxValidationError}
+            </span>
+
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "annual_property_tax")} */}
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
               Monthly Home Owner's Association dues (if applicable)
               <div className="tooltip-img">
-                <img src={quss} className="tool-img"></img>
+                <img src={quss} className="tool-img" alt="" />
                 <span className="tooltip-img-text">
                   Enter the monthly association dues that you expect to pay the
                   home owner's association of your residential complex. These
@@ -495,18 +715,24 @@ export class GetStartedHouseInfo extends Component {
                 await this.setState({
                   annual_home_owner_association_dues: value,
                 });
-                console.log("nnual_home_owner_association_dues", this.state);
               }}
             />
+            <span className="validation-text-color">
+              {this.state.annualHomeOwnerAssociationValidationError}
+            </span>
+
           </MDBCol>
+
         </MDBRow>
-        {displayValidationErrors(
-          this.validators,
-          "annual_home_owner_association_dues"
-        )}
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
-            <span className="get-started-label">Annual Home Insurance</span>
+            <span className="get-started-label">Home Owner's Insurance</span>
+            <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+                Home Owner's insurance is a form of property insurance that covers losses and damages to an individual's house and assets in the home.{" "}
+              </span>
+            </div>
             <br />
             {/* <Input
               className="input-class-mdb"
@@ -531,12 +757,14 @@ export class GetStartedHouseInfo extends Component {
                 await this.setState({
                   home_owner_insurance: value,
                 });
-                console.log("home_owner_insurance", this.state);
               }}
             />
+            <span className="validation-text-color">
+              {this.state.homeownerInsuranceValidationError}
+            </span>
+
           </MDBCol>
         </MDBRow>
-        {/* {displayValidationErrors(this.validators, "home_owner_insurance")} */}
       </Fragment>
     );
   }

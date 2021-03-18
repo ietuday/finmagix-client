@@ -3,7 +3,6 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { connect } from "react-redux";
 import Header from "../../common/header";
 import { Button } from "@material-ui/core";
-import { get_personal_finance_data } from "../redux/actions/PropertyReport/personalFinance";
 import { Redirect, withRouter } from "react-router-dom";
 import "../../css/reviewEdit.css";
 import { get_property_info } from "../redux/actions/PropertyReport/propertyInfo";
@@ -20,11 +19,12 @@ export class PropertyInformationReviewEdit extends Component {
   componentDidMount() {
     
     const { GetPropertyinfo, PropertyInfoCreateResponse } = this.props;
+    
     if(PropertyInfoCreateResponse && PropertyInfoCreateResponse.data){
 
-      GetPropertyinfo(PropertyInfoCreateResponse.data.id);
+      GetPropertyinfo(localStorage.getItem('property_id'));
     }else{
-      GetPropertyinfo(this.props.location.state.propertyId)
+      GetPropertyinfo(localStorage.getItem('property_id'))
     }
   }
   goToEdit = () => {
@@ -139,7 +139,7 @@ export class PropertyInformationReviewEdit extends Component {
             <MDBCol md="6" size="6">
               <div className="">
                 <span className="get-started-label">Downpayment Amount</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">Money you intend to pay i.s. 
             difference between the purchase price and loan amount.</span>
             </div>
@@ -226,7 +226,7 @@ export class PropertyInformationReviewEdit extends Component {
             <MDBCol md="6" size="6">
               <div className="">
                 <span className="get-started-label">Annual Property Tax</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
             <span className="tooltip-img-text">The annual property tax in number not %. 
             Typically these range between 1-2% of the home price. </span>
             </div>
