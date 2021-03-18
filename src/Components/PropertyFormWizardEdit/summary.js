@@ -1,22 +1,55 @@
 import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
+import Axios from "axios";
+import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter} from "react-router-dom";
+
+import { config } from "../config/default";
+const { baseURL } = config;
 
 export class Summary extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       loading: false,
       showReports: false,
+      isRentvsBuyFilled : props.isRentvsBuyFilled,
+      isTaxFilled : props.isTaxFilled,
+      propertyDetail: {}
     };
+    this.checkProperty()
+  }
+
+  checkProperty() {
+    
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+
+          this.setState({
+            propertyDetail: propertyInfo.data.data[0]
+          });
+        })
+        .catch((err) => {});
+    }
   }
 
   showReports = () => {
     this.props.history.push("/show-detailed-reports");
   };
-  componentDidMount() {}
+  componentDidMount() {
+    
+  }
   render() {
+    const{PropertyInfoCreateResponse,FRMMortgageCreateResponseFirst,ARMMortgageCreateResponseFirst,FRMMortgageCreateResponseSecond,ARMMortgageCreateResponseSecond, PersonalFinanceUpdateResponse,TaxUpdateResponse, PersonalFinanceCreateResponse,RentvsBuyCreateResponse,TaxCreateResponse} = this.props;
     return (
       <Fragment>
         <MDBContainer>
@@ -28,7 +61,14 @@ export class Summary extends Component {
                   alt="report"
                   onClick={this.showReports}
                 />
+                
               </div>
+              <div className="text-center">
+              <Button size="medium" className="btn btn-primary btn-sm waves-effect waves-light" onClick={this.showReports}>
+                  Show Report
+              </Button>
+              </div>
+
             </MDBCol>
           </MDBRow>
           <MDBRow>
@@ -44,7 +84,7 @@ export class Summary extends Component {
           <MDBRow className="margin20">
             <MDBCol>
               <div className="text-center">
-                <p>Do you want to Edit or Review inputs?</p>
+                <p>Do you want to review or edit your inputs? Click  below!</p>
               </div>
             </MDBCol>
           </MDBRow>
@@ -61,9 +101,8 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() =>
-                    this.props.history.push("/property-information-review-edit")
-                  }
+                  onClick={() => this.props.history.push({pathname: '/property-information-review-edit',
+                  getId : PropertyInfoCreateResponse.data.id  })}
                 />
               </div>
             </MDBCol>
@@ -82,9 +121,8 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() =>
-                    this.props.history.push("/personalfinance-review-edit")
-                  }
+                  onClick={() => this.props.history.push({pathname: '/personalfinance-review-edit',
+                  getId :JSON.parse(localStorage.getItem('personal_finance_array')).id })}
                 />
               </div>
             </MDBCol>
@@ -103,9 +141,12 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() =>
-                    this.props.history.push("/mortgage-programs-review-edit")
-                  }
+                  onClick={() => this.props.history.push({pathname: '/mortgage-programs-review-edit',
+                  getFRMDataResponseFirst : FRMMortgageCreateResponseFirst , 
+                  getARMDataResponseFirst : ARMMortgageCreateResponseFirst,
+                getARMDataResponseSecond: ARMMortgageCreateResponseSecond ,
+                getFRMDataResponseSecond: FRMMortgageCreateResponseSecond ,
+              })}
                 />
               </div>
             </MDBCol>
@@ -125,7 +166,10 @@ export class Summary extends Component {
                   icon="angle-right"
                   size="large"
                   onClick={() =>
-                    this.props.history.push("/rent-vs-buy-review-edit")
+                    this.props.history.push({pathname: 'rent-vs-buy-review-edit',
+                    state: {isRentvsBuyFilled:true, 
+                      getId : this.state.propertyDetail.rent_vs_buy.id 
+                     }})
                   }
                 />
               </div>
@@ -145,15 +189,41 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() => this.props.history.push("/taxes-review-edit")}
+                  onClick={() =>
+                    this.props.history.push({pathname: '/taxes-review-edit',
+                    state: {isTaxFilled : true,
+                      getId :JSON.parse(localStorage.getItem('tax_array')).id }})
+                  }
                 />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
-          </MDBRow>
+          </MDBRow> 
         </MDBContainer>
-      </Fragment>
+      </Fragment> 
     );
   }
 }
-export default withRouter(Summary);
+const mapStateToProps = (state) => {
+  return {
+    PersonalFinanceCreateResponse: state.PersonalFinanceCreateResponse,
+    PropertyInfoCreateResponse: state.PropertyInfoCreateResponse,
+    RentvsBuyCreateResponse: state.RentvsBuyCreateResponse,
+    TaxCreateResponse : state.TaxCreateResponse,
+    PersonalFinanceUpdateResponse: state.PersonalFinanceUpdateResponse,
+    FRMMortgageCreateResponseFirst : state.FRMMortgageCreateResponseFirst,
+    ARMMortgageCreateResponseFirst : state.ARMMortgageCreateResponseFirst,
+    FRMMortgageCreateResponseSecond : state.FRMMortgageCreateResponseSecond,
+    ARMMortgageCreateResponseSecond : state.ARMMortgageCreateResponseSecond,
+    TaxUpdateResponse : state.TaxUpdateResponse
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  };
+};
+export default withRouter(
+  connect(mapStateToProps, null)(Summary)
+);
+

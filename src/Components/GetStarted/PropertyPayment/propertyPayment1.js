@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
-import RangeSlider from "../../../common/RangeSilder";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Select from "@material-ui/core/Select";
@@ -162,7 +160,7 @@ export class PropertyPaymentInfo2 extends Component {
             <span className="get-started-label">
               How long do you intend to stay in this house?
             </span>
-            <div className="tooltip-img"><img src={quss} className="tool-img"></img>
+            <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
 <span className="tooltip-img-text">Enter the number of years you intend to stay in this house,
  or the number of years after which you intend to refinance the mortgage on this house. </span>
 </div>

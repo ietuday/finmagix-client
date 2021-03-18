@@ -1,7 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import { Button } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 import Item from "./item";
 import SplashScreen1 from "./splashscreen1";
@@ -17,7 +14,6 @@ export class SplashScreen extends Component {
     };
   }
   componentDidMount() {
-    localStorage.clear();
   }
   render() {
     return (

@@ -7,11 +7,11 @@ import {
   MDBModalHeader,
   MDBModalFooter
 } from "mdbreact";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { tax_create, tax_update } from "../redux/actions/PropertyReport/taxes";
-import { NotificationManager } from "react-notifications";
-import { Radio, Input } from "antd";
+
+import { Radio } from "antd";
 import { Button } from "@material-ui/core";
 import { isFormValid } from "../../common/ValidatorFunction";
 import Tax1 from "./tax1";
@@ -56,7 +56,7 @@ export class TaxHoc extends Component {
     }
   };
   saveApiData = () => {
-    console.log(this.state.tax)
+    
     if (
       this.state.tax.detailed_tax_expenses === "Y" &&
       this.state.tax.previous_balance === "N"
@@ -227,7 +227,7 @@ export class TaxHoc extends Component {
             ? JSON.parse(localStorage.getItem("tax_array")).id
             : null,
       };
-      console.log(showallData)
+      
       Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !== 0
       ? this.props.TaxesUpdate(showallData)
       : this.props.TaxesCreate(showallData);
@@ -252,7 +252,7 @@ export class TaxHoc extends Component {
       tax: { ...this.state.tax1.data, ...this.state.tax2.data },
       isTaxFilled: true,
     });
-    console.log("getData",this.state)
+    
     
     this.props.getTaxFilledStataus(this.state.isTaxFilled);
   };

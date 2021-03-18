@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Header from "../../common/header";
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import "../../css/reports.css";
 // import "./nerdReportDetails.css";
 import {
@@ -15,20 +15,30 @@ import {
   XAxis,
   YAxis,
   Cell,
-  Text,
-  Tooltip
+  Text
 } from "recharts";
 
 // import "./styles.css";
 
 const blues = [
   ["#00aff0"],
-  ['#97d24f'],
+  ['#85bb43'],
   ["#00aff0"],
-  ['#97d24f']
+  ['#85bb43']
+];
+
+const mortgageBlues = [
+  ["#00aff0"],
+  ["#00aff0"],
+  ['#85bb43'],
+  ['#85bb43']
 ];
 const getColor = (length, index) => {
   return blues[index];
+};
+
+const getMortageColor = (length, index) => {
+  return mortgageBlues[index];
 };
 
 const YAxisLeftTick = ({ y, payload: { value } }) => {
@@ -69,6 +79,11 @@ function CheatSheet(props) {
     );
   }
 
+ 
+
+
+
+
   const loandata = [
     {
       name: "Loan Amount First",  
@@ -90,7 +105,7 @@ function CheatSheet(props) {
         String(
           `${
             CalculatorResponse.ARM1
-              ? CalculatorResponse.ARM1.loanamountsecond1
+              ? CalculatorResponse.ARM1.loanamountsecond1 
               : CalculatorResponse.FRM1
               ? CalculatorResponse.FRM1.loanamountsecond1
               : 0
@@ -113,14 +128,14 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Loan Amount Second",
+      name: "Loan Amount Second", 
       Amount: parseFloat(
         String(
           `${
             CalculatorResponse.ARM2
-              ? CalculatorResponse.ARM2.loanamountsecond2
+              ? CalculatorResponse.ARM2.loanamountsecond2 
               : CalculatorResponse.FRM2
-              ? CalculatorResponse.FRM2.loanamountsecond1
+              ? CalculatorResponse.FRM2.loanamountsecond1 
               : 0
           }`
         ).replace(/,/g, "")
@@ -144,14 +159,14 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Second Mortage payment",
+      name: ((CalculatorResponse.ARM1 && CalculatorResponse.ARM1.Paymentsecond1) || (CalculatorResponse.FRM1 && CalculatorResponse.FRM1.Paymentsecond1)) ? "Second Mortage payment" : "PMI",
       Amount: parseFloat(
         String(
           `${
             CalculatorResponse.ARM1
-              ? CalculatorResponse.ARM1.Paymentsecond1
+              ? (CalculatorResponse.ARM1.Paymentsecond1 ? CalculatorResponse.ARM1.Paymentsecond1 :CalculatorResponse.ARM1['mth-pmi'])
               : CalculatorResponse.FRM1
-              ? CalculatorResponse.FRM1.Paymentsecond1
+              ? (CalculatorResponse.FRM1.Paymentsecond1 ? CalculatorResponse.FRM1.Paymentsecond1 :CalculatorResponse.FRM1['mth-pmi'])
               : 0
           }`
         ).replace(/,/g, "")
@@ -172,14 +187,14 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Second Mortage payment",
+      name: ((CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Paymentsecond2) || (CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Paymentsecond2)) ? "Second Mortage payment" : "PMI",
       Amount: parseFloat(
         String(
           `${
             CalculatorResponse.ARM2
-              ? CalculatorResponse.ARM2.Paymentsecond2
+              ? (CalculatorResponse.ARM2.Paymentsecond2 ? CalculatorResponse.ARM2.Paymentsecond2 :CalculatorResponse.ARM2['mth-pmi'])
               : CalculatorResponse.FRM2
-              ? CalculatorResponse.FRM2.Paymentsecond2
+              ? (CalculatorResponse.FRM2.Paymentsecond2 ? CalculatorResponse.FRM2.Paymentsecond2 :CalculatorResponse.FRM2['mth-pmi'])
               : 0
           }`
         ).replace(/,/g, "")
@@ -194,16 +209,16 @@ function CheatSheet(props) {
         String(
           `${
             CalculatorResponse.ARM1
-              ? CalculatorResponse.ARM1.HousingpaymentcomboARM
+              ? CalculatorResponse.ARM1['total-mth-hsg-pay']
               : CalculatorResponse.FRM1
-              ? CalculatorResponse.FRM1.HousingpaymentcomboFRM
+              ? CalculatorResponse.FRM1['total-mth-hsg-pay']
               : 0
           }`
         ).replace(/,/g, "")
       ),
     },
     {
-      name: "Total Housing Payment",
+      name: "Housing Payment",
       Amount: parseFloat(
         String(
           `${
@@ -220,7 +235,7 @@ function CheatSheet(props) {
 
   const projectedEquitydata = [
     {
-      name: "Scenario1",
+      name: "First Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -234,7 +249,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenario2",
+      name: "Second Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -251,7 +266,7 @@ function CheatSheet(props) {
 
   const afterHomedata = [
     {
-      name: "Scenario1",
+      name: "First Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -265,7 +280,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenerio2",
+      name: "Second Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -282,7 +297,7 @@ function CheatSheet(props) {
 
   const taxImpact = [
     {
-      name: "Scenario1",
+      name: "First Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -296,7 +311,7 @@ function CheatSheet(props) {
       ),
     },
     {
-      name: "Scenario2",
+      name: "Second Scenario",
       Amount: parseFloat(
         String(
           `${
@@ -313,6 +328,7 @@ function CheatSheet(props) {
 
   const xKey = "name";
   const yKey = "Amount";
+
   const maxTextWidthLoan = useMemo(
     () =>
       loandata.reduce((acc, cur) => {
@@ -437,7 +453,7 @@ function CheatSheet(props) {
               style={{
                 width: "150px",
                 height: "20px",
-                backgroundColor: "#97d24f",
+                backgroundColor: "#85bb43",
               }}
             ></div>
           </MDBCol>
@@ -461,7 +477,6 @@ function CheatSheet(props) {
           </MDBCol>
         </MDBRow>
         <h6 class="CardTitle">Loan Program Comparison</h6>
-        
         <ResponsiveContainer
           width={"100%"}
           height={50 * loandata.length}
@@ -501,7 +516,7 @@ function CheatSheet(props) {
             <Bar dataKey={yKey} minPointSize={2} barSize={32}>
               {loandata.map((d, idx) => {
                 return (
-                  <Cell key={d[xKey]} fill={getColor(loandata.length, idx)} />
+                  <Cell key={d[xKey]} fill={getMortageColor(loandata.length, idx)} />
                 );
               })}
             </Bar>
@@ -553,7 +568,7 @@ function CheatSheet(props) {
                 return (
                   <Cell
                     key={d[xKey]}
-                    fill={getColor(paymentdata.length, idx)}
+                    fill={getMortageColor(paymentdata.length, idx)}
                   />
                 );
               })}
@@ -719,7 +734,7 @@ function CheatSheet(props) {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        <h6 className="CardTitle">Tax Impact</h6>
+        <h6 className="CardTitle">Tax Benefit in first year of home purchase</h6>
 
         <ResponsiveContainer
           width={"100%"}

@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol, MDBContainer } from "mdbreact";
 import { Button } from "@material-ui/core";
 import GetStartedBasicInfo from "../../Components/GetStarted/basicInfo";
-import GetStartedHouseInfo from "../../Components/GetStarted/houseInfo";
 import PropertyPaymentInfo1 from "../GetStarted/PropertyPayment/propertyPayment1";
 import PrelimReport from "../GetStarted/PropertyPayment/PrelimReport";
 import { Redirect } from "react-router-dom";

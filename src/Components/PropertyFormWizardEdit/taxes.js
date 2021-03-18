@@ -6,8 +6,8 @@ import {
   MDBModalBody,
   MDBModalHeader,
 } from "mdbreact";
-import { Radio, Input } from "antd";
-import { withRouter, Redirect } from "react-router-dom";
+import { Radio } from "antd";
+import { withRouter } from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Select from "@material-ui/core/Select";
@@ -571,7 +571,7 @@ export class Taxes extends Component {
               Tax deductive investment interest
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"alt="" />
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Investment interest is interest paid on money you borrowed that
                 is allocable to property held for investment. It doesn't include
@@ -683,7 +683,7 @@ export class Taxes extends Component {
               Average loan balance for grandfathered debt
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"alt="" />
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 If you took out a mortgage on your home before October 14, 1987,
                 or you refinanced such a mortgage, it may qualify as
@@ -728,7 +728,7 @@ export class Taxes extends Component {
               Average loan balance for home acquisition debt
             </span>
             <div className="tooltip-img">
-              <img src={quss} className="tool-img"alt="" />
+              <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
                 Home acquisition debt is a mortgage you took out after October
                 13, 1987, to buy, build, or substantially improve a qualified

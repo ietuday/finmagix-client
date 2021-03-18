@@ -1,16 +1,13 @@
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import React, { Fragment } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import {
-  MDBBtn,
+
   MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
+
   MDBCol,
   MDBRow,
   MDBContainer,
@@ -25,20 +22,20 @@ function TabPanel(props) {
 }
 
 function MortgageSummary(props) {
-  let singlePropertyResponse;
+  // let singlePropertyResponse;
   let CalculatorResponse;
   if (
     props.location.state &&
     props.location.state.singlePropertyResponse &&
     props.location.state.GetSinglePropertyResponse
   ) {
-    singlePropertyResponse = props.location.state.singlePropertyResponse;
+    // singlePropertyResponse = props.location.state.singlePropertyResponse;
     CalculatorResponse = props.location.state.GetSinglePropertyResponse;
   } else {
     CalculatorResponse = JSON.parse(localStorage.getItem("calculatorResponse"));
-    singlePropertyResponse = JSON.parse(
-      localStorage.getItem("GetSinglePropertyResponse")
-    );
+    // singlePropertyResponse = JSON.parse(
+    //   localStorage.getItem("GetSinglePropertyResponse")
+    // );
   }
 
   const [value, setValue] = React.useState(0);
@@ -71,7 +68,7 @@ function MortgageSummary(props) {
                     <div className="tab_contnt">
                       <h6 className="box">Monthly Payments</h6>
                       <h6 className="box-1">First Mortgage</h6>
-                      <h6 className="box-1">Second</h6>
+                      <h6 className="box-1">Second Mortgage</h6>
                     </div>
                   </MDBCol>
                 </MDBRow>
@@ -85,6 +82,46 @@ function MortgageSummary(props) {
                       </div>
                       <div className="box-1">
                         {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
+                      </div>
+                    </div>
+                  </MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  <MDBCol md="12">
+                    <div className="tab_contnt">
+                      <div className="box">Loan Term</div>
+                      <div className="box-1">
+                      {CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1.termfirst1
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1.termfirst1 
+                          : 0}
+                      </div>
+                      <div className="box-1">
+                 
+                      </div>
+                    </div>
+                  </MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  <MDBCol md="12">
+                    <div className="tab_contnt">
+                      <div className="box">Loan Amount</div>
+                      <div className="box-1">
+                      {CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1.loanamountfirst1
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1.loanamountfirst1 
+                          : 0}
+                      </div>
+                      <div className="box-1">
+                      {CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1.loanamountsecond1
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1.loanamountsecond1 
+                          : 0}
                       </div>
                     </div>
                   </MDBCol>
@@ -296,11 +333,7 @@ function MortgageSummary(props) {
                           : 0}
                       </div>
                       <div className="box-1">
-                        {CalculatorResponse.ARM2
-                          ? CalculatorResponse.ARM2["PMI-Stop-Year"] // we don't have PMI or PMI-Stop-Year for second mortgage
-                          : CalculatorResponse.FRM2
-                          ? CalculatorResponse.FRM2["PMI-Stop-Year"] // we don't have PMI or PMI-Stop-Year for second mortgage
-                          : 0}
+               
                       </div>
                     </div>
                   </MDBCol>
@@ -337,6 +370,47 @@ function MortgageSummary(props) {
                     </div>
                   </MDBCol>
                 </MDBRow>
+
+                <MDBRow>
+                  <MDBCol md="12">
+                    <div className="tab_contnt">
+                      <div className="box">Loan Term</div>
+                      <div className="box-1">
+                      {CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2.termfirst2
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2.termfirst2 
+                          : 0}
+                      </div>
+                      <div className="box-1">
+                        {/* { CalculatorResponse ?  (CalculatorResponse.ARM1 ? "ARM" : CalculatorResponse.FRM1 ? "FRM" : "") : ""} */}
+                      </div>
+                    </div>
+                  </MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  <MDBCol md="12">
+                    <div className="tab_contnt">
+                      <div className="box">Loan Amount</div>
+                      <div className="box-1">
+                      {CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2.loanamountfirst2
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2.loanamountfirst2 
+                          : 0}
+                      </div>
+                      <div className="box-1">
+                      {CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2.loanamountsecond2
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2.loanamountsecond1 
+                          : 0}
+                      </div>
+                    </div>
+                  </MDBCol>
+                </MDBRow>
+                
                 <MDBRow>
                   <MDBCol md="12">
                     <div className="tab_contnt">

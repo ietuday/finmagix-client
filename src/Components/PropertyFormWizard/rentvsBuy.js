@@ -5,20 +5,15 @@ import {
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
-  MDBModalFooter,
+  MDBModalFooter, 
 } from "mdbreact";
 import Button from "@material-ui/core/Button";
 
 import Axios from "axios";
 
-import { Radio, Input } from "antd";
-import { withRouter, Redirect } from "react-router-dom";
-import RentvsBuyValidator from "../validatorRules/RentvsBuyValidatorRules";
-import { updateValidators } from "../../common/ValidatorFunction";
-import {
-  resetValidators,
-  displayValidationErrors,
-} from "../../common/ValidatorFunction";
+import { Radio} from "antd";
+import { withRouter} from "react-router-dom";
+
 import { setRentvsBuyFilledStatus } from "../../routes/utils";
 import NumberFormat from "react-number-format";
 
@@ -44,7 +39,8 @@ export class RentvsBuy extends Component {
       rentinflation_percentage: 0,
       annual_rent_insurance_number: 0,
       is_update:false,
-      id: ""
+      id: "",
+      annual_rent_insuranceValidationError: ""
     };
     // this.validators = RentvsBuyValidator;
     // resetValidators(this.validators);
@@ -54,7 +50,7 @@ export class RentvsBuy extends Component {
   }
 
   checkProperty() {
-    console.log("ncbncbz");
+    
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -78,15 +74,31 @@ export class RentvsBuy extends Component {
             is_update:true,
             id: propertyDetail.rent_vs_buy.id
           });
-          console.log(this.state)
+          
           this.props.getRentvsBuyData(this.state);
         })
         .catch((err) => {});
     }
   }
   async handleChange(e, value) {
-    const { name } = e.target;
+    // const { name } = e.target;
     e.persist();
+
+    if (e.target.name === "annual_rent_insurance") {
+      const yearly_rent = Number(this.state.current_monthly_rent_payment)*12;
+      if (parseInt(String(e.target.value).replace(/,/g, '')) > (parseFloat(String(yearly_rent).replace(/,/g, '')) * 3) / 100) {
+
+        this.setState({
+          annual_rent_insuranceValidationError: "Shouldn't exceed 3% of annual rent"
+        })
+      } else {
+        this.setState({
+          annual_rent_insuranceValidationError: ""
+        })
+      }
+    }
+
+
     await this.setState({
       [e.target.name]: e.target.value,
     });
@@ -208,7 +220,7 @@ export class RentvsBuy extends Component {
               <MDBCol md="12">
                 <span className="get-started-label">Annual rent insurance</span>
                 <div className="tooltip-img">
-                  <img src={quss} className="tool-img"></img>
+                  <img src={quss} className="tool-img" alt="" />
                   <span className="tooltip-img-text">
                     This is the insurance that covers a rental property.
                     Different landlords may require different levels of coverage
@@ -242,6 +254,10 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
+                 <span className="validation-text-color">
+                 {this.state.annual_rent_insuranceValidationError}
+                 </span>
+               
               </MDBCol>
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "annual_rent_insurance")} */}
@@ -249,7 +265,7 @@ export class RentvsBuy extends Component {
               <MDBCol md="12">
                 <span className="get-started-label">Rate of investment</span>
                 <div className="tooltip-img">
-                  <img src={quss} className="tool-img"></img>
+                  <img src={quss} className="tool-img" alt="" />
                   <span className="tooltip-img-text">
                     This is your average annualized 'rate of return' on your
                     investments. This input is used in the 'rent vs. buy'
@@ -290,7 +306,13 @@ export class RentvsBuy extends Component {
 
             <MDBRow className="margin20 marginbottom20">
               <MDBCol md="12">
-                <span className="get-started-label">Rate Inflation</span>
+                <span className="get-started-label">Rent Rate Inflation</span>
+                <div className="tooltip-img">
+                  <img src={quss} className="tool-img" alt="" />
+                  <span className="tooltip-img-text">
+                  Rate inflation is the estimated annual increase in your rent
+                  </span>
+                </div>
                 <br />
                 {/* <Input
                   type="text"

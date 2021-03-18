@@ -1,18 +1,12 @@
-import { withRouter, Redirect, Link } from "react-router-dom";
-import React, { Fragment, PureComponent } from "react";
+import { withRouter, Link } from "react-router-dom";
+import React, { Fragment} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import {
-  MDBBtn,
   MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-  MDBRow,
+
   MDBContainer,
 } from "mdbreact";
 import { Button } from "@material-ui/core";
@@ -23,10 +17,10 @@ import {
   BarChart,
   Bar,
   XAxis,
-  YAxis,
-  CartesianGrid,
+  // YAxis,
+  // CartesianGrid,
   Tooltip,
-  Legend,
+  // Legend,
 } from "recharts";
 
 const getIntroOfPage = (label) => {
@@ -68,7 +62,8 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return <div {...other}>{value === index && <Box p={3}>{children}</Box>}</div>;
 }
-let data = [];
+let data1 = [];
+let data2 = [];
 
 function EquityProjection(props) {
   let singlePropertyResponse;
@@ -128,7 +123,7 @@ function EquityProjection(props) {
         ? CalculatorResponse.FRM2.ProjectedequityFRMOption2
         : 0;
       ct2 = parseFloat(String(ct2).replace(/,/g, ''))
-    data = [
+    data1 = [
       {
         name: "Projected home price",
         pv:
@@ -163,8 +158,35 @@ function EquityProjection(props) {
             : 0
       },
     ];
+
+    data2 = [
+      {
+        name: "Projected home price",
+        pv:
+           (CalculatorResponse && CalculatorResponse.ARM2) ||
+              (CalculatorResponse && CalculatorResponse.FRM2)
+            ? pv2
+            : 0
+      },
+      {
+        name: "Loan Balance",
+        at:
+          (CalculatorResponse && CalculatorResponse.ARM2) ||
+              (CalculatorResponse && CalculatorResponse.FRM2)
+            ? at2
+            : 0
+      },
+      {
+        name: "Equity",
+        ct:
+          (CalculatorResponse && CalculatorResponse.ARM2) ||
+              (CalculatorResponse && CalculatorResponse.FRM2)
+            ? ct2
+            : 0
+      },
+    ];
   }
-  console.log(data)
+
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -194,7 +216,7 @@ function EquityProjection(props) {
                 price and your total mortgage loan balance at the end of your
                 duration of stay of {singlePropertyResponse.stay_duration} years
               </p>
-              <h6>Equity represents the difference between your projected</h6>
+              
               <h4>
                 
               {CalculatorResponse.ARM1
@@ -206,7 +228,7 @@ function EquityProjection(props) {
               <BarChart
                 width={300}
                 height={400}
-                data={data}
+                data={data1}
                 margin={{
                   top: 5,
                   right: 30,
@@ -231,7 +253,7 @@ function EquityProjection(props) {
                 price and your total mortgage loan balance at the end of your
                 duration of stay of {singlePropertyResponse.stay_duration} years
               </p>
-              <h6>Equity represents the difference between your projected</h6>
+              
               <h4>
                 {CalculatorResponse.ARM2
                   ? "ARM"
@@ -240,9 +262,9 @@ function EquityProjection(props) {
                   : ""}
               </h4>
               <BarChart
-                width={300}
-                height={300}
-                data={data}
+                  width={300}
+                  height={400}
+                data={data2}
                 margin={{
                   top: 5,
                   right: 30,

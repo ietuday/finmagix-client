@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import {
-  MDBBtn,
+  
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
+  
   MDBCardTitle,
   MDBCardText,
   MDBCol,
@@ -43,16 +43,16 @@ export class PropertyAndPersonalFinanceInfo extends Component {
   }
 
   componentDidMount() {
-    this.state.CalculatorResponse = JSON.parse(
+    this.setState({ CalculatorResponse : JSON.parse(
       localStorage.getItem("calculatorResponse")
-    );
-    this.state.singlePropertyResponse = JSON.parse(
+    )});
+    this.setState({ singlePropertyResponse : JSON.parse(
       localStorage.getItem("GetSinglePropertyResponse")
-    );
+    )});
 
     if(this.state.CalculatorResponse){
-      const data = parseInt(String(Number(this.state.personalFinanace.marginal_tax_rate)*100))
-      console.log(data)
+      // const data = parseInt(String(Number(this.state.personalFinanace.marginal_tax_rate)*100))
+      
       this.setState({marginal_tax_rate: parseInt(String(Number(this.state.personalFinanace.marginal_tax_rate)*100))})
     }
     
@@ -246,9 +246,16 @@ export class PropertyAndPersonalFinanceInfo extends Component {
                           className="property-finance-logo"
                         />
                         <div>
-                        <NumberFormat value={this.state.personalFinanace
+                        {/* <NumberFormat value={this.state.personalFinanace
                             ? this.state[this.state.personalFinanace.fico_score_range]
-                            : 0} displayType={'text'} thousandSeparator={true} />
+                            : 0} displayType={'text'}/> */}
+                            {
+                            this.state.personalFinanace && this.state.personalFinanace.fico_score_range
+                             ? 
+                             this.state[this.state.personalFinanace.fico_score_range]
+                             : 
+                             ""
+                             }
                           </div>
                       </div>
                     </MDBCol>

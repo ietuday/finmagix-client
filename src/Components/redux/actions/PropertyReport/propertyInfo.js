@@ -2,7 +2,8 @@ import { PROPERTY_INFO_CREATE, PROPERTY_INFO_GET ,PROPERTY_INFO_UPDATE,SURVEY_CR
 import Axios from "axios";
 import { config } from "../../../config/default";
 const { baseURL } = config;
-const token = window.localStorage.getItem('accessToken')
+
+
 export const property_info_create = (data,onSuccess,onFailure) => {
   return (dispatch) => {
     Axios.post(`${baseURL}/property_listings/list_or_create`, data, {

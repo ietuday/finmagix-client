@@ -36,19 +36,6 @@ class Map extends Component {
     };
   }
   componentDidMount() {
-    // Geocode.fromLatLng(
-    //   this.state.mapPosition.lat,
-    //   this.state.mapPosition.lng
-    // ).then(
-    //   (response) => {
-    //     console.log(response);
-    //     const address = response.results[0].formatted_address,
-    //       addressArray = response.results[0].address_components,
-    //       city = this.getCity(addressArray),
-    //       area = this.getArea(addressArray),
-    //       state = this.getState(addressArray);
-
-    //     console.log("city", address, city, area, state);
 
     this.setState({
       address: this.props.apiData ? this.props.apiData.house_address : "",
@@ -56,15 +43,10 @@ class Map extends Component {
       city: "",
       state: this.props.apiData ? this.props.apiData.house_state : "",
     });
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
   }
   initMap = () => {
     let { lat, lng } = this.state;
-    var map = new window.google.maps.Map(document.getElementById("map"), {
+    new window.google.maps.Map(document.getElementById("map"), {
       center: { lat, lng },
       zoom: 8,
     });
@@ -90,13 +72,13 @@ class Map extends Component {
         "administrative_area_level_2" === addressArray[i].types[0]
       ) {
         city = addressArray[i].long_name;
-        console.log(city);
+        
         return city;
       }
     }
   };
   getArea = (addressArray) => {
-    console.log(addressArray);
+    
     let area = "";
     for (let i = 0; i < addressArray.length; i++) {
       if (addressArray[i].types[0]) {
@@ -104,7 +86,7 @@ class Map extends Component {
           if (
             // "sublocality_level_1" === addressArray[i].types[j] ||
             // "locality" === addressArray[i].types[j] ||
-            addressArray[i].types[j] == "postal_code"
+            addressArray[i].types[j] === "postal_code"
           ) {
             area = addressArray[i].long_name;
             return area;

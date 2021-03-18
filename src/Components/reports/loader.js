@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Header from "../../common/header";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol} from "mdbreact";
 
 export class Loader extends Component {
   constructor() {
