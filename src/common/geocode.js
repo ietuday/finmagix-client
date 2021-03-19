@@ -4,7 +4,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { Input } from "antd";
-// import { MapContainer } from './geocodeHOC';
+// import MapContainer from './geocodeHOC';
  
 export default class MapWithASearchBox extends React.Component {
   constructor(props) {
@@ -44,7 +44,6 @@ export default class MapWithASearchBox extends React.Component {
   render() {
     return (
       <>
-      {/* <MapContainer /> */}
       <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
@@ -59,7 +58,7 @@ export default class MapWithASearchBox extends React.Component {
               })}
             />
             <div className="autocomplete-dropdown-container">
-              {loading && <div>Loading...</div>}
+              {loading && <div>Loading......</div>}
               {suggestions.map(suggestion => {
                 const className = suggestion.active
                   ? 'suggestion-item--active'

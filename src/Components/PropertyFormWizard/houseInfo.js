@@ -6,6 +6,7 @@ import NumberFormat from "react-number-format";
 
 
 import MapWithASearchBox from "../../common/geocode";
+import MapContainer from '../../common/geocodeHOC';
 
 
 import quss from "../../assets/images/que.png";
@@ -378,17 +379,14 @@ export class GetStartedHouseInfo extends Component {
       <Fragment>
         <MDBRow className="margin20">
           <MDBCol>
+          <MapContainer />
+          </MDBCol>
+        </MDBRow>
+        <MDBRow className="margin20">
+          <MDBCol>
             <MapWithASearchBox />
           </MDBCol>
         </MDBRow>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br /> <br /> <br />
-        <br /> <br /> <br />
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
