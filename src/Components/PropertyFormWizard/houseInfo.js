@@ -382,11 +382,11 @@ export class GetStartedHouseInfo extends Component {
           <MapContainer />
           </MDBCol>
         </MDBRow>
-        <MDBRow className="margin20">
+        {/* <MDBRow className="margin20">
           <MDBCol>
-            <MapWithASearchBox />
-          </MDBCol>
-        </MDBRow>
+            {/* <MapWithASearchBox /> */}
+          {/* </MDBCol> */}
+        {/* </MDBRow> */} 
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
