@@ -55,6 +55,7 @@ const MapWithASearchBox = compose(
         },
          
         checkProperty: () => {
+          console.log('what is this')
           const propertyId = JSON.parse(localStorage.getItem("property_id"));
           if (propertyId) {
             Axios.get(`${baseURL}/property_listings/${propertyId}`, {

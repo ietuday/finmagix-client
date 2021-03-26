@@ -6,7 +6,7 @@ import NumberFormat from "react-number-format";
 
 
 import MapWithASearchBox from "../../common/geocode";
-import MapContainer from '../../common/geocodeHOC';
+// import MapContainer from '../../common/geocode';
 
 
 import quss from "../../assets/images/que.png";
@@ -83,7 +83,12 @@ export class GetStartedHouseInfo extends Component {
         },
       })
         .then((propertyInfo) => {
+          console.log('inside property')
           const propertyDetail = propertyInfo.data.data[0];
+          console.log(propertyDetail)
+          console.log(propertyDetail.id)
+          console.log(propertyDetail.house_address)
+          console.log('end')
 
           this.setState({
             house_address: propertyDetail.house_address,
@@ -138,9 +143,9 @@ export class GetStartedHouseInfo extends Component {
         })
         .catch((err) => { });
     } else {
-      // this.setState({
-      //   mapContainer: <MapWithASearchBox  />
-      // })
+      this.setState({
+        mapContainer: <MapWithASearchBox  />
+      })
     }
   }
 
@@ -377,16 +382,19 @@ export class GetStartedHouseInfo extends Component {
   render() {
     return (
       <Fragment>
-        <MDBRow className="margin20">
+         <MDBRow className="margin20">
           <MDBCol>
-          <MapContainer />
+            <MapWithASearchBox />
           </MDBCol>
         </MDBRow>
-        {/* <MDBRow className="margin20">
-          <MDBCol>
-            {/* <MapWithASearchBox /> */}
-          {/* </MDBCol> */}
-        {/* </MDBRow> */} 
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br /> <br /> <br />
+        <br /> <br /> <br /> 
         <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
