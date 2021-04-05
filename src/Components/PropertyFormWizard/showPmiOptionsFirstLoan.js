@@ -111,7 +111,9 @@ export class ShowPmiOptionsFirstLoan extends Component {
             rateadd2: propertyDetail.first_frm.rateadd2,
             second_mortgage_points_percentage: Number(propertyDetail.first_frm.second_mortgage_points)*100,
             is_update:true,
-            id: propertyDetail.first_frm.id
+            id: propertyDetail.first_frm.id,
+            propertyPrice: propertyDetail.property_price,
+            property_downpayment: propertyDetail.downpayment_amount
           })
           
           this.props.handleDownpaymentData(this.state);
@@ -122,7 +124,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
     }
   }
   
-  showPmiSecondloan = (event, value) => {
+  showPmiSecondloan = async(event, value) => {
     this.setState({
       PMIOptions: value,
     });
@@ -131,9 +133,43 @@ export class ShowPmiOptionsFirstLoan extends Component {
         showSecondloanOption: false,
       });
     } else if (value === "Second Loan") {
-      this.setState({
+      console.log('clicked')
+      let e = true;
+      
+      console.log(this.props)
+      console.log(this.props.second_mortgage_loan_amount)
+      await this.setState({
         showSecondloanOption: true,
+        loanamountsecond1: this.props.second_mortgage_loan_amount,
+        loan_amount: this.props.loan_amount 
       });
+      console.log(this.state.loan_amount)
+      var loanOnePercent;
+      var secondMortagePercent;
+      console.log(this.state.loan_amount, 'success')
+      console.log(this.state.property_downpayment, 'success')
+        var loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
+    console.log(loanPlusDown)
+    var diff;
+    var loanOnePercent;
+    var secondMortagePercent;
+    diff = this.state.propertyPrice - loanPlusDown;
+    console.log(diff)
+    if(diff == 0) {
+      loanOnePercent = (this.state.loan_amount/100)*80;
+      console.log(loanOnePercent)
+      secondMortagePercent = this.state.loan_amount - loanOnePercent
+      console.log(secondMortagePercent)
+      this.setState({
+        loanamountsecond1: secondMortagePercent
+      })
+     this.props.getEventfromSecondMortgage(loanOnePercent) 
+    } else {
+      console.log(diff)
+      this.setState({
+        loanamountsecond1: diff
+      })
+    }
     }
   };
   async handleChange(event) {
@@ -284,6 +320,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
               placeholder="Enter amount here"
               name="loanamountsecond1"
               value={this.state.loanamountsecond1}
+              // value={this.state.second_mortgage_loan_amount}
               onChange={this.handleChange}
               thousandSeparator={true}
               onValueChange={async (values) => {

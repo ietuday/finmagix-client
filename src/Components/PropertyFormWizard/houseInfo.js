@@ -69,7 +69,6 @@ export class GetStartedHouseInfo extends Component {
     this.handleBathRoomCount = this.handleBathRoomCount.bind(this);
     this.recommended_info = this.recommended_info.bind(this);
     this.checkProperty();
-    
   }
 
   checkProperty() {

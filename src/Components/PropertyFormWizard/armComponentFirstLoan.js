@@ -111,7 +111,7 @@ export class ARMComponentFirstLoan extends Component {
           
           this.setState({
             'property_price': propertyDetail.property_price,
-            'property_downpayment': propertyDetail.downpayment_amount
+            'property_downpayment': propertyDetail.downpayment_amount,
           })
           if (propertyDetail.first_arm && propertyDetail.first_arm.id) {
             this.setState({
