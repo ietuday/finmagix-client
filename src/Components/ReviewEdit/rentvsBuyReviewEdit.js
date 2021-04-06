@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol,MDBIcon  } from "mdbreact";
 import Axios from "axios";
 import { connect } from "react-redux";
 import Header from "../../common/header";
@@ -77,7 +77,7 @@ export class RentvsBuyReviewEdit extends Component {
                 returnBackFromreviewEdit: true
               })}
             >
-              Back
+              <MDBIcon icon="angle-left" />
             </Button>
           </MDBRow>
           <MDBRow className="margin20">

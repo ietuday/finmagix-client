@@ -11,7 +11,8 @@ import Summary from "../PropertyFormWizard/summary";
 import { log_out } from "../redux/actions/signinSignup.js";
 import { logout } from "../../routes/utils";
 import { Redirect, withRouter } from "react-router-dom";
-
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { IconButton } from "@material-ui/core";
 import {
   MDBContainer,
   MDBRow,
@@ -721,7 +722,9 @@ export class StepperComponent extends Component {
                 size="large"
                 onClick={this.handlePreviousForFirstpage}
               >
-                Back
+                  
+                    <ArrowBackIosIcon />
+                 
               </Button>
             ) : (
                 <Button
