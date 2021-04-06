@@ -328,7 +328,6 @@ function CheatSheet(props) {
 
   const xKey = "name";
   const yKey = "Amount";
-
   const maxTextWidthLoan = useMemo(
     () =>
       loandata.reduce((acc, cur) => {

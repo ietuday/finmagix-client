@@ -137,7 +137,6 @@ export class ShowPmiOptionsFirstLoan extends Component {
     }
   };
   async handleChange(event) {
-
     event.persist();
     await this.setState({
       [event.target.name]: event.target.value,

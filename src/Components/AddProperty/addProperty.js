@@ -7,7 +7,6 @@ import { Redirect } from "react-router-dom";
 import "../../css/addProperty.css";
 import { Input } from "antd";
 import MapContainer from "../../common/googleMap";
-
 import NumberSpinner from "../../common/inputNumberSpinner";
 import quss from "../../assets/images/que.png";
 

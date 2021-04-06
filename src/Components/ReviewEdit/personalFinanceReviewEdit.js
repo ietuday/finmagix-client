@@ -8,7 +8,7 @@ import { Redirect,withRouter } from "react-router-dom";
 import "../../css/reviewEdit.css";
 import quss from "../../assets/images/que.png";
 
-
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 export class PersonalFinanceReviewEdit extends Component {
   constructor() {
     super();
@@ -39,7 +39,7 @@ export class PersonalFinanceReviewEdit extends Component {
     }
     return (
       <Fragment>
-        <Header type="Personal Finance" />
+        <Header type="Edit your inputs" />
         <MDBContainer className="review-edit-container">
         <MDBRow className="margin20">
             <Button
@@ -48,7 +48,7 @@ export class PersonalFinanceReviewEdit extends Component {
               onClick={() => this.props.history.push({pathname: '/property-form',
               returnBackFromreviewEdit : true})}
             >
-              Back
+               <ArrowBackIosIcon />
             </Button>
           </MDBRow>
           <MDBRow className="margin20">
@@ -57,14 +57,14 @@ export class PersonalFinanceReviewEdit extends Component {
             </MDBCol>
           </MDBRow>
           <MDBRow className="margin20">
-            <MDBCol md="1" size="1"></MDBCol>
-            <MDBCol md="6" size="6">
+          <MDBCol md="1" size="1"></MDBCol>
+            <MDBCol md="5" size="5">
               <div className="">
-                <span className="get-started-label">Fico Score Range</span>
+                <span className="get-started-label">FICO Score Range</span>
               </div>
             </MDBCol>
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            <MDBCol md="3" size="3">
+           
+            <MDBCol size="6" sm="4" md="4">
               <div className="get-started-label text-center">
                 { PeronalFinanceData.fico_score_range === "A" ? "620-639":
                 PeronalFinanceData.fico_score_range === "B" ? "640-659":

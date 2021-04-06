@@ -129,7 +129,6 @@ export class Dashboard extends Component {
   render() {
     const {
       PropertyListResponse,
-
     } = this.props;
     if (this.state.nextButton) {
       return <Redirect to="/select-modules" />;

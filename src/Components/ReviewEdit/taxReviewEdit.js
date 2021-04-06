@@ -6,8 +6,8 @@ import { Button } from "@material-ui/core";
 import { Redirect,withRouter } from "react-router-dom";
 import "../../css/reviewEdit.css";
 import { get_tax_data } from "../redux/actions/PropertyReport/taxes";
-import quss from "../../assets/images/que.png";
 
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 export class TaxReviewEdit extends Component {
   constructor() {
@@ -40,7 +40,7 @@ export class TaxReviewEdit extends Component {
     }
     return (
       <Fragment>
-        <Header type="Personal Finance" />
+        <Header type="Edit your inputs" />
         <MDBContainer className="review-edit-container">
         <MDBRow className="margin20">
             <Button
@@ -49,7 +49,7 @@ export class TaxReviewEdit extends Component {
               onClick={() => this.props.history.push({pathname: '/property-form',
               returnBackFromreviewEdit : true })}
             >
-              Back
+               <ArrowBackIosIcon />
             </Button>
           </MDBRow>
         <MDBRow className="margin20">
@@ -110,12 +110,7 @@ export class TaxReviewEdit extends Component {
             <MDBCol md="6" size="6">
               <div className="">
                 <span className="get-started-label">Tax deductive investment interest</span>
-                <div className="tooltip-img"><img src={quss} className="tool-img" alt="" />
-            <span className="tooltip-img-text">Investment interest is interest paid on money you borrowed
-             that is allocable to property held for investment. It doesn't include any interest 
-             allocable to passive activities or to securities that generate tax-exempt income.
-              Source: IRS </span>
-            </div>
+           
               </div>
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;

@@ -10,7 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import NumberFormat from "react-number-format";
 import ShowPmiOptionsFirstLoanARM from "./showPmiOptionsFirstLoanARM";
-
 import quss from "../../assets/images/que.png";
 
 
@@ -98,7 +97,6 @@ export class ARMComponentFirstLoan extends Component {
   checkProperty(){
     
     const propertyId = JSON.parse(localStorage.getItem('property_id'))
-
     if(propertyId){
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
         headers: {

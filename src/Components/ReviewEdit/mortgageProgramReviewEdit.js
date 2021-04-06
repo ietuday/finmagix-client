@@ -465,7 +465,6 @@ export class MortgageProgramReviewEdit extends Component {
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
                   </MDBRow>
-
                     <MDBRow className="margin20 marginbottom20">
                       <MDBCol md="12" className="text-center">
                         <Button

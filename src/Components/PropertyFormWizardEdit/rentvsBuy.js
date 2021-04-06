@@ -30,7 +30,6 @@ import quss from "../../assets/images/que.png";
 
 
 
-
 export class RentvsBuy extends Component {
   constructor(props) {
     super(props);

@@ -1,22 +1,24 @@
 
-@import url("../src/sf-webfont/style.css");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
 body {
   margin: 0;
-  font-family: 'SF Pro Display Regular' !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+   font-family: 'Open Sans', sans-serif;
+   font-weight: 300;
+
 }
 
 code {
-  font-family: 'SF Pro Display Regular' !important;
+   font-family: 'Open Sans', sans-serif;
 }
 h2{
-  font-family: 'SF UI Display Heavy' !important;
+  font-family: 'Open Sans', sans-serif;
+  
+  font-weight: 600;
 }
 
 h5{
-  font-family: 'SF Pro Display Regular' !important;
+   font-family: 'Open Sans', sans-serif;
   font-size: 24px !important;
   line-height: 27px !important;
   padding-top: 5px;
