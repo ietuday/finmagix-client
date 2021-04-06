@@ -9,7 +9,6 @@ const PersonalFinanceValidator = {
       },
       {
         test: /^[0-9,]*$/,
-
         message: "only numbers are allowed!",
       },
     ],
@@ -17,7 +16,6 @@ const PersonalFinanceValidator = {
     valid: false,
     state: "",
   },
-
   monthly_debt_payments: {
     rules: [
       {
@@ -52,7 +50,6 @@ const PersonalFinanceValidator = {
     valid: false,
     state: "",
   },
-
   marginal_tax_rate: {
     rules: [
       {
@@ -70,7 +67,6 @@ const PersonalFinanceValidator = {
     valid: false,
     state: "",
   },
-
   monthly_non_housing_expenses: {
     rules: [
       {

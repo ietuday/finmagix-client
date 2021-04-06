@@ -1,4 +1,4 @@
-@import url("../sf-webfont/style.css");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
 
 .css-box{
@@ -23,10 +23,8 @@
   top: 0;
   left: 0;
 }
-.get-started-label {
-  font-weight: 700;
-  font-family: 'SF UI Display Medium' !important;
-}
+
+
 .get-started-short-question {
   margin-right: 50px;
   font-weight: 700;
@@ -37,7 +35,7 @@
 .get-started-container {
   border:1px solid lightgrey;
   /* width:70% !important; */
-  margin-top:140px !important;
+  margin-top:25px !important;
 }
 .address-fields {
   margin-top: 85px;
@@ -152,9 +150,9 @@
     width:100% !important;
     border-bottom: 1px solid black;
   }
-  .fico-score-range-text{
+  /* .fico-score-range-text{
     margin-left:30% !important;
-  }
+  } */
 }
 
 .bottom_line{

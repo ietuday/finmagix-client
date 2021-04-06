@@ -554,7 +554,7 @@ export class StepperComponent extends Component {
                   this.props.history.push("/property-information-review-edit")
                 }
               >
-                Back
+                <MDBIcon icon="angle-left" />
               </Button>
             ) : activeStep === 1 ? (
               <Button
@@ -564,7 +564,7 @@ export class StepperComponent extends Component {
                   this.props.history.push("/personalfinance-review-edit")
                 }
               >
-                Back
+                <MDBIcon icon="angle-left" />
               </Button>
             ) : activeStep === 2 ? (
               <Button
@@ -574,7 +574,7 @@ export class StepperComponent extends Component {
                   this.props.history.push("/mortgage-programs-review-edit")
                 }
               >
-                Back
+                <MDBIcon icon="angle-left" />
               </Button>
             ) : activeStep === 3 ? (
               <Button
@@ -584,7 +584,7 @@ export class StepperComponent extends Component {
                   this.props.history.push("/rent-vs-buy-review-edit")
                 }
               >
-                Back
+                 <MDBIcon icon="angle-left" />
               </Button>
             ) : (
                         <Button
@@ -592,7 +592,7 @@ export class StepperComponent extends Component {
                           size="large"
                           onClick={() => this.props.history.push("/taxes-review-edit")}
                         >
-                          Back
+                          <MDBIcon icon="angle-left" />
                         </Button>
                       )}
 

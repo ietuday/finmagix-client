@@ -83,6 +83,8 @@
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
+    right: 0;
+    
   }
   
   .tooltip-img:hover .tooltip-img-text {

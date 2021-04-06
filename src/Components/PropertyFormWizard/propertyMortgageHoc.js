@@ -19,14 +19,12 @@ import {
   arm_mortgage_update_second,
   frm_mortgage_update_first,
   frm_mortgage_update_second
-
 } from "../redux/actions/PropertyReport/propertyMortgage";
 import { Radio } from "antd";
 import { Button } from "@material-ui/core";
 import SecondLoanScenario from "./secondLoanScenario";
 import FirstLoanScenario from "./firstLoanScenario";
 import { NotificationManager } from "react-notifications";
-
 
 export class PropertyMortgageHOC extends Component {
   constructor(props) {
@@ -1280,7 +1278,6 @@ export class PropertyMortgageHOC extends Component {
     );
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     FRMMortgageCreateResponseFirst: state.FRMMortgageCreateResponseFirst,

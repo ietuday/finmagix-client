@@ -72,7 +72,6 @@ export class DetailedExpenseModal extends Component {
     });
     
   }
-
   render() {
     return (
       <Fragment>

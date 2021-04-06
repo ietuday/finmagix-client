@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol  } from "mdbreact";
 import Axios from "axios";
 import { connect } from "react-redux";
 import Header from "../../common/header";
@@ -9,7 +9,7 @@ import "../../css/reviewEdit.css";
 import { get_rent_vs_buy_data } from "../redux/actions/PropertyReport/rentvsBuy";
 
 import quss from "../../assets/images/que.png";
-
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { config } from "../config/default";
 const { baseURL } = config;
 
@@ -66,7 +66,7 @@ export class RentvsBuyReviewEdit extends Component {
     }
     return (
       <Fragment>
-        <Header type="Personal Finance" />
+        <Header type=" Edit your inputs" />
         <MDBContainer className="review-edit-container">
           <MDBRow className="margin20">
             <Button
@@ -77,7 +77,7 @@ export class RentvsBuyReviewEdit extends Component {
                 returnBackFromreviewEdit: true
               })}
             >
-              Back
+             <ArrowBackIosIcon />
             </Button>
           </MDBRow>
           <MDBRow className="margin20">
@@ -166,7 +166,6 @@ export class RentvsBuyReviewEdit extends Component {
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
-
           <MDBRow className="margin20 marginbottom20">
             <MDBCol md="12" className="text-center">
               <Button

@@ -211,6 +211,7 @@ export class Signin extends Component {
           </MDBRow>
           <MDBRow className="margin20">
             <MDBCol md="6" size="6" className="text-center">
+           
               <GoogleLogin
                 clientId="840928618180-lcnv7e1qlmt52af1eo73ir3pccarj3hg.apps.googleusercontent.com"
                 buttonText="Google"
@@ -225,7 +226,7 @@ export class Signin extends Component {
                 appId="950719508668620"
                 fields="name,email,picture"
                 scope="public_profile,user_friends"
-                textButton="     Facebook"
+                textButton="         Facebook"
                 cssClass="facebook-button"
                 callback={responseFacebook}
                 icon="fab fa-facebook-square"

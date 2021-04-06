@@ -7,7 +7,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import "../../css/reviewEdit.css";
 import { get_property_info } from "../redux/actions/PropertyReport/propertyInfo";
 import quss from "../../assets/images/que.png";
-
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 export class PropertyInformationReviewEdit extends Component {
   constructor() {
@@ -49,7 +49,7 @@ export class PropertyInformationReviewEdit extends Component {
     }
     return (
       <Fragment>
-        <Header type="Personal Finance" />
+        <Header type="Edit your inputs" />
         <MDBContainer className="review-edit-container">
           <MDBRow className="margin20">
             <Button
@@ -62,24 +62,24 @@ export class PropertyInformationReviewEdit extends Component {
                 })
               }
             >
-              Back
+               <ArrowBackIosIcon />
             </Button>
           </MDBRow>
           <MDBRow className="margin20">
-            <MDBCol md="12" className="text-center">
+            <MDBCol md="12" className="text-left">
               <h4 className="summary-title">Property Information</h4>
             </MDBCol>
           </MDBRow>
           <MDBRow className="margin20">
             <MDBCol md="1" size="1"></MDBCol>
-            <MDBCol md="6" size="6">
+            <MDBCol md="5" size="5">
               <div className="">
                 <span className="get-started-label">House Address</span>
               </div>
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+            <MDBCol md="5" size="5">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData ? GetPropertyinfoData.house_address : null}
               </div>
             </MDBCol>
@@ -94,7 +94,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData ? GetPropertyinfoData.house_state : null}
               </div>
             </MDBCol>
@@ -109,7 +109,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData
                   ? GetPropertyinfoData.house_zip_code
                   : null}
@@ -126,7 +126,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData
                   ? GetPropertyinfoData.property_price
                   : null}
@@ -147,7 +147,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData
                   ? GetPropertyinfoData.downpayment_amount
                   : null}
@@ -164,7 +164,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData ? GetPropertyinfoData.stay_duration : null}
               </div>
             </MDBCol>
@@ -179,7 +179,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData
                   ? GetPropertyinfoData.no_of_bedrooms
                   : null}
@@ -196,7 +196,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData
                   ? GetPropertyinfoData.no_of_bathrooms
                   : null}
@@ -213,7 +213,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData
                   ? GetPropertyinfoData.area_of_the_house
                   : null}
@@ -232,9 +232,9 @@ export class PropertyInformationReviewEdit extends Component {
             </div>
               </div>
             </MDBCol>
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData
                   ? GetPropertyinfoData.annual_property_tax
                   : null}
@@ -253,7 +253,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData
                   ? GetPropertyinfoData.annual_home_owner_association_dues
                   : null}
@@ -270,7 +270,7 @@ export class PropertyInformationReviewEdit extends Component {
             </MDBCol>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
-              <div className="get-started-label text-center">
+              <div className="get-started-label text-left">
                 {GetPropertyinfoData
                   ? GetPropertyinfoData.home_owner_insurance
                   : null}
@@ -279,7 +279,7 @@ export class PropertyInformationReviewEdit extends Component {
             <MDBCol md="2"></MDBCol>
           </MDBRow>
           <MDBRow className="margin20 marginbottom20">
-            <MDBCol md="12" className="text-center">
+            <MDBCol md="12" className="text-left">
               <Button
                 variant="outlined"
                 size="large"

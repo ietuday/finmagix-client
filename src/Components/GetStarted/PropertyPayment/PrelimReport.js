@@ -102,7 +102,7 @@ export class PrelimReport extends Component {
               Sign up to get a complete financial review of your home purchase
               customized to your needs
             </h4>
-            <p className="link">(Click here for sample report)</p>
+            {/* <p className="link">(Click here for sample report)</p> */}
             <br />
             <Button
               variant="contained"
