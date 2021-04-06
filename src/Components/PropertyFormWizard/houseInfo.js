@@ -59,7 +59,12 @@ export class GetStartedHouseInfo extends Component {
       annualPropertytaxValidationError: "",
       homeownerInsuranceValidationError: "",
       mapContainer: <MapWithASearchBox />,
-      annualHomeOwnerAssociationValidationError: ""
+      annualHomeOwnerAssociationValidationError: "",
+      no_of_bedroomsValidationError: "",
+      no_of_bathroomsValidationError: "",
+      stay_durationValidationError: "",
+      property_priceValidationError: "",
+      area_of_the_houseValidationError: "",
     };
     // this.validators = HouseInfoValidator;
     //resetValidators(this.validators);
@@ -147,7 +152,68 @@ export class GetStartedHouseInfo extends Component {
     this.selectAddress(JSON.parse(localStorage.getItem("addressData")));
     event.persist();
     let downpayment;
+
+      
+      if(event.target.name === "property_price") {
+        if(parseInt(String(event.target.value).replace(/,/g, "")) > 50000000){
+          this.setState({
+            property_priceValidationError: " *Cannot exceed 5000000"
+          })
+        } else {
+          this.setState({
+            property_priceValidationError: ""
+          })
+        }
+      }
+
+      if(event.target.name === "area_of_the_house") {
+        if(parseInt(String(event.target.value).replace(/,/g, "")) > 100000){
+          this.setState({
+            area_of_the_houseValidationError: " *Cannot exceed 100000"
+          })
+        } else {
+          this.setState({
+            area_of_the_houseValidationError: ""
+          })
+        }
+      }
+
+    if(event.target.name === "no_of_bedrooms") {
+      if(parseInt(String(event.target.value).replace(/%/g, "")) > 50){
+        this.setState({
+          no_of_bedroomsValidationError: " *Cannot exceed 50"
+        })
+      } else {
+        this.setState({
+          no_of_bedroomsValidationError: ""
+        })
+      }
+    }
     
+    if(event.target.name === "no_of_bathrooms") {
+      if(parseInt(String(event.target.value).replace(/%/g, "")) > 50){
+        this.setState({
+          no_of_bathroomsValidationError: " *Cannot exceed 50"
+        })
+      } else {
+        this.setState({
+          no_of_bathroomsValidationError: ""
+        })
+      }
+    }
+
+    // stay_duration
+    if(event.target.name === "stay_duration") {
+      if(parseInt(String(event.target.value).replace(/%/g, "")) > 100){
+        this.setState({
+          stay_durationValidationError: " *Cannot exceed 100"
+        })
+      } else {
+        this.setState({
+          stay_durationValidationError: ""
+        })
+      }
+    }
 
     if (event.target.name === "home_price_growth_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, "")) > 20) {
@@ -429,6 +495,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
+            <span className="validation-text-color">{this.state.property_priceValidationError}</span>
           </MDBCol>
           {/* {displayValidationErrors(this.validators, "property_price")} */}
         </MDBRow>
@@ -538,6 +605,7 @@ export class GetStartedHouseInfo extends Component {
               className="input-class-mdb"
               placeholder="Duration of stay"
               value={this.state.stay_duration}
+              allowNegative= {false}
               name="stay_duration"
               onChange={this.handleChange}
               thousandSeparator={true}
@@ -551,6 +619,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
+            <span className="validation-text-color">{this.state.stay_durationValidationError}</span>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -569,6 +638,7 @@ export class GetStartedHouseInfo extends Component {
               name="no_of_bedrooms"
               value={this.state.no_of_bedrooms}
               onChange={this.handleChange}
+              allowNegative= {false}
               onValueChange={async (values) => {
                 const { value } = values;
                 await this.setState({
@@ -576,6 +646,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
+            <span className="validation-text-color">{this.state.no_of_bedroomsValidationError}</span>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -593,6 +664,7 @@ export class GetStartedHouseInfo extends Component {
               placeholder="Bathroom"
               name="no_of_bathrooms"
               value={this.state.no_of_bathrooms}
+              allowNegative= {false}
               onChange={this.handleChange}
               onValueChange={async (values) => {
                 const { value } = values;
@@ -601,6 +673,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
+            <span className="validation-text-color">{this.state.no_of_bathroomsValidationError}</span>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -632,6 +705,9 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
+            <span className="validation-text-color">
+              {this.state.area_of_the_houseValidationError}
+            </span>
           </MDBCol>
         </MDBRow>
 
