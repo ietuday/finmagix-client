@@ -100,11 +100,16 @@ export class FirstLoanScenario extends Component {
       })
         .then(async (propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0];
+          console.log('property callback', propertyInfo.data.data[0])
+          
           
           this.setState({
             property_price: propertyDetail.property_price,
             property_downpayment: propertyDetail.downpayment_amount,
+            loan_amount: propertyDetail.property_price - propertyDetail.downpayment_amount
           });
+          // this.loanToApply();
+          console.log('loan_amount', this.state)
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             await this.setState({
               mortgage_program_type:
@@ -214,6 +219,7 @@ export class FirstLoanScenario extends Component {
       } else {
         this.setState({
           loan_amount_validation_error: "",
+          loan_amount: event.target.value
         });
       }
     }
@@ -508,6 +514,38 @@ export class FirstLoanScenario extends Component {
       });
     }
   };
+
+  // loanToApply(){
+  //   console.log('in loan to apply')
+  //   console.log('complete state', this.state)
+  //   console.log('loan amount', this.state.loan_amount)
+  //   console.log('property price', this.state.property_price)
+  //   console.log('property downpayment', this.state.property_downpayment)
+  //   var loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
+  //   console.log(loanPlusDown)
+  //   var diff;
+  //   var loanOnePercent;
+  //   var secondMortagePercent;
+  //   diff = this.state.property_price - loanPlusDown;
+  //     console.log(diff)
+  //       if(diff == 0){
+  //         console.log('diff 0')
+  //         loanOnePercent = (this.state.loan_amount/100)*80;
+  //         console.log(loanOnePercent)
+  //         secondMortagePercent = this.state.loan_amount - loanOnePercent
+  //         console.log(secondMortagePercent)
+  //         this.setState({ second_mortgage_loan_amount : secondMortagePercent })
+  //       }
+  
+  //   // console.log(r)
+  // }
+
+  getEventfromSecondMortgage = (r) =>{
+        console.log(r, 'test')
+        this.setState({ 
+          loan_amount: r
+        })
+  }
   render(props) {
     const showInterestOnlyPeriodButton = (
       <MDBRow className="margin20">
@@ -800,6 +838,9 @@ export class FirstLoanScenario extends Component {
               <ShowPmiOptionsFirstLoan
                 loanAmount={this.state.loan_amount}
                 handleDownpaymentData={this.handleDownpaymentData}
+                getEventfromSecondMortgage={this.getEventfromSecondMortgage}
+                second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
+                loan_amount={this.state.loan_amount}
               />
             ) : null}
           </div>

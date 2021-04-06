@@ -109,7 +109,8 @@ export class ARMComponentFirstLoan extends Component {
           
           this.setState({
             'property_price': propertyDetail.property_price,
-            'property_downpayment': propertyDetail.downpayment_amount
+            'property_downpayment': propertyDetail.downpayment_amount,
+            loan_amount: propertyDetail.property_price - propertyDetail.downpayment_amount
           })
           if (propertyDetail.first_arm && propertyDetail.first_arm.id) {
             this.setState({
@@ -604,6 +605,12 @@ if(event.target.name === "points_percentage"){
     }
   };
   componentDidMount() {}
+  getEventfromSecondMortgage = (r) =>{
+    console.log(r, 'test')
+    this.setState({ 
+      loan_amount: r
+    })
+}
   render() {
     const showInterestOnlyPeriodButton = (
       <MDBRow className="margin20">
@@ -1110,6 +1117,8 @@ if(event.target.name === "points_percentage"){
           <ShowPmiOptionsFirstLoanARM
             loanAmount={this.state.loan_amount}
             handleDownpaymentData={this.handleDownpaymentData}
+            getEventfromSecondMortgage={this.getEventfromSecondMortgage}
+            second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
           />
         ) : null}
 
