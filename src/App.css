@@ -331,3 +331,10 @@ input {
   color: #fff;
   background-color: #00aff0 !important;
 }
+
+a{
+  color: #fff !important;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
