@@ -46,8 +46,8 @@ export class GetStarted extends Component {
   render() {
     return (
       <Fragment>
-        <MDBContainer>
-          <MDBRow className="header-row-get-started">
+        <MDBContainer fluid className="header-row-get-started"> 
+          <MDBRow >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <MDBRow className="margin20">
                 <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">

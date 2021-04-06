@@ -1,4 +1,4 @@
-@import url("../sf-webfont/style.css");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
 
 .css-box{
@@ -25,7 +25,7 @@
 }
 .get-started-label {
   font-weight: 700;
-  font-family: 'SF UI Display Medium' !important;
+  font-family: 'Open Sans', sans-serif;
 }
 .get-started-short-question {
   margin-right: 50px;
@@ -37,7 +37,7 @@
 .get-started-container {
   border:1px solid lightgrey;
   /* width:70% !important; */
-  margin-top:140px !important;
+  margin-top:25px !important;
 }
 .address-fields {
   margin-top: 85px;

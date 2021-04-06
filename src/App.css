@@ -1,7 +1,7 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 body {
   margin: 0;
-  font-family: "SF Pro Display Regular" !important;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -9,7 +9,9 @@ body {
 .validation_red{
 color: red;
 }
-
+h2{
+  font-weight: 600 !important;
+}
 .geocode-style{
   background: none padding-box rgb(255, 255, 255);
   display: table-cell;
@@ -26,7 +28,7 @@ color: red;
   height: 40px;
   vertical-align: middle;
   color: rgb(86, 86, 86);
-  /* font-family: Roboto, Arial, sans-serif; */
+  font-family: 'Open Sans', sans-serif;
   font-size:16px !important;
   border-radius: 2px;
   border-top-right-radius: 2px;
@@ -230,13 +232,13 @@ input[type="number"] {
 }
 
 .MuiButton-label {
-  font-family: "SF UI Display Bold" !important;
+font-family: 'Open Sans', sans-serif;
 }
 
 input {
   color: #7f8586 !important;
   font-size: 18px !important;
-  font-family: "SF Pro Display Regular" !important;
+  font-family: 'Open Sans', sans-serif;
   padding: 0 !important;
 }
 
