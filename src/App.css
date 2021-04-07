@@ -333,8 +333,8 @@ input {
 }
 
 a{
-  color: #fff !important;
+  color: #000 !important;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-}
+  }
