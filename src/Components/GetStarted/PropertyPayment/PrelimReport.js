@@ -60,11 +60,11 @@ export class PrelimReport extends Component {
     NotificationManager.success(
       "User Created Successfully ..!!",
       "Success",
-      2000
+      3000
     );
   };
   onFailure = (message) => {
-    NotificationManager.error("data already exists", "error");
+    NotificationManager.error("data already exists", "error", 3000);
   };
   goToSignup = () => {
     this.setState({

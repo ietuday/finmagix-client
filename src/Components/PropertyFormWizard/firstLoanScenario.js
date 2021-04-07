@@ -24,7 +24,7 @@ export class FirstLoanScenario extends Component {
       loan_amount_number: 0,
       loan_term: 30,
       interest: 0,
-      interest_percentage: 0,
+      interest_percentage: 1,
       points: 0,
       closing_costs: 0,
       closing_costs_number: 0,
@@ -240,12 +240,19 @@ export class FirstLoanScenario extends Component {
     if (event.target.name === "interest_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, "")) > 10) {
         this.setState({
-          interestrateValidationError: "Is the interest rate input accurate?",
+          // interestrateValidationError: "Is the interest rate input accurate?",
+          interestrateValidationError: "Interest rate cannot exceed 10%",
         });
       } else {
-        this.setState({
-          interestrateValidationError: "",
-        });
+           if(parseInt(String(event.target.value).replace(/%/g, "")) <= 0) {
+            this.setState({
+              interestrateValidationError: "Interest rate cannot be 0% or less than 0%",
+            });     
+           } else {
+            this.setState({
+              interestrateValidationError: "",
+            });
+           }    
       }
     }
 
@@ -594,7 +601,12 @@ export class FirstLoanScenario extends Component {
         </MDBRow>
         <MDBRow>
           <MDBCol md="12" className="margin20">
-            <h4 className="get-started-label">Mortgage Details (Option 1)</h4>
+            <h4 className="get-started-label">Mortgage Details</h4>
+          </MDBCol>
+        </MDBRow>
+        <MDBRow>
+          <MDBCol md="12" className="margin20">
+            <h4 className="text-center get-started-label">Scenario 1</h4>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -702,6 +714,7 @@ export class FirstLoanScenario extends Component {
                   placeholder="Enter amount here"
                   name="interest_percentage"
                   value={this.state.interest_percentage}
+                  allowNegative={false}
                   onChange={this.handleChange}
                   // thousandSeparator={true}
                   suffix={"%"}

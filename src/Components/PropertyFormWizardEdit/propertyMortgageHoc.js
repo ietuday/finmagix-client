@@ -103,18 +103,18 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error 
           ){
-            NotificationManager.error('error', 'Validation Error')
+            NotificationManager.error('error', 'Validation Error', 3000)
           }else{
             if (Number(this.state.firstLoanScenario.loanamountsecond1)){
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if(checkSum !== Number(this.state.firstLoanScenario.property_price)){
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                  
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
 
               }
             }
@@ -161,18 +161,18 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error 
           ){
-            NotificationManager.error('error', 'Validation Error')
+            NotificationManager.error('error', 'Validation Error', 3000)
           }else{
             if (Number(this.state.firstLoanScenario.loanamountsecond1)){
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if(checkSum !== Number(this.state.firstLoanScenario.property_price)){
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                  
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
 
               }
             }
@@ -264,18 +264,18 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.loan_amount_validation_error 
           
           ){
-            NotificationManager.error('error', 'Validation Error')
+            NotificationManager.error('error', 'Validation Error', 3000)
           }else{
             if (Number(this.state.firstLoanScenario.loanamountsecond1)){
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if(checkSum !== Number(this.state.firstLoanScenario.property_price)){
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                  
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
 
               }
             }
@@ -319,18 +319,18 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error 
           ){
-            NotificationManager.error('error', 'Validation Error')
+            NotificationManager.error('error', 'Validation Error', 3000)
           }else{
             if(Number(this.state.firstLoanScenario.loanamountsecond1)){
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if(checkSum !== Number(this.state.firstLoanScenario.property_price)){
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                  
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
 
               }
             }
@@ -410,7 +410,7 @@ export class PropertyMortgageHOC extends Component {
         } 
         this.setState({ onClick: !this.state.onClick });
   }else {
-      NotificationManager.error("Please Validate Fields", "Error");
+      NotificationManager.error("Please Validate Fields", "Error", 3000);
     }
   };
   goToNextPage = () => {
@@ -451,18 +451,18 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
             this.state.secondLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error')
+              NotificationManager.error('error', 'Validation Error', 3000)
             }else{
               if(Number(this.state.secondLoanScenario.loanamountsecond2)){
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
                 if(checkSum !== Number(this.state.secondLoanScenario.property_price)){
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                    
                 }
               }else{
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
 
               }
             }
@@ -510,18 +510,18 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
             this.state.secondLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error')
+              NotificationManager.error('error', 'Validation Error', 3000)
             }else{
               if(Number(this.state.secondLoanScenario.loanamountsecond2)){
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
                 if(checkSum !== Number(this.state.secondLoanScenario.property_price)){
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                    
                 }
               }else{
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
                 if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
   
                 }
               }
@@ -607,18 +607,18 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
             this.state.secondLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error')
+              NotificationManager.error('error', 'Validation Error', 3000)
             }else{
               if(Number(this.state.secondLoanScenario.loanamountsecond2)){
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond1);
                 if(checkSum !== Number(this.state.secondLoanScenario.property_price)){
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                    
                 }
               }else{
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
                 if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
   
                 }
               }
@@ -663,18 +663,18 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
             this.state.secondLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error')
+              NotificationManager.error('error', 'Validation Error', 3000)
             }else{
               if(Number(this.state.secondLoanScenario.loanamountsecond2)){
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
                 if(checkSum !== Number(this.state.secondLoanScenario.property_price)){
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                    
                 }
               }else{
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
                 if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
   
                 }
               }
@@ -752,7 +752,7 @@ export class PropertyMortgageHOC extends Component {
         }
         this.props.handleContinue();
       } else {
-        NotificationManager.error("Please Validate Fields", "Error");
+        NotificationManager.error("Please Validate Fields", "Error", 3000);
       }
     }else if(this.state.firstLoanScenario && this.state.firstLoanScenario.id){
       if (
@@ -768,18 +768,18 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
             this.state.firstLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error')
+              NotificationManager.error('error', 'Validation Error', 3000)
             }else{
               if(Number(this.state.firstLoanScenario.loanamountsecond1)){
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                 if(checkSum !== Number(this.state.firstLoanScenario.property_price)){
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                    
                 }
               }else{
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                 if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
   
                 }
               }
@@ -826,18 +826,18 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
             this.state.firstLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error')
+              NotificationManager.error('error', 'Validation Error', 3000)
             }else{
               if(Number(this.state.firstLoanScenario.loanamountsecond1)){
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                 if(checkSum !== Number(this.state.firstLoanScenario.property_price)){
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                    
                 }
               }else{
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                 if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
   
                 }
               }
@@ -929,18 +929,18 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario.loan_amount_validation_error 
             
             ){
-              NotificationManager.error('error', 'Validation Error')
+              NotificationManager.error('error', 'Validation Error', 3000)
             }else{
               if(Number(this.state.firstLoanScenario.loanamountsecond1)){
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                 if(checkSum !== Number(this.state.firstLoanScenario.property_price)){
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                    
                 }
               }else{
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                 if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
   
                 }
               }
@@ -983,18 +983,18 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
             this.state.firstLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error')
+              NotificationManager.error('error', 'Validation Error', 3000)
             }else{
               if(Number(this.state.firstLoanScenario.loanamountsecond1)){
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                 if(checkSum !== Number(this.state.firstLoanScenario.property_price)){
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price', 3000)
                    
                 }
               }else{
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                 if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price')
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price', 3000)
   
                 }
               }
@@ -1075,7 +1075,7 @@ export class PropertyMortgageHOC extends Component {
           this.props.handleContinue(); 
           this.setState({ onClick: !this.state.onClick });
     }else {
-        NotificationManager.error("Please Validate Fields", "Error");
+        NotificationManager.error("Please Validate Fields", "Error", 3000);
       }
     }
     

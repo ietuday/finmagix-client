@@ -434,7 +434,12 @@ if (event.target.name === "closing_costs") {
         </MDBRow>
         <MDBRow>
           <MDBCol md="12" className="margin20">
-            <h4 className="get-started-label">Mortgage Details (Option 2)</h4>
+            <h4 className="get-started-label">Mortgage Details</h4>
+          </MDBCol>
+        </MDBRow>
+        <MDBRow>
+          <MDBCol md="12" className="margin20">
+            <h4 className="text-center get-started-label">Scenario 2</h4>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
