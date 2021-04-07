@@ -8,7 +8,7 @@ import "../../css/reviewEdit.css";
 import { get_property_info } from "../redux/actions/PropertyReport/propertyInfo";
 import quss from "../../assets/images/que.png";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-
+import NumberFormat from "react-number-format";
 export class PropertyInformationReviewEdit extends Component {
   constructor() {
     super();
@@ -127,9 +127,10 @@ export class PropertyInformationReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-left">
-                {GetPropertyinfoData
+              <NumberFormat value= {GetPropertyinfoData
                   ? GetPropertyinfoData.property_price
-                  : null}
+                  : null} displayType={'text'} thousandSeparator={true} />
+               
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -148,9 +149,10 @@ export class PropertyInformationReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-left">
-                {GetPropertyinfoData
+              <NumberFormat value=  {GetPropertyinfoData
                   ? GetPropertyinfoData.downpayment_amount
-                  : null}
+                  : null} displayType={'text'} thousandSeparator={true} />
+               
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
