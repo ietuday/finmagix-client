@@ -7,7 +7,7 @@ import { get_personal_finance_data } from "../redux/actions/PropertyReport/perso
 import { Redirect,withRouter } from "react-router-dom";
 import "../../css/reviewEdit.css";
 import quss from "../../assets/images/que.png";
-
+import NumberFormat from "react-number-format";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 export class PersonalFinanceReviewEdit extends Component {
   constructor() {
@@ -94,7 +94,8 @@ export class PersonalFinanceReviewEdit extends Component {
           &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
           <MDBCol md="3" size="3">
             <div className="get-started-label text-center">
-              {PeronalFinanceData.federal_income}
+              {/* {PeronalFinanceData.federal_income} */}
+              <NumberFormat value={PeronalFinanceData.federal_income} displayType={'text'} thousandSeparator={true} />
             </div>
           </MDBCol>
           <MDBCol md="2"></MDBCol>

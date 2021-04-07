@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 import { Redirect, withRouter } from "react-router-dom";
 import "../../css/reviewEdit.css";
 import { get_rent_vs_buy_data } from "../redux/actions/PropertyReport/rentvsBuy";
-
+import NumberFormat from "react-number-format";
 import quss from "../../assets/images/que.png";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { config } from "../config/default";
@@ -100,7 +100,8 @@ export class RentvsBuyReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-                {this.state.propertyDetail && this.state.propertyDetail.rent_vs_buy && this.state.propertyDetail.rent_vs_buy.current_monthly_rent_payment ? this.state.propertyDetail.rent_vs_buy.current_monthly_rent_payment : null}
+              <NumberFormat value= {this.state.propertyDetail && this.state.propertyDetail.rent_vs_buy && this.state.propertyDetail.rent_vs_buy.current_monthly_rent_payment ? this.state.propertyDetail.rent_vs_buy.current_monthly_rent_payment : null} displayType={'text'} thousandSeparator={true} />
+               
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -144,7 +145,7 @@ export class RentvsBuyReviewEdit extends Component {
           &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
           <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-                {this.state.propertyDetail && this.state.propertyDetail.rent_vs_buy && this.state.propertyDetail.rent_vs_buy.rate_of_investment ? this.state.propertyDetail.rent_vs_buy.rate_of_investment : null}
+                {this.state.propertyDetail && this.state.propertyDetail.rent_vs_buy && this.state.propertyDetail.rent_vs_buy.rate_of_investment ? this.state.propertyDetail.rent_vs_buy.rate_of_investment : null}%
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -161,7 +162,7 @@ export class RentvsBuyReviewEdit extends Component {
         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
         <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-                {this.state.propertyDetail && this.state.propertyDetail.rent_vs_buy && this.state.propertyDetail.rent_vs_buy.rentinflation ? this.state.propertyDetail.rent_vs_buy.rentinflation : null}
+                {this.state.propertyDetail && this.state.propertyDetail.rent_vs_buy && this.state.propertyDetail.rent_vs_buy.rentinflation ? this.state.propertyDetail.rent_vs_buy.rentinflation : null}%
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
