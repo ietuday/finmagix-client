@@ -77,14 +77,14 @@ class ForgotPassword extends Component {
             this.setState({
               valid: false,
             });
-            NotificationManager.success("Email Sent", resetData.data.message);
+            NotificationManager.success("Email Sent", resetData.data.message, 3000);
             this.props.history.push('/signin');        
           } else {
-            NotificationManager.error("Error", resetData.data.message);
+            NotificationManager.error("Error", resetData.data.message, 3000);
           }
         })
         .catch((err) => {
-          NotificationManager.error("Error");
+          NotificationManager.error("Error", "Error", 3000);
         });
     }
   };

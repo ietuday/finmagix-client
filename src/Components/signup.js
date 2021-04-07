@@ -90,7 +90,7 @@ export class Signup extends Component {
     if (this.isFormValid()) {
       SignUp(signupDataObject, this.onSuccess, this.onFailure);
     } else {
-      NotificationManager.error("Please validate fields!", "Error");
+      NotificationManager.error("Please validate fields!", "Error", 3000);
     }
   };
   onSuccess = () => {
@@ -98,11 +98,11 @@ export class Signup extends Component {
     NotificationManager.success(
       "User Created Successfully ..!!",
       "Success",
-      2000
+      3000
     );
   };
   onFailure = (message) => {
-    NotificationManager.error("data already exists", "error");
+    NotificationManager.error("data already exists", "error", 3000);
   };
   goToPreviousPage = () => {
     this.setState({

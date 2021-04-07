@@ -75,7 +75,7 @@ export class Signin extends Component {
     if (this.isFormValid()) {
       SignIn(signinDataObject, this.onSuccess, this.onFailure);
     } else {
-      NotificationManager.error("some error", "Error");
+      NotificationManager.error("some error", "Error", 3000);
     }
   };
   signUpGoogleFacebbok(res, type) {
@@ -105,10 +105,10 @@ export class Signin extends Component {
     } else {
       this.props.history.push("/dashboard");
     }
-    NotificationManager.success("Signed in Successfully ..!!", "Success", 2000);
+    NotificationManager.success("Signed in Successfully ..!!", "Success", 3000);
   };
   onFailure = () => {
-    NotificationManager.error("Invalid Credentials", "error");
+    NotificationManager.error("Invalid Credentials", "error", 3000);
   };
   render() {
     if (this.state.backButton) {

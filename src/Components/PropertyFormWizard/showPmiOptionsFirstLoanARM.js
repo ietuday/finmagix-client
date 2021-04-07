@@ -17,8 +17,8 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
     super();
 
     this.state = {
-      pmi_amount: 0,
-      pmi_amount_number: "0",
+      pmi_amount: 1,
+      pmi_amount_number: "1",
       loanamountsecond1_number: "0",
       second_mortgage_loan_amount: "0",
       second_mortgage_loan_term: "0",
@@ -136,7 +136,7 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
         showSecondloanOption: true,
       });
       console.log('clicked')
-      let e = true;
+      // let e = true;
       
       console.log(this.props)
       console.log(this.props.second_mortgage_loan_amount)
@@ -153,11 +153,9 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
         var loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
     console.log(loanPlusDown)
     var diff;
-    var loanOnePercent;
-    var secondMortagePercent;
     diff = this.state.propertyPrice - loanPlusDown;
     console.log(diff)
-    if(diff == 0) {
+    if(diff === 0) {
       loanOnePercent = (this.state.loan_amount/100)*80;
       console.log(loanOnePercent)
       secondMortagePercent = this.state.loan_amount - loanOnePercent
@@ -213,9 +211,15 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
         pmiValidationError: "Shouldn't exceed 3% of first loan amount"
       }) 
     }else{
-      this.setState({
-        pmiValidationError: ""
-      }) 
+      if(parseInt(String(event.target.value).replace(/,/g, '')) <= 0) {
+        this.setState({
+          pmiValidationError: "PMI cannot be 0"
+        })  
+      } else {
+        this.setState({
+          pmiValidationError: ""
+        })
+      }
     }
     
   }

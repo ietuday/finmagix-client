@@ -85,7 +85,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error
         ) {
-          return NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error', 3000)
         } else {
 
           if (
@@ -95,13 +95,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }
@@ -146,7 +146,7 @@ export class PropertyMortgageHOC extends Component {
 
           }
           else {
-            return NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
           }
         }
       } else if (
@@ -162,7 +162,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.floorinterestrateValidationError ||
           this.state.firstLoanScenario.periodCapValidationError 
         ) {
-          return NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error', 3000)
         } else {
             
           if (
@@ -174,13 +174,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }
@@ -250,7 +250,7 @@ export class PropertyMortgageHOC extends Component {
             }
 
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
           }
         }
 
@@ -268,7 +268,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.loan_amount_validation_error
 
         ) {
-          return NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error', 3000)
         } else {
           if (
             this.state.firstLoanScenario['loan_amount']
@@ -276,13 +276,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }
@@ -317,7 +317,7 @@ export class PropertyMortgageHOC extends Component {
 
           }
           else {
-            return NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
           }
         }
 
@@ -334,7 +334,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.floorinterestrateValidationError ||
           this.state.firstLoanScenario.periodCapValidationError
         ) {
-          return NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error', 3000)
         } else {
 
           if (
@@ -346,13 +346,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }else{
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }
@@ -422,13 +422,13 @@ export class PropertyMortgageHOC extends Component {
             }
 
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
           }
         }
       }
       this.setState({ onClick: !this.state.onClick });
     } else {
-      return NotificationManager.error("Please Validate Fields", "Error");
+      return NotificationManager.error("Please Validate Fields", "Error", 3000);
     }
   };
   handleSubmit = async () => {
@@ -457,7 +457,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
           this.state.secondLoanScenario.loan_amount_validation_error
         ) {
-          return NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error', 3000)
         } else {
           if (
              
@@ -466,13 +466,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }else{
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }
@@ -506,7 +506,7 @@ export class PropertyMortgageHOC extends Component {
               FRMMortgageCreateSecond(this.state.secondLoanScenario);
             }
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
           }
         }
       } else if (
@@ -522,7 +522,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.secondLoanScenario.floorinterestrateValidationError ||
           this.state.secondLoanScenario.periodCapValidationError
         ) {
-          return NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error', 3000)
         } else {
 
           if (
@@ -534,13 +534,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }else{
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }
@@ -609,7 +609,7 @@ export class PropertyMortgageHOC extends Component {
               ARMMortgageCreateSecond(this.state.secondLoanScenario);
             }
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
           }
 
         }
@@ -633,13 +633,13 @@ export class PropertyMortgageHOC extends Component {
               if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
                 if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
                 }
               }else{
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
                 if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
   
                 }
               }
@@ -674,7 +674,7 @@ export class PropertyMortgageHOC extends Component {
               }
             
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
           }
         }
       } else if (
@@ -691,7 +691,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.secondLoanScenario.periodCapValidationError
 
         ) {
-          return NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Validation Error', 3000)
         } else {
           if (
             this.state.secondLoanScenario['first_interest_rate_adj_cap'] &&
@@ -702,13 +702,13 @@ export class PropertyMortgageHOC extends Component {
             if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }else{
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
               if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
 
               }
             }
@@ -778,7 +778,7 @@ export class PropertyMortgageHOC extends Component {
             }
 
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields')
+            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
           }
         }
       } else {
@@ -796,7 +796,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
               this.state.firstLoanScenario.loan_amount_validation_error
             ) {
-              return NotificationManager.error('error', 'Validation Error')
+              return NotificationManager.error('error', 'Validation Error', 3000)
             } else {
     
               if (
@@ -806,13 +806,13 @@ export class PropertyMortgageHOC extends Component {
                 if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
     
                   }
                 }else{
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
     
                   }
                 }
@@ -857,7 +857,7 @@ export class PropertyMortgageHOC extends Component {
     
               }
               else {
-                return NotificationManager.error('Validation error', 'Please fill required fields')
+                return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
               }
             }
           } else if (
@@ -872,7 +872,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.floorinterestrateValidationError ||
               this.state.firstLoanScenario.periodCapValidationError
             ) {
-              return NotificationManager.error('error', 'Validation Error')
+              return NotificationManager.error('error', 'Validation Error', 3000)
             } else {
               
               if (
@@ -884,13 +884,13 @@ export class PropertyMortgageHOC extends Component {
                 if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
     
                   }
                 }else{
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
     
                   }
                 }
@@ -960,7 +960,7 @@ export class PropertyMortgageHOC extends Component {
                 }
     
               } else {
-                return NotificationManager.error('Validation error', 'Please fill required fields')
+                return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
               }
             }
     
@@ -978,7 +978,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.loan_amount_validation_error
     
             ) {
-              return NotificationManager.error('error', 'Validation Error')
+              return NotificationManager.error('error', 'Validation Error', 3000)
             } else {
               if (
                 
@@ -987,13 +987,13 @@ export class PropertyMortgageHOC extends Component {
                 if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
     
                   }
                 }else{
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
     
                   }
                 }
@@ -1028,7 +1028,7 @@ export class PropertyMortgageHOC extends Component {
     
               }
               else {
-                return NotificationManager.error('Validation error', 'Please fill required fields')
+                return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
               }
             }
     
@@ -1045,7 +1045,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.floorinterestrateValidationError ||
               this.state.firstLoanScenario.periodCapValidationError
             ) {
-              return NotificationManager.error('error', 'Validation Error')
+              return NotificationManager.error('error', 'Validation Error', 3000)
             } else {
               
               if (
@@ -1057,13 +1057,13 @@ export class PropertyMortgageHOC extends Component {
                 if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
     
                   }
                 }else{
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
                   if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage')
+                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
     
                   }
                 }
@@ -1133,18 +1133,18 @@ export class PropertyMortgageHOC extends Component {
                 }
     
               } else {
-                return NotificationManager.error('Validation error', 'Please fill required fields')
+                return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
               }
             }
           }
           
         } else {
-          return NotificationManager.error("Please Validate Fields", "Error");
+          return NotificationManager.error("Please Validate Fields", "Error", 3000);
         }
       }
       this.props.handleContinue();
     }else {
-      return NotificationManager.error("Please Validate Fields", "Error");
+      return NotificationManager.error("Please Validate Fields", "Error", 3000);
     }
   };
   toggle = () => {
