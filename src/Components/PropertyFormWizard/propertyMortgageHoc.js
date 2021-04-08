@@ -85,7 +85,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error
         ) {
-          return NotificationManager.error('error', 'Validation Error', 3000)
+          return NotificationManager.error('error', 'Please correct your input', 3000)
         } else {
 
           if (
@@ -146,7 +146,7 @@ export class PropertyMortgageHOC extends Component {
 
           }
           else {
-            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+            return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
         }
       } else if (
@@ -162,7 +162,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.floorinterestrateValidationError ||
           this.state.firstLoanScenario.periodCapValidationError 
         ) {
-          return NotificationManager.error('error', 'Validation Error', 3000)
+          return NotificationManager.error('error', 'Please correct your input', 3000)
         } else {
             
           if (
@@ -250,7 +250,7 @@ export class PropertyMortgageHOC extends Component {
             }
 
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+            return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
         }
 
@@ -268,7 +268,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.loan_amount_validation_error
 
         ) {
-          return NotificationManager.error('error', 'Validation Error', 3000)
+          return NotificationManager.error('error', 'Please correct your input', 3000)
         } else {
           if (
             this.state.firstLoanScenario['loan_amount']
@@ -317,7 +317,7 @@ export class PropertyMortgageHOC extends Component {
 
           }
           else {
-            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+            return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
         }
 
@@ -334,7 +334,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.floorinterestrateValidationError ||
           this.state.firstLoanScenario.periodCapValidationError
         ) {
-          return NotificationManager.error('error', 'Validation Error', 3000)
+          return NotificationManager.error('error', 'Please correct your input', 3000)
         } else {
 
           if (
@@ -422,7 +422,7 @@ export class PropertyMortgageHOC extends Component {
             }
 
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+            return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
         }
       }
@@ -457,7 +457,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
           this.state.secondLoanScenario.loan_amount_validation_error
         ) {
-          return NotificationManager.error('error', 'Validation Error', 3000)
+          return NotificationManager.error('error', 'Please correct your input', 3000)
         } else {
           if (
              
@@ -506,7 +506,7 @@ export class PropertyMortgageHOC extends Component {
               FRMMortgageCreateSecond(this.state.secondLoanScenario);
             }
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+            return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
         }
       } else if (
@@ -522,7 +522,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.secondLoanScenario.floorinterestrateValidationError ||
           this.state.secondLoanScenario.periodCapValidationError
         ) {
-          return NotificationManager.error('error', 'Validation Error', 3000)
+          return NotificationManager.error('error', 'Please correct your input', 3000)
         } else {
 
           if (
@@ -609,7 +609,7 @@ export class PropertyMortgageHOC extends Component {
               ARMMortgageCreateSecond(this.state.secondLoanScenario);
             }
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+            return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
 
         }
@@ -622,7 +622,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
           this.state.secondLoanScenario.loan_amount_validation_error
         ) {
-          return NotificationManager.error('error', 'Validation Error')
+          return NotificationManager.error('error', 'Please correct your input')
         } else {
 
 
@@ -674,7 +674,7 @@ export class PropertyMortgageHOC extends Component {
               }
             
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+            return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
         }
       } else if (
@@ -691,7 +691,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.secondLoanScenario.periodCapValidationError
 
         ) {
-          return NotificationManager.error('error', 'Validation Error', 3000)
+          return NotificationManager.error('error', 'Please correct your input', 3000)
         } else {
           if (
             this.state.secondLoanScenario['first_interest_rate_adj_cap'] &&
@@ -778,7 +778,7 @@ export class PropertyMortgageHOC extends Component {
             }
 
           } else {
-            return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+            return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
         }
       } else {
@@ -796,7 +796,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
               this.state.firstLoanScenario.loan_amount_validation_error
             ) {
-              return NotificationManager.error('error', 'Validation Error', 3000)
+              return NotificationManager.error('error', 'Please correct your input', 3000)
             } else {
     
               if (
@@ -857,7 +857,7 @@ export class PropertyMortgageHOC extends Component {
     
               }
               else {
-                return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+                return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
               }
             }
           } else if (
@@ -872,7 +872,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.floorinterestrateValidationError ||
               this.state.firstLoanScenario.periodCapValidationError
             ) {
-              return NotificationManager.error('error', 'Validation Error', 3000)
+              return NotificationManager.error('error', 'Please correct your input', 3000)
             } else {
               
               if (
@@ -960,7 +960,7 @@ export class PropertyMortgageHOC extends Component {
                 }
     
               } else {
-                return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+                return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
               }
             }
     
@@ -978,7 +978,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.loan_amount_validation_error
     
             ) {
-              return NotificationManager.error('error', 'Validation Error', 3000)
+              return NotificationManager.error('error', 'Please correct your input', 3000)
             } else {
               if (
                 
@@ -1028,7 +1028,7 @@ export class PropertyMortgageHOC extends Component {
     
               }
               else {
-                return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+                return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
               }
             }
     
@@ -1045,7 +1045,7 @@ export class PropertyMortgageHOC extends Component {
               this.state.firstLoanScenario.floorinterestrateValidationError ||
               this.state.firstLoanScenario.periodCapValidationError
             ) {
-              return NotificationManager.error('error', 'Validation Error', 3000)
+              return NotificationManager.error('error', 'Please correct your input', 3000)
             } else {
               
               if (
@@ -1133,7 +1133,7 @@ export class PropertyMortgageHOC extends Component {
                 }
     
               } else {
-                return NotificationManager.error('Validation error', 'Please fill required fields', 3000)
+                return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
               }
             }
           }

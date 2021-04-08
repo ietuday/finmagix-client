@@ -103,7 +103,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error 
           ){
-            NotificationManager.error('error', 'Validation Error', 3000)
+            NotificationManager.error('error', 'Please correct your input', 3000)
           }else{
             if (Number(this.state.firstLoanScenario.loanamountsecond1)){
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -161,7 +161,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error 
           ){
-            NotificationManager.error('error', 'Validation Error', 3000)
+            NotificationManager.error('error', 'Please correct your input', 3000)
           }else{
             if (Number(this.state.firstLoanScenario.loanamountsecond1)){
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -264,7 +264,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.loan_amount_validation_error 
           
           ){
-            NotificationManager.error('error', 'Validation Error', 3000)
+            NotificationManager.error('error', 'Please correct your input', 3000)
           }else{
             if (Number(this.state.firstLoanScenario.loanamountsecond1)){
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -319,7 +319,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error 
           ){
-            NotificationManager.error('error', 'Validation Error', 3000)
+            NotificationManager.error('error', 'Please correct your input', 3000)
           }else{
             if(Number(this.state.firstLoanScenario.loanamountsecond1)){
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -451,7 +451,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
             this.state.secondLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error', 3000)
+              NotificationManager.error('error', 'Please correct your input', 3000)
             }else{
               if(Number(this.state.secondLoanScenario.loanamountsecond2)){
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
@@ -510,7 +510,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
             this.state.secondLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error', 3000)
+              NotificationManager.error('error', 'Please correct your input', 3000)
             }else{
               if(Number(this.state.secondLoanScenario.loanamountsecond2)){
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
@@ -607,7 +607,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
             this.state.secondLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error', 3000)
+              NotificationManager.error('error', 'Please correct your input', 3000)
             }else{
               if(Number(this.state.secondLoanScenario.loanamountsecond2)){
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond1);
@@ -663,7 +663,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
             this.state.secondLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error', 3000)
+              NotificationManager.error('error', 'Please correct your input', 3000)
             }else{
               if(Number(this.state.secondLoanScenario.loanamountsecond2)){
                 const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
@@ -768,7 +768,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
             this.state.firstLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error', 3000)
+              NotificationManager.error('error', 'Please correct your input', 3000)
             }else{
               if(Number(this.state.firstLoanScenario.loanamountsecond1)){
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -826,7 +826,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
             this.state.firstLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error', 3000)
+              NotificationManager.error('error', 'Please correct your input', 3000)
             }else{
               if(Number(this.state.firstLoanScenario.loanamountsecond1)){
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -929,7 +929,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario.loan_amount_validation_error 
             
             ){
-              NotificationManager.error('error', 'Validation Error', 3000)
+              NotificationManager.error('error', 'Please correct your input', 3000)
             }else{
               if(Number(this.state.firstLoanScenario.loanamountsecond1)){
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -983,7 +983,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
             this.state.firstLoanScenario.loan_amount_validation_error 
             ){
-              NotificationManager.error('error', 'Validation Error', 3000)
+              NotificationManager.error('error', 'Please correct your input', 3000)
             }else{
               if(Number(this.state.firstLoanScenario.loanamountsecond1)){
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);

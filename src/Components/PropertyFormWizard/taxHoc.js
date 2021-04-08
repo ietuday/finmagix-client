@@ -317,9 +317,8 @@ export class TaxHoc extends Component {
     return (
       <Fragment>
         {localStorage.getItem("is_tax_selected") === "true" ||
-        this.state.radioValue ||
-        Object.entries(JSON.parse(localStorage.getItem("tax_array"))).length !==
-          0 ? (
+        this.state.radioValue
+         ? (
           <div>
             {!this.state.onClick ? (
               <Tax1
