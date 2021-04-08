@@ -375,7 +375,7 @@ export class StepperComponent extends Component {
         this.state.propertyInfo.annualPropertytaxValidationError ||
         this.state.propertyInfo.homeownerInsuranceValidationError
       ) {
-        NotificationManager.error("Error", "Validation Error", 3000);
+        NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
 
         this.setState({ [this.state.propertyInfo.home_price_growth] : String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)})
