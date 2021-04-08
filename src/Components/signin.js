@@ -213,7 +213,7 @@ export class Signin extends Component {
             <MDBCol md="6" size="6" className="text-center">
            
               <GoogleLogin
-                clientId="840928618180-lcnv7e1qlmt52af1eo73ir3pccarj3hg.apps.googleusercontent.com"
+                clientId="1058447115595-ukhhmegumqrk5766437i00qolisqhgqv.apps.googleusercontent.com"
                 buttonText="Google"
                 className="google-button"
                 onSuccess={responseGoogle}
