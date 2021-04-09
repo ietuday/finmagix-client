@@ -58,6 +58,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
       pointsValidationError: "",
       pmiValidationError: "",
       closingCostsValidationError: "",
+      second_mortgage_changed_value: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty()
@@ -129,45 +130,16 @@ export class ShowPmiOptionsFirstLoan extends Component {
       PMIOptions: value,
     });
     if (value === "PMI") {
-      this.setState({
+      await this.setState({
         showSecondloanOption: false,
+        loanamountsecond1 : 0
       });
+      this.props.getEventfromSecondMortgage("PMI")
     } else if (value === "Second Loan") {
-      console.log('clicked')
-      // let e = true;
-      
-      console.log(this.props)
-      console.log(this.props.second_mortgage_loan_amount)
       await this.setState({
         showSecondloanOption: true,
-        loanamountsecond1: this.props.second_mortgage_loan_amount,
-        loan_amount: this.props.loan_amount 
       });
-      console.log(this.state.loan_amount)
-      var loanOnePercent;
-      var secondMortagePercent;
-      console.log(this.state.loan_amount, 'success')
-      console.log(this.state.property_downpayment, 'success')
-        var loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
-    console.log(loanPlusDown)
-    var diff;
-    diff = this.state.propertyPrice - loanPlusDown;
-    console.log(diff)
-    if(diff === 0) {
-      loanOnePercent = (this.state.loan_amount/100)*80;
-      console.log(loanOnePercent)
-      secondMortagePercent = this.state.loan_amount - loanOnePercent
-      console.log(secondMortagePercent)
-      this.setState({
-        loanamountsecond1: secondMortagePercent
-      })
-     this.props.getEventfromSecondMortgage(loanOnePercent) 
-    } else {
-      console.log(diff)
-      this.setState({
-        loanamountsecond1: diff
-      })
-    }
+      this.props.getEventfromSecondMortgage("SecondMortgage") 
     }
   };
   async handleChange(event) {
@@ -258,8 +230,18 @@ export class ShowPmiOptionsFirstLoan extends Component {
 
     this.props.handleDownpaymentData(this.state);
   }
-  componentDidMount() {}
+  componentDidMount() {
+    console.log('in componentDidMount')
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.second_mortgage_changed_value){
+      this.setState({
+        loanamountsecond1: nextProps.second_mortgage_changed_value
+      })
+    }
+  }
   render() {
+    console.log(this.props)
     const showPmiAmount = (
       <MDBRow className="margin20">
         <MDBCol md="12">

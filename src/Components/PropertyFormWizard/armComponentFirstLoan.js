@@ -86,7 +86,10 @@ export class ARMComponentFirstLoan extends Component {
       interestOnlyPeriodValidationError:"",
       property_downpayment: "",
       pointsValidationError: "",
-      floorinterestrateCheckValidationError: ""
+      floorinterestrateCheckValidationError: "",
+      second_mortgage_changed_value: "",
+      inPmiStatus: false,
+      inSecondMortgage: false,
     };
     // this.validators = ArmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -188,6 +191,38 @@ export class ARMComponentFirstLoan extends Component {
         });
     }
   }
+
+  handleLoanAmount = async(e,r) => {
+    let loanOnePercent;
+    let secondMortagePercent;
+    let loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
+  
+  let diff;
+  diff = this.state.property_price - loanPlusDown;
+  if(this.state.inPmiStatus) {
+    console.log('in pmi condition')
+    this.setState({
+      loan_amount: this.state.loan_amount,
+      second_mortgage_changed_value: 0
+    })
+  } 
+  if(this.state.inSecondMortgage){
+    console.log('not in pmi condition')
+    if(diff === 0) {
+      loanOnePercent = (this.state.loan_amount/100)*80;
+        secondMortagePercent = this.state.loan_amount - loanOnePercent
+        this.setState({
+          loan_amount: loanOnePercent,
+          second_mortgage_changed_value: secondMortagePercent
+        })
+    } else {
+      console.log(diff, 'in else')
+      this.setState({
+        second_mortgage_changed_value: diff
+      })
+    }
+  }
+}
 
   async handleChange(event) {
     // const { name } = event.target;
@@ -607,9 +642,19 @@ if(event.target.name === "points_percentage"){
   componentDidMount() {}
   getEventfromSecondMortgage = (r) =>{
     console.log(r, 'test')
-    this.setState({ 
-      loan_amount: r
-    })
+    if(r === "PMI"){
+      this.setState({
+        inPmiStatus: true,
+        inSecondMortgage: false
+      })
+    }
+    if(r === "SecondMortgage"){
+      this.setState({
+        inSecondMortgage: true,
+        inPmiStatus: false
+      })
+    }
+    this.handleLoanAmount(r)
 }
   render() {
     const showInterestOnlyPeriodButton = (
@@ -664,6 +709,7 @@ if(event.target.name === "points_percentage"){
               name="loan_amount"
               value={this.state.loan_amount}
               onChange={this.handleChange}
+              onBlur={this.handleLoanAmount}
               thousandSeparator={true}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
@@ -1118,7 +1164,8 @@ if(event.target.name === "points_percentage"){
             loanAmount={this.state.loan_amount}
             handleDownpaymentData={this.handleDownpaymentData}
             getEventfromSecondMortgage={this.getEventfromSecondMortgage}
-            second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
+            // second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
+            second_mortgage_changed_value={this.state.second_mortgage_changed_value}
           />
         ) : null}
 

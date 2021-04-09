@@ -87,6 +87,9 @@ export class ARMComponentSecondLoan extends Component {
       property_downpayment: "",
       pointsValidationError: "",
       floorinterestrateCheckValidationError: "",
+      second_mortgage_changed_value: "",
+      inPmiStatus: false,
+      inSecondMortgage: false,
     };
     // this.validators = ArmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -220,6 +223,36 @@ export class ARMComponentSecondLoan extends Component {
         .catch((err) => {});
     }
   }
+
+
+  handleLoanAmount = async(e,r) => {
+    let loanOnePercent;
+    let secondMortagePercent;
+    let loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
+  
+  let diff;
+  diff = this.state.property_price - loanPlusDown;
+  if(this.state.inPmiStatus) {
+    this.setState({
+      loan_amount: this.state.loan_amount,
+      second_mortgage_changed_value: 0
+    })
+  } 
+  if(this.state.inSecondMortgage){
+    if(diff === 0) {
+      loanOnePercent = (this.state.loan_amount/100)*80;
+        secondMortagePercent = this.state.loan_amount - loanOnePercent
+        this.setState({
+          loan_amount: loanOnePercent,
+          second_mortgage_changed_value: secondMortagePercent
+        })
+    } else {
+      this.setState({
+        second_mortgage_changed_value: diff
+      })
+    }
+  }
+}  
 
   async handleChange(event) {
     // const { name } = event.target;
@@ -655,9 +688,19 @@ export class ARMComponentSecondLoan extends Component {
   componentDidMount() {}
   getEventfromSecondMortgage = (r) =>{
     console.log(r, 'test')
-    this.setState({ 
-      loan_amount: r
-    })
+    if(r === "PMI"){
+      this.setState({
+        inPmiStatus: true,
+        inSecondMortgage: false
+      })
+    }
+    if(r === "SecondMortgage"){
+      this.setState({
+        inSecondMortgage: true,
+        inPmiStatus: false
+      })
+    }
+    this.handleLoanAmount(r)
 }
   render() {
     const showInterestOnlyPeriodButton = (
@@ -727,6 +770,7 @@ export class ARMComponentSecondLoan extends Component {
               name="loan_amount"
               value={this.state.loan_amount}
               onChange={this.handleChange}
+              onBlur={this.handleLoanAmount}
               thousandSeparator={true}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
@@ -1157,7 +1201,8 @@ export class ARMComponentSecondLoan extends Component {
             loanAmount={this.state.loan_amount}
             handleDownpaymentData={this.handleDownpaymentData}
             getEventfromSecondMortgage={this.getEventfromSecondMortgage}
-            second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
+            // second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
+            second_mortgage_changed_value={this.state.second_mortgage_changed_value}
           />
         ) : null}
       </Fragment>
