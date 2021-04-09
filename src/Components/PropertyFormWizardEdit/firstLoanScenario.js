@@ -558,7 +558,7 @@ export class FirstLoanScenario extends Component {
         </MDBRow>
         <MDBRow>
           <MDBCol md="12" className="margin20">
-            <h4 className="get-started-label">Mortgage Details (Option 1)</h4>
+            <h4 className="get-started-label">Mortgage Details (Scenario 1)</h4>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
