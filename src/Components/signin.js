@@ -223,7 +223,7 @@ export class Signin extends Component {
             </MDBCol>
             <MDBCol md="6" size="6" className="text-center">
               <FacebookLogin
-                appId="950719508668620"
+                appId="354525859322257"
                 fields="name,email,picture"
                 scope="public_profile,user_friends"
                 textButton="         Facebook"

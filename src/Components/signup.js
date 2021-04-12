@@ -258,7 +258,7 @@ export class Signup extends Component {
             /> */}
 
               <FacebookLogin
-                appId="950719508668620"
+                appId="354525859322257"
                 fields="name,email,picture"
                 scope="public_profile,user_friends"
                 textButton="     Facebook"

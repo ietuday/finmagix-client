@@ -739,7 +739,7 @@ export class ARMComponentSecondLoan extends Component {
               });
             }}
           />
-          <span className="validation-text-color">
+          <span className="validation_red">
             {this.state.interestOnlyPeriodValidationError}
           </span>
         </MDBCol>
@@ -858,7 +858,7 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.interestrateValidationError}
             </span>
           </MDBCol>
@@ -906,7 +906,7 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.rateAdjustmentCapValidationError}
             </span>
           </MDBCol>
@@ -991,7 +991,7 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.floorinterestrateValidationError}
               {this.state.floorinterestrateCheckValidationError}
             </span>
@@ -1037,7 +1037,7 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.periodCapValidationError}
             </span>
           </MDBCol>
@@ -1118,7 +1118,7 @@ export class ARMComponentSecondLoan extends Component {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                   {this.state.pointsValidationError}
                 </span>
               </MDBCol>
@@ -1168,7 +1168,7 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.closingCostsValidationError}
             </span>
           </MDBCol>

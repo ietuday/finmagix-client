@@ -269,7 +269,7 @@ if (event.target.name === "second_mortgage_closing_costs") {
                 });
               }}
             />
-             <span className="validation-text-color">
+             <span className="validation_red">
 
              {this.state.pmiValidationError}
              </span>
@@ -313,7 +313,7 @@ if (event.target.name === "second_mortgage_closing_costs") {
                 });
               }}
             />
-              <span className="validation-text-color">
+              <span className="validation_red">
               {this.state.secondloanAmountValidationError}
               </span>
            
@@ -371,7 +371,7 @@ if (event.target.name === "second_mortgage_closing_costs") {
                 });
               }}
             />
-              <span className="validation-text-color">
+              <span className="validation_red">
               {this.state.interestrateValidationError}
               </span>
             
@@ -415,7 +415,7 @@ if (event.target.name === "second_mortgage_closing_costs") {
                 });
               }}
             />
-              <span className="validation-text-color">
+              <span className="validation_red">
               {this.state.pointsValidationError}  
               </span>
              
@@ -463,7 +463,7 @@ if (event.target.name === "second_mortgage_closing_costs") {
                 });
               }}
             />
-             <span className="validation-text-color">
+             <span className="validation_red">
              {this.state.closingCostsValidationError}
              </span>
 

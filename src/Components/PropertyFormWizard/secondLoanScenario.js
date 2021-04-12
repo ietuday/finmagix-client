@@ -458,7 +458,7 @@ if (event.target.name === "closing_costs") {
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
-           <span className="validation-text-color">
+           <span className="validation_red">
            {this.state.interestOnlyPeriodValidationError}
            </span>
        
@@ -546,7 +546,7 @@ if (event.target.name === "closing_costs") {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                 {this.state.loan_amount_validation_error}
                 </span>
                
@@ -610,7 +610,7 @@ if (event.target.name === "closing_costs") {
                     });
                   }}
                 />
-                 <span className="validation-text-color">
+                 <span className="validation_red">
                  {this.state.interestrateValidationError}
                  </span>
               
@@ -656,7 +656,7 @@ if (event.target.name === "closing_costs") {
                     });
                   }}
                 />
-                  <span className="validation-text-color">
+                  <span className="validation_red">
                   {this.state.pointsValidationError}  
                   </span>
              
@@ -705,7 +705,7 @@ if (event.target.name === "closing_costs") {
                     });
                   }}
                 />
-                  <span className="validation-text-color">
+                  <span className="validation_red">
                   {this.state.closingCostsValidationError}
                   </span>
                

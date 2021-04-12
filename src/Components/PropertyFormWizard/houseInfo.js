@@ -157,7 +157,7 @@ export class GetStartedHouseInfo extends Component {
       if(event.target.name === "property_price") {
         if(parseInt(String(event.target.value).replace(/,/g, "")) > 50000000){
           this.setState({
-            property_priceValidationError: " *Cannot exceed 5000000"
+            property_priceValidationError: " *Cannot exceed 50,000,000"
           })
         } else {
           this.setState({
@@ -229,7 +229,7 @@ export class GetStartedHouseInfo extends Component {
 
     if (event.target.name === "downpayment_amount") {
       if (
-        this.state.property_price <
+        this.state.property_price <=
         parseInt(String(event.target.value).replace(/,/g, ""))
       ) {
         this.setState({
@@ -495,7 +495,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">{this.state.property_priceValidationError}</span>
+            <span className="validation_red">{this.state.property_priceValidationError}</span>
           </MDBCol>
           {/* {displayValidationErrors(this.validators, "property_price")} */}
         </MDBRow>
@@ -574,7 +574,7 @@ export class GetStartedHouseInfo extends Component {
               value={this.state.downpayment_amount}
               onChange={this.handleChange}
             /> */}
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.downpaymentnewValidationError}
             </span>
 
@@ -619,7 +619,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">{this.state.stay_durationValidationError}</span>
+            <span className="validation_red">{this.state.stay_durationValidationError}</span>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -646,7 +646,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">{this.state.no_of_bedroomsValidationError}</span>
+            <span className="validation_red">{this.state.no_of_bedroomsValidationError}</span>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -673,7 +673,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">{this.state.no_of_bathroomsValidationError}</span>
+            <span className="validation_red">{this.state.no_of_bathroomsValidationError}</span>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -705,7 +705,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.area_of_the_houseValidationError}
             </span>
           </MDBCol>
@@ -746,7 +746,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.annualPropertytaxValidationError}
             </span>
 
@@ -792,7 +792,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.annualHomeOwnerAssociationValidationError}
             </span>
 
@@ -834,7 +834,7 @@ export class GetStartedHouseInfo extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
               {this.state.homeownerInsuranceValidationError}
             </span>
 
