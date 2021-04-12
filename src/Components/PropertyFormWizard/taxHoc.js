@@ -282,7 +282,7 @@ export class TaxHoc extends Component {
         disableBackdrop={true}
       >
         <MDBModalHeader toggle={this.toggle}>
-        <div><h4>Rent Vs Buy</h4></div>
+        <div><h4>Taxes</h4></div>
          
        
         </MDBModalHeader>
@@ -291,8 +291,7 @@ export class TaxHoc extends Component {
           <MDBModalBody>
 
           <p>
-          You haven't opted for this module. <br></br>Do you still want to fill Rent vs
-            Buy module? {" "}
+          You haven't opted for this module. <br></br>Do you still want to fill Taxes module? {" "}
           </p>
             <Radio.Group
               onChange={this.onRadioChange}

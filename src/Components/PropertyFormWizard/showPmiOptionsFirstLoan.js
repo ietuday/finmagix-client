@@ -272,7 +272,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
               });
             }}
           />
-           <span className="validation-text-color">
+           <span className="validation_red">
            {this.state.pmiValidationError}
            </span>
         
@@ -318,7 +318,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
                 });
               }}
             />
-             <span className="validation-text-color">
+             <span className="validation_red">
              {this.state.loanAmountValidationError}
              </span>
          
@@ -378,7 +378,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
             {this.state.interestrateValidationError}
             </span>
          
@@ -422,7 +422,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
                 });
               }}
             />
-              <span className="validation-text-color">
+              <span className="validation_red">
               {this.state.pointsValidationError}  
               </span>
           
@@ -470,7 +470,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
                 });
               }}
             />
-              <span className="validation-text-color">
+              <span className="validation_red">
               {this.state.closingCostsValidationError}
               </span>
           

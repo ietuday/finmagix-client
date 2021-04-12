@@ -676,7 +676,7 @@ if(event.target.name === "points_percentage"){
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
-           <span className="validation-text-color">
+           <span className="validation_red">
            {this.state.interestOnlyPeriodValidationError}
            </span>
         
@@ -721,7 +721,7 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
-               <span className="validation-text-color">
+               <span className="validation_red">
                {this.state.loan_amount_validation_error}
                </span>
           
@@ -803,7 +803,7 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
             {this.state.interestrateValidationError}
             </span>
             
@@ -854,7 +854,7 @@ if(event.target.name === "points_percentage"){
               }}
             />
 
-<span className="validation-text-color">
+<span className="validation_red">
   {this.state.rateAdjustmentCapValidationError}
 </span>     
 
@@ -902,7 +902,7 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
-             <span className="validation-text-color">
+             <span className="validation_red">
              {this.state.ceilinginterestrateValidationError}
              </span>
            
@@ -946,7 +946,7 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
-             <span className="validation-text-color">
+             <span className="validation_red">
              {this.state.floorinterestrateValidationError}
              {this.state.floorinterestrateCheckValidationError}
              </span>
@@ -994,7 +994,7 @@ if(event.target.name === "points_percentage"){
                 
               }}
             />
-             <span className="validation-text-color">
+             <span className="validation_red">
              {this.state.periodCapValidationError}
              </span>
           
@@ -1039,7 +1039,7 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
- <span className="validation-text-color">
+ <span className="validation_red">
  {this.state.rateAddValidationError}
  </span>
           
@@ -1081,7 +1081,7 @@ if(event.target.name === "points_percentage"){
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                 {this.state.pointsValidationError}
                 </span>
                 
@@ -1130,7 +1130,7 @@ if(event.target.name === "points_percentage"){
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
             {this.state.closingCostsValidationError}
             </span>
           

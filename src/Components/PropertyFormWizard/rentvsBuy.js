@@ -249,7 +249,7 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                   {this.state.current_monthly_rent_payment_ValidationError}
                 </span>
               </MDBCol>
@@ -296,7 +296,7 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
-                 <span className="validation-text-color">
+                 <span className="validation_red">
                  {this.state.annual_rent_insuranceValidationError}
                  </span>
                
@@ -343,7 +343,7 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                   {this.state.rate_of_investment_percentage_ValidationError}
                 </span>
               </MDBCol>
@@ -388,7 +388,7 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                   {this.state.rentinflation_percentage_ValidationError}
                 </span>
               </MDBCol>
