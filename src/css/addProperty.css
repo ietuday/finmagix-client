@@ -71,8 +71,8 @@
   
   .tooltip-img .tooltip-img-text {
     visibility: hidden;
-    max-width:100%;
-    min-width: 200px;
+    
+    width: 200px;
     background-color: black;
     color: #fff;
     text-align: center;
@@ -83,7 +83,9 @@
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    right:0;
     
   }
   
