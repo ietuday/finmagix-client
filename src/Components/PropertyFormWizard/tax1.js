@@ -562,11 +562,20 @@ export class Tax1 extends Component {
       <Fragment>
         <div>
           <MDBRow className="margin20 marginbottom20">
-            <MDBCol md="12">
+            <MDBCol md="12" className="text-center">
               <span className="get-started-label">
-                Do you want to provide detailed itemized deduction?
+                <h4>Taxes</h4>
+                Do you want to provide detailed itemized deduction? 
               </span>
-              <br />
+              <div className="tooltip-img">
+              <img src={quss} className="tool-img" alt="" />
+              <span className="tooltip-img-text">
+              Your inputs will help us model
+the tax impact of your home purchase more accurately’
+
+              </span>
+            </div>
+              <br /><br /><br />
               <ToggleButtonGroup
                 name="select_your_filling_status"
                 value={this.state.detailed_tax_expenses}
