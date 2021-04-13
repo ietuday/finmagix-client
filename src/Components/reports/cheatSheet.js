@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Header from "../../common/header";
 import { withRouter, Link } from "react-router-dom";
+import NumberFormat from "react-number-format";
 import "../../css/reports.css";
 // import "./nerdReportDetails.css";
 import {
@@ -467,10 +468,50 @@ function CheatSheet(props) {
               <MDBRow className="margin20">
                 <MDBCol md="9" size="10">
                   <Typography variant="h5" component="h2">
-                    Mortgage Program
+                
+                  <h6 class="CardTitle">  Home Information</h6>
                   </Typography>
                 </MDBCol>
               </MDBRow>
+              <MDBRow>
+                              <MDBCol md="8">
+                                <Typography color="textSecondary">
+                                  Property Price
+                                </Typography>
+                              </MDBCol>
+                              <MDBCol md="3">
+                                <Typography variant="body2" component="p">
+                                <NumberFormat value={singlePropertyResponse.property_price} displayType={'text'} thousandSeparator={true} />
+                                
+                                </Typography>
+                              </MDBCol>
+                            </MDBRow>
+                            <MDBRow>
+                              <MDBCol md="8">
+                                <Typography color="textSecondary">
+                                Downpayment
+                                </Typography>
+                              </MDBCol>
+                              <MDBCol md="3">
+                                <Typography variant="body2" component="p">
+                                <NumberFormat value={singlePropertyResponse.downpayment_amount} displayType={'text'} thousandSeparator={true} />
+                                
+                                </Typography>
+                              </MDBCol>
+                            </MDBRow>
+                            <MDBRow>
+                              <MDBCol md="8">
+                                <Typography color="textSecondary">
+                                Duration of stay
+                                </Typography>
+                              </MDBCol>
+                              <MDBCol md="3">
+                                <Typography variant="body2" component="p">
+                                <NumberFormat value={singlePropertyResponse.stay_duration} displayType={'text'} thousandSeparator={true} />
+                                
+                                </Typography>
+                              </MDBCol>
+                            </MDBRow>
             </CardContent>
             {/* </Card> */}
           </MDBCol>

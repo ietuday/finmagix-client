@@ -53,6 +53,16 @@ export class Summary extends Component {
     return (
       <Fragment>
         <MDBContainer>
+        <MDBRow>
+            <MDBCol>
+              <div className="text-center">
+                <h1 className="report-text">Well done,</h1>
+                <h4 className="get-started-label report-text">
+                  Your report is ready
+                </h4>
+              </div>
+            </MDBCol>
+          </MDBRow>
           <MDBRow className="margin20">
             <MDBCol>
               <div className="text-center">
@@ -64,23 +74,15 @@ export class Summary extends Component {
                 
               </div>
               <div className="text-center">
-              <Button size="medium" className="btn btn-primary btn-sm waves-effect waves-light" onClick={this.showReports}>
-                  Show Report
+              <Button size="large" className="btn btn-primary waves-effect waves-light" onClick={this.showReports}>
+              Show Reports
               </Button>
+         
               </div>
 
             </MDBCol>
           </MDBRow>
-          <MDBRow>
-            <MDBCol>
-              <div className="text-center">
-                <h1 className="report-text">Well done,</h1>
-                <h4 className="get-started-label report-text">
-                  Your report is ready
-                </h4>
-              </div>
-            </MDBCol>
-          </MDBRow>
+      
           <MDBRow className="margin20">
             <MDBCol>
               <div className="text-center">
