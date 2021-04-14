@@ -5,7 +5,7 @@
   border-bottom: 1px solid black;
 }
 .space-left{
-  padding-left:60px ;
+  padding-left:86px ;
 }
 .space-top{
   padding-top:50px ;
@@ -119,16 +119,31 @@ padding-bottom:20px ;
 .img-pos{
   width: 50px;
   position: absolute;
-  margin: -14px 0 0 0;
+  margin: -14px 0 0 -165px;
 }
 .img-pos5{
   width: 50px;
   position: absolute;
-  margin: -0px 0 0 0px;
+  margin: -0px 0 0 -165px;
 }
 
 .img-header{
   width: 50px;
   position: absolute;
   margin: -8px 0px 0 -57px;
+}
+.rent-vs{
+  margin-left: -70px;
+}
+
+.finance-Summary{
+  margin-left: -25px;
+}
+
+.mortgage-Summary{
+  margin-left: -32px;
+}
+
+.textd{
+  margin-left: -33px;
 }
