@@ -87,11 +87,11 @@ export class Dashboard extends Component {
           const { GetPropertyListing } = this.props;
 
           GetPropertyListing();
-          NotificationManager.success("Deleted Succesfully", "Property");
+          NotificationManager.success("Deleted Succesfully", "Property", 3000);
           this.toggle();
         })
         .catch((err) => {
-          NotificationManager.error("Error");
+          NotificationManager.error("Error", "Error", 3000);
           this.toggle();
         });
     } else {

@@ -375,7 +375,7 @@ export class StepperComponent extends Component {
         this.state.propertyInfo.annualPropertytaxValidationError ||
         this.state.propertyInfo.homeownerInsuranceValidationError
       ) {
-        NotificationManager.error("Error", "");
+        NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
 
         this.setState({ [this.state.propertyInfo.home_price_growth] : String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)})
@@ -415,7 +415,7 @@ export class StepperComponent extends Component {
         this.setState({
           activeStep: this.state.activeStep,
         });
-        NotificationManager.error("Please Validate Fields", "Error");
+        NotificationManager.error("Please Validate Fields", "Error", 3000);
       } else {
         this.setState({ [this.state.RentvsBuy.rate_of_investment] : String(
           Number(this.state.RentvsBuy["rate_of_investment"]) / 100

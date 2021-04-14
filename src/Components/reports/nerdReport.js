@@ -345,7 +345,8 @@ export class NerdReport extends Component {
                        Equity projections
                       </Typography>
                       <Typography variant="body2" component="p">
-                        Equility in the house or house price
+                        {/* Equility in the house or house price */}
+                        Project equity in your home by the end of your stay
                       </Typography>
                     </MDBCol>
                     <MDBCol md="2" size="2">

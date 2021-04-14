@@ -40,7 +40,10 @@ export class RentvsBuy extends Component {
       annual_rent_insurance_number: 0,
       is_update:false,
       id: "",
-      annual_rent_insuranceValidationError: ""
+      annual_rent_insuranceValidationError: "",
+      current_monthly_rent_payment_ValidationError: "",
+      rate_of_investment_percentage_ValidationError: "",
+      rentinflation_percentage_ValidationError: "",
     };
     // this.validators = RentvsBuyValidator;
     // resetValidators(this.validators);
@@ -98,6 +101,41 @@ export class RentvsBuy extends Component {
       }
     }
 
+    if (e.target.name === "current_monthly_rent_payment") {
+       if(parseInt(String(e.target.value).replace(/,/g, '')) > 50000) {
+           this.setState({
+             current_monthly_rent_payment_ValidationError: "Cannot exceed 50000"
+           })
+       } else {
+           this.setState({
+             current_monthly_rent_payment_ValidationError: ""
+           })
+       }
+    }
+
+    if (e.target.name === "rate_of_investment_percentage") {
+      if(parseInt(String(e.target.value).replace(/%/g, '')) > 20) {
+          this.setState({
+            rate_of_investment_percentage_ValidationError: "Cannot exceed 20%"
+          })
+      } else {
+          this.setState({
+            rate_of_investment_percentage_ValidationError: ""
+          })
+      }
+   }
+
+   if (e.target.name === "rentinflation_percentage") {
+    if(parseInt(String(e.target.value).replace(/%/g, '')) > 20) {
+        this.setState({
+          rentinflation_percentage_ValidationError: "Cannot exceed 20%"
+        })
+    } else {
+        this.setState({
+          rentinflation_percentage_ValidationError: ""
+        })
+    }
+ }
 
     await this.setState({
       [e.target.name]: e.target.value,
@@ -200,6 +238,7 @@ export class RentvsBuy extends Component {
                   value={this.state.current_monthly_rent_payment}
                   onChange={this.handleChange}
                   thousandSeparator={true}
+                  allowNegative={false}
                   onValueChange={async (values) => {
                     const { formattedValue, value } = values;
                     await this.setState({
@@ -210,6 +249,9 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
+                <span className="validation_red">
+                  {this.state.current_monthly_rent_payment_ValidationError}
+                </span>
               </MDBCol>
             </MDBRow>
             {/* {displayValidationErrors(
@@ -254,7 +296,7 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
-                 <span className="validation-text-color">
+                 <span className="validation_red">
                  {this.state.annual_rent_insuranceValidationError}
                  </span>
                
@@ -287,6 +329,7 @@ export class RentvsBuy extends Component {
                   placeholder="Enter amount here %"
                   name="rate_of_investment_percentage"
                   value={this.state.rate_of_investment_percentage}
+                  allowNegative={false}
                   onChange={this.handleChange}
                   // thousandSeparator={true}
                   suffix={"%"}
@@ -300,6 +343,9 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
+                <span className="validation_red">
+                  {this.state.rate_of_investment_percentage_ValidationError}
+                </span>
               </MDBCol>
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "rate_of_investment")} */}
@@ -328,6 +374,7 @@ export class RentvsBuy extends Component {
                   placeholder="Enter amount here %"
                   name="rentinflation_percentage"
                   value={this.state.rentinflation_percentage}
+                  allowNegative={false}
                   onChange={this.handleChange}
                   // thousandSeparator={true}
                   suffix={"%"}
@@ -341,6 +388,9 @@ export class RentvsBuy extends Component {
                     });
                   }}
                 />
+                <span className="validation_red">
+                  {this.state.rentinflation_percentage_ValidationError}
+                </span>
               </MDBCol>
               {/* {displayValidationErrors(this.validators, "rentinflation")} */}
             </MDBRow>

@@ -68,7 +68,10 @@ export class SecondLoanScenario extends Component {
       property_price: "",
       loan_amount_validation_error: "",
       closingCostsValidationError:"",
-      property_downpayment: ""
+      property_downpayment: "",
+      second_mortgage_changed_value: "",
+      inPmiStatus: false,
+      inSecondMortgage: false,
     };
     // this.validators = FrmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -171,6 +174,36 @@ export class SecondLoanScenario extends Component {
       armValidationErrors: error,
     });
   };
+
+  handleLoanAmount = async(e,r) => {
+    let loanOnePercent;
+    let secondMortagePercent;
+    let loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
+  
+  let diff;
+  diff = this.state.property_price - loanPlusDown;
+  if(this.state.inPmiStatus) {
+    this.setState({
+      loan_amount: this.state.loan_amount,
+      second_mortgage_changed_value: 0
+    })
+  } 
+  if(this.state.inSecondMortgage){
+    if(diff === 0) {
+      loanOnePercent = (this.state.loan_amount/100)*80;
+        secondMortagePercent = this.state.loan_amount - loanOnePercent
+        this.setState({
+          loan_amount: loanOnePercent,
+          second_mortgage_changed_value: secondMortagePercent
+        })
+    } else {
+      this.setState({
+        second_mortgage_changed_value: diff
+      })
+    }
+  }
+}
+
   async handleChange(event) {
     // const { name } = event.target;
 
@@ -391,9 +424,19 @@ if (event.target.name === "closing_costs") {
   };
   getEventfromSecondMortgage = (r) =>{
     console.log(r, 'test')
-    this.setState({ 
-      loan_amount: r
-    })
+    if(r === "PMI"){
+      this.setState({
+        inPmiStatus: true,
+        inSecondMortgage: false
+      })
+    }
+    if(r === "SecondMortgage"){
+      this.setState({
+        inSecondMortgage: true,
+        inPmiStatus: false
+      })
+    }
+    this.handleLoanAmount(r)
 }
   render(props) {
     const showInterestOnlyPeriodButton = (
@@ -415,7 +458,7 @@ if (event.target.name === "closing_costs") {
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
-           <span className="validation-text-color">
+           <span className="validation_red">
            {this.state.interestOnlyPeriodValidationError}
            </span>
        
@@ -434,7 +477,12 @@ if (event.target.name === "closing_costs") {
         </MDBRow>
         <MDBRow>
           <MDBCol md="12" className="margin20">
-            <h4 className="get-started-label">Mortgage Details (Option 2)</h4>
+            <h4 className="get-started-label">Mortgage Details</h4>
+          </MDBCol>
+        </MDBRow>
+        <MDBRow>
+          <MDBCol md="12" className="margin20">
+            <h4 className="text-center get-started-label">Scenario 2</h4>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -486,6 +534,7 @@ if (event.target.name === "closing_costs") {
                   name="loan_amount"
                   value={this.state.loan_amount}
                   onChange={this.handleChange}
+                  onBlur={this.handleLoanAmount}
                   thousandSeparator={true}
                   onValueChange={async (values) => {
                     const { formattedValue, value } = values;
@@ -497,7 +546,7 @@ if (event.target.name === "closing_costs") {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                 {this.state.loan_amount_validation_error}
                 </span>
                
@@ -561,7 +610,7 @@ if (event.target.name === "closing_costs") {
                     });
                   }}
                 />
-                 <span className="validation-text-color">
+                 <span className="validation_red">
                  {this.state.interestrateValidationError}
                  </span>
               
@@ -607,7 +656,7 @@ if (event.target.name === "closing_costs") {
                     });
                   }}
                 />
-                  <span className="validation-text-color">
+                  <span className="validation_red">
                   {this.state.pointsValidationError}  
                   </span>
              
@@ -656,7 +705,7 @@ if (event.target.name === "closing_costs") {
                     });
                   }}
                 />
-                  <span className="validation-text-color">
+                  <span className="validation_red">
                   {this.state.closingCostsValidationError}
                   </span>
                
@@ -689,7 +738,8 @@ if (event.target.name === "closing_costs") {
               loanAmount={this.state.loan_amount}
                 handleDownpaymentData={this.handleDownpaymentData}
                 getEventfromSecondMortgage={this.getEventfromSecondMortgage}
-                second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
+                // second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
+                second_mortgage_changed_value={this.state.second_mortgage_changed_value}
               />
             ) : null}
           </div>

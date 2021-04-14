@@ -57,7 +57,7 @@ class createPassword extends Component {
 
   handleSubmit = () => {
     if(this.state.password !== this.state.confirmPassword){
-      NotificationManager.warning('Warning', 'Password not match')
+      NotificationManager.warning('Warning', 'Password not match',3000)
     }else{
       this.setState({
         valid: true,
@@ -76,14 +76,14 @@ class createPassword extends Component {
               valid: false,
             });
             if(resetData.data.success){
-              NotificationManager.success('Email Sent', resetData.data.message);
+              NotificationManager.success('Email Sent', resetData.data.message, 3000);
               this.props.history.push('/signin');  
             }else{
-              NotificationManager.error('Error', resetData.data.message);
+              NotificationManager.error('Error', resetData.data.message, 3000);
             }
           })
           .catch(err => {
-            NotificationManager.error('Error');
+            NotificationManager.error('Error', "Error", 3000);
           });
     }
     }

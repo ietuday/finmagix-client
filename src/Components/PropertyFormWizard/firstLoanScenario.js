@@ -24,7 +24,7 @@ export class FirstLoanScenario extends Component {
       loan_amount_number: 0,
       loan_term: 30,
       interest: 0,
-      interest_percentage: 0,
+      interest_percentage: 1,
       points: 0,
       closing_costs: 0,
       closing_costs_number: 0,
@@ -81,6 +81,9 @@ export class FirstLoanScenario extends Component {
       loan_amount_validation_error: "",
       closingCostsValidationError: "",
       property_downpayment: "",
+      second_mortgage_changed_value: "",
+      inPmiStatus: false,
+      inSecondMortgage: false,
     };
     // this.validators = FrmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -204,6 +207,35 @@ export class FirstLoanScenario extends Component {
       armValidationErrors: error,
     });
   };
+
+  handleLoanAmount = async(e,r) => {
+      let loanOnePercent;
+      let secondMortagePercent;
+      let loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
+    
+    let diff;
+    diff = this.state.property_price - loanPlusDown;
+    if(this.state.inPmiStatus) {
+      this.setState({
+        loan_amount: this.state.loan_amount,
+        second_mortgage_changed_value: 0
+      })
+    } 
+    if(this.state.inSecondMortgage){
+      if(diff === 0) {
+        loanOnePercent = (this.state.loan_amount/100)*80;
+          secondMortagePercent = this.state.loan_amount - loanOnePercent
+          this.setState({
+            loan_amount: loanOnePercent,
+            second_mortgage_changed_value: secondMortagePercent
+          })
+      } else {
+        this.setState({
+          second_mortgage_changed_value: diff
+        })
+      }
+    }
+  }
   async handleChange(event) {
     // const { name } = event.target;
     event.persist();
@@ -240,12 +272,19 @@ export class FirstLoanScenario extends Component {
     if (event.target.name === "interest_percentage") {
       if (parseInt(String(event.target.value).replace(/%/g, "")) > 10) {
         this.setState({
-          interestrateValidationError: "Is the interest rate input accurate?",
+          // interestrateValidationError: "Is the interest rate input accurate?",
+          interestrateValidationError: "Interest rate cannot exceed 10%",
         });
       } else {
-        this.setState({
-          interestrateValidationError: "",
-        });
+           if(parseInt(String(event.target.value).replace(/%/g, "")) <= 0) {
+            this.setState({
+              interestrateValidationError: "Interest rate cannot be 0% or less than 0%",
+            });     
+           } else {
+            this.setState({
+              interestrateValidationError: "",
+            });
+           }    
       }
     }
 
@@ -515,36 +554,22 @@ export class FirstLoanScenario extends Component {
     }
   };
 
-  // loanToApply(){
-  //   console.log('in loan to apply')
-  //   console.log('complete state', this.state)
-  //   console.log('loan amount', this.state.loan_amount)
-  //   console.log('property price', this.state.property_price)
-  //   console.log('property downpayment', this.state.property_downpayment)
-  //   var loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
-  //   console.log(loanPlusDown)
-  //   var diff;
-  //   var loanOnePercent;
-  //   var secondMortagePercent;
-  //   diff = this.state.property_price - loanPlusDown;
-  //     console.log(diff)
-  //       if(diff == 0){
-  //         console.log('diff 0')
-  //         loanOnePercent = (this.state.loan_amount/100)*80;
-  //         console.log(loanOnePercent)
-  //         secondMortagePercent = this.state.loan_amount - loanOnePercent
-  //         console.log(secondMortagePercent)
-  //         this.setState({ second_mortgage_loan_amount : secondMortagePercent })
-  //       }
-  
-  //   // console.log(r)
-  // }
 
   getEventfromSecondMortgage = (r) =>{
         console.log(r, 'test')
-        this.setState({ 
-          loan_amount: r
-        })
+        if(r === "PMI"){
+          this.setState({
+            inPmiStatus: true,
+            inSecondMortgage: false
+          })
+        }
+        if(r === "SecondMortgage"){
+          this.setState({
+            inSecondMortgage: true,
+            inPmiStatus: false
+          })
+        }
+        this.handleLoanAmount(r)
   }
   render(props) {
     const showInterestOnlyPeriodButton = (
@@ -577,7 +602,7 @@ export class FirstLoanScenario extends Component {
               });
             }}
           />
-          <span className="validation-text-color">
+          <span className="validation_red">
             {this.state.interestOnlyPeriodValidationError}
           </span>
         </MDBCol>
@@ -594,7 +619,12 @@ export class FirstLoanScenario extends Component {
         </MDBRow>
         <MDBRow>
           <MDBCol md="12" className="margin20">
-            <h4 className="get-started-label">Mortgage Details (Scenario 1)</h4>
+            <h4 className="get-started-label">Mortgage Details</h4>
+          </MDBCol>
+        </MDBRow>
+        <MDBRow>
+          <MDBCol md="12" className="margin20">
+            <h4 className="text-center get-started-label">Scenario 1</h4>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -647,6 +677,7 @@ export class FirstLoanScenario extends Component {
                   name="loan_amount"
                   value={this.state.loan_amount}
                   onChange={this.handleChange}
+                  onBlur={this.handleLoanAmount}
                   thousandSeparator={true}
                   onValueChange={async (values) => {
                     const { formattedValue, value } = values;
@@ -658,7 +689,7 @@ export class FirstLoanScenario extends Component {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                   {this.state.loan_amount_validation_error}
                 </span>
               </MDBCol>
@@ -702,6 +733,7 @@ export class FirstLoanScenario extends Component {
                   placeholder="Enter amount here"
                   name="interest_percentage"
                   value={this.state.interest_percentage}
+                  allowNegative={false}
                   onChange={this.handleChange}
                   // thousandSeparator={true}
                   suffix={"%"}
@@ -715,7 +747,7 @@ export class FirstLoanScenario extends Component {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                   {this.state.interestrateValidationError}
                 </span>
               </MDBCol>
@@ -760,7 +792,7 @@ export class FirstLoanScenario extends Component {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                   {this.state.pointsValidationError}
                 </span>
               </MDBCol>
@@ -807,7 +839,7 @@ export class FirstLoanScenario extends Component {
                     });
                   }}
                 />
-                <span className="validation-text-color">
+                <span className="validation_red">
                   {this.state.closingCostsValidationError}
                 </span>
               </MDBCol>
@@ -839,7 +871,7 @@ export class FirstLoanScenario extends Component {
                 loanAmount={this.state.loan_amount}
                 handleDownpaymentData={this.handleDownpaymentData}
                 getEventfromSecondMortgage={this.getEventfromSecondMortgage}
-                second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
+                second_mortgage_changed_value={this.state.second_mortgage_changed_value}
                 loan_amount={this.state.loan_amount}
               />
             ) : null}

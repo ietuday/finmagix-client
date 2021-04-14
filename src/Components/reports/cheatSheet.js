@@ -23,16 +23,16 @@ import {
 
 const blues = [
   ["#00aff0"],
-  ['#85bb43'],
+  ['#2FD411'],
   ["#00aff0"],
-  ['#85bb43']
+  ['#2FD411']
 ];
 
 const mortgageBlues = [
   ["#00aff0"],
   ["#00aff0"],
-  ['#85bb43'],
-  ['#85bb43']
+  ['#2FD411'],
+  ['#2FD411']
 ];
 const getColor = (length, index) => {
   return blues[index];
@@ -453,7 +453,7 @@ function CheatSheet(props) {
               style={{
                 width: "150px",
                 height: "20px",
-                backgroundColor: "#85bb43",
+                backgroundColor: "#2FD411",
               }}
             ></div>
           </MDBCol>

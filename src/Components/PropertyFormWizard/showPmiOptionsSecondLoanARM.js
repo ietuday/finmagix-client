@@ -16,7 +16,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
   constructor() {
     super();
     this.state = {
-      pmi_amount: 0,
+      pmi_amount: 1,
       pmi_amount_number: "",
       second_mortgage_loan_amount: "",
       second_mortgage_loan_term: "",
@@ -57,7 +57,8 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       loanAmountValidationError:"",
       interestrateValidationError:"",
       pointsValidationError:"",
-      closingCostsValidationError: ""
+      closingCostsValidationError: "",
+      second_mortgage_changed_value: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.checkProperty();
@@ -127,50 +128,16 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       PMIOptions: value,
     });
     if (value === "PMI") {
-      this.setState({
+      await this.setState({
         showSecondloanOption: false,
+        loanamountsecond2 : 0
       });
+      this.props.getEventfromSecondMortgage("PMI")
     } else if (value === "Second Loan") {
-      this.setState({
-        showSecondloanOption: true,
-      });
-      // console.log('clicked')
-      // let e = true;
-      
-      // console.log(this.props)
-      // console.log(this.props.second_mortgage_loan_amount)
       await this.setState({
         showSecondloanOption: true,
-        loanamountsecond2: this.props.second_mortgage_loan_amount,
-        loan_amount: this.props.loanAmount 
       });
-      console.log(this.state.loan_amount)
-      var loanOnePercent;
-      var secondMortagePercent;
-      // console.log(this.state.loan_amount, 'success')
-      // console.log(this.state.property_downpayment, 'success')
-        var loanPlusDown = (parseInt(this.state.loan_amount)) + (parseInt(this.state.property_downpayment))
-    // console.log(loanPlusDown)
-    var diff;
-    var loanOnePercent;
-    var secondMortagePercent;
-    diff = this.state.propertyPrice - loanPlusDown;
-    // console.log(diff)
-    if(diff == 0) {
-      loanOnePercent = (this.state.loan_amount/100)*80;
-      // console.log(loanOnePercent)
-      secondMortagePercent = this.state.loan_amount - loanOnePercent
-      // console.log(secondMortagePercent)
-      this.setState({
-        loanamountsecond2: secondMortagePercent
-      })
-     this.props.getEventfromSecondMortgage(loanOnePercent) 
-    } else {
-      // console.log(diff)
-      this.setState({
-        loanamountsecond2: diff
-      })
-    }
+      this.props.getEventfromSecondMortgage("SecondMortgage") 
     }
   };
   async handleChange(event) {
@@ -185,9 +152,15 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
           pmiValidationError: "Shouldn't exceed 3% of first loan amount"
         }) 
       }else{
-        this.setState({
-          pmiValidationError: ""
-        }) 
+        if(parseInt(String(event.target.value).replace(/,/g, '')) <= 0) {
+          this.setState({
+            pmiValidationError: "PMI cannot be 0"
+          })  
+        } else {
+          this.setState({
+            pmiValidationError: ""
+          })
+        }
       }
     }
 
@@ -251,6 +224,13 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
     this.props.handleDownpaymentData(this.state);
   }
   componentDidMount() {}
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.second_mortgage_changed_value){
+      this.setState({
+        loanamountsecond2: nextProps.second_mortgage_changed_value
+      })
+    }
+  }
   render() {
     const showPmiAmount = (
       <MDBRow className="margin20">
@@ -287,7 +267,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
               });
             }}
           />
-          <span className="validation-text-color">
+          <span className="validation_red">
           {this.state.pmiValidationError}
           </span>
          
@@ -331,7 +311,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
                 });
               }}
             />
-              <span className="validation-text-color">
+              <span className="validation_red">
               {this.state.loanAmountValidationError}
               </span>
            
@@ -388,7 +368,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
                 });
               }}
             />
-             <span className="validation-text-color">
+             <span className="validation_red">
              {this.state.interestrateValidationError}
              </span>
           
@@ -432,7 +412,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
             {this.state.pointsValidationError}  
             </span>
           
@@ -479,7 +459,7 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
             {this.state.closingCostsValidationError}
             </span>
             

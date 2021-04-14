@@ -75,7 +75,7 @@ export class Signin extends Component {
     if (this.isFormValid()) {
       SignIn(signinDataObject, this.onSuccess, this.onFailure);
     } else {
-      NotificationManager.error("some error", "Error");
+      NotificationManager.error("some error", "Error", 3000);
     }
   };
   signUpGoogleFacebbok(res, type) {
@@ -105,10 +105,10 @@ export class Signin extends Component {
     } else {
       this.props.history.push("/dashboard");
     }
-    NotificationManager.success("Signed in Successfully ..!!", "Success", 2000);
+    NotificationManager.success("Signed in Successfully ..!!", "Success", 3000);
   };
   onFailure = () => {
-    NotificationManager.error("Invalid Credentials", "error");
+    NotificationManager.error("Invalid Credentials", "error", 3000);
   };
   render() {
     if (this.state.backButton) {
@@ -213,7 +213,7 @@ export class Signin extends Component {
             <MDBCol md="6" size="6" className="text-center">
            
               <GoogleLogin
-                clientId="840928618180-lcnv7e1qlmt52af1eo73ir3pccarj3hg.apps.googleusercontent.com"
+                clientId="1058447115595-ukhhmegumqrk5766437i00qolisqhgqv.apps.googleusercontent.com"
                 buttonText="Google"
                 className="google-button"
                 onSuccess={responseGoogle}
@@ -223,7 +223,7 @@ export class Signin extends Component {
             </MDBCol>
             <MDBCol md="6" size="6" className="text-center">
               <FacebookLogin
-                appId="950719508668620"
+                appId="354525859322257"
                 fields="name,email,picture"
                 scope="public_profile,user_friends"
                 textButton="         Facebook"

@@ -78,6 +78,7 @@ export class PersonalFinance extends Component {
           monthlydebtPaymentValidationError:"",
           monthlynonhousingExpensesValidationError:"",
           marginal_tax_rate_ValidationError: "",
+          federal_income_ValidationError: "",
 
       detail_non_housing_expenses: {},
       openModal: false,
@@ -139,6 +140,18 @@ export class PersonalFinance extends Component {
         })
       }
 
+    }
+
+    if (event.target.name === "federal_income") {
+      if(parseInt(String(event.target.value).replace(/,/g, '')) > 50000000) {
+        this.setState({
+          federal_income_ValidationError: "Cannot exceed 50,000,000"
+        })
+      } else {
+        this.setState({
+          federal_income_ValidationError: ""
+        })
+      }
     }
 
 
@@ -260,6 +273,7 @@ export class PersonalFinance extends Component {
               value={this.state.federal_income}
               onChange={this.handleChange}
               thousandSeparator={true}
+              allowNegative={false}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
                 await this.setState({
@@ -270,6 +284,9 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
+            <span className="validation_red">
+            {this.state.federal_income_ValidationError}
+            </span>
           </MDBCol>
          
         </MDBRow>
@@ -311,7 +328,7 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
             {this.state.monthlydebtPaymentValidationError}
             </span>
          
@@ -360,7 +377,7 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
-            <span className="validation-text-color">
+            <span className="validation_red">
             {this.state.monthlynonhousingExpensesValidationError}
             </span>
          
@@ -406,7 +423,7 @@ export class PersonalFinance extends Component {
                 });
               }}
             />
-             <span className="validation-text-color">
+             <span className="validation_red">
              {this.state.marginal_tax_rate_ValidationError}
              </span>
            

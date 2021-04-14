@@ -90,7 +90,7 @@ export class Signup extends Component {
     if (this.isFormValid()) {
       SignUp(signupDataObject, this.onSuccess, this.onFailure);
     } else {
-      NotificationManager.error("Please validate fields!", "Error");
+      NotificationManager.error("Please validate fields!", "Error", 3000);
     }
   };
   onSuccess = () => {
@@ -98,11 +98,11 @@ export class Signup extends Component {
     NotificationManager.success(
       "User Created Successfully ..!!",
       "Success",
-      2000
+      3000
     );
   };
   onFailure = (message) => {
-    NotificationManager.error("data already exists", "error");
+    NotificationManager.error("data already exists", "error", 3000);
   };
   goToPreviousPage = () => {
     this.setState({
@@ -236,7 +236,7 @@ export class Signup extends Component {
         <MDBRow className="margin20">
           <MDBCol md="6" size="6" className="text-center">
             <GoogleLogin
-              clientId="840928618180-lcnv7e1qlmt52af1eo73ir3pccarj3hg.apps.googleusercontent.com"
+              clientId="1058447115595-ukhhmegumqrk5766437i00qolisqhgqv.apps.googleusercontent.com"
               buttonText="Google"
               className="google-button"
               onSuccess={responseGoogle}
@@ -258,7 +258,7 @@ export class Signup extends Component {
             /> */}
 
               <FacebookLogin
-                appId="950719508668620"
+                appId="354525859322257"
                 fields="name,email,picture"
                 scope="public_profile,user_friends"
                 textButton="     Facebook"
