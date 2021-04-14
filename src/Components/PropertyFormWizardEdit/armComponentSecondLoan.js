@@ -308,6 +308,7 @@ export class ARMComponentSecondLoan extends Component {
         });
     }
   }
+
   async handleChange(event) {
     // const { name } = event.target;
     event.persist();
@@ -720,7 +721,9 @@ export class ARMComponentSecondLoan extends Component {
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
+          <span className="validation_red">
           {this.state.interestOnlyPeriodValidationError}
+          </span>
         </MDBCol>
       </MDBRow>
     );
@@ -748,6 +751,7 @@ export class ARMComponentSecondLoan extends Component {
               placeholder="Enter amount here"
               name="loan_amount"
               value={this.state.loan_amount}
+              decimalScale={2}
               onChange={this.handleChange}
               thousandSeparator={true}
               onValueChange={async (values) => {
@@ -825,6 +829,7 @@ export class ARMComponentSecondLoan extends Component {
               placeholder="Enter amount here"
               name="initial_interest_rate_percentage"
               value={this.state.initial_interest_rate_percentage}
+              decimalScale={2}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -838,7 +843,9 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
+            <span className="validation_red">
             {this.state.interestrateValidationError}
+            </span>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -871,6 +878,7 @@ export class ARMComponentSecondLoan extends Component {
               placeholder="Enter amount here"
               name="first_interest_rate_adj_cap_percentage"
               value={this.state.first_interest_rate_adj_cap_percentage}
+              decimalScale={2}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -884,7 +892,9 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
+            <span className="validation_red">
             {this.state.rateAdjustmentCapValidationError}
+            </span>
           </MDBCol>
 
         </MDBRow>
@@ -918,6 +928,7 @@ export class ARMComponentSecondLoan extends Component {
               placeholder="Enter amount here"
               name="floor_interest_rate_percentage"
               value={this.state.floor_interest_rate_percentage}
+              decimalScale={2}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -931,7 +942,9 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
+            <span className="validation_red">
             {this.state.floorinterestrateValidationError}
+            </span>
           </MDBCol>
 
         </MDBRow>
@@ -962,6 +975,7 @@ export class ARMComponentSecondLoan extends Component {
               placeholder="Enter amount here"
               name="ceiling_interest_rate_percentage"
               value={this.state.ceiling_interest_rate_percentage}
+              decimalScale={2}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -1005,6 +1019,7 @@ export class ARMComponentSecondLoan extends Component {
               placeholder="Enter amount here"
               name="period_cap_percentage"
               value={this.state.period_cap_percentage}
+              decimalScale={2}
               onChange={this.handleChange}
               suffix={"%"}
               onValueChange={async (values) => {
@@ -1017,7 +1032,9 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
+            <span className="validation_red">
             {this.state.periodCapValidationError}
+            </span>
           </MDBCol>
 
         </MDBRow>
@@ -1046,6 +1063,7 @@ export class ARMComponentSecondLoan extends Component {
               placeholder="Enter amount here"
               name="rate_add_percentage"
               value={this.state.rate_add_percentage}
+              decimalScale={2}
               onChange={this.handleChange}
               // thousandSeparator={true}
               suffix={"%"}
@@ -1059,7 +1077,9 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
+            <span className="validation_red">
             {this.state.rateAddValidationError}
+            </span>
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Points</span>
@@ -1085,6 +1105,7 @@ export class ARMComponentSecondLoan extends Component {
                   placeholder="Enter amount here"
                   name="points_percentage"
                   value={this.state.points_percentage}
+                  decimalScale={2}
                   onChange={this.handleChange}
                   suffix={"%"}
                   onValueChange={async (values) => {
@@ -1097,7 +1118,9 @@ export class ARMComponentSecondLoan extends Component {
                     });
                   }}
                 />
+                <span className="validation_red">
                 {this.state.pointsValidationError}
+                </span>
               </MDBCol>
             </MDBRow>
             {/* {displayValidationErrors(this.validators, "points")} */}
@@ -1133,6 +1156,7 @@ export class ARMComponentSecondLoan extends Component {
               placeholder="Enter amount here"
               name="closing_costs"
               value={this.state.closing_costs}
+              decimalScale={2}
               onChange={this.handleChange}
               thousandSeparator={true}
               onValueChange={async (values) => {
@@ -1145,7 +1169,9 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
+            <span className="validation_red">
             {this.state.closingCostsValidationError}
+            </span>
           </MDBCol>
         </MDBRow>
         {/* {displayValidationErrors(this.validators, "closing_costs")} */}

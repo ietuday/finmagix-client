@@ -1080,7 +1080,9 @@ export class ARMComponentSecondLoan extends Component {
                 });
               }}
             />
+            <span className="validation_red">
             {this.state.rateAddValidationError}
+            </span>
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">Points</span>
@@ -1201,7 +1203,6 @@ export class ARMComponentSecondLoan extends Component {
             loanAmount={this.state.loan_amount}
             handleDownpaymentData={this.handleDownpaymentData}
             getEventfromSecondMortgage={this.getEventfromSecondMortgage}
-            // second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
             second_mortgage_changed_value={this.state.second_mortgage_changed_value}
           />
         ) : null}

@@ -200,14 +200,12 @@ export class ARMComponentFirstLoan extends Component {
   let diff;
   diff = this.state.property_price - loanPlusDown;
   if(this.state.inPmiStatus) {
-    console.log('in pmi condition')
     this.setState({
       loan_amount: this.state.loan_amount,
       second_mortgage_changed_value: 0
     })
   } 
   if(this.state.inSecondMortgage){
-    console.log('not in pmi condition')
     if(diff === 0) {
       loanOnePercent = (this.state.loan_amount/100)*80;
         secondMortagePercent = this.state.loan_amount - loanOnePercent
@@ -216,7 +214,6 @@ export class ARMComponentFirstLoan extends Component {
           second_mortgage_changed_value: secondMortagePercent
         })
     } else {
-      console.log(diff, 'in else')
       this.setState({
         second_mortgage_changed_value: diff
       })
@@ -1164,7 +1161,6 @@ if(event.target.name === "points_percentage"){
             loanAmount={this.state.loan_amount}
             handleDownpaymentData={this.handleDownpaymentData}
             getEventfromSecondMortgage={this.getEventfromSecondMortgage}
-            // second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
             second_mortgage_changed_value={this.state.second_mortgage_changed_value}
           />
         ) : null}

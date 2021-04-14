@@ -602,6 +602,7 @@ export class GetStartedHouseInfo extends Component {
               onChange={this.handleChange}
             /> */}
             <NumberFormat
+              decimalScale={0}
               className="input-class-mdb"
               placeholder="Duration of stay"
               value={this.state.stay_duration}
