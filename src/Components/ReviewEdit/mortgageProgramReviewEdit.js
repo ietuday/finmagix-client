@@ -1066,7 +1066,7 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_frm
-                        ? this.state.propertyDetail.second_frm.second_mortgage_loan_amount || 0
+                        ? this.state.propertyDetail.second_frm.loanamountsecond2 || 0
                         : null}
                         
                       </div>
