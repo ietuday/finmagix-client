@@ -83,6 +83,7 @@ export class PropertyMortgageHOC extends Component {
     await this.setState((prevState) => {
       let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
       secondLoanScenario = data;
+      console.log(this.state, 'testHOC1')
       return { secondLoanScenario };
     });
   };
@@ -413,7 +414,7 @@ export class PropertyMortgageHOC extends Component {
       NotificationManager.error("Please Validate Fields", "Error", 3000);
     }
   };
-  goToNextPage = () => {
+  goToNextPage = async() => {
  
     const {
  
@@ -423,7 +424,7 @@ export class PropertyMortgageHOC extends Component {
       ARMMortgageUpdateSecond,
   
     } = this.props;
-    
+    // debugger
     // if(this.state.firstLoanScenario && (this.state.firstLoanScenario.mortgage_program_type === 1 || this.state.firstLoanScenario.mortgage_program_type == "FIRST")){
     //   FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.props.FrmMortgageFirstEditId)
     // }
@@ -680,72 +681,100 @@ export class PropertyMortgageHOC extends Component {
               }
   
           if (this.state.secondLoanScenario["ARM2rate"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.ARM2rate] : String(
-              Number(this.state.secondLoanScenario["ARM2rate"]) / 100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["ARM2rate"] = String(
+                Number(this.state.secondLoanScenario["ARM2rate"]) / 100
+              )
+              return { secondLoanScenario }
+            })
           }
           if (this.state.secondLoanScenario["first_interest_rate_adj_cap"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.first_interest_rate_adj_cap] : String(
-              Number(
-                this.state.secondLoanScenario["first_interest_rate_adj_cap"]
-              ) / 100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["first_interest_rate_adj_cap"] = String(
+                   Number(this.state.secondLoanScenario["first_interest_rate_adj_cap"]) / 100
+                 )
+              return { secondLoanScenario }   
+            })
           }
           if (this.state.secondLoanScenario["floor_interest_rate"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.floor_interest_rate] : String(
-              Number(this.state.secondLoanScenario["floor_interest_rate"]) / 100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["floor_interest_rate"] = String(
+                   Number(this.state.secondLoanScenario["floor_interest_rate"]) / 100
+                 )
+              return { secondLoanScenario }   
+            })
           }
           if (this.state.secondLoanScenario["ceiling_interest_rate"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.ceiling_interest_rate] : String(
-              Number(this.state.secondLoanScenario["ceiling_interest_rate"]) / 100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["ceiling_interest_rate"] = String(
+                   Number(this.state.secondLoanScenario["ceiling_interest_rate"]) / 100
+                 )
+              return { secondLoanScenario }   
+            })
           }
           if (this.state.secondLoanScenario["period_cap"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.period_cap] : String(
-              Number(this.state.secondLoanScenario["period_cap"]) / 100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["period_cap"] = String(
+                   Number(this.state.secondLoanScenario["period_cap"]) / 100
+                 )
+              return { secondLoanScenario }    
+            })
           }
           if (this.state.secondLoanScenario["rate_add"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.rate_add] : String(
-              Number(this.state.secondLoanScenario["rate_add"]) / 100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["rate_add"] = String(
+                   Number(this.state.secondLoanScenario["rate_add"]) / 100
+                 )
+              return { secondLoanScenario }   
+            })
           }
   
           if (this.state.secondLoanScenario["points"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.points] : String(
-              Number(this.state.secondLoanScenario["points"]) / 100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["points"] = String(
+                   Number(this.state.secondLoanScenario["points"]) / 100
+                 )
+              return { secondLoanScenario }   
+            })
           }
   
           if (this.state.secondLoanScenario["second_mortgage_interest"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.second_mortgage_interest] : String(
-              Number(this.state.secondLoanScenario["second_mortgage_interest"]) /
-                100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["second_mortgage_interest"] = String(
+                   Number(this.state.secondLoanScenario["second_mortgage_interest"]) /
+                     100
+                 )
+              return { secondLoanScenario }   
+            })
           }
   
           if (this.state.secondLoanScenario["second_mortgage_points"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.second_mortgage_points] : String(
-              Number(this.state.secondLoanScenario["second_mortgage_points"]) /
-                100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["second_mortgage_points"] = String(
+                   Number(this.state.secondLoanScenario["second_mortgage_points"]) /
+                     100
+                 )
+              return { secondLoanScenario }    
+            })
           }
   
           if (this.state.secondLoanScenario["initial_interest_rate"]) {
-            const secondLoanScenario = this.state.secondLoanScenario;
-            this.setState({ [secondLoanScenario.initial_interest_rate] : String(
-              Number(this.state.secondLoanScenario["initial_interest_rate"]) / 100
-            )});
+            await this.setState(prevState => {
+              let secondLoanScenario = Object.assign({}, prevState.secondLoanScenario);
+              secondLoanScenario["initial_interest_rate"] = String(
+                   Number(this.state.secondLoanScenario["initial_interest_rate"]) / 100
+                 )
+              return { secondLoanScenario }   
+            })
           }
             ARMMortgageUpdateSecond(this.state.secondLoanScenario,this.state.secondLoanScenario.id )
             }
@@ -755,14 +784,17 @@ export class PropertyMortgageHOC extends Component {
         NotificationManager.error("Please Validate Fields", "Error", 3000);
       }
     }else if(this.state.firstLoanScenario && this.state.firstLoanScenario.id){
+      console.log('in first loan scenario')
       if (
         this.state.firstLoanScenario.firstloanarmvalidationerror === 0 ||
         this.state.FirstloanscenarioValidationErrors === 0
       ) {
+        console.log('got one')
         if (
           this.state.radioValue &&
           this.state.firstLoanScenario.mortgage_program_type_value === 1
         ) {
+          console.log('got two')
   
           if(
             this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
@@ -770,6 +802,7 @@ export class PropertyMortgageHOC extends Component {
             ){
               NotificationManager.error('error', 'Please correct your input', 3000)
             }else{
+              console.log('got three')
               if(Number(this.state.firstLoanScenario.loanamountsecond1)){
                 const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
                 if(checkSum !== Number(this.state.firstLoanScenario.property_price)){
@@ -820,7 +853,7 @@ export class PropertyMortgageHOC extends Component {
           this.state.radioValue &&
           this.state.firstLoanScenario.mortgage_program_type_value === 2
         ) {
-  
+
   
           if(
             this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
@@ -945,29 +978,43 @@ export class PropertyMortgageHOC extends Component {
                 }
               }
               if (this.state.firstLoanScenario["interest"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.interest] : String(
-                  Number(this.state.firstLoanScenario["interest"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["interest"] = String(
+                  Number(
+                    this.state.firstLoanScenario["interest"]
+                  ) / 100
+                )
+                return { firstLoanScenario }
+                })
               }
               if (this.state.firstLoanScenario["second_mortgage_interest"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.second_mortgage_interest] : String(
-                  Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
-                    100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["second_mortgage_interest"] = String(
+                       Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
+                         100
+                     )
+                return { firstLoanScenario }     
+                })
               }
               if (this.state.firstLoanScenario["points"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.points] : String(
-                  Number(this.state.firstLoanScenario["points"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["points"] = String(
+                       Number(this.state.firstLoanScenario["points"]) / 100
+                     )
+                return { firstLoanScenario }     
+                })
               }
               if (this.state.firstLoanScenario["second_mortgage_points"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.second_mortgage_points] : String(
-                  Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["second_mortgage_points"] = String(
+                       Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+                     )
+                return { firstLoanScenario }     
+                })
               }
               FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )
              
@@ -1000,71 +1047,100 @@ export class PropertyMortgageHOC extends Component {
               }
   
               if (this.state.firstLoanScenario["ARM1rate"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.ARM1rate] : String(
-                  Number(this.state.firstLoanScenario["ARM1rate"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["ARM1rate"] = String(
+                    Number(this.state.firstLoanScenario["ARM1rate"]) / 100
+                  )
+                  return { firstLoanScenario }
+                })
               }
               if (this.state.firstLoanScenario["first_interest_rate_adj_cap"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.first_interest_rate_adj_cap] : String(
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                firstLoanScenario['first_interest_rate_adj_cap'] = String(
                   Number(
                     this.state.firstLoanScenario["first_interest_rate_adj_cap"]
                   ) / 100
-                )});
+                )
+                return { firstLoanScenario }
+                })
               }
               if (this.state.firstLoanScenario["floor_interest_rate"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.floor_interest_rate] : String(
-                  Number(this.state.firstLoanScenario["floor_interest_rate"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["floor_interest_rate"] = String(
+                       Number(this.state.firstLoanScenario["floor_interest_rate"]) / 100
+                     )
+                return { firstLoanScenario }     
+                })
               }
               if (this.state.firstLoanScenario["ceiling_interest_rate"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.ceiling_interest_rate] : String(
-                  Number(this.state.firstLoanScenario["ceiling_interest_rate"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["ceiling_interest_rate"] = String(
+                       Number(this.state.firstLoanScenario["ceiling_interest_rate"]) / 100
+                     )
+                return { firstLoanScenario }
+                })
               }
               if (this.state.firstLoanScenario["period_cap"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.period_cap] : String(
-                  Number(this.state.firstLoanScenario["period_cap"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["period_cap"] = String(
+                       Number(this.state.firstLoanScenario["period_cap"]) / 100
+                     )
+                return { firstLoanScenario }     
+                })
               }
               if (this.state.firstLoanScenario["rate_add"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.rate_add] : String(
-                  Number(this.state.firstLoanScenario["rate_add"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["rate_add"] = String(
+                       Number(this.state.firstLoanScenario["rate_add"]) / 100
+                     )
+                return { firstLoanScenario }     
+                })
               }
       
               if (this.state.firstLoanScenario["points"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.points] : String(
-                  Number(this.state.firstLoanScenario["points"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["points"] = String(
+                       Number(this.state.firstLoanScenario["points"]) / 100
+                     )
+                return { firstLoanScenario }     
+                })
               }
       
               if (this.state.firstLoanScenario["second_mortgage_interest"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.second_mortgage_interest] : String(
-                  Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
-                    100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["second_mortgage_interest"] = String(
+                       Number(this.state.firstLoanScenario["second_mortgage_interest"]) / 100
+                     )
+                return { firstLoanScenario }     
+                })
               }
        
               if (this.state.firstLoanScenario["second_mortgage_points"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.second_mortgage_points] : String(
-                  Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["second_mortgage_points"] = String(
+                       Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+                     )
+                return { firstLoanScenario }     
+                })
               }
       
               if (this.state.firstLoanScenario["initial_interest_rate"]) {
-                const firstLoanScenario = this.state.firstLoanScenario;
-                this.setState({ [firstLoanScenario.initial_interest_rate] : String(
-                  Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
-                )});
+                await this.setState(prevState => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario["initial_interest_rate"] = String(
+                       Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
+                     )
+                return { firstLoanScenario }     
+                })
               }
       
                 ARMMortgageUpdateFirst(this.state.firstLoanScenario,this.state.firstLoanScenario.id )

@@ -230,16 +230,22 @@ export class FirstLoanScenario extends Component {
     }
 
     if (event.target.name === "interest_percentage") {
-      if (parseInt(String(event.target.value).replace(/%/g, '')) > 10) {
+      if (parseInt(String(event.target.value).replace(/%/g, "")) > 10) {
         this.setState({
-          interestrateValidationError: "Is the interest rate input accurate?"
-        })
+          // interestrateValidationError: "Is the interest rate input accurate?",
+          interestrateValidationError: "Interest rate cannot exceed 10%",
+        });
       } else {
-        this.setState({
-          interestrateValidationError: ""
-        })
+           if(parseInt(String(event.target.value).replace(/%/g, "")) <= 0) {
+            this.setState({
+              interestrateValidationError: "Interest rate cannot be 0% or less than 0%",
+            });     
+           } else {
+            this.setState({
+              interestrateValidationError: "",
+            });
+           }    
       }
-
     }
 
 
@@ -521,7 +527,7 @@ export class FirstLoanScenario extends Component {
         showMortgageTypeChangeOption: false,
       });
     }
-  };
+  };  
   render(props) {
     const showInterestOnlyPeriodButton = (
       <MDBRow className="margin20">
@@ -542,7 +548,9 @@ export class FirstLoanScenario extends Component {
             value={this.state.interest_only_period}
             onChange={this.handleChange}
           />
+          <span className="validation_red">
           {this.state.interestOnlyPeriodValidationError}
+          </span>
         </MDBCol>
 
       </MDBRow>
@@ -558,7 +566,12 @@ export class FirstLoanScenario extends Component {
         </MDBRow>
         <MDBRow>
           <MDBCol md="12" className="margin20">
-            <h4 className="get-started-label">Mortgage Details (Option 1)</h4>
+            <h4 className="get-started-label">Mortgage Details</h4>
+          </MDBCol>
+        </MDBRow>
+        <MDBRow>
+          <MDBCol md="12" className="margin20">
+            <h4 className="text-center get-started-label">Scenario 1</h4>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -624,7 +637,9 @@ export class FirstLoanScenario extends Component {
                       });
                     }}
                   />
+                  <span className="validation_red">
                   {this.state.loan_amount_validation_error}
+                  </span>
                 </MDBCol>
               </MDBRow>
 
@@ -668,6 +683,7 @@ export class FirstLoanScenario extends Component {
                     name="interest_percentage"
                     value={this.state.interest_percentage}
                     onChange={this.handleChange}
+                    allowNegative={false}
                     // thousandSeparator={true}
                     suffix={"%"}
                     onValueChange={async (values) => {
@@ -680,7 +696,9 @@ export class FirstLoanScenario extends Component {
                       });
                     }}
                   />
+                  <span className="validation_red">
                   {this.state.interestrateValidationError}
+                  </span>
                 </MDBCol>
 
               </MDBRow>
@@ -724,7 +742,9 @@ export class FirstLoanScenario extends Component {
                       });
                     }}
                   />
+                  <span className="validation_red">
                   {this.state.pointsValidationError}
+                  </span>
                 </MDBCol>
 
               </MDBRow>
@@ -770,7 +790,9 @@ export class FirstLoanScenario extends Component {
                       });
                     }}
                   />
+                  <span className="validation_red">
                   {this.state.closingCostsValidationError}
+                  </span>
                 </MDBCol>
               </MDBRow>
 
