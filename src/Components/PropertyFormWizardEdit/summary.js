@@ -53,25 +53,7 @@ export class Summary extends Component {
     return (
       <Fragment>
         <MDBContainer>
-          <MDBRow className="margin20">
-            <MDBCol>
-              <div className="text-center">
-                <img
-                  src={require("../../assets/logo/report-logo.png")}
-                  alt="report"
-                  onClick={this.showReports}
-                />
-                
-              </div>
-              <div className="text-center">
-              <Button size="medium" className="btn btn-primary btn-sm waves-effect waves-light" onClick={this.showReports}>
-                  Show Report
-              </Button>
-              </div>
-
-            </MDBCol>
-          </MDBRow>
-          <MDBRow>
+        <MDBRow>
             <MDBCol>
               <div className="text-center">
                 <h1 className="report-text">Well done,</h1>
@@ -84,11 +66,33 @@ export class Summary extends Component {
           <MDBRow className="margin20">
             <MDBCol>
               <div className="text-center">
-                <p>Do you want to review or edit your inputs? Click  below!</p>
+                <img
+                  src={require("../../assets/logo/report-logo.png")}
+                  alt="report"
+                  onClick={this.showReports}
+                />
+                
+              </div>
+              <div className="text-center">
+              <Button size="large" className="btn btn-primary waves-effect waves-light" onClick={this.showReports}>
+              Show Reports
+              </Button>
+         
+              </div>
+
+            </MDBCol>
+          </MDBRow>
+      
+          <MDBRow className="margin20">
+            <MDBCol>
+              <div className="text-center">
+                <p className="summary-font">Do you want to review or edit your inputs? Click  below!</p>
               </div>
             </MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer" 
+            onClick={() => this.props.history.push({pathname: '/property-information-review-edit',
+            getId : PropertyInfoCreateResponse.data.id  })}>
             <MDBCol md="1"></MDBCol>
             <MDBCol md="8" size="8">
               <div className="">
@@ -101,14 +105,15 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() => this.props.history.push({pathname: '/property-information-review-edit',
-                  getId : PropertyInfoCreateResponse.data.id  })}
+                
                 />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+          onClick={() => this.props.history.push({pathname: '/personalfinance-review-edit',
+          getId :JSON.parse(localStorage.getItem('personal_finance_array')).id })}>
             <MDBCol md="1"></MDBCol>
             <MDBCol md="8" size="8">
               <div className="">
@@ -121,14 +126,19 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() => this.props.history.push({pathname: '/personalfinance-review-edit',
-                  getId :JSON.parse(localStorage.getItem('personal_finance_array')).id })}
+                  
                 />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+           onClick={() =>
+            this.props.history.push({pathname: 'rent-vs-buy-review-edit',
+            state: {isRentvsBuyFilled:true, 
+              getId : this.state.propertyDetail.rent_vs_buy.id 
+             }})
+          }>
             <MDBCol md="1"></MDBCol>
             <MDBCol md="8" size="8">
               <div className="">
@@ -152,7 +162,13 @@ export class Summary extends Component {
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
-          <MDBRow className="margin20">
+          <MDBRow className="margin20 pointer"
+           onClick={() =>
+            this.props.history.push({pathname: 'rent-vs-buy-review-edit',
+            state: {isRentvsBuyFilled:true, 
+              getId : this.state.propertyDetail.rent_vs_buy.id 
+             }})
+          }>
             <MDBCol md="1"></MDBCol>
             <MDBCol md="8" size="8">
               <div className="">
@@ -165,18 +181,18 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() =>
-                    this.props.history.push({pathname: 'rent-vs-buy-review-edit',
-                    state: {isRentvsBuyFilled:true, 
-                      getId : this.state.propertyDetail.rent_vs_buy.id 
-                     }})
-                  }
+                 
                 />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
-          <MDBRow className="margin20 marginbottom50">
+          <MDBRow className="margin20 marginbottom50 pointer"
+           onClick={() =>
+            this.props.history.push({pathname: '/taxes-review-edit',
+            state: {isTaxFilled : true,
+              getId :JSON.parse(localStorage.getItem('tax_array')).id }})
+          }>
             <MDBCol md="1"></MDBCol>
             <MDBCol md="8" size="8">
               <div className="">
@@ -189,11 +205,7 @@ export class Summary extends Component {
                 <MDBIcon
                   icon="angle-right"
                   size="large"
-                  onClick={() =>
-                    this.props.history.push({pathname: '/taxes-review-edit',
-                    state: {isTaxFilled : true,
-                      getId :JSON.parse(localStorage.getItem('tax_array')).id }})
-                  }
+                 
                 />
               </div>
             </MDBCol>

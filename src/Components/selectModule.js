@@ -64,7 +64,7 @@ export class SelectModule extends Component {
     return (
       <Fragment>
         <Header type="Select Modules" />
-        <MDBContainer className="select-module-container">
+        <MDBContainer className="select-module-container text-center">
           <MDBRow className="margin20">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <span
@@ -90,9 +90,9 @@ export class SelectModule extends Component {
                     width={"150px"}
                   />
                 </span>{" "}
-                experience
+                experience! 
               </h3>
-              <p className="get-started-label">Modules included</p>
+             
             </MDBCol>
           </MDBRow>
           <MDBRow className="space-top">
@@ -118,7 +118,7 @@ export class SelectModule extends Component {
                   className="custom-control-label"
                   htmlFor="houseInfo"
                 >
-                 House and Property Information
+                 Crunch numbers on any property
                  <span >
 
               </span>
@@ -147,12 +147,12 @@ export class SelectModule extends Component {
                   checked={true}
                 />
                 <label
-                  className="custom-control-label"
+                  className="custom-control-label finance-Summary"
                   htmlFor="personalFinance"
                   
                 >
 
-                  <span>Personal Finance Summary</span>
+                  <span>Post home-purchase financials</span>
                   <span >
 
               </span>
@@ -175,16 +175,16 @@ export class SelectModule extends Component {
               <div className="space-left">
                 <input
                   type="checkbox"
-                  className="custom-control-input"
+                  className="custom-control-input "
                   id="mortgageProgram"
                   disabled={true}
                   checked={true}
                 />
                 <label
-                  className="custom-control-label"
+                  className="custom-control-label mortgage-Summary"
                   htmlFor="mortgageProgram"
                 >
-                  Mortgage Summary
+                  Model 100’s of loan scenarios
                   <span >
 
               </span>
@@ -211,8 +211,8 @@ export class SelectModule extends Component {
                   defaultChecked={this.state.rentvsbuychecked}
                   onChange={this.rentvsbuyChecked}
                 />
-                <label className="custom-control-label" htmlFor="rentvsbuy">
-                  Rent Vs Buy
+                <label className="custom-control-label rent-vs" htmlFor="rentvsbuy" >
+                Should you rent or buy?
                   <span >
 
               </span>
@@ -239,8 +239,9 @@ export class SelectModule extends Component {
                   defaultChecked={this.state.taxchecked}
                   onChange={this.taxChecked}
                 />
-                <label className="custom-control-label" htmlFor="taxmodule">
-                 Tax
+                <label className="custom-control-label textd" htmlFor="taxmodule">
+                Tax impact of home purchase
+
                   <span >
 
               </span>

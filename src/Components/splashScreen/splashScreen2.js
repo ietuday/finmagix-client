@@ -74,6 +74,22 @@ export class SplashScreen2 extends Component {
               </div>
             </MDBCol>
           </MDBRow>
+
+          <MDBRow>
+            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
+            <div className="followinglines">
+         
+
+<ul>
+  <li>Select the best mortgage ! Model hundreds of combinations!</li>
+  <li>Rent vs. Buy analysis</li>
+  <li>Understand the tax impact of your home purchase</li>
+  <li>Project your home equity</li>
+  <li>Understand post purchase financial impact</li>
+</ul>
+</div>
+            </MDBCol>
+          </MDBRow>
         </MDBContainer>
       </Fragment>
     );

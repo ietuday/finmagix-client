@@ -41,8 +41,7 @@ export class SplashScreen1 extends Component {
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <div className="text-center">
                 <h5 className="splash-text-inner">
-                  In under a minute,we assist you in making one of the most<br></br>
-                  important financial decisions of your life!
+                  Let Finmagix crunch the numbers on your home purchase !!
                 </h5>
               </div>
             </MDBCol>
