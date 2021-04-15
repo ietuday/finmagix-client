@@ -432,7 +432,8 @@ export class ARMComponentSecondLoan extends Component {
 
       
     if (event.target.name === "interest_only_period") {
-      if (this.state.loan_term < event.target.value) {
+      let loan_term_value = parseInt(this.state.loan_term)
+      if (loan_term_value < event.target.value) {
         this.setState({
           interestOnlyPeriodValidationError: "Interest Only period cannot exceed the loan term of the first mortgage"
         })

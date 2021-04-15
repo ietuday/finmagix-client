@@ -103,7 +103,7 @@ export class FirstLoanScenario extends Component {
       })
         .then(async (propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0];
-          console.log('property callback', propertyInfo.data.data[0])
+          // console.log('property callback', propertyInfo.data.data[0])
           
           
           this.setState({
@@ -112,7 +112,7 @@ export class FirstLoanScenario extends Component {
             loan_amount: propertyDetail.property_price - propertyDetail.downpayment_amount
           });
           // this.loanToApply();
-          console.log('loan_amount', this.state)
+          // console.log('loan_amount', this.state)
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             await this.setState({
               mortgage_program_type:
@@ -556,7 +556,7 @@ export class FirstLoanScenario extends Component {
 
 
   getEventfromSecondMortgage = (r) =>{
-        console.log(r, 'test')
+        // console.log(r, 'test')
         if(r === "PMI"){
           this.setState({
             inPmiStatus: true,

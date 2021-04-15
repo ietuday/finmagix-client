@@ -23,7 +23,7 @@ export class ARMComponentFirstLoan extends Component {
       mortgage_program_type: "FIRST",
       loan_amount: 0,
       loan_amount_number: 0,
-      loan_term: "15",
+      loan_term: 15,
       select_loan_program: "1/1 ARM",
       initial_interest_rate: 0,
       initial_interest_rate_percentage: 0,

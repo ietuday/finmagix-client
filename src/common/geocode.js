@@ -251,6 +251,10 @@ const MapWithASearchBox = compose(
           type="text"
           placeholder="Enter your address"
           className="geocode-style"
+          style={{zIndex: '0',
+            position: 'absolute',
+            left: '213px',
+            top: '334px'}}
         />
       </SearchBox>
       {props.markers.map((marker, index) => (
