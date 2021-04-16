@@ -603,18 +603,18 @@ class AmortizationTableFRM extends React.Component {
       : "";
     const label1 = this.CalculatorResponse
       ? this.CalculatorResponse.ARM1
-        ? "Scenario One ARM"
-        : "Scenario One FRM"
+        ? <b>Scenario One ARM</b>
+        : <b>Scenario One FRM</b>
       : "";
 
-    const label2 = "Second Mortgage";
+    const label2 = <b>Second Mortgage</b>;
     const label3 = this.CalculatorResponse
       ? this.CalculatorResponse.ARM2
-        ? "Scenario Two ARM"
-        : "Scenario Two FRM"
+        ? <b>Scenario Two ARM</b>
+        : <b>Scenario Two FRM</b>
       : "";
 
-    const label4 = "Second Mortgage";
+    const label4 = <b>Second Mortgage</b>;
     const getClassName = () => {
       return `${classes.root} margin10`
     }

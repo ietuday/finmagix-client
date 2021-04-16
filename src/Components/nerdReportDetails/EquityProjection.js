@@ -205,8 +205,8 @@ function EquityProjection(props) {
         <MDBCard className="margin10">
           <AppBar position="static">
             <Tabs value={value} onChange={handleChange} variant="fullWidth">
-              <Tab label="Scenario 1" />
-              <Tab label="Scenario 2" />
+              <Tab label={<span><b>Scenario 1</b> </span>} />
+              <Tab label={<span><b>Scenario 2</b> </span>} />
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>
