@@ -32,7 +32,7 @@ export class GetStartedHouseInfo extends Component {
       property_price_number: "",
       downpayment_amount: "",
       downpayment_amount_number: "",
-      stay_duration: "",
+      stay_duration: 5,
       stay_duration_number: "",
       no_of_bedrooms: localStorage.getItem("no_of_bedrooms")
         ? localStorage.getItem("no_of_bedrooms")
@@ -47,8 +47,8 @@ export class GetStartedHouseInfo extends Component {
       annual_home_owner_association_dues_number: "",
       home_owner_insurance: "",
       home_owner_insurance_number: "",
-      home_price_growth: "",
-      home_price_growth_percentage: "",
+      home_price_growth: 2,
+      home_price_growth_percentage: 2,
       address: localStorage.getItem("address")
         ? JSON.parse(localStorage.getItem("address"))
         : "",

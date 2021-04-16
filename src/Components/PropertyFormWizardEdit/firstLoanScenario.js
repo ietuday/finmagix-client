@@ -587,8 +587,8 @@ export class FirstLoanScenario extends Component {
               aria-label="text alignment"
               size="large"
             >
-              <ToggleButton value={1}>FRM</ToggleButton>
-              <ToggleButton value={2}>ARM</ToggleButton>
+              <ToggleButton value={1}>Fixed Rate Mortgage</ToggleButton>
+              <ToggleButton value={2}>Adjustable Rate Mortgage</ToggleButton>
             </ToggleButtonGroup>
           </MDBCol>
         </MDBRow>

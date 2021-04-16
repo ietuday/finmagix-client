@@ -26,7 +26,7 @@ export class PersonalFinance extends Component {
         ).length !== 0
           ? JSON.parse(localStorage.getItem("personal_finance_array"))
               .marginal_tax_rate
-          : "",
+          : 22,
       marginal_tax_rate_percentage:
         Object.entries(
           JSON.parse(localStorage.getItem("personal_finance_array"))
@@ -39,7 +39,7 @@ export class PersonalFinance extends Component {
                 ) * 100
               )
             ) + "%"
-          : "",
+          : 22,
       annual_gross_income:
         Object.entries(
           JSON.parse(localStorage.getItem("personal_finance_array"))
@@ -74,7 +74,7 @@ export class PersonalFinance extends Component {
         ).length !== 0
           ? JSON.parse(localStorage.getItem("personal_finance_array"))
               .federal_income
-          : "",
+          : "100,000",
           monthlydebtPaymentValidationError:"",
           monthlynonhousingExpensesValidationError:"",
           marginal_tax_rate_ValidationError: "",

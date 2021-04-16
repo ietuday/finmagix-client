@@ -23,8 +23,8 @@ export class FirstLoanScenario extends Component {
       loan_amount: 0,
       loan_amount_number: 0,
       loan_term: 30,
-      interest: 0,
-      interest_percentage: 1,
+      interest: 3,
+      interest_percentage: 3,
       points: 0,
       closing_costs: 0,
       closing_costs_number: 0,
@@ -639,8 +639,8 @@ export class FirstLoanScenario extends Component {
               aria-label="text alignment"
               size="large"
             >
-              <ToggleButton value={1}>FRM</ToggleButton>
-              <ToggleButton value={2}>ARM</ToggleButton>
+              <ToggleButton value={1}>Fixed Rate Mortgage</ToggleButton>
+              <ToggleButton value={2}>Adjustable Rate Mortgage</ToggleButton>
             </ToggleButtonGroup>
           </MDBCol>
         </MDBRow>

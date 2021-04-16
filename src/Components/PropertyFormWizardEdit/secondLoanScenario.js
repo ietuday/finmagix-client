@@ -444,8 +444,8 @@ if (event.target.name === "closing_costs") {
               aria-label="text alignment"
               size="large"
             >
-              <ToggleButton disabled={this.props.frmDisabled ? true : false} value={1}>FRM</ToggleButton>
-              <ToggleButton disabled={this.props.armDisabled ? true : false} value={2}>ARM</ToggleButton>
+              <ToggleButton disabled={this.props.frmDisabled ? true : false} value={1}>Fixed Rate Mortgage</ToggleButton>
+              <ToggleButton disabled={this.props.armDisabled ? true : false} value={2}>Adjustable Rate Mortgage</ToggleButton>
             </ToggleButtonGroup>
           </MDBCol>
         </MDBRow>
