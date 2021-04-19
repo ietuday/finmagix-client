@@ -224,8 +224,8 @@ export class Signin extends Component {
             <MDBCol md="6" size="6" className="text-center">
               <FacebookLogin
                 appId="354525859322257"
-                fields="name,email,picture"
-                scope="public_profile,user_friends"
+                fields="name,email,friends,picture"
+                scope="public_profile"
                 textButton="         Facebook"
                 cssClass="facebook-button"
                 callback={responseFacebook}

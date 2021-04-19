@@ -259,8 +259,8 @@ export class Signup extends Component {
 
               <FacebookLogin
                 appId="354525859322257"
-                fields="name,email,picture"
-                scope="public_profile,user_friends"
+                fields="name,email,friends,picture"
+                scope="public_profile"
                 textButton="     Facebook"
                 cssClass="facebook-button"
                 callback={responseFacebook}

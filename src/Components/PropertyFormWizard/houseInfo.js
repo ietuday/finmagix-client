@@ -502,7 +502,7 @@ export class GetStartedHouseInfo extends Component {
         {/* New field add */}
         <MDBRow className="margin20">
           <MDBCol md="12">
-            <span className="get-started-label">Home Price Growth</span>
+            <span className="get-started-label">Annual Home Price Growth</span>
             <div className="tooltip-img">
               <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">

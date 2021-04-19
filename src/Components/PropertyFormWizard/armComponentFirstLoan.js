@@ -33,9 +33,9 @@ export class ARMComponentFirstLoan extends Component {
       floor_interest_rate_percentage: 0,
       ceiling_interest_rate: 0,
       ceiling_interest_rate_percentage: 0,
-      period_cap: 0,
-      rate_add: 0,
-      rate_add_percentage: 0,
+      period_cap: 1,
+      rate_add: 1,
+      rate_add_percentage: 1,
       points: 0,
       closing_costs: 0,
       closing_costs_number:0,
@@ -71,7 +71,7 @@ export class ARMComponentFirstLoan extends Component {
       rateadd2: 0,
       points_percentage: 0,
       closing_costs_percentage: 0,
-      period_cap_percentage: 0,
+      period_cap_percentage: 1,
       is_update:false,
       id: "",
       rateAdjustmentCapValidationError: "",
@@ -798,6 +798,12 @@ if(event.target.name === "points_percentage"){
                 await this.setState({
                   initial_interest_rate_percentage: formattedValue,
                 });
+                await this.setState({
+                  floor_interest_rate: this.state.initial_interest_rate - 1,
+                  floor_interest_rate_percentage: this.state.initial_interest_rate_percentage.split('%')[0]-1,
+                  first_interest_rate_adj_cap: (parseInt(this.state.initial_interest_rate) + 1),
+                  first_interest_rate_adj_cap_percentage: (parseInt(this.state.initial_interest_rate_percentage.split('%')[0])+ 1),
+                })
               }}
             />
             <span className="validation_red">
