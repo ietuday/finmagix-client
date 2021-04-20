@@ -230,15 +230,21 @@ export class ShowPmiOptionsFirstLoan extends Component {
 
     this.props.handleDownpaymentData(this.state);
   }
-  componentDidMount() {
-    console.log('in componentDidMount')
-  }
+  componentDidMount() {}
   componentWillReceiveProps(nextProps) {
     if(nextProps.second_mortgage_changed_value){
       this.setState({
         loanamountsecond1: nextProps.second_mortgage_changed_value
       })
     }
+    // console.log(this.props.pmiValue, 'pmi value')
+    // if(nextProps.pmiValue) {
+    //   this.setState({
+    //     pmi_amount: nextProps.pmiValue,
+    //     pmi_amount_number: nextProps.pmiValue
+    //   })
+    // }
+    // console.log('in componentWIllREceiveProps')
   }
   render() {
     console.log(this.props)

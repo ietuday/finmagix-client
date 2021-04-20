@@ -23,12 +23,12 @@ export class ARMComponentSecondLoan extends Component {
       loan_amount: 0,
       loan_amount_number: "",
       loan_term: 15,
-      select_loan_program: "1/1 ARM",
-      initial_interest_rate: 0,
-      initial_interest_rate_percentage: 0,
+      select_loan_program: 3,
+      initial_interest_rate: 3,
+      initial_interest_rate_percentage: 3,
       first_interest_rate_adj_cap: 0,
       floor_interest_rate: 0,
-      ceiling_interest_rate: 0,
+      ceiling_interest_rate: 10,
       period_cap: 1,
       rate_add: 1,
       points: 0,
@@ -67,7 +67,7 @@ export class ARMComponentSecondLoan extends Component {
       rateadd2: "0",
       first_interest_rate_adj_cap_percentage: "0",
       floor_interest_rate_percentage: "0",
-      ceiling_interest_rate_percentage: "0",
+      ceiling_interest_rate_percentage: 10,
       rate_add_percentage: 1,
       closing_costs_percentage: "0",
       points_percentage: "0",
@@ -685,7 +685,14 @@ export class ARMComponentSecondLoan extends Component {
       });
     }
   };
-  componentDidMount() {}
+  componentDidMount() {
+    this.setState({
+      floor_interest_rate: this.state.initial_interest_rate - 1,
+      floor_interest_rate_percentage: this.state.initial_interest_rate_percentage - 1,
+      first_interest_rate_adj_cap: (parseInt(this.state.initial_interest_rate) + 1),
+      first_interest_rate_adj_cap_percentage: (parseInt(this.state.initial_interest_rate_percentage)+ 1),
+    })
+  }
   getEventfromSecondMortgage = (r) =>{
     console.log(r, 'test')
     if(r === "PMI"){
