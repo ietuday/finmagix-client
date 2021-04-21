@@ -148,7 +148,7 @@ export class PrelimReport extends Component {
               <FacebookLogin
                 appId="354525859322257"
                 fields="name,email,picture"
-                scope="public_profile,user_friends"
+                scope="public_profile"
                 textButton="     Facebook"
                 cssClass="facebook-button"
                 callback={responseFacebook}
