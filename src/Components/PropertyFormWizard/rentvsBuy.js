@@ -20,6 +20,7 @@ import NumberFormat from "react-number-format";
 import quss from "../../assets/images/que.png";
 
 import { config } from '../config/default';
+import { NotificationManager } from "react-notifications";
 const { baseURL } = config;
 
 

@@ -239,7 +239,9 @@ export class RentvsBuy extends Component {
                   });
                 }}
               />
+              <span className="validation_red">
               {this.state. annual_rent_insuranceValidationError}
+              </span>
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20 marginbottom20">
