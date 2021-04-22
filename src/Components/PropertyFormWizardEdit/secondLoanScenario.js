@@ -484,7 +484,9 @@ if (event.target.name === "closing_costs") {
                     });
                   }}
                 />
+                <span className="validation_red">
                 {this.state.loan_amount_validation_error}
+                </span>
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20">
@@ -533,7 +535,9 @@ if (event.target.name === "closing_costs") {
                   });
                 }}
               />
+              <span className="validation_red">
             {this.state.interestrateValidationError}
+            </span>
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20">
@@ -562,8 +566,9 @@ if (event.target.name === "closing_costs") {
                   });
                 }}
               />
+              <span className="validation_red">
             {this.state.pointsValidationError}
-
+                </span>
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20">
@@ -597,7 +602,9 @@ if (event.target.name === "closing_costs") {
                   });
                 }}
               />
+              <span className="validation_red">
 {this.state.closingCostsValidationError}
+</span>
               </MDBCol>
             </MDBRow>
             <MDBRow className="margin20">

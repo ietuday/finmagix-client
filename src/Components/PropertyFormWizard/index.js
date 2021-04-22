@@ -515,29 +515,39 @@ export class StepperComponent extends Component {
         activeStep: newActiveStep,
       });
     } else if (this.state.activeStep === 3) {
-      this.setState({
-        activeStep: newActiveStep,
-      });
-      this.state.RentvsBuy["rate_of_investment"] = String(
-        parseFloat(
-          String(this.state.RentvsBuy["rate_of_investment_percentage"]).replace(
-            /,/g,
-            ""
-          )
-        ) / 100
-      );
-      this.state.RentvsBuy["rentinflation"] = String(
-        parseFloat(
-          String(this.state.RentvsBuy["rentinflation_percentage"]).replace(
-            /,/g,
-            ""
-          )
-        ) / 100
-      );
-      if (this.state.RentvsBuy.is_update && this.state.RentvsBuy.id) {
-        RentvsBuyUpdate(this.state.RentvsBuy)
+      if(this.state.RentvsBuy.annual_rent_insurance === null || this.state.RentvsBuy.annual_rent_insurance === "" || this.state.RentvsBuy.current_monthly_rent_payment === null 
+      || this.state.RentvsBuy.current_monthly_rent_payment === "" || this.state.RentvsBuy.rate_of_investment === null || this.state.RentvsBuy.rate_of_investment === "" 
+      || this.state.RentvsBuy.rentinflation === null || this.state.RentvsBuy.rentinflation === "" 
+      || this.state.RentvsBuy.annual_rent_insurance === undefined || this.state.RentvsBuy.annual_rent_insurance === "NaN"
+      || this.state.RentvsBuy.current_monthly_rent_payment === undefined || this.state.RentvsBuy.current_monthly_rent_payment === "NaN"
+      || this.state.RentvsBuy.rate_of_investment === undefined || this.state.RentvsBuy.rate_of_investment === "NaN" 
+      || this.state.RentvsBuy.rentinflation === undefined || this.state.RentvsBuy.rentinflation === "NaN" ){
+        return NotificationManager.error('Please correct your input', 'Please fill required fields',3000)
       } else {
-        RentvsBuyCreate(this.state.RentvsBuy);
+        this.setState({
+          activeStep: newActiveStep,
+        });
+        this.state.RentvsBuy["rate_of_investment"] = String(
+          parseFloat(
+            String(this.state.RentvsBuy["rate_of_investment_percentage"]).replace(
+              /,/g,
+              ""
+            )
+          ) / 100
+        );
+        this.state.RentvsBuy["rentinflation"] = String(
+          parseFloat(
+            String(this.state.RentvsBuy["rentinflation_percentage"]).replace(
+              /,/g,
+              ""
+            )
+          ) / 100
+        );
+        if (this.state.RentvsBuy.is_update && this.state.RentvsBuy.id) {
+          RentvsBuyUpdate(this.state.RentvsBuy)
+        } else {
+          RentvsBuyCreate(this.state.RentvsBuy);
+        }
       }
     } else if (this.state.activeStep === 4) {
       this.setState({

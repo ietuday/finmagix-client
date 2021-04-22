@@ -410,27 +410,35 @@ export class StepperComponent extends Component {
       })
     } else if (this.state.activeStep === 3) {
 
-      if (this.state.rentvsBuyValidationErrors !== 0 &&
-        !isFormValid("rent_vs_buy")) {
-        this.setState({
-          activeStep: this.state.activeStep,
-        });
-        NotificationManager.error("Please Validate Fields", "Error", 3000);
+      if(this.state.RentvsBuy.annual_rent_insurance === null || this.state.RentvsBuy.annual_rent_insurance === "" || this.state.RentvsBuy.current_monthly_rent_payment === null 
+      || this.state.RentvsBuy.current_monthly_rent_payment === "" || this.state.RentvsBuy.rate_of_investment === null || this.state.RentvsBuy.rate_of_investment === "" 
+      || this.state.RentvsBuy.rentinflation === null || this.state.RentvsBuy.rentinflation === "" 
+      || this.state.RentvsBuy.annual_rent_insurance === undefined || this.state.RentvsBuy.annual_rent_insurance === "NaN"
+      || this.state.RentvsBuy.current_monthly_rent_payment === undefined || this.state.RentvsBuy.current_monthly_rent_payment === "NaN"
+      || this.state.RentvsBuy.rate_of_investment === undefined || this.state.RentvsBuy.rate_of_investment === "NaN" 
+      || this.state.RentvsBuy.rentinflation === undefined || this.state.RentvsBuy.rentinflation === "NaN" ){
+        return NotificationManager.error('Please correct your input', 'Please fill required fields',3000)
       } else {
-        this.setState({ [this.state.RentvsBuy.rate_of_investment] : String(
-          Number(this.state.RentvsBuy["rate_of_investment"]) / 100
-        )});
-        this.setState({ [this.state.RentvsBuy.rentinflation] : String(
-          Number(this.state.RentvsBuy["rentinflation"]) / 100
-        )});
-        RentvsBuyUpdate(this.state.RentvsBuy);
-        this.props.history.push({
-          pathname: '/property-form',
-          returnBackFromreviewEdit: true
-        })
+        if (this.state.rentvsBuyValidationErrors !== 0 &&
+          !isFormValid("rent_vs_buy")) {
+          this.setState({
+            activeStep: this.state.activeStep,
+          });
+          NotificationManager.error("Please Validate Fields", "Error", 3000);
+        } else {
+          this.setState({ [this.state.RentvsBuy.rate_of_investment] : String(
+            Number(this.state.RentvsBuy["rate_of_investment"]) / 100
+          )});
+          this.setState({ [this.state.RentvsBuy.rentinflation] : String(
+            Number(this.state.RentvsBuy["rentinflation"]) / 100
+          )});
+          RentvsBuyUpdate(this.state.RentvsBuy);
+          this.props.history.push({
+            pathname: '/property-form',
+            returnBackFromreviewEdit: true
+          })
+        }
       }
-
-
 
     } else if (this.state.activeStep === 4) {
       this.props.history.push({

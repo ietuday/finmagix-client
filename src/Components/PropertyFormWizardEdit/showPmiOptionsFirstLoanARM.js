@@ -246,7 +246,9 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
             });
           }}
         />
+        <span className="validation_red">
         {this.state.pmiValidationError}
+        </span>
         </MDBCol>
       </MDBRow>
     );
@@ -321,7 +323,9 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
                 });
               }}
             />
+            <span className="validation_red">
             {this.state.interestrateValidationError}
+            </span>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -349,8 +353,9 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
               });
             }}
           />
-
+          <span className="validation_red">
           {this.state.pointsValidationError}
+          </span>
           </MDBCol>
         </MDBRow>
         <MDBRow className="margin20">
@@ -383,7 +388,9 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
                 });
               }}
             />
+            <span className="validation_red">
             {this.state.closingCostsValidationError}
+            </span>
           </MDBCol>
         </MDBRow>
       </div>
