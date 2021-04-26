@@ -76,8 +76,8 @@ export class ShowPmiOptionsSecondLoan extends Component {
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
           this.setState({
-            pmi_amount: propertyDetail.second_frm.pmi,
-            pmi_amount_number: propertyDetail.second_frm.pmi,
+            // pmi_amount: propertyDetail.second_frm.pmi,
+            // pmi_amount_number: propertyDetail.second_frm.pmi,
             second_mortgage_loan_amount: propertyDetail.second_frm.loanamountsecond1,
             second_mortgage_loan_term: propertyDetail.second_frm.second_mortgage_loan_term,
             second_mortgage_interest: propertyDetail.second_frm.second_mortgage_interest,
@@ -131,12 +131,16 @@ export class ShowPmiOptionsSecondLoan extends Component {
     if (value === "PMI") {
       await this.setState({
         showSecondloanOption: false,
-        loanamountsecond2 : 0
+        loanamountsecond2 : 0,
+        pmi_amount: this.props.pmiValue,
+        pmi_amount_number: this.props.pmiValue
       });
       this.props.getEventfromSecondMortgage("PMI")
     } else if (value === "Second Loan") {
       await this.setState({
         showSecondloanOption: true,
+        pmi_amount: 0,
+        pmi_amount_number: 0
       });
       this.props.getEventfromSecondMortgage("SecondMortgage") 
     }
@@ -230,6 +234,12 @@ if (event.target.name === "second_mortgage_closing_costs") {
     if(nextProps.second_mortgage_changed_value){
       this.setState({
         loanamountsecond2: nextProps.second_mortgage_changed_value
+      })
+    }
+    if(nextProps.pmiValue !== this.props.pmiValue) {
+      this.setState({
+        pmi_amount: nextProps.pmiValue,
+        pmi_amount_number: nextProps.pmiValue
       })
     }
   }

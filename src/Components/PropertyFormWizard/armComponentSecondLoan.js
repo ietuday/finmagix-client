@@ -90,6 +90,7 @@ export class ARMComponentSecondLoan extends Component {
       second_mortgage_changed_value: "",
       inPmiStatus: false,
       inSecondMortgage: false,
+      pmiValue: 0,
     };
     // this.validators = ArmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -114,6 +115,9 @@ export class ARMComponentSecondLoan extends Component {
             property_downpayment: propertyDetail.downpayment_amount,
             loan_amount: propertyDetail.property_price - propertyDetail.downpayment_amount
           });
+          this.setState({
+            pmiValue: (0.000833 * (this.state.loan_amount))
+          })
           if (propertyDetail.second_arm && propertyDetail.second_arm.id) {
             this.setState({
               mortgage_program_type:
@@ -409,6 +413,10 @@ export class ARMComponentSecondLoan extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
+
+    await this.setState({
+      pmiValue: (0.000833 * (this.state.loan_amount))
+    })
 
     // if (
     //   (this.state.mortgage_program_type_value === 2 &&
@@ -1217,6 +1225,7 @@ export class ARMComponentSecondLoan extends Component {
             handleDownpaymentData={this.handleDownpaymentData}
             getEventfromSecondMortgage={this.getEventfromSecondMortgage}
             second_mortgage_changed_value={this.state.second_mortgage_changed_value}
+            pmiValue={this.state.pmiValue}
           />
         ) : null}
       </Fragment>
