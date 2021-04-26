@@ -18,7 +18,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
 
     this.state = {
       pmi_amount: 1,
-      pmi_amount_number: "1",
+      pmi_amount_number: 1,
       second_mortgage_loan_amount: "0",
       second_mortgage_loan_term: "0",
       second_mortgage_interest: "0",
@@ -77,8 +77,8 @@ export class ShowPmiOptionsFirstLoan extends Component {
         .then((propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0]
           this.setState({
-            pmi_amount: propertyDetail.first_frm.pmi,
-            pmi_amount_number: propertyDetail.first_frm.pmi,
+            // pmi_amount: propertyDetail.first_frm.pmi,
+            // pmi_amount_number: propertyDetail.first_frm.pmi,
             second_mortgage_loan_amount: propertyDetail.first_frm.loanamountsecond1,
             second_mortgage_loan_term: propertyDetail.first_frm.second_mortgage_loan_term,
             second_mortgage_interest: propertyDetail.first_frm.second_mortgage_interest,
@@ -132,12 +132,17 @@ export class ShowPmiOptionsFirstLoan extends Component {
     if (value === "PMI") {
       await this.setState({
         showSecondloanOption: false,
-        loanamountsecond1 : 0
+        loanamountsecond1 : 0,
+        pmi_amount: this.props.pmiValue,
+        pmi_amount_number: this.props.pmiValue
       });
+      console.log(this.props, 'inside pmi condition')
       this.props.getEventfromSecondMortgage("PMI")
     } else if (value === "Second Loan") {
       await this.setState({
         showSecondloanOption: true,
+        pmi_amount: 0,
+        pmi_amount_number: 0
       });
       this.props.getEventfromSecondMortgage("SecondMortgage") 
     }
@@ -147,7 +152,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
     await this.setState({
       [event.target.name]: event.target.value,
     });
-
+    console.log(this.state,'handle change called')
     if(event.target.name === "second_mortgage_interest_percentage"){
       if(parseInt(String(event.target.value).replace(/%/g, '')) > 10){
         this.setState({
@@ -237,17 +242,36 @@ export class ShowPmiOptionsFirstLoan extends Component {
         loanamountsecond1: nextProps.second_mortgage_changed_value
       })
     }
-    // console.log(this.props.pmiValue, 'pmi value')
-    // if(nextProps.pmiValue) {
-    //   this.setState({
-    //     pmi_amount: nextProps.pmiValue,
-    //     pmi_amount_number: nextProps.pmiValue
-    //   })
-    // }
-    // console.log('in componentWIllREceiveProps')
+    console.log(this.props, 'this.props')
+    console.log(nextProps, 'new props')
+    console.log(this.props.pmiValue, 'pmi value')
+    if(nextProps.pmiValue !== this.props.pmiValue) {
+      this.setState({
+        pmi_amount: nextProps.pmiValue,
+        pmi_amount_number: nextProps.pmiValue
+      })
+    }
+    console.log(this.state, 'current state')
+    console.log('in componentWIllREceiveProps')
   }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   // if(nextProps.profileImage !== prevState.profileImage ) {
+  //   //   // return {stateFoo: 'valueBar'};
+  //   // }
+  //   console.log(prevState, 'prevState')
+  //   console.log(nextProps, 'nextProps')
+  //   if(nextProps.second_mortgage_changed_value){
+  //     return {loanamountsecond1: nextProps.second_mortgage_changed_value}
+  //   }
+  //   if(nextProps.pmiValue) {
+  //     return {
+  //       pmi_amount: nextProps.pmiValue,
+  //       pmi_amount_number: nextProps.pmiValue
+  //     }
+  //   }
+  // }
   render() {
-    console.log(this.props)
+    console.log(this.props, 'after render')
     const showPmiAmount = (
       <MDBRow className="margin20">
         <MDBCol md="12">
@@ -269,6 +293,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
             onChange={this.handleChange}
             thousandSeparator={true}
             onValueChange={async (values) => {
+              console.log(values, 'on value change called')
               const { formattedValue, value } = values;
               await this.setState({
                 pmi_amount_number: formattedValue,

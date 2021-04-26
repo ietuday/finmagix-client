@@ -72,6 +72,7 @@ export class SecondLoanScenario extends Component {
       second_mortgage_changed_value: "",
       inPmiStatus: false,
       inSecondMortgage: false,
+      pmiValue: 0,
     };
     // this.validators = FrmMortgageProgramValidator;
     // resetValidators(this.validators);
@@ -95,6 +96,9 @@ export class SecondLoanScenario extends Component {
             'property_price': propertyDetail.property_price,
             'property_downpayment': propertyDetail.downpayment_amount,
             loan_amount: propertyDetail.property_price - propertyDetail.downpayment_amount
+          })
+          this.setState({
+            pmiValue: (0.000833 * (this.state.loan_amount))
           })
           if (propertyDetail.first_frm && propertyDetail.first_frm.id) {
             this.setState({
@@ -280,6 +284,10 @@ if (event.target.name === "closing_costs") {
     await this.setState({
       [event.target.name]: event.target.value,
     });
+
+    await this.setState({
+      pmiValue: (0.000833 * (this.state.loan_amount))
+    })
     // if (
     //   (this.state.mortgage_program_type_value === 1 &&
     //     name === "loan_amount") ||
@@ -740,6 +748,7 @@ if (event.target.name === "closing_costs") {
                 getEventfromSecondMortgage={this.getEventfromSecondMortgage}
                 // second_mortgage_loan_amount={this.state.second_mortgage_loan_amount}
                 second_mortgage_changed_value={this.state.second_mortgage_changed_value}
+                pmiValue={this.state.pmiValue}
               />
             ) : null}
           </div>
