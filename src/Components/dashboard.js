@@ -55,6 +55,7 @@ export class Dashboard extends Component {
     if(localStorage.getItem('addressData')) localStorage.removeItem('addressData')
     if(localStorage.getItem('GetSinglePropertyResponse'))localStorage.removeItem('GetSinglePropertyResponse')
     if(localStorage.getItem('calculatorResponse'))localStorage.removeItem('calculatorResponse')
+    if(localStorage.getItem('property_id'))localStorage.removeItem('property_id')
     
   }
   toggle = (item) => {
