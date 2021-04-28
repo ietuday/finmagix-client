@@ -7,44 +7,89 @@ import { config } from "../../../config/default";
 const { baseURL } = config;
 // const token = localStorage.getItem('accessToken')
 export const frm_mortgage_create_first = (data) => {
-  return (dispatch) => {
-    Axios.post(`${baseURL}/mortgage_programs/frm/list_or_create`, data, {
-      headers: {
-        "Content-type": "Application/json",
-        Authorization: `JWT ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((frmMortgageCreateResponse) => {
-        dispatch({
-          type: FRM_MORTGAGE_CREATE_FIRST,
-          payload: frmMortgageCreateResponse.data,
-        });
+  if(data && data.property_obj){
+    return (dispatch) => {
+      Axios.post(`${baseURL}/mortgage_programs/frm/list_or_create`, data, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
       })
-      .catch((err) => {
-      
-      });
-  };
+        .then((frmMortgageCreateResponse) => {
+          dispatch({
+            type: FRM_MORTGAGE_CREATE_FIRST,
+            payload: frmMortgageCreateResponse.data,
+          });
+        })
+        .catch((err) => {
+        
+        });
+    };
+  } else {
+    data.property_obj = localStorage.getItem("property_id");
+    return (dispatch) => {
+      Axios.post(`${baseURL}/mortgage_programs/frm/list_or_create`, data, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((frmMortgageCreateResponse) => {
+          dispatch({
+            type: FRM_MORTGAGE_CREATE_FIRST,
+            payload: frmMortgageCreateResponse.data,
+          });
+        })
+        .catch((err) => {
+        
+        });
+    };
+  }
+  
 };
 export const frm_mortgage_create_second = (data) => {
-  return (dispatch) => {
-    Axios.post(`${baseURL}/mortgage_programs/frm/list_or_create`, data, {
-      headers: {
-        "Content-type": "Application/json",
-        Authorization: `JWT ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((frmMortgageCreateResponse) => {
-        dispatch({
-          type: FRM_MORTGAGE_CREATE_SECOND,
-          payload: frmMortgageCreateResponse.data,
-        });
+  if(data && data.property_obj){
+    return (dispatch) => {
+      Axios.post(`${baseURL}/mortgage_programs/frm/list_or_create`, data, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
       })
-      .catch((err) => {
-       
-      });
-  };
+        .then((frmMortgageCreateResponse) => {
+          dispatch({
+            type: FRM_MORTGAGE_CREATE_SECOND,
+            payload: frmMortgageCreateResponse.data,
+          });
+        })
+        .catch((err) => {
+         
+        });
+    };
+  } else {
+    data.property_obj = localStorage.getItem("property_id");
+    return (dispatch) => {
+      Axios.post(`${baseURL}/mortgage_programs/frm/list_or_create`, data, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((frmMortgageCreateResponse) => {
+          dispatch({
+            type: FRM_MORTGAGE_CREATE_SECOND,
+            payload: frmMortgageCreateResponse.data,
+          });
+        })
+        .catch((err) => {
+         
+        });
+    };
+  }
+  
 };
 export const arm_mortgage_create_first = (data) => {
+  if(data && data.property_obj) {
     return (dispatch) => {
       Axios.post(`${baseURL}/mortgage_programs/arm/list_or_create`, data, {
         headers: {
@@ -62,8 +107,8 @@ export const arm_mortgage_create_first = (data) => {
          
         });
     };
-  };
-  export const arm_mortgage_create_second = (data) => {
+  } else {
+    data.property_obj = localStorage.getItem("property_id");
     return (dispatch) => {
       Axios.post(`${baseURL}/mortgage_programs/arm/list_or_create`, data, {
         headers: {
@@ -73,14 +118,56 @@ export const arm_mortgage_create_first = (data) => {
       })
         .then((armMortgageCreateResponse) => {
           dispatch({
-            type: ARM_MORTGAGE_CREATE_SECOND,
+            type: ARM_MORTGAGE_CREATE_FIRST,
             payload: armMortgageCreateResponse.data,
           });
         })
         .catch((err) => {
-       
+         
         });
     };
+  }
+    
+  };
+  export const arm_mortgage_create_second = (data) => {
+    if(data && data.property_obj) {
+      return (dispatch) => {
+        Axios.post(`${baseURL}/mortgage_programs/arm/list_or_create`, data, {
+          headers: {
+            "Content-type": "Application/json",
+            Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+          },
+        })
+          .then((armMortgageCreateResponse) => {
+            dispatch({
+              type: ARM_MORTGAGE_CREATE_SECOND,
+              payload: armMortgageCreateResponse.data,
+            });
+          })
+          .catch((err) => {
+         
+          });
+      };  
+    } else {
+      data.property_obj = localStorage.getItem("property_id");
+      return (dispatch) => {
+        Axios.post(`${baseURL}/mortgage_programs/arm/list_or_create`, data, {
+          headers: {
+            "Content-type": "Application/json",
+            Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+          },
+        })
+          .then((armMortgageCreateResponse) => {
+            dispatch({
+              type: ARM_MORTGAGE_CREATE_SECOND,
+              payload: armMortgageCreateResponse.data,
+            });
+          })
+          .catch((err) => {
+         
+          });
+      };
+    }
   };
 export const frm_mortgage_get_first = (id) => {
   return (dispatch) => {

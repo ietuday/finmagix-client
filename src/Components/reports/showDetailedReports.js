@@ -310,7 +310,7 @@ export class ShowDetailedReports extends Component {
         ? this.state.personalFinace.fico_score_range
         : "",
       Federalincome: this.state.personalFinace.federal_income
-        ? Number(this.state.personalFinace.federal_income)
+        ? Number(this.state.personalFinace.federal_income.replace(/,/g,''))
         : 0,
       Taxrate: this.state.personalFinace.marginal_tax_rate
         ? Number(this.state.personalFinace.marginal_tax_rate)
