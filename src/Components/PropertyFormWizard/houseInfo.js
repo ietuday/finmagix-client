@@ -823,6 +823,7 @@ export class GetStartedHouseInfo extends Component {
               placeholder="Enter amount here"
               name="home_owner_insurance"
               value={this.state.home_owner_insurance}
+              decimalScale={0}
               onChange={this.handleChange}
               thousandSeparator={true}
               onValueChange={async (values) => {
