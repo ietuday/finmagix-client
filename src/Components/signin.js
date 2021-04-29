@@ -163,7 +163,9 @@ export class Signin extends Component {
               />
             </MDBCol>
           </MDBRow>
+          <span className="validation_red">
           {displayValidationErrors(this.validators, "email")}
+          </span>
           <MDBRow className="margin20">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <span className="signup-signin-label">Password</span>
@@ -178,7 +180,9 @@ export class Signin extends Component {
               />
             </MDBCol>
           </MDBRow>
+          <span className="validation_red">
           {displayValidationErrors(this.validators, "password")}
+          </span>
 
 
 

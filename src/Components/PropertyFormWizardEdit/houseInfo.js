@@ -680,6 +680,7 @@ export class GetStartedHouseInfo extends Component {
               name="home_owner_insurance"
               value={this.state.home_owner_insurance}
               onChange={this.handleChange}
+              decimalScale={0}
               thousandSeparator={true}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;

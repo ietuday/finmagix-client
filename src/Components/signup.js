@@ -179,7 +179,9 @@ export class Signup extends Component {
             />
           </MDBCol>
         </MDBRow>
+        <span className="validation_red">
         {displayValidationErrors(this.validators, "email")}
+        </span>
         <MDBRow className="margin20">
           <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <span className="signup-signin-label">Password</span>
@@ -194,7 +196,9 @@ export class Signup extends Component {
             />
           </MDBCol>
         </MDBRow>
+        <span className="validation_red">
         {displayValidationErrors(this.validators, "password")}
+        </span>
         <MDBRow className="margin20">
           <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <div className="custom-control custom-checkbox">
@@ -209,7 +213,8 @@ export class Signup extends Component {
                 htmlFor="defaultUnchecked"
               >
                 I have read and agree to the{" "}
-                <Link to="#">Terms and Conditions</Link>
+                {/* <Link to="https://finmagix.s3-us-west-1.amazonaws.com/Finmagix+Terms+of+Use.pdf">Terms and Conditions</Link> */}
+                <a rel="noopener noreferrer" target="_blank" href={"https://finmagix.s3-us-west-1.amazonaws.com/Finmagix+Terms+of+Use.pdf"} >Terms and Conditions</a>
               </label>
             </div>
           </MDBCol>
