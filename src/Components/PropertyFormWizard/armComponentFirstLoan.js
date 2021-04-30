@@ -21,6 +21,7 @@ export class ARMComponentFirstLoan extends Component {
     super(props);
     this.state = {
       mortgage_program_type: "FIRST",
+      mortgage_program_type_value: 2,
       loan_amount: 0,
       loan_amount_number: 0,
       loan_term: 15,
