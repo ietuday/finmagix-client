@@ -20,6 +20,7 @@ export class ARMComponentSecondLoan extends Component {
     super();
     this.state = {
       mortage_program_type: "SECOND",
+      mortgage_program_type_value: 2,
       loan_amount: 0,
       loan_amount_number: "",
       loan_term: 15,
