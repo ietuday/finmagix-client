@@ -235,6 +235,7 @@ if (event.target.name === "second_mortgage_closing_costs") {
               name="pmi_amount"
               value={this.state.pmi_amount}
               onChange={this.handleChange}
+              decimalScale={0}
               thousandSeparator={true}
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
