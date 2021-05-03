@@ -282,7 +282,7 @@ export class Tax1 extends Component {
 
     const showDetailedDeductionRow = (
       <div>
-        <MDBRow className="margin20">
+        {/* <MDBRow className="margin20">
           <MDBCol md="12">
             <span className="get-started-label">
               Federal adjusted gross income
@@ -296,25 +296,25 @@ export class Tax1 extends Component {
             placeholder="Enter amount here"
           /> */}
 
-            <NumberFormat
-              className="input-class-mdb"
-              name="fedral_adjusted_gross_income"
-              value={this.state.fedral_adjusted_gross_income}
-              onChange={this.handleChange}
-              placeholder="Enter amount here"
-              thousandSeparator={true}
-              onValueChange={async (values) => {
-                const { formattedValue, value } = values;
-                await this.setState({
-                  fedral_adjusted_gross_income_number: formattedValue,
-                });
-                await this.setState({
-                  fedral_adjusted_gross_income: value,
-                });
-              }}
-            />
-          </MDBCol>
-        </MDBRow>
+            {/* <NumberFormat */}
+              {/* className="input-class-mdb" */}
+              {/* name="fedral_adjusted_gross_income" */}
+              {/* value={this.state.fedral_adjusted_gross_income} */}
+              {/* onChange={this.handleChange} */}
+              {/* placeholder="Enter amount here" */}
+              {/* thousandSeparator={true} */}
+              {/* onValueChange={async (values) => { */}
+                {/* const { formattedValue, value } = values; */}
+                {/* await this.setState({ */}
+                  {/* fedral_adjusted_gross_income_number: formattedValue, */}
+                {/* }); */}
+                {/* await this.setState({ */}
+                  {/* fedral_adjusted_gross_income: value, */}
+                {/* }); */}
+              {/* }} */}
+            {/* /> */}
+          {/* </MDBCol> */}
+        {/* </MDBRow> */} 
 
         <MDBRow className="margin20">
           <MDBCol md="12">
@@ -564,7 +564,7 @@ export class Tax1 extends Component {
           <MDBRow className="margin20 marginbottom20">
             <MDBCol md="12" className="text-center">
               <span className="get-started-label">
-                <h4>Taxes</h4>
+                <h4><b>Taxes</b></h4><br />
                 Do you want to provide detailed itemized deduction? 
               </span>
               <div className="tooltip-img">

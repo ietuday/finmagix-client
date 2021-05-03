@@ -82,7 +82,38 @@ function CheatSheet(props) {
 
  
 
-
+  const HouseInfo = [
+    {
+      name: "Property Price",
+      Amount: parseFloat(
+        String(
+          `${
+            singlePropertyResponse.property_price
+          }`
+        ).replace(/,/g, "")
+      ),
+    },
+    {
+      name: "Downpayment",
+      Amount: parseFloat(
+        String(
+          `${
+            singlePropertyResponse.downpayment_amount
+          }`
+        ).replace(/,/g, "")
+      ),
+    },
+    {
+      name: "Duration of stay",
+      Amount: parseFloat(
+        String(
+          `${
+            singlePropertyResponse.stay_duration
+          }`
+        ).replace(/,/g, "")
+      ),
+    }
+  ]
 
 
   const loandata = [
@@ -461,61 +492,53 @@ function CheatSheet(props) {
             Second Scenario
           </MDBCol>
         </MDBRow>
-        <MDBRow className="margin20">
-          <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-            {/* <Card> */}
-            <CardContent>
-              <MDBRow className="margin20">
-                <MDBCol md="9" size="10">
-                  <Typography variant="h5" component="h2">
-                
-                  <h6 class="CardTitle">  Home Information</h6>
-                  </Typography>
-                </MDBCol>
-              </MDBRow>
-              <MDBRow>
-                              <MDBCol md="8">
-                                <Typography color="textSecondary">
-                                  Property Price
-                                </Typography>
-                              </MDBCol>
-                              <MDBCol md="3">
-                                <Typography variant="body2" component="p">
-                                <NumberFormat value={singlePropertyResponse.property_price} displayType={'text'} thousandSeparator={true} />
-                                
-                                </Typography>
-                              </MDBCol>
-                            </MDBRow>
-                            <MDBRow>
-                              <MDBCol md="8">
-                                <Typography color="textSecondary">
-                                Downpayment
-                                </Typography>
-                              </MDBCol>
-                              <MDBCol md="3">
-                                <Typography variant="body2" component="p">
-                                <NumberFormat value={singlePropertyResponse.downpayment_amount} displayType={'text'} thousandSeparator={true} />
-                                
-                                </Typography>
-                              </MDBCol>
-                            </MDBRow>
-                            <MDBRow>
-                              <MDBCol md="8">
-                                <Typography color="textSecondary">
-                                Duration of stay
-                                </Typography>
-                              </MDBCol>
-                              <MDBCol md="3">
-                                <Typography variant="body2" component="p">
-                                <NumberFormat value={singlePropertyResponse.stay_duration} displayType={'text'} thousandSeparator={true} />
-                                
-                                </Typography>
-                              </MDBCol>
-                            </MDBRow>
-            </CardContent>
-            {/* </Card> */}
-          </MDBCol>
-        </MDBRow>
+        
+        <h6 class="CardTitle">Home Information</h6>
+        <ResponsiveContainer
+          width={"100%"}
+          height={50 * HouseInfo.length}
+          debounce={50}
+        >
+          <BarChart
+            data={HouseInfo}
+            layout="vertical"
+            margin={{
+              left: 125,
+              right: maxTextWidthLoan + (BAR_AXIS_SPACE - 8),
+            }}
+          >
+            <XAxis hide axisLine={false} type="number" />
+            <YAxis
+              yAxisId={0}
+              dataKey={xKey}
+              type="category"
+              axisLine={false}
+              tickLine={false}
+              tick={YAxisLeftTick}
+            />
+            <YAxis
+              orientation="right"
+              yAxisId={1}
+              dataKey={yKey}
+              type="category"
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={(value) => value.toLocaleString()}
+              mirror
+              tick={{
+                transform: `translate(${maxTextWidthLoan + BAR_AXIS_SPACE}, 0)`,
+              }}
+            />
+         
+            {/* <Bar dataKey={yKey} minPointSize={2} barSize={32}>
+              {HouseInfo.map((d, idx) => {
+                return (
+                  <Cell key={d[xKey]} fill={getMortageColor(HouseInfo.length, idx)} />
+                );
+              })}
+            </Bar> */}
+          </BarChart>
+        </ResponsiveContainer>
         <h6 class="CardTitle">Loan Program Comparison</h6>
         <ResponsiveContainer
           width={"100%"}
