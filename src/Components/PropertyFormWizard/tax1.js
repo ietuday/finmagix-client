@@ -565,7 +565,7 @@ export class Tax1 extends Component {
             <MDBCol md="12" className="text-center">
               <span className="get-started-label">
                 <h4><b>Taxes</b></h4><br />
-                Do you want to provide detailed itemized deduction? 
+                Do you want to provide itemized deduction? 
               </span>
               <div className="tooltip-img">
               <img src={quss} className="tool-img" alt="" />

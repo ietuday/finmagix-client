@@ -150,7 +150,7 @@ function PostMortgagePurchaseProfile(props) {
             : 0
         ).replace(/,/g, "")
       ),
-    },
+    }
   ];
 
   const data = [
@@ -199,6 +199,32 @@ function PostMortgagePurchaseProfile(props) {
             : CalculatorResponse.FRM1
             ? CalculatorResponse.FRM1.Balanceoption1
             : 0
+        ).replace(/,/g, "")
+      ),
+    },
+  ];
+
+  const data3 = [
+    {
+      name: "Monthly Income",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM1
+            ? CalculatorResponse.ARM1.Monthincome
+            : CalculatorResponse.FRM1.Monthincome
+        ).replace(/,/g, "")
+      ),
+    },
+  ];
+
+  const data4 = [
+    {
+      name: "Monthly Income",
+      pv: parseFloat(
+        String(
+          CalculatorResponse.ARM2
+            ? CalculatorResponse.ARM2.Monthincome
+            : CalculatorResponse.FRM2.Monthincome
         ).replace(/,/g, "")
       ),
     },
@@ -439,6 +465,52 @@ function PostMortgagePurchaseProfile(props) {
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
+              <ResponsiveContainer
+                width={"100%"}
+                height={50 * data.length}
+                debounce={50}
+              >
+                <BarChart
+                  data={data3}
+                  layout="vertical"
+                  margin={{
+                    left: 130,
+                    right: maxTextWidth + (BAR_AXIS_SPACE - 8),
+                  }}
+                >
+                  <XAxis hide axisLine={false} type="number" />
+                  <YAxis
+                    yAxisId={0}
+                    dataKey={xKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={YAxisLeftTick}
+                  />
+                  <YAxis
+                    orientation="right"
+                    yAxisId={1}
+                    dataKey={yKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tickFormatter={(value) => value.toLocaleString()}
+                    mirror
+                    tick={{
+                      transform: `translate(${
+                        maxTextWidth + BAR_AXIS_SPACE
+                      }, 0)`,
+                    }}
+                  />
+                  <Bar dataKey={yKey} minPointSize={2} barSize={32}>
+                    {data.map((d, idx) => {
+                      return (
+                        <Cell key={d[xKey]} fill="#F08080" />
+                      );
+                    })}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </TabPanel>
           <TabPanel value={value} index={1}>
@@ -519,6 +591,52 @@ function PostMortgagePurchaseProfile(props) {
                     {data.map((d, idx) => {
                       return (
                         <Cell key={d[xKey]} fill={getColor(data.length, idx)} />
+                      );
+                    })}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+              <ResponsiveContainer
+                width={"100%"}
+                height={50 * data.length}
+                debounce={50}
+              >
+                <BarChart
+                  data={data4}
+                  layout="vertical"
+                  margin={{
+                    left: 130,
+                    right: maxTextWidth + (BAR_AXIS_SPACE - 8),
+                  }}
+                >
+                  <XAxis hide axisLine={false} type="number" />
+                  <YAxis
+                    yAxisId={0}
+                    dataKey={xKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={YAxisLeftTick}
+                  />
+                  <YAxis
+                    orientation="right"
+                    yAxisId={1}
+                    dataKey={yKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tickFormatter={(value) => value.toLocaleString()}
+                    mirror
+                    tick={{
+                      transform: `translate(${
+                        maxTextWidth + BAR_AXIS_SPACE
+                      }, 0)`,
+                    }}
+                  />
+                  <Bar dataKey={yKey} minPointSize={2} barSize={32}>
+                    {data.map((d, idx) => {
+                      return (
+                        <Cell key={d[xKey]} fill="#F08080" />
                       );
                     })}
                   </Bar>

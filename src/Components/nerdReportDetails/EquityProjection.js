@@ -20,7 +20,9 @@ import {
   // YAxis,
   // CartesianGrid,
   Tooltip,
+  YAxis,
   // Legend,
+  ResponsiveContainer
 } from "recharts";
 
 const getIntroOfPage = (label) => {
@@ -225,10 +227,12 @@ function EquityProjection(props) {
                   ? "FRM"
                   : ""}
               </h4>
+              <ResponsiveContainer width='100%' height={300}>
               <BarChart
-                width={300}
-                height={400}
+                width={350}
+                height={300}
                 data={data1}
+                layout="vertical"
                 margin={{
                   top: 5,
                   right: 30,
@@ -236,14 +240,20 @@ function EquityProjection(props) {
                   bottom: 5,
                 }}
               >
-                <XAxis dataKey="name" />
-
+                <XAxis hide axisLine={false} type="number" />
+                <YAxis 
+                width={155}
+                 type="category"
+                 orientation="right"
+                 dataKey="name"
+                 axisLine={false}
+                 />
                 <Tooltip content={<CustomTooltip />} />
-
                 <Bar dataKey="pv" barSize={40} fill="#32C0CC" />
                 <Bar dataKey="at" barSize={40} fill="#19AAF2" />
                 <Bar dataKey="ct" barSize={40} fill="#88E6A1" />
               </BarChart>
+              </ResponsiveContainer>
             </div>
           </TabPanel>
           <TabPanel value={value} index={1}>
@@ -261,10 +271,12 @@ function EquityProjection(props) {
                   ? "FRM"
                   : ""}
               </h4>
+              <ResponsiveContainer width='100%' height={300}>
               <BarChart
-                  width={300}
-                  height={400}
+                  width={370}
+                  height={300}
                 data={data2}
+                layout="vertical"
                 margin={{
                   top: 5,
                   right: 30,
@@ -272,7 +284,14 @@ function EquityProjection(props) {
                   bottom: 5,
                 }}
               >
-                <XAxis dataKey="name" />
+                <XAxis hide axisLine={false} type="number" />
+                <YAxis 
+                 width={155}
+                 orientation="right"
+                 type="category"
+                 dataKey="name"
+                 axisLine={false}
+                 />
 
                 <Tooltip content={<CustomTooltip />} />
 
@@ -280,6 +299,7 @@ function EquityProjection(props) {
                 <Bar dataKey="at" barSize={40} fill="#19AAF2" />
                 <Bar dataKey="ct" barSize={40} fill="#88E6A1" />
               </BarChart>
+              </ResponsiveContainer>
             </div>
           </TabPanel>
         </MDBCard>
