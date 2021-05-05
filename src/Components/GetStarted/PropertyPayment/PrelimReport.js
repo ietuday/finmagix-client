@@ -17,7 +17,7 @@ export class PrelimReport extends Component {
   constructor() {
     super();
     this.state = {
-      signup: false,
+      selectModules: false,
     };
   }
 
@@ -34,26 +34,26 @@ export class PrelimReport extends Component {
     GetPrelimReport(dataObject);
   }
 
-  signUpGoogleFacebbok(res, type) {
-    const { SignUp } = this.props;
-    let response;
-    if (type === "google") {
-      response = {
-        name: SHA256(JSON.stringify(res.profileObj.name)).toString(),
-        email: SHA256(JSON.stringify(res.profileObj.email)).toString(),
-        password: SHA256(JSON.stringify("12345678")).toString(),
-      };
-    } else if (type === "facebook") {
-      response = {
-        name: SHA256(JSON.stringify(res.name)).toString(),
-        email: SHA256(JSON.stringify(res.email)).toString(),
-        password: SHA256(JSON.stringify("12345678")).toString(),
-      };
-    }
-    if (response) {
-      SignUp(response, this.onSuccess, this.onFailure);
-    }
-  }
+  // signUpGoogleFacebbok(res, type) {
+  //   const { SignUp } = this.props;
+  //   let response;
+  //   if (type === "google") {
+  //     response = {
+  //       name: SHA256(JSON.stringify(res.profileObj.name)).toString(),
+  //       email: SHA256(JSON.stringify(res.profileObj.email)).toString(),
+  //       password: SHA256(JSON.stringify("12345678")).toString(),
+  //     };
+  //   } else if (type === "facebook") {
+  //     response = {
+  //       name: SHA256(JSON.stringify(res.name)).toString(),
+  //       email: SHA256(JSON.stringify(res.email)).toString(),
+  //       password: SHA256(JSON.stringify("12345678")).toString(),
+  //     };
+  //   }
+  //   if (response) {
+  //     SignUp(response, this.onSuccess, this.onFailure);
+  //   }
+  // }
 
   onSuccess = () => {
     // this.props.history("/signin");
@@ -66,15 +66,15 @@ export class PrelimReport extends Component {
   onFailure = (message) => {
     NotificationManager.error("data already exists", "error", 3000);
   };
-  goToSignup = () => {
+  goToSelectModules = () => {
     this.setState({
-      signup: !this.state.signup,
+      selectModules: !this.state.selectModules,
     });
   };
   render() {
     const { PrelimReportResponse } = this.props;
-    if (this.state.signup) {
-      return <Redirect to="/signup" />;
+    if (this.state.selectModules) {
+      return <Redirect to="/select-modules" />;
     }
     const responseFacebook = (response) => {
       this.signUpGoogleFacebbok(response, "facebook");
@@ -86,7 +86,7 @@ export class PrelimReport extends Component {
       <Fragment>
         <MDBRow className="prelim-report-row ">
           <MDBCol md="12" className="text-center">
-            <h4 style={{color:'white'}}>Preliminary Report</h4>
+            <h4 style={{color:'white'}}>Based on your inputs, Finmagix recommends</h4>
             <p>Monthly</p>
             <h2 style={{color:'white'}}>
               {PrelimReportResponse
@@ -98,30 +98,26 @@ export class PrelimReport extends Component {
         </MDBRow>
         <MDBRow className="margin20">
           <MDBCol md="12" className="text-center">
-            <h4>
-              Sign up to get a complete financial review of your home purchase
-              customized to your needs
-            </h4>
             {/* <p className="link">(Click here for sample report)</p> */}
-            <br />
+            {/* <br /> */}
             <Button
               variant="contained"
               size="large"
               color="primary"
-              onClick={this.goToSignup}
+              onClick={this.goToSelectModules}
               className="button-inner-class"
               fullWidth
             >
-              Sign Up
+              Next
             </Button>
           </MDBCol>
         </MDBRow>
-        <MDBRow className="margin20">
+        {/* <MDBRow className="margin20">
           <MDBCol md="12" className="text-center">
             <span className="get-started-label">Or sign up with</span>
           </MDBCol>
-        </MDBRow>
-        <MDBRow className="margin20">
+        </MDBRow> */}
+        {/* <MDBRow className="margin20">
           <MDBCol md="6" size="6" className="text-center">
             <GoogleLogin
               clientId="1058447115595-ukhhmegumqrk5766437i00qolisqhgqv.apps.googleusercontent.com"
@@ -145,25 +141,25 @@ export class PrelimReport extends Component {
             
             */}
 
-              <FacebookLogin
-                appId="354525859322257"
-                fields="name,email,picture"
-                scope="public_profile"
-                textButton="     Facebook"
-                cssClass="facebook-button"
-                callback={responseFacebook}
-                icon="fab fa-facebook-square"
-              />
-          </MDBCol>
+              {/* <FacebookLogin */}
+                {/* appId="354525859322257" */}
+                {/* fields="name,email,picture" */}
+                {/* scope="public_profile" */}
+                {/* textButton="     Facebook" */}
+                {/* cssClass="facebook-button" */}
+                {/* callback={responseFacebook} */}
+                {/* icon="fab fa-facebook-square" */}
+              {/* /> */}
+          {/* </MDBCol> */}
     
-        </MDBRow>
-        <MDBRow className="margin20 signuplastsentence text-center">
-          <MDBCol md="12" className="text-center">
-            <span className="sign-up-small-label">
-            Already have an account? <Link to="/signin">Sign In</Link>
-            </span>
-          </MDBCol>
-        </MDBRow>
+        {/* </MDBRow> */}
+        {/* <MDBRow className="margin20 signuplastsentence text-center"> */}
+          {/* <MDBCol md="12" className="text-center"> */}
+            {/* <span className="sign-up-small-label"> */}
+            {/* Already have an account? <Link to="/signin">Sign In</Link> */}
+            {/* </span> */}
+          {/* </MDBCol> */}
+        {/* </MDBRow> */}
       </Fragment>
     );
   }
