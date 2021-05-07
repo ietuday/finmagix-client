@@ -70,8 +70,8 @@ export class RentvsBuy extends Component {
             current_monthly_rent_payment: propertyDetail.rent_vs_buy.current_monthly_rent_payment,
             current_monthly_rent_payment_number: propertyDetail.rent_vs_buy.current_monthly_rent_payment,
             annual_rent_insurance: propertyDetail.rent_vs_buy.annual_rent_insurance,
-            rate_of_investment: propertyDetail.rent_vs_buy.rate_of_investment,
-            rentinflation: propertyDetail.rent_vs_buy.rentinflation,
+            rate_of_investment: Number(propertyDetail.rent_vs_buy.rate_of_investment)*100,
+            rentinflation: Number(propertyDetail.rent_vs_buy.rentinflation)*100,
             rate_of_investment_percentage: Number(propertyDetail.rent_vs_buy.rate_of_investment)*100,
             rentinflation_percentage: Number(propertyDetail.rent_vs_buy.rentinflation)*100,
             annual_rent_insurance_number: propertyDetail.rent_vs_buy.annual_rent_insurance,
@@ -169,7 +169,9 @@ export class RentvsBuy extends Component {
     this.props.goToTaxfromRentvsBuyModal();
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log('rentvsbuy edit main')
+  }
   render() {
     const showSelectRentvsbuyModule = (
       <MDBModal
@@ -331,6 +333,7 @@ export class RentvsBuy extends Component {
                   name="rate_of_investment_percentage"
                   value={this.state.rate_of_investment_percentage}
                   allowNegative={false}
+                  decimalScale={0}
                   onChange={this.handleChange}
                   // thousandSeparator={true}
                   suffix={"%"}
@@ -376,6 +379,7 @@ export class RentvsBuy extends Component {
                   name="rentinflation_percentage"
                   value={this.state.rentinflation_percentage}
                   allowNegative={false}
+                  decimalScale={0}
                   onChange={this.handleChange}
                   // thousandSeparator={true}
                   suffix={"%"}
