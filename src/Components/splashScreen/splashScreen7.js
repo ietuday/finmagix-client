@@ -26,8 +26,8 @@ export class SplashScreen7 extends Component {
       <Fragment>
         <CssBaseline />
 
-        <MDBContainer className="splash-container">
-        <MDBRow className="margin20">
+        <MDBContainer style={{bacground: '#ffffff', width: '78%'}}>
+        <MDBRow >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <div className="text-center">
                 <img
@@ -40,9 +40,9 @@ export class SplashScreen7 extends Component {
           </MDBRow>
           <MDBRow>
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center margin20">
+              <div className="text-center margin10">
                 <img
-                  src={require("../../assets/images/screen7.png")}
+                  src={require("../../assets/images/Group 68.png")}
                   alt="finmagix"
                   className="splash-img"
                 />

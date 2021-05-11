@@ -14,12 +14,12 @@ export class SplashScreen2 extends Component {
       <Fragment>
         <CssBaseline />
 
-        <MDBContainer className="splash-container">
+        <MDBContainer style={{bacground: '#ffffff', width: '78%'}}>
           <MDBRow>
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center margin20">
+              <div className="text-center margin10">
                 <img
-                  src={require("../../assets/images/Sign up Screen 2 picture.png")}
+                  src={require("../../assets/images/Group 27.png")}
                   alt="finmagix"
                   className="splash-img"
                 />
