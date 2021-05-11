@@ -610,7 +610,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/information.png")}
+                      src={require("../../assets/logo/9.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />
@@ -620,7 +620,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/per_finance.svg")}
+                      src={require("../../assets/logo/personal_finance.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />
@@ -630,7 +630,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/mortgage.svg")}
+                      src={require("../../assets/logo/mortgages.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />
@@ -640,7 +640,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/rent-buy.png")}
+                      src={require("../../assets/logo/rent.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />
@@ -650,7 +650,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/tax_new.svg")}
+                      src={require("../../assets/logo/taxes.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />
