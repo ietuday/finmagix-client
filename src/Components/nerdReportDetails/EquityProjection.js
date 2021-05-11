@@ -1,5 +1,5 @@
 import { withRouter, Link } from "react-router-dom";
-import React, { Fragment} from "react";
+import React, { useMemo, Fragment} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -19,46 +19,44 @@ import {
   XAxis,
   // YAxis,
   // CartesianGrid,
-  Tooltip,
   YAxis,
   // Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Cell,
+  Text,
 } from "recharts";
 
-const getIntroOfPage = (label) => {
-  if (label === "Page A") {
-    return "Page A is about men's clothing";
-  }
-  if (label === "Page B") {
-    return "Page B is about women's dress";
-  }
-  if (label === "Page C") {
-    return "Page C is about women's bag";
-  }
-  if (label === "Page D") {
-    return "Page D is about household goods";
-  }
-  if (label === "Page E") {
-    return "Page E is about food";
-  }
-  if (label === "Page F") {
-    return "Page F is about baby food";
-  }
-};
-
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active) {
-    return (
-      <div className="custom-tooltip">
-        <p className="label">{`${label} : ${payload[0].value}`}</p>
-        <p className="intro">{getIntroOfPage(label)}</p>
-        {/* <p className="desc">Anything you want can be displayed here.</p> */}
-      </div>
-    );
+export const measureText14HelveticaNeue = (text) => {
+  if (!ctx) {
+    ctx = document.createElement("canvas").getContext("2d");
+    ctx.font = "8px 'Helvetica Neue";
   }
 
-  return null;
+  return ctx.measureText(text).width;
 };
+
+let ctx;
+
+const mortgageBlues = [
+  ["#00aff0"],
+  ["#00aff0"],
+  ['#2FD411'],
+  ['#2FD411']
+];
+
+const getMortageColor = (length, index) => {
+  return mortgageBlues[index];
+};
+
+const YAxisLeftTick = ({ y, payload: { value } }) => {
+  return (
+    <Text x={0} y={y} textAnchor="start" verticalAnchor="middle" scaleToFit>
+      {value}
+    </Text>
+  );
+};
+
+const BAR_AXIS_SPACE =100;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -139,7 +137,7 @@ function EquityProjection(props) {
       },
       {
         name: "Loan Balance",
-        at:
+        pv:
           (CalculatorResponse && CalculatorResponse.ARM1) ||
           (CalculatorResponse && CalculatorResponse.FRM1)
             ? at1
@@ -150,7 +148,7 @@ function EquityProjection(props) {
       },
       {
         name: "Equity",
-        ct:
+        pv:
           (CalculatorResponse && CalculatorResponse.ARM1) ||
           (CalculatorResponse && CalculatorResponse.FRM1)
             ? ct1
@@ -172,7 +170,7 @@ function EquityProjection(props) {
       },
       {
         name: "Loan Balance",
-        at:
+        pv:
           (CalculatorResponse && CalculatorResponse.ARM2) ||
               (CalculatorResponse && CalculatorResponse.FRM2)
             ? at2
@@ -180,7 +178,7 @@ function EquityProjection(props) {
       },
       {
         name: "Equity",
-        ct:
+        pv:
           (CalculatorResponse && CalculatorResponse.ARM2) ||
               (CalculatorResponse && CalculatorResponse.FRM2)
             ? ct2
@@ -193,6 +191,22 @@ function EquityProjection(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const xKey = "name";
+  const yKey = "pv";
+
+  const maxTextWidthLoan = useMemo(
+    () =>
+      data1.reduce((acc, cur) => {
+        const value = cur[yKey];
+        const width = measureText14HelveticaNeue(value.toLocaleString());
+        if (width > acc) {
+          return width;
+        }
+        return acc;
+      }, 0),[]
+    // [data1, yKey]
+  );
 
   return (
     <Fragment>
@@ -227,33 +241,51 @@ function EquityProjection(props) {
                   ? "FRM"
                   : ""}
               </h4>
-              <ResponsiveContainer width='100%' height={300}>
-              <BarChart
-                width={350}
-                height={300}
-                data={data1}
-                layout="vertical"
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <XAxis hide axisLine={false} type="number" />
-                <YAxis 
-                width={155}
-                 type="category"
-                 orientation="right"
-                 dataKey="name"
-                 axisLine={false}
-                 />
-                <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="pv" barSize={40} fill="#32C0CC" />
-                <Bar dataKey="at" barSize={40} fill="#19AAF2" />
-                <Bar dataKey="ct" barSize={40} fill="#88E6A1" />
-              </BarChart>
-              </ResponsiveContainer>
+      <ResponsiveContainer
+          width={"100%"}
+          height={50 * data1.length}
+          debounce={50}
+        >
+          <BarChart
+            data={data1}
+            layout="vertical"
+            margin={{
+              left: 125,
+              right: maxTextWidthLoan + (BAR_AXIS_SPACE - 8),
+            }}
+          >
+            <XAxis hide axisLine={false} type="number" />
+            <YAxis
+              yAxisId={0}
+              dataKey={xKey}
+              type="category"
+              axisLine={false}
+              tickLine={false}
+              tick={YAxisLeftTick}
+            />
+            <YAxis
+              orientation="right"
+              yAxisId={1}
+              dataKey={yKey}
+              type="category"
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={(value) => value.toLocaleString()}
+              mirror
+              tick={{
+                transform: `translate(${maxTextWidthLoan + BAR_AXIS_SPACE}, 0)`,
+              }}
+            />
+         
+            <Bar dataKey={yKey} minPointSize={2} barSize={32}>
+              {data1.map((d, idx) => {
+                return (
+                  <Cell key={d[xKey]} fill={getMortageColor(data1.length, idx)} />
+                );
+              })}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
             </div>
           </TabPanel>
           <TabPanel value={value} index={1}>
@@ -271,35 +303,51 @@ function EquityProjection(props) {
                   ? "FRM"
                   : ""}
               </h4>
-              <ResponsiveContainer width='100%' height={300}>
-              <BarChart
-                  width={370}
-                  height={300}
-                data={data2}
-                layout="vertical"
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <XAxis hide axisLine={false} type="number" />
-                <YAxis 
-                 width={155}
-                 orientation="right"
-                 type="category"
-                 dataKey="name"
-                 axisLine={false}
-                 />
-
-                <Tooltip content={<CustomTooltip />} />
-
-                <Bar dataKey="pv" barSize={40} fill="#32C0CC" />
-                <Bar dataKey="at" barSize={40} fill="#19AAF2" />
-                <Bar dataKey="ct" barSize={40} fill="#88E6A1" />
-              </BarChart>
-              </ResponsiveContainer>
+      <ResponsiveContainer
+          width={"100%"}
+          height={50 * data2.length}
+          debounce={50}
+        >
+          <BarChart
+            data={data2}
+            layout="vertical"
+            margin={{
+              left: 125,
+              right: maxTextWidthLoan + (BAR_AXIS_SPACE - 8),
+            }}
+          >
+            <XAxis hide axisLine={false} type="number" />
+            <YAxis
+              yAxisId={0}
+              dataKey={xKey}
+              type="category"
+              axisLine={false}
+              tickLine={false}
+              tick={YAxisLeftTick}
+            />
+            <YAxis
+              orientation="right"
+              yAxisId={1}
+              dataKey={yKey}
+              type="category"
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={(value) => value.toLocaleString()}
+              mirror
+              tick={{
+                transform: `translate(${maxTextWidthLoan + BAR_AXIS_SPACE}, 0)`,
+              }}
+            />
+         
+            <Bar dataKey={yKey} minPointSize={2} barSize={32}>
+              {data1.map((d, idx) => {
+                return (
+                  <Cell key={d[xKey]} fill={getMortageColor(data2.length, idx)} />
+                );
+              })}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
             </div>
           </TabPanel>
         </MDBCard>

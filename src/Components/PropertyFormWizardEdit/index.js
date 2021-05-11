@@ -357,7 +357,7 @@ export class StepperComponent extends Component {
     return this.completedSteps === this.totalSteps;
   };
 
-  handleNext() {
+  handleNext = async() => {
     const {
       PersonalFinanceUpdate,
       RentvsBuyUpdate,
@@ -426,12 +426,20 @@ export class StepperComponent extends Component {
           });
           NotificationManager.error("Please Validate Fields", "Error", 3000);
         } else {
-          this.setState({ [this.state.RentvsBuy.rate_of_investment] : String(
-            Number(this.state.RentvsBuy["rate_of_investment"]) / 100
-          )});
-          this.setState({ [this.state.RentvsBuy.rentinflation] : String(
-            Number(this.state.RentvsBuy["rentinflation"]) / 100
-          )});
+        await this.setState(prevState => {
+            let RentvsBuy = Object.assign({}, prevState.RentvsBuy);
+            RentvsBuy.rate_of_investment = String(
+              Number(this.state.RentvsBuy["rate_of_investment"]) / 100
+            );
+            return { RentvsBuy }
+          })
+        await this.setState(prevState => {
+            let RentvsBuy = Object.assign({}, prevState.RentvsBuy);
+            RentvsBuy.rentinflation = String(
+              Number(this.state.RentvsBuy["rentinflation"]) / 100
+            );
+            return { RentvsBuy }
+          })
           RentvsBuyUpdate(this.state.RentvsBuy);
           this.props.history.push({
             pathname: '/property-form',

@@ -425,52 +425,6 @@ function PostMortgagePurchaseProfile(props) {
                 debounce={50}
               >
                 <BarChart
-                  data={data}
-                  layout="vertical"
-                  margin={{
-                    left: 130,
-                    right: maxTextWidth + (BAR_AXIS_SPACE - 8),
-                  }}
-                >
-                  <XAxis hide axisLine={false} type="number" />
-                  <YAxis
-                    yAxisId={0}
-                    dataKey={xKey}
-                    type="category"
-                    axisLine={false}
-                    tickLine={false}
-                    tick={YAxisLeftTick}
-                  />
-                  <YAxis
-                    orientation="right"
-                    yAxisId={1}
-                    dataKey={yKey}
-                    type="category"
-                    axisLine={false}
-                    tickLine={false}
-                    tickFormatter={(value) => value.toLocaleString()}
-                    mirror
-                    tick={{
-                      transform: `translate(${
-                        maxTextWidth + BAR_AXIS_SPACE
-                      }, 0)`,
-                    }}
-                  />
-                  <Bar dataKey={yKey} minPointSize={2} barSize={32}>
-                    {data.map((d, idx) => {
-                      return (
-                        <Cell key={d[xKey]} fill={getColor(data.length, idx)} />
-                      );
-                    })}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-              <ResponsiveContainer
-                width={"100%"}
-                height={50 * data.length}
-                debounce={50}
-              >
-                <BarChart
                   data={data3}
                   layout="vertical"
                   margin={{
@@ -506,6 +460,52 @@ function PostMortgagePurchaseProfile(props) {
                     {data.map((d, idx) => {
                       return (
                         <Cell key={d[xKey]} fill="#F08080" />
+                      );
+                    })}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+              <ResponsiveContainer
+                width={"100%"}
+                height={50 * data.length}
+                debounce={50}
+              >
+                <BarChart
+                  data={data}
+                  layout="vertical"
+                  margin={{
+                    left: 130,
+                    right: maxTextWidth + (BAR_AXIS_SPACE - 8),
+                  }}
+                >
+                  <XAxis hide axisLine={false} type="number" />
+                  <YAxis
+                    yAxisId={0}
+                    dataKey={xKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={YAxisLeftTick}
+                  />
+                  <YAxis
+                    orientation="right"
+                    yAxisId={1}
+                    dataKey={yKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tickFormatter={(value) => value.toLocaleString()}
+                    mirror
+                    tick={{
+                      transform: `translate(${
+                        maxTextWidth + BAR_AXIS_SPACE
+                      }, 0)`,
+                    }}
+                  />
+                  <Bar dataKey={yKey} minPointSize={2} barSize={32}>
+                    {data.map((d, idx) => {
+                      return (
+                        <Cell key={d[xKey]} fill={getColor(data.length, idx)} />
                       );
                     })}
                   </Bar>
@@ -549,53 +549,6 @@ function PostMortgagePurchaseProfile(props) {
                   ))}
                 </Pie>
               </PieChart>
-
-              <ResponsiveContainer
-                width={"100%"}
-                height={50 * data.length}
-                debounce={50}
-              >
-                <BarChart
-                  data={data2}
-                  layout="vertical"
-                  margin={{
-                    left: 130,
-                    right: maxTextWidth + (BAR_AXIS_SPACE - 8),
-                  }}
-                >
-                  <XAxis hide axisLine={false} type="number" />
-                  <YAxis
-                    yAxisId={0}
-                    dataKey={xKey}
-                    type="category"
-                    axisLine={false}
-                    tickLine={false}
-                    tick={YAxisLeftTick}
-                  />
-                  <YAxis
-                    orientation="right"
-                    yAxisId={1}
-                    dataKey={yKey}
-                    type="category"
-                    axisLine={false}
-                    tickLine={false}
-                    tickFormatter={(value) => value.toLocaleString()}
-                    mirror
-                    tick={{
-                      transform: `translate(${
-                        maxTextWidth + BAR_AXIS_SPACE
-                      }, 0)`,
-                    }}
-                  />
-                  <Bar dataKey={yKey} minPointSize={2} barSize={32}>
-                    {data.map((d, idx) => {
-                      return (
-                        <Cell key={d[xKey]} fill={getColor(data.length, idx)} />
-                      );
-                    })}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
               <ResponsiveContainer
                 width={"100%"}
                 height={50 * data.length}
@@ -637,6 +590,52 @@ function PostMortgagePurchaseProfile(props) {
                     {data.map((d, idx) => {
                       return (
                         <Cell key={d[xKey]} fill="#F08080" />
+                      );
+                    })}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+              <ResponsiveContainer
+                width={"100%"}
+                height={50 * data.length}
+                debounce={50}
+              >
+                <BarChart
+                  data={data2}
+                  layout="vertical"
+                  margin={{
+                    left: 130,
+                    right: maxTextWidth + (BAR_AXIS_SPACE - 8),
+                  }}
+                >
+                  <XAxis hide axisLine={false} type="number" />
+                  <YAxis
+                    yAxisId={0}
+                    dataKey={xKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={YAxisLeftTick}
+                  />
+                  <YAxis
+                    orientation="right"
+                    yAxisId={1}
+                    dataKey={yKey}
+                    type="category"
+                    axisLine={false}
+                    tickLine={false}
+                    tickFormatter={(value) => value.toLocaleString()}
+                    mirror
+                    tick={{
+                      transform: `translate(${
+                        maxTextWidth + BAR_AXIS_SPACE
+                      }, 0)`,
+                    }}
+                  />
+                  <Bar dataKey={yKey} minPointSize={2} barSize={32}>
+                    {data.map((d, idx) => {
+                      return (
+                        <Cell key={d[xKey]} fill={getColor(data.length, idx)} />
                       );
                     })}
                   </Bar>

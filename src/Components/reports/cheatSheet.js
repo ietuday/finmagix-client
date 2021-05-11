@@ -6,7 +6,7 @@ import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Header from "../../common/header";
 import { withRouter, Link } from "react-router-dom";
-import NumberFormat from "react-number-format";
+// import NumberFormat from "react-number-format";
 import "../../css/reports.css";
 // import "./nerdReportDetails.css";
 import {
