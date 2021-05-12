@@ -23,7 +23,7 @@ export class ARMComponentSecondLoan extends Component {
       mortgage_program_type_value: 2,
       loan_amount: 0,
       loan_amount_number: "",
-      loan_term: 15,
+      loan_term: 30,
       select_loan_program: 3,
       initial_interest_rate: 3,
       initial_interest_rate_percentage: 3,

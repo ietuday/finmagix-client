@@ -38,8 +38,8 @@ export const measureText14HelveticaNeue = (text) => {
 let ctx;
 
 const mortgageBlues = [
-  ["#00aff0"],
-  ["#00aff0"],
+  ["#EFB1EF"],
+  ["#32C0CC"],
   ['#2FD411'],
   ['#2FD411']
 ];
