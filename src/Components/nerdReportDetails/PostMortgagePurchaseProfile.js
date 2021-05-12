@@ -421,7 +421,7 @@ function PostMortgagePurchaseProfile(props) {
               </PieChart>
               <ResponsiveContainer
                 width={"100%"}
-                height={50 * data.length}
+                height={50 * data3.length}
                 debounce={50}
               >
                 <BarChart
@@ -459,7 +459,7 @@ function PostMortgagePurchaseProfile(props) {
                   <Bar dataKey={yKey} minPointSize={2} barSize={32}>
                     {data.map((d, idx) => {
                       return (
-                        <Cell key={d[xKey]} fill="#F08080" />
+                        <Cell key={d[xKey]} fill="#2FD411" />
                       );
                     })}
                   </Bar>
@@ -551,7 +551,7 @@ function PostMortgagePurchaseProfile(props) {
               </PieChart>
               <ResponsiveContainer
                 width={"100%"}
-                height={50 * data.length}
+                height={50 * data4.length}
                 debounce={50}
               >
                 <BarChart
@@ -589,7 +589,7 @@ function PostMortgagePurchaseProfile(props) {
                   <Bar dataKey={yKey} minPointSize={2} barSize={32}>
                     {data.map((d, idx) => {
                       return (
-                        <Cell key={d[xKey]} fill="#F08080" />
+                        <Cell key={d[xKey]} fill="#2FD411" />
                       );
                     })}
                   </Bar>
