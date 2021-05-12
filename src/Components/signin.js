@@ -101,7 +101,8 @@ export class Signin extends Component {
      login(data.token, data.data.id,data.data);
     
     if (data.data.last_login == null) {
-      this.props.history.push("/select-modules");
+      // this.props.history.push("/select-modules");
+      this.props.history.push("/get-started")
     } else {
       this.props.history.push("/dashboard");
     }

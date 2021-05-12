@@ -98,7 +98,7 @@ export class SelectModule extends Component {
           <MDBRow className="space-top">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <img
-                    className="img-pos" src={require("../assets/logo/information.png")}
+                    className="img-pos" src={require("../assets/logo/8.png")}
                     alt="finmagix"
                     // height={"60px"}
                
@@ -130,7 +130,7 @@ export class SelectModule extends Component {
           <MDBRow className="space-top">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <img
-                    className="img-pos" src={require("../assets/logo/finance.png")}
+                    className="img-pos" src={require("../assets/logo/finance_personal.png")}
                     alt="finmagix"
                     // height={"60px"}
                
@@ -165,7 +165,7 @@ export class SelectModule extends Component {
           <MDBRow className="space-top">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <img
-                    className="img-pos5" src={require("../assets/logo/account.png")}
+                    className="img-pos5" src={require("../assets/logo/Mortgage-Summary.png")}
                     alt="finmagix"
                     // height={"60px"}
                
@@ -196,7 +196,7 @@ export class SelectModule extends Component {
           <MDBRow className="space-top">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <img
-                    className="img-pos" src={require("../assets/logo/rent-buy.png")}
+                    className="img-pos" src={require("../assets/logo/rentVsBuy.png")}
                     alt="finmagix"
                     // height={"60px"}
                
@@ -224,7 +224,7 @@ export class SelectModule extends Component {
           <MDBRow className="space-top">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
             <img
-                    className="img-pos" src={require("../assets/logo/tax.png")}
+                    className="img-pos" src={require("../assets/logo/taxes-new.png")}
                     alt="finmagix"
                     // height={"60px"}
                

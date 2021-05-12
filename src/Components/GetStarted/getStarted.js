@@ -66,7 +66,7 @@ export class GetStarted extends Component {
                         ? "Welcome"
                         : this.state.getStartedView === 2
                         ? "Almost there"
-                        : "Show time !!!"}
+                        : ""}
                     </h2>
                   </div>
                 </MDBCol>
