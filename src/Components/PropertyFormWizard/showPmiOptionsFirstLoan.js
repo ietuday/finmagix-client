@@ -116,8 +116,9 @@ export class ShowPmiOptionsFirstLoan extends Component {
             propertyPrice: propertyDetail.property_price,
             property_downpayment: propertyDetail.downpayment_amount
           })
-          
-          this.props.handleDownpaymentData(this.state);
+          setTimeout(() => {
+            this.props.handleDownpaymentData(this.state);
+          }, 1000)
         })
         .catch((err) => {
          
