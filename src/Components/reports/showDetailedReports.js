@@ -1161,7 +1161,7 @@ export class ShowDetailedReports extends Component {
           >
             Go To Dashboard
           </Button>
-          <MDBRow className="margin20 marginbottom20">
+          {/* <MDBRow className="margin20 marginbottom20">
             <MDBCol md="8" size="6" className="text-center">
               <Input
                 type="email"
@@ -1185,7 +1185,7 @@ export class ShowDetailedReports extends Component {
                 Submit
               </Button>
             </MDBCol>
-          </MDBRow>
+          </MDBRow> */}
           <hr />
           <MDBRow className="margin20 pointer">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">

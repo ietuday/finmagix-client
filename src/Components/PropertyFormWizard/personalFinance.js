@@ -231,7 +231,7 @@ export class PersonalFinance extends Component {
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
             <span className="get-started-label">
-              Select your filling status
+              Select your filing status
             </span>
             <br />
             <Select
@@ -241,8 +241,8 @@ export class PersonalFinance extends Component {
               style={{ minWidth: "100%" }}
             >
               <MenuItem value={"1"}>Single</MenuItem>
-              <MenuItem value={"2"}>Married filling jointly</MenuItem>
-              <MenuItem value={"3"}>Married filling seperately</MenuItem>
+              <MenuItem value={"2"}>Married filing jointly</MenuItem>
+              <MenuItem value={"3"}>Married filing seperately</MenuItem>
               <MenuItem value={"4"}>Head of household</MenuItem>
             </Select>
           </MDBCol>
