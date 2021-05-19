@@ -24,7 +24,7 @@ export class SplashScreen extends Component {
     return (
       <Fragment>
         <CssBaseline />
-            <Carousel showArrows={false} showDots={false} >
+            <Carousel showArrows={false}  >
               <Item>
                 <SplashScreen1 />
               </Item>

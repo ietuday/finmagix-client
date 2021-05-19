@@ -4,9 +4,10 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   cursor: pointer;
-  color: #0ba7ec;
+  color: #3f444a;
   opacity: 1;
-  font-weight: 800;
+  font-weight: 600;
+  font-size: 16px !important;
 }
 .splash-img {
   opacity: 1;
@@ -14,14 +15,15 @@
 .splash-container[class] {
     background: rgb(11,167,236);
     background: linear-gradient(180deg, rgba(11,167,236, 0.1) 0%, rgba(255,255,255, 0.1) 35%);
-    width: 78% ;
+    width: 100% ;
 }
 .splash-container-for-buttton{
   
-/* background-image: url('../assets/images/splash_img.jpg') ; */
-background: rgb(11,167,236);
-    background: linear-gradient(180deg, rgba(11,167,236, 0.1) 0%, rgba(255,255,255, 0.1) 35%);
+background-image: url('../assets/images/bg5.png') ;
+/* background: rgb(11,167,236);
+    background: linear-gradient(180deg, rgba(11,167,236, 0.1) 0%, rgba(255,255,255, 0.1) 35%); */
 width: 100%;
+
 background-repeat: no-repeat;
 background-position:center ;
 padding: 12%;

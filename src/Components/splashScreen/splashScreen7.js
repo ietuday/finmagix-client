@@ -26,7 +26,7 @@ export class SplashScreen7 extends Component {
       <Fragment>
         <CssBaseline />
 
-        <MDBContainer style={{bacground: '#ffffff', width: '78%'}}>
+        <MDBContainer className="splash-container">
         <MDBRow >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <div className="text-center">
@@ -38,9 +38,20 @@ export class SplashScreen7 extends Component {
               </div>
             </MDBCol>
           </MDBRow>
+          <MDBRow className="margin10">
+            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
+              <div className="text-center">
+                <h5 className="splash-text-inner">
+               Leave the home purchase
+               number<br/> crunching to Finmagix!
+
+                </h5>
+              </div>
+            </MDBCol>
+          </MDBRow>
           <MDBRow>
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center margin10">
+              <div className="text-center ">
                 <img
                   src={require("../../assets/images/Group 68.png")}
                   alt="finmagix"
@@ -50,7 +61,8 @@ export class SplashScreen7 extends Component {
             </MDBCol>
           </MDBRow>
           <MDBRow>
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
+          <MDBCol xl="3" lg="3" md="3" sm="3" xs="3"></MDBCol>
+            <MDBCol xl="6" lg="6" md="6" sm="6" xs="6">
               <div className="text-center">
                 <Button
                   variant="contained"
