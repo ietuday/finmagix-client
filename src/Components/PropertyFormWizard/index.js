@@ -610,7 +610,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/9.png")}
+                      src={require("../../assets/logo/13.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />
@@ -620,7 +620,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/personal_finance.png")}
+                      src={require("../../assets/logo/34.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />
@@ -630,7 +630,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/mortgages.png")}
+                      src={require("../../assets/logo/45.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />
@@ -640,7 +640,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/rent.png")}
+                      src={require("../../assets/logo/56.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />
@@ -650,7 +650,7 @@ export class StepperComponent extends Component {
                   <span>
                     <img
                       className="img-header"
-                      src={require("../../assets/logo/taxes.png")}
+                      src={require("../../assets/logo/85.png")}
                       alt="finmagix"
                     // height={"60px"}
                     />

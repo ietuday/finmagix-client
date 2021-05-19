@@ -502,16 +502,71 @@ export class StepperComponent extends Component {
               <br />
               <span className="header-label">
                 {activeStep === 0
-                  ? "Property Information"
-                  : activeStep === 1
-                    ? "Personal Finance"
-                    : activeStep === 2
-                      ? "Mortgage Programs"
-                      : activeStep === 3
-                        ? "Rent vs Buy"
-                        : activeStep === 4
-                          ? "Taxes"
-                          : "Summary"}
+                  ? (
+                    <span>
+                      <img
+                        className="img-header"
+                        src={require("../../assets/logo/13.png")}
+                        alt="finmagix"
+                      // height={"60px"}
+                      />
+                      Property Information
+                    </span>
+                  ) : activeStep === 1
+                    ? (
+                      <span>
+                        <img
+                          className="img-header"
+                          src={require("../../assets/logo/34.png")}
+                          alt="finmagix"
+                        // height={"60px"}
+                        />
+                        Personal Finance
+                      </span>
+                    ) : activeStep === 2
+                      ? (
+                        <span>
+                          <img
+                            className="img-header"
+                            src={require("../../assets/logo/45.png")}
+                            alt="finmagix"
+                          // height={"60px"}
+                          />
+                          Mortgage Programs
+                        </span>
+                      ) : activeStep === 3
+                        ? (
+                          <span>
+                            <img
+                              className="img-header"
+                              src={require("../../assets/logo/56.png")}
+                              alt="finmagix"
+                            // height={"60px"}
+                            />
+                            Rent vs Buy
+                          </span>
+                        ) : activeStep === 4
+                          ? (
+                            <span>
+                              <img
+                                className="img-header"
+                                src={require("../../assets/logo/85.png")}
+                                alt="finmagix"
+                              // height={"60px"}
+                              />
+                              Taxes
+                            </span>
+                          ) : (
+                            <span>
+                              <img
+                                className="img-header"
+                                src={require("../../assets/logo/report.svg")}
+                                alt="finmagix"
+                              // height={"60px"}
+                              />
+                    Summary
+                            </span>
+                          )}
               </span>
               <br />
               <Stepper
