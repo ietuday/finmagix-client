@@ -15,6 +15,7 @@ export class SplashScreen1 extends Component {
         <CssBaseline />
 
         <MDBContainer className="splash-container">
+         
           <MDBRow>
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <div className="text-center margin20">
