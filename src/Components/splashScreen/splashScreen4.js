@@ -14,7 +14,18 @@ export class SplashScreen4 extends Component {
       <Fragment>
         <CssBaseline />
 
-        <MDBContainer style={{bacground: '#ffffff', width: '78%'}}>
+        <MDBContainer className="splash-container">
+        <MDBRow >
+            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
+              <div className="text-center">
+                <img
+                  src={require("../../assets/logo/finmagix-text.png")}
+                  alt="finmagix"
+                  className="splash-img"
+                />
+              </div>
+            </MDBCol>
+          </MDBRow>
           <MDBRow className="margin10">
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <div className="text-center">
