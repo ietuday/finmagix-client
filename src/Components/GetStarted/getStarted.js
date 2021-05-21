@@ -30,15 +30,25 @@ export class GetStarted extends Component {
       getStartedView: this.state.getStartedView - 1,
     });
   }
+  // renderSwitch(param) {
+  //   switch (param) {
+  //     case 1:
+  //       return <GetStartedBasicInfo />;
+  //     case 2:
+  //       return <PropertyPaymentInfo1 />;
+  //     case 3:
+  //       return <PrelimReport />;
+
+  //     default:
+  //       return <Redirect to="/" />;
+  //   }
+  // }
   renderSwitch(param) {
     switch (param) {
       case 1:
-        return <GetStartedBasicInfo />;
-      case 2:
         return <PropertyPaymentInfo1 />;
-      case 3:
+      case 2:
         return <PrelimReport />;
-
       default:
         return <Redirect to="/" />;
     }
@@ -64,9 +74,7 @@ export class GetStarted extends Component {
                     <h2 className="back-button-class">
                       {this.state.getStartedView === 1
                         ? "Welcome"
-                        : this.state.getStartedView === 2
-                        ? "Almost there"
-                        : ""}
+                        : "" }
                     </h2>
                   </div>
                 </MDBCol>
@@ -79,15 +87,6 @@ export class GetStarted extends Component {
               <MDBCol lg="12" xl="12" xs="12" md="12" sm="12" size="12">
                 <div className="text-center">
                   {this.state.getStartedView === 2 ? (
-                    <Button
-                      variant="contained"
-                      size="large"
-                      className="button-inner-class"
-                      onClick={this.goToNextPage}
-                    >
-                      View Result
-                    </Button>
-                  ) : this.state.getStartedView === 3 ? (
                     ""
                   ) : (
                     <Button

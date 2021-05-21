@@ -169,6 +169,7 @@ export class StepperComponent extends Component {
     });
   };
   handleHouseInfo = async (downpayment, data) => {
+    console.log(data, 'in handle house info fn')
     await this.setState((prevState) => {
       let propertyInfo = Object.assign({}, prevState.propertyInfo);
       propertyInfo = data;
@@ -178,6 +179,7 @@ export class StepperComponent extends Component {
     this.setState({
       downpayment: downpayment,
     });
+    console.log(this.state,'index state')
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;

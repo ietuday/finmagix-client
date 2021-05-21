@@ -5,6 +5,7 @@ const { baseURL } = config;
 
 
 export const property_info_create = (data,onSuccess,onFailure) => {
+  console.log(data, 'in api')
   return (dispatch) => {
     Axios.post(`${baseURL}/property_listings/list_or_create`, data, {
       headers: {

@@ -76,7 +76,7 @@ export class Survey extends Component {
       return (
         <Redirect
           to={{
-            pathname: "/property-form",
+            pathname: "/get-started",
             surveyData: this.state,
           }}
         />

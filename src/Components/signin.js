@@ -102,7 +102,7 @@ export class Signin extends Component {
     
     if (data.data.last_login == null) {
       // this.props.history.push("/select-modules");
-      this.props.history.push("/get-started")
+      this.props.history.push("/survey")
     } else {
       this.props.history.push("/dashboard");
     }

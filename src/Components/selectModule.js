@@ -54,7 +54,7 @@ export class SelectModule extends Component {
     if(this.state.nextButton && Object.entries(JSON.parse(localStorage.getItem('personal_finance_array'))).length === 0){
       return <Redirect
       to={{
-        pathname: "/survey",
+        pathname: "/property-form",
       }}
       />;
     }
