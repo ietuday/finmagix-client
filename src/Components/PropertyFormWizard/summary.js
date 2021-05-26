@@ -23,6 +23,7 @@ export class Summary extends Component {
       propertyDetail: {}
     };
     this.checkProperty()
+    // this.updateTaxRent()
   }
 
   checkProperty() {
@@ -43,6 +44,31 @@ export class Summary extends Component {
         .catch((err) => {});
     }
   }
+
+  // updateTaxRent() {
+  //   const taxesLocal = JSON.parse(localStorage.getItem("is_tax_selected"));
+  //   const rentVsBuy = JSON.parse(localStorage.getItem("is_rent_vs_buy_selected"));
+  //   console.log(taxesLocal, 'taxes');
+  //   console.log(rentVsBuy, 'rent');
+  //   const data = {
+  //     is_rent_vs_buy_selected: rentVsBuy,
+  //     is_tax_seleced: taxesLocal
+  //   }
+  //   console.log(data, ' data from summary')
+  //   const propertyIdField = JSON.parse(localStorage.getItem("property_id"));
+  //   if (propertyIdField) {
+  //     Axios.put(`${baseURL}/property_listings/${propertyIdField}`, data, {
+  //       headers: {
+  //         "Content-type": "Application/json",
+  //         Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+  //       }
+  //     })
+  //       .then((propertyData) => {
+  //         console.log(propertyData, 'updateTaxRent')
+  //       })
+  //       .catch((err) => {});
+  //   }
+  // }
 
   showReports = () => {
     this.props.history.push("/show-detailed-reports");

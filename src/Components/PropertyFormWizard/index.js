@@ -179,7 +179,11 @@ export class StepperComponent extends Component {
     this.setState({
       downpayment: downpayment,
     });
-    console.log(this.state,'index state')
+    await this.setState({
+      is_rent_vs_buy_selected: this.state.propertyInfo.is_rent_vs_buy_selected,
+      is_tax_selected: this.state.propertyInfo.is_tax_selected
+    })
+    console.log(this.state,'index state in handlehouseinfo')
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
@@ -259,6 +263,13 @@ export class StepperComponent extends Component {
       RentvsBuy = data;
       return { RentvsBuy };
     });
+  }
+  taxRadioValue = async(data) => {
+    console.log(data, 'data in index')
+    await this.setState({
+      is_tax_selected: data
+    })
+    console.log(this.state.is_tax_selected, 'after update in taxRadioValue index')
   }
   getRentvsBuyFilledStatus = async (status) => {
     await this.setState({
@@ -346,6 +357,7 @@ export class StepperComponent extends Component {
               this.handleStep(step);
             }}
             getValidationError={this.getRentvsBuyValidationError}
+            is_rent_vs_buy_selected={this.state.is_rent_vs_buy_selected}
           />
         );
       case 4:
@@ -355,6 +367,11 @@ export class StepperComponent extends Component {
             getTaxFilledStataus={(getTaxFillStatus) =>
               this.getTaxFilledStataus(getTaxFillStatus)
             }
+            showStep={(step) => {
+              this.handleStep(step);
+            }}
+            is_tax_selected={this.state.is_tax_selected}
+            taxRadioValue={this.taxRadioValue}
           >
             <Tax1 />
             <Tax2 />
@@ -398,6 +415,7 @@ export class StepperComponent extends Component {
   };
 
   async handleNext() {
+    // debugger
     const {
       // PersonalFinanceUpdate,
       RentvsBuyCreate,
@@ -465,6 +483,10 @@ export class StepperComponent extends Component {
               this.onFailureHouseInfo
             );
           }
+          console.log(this.state, 'only state index')
+          console.log(this.state.propertyInfo, 'index property info')
+          
+          console.log(this.state, 'index after update')
 
           if (this.props.location.surveyData) {
             this.props.location.surveyData.property_obj = localStorage.getItem(
@@ -546,15 +568,27 @@ export class StepperComponent extends Component {
           ) / 100
         );
         if (this.state.RentvsBuy.is_update && this.state.RentvsBuy.id) {
+          console.log(this.state.RentvsBuy, 'in update')
           RentvsBuyUpdate(this.state.RentvsBuy)
         } else {
+          console.log(this.state.RentvsBuy, 'in create index 1')
           RentvsBuyCreate(this.state.RentvsBuy);
+          const data = {
+            is_rent_vs_buy_selected: this.state.RentvsBuy.is_rent_vs_buy_selected,
+            id: JSON.parse(localStorage.getItem("property_id"))
+          }
+          PropertyInfoUpdate(data)
         }
       }
     } else if (this.state.activeStep === 4) {
       this.setState({
         activeStep: newActiveStep,
       });
+      const data = {
+        is_tax_selected: this.state.is_tax_selected,
+        id: JSON.parse(localStorage.getItem("property_id"))
+      }
+      PropertyInfoUpdate(data)
     } else if (this.state.activeStep === 5) {
       this.setState({
         activeStep: newActiveStep,

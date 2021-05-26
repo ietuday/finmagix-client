@@ -35,7 +35,7 @@ import {
   personal_finance_update,
 
 } from "../redux/actions/PropertyReport/personalFinance";
-import {rent_vs_buy_update } from "../redux/actions/PropertyReport/rentvsBuy";
+import {rent_vs_buy_create, rent_vs_buy_update } from "../redux/actions/PropertyReport/rentvsBuy";
 import {
 
   property_info_update,
@@ -322,7 +322,9 @@ export class StepperComponent extends Component {
         );
       case 4:
         return (
-          <TaxHoc handleContinue={this.handleNext} getId={this.props.location.state.tax_edit_id} isTaxFilled={true}>
+          <TaxHoc handleContinue={this.handleNext} getId={this.props.location.state.tax_edit_id} isTaxFilled={true} showStep={(step) => {
+            this.handleStep(step);
+          }}>
             <Tax1 />
             <Tax2 />
           </TaxHoc>
@@ -360,6 +362,7 @@ export class StepperComponent extends Component {
   handleNext = async() => {
     const {
       PersonalFinanceUpdate,
+      RentvsBuyCreate,
       RentvsBuyUpdate,
       PropertyInfoUpdate,
       PersonalFinanceCreate
@@ -440,11 +443,33 @@ export class StepperComponent extends Component {
             );
             return { RentvsBuy }
           })
-          RentvsBuyUpdate(this.state.RentvsBuy);
-          this.props.history.push({
-            pathname: '/property-form',
-            returnBackFromreviewEdit: true
-          })
+          console.log(this.state.RentvsBuy, 'in update another index edit')
+          // RentvsBuyUpdate(this.state.RentvsBuy);
+          // this.props.history.push({
+          //   pathname: '/property-form',
+          //   returnBackFromreviewEdit: true
+          // })
+          if (this.state.RentvsBuy.is_update && this.state.RentvsBuy.id) {
+            console.log(this.state.RentvsBuy, 'in update')
+            RentvsBuyUpdate(this.state.RentvsBuy)
+            this.props.history.push({
+              pathname: '/property-form',
+              returnBackFromreviewEdit: true
+            })
+          } else {
+            console.log(this.state.RentvsBuy, 'in create index 2')
+            RentvsBuyCreate(this.state.RentvsBuy);
+            const data = {
+              is_rent_vs_buy_selected: this.state.RentvsBuy.is_rent_vs_buy_selected,
+              id: JSON.parse(localStorage.getItem("property_id"))
+            }
+            console.log(data, 'data in edit')
+            PropertyInfoUpdate(data)
+            this.props.history.push({
+              pathname: '/property-form',
+              returnBackFromreviewEdit: true
+            })
+          }
         }
       }
 
@@ -705,6 +730,7 @@ export class StepperComponent extends Component {
 const mapStateToProps = (state) => {
   return {
     PersonalFinanceUpdateResponse: state.PersonalFinanceUpdateResponse,
+    RentvsBuyCreateResponse: state.RentvsBuyCreateResponse,
     RentvsBuyUpdateResponse: state.RentvsBuyUpdateResponse,
     PropertyInfoUpdateResponse: state.PropertyInfoUpdateResponse,
   };
@@ -713,6 +739,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     PersonalFinanceUpdate: (data) => dispatch(personal_finance_update(data)),
+    RentvsBuyCreate: (data) => dispatch(rent_vs_buy_create(data)),
     RentvsBuyUpdate: (data) => dispatch(rent_vs_buy_update(data)),
     PropertyInfoUpdate: (data) => dispatch(property_info_update(data)),
     LogOut: () => dispatch(log_out()),

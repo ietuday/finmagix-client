@@ -65,6 +65,8 @@ export class GetStartedHouseInfo extends Component {
       stay_durationValidationError: "",
       property_priceValidationError: "",
       area_of_the_houseValidationError: "",
+      is_rent_vs_buy_selected: JSON.parse(localStorage.getItem("is_rent_vs_buy_selected")),
+      is_tax_selected: JSON.parse(localStorage.getItem('is_tax_selected'))
     };
     // this.validators = HouseInfoValidator;
     //resetValidators(this.validators);

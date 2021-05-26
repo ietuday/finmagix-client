@@ -45,16 +45,48 @@ export class RentvsBuy extends Component {
       current_monthly_rent_payment_ValidationError: "",
       rate_of_investment_percentage_ValidationError: "",
       rentinflation_percentage_ValidationError: "",
+      is_rent_vs_buy_selected: this.props.is_rent_vs_buy_selected,
+      checkPropertyApiLoaded: false,
+      loadModalYesOrNo: false,
+      loadForm: false
     };
     // this.validators = RentvsBuyValidator;
     // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
     this.onRadioChange = this.onRadioChange.bind(this);
     this.checkProperty()
+    this.checkFunction();
   }
 
+  checkFunction = () => {
+    console.log('in testfunction render')
+    if((this.state.is_rent_vs_buy_selected && this.state.checkPropertyApiLoaded) || this.state.radioValue){
+      console.log(`${this.state.is_rent_vs_buy_selected}${this.state.checkPropertyApiLoaded} first`)
+      this.setState({
+        loadForm: true,
+        loadModalYesOrNo: false
+      })
+    } else {
+      if((!this.state.is_rent_vs_buy_selected && !this.state.checkPropertyApiLoaded) || this.state.radioValue) {
+      console.log(`${this.state.is_rent_vs_buy_selected}${this.state.checkPropertyApiLoaded} second`)
+      this.setState({
+        loadForm: true,
+        loadModalYesOrNo: false
+      })
+    } else {
+      console.log(`${this.state.is_rent_vs_buy_selected}${this.state.checkPropertyApiLoaded} third`)
+      this.setState({
+        loadModalYesOrNo: true,
+        loadForm: false
+      })
+    }
+  }
+}
+
   checkProperty() {
-    
+    console.log(this.props, 'props in rentvsbuy')
+    console.log(this.state, 'rentvsbuy state')
+    console.log('prperty loaded rent')
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -63,10 +95,11 @@ export class RentvsBuy extends Component {
           Authorization: `JWT ${localStorage.getItem("accessToken")}`,
         },
       })
-        .then((propertyInfo) => {
+        .then(async(propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0];
+          console.log(propertyDetail, 'rent property complete data')
 
-          this.setState({
+         await this.setState({
             current_monthly_rent_payment: propertyDetail.rent_vs_buy.current_monthly_rent_payment,
             current_monthly_rent_payment_number: propertyDetail.rent_vs_buy.current_monthly_rent_payment,
             annual_rent_insurance: propertyDetail.rent_vs_buy.annual_rent_insurance,
@@ -76,9 +109,11 @@ export class RentvsBuy extends Component {
             rentinflation_percentage: Number(propertyDetail.rent_vs_buy.rentinflation)*100,
             annual_rent_insurance_number: propertyDetail.rent_vs_buy.annual_rent_insurance,
             is_update:true,
-            id: propertyDetail.rent_vs_buy.id
+            id: propertyDetail.rent_vs_buy.id,
+            is_rent_vs_buy_selected: propertyDetail.is_rent_vs_buy_selected,
+            checkPropertyApiLoaded: true
           });
-          
+          console.log(this.state, 'state after update in rentvsbuy rentselectedornot')
           this.props.getRentvsBuyData(this.state);
         })
         .catch((err) => {});
@@ -157,6 +192,7 @@ export class RentvsBuy extends Component {
     this.setState({ openModal: !this.state.openModal });
   };
   async onRadioChange(e) {
+    console.log(this.state, 'state in radio before update')
     await this.setState({
       radioValue: e.target.value,
     });
@@ -164,6 +200,13 @@ export class RentvsBuy extends Component {
       this.props.showStep(2);
     }
     setRentvsBuyFilledStatus(this.state.radioValue);
+    if(this.state.radioValue === true){
+      // localStorage.setItem("is_rent_vs_buy_selected", true);
+      await this.setState({
+        is_rent_vs_buy_selected: true
+      })
+    }
+    console.log(this.state, 'after state update in radio')
   }
   goToTaxScreen = () => {
     this.props.goToTaxfromRentvsBuyModal();
@@ -173,6 +216,7 @@ export class RentvsBuy extends Component {
     console.log('rentvsbuy edit main')
   }
   render() {
+    console.log(this.state, 'rentvs buy render')
     const showSelectRentvsbuyModule = (
       <MDBModal
         isOpen={this.state.openModal}
@@ -190,7 +234,7 @@ export class RentvsBuy extends Component {
         <MDBModalBody>
           <p>
             You haven't opted for this module. <br></br>Do you still want to
-            fill Rent vs Buy module?{" "}
+            fill Rent vs Buy module?8{" "}
           </p>
           <Radio.Group
             onChange={this.onRadioChange}
@@ -214,11 +258,9 @@ export class RentvsBuy extends Component {
         </MDBModalFooter>
       </MDBModal>
     );
-    return (
-      <Fragment>
-        {localStorage.getItem("is_rent_vs_buy_selected") === "true" ||
-        this.state.radioValue ? (
-          <div>
+
+    const showForm = (
+      <div>
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">
@@ -400,9 +442,18 @@ export class RentvsBuy extends Component {
               {/* {displayValidationErrors(this.validators, "rentinflation")} */}
             </MDBRow>
           </div>
-        ) : (
-          showSelectRentvsbuyModule
-        )}
+    );
+    return (
+      <Fragment>
+        {/* {this.state.is_rent_vs_buy_selected ||
+        this.state.radioValue ? ( */}
+        { this.state.loadForm ? (
+            showForm
+        ) : 
+          // showSelectRentvsbuyModule
+        this.state.loadModalYesOrNo ?
+            (showSelectRentvsbuyModule) : showForm
+        }
       </Fragment>
     );
   }

@@ -259,12 +259,18 @@ export class TaxHoc extends Component {
   toggle = () => {
     this.setState({ openModal: !this.state.openModal });
   };
-  onRadioChange = (e) => {
-    this.setState({
+  onRadioChange = async(e) => {
+    console.log(this.props, 'this props')
+    console.log(this.state.radioValue, 'before')
+    await this.setState({
       radioValue: e.target.value,
     });
+    console.log(this.state.radioValue, 'after')
     if (this.state.radioValue) {
       this.props.showStep(3);
+    }
+    if(this.state.radioValue === true) {
+      localStorage.setItem("is_tax_selected", true);
     }
   };
   goToReport = () => {
@@ -273,6 +279,7 @@ export class TaxHoc extends Component {
   componentDidMount() {}
 
   render() {
+    console.log('in edit')
     const showSelectTaxModule = (
       <MDBModal
         isOpen={this.state.openModal}
