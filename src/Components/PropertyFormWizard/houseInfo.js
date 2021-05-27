@@ -349,12 +349,20 @@ export class GetStartedHouseInfo extends Component {
       },
     })
       .then(async (recc_info) => {
-        
+        console.log(recc_info.data, 'another api hoi and annual property tax')
         await this.setState({
           'home_owner_insurance': recc_info.data.data['recommended_HOI'],
           'annual_property_tax': recc_info.data.data['recommended_Annual_Property_Tax']
         })
-        
+        let downpayment;
+        let twenty_percent_of_property_price =
+        (this.state.property_price * 20) / 100;
+      if (this.state.downpayment_amount < twenty_percent_of_property_price) {
+        downpayment = "lessthan20";
+      } else {
+        downpayment = "greaterthan20";
+      }
+        this.props.handleHouseInfo(downpayment, this.state);
              
       })
       .catch((err) => { });

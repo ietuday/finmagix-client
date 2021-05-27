@@ -36,48 +36,8 @@ export class TaxHoc extends Component {
       isTaxFilled: false,
       is_tax_selected: this.props.is_tax_selected
     };
-    // this.checkProperty();
     this.props.taxRadioValue(this.state.is_tax_selected);
   }
-
-  // checkProperty() {
-  //   const propertyId = JSON.parse(localStorage.getItem("property_id"));
-  //   if (propertyId) {
-  //     Axios.get(`${baseURL}/property_listings/${propertyId}`, {
-  //       headers: {
-  //         "Content-type": "Application/json",
-  //         Authorization: `JWT ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //       .then(async(propertyInfo) => {
-  //         const propertyDetail = propertyInfo.data.data[0];
-  //         console.log(propertyDetail, 'check property in taxhoc')
-  //         await this.setState({
-  //           is_tax_seleced: propertyDetail.is_tax_seleced
-  //         })
-  //       })
-  //       .catch((err) => {});
-  //     } 
-  // }
-
-  // updateTaxStatus(){
-  //   const data = {
-  //     is_tax_seleced: this.state.is_tax_seleced
-  //   }
-  //   const propertyIdField = JSON.parse(localStorage.getItem("property_id"));
-  //   if (propertyIdField) {
-  //     Axios.put(`${baseURL}/property_listings/${propertyIdField}`, data, {
-  //       headers: {
-  //         "Content-type": "Application/json",
-  //         Authorization: `JWT ${localStorage.getItem("accessToken")}`,
-  //       }
-  //     })
-  //       .then((propertyData) => {
-  //         console.log(propertyData, 'updateTax done')
-  //       })
-  //       .catch((err) => {});
-  //   }
-  // }
 
   tax1YesValidationError = (error, status) => {
      this.setState({
@@ -306,7 +266,6 @@ export class TaxHoc extends Component {
     this.setState({ openModal: !this.state.openModal });
   };
   onRadioChange = async(e) => {
-    console.log(this.state, 'in radio')
    await this.setState({
       radioValue: e.target.value,
     });
@@ -314,17 +273,9 @@ export class TaxHoc extends Component {
       this.props.showStep(3);
     }
     if(this.state.radioValue === true) {
-      console.log(this.state, 'in true radio')
-      // const data = {
-      //   is_rent_vs_buy_selected: this.state.RentvsBuy.is_rent_vs_buy_selected,
-      //   id: JSON.parse(localStorage.getItem("property_id"))
-      // }
-      // PropertyInfoUpdate(data)
       await this.setState({
         is_tax_selected: true
       })
-      // this.updateTaxStatus();
-      console.log(this.state, 'in radio taxhoc after update')
       this.props.taxRadioValue(this.state.is_tax_selected);
       localStorage.setItem("is_tax_selected", true);
       
@@ -338,7 +289,6 @@ export class TaxHoc extends Component {
   componentDidMount() {}
 
   render() {
-    console.log('not edit')
     const showSelectTaxModule = (
       <MDBModal
         isOpen={this.state.openModal}

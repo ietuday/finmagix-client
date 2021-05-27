@@ -190,7 +190,16 @@ export class StepperComponent extends Component {
     });
   };
 
+  taxRadioValue = async(data) => {
+    await this.setState({
+      is_tax_selected: data
+    })
+  }
+
   handleHouseInfo = async (downpayment, data, id) => {
+    console.log(data, 'data in handlehouseinfo edit index')
+    console.log(downpayment, 'downpayment in handlehouseinfo edit index')
+    console.log(id, 'id in handlehouseinfo edit index')
     id = localStorage.getItem('property_id')
     await this.setState((prevState) => {
       let propertyInfo = Object.assign({}, prevState.propertyInfo);
@@ -201,6 +210,7 @@ export class StepperComponent extends Component {
     this.setState({
       downpayment: downpayment,
     });
+    console.log(this.state, 'state in handlehouseinfo after state update')
   };
   handlePersonalFinance = async (data, id) => {
     Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
@@ -324,7 +334,7 @@ export class StepperComponent extends Component {
         return (
           <TaxHoc handleContinue={this.handleNext} getId={this.props.location.state.tax_edit_id} isTaxFilled={true} showStep={(step) => {
             this.handleStep(step);
-          }}>
+          }} taxRadioValue={this.taxRadioValue}>
             <Tax1 />
             <Tax2 />
           </TaxHoc>
@@ -360,6 +370,7 @@ export class StepperComponent extends Component {
   };
 
   handleNext = async() => {
+    // debugger
     const {
       PersonalFinanceUpdate,
       RentvsBuyCreate,
@@ -380,7 +391,7 @@ export class StepperComponent extends Component {
       ) {
         NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
-
+        console.log(this.state,'in else edit index')
         this.setState({ [this.state.propertyInfo.home_price_growth] : String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)})
 
         PropertyInfoUpdate(this.state.propertyInfo);
@@ -443,27 +454,24 @@ export class StepperComponent extends Component {
             );
             return { RentvsBuy }
           })
-          console.log(this.state.RentvsBuy, 'in update another index edit')
+          // console.log(this.state.RentvsBuy, 'in update another index edit')
           // RentvsBuyUpdate(this.state.RentvsBuy);
           // this.props.history.push({
           //   pathname: '/property-form',
           //   returnBackFromreviewEdit: true
           // })
           if (this.state.RentvsBuy.is_update && this.state.RentvsBuy.id) {
-            console.log(this.state.RentvsBuy, 'in update')
             RentvsBuyUpdate(this.state.RentvsBuy)
             this.props.history.push({
               pathname: '/property-form',
               returnBackFromreviewEdit: true
             })
           } else {
-            console.log(this.state.RentvsBuy, 'in create index 2')
             RentvsBuyCreate(this.state.RentvsBuy);
             const data = {
               is_rent_vs_buy_selected: this.state.RentvsBuy.is_rent_vs_buy_selected,
               id: JSON.parse(localStorage.getItem("property_id"))
             }
-            console.log(data, 'data in edit')
             PropertyInfoUpdate(data)
             this.props.history.push({
               pathname: '/property-form',
@@ -478,6 +486,11 @@ export class StepperComponent extends Component {
         pathname: '/property-form',
         returnBackFromreviewEdit: true
       })
+      const data = {
+        is_tax_selected: this.state.is_tax_selected,
+        id: JSON.parse(localStorage.getItem("property_id"))
+      }
+      PropertyInfoUpdate(data)
     } else if (this.state.activeStep === 5) {
       this.props.history.push({
         pathname: '/property-form',

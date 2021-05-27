@@ -183,7 +183,6 @@ export class StepperComponent extends Component {
       is_rent_vs_buy_selected: this.state.propertyInfo.is_rent_vs_buy_selected,
       is_tax_selected: this.state.propertyInfo.is_tax_selected
     })
-    console.log(this.state,'index state in handlehouseinfo')
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
@@ -265,11 +264,9 @@ export class StepperComponent extends Component {
     });
   }
   taxRadioValue = async(data) => {
-    console.log(data, 'data in index')
     await this.setState({
       is_tax_selected: data
     })
-    console.log(this.state.is_tax_selected, 'after update in taxRadioValue index')
   }
   getRentvsBuyFilledStatus = async (status) => {
     await this.setState({
@@ -439,12 +436,15 @@ export class StepperComponent extends Component {
       ) {
         return NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
-        
         if (
           this.state.propertyInfo.property_price &&
           this.state.propertyInfo.downpayment_amount &&
           this.state.propertyInfo.annual_property_tax &&
-          this.state.propertyInfo.home_owner_insurance
+          this.state.propertyInfo.home_owner_insurance &&
+          this.state.propertyInfo.house_address &&
+          this.state.propertyInfo.house_state &&
+          this.state.propertyInfo.house_zip_code &&
+          this.state.propertyInfo.stay_duration 
         ) {
           this.setState({
             activeStep: newActiveStep,
@@ -483,10 +483,6 @@ export class StepperComponent extends Component {
               this.onFailureHouseInfo
             );
           }
-          console.log(this.state, 'only state index')
-          console.log(this.state.propertyInfo, 'index property info')
-          
-          console.log(this.state, 'index after update')
 
           if (this.props.location.surveyData) {
             this.props.location.surveyData.property_obj = localStorage.getItem(
@@ -499,7 +495,7 @@ export class StepperComponent extends Component {
       }
 
     } else if (this.state.activeStep === 1) {
-      
+
       if(this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments){
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
@@ -568,10 +564,8 @@ export class StepperComponent extends Component {
           ) / 100
         );
         if (this.state.RentvsBuy.is_update && this.state.RentvsBuy.id) {
-          console.log(this.state.RentvsBuy, 'in update')
           RentvsBuyUpdate(this.state.RentvsBuy)
         } else {
-          console.log(this.state.RentvsBuy, 'in create index 1')
           RentvsBuyCreate(this.state.RentvsBuy);
           const data = {
             is_rent_vs_buy_selected: this.state.RentvsBuy.is_rent_vs_buy_selected,
