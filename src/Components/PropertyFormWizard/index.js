@@ -178,6 +178,10 @@ export class StepperComponent extends Component {
     this.setState({
       downpayment: downpayment,
     });
+    await this.setState({
+      is_rent_vs_buy_selected: this.state.propertyInfo.is_rent_vs_buy_selected,
+      is_tax_selected: this.state.propertyInfo.is_tax_selected
+    })
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
@@ -257,6 +261,11 @@ export class StepperComponent extends Component {
       RentvsBuy = data;
       return { RentvsBuy };
     });
+  }
+  taxRadioValue = async(data) => {
+    await this.setState({
+      is_tax_selected: data
+    })
   }
   getRentvsBuyFilledStatus = async (status) => {
     await this.setState({
@@ -344,6 +353,7 @@ export class StepperComponent extends Component {
               this.handleStep(step);
             }}
             getValidationError={this.getRentvsBuyValidationError}
+            is_rent_vs_buy_selected={this.state.is_rent_vs_buy_selected}
           />
         );
       case 4:
@@ -353,6 +363,11 @@ export class StepperComponent extends Component {
             getTaxFilledStataus={(getTaxFillStatus) =>
               this.getTaxFilledStataus(getTaxFillStatus)
             }
+            showStep={(step) => {
+              this.handleStep(step);
+            }}
+            is_tax_selected={this.state.is_tax_selected}
+            taxRadioValue={this.taxRadioValue}
           >
             <Tax1 />
             <Tax2 />
@@ -396,6 +411,7 @@ export class StepperComponent extends Component {
   };
 
   async handleNext() {
+    // debugger
     const {
       // PersonalFinanceUpdate,
       RentvsBuyCreate,
@@ -419,12 +435,15 @@ export class StepperComponent extends Component {
       ) {
         return NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
-        
         if (
           this.state.propertyInfo.property_price &&
           this.state.propertyInfo.downpayment_amount &&
           this.state.propertyInfo.annual_property_tax &&
-          this.state.propertyInfo.home_owner_insurance
+          this.state.propertyInfo.home_owner_insurance &&
+          this.state.propertyInfo.house_address &&
+          this.state.propertyInfo.house_state &&
+          this.state.propertyInfo.house_zip_code &&
+          this.state.propertyInfo.stay_duration 
         ) {
           this.setState({
             activeStep: newActiveStep,
@@ -475,8 +494,7 @@ export class StepperComponent extends Component {
       }
 
     } else if (this.state.activeStep === 1) {
-      
-      if(this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments){
+      if(this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments && !this.state.personalFinanceUpdate.monthly_non_housing_expenses && !this.state.personalFinanceUpdate.fico_score_range && !this.state.personalFinanceUpdate.filling_status){
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
         );
@@ -490,7 +508,7 @@ export class StepperComponent extends Component {
         this.setState({
           activeStep: newActiveStep,
         });
-      }else if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments){
+      }else if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments && this.state.personalFinanceUpdate.monthly_non_housing_expenses && this.state.personalFinanceUpdate.fico_score_range && this.state.personalFinanceUpdate.filling_status){
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
         );
@@ -506,7 +524,7 @@ export class StepperComponent extends Component {
         });
        
       }else{
-        return NotificationManager.error('Please correct your input', 'Please fill required fields',3000)
+        return NotificationManager.error('Please correct your inputy', 'Please fill required fields',3000)
       }
 
 
@@ -515,15 +533,8 @@ export class StepperComponent extends Component {
         activeStep: newActiveStep,
       });
     } else if (this.state.activeStep === 3) {
-      if(this.state.RentvsBuy.annual_rent_insurance === null || this.state.RentvsBuy.annual_rent_insurance === "" || this.state.RentvsBuy.current_monthly_rent_payment === null 
-      || this.state.RentvsBuy.current_monthly_rent_payment === "" || this.state.RentvsBuy.rate_of_investment === null || this.state.RentvsBuy.rate_of_investment === "" 
-      || this.state.RentvsBuy.rentinflation === null || this.state.RentvsBuy.rentinflation === "" 
-      || this.state.RentvsBuy.annual_rent_insurance === undefined || this.state.RentvsBuy.annual_rent_insurance === "NaN"
-      || this.state.RentvsBuy.current_monthly_rent_payment === undefined || this.state.RentvsBuy.current_monthly_rent_payment === "NaN"
-      || this.state.RentvsBuy.rate_of_investment === undefined || this.state.RentvsBuy.rate_of_investment === "NaN" 
-      || this.state.RentvsBuy.rentinflation === undefined || this.state.RentvsBuy.rentinflation === "NaN" ){
-        return NotificationManager.error('Please correct your input', 'Please fill required fields',3000)
-      } else {
+      // console.log(this.state.RentvsBuy, 'rentvsbuy index')
+      if(this.state.RentvsBuy.current_monthly_rent_payment && this.state.RentvsBuy.annual_rent_insurance && this.state.RentvsBuy.rate_of_investment && this.state.RentvsBuy.rentinflation){
         this.setState({
           activeStep: newActiveStep,
         });
@@ -547,12 +558,24 @@ export class StepperComponent extends Component {
           RentvsBuyUpdate(this.state.RentvsBuy)
         } else {
           RentvsBuyCreate(this.state.RentvsBuy);
+          const data = {
+            is_rent_vs_buy_selected: this.state.RentvsBuy.is_rent_vs_buy_selected,
+            id: JSON.parse(localStorage.getItem("property_id"))
+          }
+          PropertyInfoUpdate(data)
         }
+      } else {
+        return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
       }
     } else if (this.state.activeStep === 4) {
       this.setState({
         activeStep: newActiveStep,
       });
+      const data = {
+        is_tax_selected: this.state.is_tax_selected,
+        id: JSON.parse(localStorage.getItem("property_id"))
+      }
+      PropertyInfoUpdate(data)
     } else if (this.state.activeStep === 5) {
       this.setState({
         activeStep: newActiveStep,

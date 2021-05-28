@@ -8,6 +8,7 @@ import {
   MDBModalFooter
 } from "mdbreact";
 import { withRouter} from "react-router-dom";
+import "../../css/loader.css";
 import { connect } from "react-redux";
 import { tax_create, tax_update } from "../redux/actions/PropertyReport/taxes";
 
@@ -16,6 +17,10 @@ import { Button } from "@material-ui/core";
 import { isFormValid } from "../../common/ValidatorFunction";
 import Tax1 from "./tax1";
 import Tax2 from "./tax2";
+
+import Axios from "axios";
+import { config } from '../config/default';
+const { baseURL } = config;
 
 export class TaxHoc extends Component {
   constructor(props) {
@@ -31,8 +36,58 @@ export class TaxHoc extends Component {
       tax2: {},
       tax: {},
       isTaxFilled: false,
+      is_tax_selected: this.props.is_tax_selected,
+      checkPropertyApiLoaded: false,
+      loadModalYesOrNo: false,
+      loadForm: false,
+      loading: true,
     };
+    this.checkProperty();
   }
+
+  checkProperty() {
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then(async(propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+
+         await this.setState({
+            is_tax_selected: propertyDetail.is_tax_selected,
+            checkPropertyApiLoaded: true
+          });
+          if(propertyDetail.taxes){
+            this.setState({
+              loading: false
+            })
+          } else {
+            console.log('no data exists')
+          }
+          this.checkFunction();
+        })
+        .catch((err) => {});
+    }
+  }
+
+  checkFunction = () => {
+    if((this.state.is_tax_selected && this.state.checkPropertyApiLoaded) || this.state.radioValue){
+      this.setState({
+        loadForm: true,
+        loadModalYesOrNo: false
+      })
+    } else {
+      this.setState({
+        loadModalYesOrNo: true,
+        loadForm: false
+      })
+  }
+}
+
   tax1YesValidationError = (error, status) => {
      this.setState({
       tax1YesValidationError: error,
@@ -259,12 +314,17 @@ export class TaxHoc extends Component {
   toggle = () => {
     this.setState({ openModal: !this.state.openModal });
   };
-  onRadioChange = (e) => {
-    this.setState({
+  onRadioChange = async(e) => {
+    await this.setState({
       radioValue: e.target.value,
     });
     if (this.state.radioValue) {
       this.props.showStep(3);
+    }
+    if(this.state.radioValue === true) {
+      this.props.taxRadioValue(true);
+      this.checkFunction();
+      localStorage.setItem("is_tax_selected", true);
     }
   };
   goToReport = () => {
@@ -313,65 +373,78 @@ export class TaxHoc extends Component {
       </MDBModal>
     );
 
+  const showForm = (          <div>
+    {!this.state.onClick ? (
+      <Tax1
+        getData={this.getData}
+        getValidationErrorTax1Yes={this.tax1YesValidationError}
+        getValidationErrorTax1No={this.tax1NoValidationError}
+        {...this.props}
+        {...this.state}
+      />
+    ) : (
+      <Tax2
+        getData={this.getData}
+        getValidationError={this.tax2ValidationError}
+        {...this.props}
+        {...this.state}
+      />
+    )}
+    <div>
+      {!this.state.onClick ? (
+        <MDBRow className="margin20 text-center">
+          <MDBCol md="12">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.handleNext}
+              className="button-inner-class"
+              size="large"
+            >
+              Next
+            </Button>
+          </MDBCol>
+        </MDBRow>
+      ) : (
+        <div>
+          <MDBRow className="margin20 text-center">
+            <MDBCol md="12">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.goToNextPage}
+                className="button-inner-class"
+                size="large"
+              >
+                Continue
+              </Button>
+            </MDBCol>
+          </MDBRow>
+        </div>
+      )}
+    </div>
+  </div>);  
+
     return (
       <Fragment>
-        {localStorage.getItem("is_tax_selected") === "true" ||
+        {/* {localStorage.getItem("is_tax_selected") === "true" ||
         this.state.radioValue 
          ? (
-          <div>
-            {!this.state.onClick ? (
-              <Tax1
-                getData={this.getData}
-                getValidationErrorTax1Yes={this.tax1YesValidationError}
-                getValidationErrorTax1No={this.tax1NoValidationError}
-                {...this.props}
-                {...this.state}
-              />
-            ) : (
-              <Tax2
-                getData={this.getData}
-                getValidationError={this.tax2ValidationError}
-                {...this.props}
-                {...this.state}
-              />
-            )}
-            <div>
-              {!this.state.onClick ? (
-                <MDBRow className="margin20 text-center">
-                  <MDBCol md="12">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={this.handleNext}
-                      className="button-inner-class"
-                      size="large"
-                    >
-                      Next
-                    </Button>
-                  </MDBCol>
-                </MDBRow>
-              ) : (
-                <div>
-                  <MDBRow className="margin20 text-center">
-                    <MDBCol md="12">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.goToNextPage}
-                        className="button-inner-class"
-                        size="large"
-                      >
-                        Continue
-                      </Button>
-                    </MDBCol>
-                  </MDBRow>
-                </div>
-              )}
-            </div>
-          </div>
+            showForm
         ) : (
           showSelectTaxModule
-        )}
+        )} */}
+        {
+          this.state.loading ? (
+            <div class="loader-container">
+            <div class="loader"></div>
+          </div>
+          ) : this.state.loadForm ? (
+            showForm
+          ) : this.state.loadModalYesOrNo ? (
+            showSelectTaxModule
+          ) : null
+        }
       </Fragment>
     );
   }

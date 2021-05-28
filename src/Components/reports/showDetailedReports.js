@@ -33,7 +33,9 @@ export class ShowDetailedReports extends Component {
       disabled: true,
       calculateCalled: false,
       calculateResponse: false,
-      CalculatorResponseData:[]
+      CalculatorResponseData:[],
+      is_tax_selected: false,
+      is_rent_vs_buy_selected: false,
     };
   }
 
@@ -95,6 +97,21 @@ export class ShowDetailedReports extends Component {
         // this.calculateSurvey(prevProps);
       })
       .catch((err) => {});
+      Axios.get(`${baseURL}/property_listings/${JSON.parse(localStorage.getItem("property_id"))}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((propertyInfoData) => {
+          console.log(propertyInfoData.data.data[0].is_tax_selected,'propertyInfoData tax')
+          console.log(propertyInfoData.data.data[0].is_rent_vs_buy_selected,'propertyInfoData rent')
+          this.setState({
+            is_rent_vs_buy_selected: propertyInfoData.data.data[0].is_rent_vs_buy_selected,
+            is_tax_selected: propertyInfoData.data.data[0].is_tax_selected
+          })
+          console.log('first data', this.state)
+        })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -289,15 +306,10 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateScreen7() {
+    console.log(this.state)
     return {
-      Taxmoduleoption:
-        JSON.parse(localStorage.getItem("is_tax_selected")) === false
-          ? "N"
-          : "Y",
-      RvBuymoduleoption:
-        JSON.parse(localStorage.getItem("is_rent_vs_buy_selected")) === false
-          ? "N"
-          : "Y",
+      Taxmoduleoption: (this.state.is_tax_selected === true) ? "Y" : "N",
+      RvBuymoduleoption: (this.state.is_rent_vs_buy_selected === true) ? "Y" : "N",
     };
   }
 

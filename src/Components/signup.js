@@ -109,9 +109,7 @@ export class Signup extends Component {
       backButton: !this.state.backButton,
     });
   };
-  renderGetStarted =  () =>{
-    return <Redirect to="/get-started" />
-  }
+
   render() {
     if (this.state.backButton) {
       return <Redirect to="/" />;
@@ -127,10 +125,7 @@ export class Signup extends Component {
     };
     return (
       <Fragment>
-        { localStorage.length <= 0 
-        ?
-        this.renderGetStarted()
-        :
+        
         <MDBContainer className="signup-signin-container">
         <MDBRow>
           <MDBCol xl="12" lg="12" md="12" sm="12" xs="12" className="margin20">
@@ -281,7 +276,6 @@ export class Signup extends Component {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
-      }
         
       </Fragment>
     );

@@ -16,6 +16,9 @@ import { Button } from "@material-ui/core";
 import { isFormValid } from "../../common/ValidatorFunction";
 import Tax1 from "./tax1";
 import Tax2 from "./tax2";
+import Axios from "axios";
+import { config } from '../config/default';
+const { baseURL } = config;
 
 export class TaxHoc extends Component {
   constructor(props) {
@@ -31,8 +34,11 @@ export class TaxHoc extends Component {
       tax2: {},
       tax: {},
       isTaxFilled: false,
+      is_tax_selected: this.props.is_tax_selected
     };
+    this.props.taxRadioValue(this.state.is_tax_selected);
   }
+
   tax1YesValidationError = (error, status) => {
      this.setState({
       tax1YesValidationError: error,
@@ -259,17 +265,27 @@ export class TaxHoc extends Component {
   toggle = () => {
     this.setState({ openModal: !this.state.openModal });
   };
-  onRadioChange = (e) => {
-    this.setState({
+  onRadioChange = async(e) => {
+   await this.setState({
       radioValue: e.target.value,
     });
     if (this.state.radioValue) {
       this.props.showStep(3);
     }
+    if(this.state.radioValue === true) {
+      await this.setState({
+        is_tax_selected: true
+      })
+      this.props.taxRadioValue(this.state.is_tax_selected);
+      localStorage.setItem("is_tax_selected", true);
+      
+    }
   };
   goToReport = () => {
     this.props.handleContinue();
   };
+
+
   componentDidMount() {}
 
   render() {
@@ -315,7 +331,7 @@ export class TaxHoc extends Component {
 
     return (
       <Fragment>
-        {localStorage.getItem("is_tax_selected") === "true" ||
+        {this.state.is_tax_selected ||
         this.state.radioValue
          ? (
           <div>

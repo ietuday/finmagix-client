@@ -35,7 +35,7 @@ import {
   personal_finance_update,
 
 } from "../redux/actions/PropertyReport/personalFinance";
-import {rent_vs_buy_update } from "../redux/actions/PropertyReport/rentvsBuy";
+import {rent_vs_buy_create, rent_vs_buy_update } from "../redux/actions/PropertyReport/rentvsBuy";
 import {
 
   property_info_update,
@@ -190,7 +190,16 @@ export class StepperComponent extends Component {
     });
   };
 
+  taxRadioValue = async(data) => {
+    await this.setState({
+      is_tax_selected: data
+    })
+  }
+
   handleHouseInfo = async (downpayment, data, id) => {
+    console.log(data, 'data in handlehouseinfo edit index')
+    console.log(downpayment, 'downpayment in handlehouseinfo edit index')
+    console.log(id, 'id in handlehouseinfo edit index')
     id = localStorage.getItem('property_id')
     await this.setState((prevState) => {
       let propertyInfo = Object.assign({}, prevState.propertyInfo);
@@ -201,6 +210,7 @@ export class StepperComponent extends Component {
     this.setState({
       downpayment: downpayment,
     });
+    console.log(this.state, 'state in handlehouseinfo after state update')
   };
   handlePersonalFinance = async (data, id) => {
     Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
@@ -322,7 +332,9 @@ export class StepperComponent extends Component {
         );
       case 4:
         return (
-          <TaxHoc handleContinue={this.handleNext} getId={this.props.location.state.tax_edit_id} isTaxFilled={true}>
+          <TaxHoc handleContinue={this.handleNext} getId={this.props.location.state.tax_edit_id} isTaxFilled={true} showStep={(step) => {
+            this.handleStep(step);
+          }} taxRadioValue={this.taxRadioValue}>
             <Tax1 />
             <Tax2 />
           </TaxHoc>
@@ -358,8 +370,10 @@ export class StepperComponent extends Component {
   };
 
   handleNext = async() => {
+    // debugger
     const {
       PersonalFinanceUpdate,
+      RentvsBuyCreate,
       RentvsBuyUpdate,
       PropertyInfoUpdate,
       PersonalFinanceCreate
@@ -377,7 +391,17 @@ export class StepperComponent extends Component {
       ) {
         NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
-
+        if (
+          this.state.propertyInfo.property_price &&
+          this.state.propertyInfo.downpayment_amount &&
+          this.state.propertyInfo.annual_property_tax &&
+          this.state.propertyInfo.home_owner_insurance &&
+          this.state.propertyInfo.house_address &&
+          this.state.propertyInfo.house_state &&
+          this.state.propertyInfo.house_zip_code &&
+          this.state.propertyInfo.stay_duration 
+        ) {
+        console.log(this.state,'in else edit index')
         this.setState({ [this.state.propertyInfo.home_price_growth] : String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)})
 
         PropertyInfoUpdate(this.state.propertyInfo);
@@ -385,23 +409,37 @@ export class StepperComponent extends Component {
           pathname: '/property-form',
           returnBackFromreviewEdit: true
         })
-
+      }  else {
+        return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
+      }
       }
     } else if (this.state.activeStep === 1) {
-
-      this.props.history.push({
-        pathname: '/property-form',
-        returnBackFromreviewEdit: true
-      })
-      
-      
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-          : PersonalFinanceCreate(this.state.personalFinance);
-      
-
-
+      if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments && this.state.personalFinanceUpdate.monthly_non_housing_expenses && this.state.personalFinanceUpdate.fico_score_range && this.state.personalFinanceUpdate.filling_status) {
+        this.props.history.push({
+          pathname: '/property-form',
+          returnBackFromreviewEdit: true
+        })
+        
+        
+          Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+            .length !== 0
+            ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+            : PersonalFinanceCreate(this.state.personalFinance);
+      } else if (this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments && !this.state.personalFinanceUpdate.monthly_non_housing_expenses && !this.state.personalFinanceUpdate.fico_score_range && !this.state.personalFinanceUpdate.filling_status) {
+     
+        this.props.history.push({
+          pathname: '/property-form',
+          returnBackFromreviewEdit: true
+        })
+        
+        
+          Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+            .length !== 0
+            ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+            : PersonalFinanceCreate(this.state.personalFinance);
+      } else {
+        return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
+      }
 
     } else if (this.state.activeStep === 2) {
       this.props.history.push({
@@ -410,15 +448,7 @@ export class StepperComponent extends Component {
       })
     } else if (this.state.activeStep === 3) {
 
-      if(this.state.RentvsBuy.annual_rent_insurance === null || this.state.RentvsBuy.annual_rent_insurance === "" || this.state.RentvsBuy.current_monthly_rent_payment === null 
-      || this.state.RentvsBuy.current_monthly_rent_payment === "" || this.state.RentvsBuy.rate_of_investment === null || this.state.RentvsBuy.rate_of_investment === "" 
-      || this.state.RentvsBuy.rentinflation === null || this.state.RentvsBuy.rentinflation === "" 
-      || this.state.RentvsBuy.annual_rent_insurance === undefined || this.state.RentvsBuy.annual_rent_insurance === "NaN"
-      || this.state.RentvsBuy.current_monthly_rent_payment === undefined || this.state.RentvsBuy.current_monthly_rent_payment === "NaN"
-      || this.state.RentvsBuy.rate_of_investment === undefined || this.state.RentvsBuy.rate_of_investment === "NaN" 
-      || this.state.RentvsBuy.rentinflation === undefined || this.state.RentvsBuy.rentinflation === "NaN" ){
-        return NotificationManager.error('Please correct your input', 'Please fill required fields',3000)
-      } else {
+      if(this.state.RentvsBuy.current_monthly_rent_payment && this.state.RentvsBuy.annual_rent_insurance && this.state.RentvsBuy.rate_of_investment && this.state.RentvsBuy.rentinflation){
         if (this.state.rentvsBuyValidationErrors !== 0 &&
           !isFormValid("rent_vs_buy")) {
           this.setState({
@@ -440,12 +470,33 @@ export class StepperComponent extends Component {
             );
             return { RentvsBuy }
           })
-          RentvsBuyUpdate(this.state.RentvsBuy);
-          this.props.history.push({
-            pathname: '/property-form',
-            returnBackFromreviewEdit: true
-          })
+          // console.log(this.state.RentvsBuy, 'in update another index edit')
+          // RentvsBuyUpdate(this.state.RentvsBuy);
+          // this.props.history.push({
+          //   pathname: '/property-form',
+          //   returnBackFromreviewEdit: true
+          // })
+          if (this.state.RentvsBuy.is_update && this.state.RentvsBuy.id) {
+            RentvsBuyUpdate(this.state.RentvsBuy)
+            this.props.history.push({
+              pathname: '/property-form',
+              returnBackFromreviewEdit: true
+            })
+          } else {
+            RentvsBuyCreate(this.state.RentvsBuy);
+            const data = {
+              is_rent_vs_buy_selected: this.state.RentvsBuy.is_rent_vs_buy_selected,
+              id: JSON.parse(localStorage.getItem("property_id"))
+            }
+            PropertyInfoUpdate(data)
+            this.props.history.push({
+              pathname: '/property-form',
+              returnBackFromreviewEdit: true
+            })
+          }
         }
+      } else {
+        return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
       }
 
     } else if (this.state.activeStep === 4) {
@@ -453,6 +504,11 @@ export class StepperComponent extends Component {
         pathname: '/property-form',
         returnBackFromreviewEdit: true
       })
+      const data = {
+        is_tax_selected: this.state.is_tax_selected,
+        id: JSON.parse(localStorage.getItem("property_id"))
+      }
+      PropertyInfoUpdate(data)
     } else if (this.state.activeStep === 5) {
       this.props.history.push({
         pathname: '/property-form',
@@ -705,6 +761,7 @@ export class StepperComponent extends Component {
 const mapStateToProps = (state) => {
   return {
     PersonalFinanceUpdateResponse: state.PersonalFinanceUpdateResponse,
+    RentvsBuyCreateResponse: state.RentvsBuyCreateResponse,
     RentvsBuyUpdateResponse: state.RentvsBuyUpdateResponse,
     PropertyInfoUpdateResponse: state.PropertyInfoUpdateResponse,
   };
@@ -713,6 +770,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     PersonalFinanceUpdate: (data) => dispatch(personal_finance_update(data)),
+    RentvsBuyCreate: (data) => dispatch(rent_vs_buy_create(data)),
     RentvsBuyUpdate: (data) => dispatch(rent_vs_buy_update(data)),
     PropertyInfoUpdate: (data) => dispatch(property_info_update(data)),
     LogOut: () => dispatch(log_out()),

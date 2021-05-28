@@ -8,6 +8,7 @@ import {
   MDBModalFooter, 
 } from "mdbreact";
 import Button from "@material-ui/core/Button";
+import "../../css/loader.css";
 
 import Axios from "axios";
 
@@ -22,7 +23,6 @@ import quss from "../../assets/images/que.png";
 import { config } from '../config/default';
 // import { NotificationManager } from "react-notifications";
 const { baseURL } = config;
-
 
 export class RentvsBuy extends Component {
   constructor(props) {
@@ -45,6 +45,11 @@ export class RentvsBuy extends Component {
       current_monthly_rent_payment_ValidationError: "",
       rate_of_investment_percentage_ValidationError: "",
       rentinflation_percentage_ValidationError: "",
+      is_rent_vs_buy_selected: this.props.is_rent_vs_buy_selected,
+      checkPropertyApiLoaded: false,
+      loadModalYesOrNo: false,
+      loadForm: false,
+      loading: true,
     };
     // this.validators = RentvsBuyValidator;
     // resetValidators(this.validators);
@@ -53,8 +58,21 @@ export class RentvsBuy extends Component {
     this.checkProperty()
   }
 
+  checkFunction = () => {
+    if((this.state.is_rent_vs_buy_selected && this.state.checkPropertyApiLoaded) || this.state.radioValue){
+      this.setState({
+        loadForm: true,
+        loadModalYesOrNo: false
+      })
+    } else {
+      this.setState({
+        loadModalYesOrNo: true,
+        loadForm: false
+      })
+  }
+}
+
   checkProperty() {
-    
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -63,10 +81,10 @@ export class RentvsBuy extends Component {
           Authorization: `JWT ${localStorage.getItem("accessToken")}`,
         },
       })
-        .then((propertyInfo) => {
+        .then(async(propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0];
 
-          this.setState({
+         await this.setState({
             current_monthly_rent_payment: propertyDetail.rent_vs_buy.current_monthly_rent_payment,
             current_monthly_rent_payment_number: propertyDetail.rent_vs_buy.current_monthly_rent_payment,
             annual_rent_insurance: propertyDetail.rent_vs_buy.annual_rent_insurance,
@@ -76,10 +94,19 @@ export class RentvsBuy extends Component {
             rentinflation_percentage: Number(propertyDetail.rent_vs_buy.rentinflation)*100,
             annual_rent_insurance_number: propertyDetail.rent_vs_buy.annual_rent_insurance,
             is_update:true,
-            id: propertyDetail.rent_vs_buy.id
+            id: propertyDetail.rent_vs_buy.id,
+            is_rent_vs_buy_selected: propertyDetail.is_rent_vs_buy_selected,
+            checkPropertyApiLoaded: true
           });
-          
           this.props.getRentvsBuyData(this.state);
+          if(propertyDetail.rent_vs_buy){
+            this.setState({
+              loading: false
+            })
+          } else {
+            console.log('no data exists')
+          }
+          this.checkFunction();
         })
         .catch((err) => {});
     }
@@ -164,13 +191,19 @@ export class RentvsBuy extends Component {
       this.props.showStep(2);
     }
     setRentvsBuyFilledStatus(this.state.radioValue);
+    if(this.state.radioValue === true){
+      // localStorage.setItem("is_rent_vs_buy_selected", true);
+      await this.setState({
+        is_rent_vs_buy_selected: true
+      })
+      this.checkFunction();
+    }
   }
   goToTaxScreen = () => {
     this.props.goToTaxfromRentvsBuyModal();
   };
 
   componentDidMount() {
-    console.log('rentvsbuy edit main')
   }
   render() {
     const showSelectRentvsbuyModule = (
@@ -214,11 +247,9 @@ export class RentvsBuy extends Component {
         </MDBModalFooter>
       </MDBModal>
     );
-    return (
-      <Fragment>
-        {localStorage.getItem("is_rent_vs_buy_selected") === "true" ||
-        this.state.radioValue ? (
-          <div>
+
+    const showForm = (
+      <div>
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">
@@ -400,9 +431,31 @@ export class RentvsBuy extends Component {
               {/* {displayValidationErrors(this.validators, "rentinflation")} */}
             </MDBRow>
           </div>
-        ) : (
-          showSelectRentvsbuyModule
-        )}
+    );
+    return (
+      <Fragment>
+        {/* {this.state.is_rent_vs_buy_selected ||
+        this.state.radioValue ? ( */}
+        {/* { this.state.loadForm ? (
+            showForm
+        ) : 
+          // showSelectRentvsbuyModule
+        this.state.loadModalYesOrNo ?
+            (showSelectRentvsbuyModule) :     <div class="loader-container">
+            <div class="loader"></div>
+          </div>
+        } */}
+        {
+          this.state.loading ? (
+            <div class="loader-container">
+            <div class="loader"></div>
+          </div>
+          ) : this.state.loadForm ? (
+            showForm
+          ) : this.state.loadModalYesOrNo ? (
+            showSelectRentvsbuyModule
+          ) : null
+        }
       </Fragment>
     );
   }
