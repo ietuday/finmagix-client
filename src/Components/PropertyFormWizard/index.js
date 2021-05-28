@@ -169,7 +169,6 @@ export class StepperComponent extends Component {
     });
   };
   handleHouseInfo = async (downpayment, data) => {
-    console.log(data, 'in handle house info fn')
     await this.setState((prevState) => {
       let propertyInfo = Object.assign({}, prevState.propertyInfo);
       propertyInfo = data;
@@ -495,8 +494,7 @@ export class StepperComponent extends Component {
       }
 
     } else if (this.state.activeStep === 1) {
-
-      if(this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments){
+      if(this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments && !this.state.personalFinanceUpdate.monthly_non_housing_expenses && !this.state.personalFinanceUpdate.fico_score_range && !this.state.personalFinanceUpdate.filling_status){
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
         );
@@ -510,7 +508,7 @@ export class StepperComponent extends Component {
         this.setState({
           activeStep: newActiveStep,
         });
-      }else if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments){
+      }else if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments && this.state.personalFinanceUpdate.monthly_non_housing_expenses && this.state.personalFinanceUpdate.fico_score_range && this.state.personalFinanceUpdate.filling_status){
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
         );
@@ -526,7 +524,7 @@ export class StepperComponent extends Component {
         });
        
       }else{
-        return NotificationManager.error('Please correct your input', 'Please fill required fields',3000)
+        return NotificationManager.error('Please correct your inputy', 'Please fill required fields',3000)
       }
 
 
@@ -535,15 +533,8 @@ export class StepperComponent extends Component {
         activeStep: newActiveStep,
       });
     } else if (this.state.activeStep === 3) {
-      if(this.state.RentvsBuy.annual_rent_insurance === null || this.state.RentvsBuy.annual_rent_insurance === "" || this.state.RentvsBuy.current_monthly_rent_payment === null 
-      || this.state.RentvsBuy.current_monthly_rent_payment === "" || this.state.RentvsBuy.rate_of_investment === null || this.state.RentvsBuy.rate_of_investment === "" 
-      || this.state.RentvsBuy.rentinflation === null || this.state.RentvsBuy.rentinflation === "" 
-      || this.state.RentvsBuy.annual_rent_insurance === undefined || this.state.RentvsBuy.annual_rent_insurance === "NaN"
-      || this.state.RentvsBuy.current_monthly_rent_payment === undefined || this.state.RentvsBuy.current_monthly_rent_payment === "NaN"
-      || this.state.RentvsBuy.rate_of_investment === undefined || this.state.RentvsBuy.rate_of_investment === "NaN" 
-      || this.state.RentvsBuy.rentinflation === undefined || this.state.RentvsBuy.rentinflation === "NaN" ){
-        return NotificationManager.error('Please correct your input', 'Please fill required fields',3000)
-      } else {
+      // console.log(this.state.RentvsBuy, 'rentvsbuy index')
+      if(this.state.RentvsBuy.current_monthly_rent_payment && this.state.RentvsBuy.annual_rent_insurance && this.state.RentvsBuy.rate_of_investment && this.state.RentvsBuy.rentinflation){
         this.setState({
           activeStep: newActiveStep,
         });
@@ -573,6 +564,8 @@ export class StepperComponent extends Component {
           }
           PropertyInfoUpdate(data)
         }
+      } else {
+        return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
       }
     } else if (this.state.activeStep === 4) {
       this.setState({

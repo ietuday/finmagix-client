@@ -80,74 +80,77 @@ export class PropertyMortgageHOC extends Component {
         this.state.radioValue &&
         this.state.firstLoanScenario.mortgage_program_type_value === 1
       ) {
-
         if (
           this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
           this.state.firstLoanScenario.loan_amount_validation_error
         ) {
           return NotificationManager.error('error', 'Please correct your input', 3000)
         } else {
-
-          if (
+          if(this.state.firstLoanScenario.loan_amount && this.state.firstLoanScenario.loan_term && this.state.firstLoanScenario.interest) {
+            if (
             
-            this.state.firstLoanScenario['loan_amount']
-          ) {
-            if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
-              const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
-              if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
-
+              this.state.firstLoanScenario['loan_amount']
+            ) {
+              if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
+                const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
+                if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
+  
+                }
+              }else{
+                const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
+                if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
+  
+                }
               }
-            }else{
-              const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
-              if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
-
+              if (this.state.firstLoanScenario["interest"]) {
+                await this.setState((prevState) => {
+                  let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
+                  firstLoanScenario.interest = String(
+                    Number(this.state.firstLoanScenario["interest"]) / 100
+                  );
+                  return { firstLoanScenario };
+                });
+                // this.setState({
+                //   firstLoanScenario.interest: String(
+                //     Number(this.state.firstLoanScenario["interest"]) / 100
+                //   );
+                // })
+                
               }
-            }
-            if (this.state.firstLoanScenario["interest"]) {
-              await this.setState((prevState) => {
-                let firstLoanScenario = Object.assign({}, prevState.firstLoanScenario);
-                firstLoanScenario.interest = String(
-                  Number(this.state.firstLoanScenario["interest"]) / 100
+              if (this.state.firstLoanScenario["second_mortgage_interest"]) {
+                this.state.firstLoanScenario["second_mortgage_interest"] = String(
+                  Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
+                  100
                 );
-                return { firstLoanScenario };
-              });
-              // this.setState({
-              //   firstLoanScenario.interest: String(
-              //     Number(this.state.firstLoanScenario["interest"]) / 100
-              //   );
-              // })
-              
+              }
+              if (this.state.firstLoanScenario["points"]) {
+                this.state.firstLoanScenario["points"] = String(
+                  Number(this.state.firstLoanScenario["points"]) / 100
+                );
+              }
+  
+              if (this.state.firstLoanScenario["second_mortgage_points"]) {
+                this.state.firstLoanScenario["second_mortgage_points"] = String(
+                  Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+                );
+              }
+  
+              if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
+                FRMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
+              } else {
+                FRMMortgageCreateFirst(this.state.firstLoanScenario);
+              }
+  
             }
-            if (this.state.firstLoanScenario["second_mortgage_interest"]) {
-              this.state.firstLoanScenario["second_mortgage_interest"] = String(
-                Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
-                100
-              );
+            else {
+              return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
             }
-            if (this.state.firstLoanScenario["points"]) {
-              this.state.firstLoanScenario["points"] = String(
-                Number(this.state.firstLoanScenario["points"]) / 100
-              );
-            }
-
-            if (this.state.firstLoanScenario["second_mortgage_points"]) {
-              this.state.firstLoanScenario["second_mortgage_points"] = String(
-                Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
-              );
-            }
-
-            if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
-              FRMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
-            } else {
-              FRMMortgageCreateFirst(this.state.firstLoanScenario);
-            }
-
-          }
-          else {
+          } else {
             return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
+          
         }
       } else if (
         this.state.radioValue &&
@@ -169,7 +172,12 @@ export class PropertyMortgageHOC extends Component {
             this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.firstLoanScenario['loan_amount'] &&
             this.state.firstLoanScenario['floor_interest_rate'] &&
-            this.state.firstLoanScenario['ceiling_interest_rate'] 
+            this.state.firstLoanScenario['ceiling_interest_rate'] &&
+            this.state.firstLoanScenario['loan_term'] &&
+            this.state.firstLoanScenario['select_loan_program'] &&
+            this.state.firstLoanScenario['initial_interest_rate'] &&
+            this.state.firstLoanScenario['period_cap'] &&
+            this.state.firstLoanScenario['rate_add']
           ) {
             if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
               const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
@@ -452,60 +460,65 @@ export class PropertyMortgageHOC extends Component {
         this.state.radioValue &&
         this.state.secondLoanScenario.mortgage_program_type_value === 1
       ) {
-
+          console.log(this.state.secondLoanScenario, 'in edit secondLoanscenario frm')
         if (
           this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
           this.state.secondLoanScenario.loan_amount_validation_error
         ) {
           return NotificationManager.error('error', 'Please correct your input', 3000)
         } else {
-          if (
+
+          if(this.state.secondLoanScenario.loan_amount && this.state.secondLoanScenario.loan_term && this.state.secondLoanScenario.interest) {
+            if (
              
-            this.state.secondLoanScenario['loan_amount']
-          ) {
-            if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
-              const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
-              if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
-
+              this.state.secondLoanScenario['loan_amount']
+            ) {
+              if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
+                const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
+                if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
+                  return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
+  
+                }
+              }else{
+                const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
+                if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
+                  return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
+  
+                }
               }
-            }else{
-              const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment);
-              if (checkSum !== Number(this.state.secondLoanScenario.property_price)) {
-                return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
-
+              if (this.state.secondLoanScenario["interest"]) {
+                this.state.secondLoanScenario["interest"] = String(
+                  Number(this.state.secondLoanScenario["interest"]) / 100
+                );
               }
-            }
-            if (this.state.secondLoanScenario["interest"]) {
-              this.state.secondLoanScenario["interest"] = String(
-                Number(this.state.secondLoanScenario["interest"]) / 100
-              );
-            }
-            if (this.state.secondLoanScenario["second_mortgage_interest"]) {
-              this.state.secondLoanScenario["second_mortgage_interest"] = String(
-                Number(this.state.secondLoanScenario["second_mortgage_interest"]) /
-                100
-              );
-            }
-            if (this.state.secondLoanScenario["points"]) {
-              this.state.secondLoanScenario["points"] = String(
-                Number(this.state.secondLoanScenario["points"]) / 100
-              );
-            }
-
-            if (this.state.secondLoanScenario["second_mortgage_points"]) {
-              this.state.secondLoanScenario["second_mortgage_points"] = String(
-                Number(this.state.secondLoanScenario["second_mortgage_points"]) /
-                100
-              );
-            }
-
-            if (this.state.secondLoanScenario.is_update && this.state.secondLoanScenario.id) {
-              FRMMortgageUpdateSecond(this.state.secondLoanScenario, this.state.secondLoanScenario.id)
+              if (this.state.secondLoanScenario["second_mortgage_interest"]) {
+                this.state.secondLoanScenario["second_mortgage_interest"] = String(
+                  Number(this.state.secondLoanScenario["second_mortgage_interest"]) /
+                  100
+                );
+              }
+              if (this.state.secondLoanScenario["points"]) {
+                this.state.secondLoanScenario["points"] = String(
+                  Number(this.state.secondLoanScenario["points"]) / 100
+                );
+              }
+  
+              if (this.state.secondLoanScenario["second_mortgage_points"]) {
+                this.state.secondLoanScenario["second_mortgage_points"] = String(
+                  Number(this.state.secondLoanScenario["second_mortgage_points"]) /
+                  100
+                );
+              }
+  
+              if (this.state.secondLoanScenario.is_update && this.state.secondLoanScenario.id) {
+                FRMMortgageUpdateSecond(this.state.secondLoanScenario, this.state.secondLoanScenario.id)
+              } else {
+                FRMMortgageCreateSecond(this.state.secondLoanScenario);
+              }
             } else {
-              FRMMortgageCreateSecond(this.state.secondLoanScenario);
+              return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
             }
-          } else {
+          }  else {
             return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
           }
         }
@@ -529,7 +542,12 @@ export class PropertyMortgageHOC extends Component {
             this.state.secondLoanScenario['first_interest_rate_adj_cap'] &&
             this.state.secondLoanScenario['loan_amount'] &&
             this.state.secondLoanScenario['floor_interest_rate'] &&
-            this.state.secondLoanScenario['ceiling_interest_rate'] 
+            this.state.secondLoanScenario['ceiling_interest_rate'] &&
+            this.state.secondLoanScenario['loan_term'] &&
+            this.state.secondLoanScenario['select_loan_program'] &&
+            this.state.secondLoanScenario['initial_interest_rate'] &&
+            this.state.secondLoanScenario['period_cap'] &&
+            this.state.secondLoanScenario['rate_add']
           ) {
             if (Number(this.state.secondLoanScenario.loanamountsecond2)) {
               const checkSum = Number(this.state.secondLoanScenario.loan_amount) + Number(this.state.secondLoanScenario.property_downpayment) + Number(this.state.secondLoanScenario.loanamountsecond2);
@@ -980,56 +998,61 @@ export class PropertyMortgageHOC extends Component {
             ) {
               return NotificationManager.error('error', 'Please correct your input', 3000)
             } else {
-              if (
+               if(this.state.firstLoanScenario.loan_amount && this.state.firstLoanScenario.loan_term && this.state.firstLoanScenario.interest) {
+                if (
                 
-                this.state.firstLoanScenario['loan_amount']
-              ) {
-                if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
-                  const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
-                  if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
-    
+                  this.state.firstLoanScenario['loan_amount']
+                ) {
+                  if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
+                    const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);
+                    if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
+                      return NotificationManager.error('error', 'First loan amount + second loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
+      
+                    }
+                  }else{
+                    const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
+                    if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
+                      return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
+      
+                    }
                   }
-                }else{
-                  const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment);
-                  if (checkSum !== Number(this.state.firstLoanScenario.property_price)) {
-                    return NotificationManager.error('error', 'First loan amount + downpayment should be equal to Property Price.Tip: you may model first loan = 80% of home price if you have a second mortgage', 3000)
-    
+                  if (this.state.firstLoanScenario["interest"]) {
+                    this.state.firstLoanScenario["interest"] = String(
+                      Number(this.state.firstLoanScenario["interest"]) / 100
+                    );
                   }
+                  if (this.state.firstLoanScenario["second_mortgage_interest"]) {
+                    this.state.firstLoanScenario["second_mortgage_interest"] = String(
+                      Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
+                      100
+                    );
+                  }
+                  if (this.state.firstLoanScenario["points"]) {
+                    this.state.firstLoanScenario["points"] = String(
+                      Number(this.state.firstLoanScenario["points"]) / 100
+                    );
+                  }
+      
+                  if (this.state.firstLoanScenario["second_mortgage_points"]) {
+                    this.state.firstLoanScenario["second_mortgage_points"] = String(
+                      Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
+                    );
+                  }
+      
+                  if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
+                    FRMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
+                  } else {
+                    FRMMortgageCreateFirst(this.state.firstLoanScenario);
+                  }
+      
                 }
-                if (this.state.firstLoanScenario["interest"]) {
-                  this.state.firstLoanScenario["interest"] = String(
-                    Number(this.state.firstLoanScenario["interest"]) / 100
-                  );
-                }
-                if (this.state.firstLoanScenario["second_mortgage_interest"]) {
-                  this.state.firstLoanScenario["second_mortgage_interest"] = String(
-                    Number(this.state.firstLoanScenario["second_mortgage_interest"]) /
-                    100
-                  );
-                }
-                if (this.state.firstLoanScenario["points"]) {
-                  this.state.firstLoanScenario["points"] = String(
-                    Number(this.state.firstLoanScenario["points"]) / 100
-                  );
-                }
-    
-                if (this.state.firstLoanScenario["second_mortgage_points"]) {
-                  this.state.firstLoanScenario["second_mortgage_points"] = String(
-                    Number(this.state.firstLoanScenario["second_mortgage_points"]) / 100
-                  );
-                }
-    
-                if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
-                  FRMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
-                } else {
-                  FRMMortgageCreateFirst(this.state.firstLoanScenario);
-                }
-    
-              }
-              else {
+                else {
+                  return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
+                }   
+               } else {
                 return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
               }
+              
             }
     
             // FRMMortgageCreateFirst(this.state.firstLoanScenario);
@@ -1052,7 +1075,12 @@ export class PropertyMortgageHOC extends Component {
                 this.state.firstLoanScenario['first_interest_rate_adj_cap'] &&
                 this.state.firstLoanScenario['loan_amount'] &&
                 this.state.firstLoanScenario['floor_interest_rate'] &&
-                this.state.firstLoanScenario['ceiling_interest_rate'] 
+                this.state.firstLoanScenario['ceiling_interest_rate'] &&
+                this.state.firstLoanScenario['loan_term'] &&
+                this.state.firstLoanScenario['select_loan_program'] &&
+                this.state.firstLoanScenario['initial_interest_rate'] &&
+                this.state.firstLoanScenario['period_cap'] &&
+                this.state.firstLoanScenario['rate_add']
               ) {
                 if (Number(this.state.firstLoanScenario.loanamountsecond1)) {
                   const checkSum = Number(this.state.firstLoanScenario.loan_amount) + Number(this.state.firstLoanScenario.property_downpayment) + Number(this.state.firstLoanScenario.loanamountsecond1);

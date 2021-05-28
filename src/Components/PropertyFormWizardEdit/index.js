@@ -391,6 +391,16 @@ export class StepperComponent extends Component {
       ) {
         NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
+        if (
+          this.state.propertyInfo.property_price &&
+          this.state.propertyInfo.downpayment_amount &&
+          this.state.propertyInfo.annual_property_tax &&
+          this.state.propertyInfo.home_owner_insurance &&
+          this.state.propertyInfo.house_address &&
+          this.state.propertyInfo.house_state &&
+          this.state.propertyInfo.house_zip_code &&
+          this.state.propertyInfo.stay_duration 
+        ) {
         console.log(this.state,'in else edit index')
         this.setState({ [this.state.propertyInfo.home_price_growth] : String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)})
 
@@ -399,23 +409,37 @@ export class StepperComponent extends Component {
           pathname: '/property-form',
           returnBackFromreviewEdit: true
         })
-
+      }  else {
+        return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
+      }
       }
     } else if (this.state.activeStep === 1) {
-
-      this.props.history.push({
-        pathname: '/property-form',
-        returnBackFromreviewEdit: true
-      })
-      
-      
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-          : PersonalFinanceCreate(this.state.personalFinance);
-      
-
-
+      if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments && this.state.personalFinanceUpdate.monthly_non_housing_expenses && this.state.personalFinanceUpdate.fico_score_range && this.state.personalFinanceUpdate.filling_status) {
+        this.props.history.push({
+          pathname: '/property-form',
+          returnBackFromreviewEdit: true
+        })
+        
+        
+          Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+            .length !== 0
+            ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+            : PersonalFinanceCreate(this.state.personalFinance);
+      } else if (this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments && !this.state.personalFinanceUpdate.monthly_non_housing_expenses && !this.state.personalFinanceUpdate.fico_score_range && !this.state.personalFinanceUpdate.filling_status) {
+     
+        this.props.history.push({
+          pathname: '/property-form',
+          returnBackFromreviewEdit: true
+        })
+        
+        
+          Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+            .length !== 0
+            ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
+            : PersonalFinanceCreate(this.state.personalFinance);
+      } else {
+        return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
+      }
 
     } else if (this.state.activeStep === 2) {
       this.props.history.push({
@@ -424,15 +448,7 @@ export class StepperComponent extends Component {
       })
     } else if (this.state.activeStep === 3) {
 
-      if(this.state.RentvsBuy.annual_rent_insurance === null || this.state.RentvsBuy.annual_rent_insurance === "" || this.state.RentvsBuy.current_monthly_rent_payment === null 
-      || this.state.RentvsBuy.current_monthly_rent_payment === "" || this.state.RentvsBuy.rate_of_investment === null || this.state.RentvsBuy.rate_of_investment === "" 
-      || this.state.RentvsBuy.rentinflation === null || this.state.RentvsBuy.rentinflation === "" 
-      || this.state.RentvsBuy.annual_rent_insurance === undefined || this.state.RentvsBuy.annual_rent_insurance === "NaN"
-      || this.state.RentvsBuy.current_monthly_rent_payment === undefined || this.state.RentvsBuy.current_monthly_rent_payment === "NaN"
-      || this.state.RentvsBuy.rate_of_investment === undefined || this.state.RentvsBuy.rate_of_investment === "NaN" 
-      || this.state.RentvsBuy.rentinflation === undefined || this.state.RentvsBuy.rentinflation === "NaN" ){
-        return NotificationManager.error('Please correct your input', 'Please fill required fields',3000)
-      } else {
+      if(this.state.RentvsBuy.current_monthly_rent_payment && this.state.RentvsBuy.annual_rent_insurance && this.state.RentvsBuy.rate_of_investment && this.state.RentvsBuy.rentinflation){
         if (this.state.rentvsBuyValidationErrors !== 0 &&
           !isFormValid("rent_vs_buy")) {
           this.setState({
@@ -479,6 +495,8 @@ export class StepperComponent extends Component {
             })
           }
         }
+      } else {
+        return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
       }
 
     } else if (this.state.activeStep === 4) {
