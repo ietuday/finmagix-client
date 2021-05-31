@@ -1,5 +1,5 @@
 import { withRouter, Link } from "react-router-dom";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -17,6 +17,7 @@ import Header from "../../common/header";
 import "./nerdReportDetails.css";
 
 import { Button } from "@material-ui/core";
+import { useEffect } from "react";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return <div {...other}>{value === index && <Box p={3}>{children}</Box>}</div>;
@@ -25,6 +26,7 @@ function TabPanel(props) {
 function HomeAffordability(props) {
   // let singlePropertyResponse;
   let CalculatorResponse;
+  const [scenariodisable, setScenariodisable] = useState(false)
   if (
     props.location.state &&
     props.location.state.singlePropertyResponse &&
@@ -34,6 +36,7 @@ function HomeAffordability(props) {
     CalculatorResponse = props.location.state.GetSinglePropertyResponse;
   } else {
     CalculatorResponse = JSON.parse(localStorage.getItem("calculatorResponse"));
+    // console.log(CalculatorResponse, 'calres')
     // singlePropertyResponse = JSON.parse(
     //   localStorage.getItem("GetSinglePropertyResponse")
     // );
@@ -127,6 +130,16 @@ function HomeAffordability(props) {
       
     }
   }
+  useEffect(() => {
+     checkScenario()
+  }, [scenariodisable])
+  const checkScenario = () => {
+      if ((CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Housingpmtaffordableoption2) || (CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Housingpmtaffordableoption2) ) {
+        setScenariodisable(false)
+      } else {
+        setScenariodisable(true)
+      }
+  }
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -149,7 +162,7 @@ function HomeAffordability(props) {
               {/* <Tab label="Scenario 1" /> */}
               <Tab label={<span><b>Scenario 1</b> </span>} />
               {/* <Tab label="Scenario 2" /> */}
-              <Tab label={<span><b>Scenario 2</b> </span>} />
+              <Tab label={<span><b>Scenario 2</b> </span>} disabled={scenariodisable} />
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0} style={{ marginTop: "30px" }}>

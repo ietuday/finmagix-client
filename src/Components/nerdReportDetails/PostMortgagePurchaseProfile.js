@@ -1,5 +1,5 @@
 import { withRouter,Link } from "react-router-dom";
-import React, { Fragment, useMemo } from "react";
+import React, { Fragment, useMemo, useState, useEffect } from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -359,7 +359,17 @@ function PostMortgagePurchaseProfile(props) {
           : 0,
     },
   ];
-
+  const [scenariodisable, setScenariodisable] = useState(false);
+  useEffect(() => {
+    checkScenario()
+ }, [scenariodisable])
+ const checkScenario = () => {
+     if ((CalculatorResponse.FRM2 && CalculatorResponse.FRM2.Monthincome) || (CalculatorResponse.ARM2 && CalculatorResponse.ARM2.Monthincome) ) {
+       setScenariodisable(false)
+     } else {
+       setScenariodisable(true)
+     }
+ }
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -380,7 +390,7 @@ function PostMortgagePurchaseProfile(props) {
           <AppBar position="static">
             <Tabs value={value} onChange={handleChange} variant="fullWidth">
             <Tab label={<span><b>Scenario 1</b> </span>} />
-            <Tab label={<span><b>Scenario 2</b> </span>} />
+            <Tab label={<span><b>Scenario 2</b> </span>} disabled={scenariodisable} />
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>
