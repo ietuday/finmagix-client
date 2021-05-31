@@ -1,5 +1,5 @@
 import { withRouter, Link } from "react-router-dom";
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -37,7 +37,17 @@ function MortgageSummary(props) {
     //   localStorage.getItem("GetSinglePropertyResponse")
     // );
   }
-
+  const [scenariodisable, setScenariodisable] = useState(false);
+  useEffect(() => {
+    checkScenario()
+ }, [scenariodisable])
+ const checkScenario = () => {
+     if ((CalculatorResponse.FRM2 && CalculatorResponse.FRM2.loanamountfirst2) || (CalculatorResponse.ARM2 && CalculatorResponse.ARM2.loanamountfirst2) ) {
+       setScenariodisable(false)
+     } else {
+       setScenariodisable(true)
+     }
+ }
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -57,7 +67,7 @@ function MortgageSummary(props) {
           <AppBar position="static">
             <Tabs value={value} onChange={handleChange} variant="fullWidth">
               <Tab label={<span><b>Scenario 1</b> </span>} />
-              <Tab label={<span><b>Scenario 2</b> </span>} />
+              <Tab label={<span><b>Scenario 2</b> </span>} disabled={scenariodisable} />
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>
