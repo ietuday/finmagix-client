@@ -25,8 +25,9 @@ import {
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { IconButton } from '@material-ui/core';
 // import FacebookIcon from '@material-ui/icons/Facebook';
-
-
+import fire from '..//fire'
+import firebase from "firebase/app";
+import "firebase/auth";
 
 export class Signup extends Component {
   constructor() {
@@ -89,6 +90,7 @@ export class Signup extends Component {
     };
     if (this.isFormValid()) {
       SignUp(signupDataObject, this.onSuccess, this.onFailure);
+      fire.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
     } else {
       NotificationManager.error("Please validate fields!", "Error", 3000);
     }

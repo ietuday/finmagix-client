@@ -20,6 +20,10 @@ import { login } from "../routes/utils";
 
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { IconButton } from "@material-ui/core";
+// import fire from '..//fire'
+import fire from '..//fire'
+import firebase from "firebase/app";
+import "firebase/auth";
 
 export class Signin extends Component {
   constructor() {
@@ -74,6 +78,8 @@ export class Signin extends Component {
     };
     if (this.isFormValid()) {
       SignIn(signinDataObject, this.onSuccess, this.onFailure);
+        fire.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
+
     } else {
       NotificationManager.error("some error", "Error", 3000);
     }
