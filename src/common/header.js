@@ -11,9 +11,9 @@ import {
   MDBModalHeader,
 } from "mdbreact";
 import { Redirect } from "react-router-dom";
-import fire from '..//fire'
-import firebase from "firebase/app";
-import "firebase/auth";
+// import fire from '..//fire'
+// import firebase from "firebase/app";
+// import "firebase/auth";
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +49,7 @@ class Header extends Component {
     localStorage.clear();
     LogOut();
     logout();
-    fire.auth().signOut();
+    // fire.auth().signOut();
     this.setState({
       backButton: !this.state.backButton,
     });

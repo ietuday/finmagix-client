@@ -9,7 +9,11 @@ import store from "../src/Components/redux/store/index";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-
+// import firebase from 'firebase/app';
+// import 'firebase/database';
+// import 'firebase/auth';
+// import {firebaseConfig} from './Firebase/firebaseConfig'
+// firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
   <Provider store={store}>
     <App />

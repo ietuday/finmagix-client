@@ -1,4 +1,5 @@
 import React from "react";
+import {useEffect} from 'react'
 import SplashScreen from "./Components/splashScreen/splashScreen";
 import GetStarted from "./Components/GetStarted/getStarted";
 import Signup from "./Components/signup";
@@ -37,8 +38,15 @@ import PostMortgagePurchaseProfile from "./Components/nerdReportDetails/PostMort
 import ForgotPassword from "./Components/ForgotPassword";
 import CreatePassword from "./Components/createPassword";
 import Geocode from "./common/geocode"
-
+import ReactGA from 'react-ga'
 function App() {
+  useEffect(()=>{
+    ReactGA.initialize('UA-198350124-1')
+    // to report page view
+    ReactGA.pageview(window.location.pathname + window.location.search)
+    },
+    []
+    );
   return (
     <React.Fragment>
       <Router>

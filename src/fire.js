@@ -1,6 +1,7 @@
-import firebase from "firebase/app"
-// import initializeApp from 'firebase'
-const firebaseConfig = {
+import firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
+var firebaseConfig = {
     apiKey: "AIzaSyCgNaKikcNjziTVmJiAaZZMGgv3kzbPxko",
     authDomain: "finmagix-client.firebaseapp.com",
     projectId: "finmagix-client",
@@ -10,5 +11,5 @@ const firebaseConfig = {
     measurementId: "G-N61PTJ7KZ3"
   };
   const fire = firebase.initializeApp(firebaseConfig);
-  // firebase.analytics();     
+  
   export default fire;

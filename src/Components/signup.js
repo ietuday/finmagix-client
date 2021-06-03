@@ -26,8 +26,9 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { IconButton } from '@material-ui/core';
 // import FacebookIcon from '@material-ui/icons/Facebook';
 import fire from '..//fire'
-import firebase from "firebase/app";
-import "firebase/auth";
+// import firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
 
 export class Signup extends Component {
   constructor() {

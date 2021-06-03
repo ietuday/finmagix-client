@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, {  Fragment } from "react";
 import Carousel from "react-elastic-carousel";
 import Item from "./item";
 import SplashScreen1 from "./splashscreen1";
@@ -11,16 +11,13 @@ import SplashScreen4 from "./splashScreen4";
 import SplashScreen5 from "./splashScreen5";
 import SplashScreen6 from "./splashScreen6";
 import SplashScreen7 from "./splashScreen7";
+// import ReactGA from 'react-ga';
+// import {firebaseAnalytics} from "../../Firebase/firebaseConfig"
+function SplashScreen () {
+ 
 
-export class SplashScreen extends Component {
-  constructor() {
-    super();
-    this.state = {
-    };
-  }
-  componentDidMount() {
-  }
-  render() {
+
+
     return (
       <Fragment>
         <CssBaseline />
@@ -50,6 +47,6 @@ export class SplashScreen extends Component {
       </Fragment>
     );
   }
-}
+
 
 export default SplashScreen;

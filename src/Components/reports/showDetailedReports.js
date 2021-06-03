@@ -10,7 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import Loader from "./loader";
-import { Input } from "antd";
+// import { Input } from "antd";
 import { get_single_property } from "../redux/actions/PropertyListing/index";
 import { get_calculator } from "../redux/actions/Calculator/index";
 import "../../css/reports.css";
