@@ -3,8 +3,8 @@ import Geocode from "react-geocode";
 
 import Axios from "axios";
 
-import { Input } from "antd";
-import { MDBRow, MDBCol } from "mdbreact";
+// import { Input } from "antd";
+// import { MDBRow, MDBCol } from "mdbreact";
 import { config } from '../Components/config/default';
 const { compose, withProps, lifecycle } = require("recompose");
 const _ = require("lodash");
@@ -234,6 +234,7 @@ const MapWithASearchBox = compose(
   withGoogleMap
 )((props) => (
   <>
+
     <GoogleMap
       ref={props.onMapMounted}
       defaultZoom={15}
@@ -247,21 +248,25 @@ const MapWithASearchBox = compose(
         controlPosition={window.google.maps.ControlPosition.TOP_LEFT}
         onPlacesChanged={props.onPlacesChanged}
       >
+        
         <input
+          
           type="text"
           placeholder="Enter your address"
           className="geocode-style"
+          onChange={props.onChange}
           style={{zIndex: '0',
             position: 'absolute',
             left: '213px',
-            top: '334px'}}
+            top: '334px'}
+          }
         />
       </SearchBox>
       {props.markers.map((marker, index) => (
         <Marker key={index} position={marker.position} />
       ))}
     </GoogleMap>
-    <div>
+    {/* <div>
       <MDBRow className="margin20">
         <MDBCol>
           <span className="get-started-label">Address</span>
@@ -304,7 +309,7 @@ const MapWithASearchBox = compose(
           />
         </MDBCol>
       </MDBRow>
-    </div>
+    </div> */}
   </>
 ));
 

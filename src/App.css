@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -12,32 +13,37 @@ color: red;
 h2{
   font-weight: 600 !important;
 }
-.geocode-style{
-  top: 334px !important;
+
+.geocode-style {
+  top: 287px !important;
   z-index: 0 !important;
   position: absolute !important;
-  left: 110px !important;
-  background: none padding-box rgb(255, 255, 255);
+  left: 47px !important;
+  background: no-repeat padding-box rgb(255, 255, 255);
+  background-image: url("./favicon-32x32.png");
+  background-position-x: 706px;
+  background-position-y: 13px;
   display: table-cell;
-  border: 0px;
+  border: 5px solid;
   margin-top: 11px;
   padding: 4px 17px !important;
   text-transform: none;
   -webkit-appearance: none;
   position: relative;
+  -webkit-user-select: none;
   user-select: none;
   direction: ltr;
   overflow: hidden;
   text-align: left;
-  height: 40px;
+  height: 69px;
   vertical-align: middle;
   color: rgb(86, 86, 86);
   font-family: 'Open Sans', sans-serif;
-  font-size:16px !important;
-  border-radius: 2px;
-  border-top-right-radius: 2px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-  min-width: 64px;
+  font-size: 23px !important;
+  border-radius: 177px;
+  border-top-right-radius: 177px;
+  box-shadow: rgb(0 0 0 / 30%) 16px 13px 5px -1px;
+  width: 767px;
 }
 
 
@@ -147,6 +153,37 @@ button:focus {
 }
 
 @media screen and (max-width: 600px) {
+  .geocode-style {
+    top: 280px !important;
+    z-index: 0 !important;
+    position: absolute !important;
+    left: 21px !important;
+    background: no-repeat padding-box rgb(255, 255, 255);
+    background-image: url("./favicon-32x32.png");
+    background-position-x: 237px;
+    background-position-y: 13px;
+    display: table-cell;
+    border: solid;
+    border: solid grey 5px;
+    padding: 4px 17px !important;
+    text-transform: none;
+    -webkit-appearance: none;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+    direction: ltr;
+    overflow: hidden;
+    text-align: left;
+    height: 72px;
+    vertical-align: middle;
+    color: rgb(86, 86, 86);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 21px !important;
+    border-radius: 40px;
+    border-top-right-radius: 40px;
+    box-shadow: rgb(0 0 0 / 30%) 11px 10px 5px -1px;
+    width: 287px;
+}
   .header-row {
     width: 100% !important;
   }
@@ -227,6 +264,7 @@ input[type="number"] {
 }
 
 @media screen and (max-width: 600px) {
+
   .MuiButtonBase-root.MuiButton-root.MuiButton-contained.button-inner-class.MuiButton-containedSizeLarge.MuiButton-sizeLarge {
     width: 100% !important;
   }
@@ -342,3 +380,7 @@ a{
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   }
+
+
+  /* ...................................... */
+  
