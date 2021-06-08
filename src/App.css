@@ -159,9 +159,9 @@ button:focus {
     position: absolute !important;
     left: 21px !important;
     background: no-repeat padding-box rgb(255, 255, 255);
-  background-image: url("./favicon-32x32.png");
-  background-position-x: 298px;
-  background-position-y: 13px;
+    background-image: url("./favicon-32x32.png");
+    background-position-x: 237px;
+    background-position-y: 13px;
     display: table-cell;
     border: solid;
     border: solid grey 5px;
@@ -182,7 +182,7 @@ button:focus {
     border-radius: 40px;
     border-top-right-radius: 40px;
     box-shadow: rgb(0 0 0 / 30%) 11px 10px 5px -1px;
-    width: 358px;
+    width: 287px;
 }
   .header-row {
     width: 100% !important;
@@ -380,3 +380,7 @@ a{
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   }
+
+
+  /* ...................................... */
+  
