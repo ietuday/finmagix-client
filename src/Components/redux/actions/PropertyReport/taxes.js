@@ -5,6 +5,7 @@ import { saveTax } from "../../../../routes/utils";
 const { baseURL } = config; 
 
 export const tax_create = (data) => {
+  const PropertyID = JSON.parse(localStorage.getItem('property_id'))
   return (dispatch) => {
     Axios.post(`${baseURL}/taxes/list_or_create`, data, {
       headers: {
@@ -13,12 +14,30 @@ export const tax_create = (data) => {
       },
     })
       .then((TaxCreateResponse) => {
-        dispatch({
-          type: TAX_CREATE,
-          payload: TaxCreateResponse.data,
-        });
-        saveTax(TaxCreateResponse.data);
+        const proData = {
+          is_tax_selected: true
+        }
+        Axios.put(`${baseURL}/property_listings/${PropertyID}`, proData, {
+          headers: {
+            "Content-type": "Application/json",
+            Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+          },
+        })
+          .then((updatePropertyInfoData) => {
+            dispatch({
+              type: TAX_CREATE,
+              payload: TaxCreateResponse.data,
+            });
+            saveTax(TaxCreateResponse.data);
+          })
+          .catch((err) => {
+            console.log(err)
+          });
+
       })
+
+
+      // })
       .catch((err) => {
         
       });
@@ -46,6 +65,7 @@ export const get_tax_data = (data) => {
 };
 
 export const tax_update = (data) => {
+  const PropertyID = JSON.parse(localStorage.getItem('property_id'))
   return (dispatch) => {
     Axios.put(`${baseURL}/taxes/${JSON.parse(localStorage.getItem('tax_array')).id}`, data,{
       headers: {
@@ -54,11 +74,26 @@ export const tax_update = (data) => {
       },
     })
       .then((updateTaxData) => {
-        dispatch({
-          type: TAX_UPDATE,
-          payload: updateTaxData.data.data,
-        });
-        saveTax(updateTaxData.data);
+        const proData = {
+          is_tax_selected: true
+        }
+        Axios.put(`${baseURL}/property_listings/${PropertyID}`, proData, {
+          headers: {
+            "Content-type": "Application/json",
+            Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+          },
+        })
+          .then((updatePropertyInfoData) => {
+            dispatch({
+              type: TAX_UPDATE,
+              payload: updateTaxData.data.data,
+            });
+            saveTax(updateTaxData.data);
+          })
+          .catch((err) => {
+            console.log(err)
+          });
+
       })
       .catch((err) => {
         
