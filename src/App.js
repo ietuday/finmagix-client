@@ -37,8 +37,20 @@ import PostMortgagePurchaseProfile from "./Components/nerdReportDetails/PostMort
 import ForgotPassword from "./Components/ForgotPassword";
 import CreatePassword from "./Components/createPassword";
 import Geocode from "./common/geocode"
+import {SendPageViewToGA} from './Analitics/GoogleAnalitics'
+
+import { InitiallizeGoogleAnalytics } from './Analitics/GoogleAnalitics'
+import { useEffect } from "react";
+
+InitiallizeGoogleAnalytics()
 
 function App() {
+  console.log(window.location)
+  const {pathname} =window.location
+  useEffect(() => {
+    SendPageViewToGA(pathname)
+    console.log(pathname)
+  }, [pathname])
   return (
     <React.Fragment>
       <Router>

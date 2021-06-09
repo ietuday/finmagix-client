@@ -20,7 +20,7 @@ import { login } from "../routes/utils";
 
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { IconButton } from "@material-ui/core";
-
+import {SendEventToGA} from '../Analitics/GoogleAnalitics';
 export class Signin extends Component {
   constructor() {
     super();
@@ -77,6 +77,14 @@ export class Signin extends Component {
     } else {
       NotificationManager.error("some error", "Error", 3000);
     }
+    SendEventToGA({
+      category: 'Signin Details',
+      action: 'Signin',
+      value:this.state.email
+      
+    })
+    
+    
   };
   signUpGoogleFacebbok(res, type) {
     const { SignIn } = this.props;
@@ -111,6 +119,7 @@ export class Signin extends Component {
   onFailure = () => {
     NotificationManager.error("Invalid Credentials", "error", 3000);
   };
+  
   render() {
     if (this.state.backButton) {
       return <Redirect to="/signup" />;
