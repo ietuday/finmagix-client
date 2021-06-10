@@ -55,12 +55,12 @@ export class ShowDetailedReports extends Component {
     this.setState({
       cheatSheet: !this.state.cheatSheet,
     });
-    SendEventToGA({
-      category: 'Cheet Sheet Details',
-      action: 'Checked Cheet Sheet Report',
+    // SendEventToGA({
+    //   category: 'Cheet Sheet Details',
+    //   action: 'Checked Cheet Sheet Report',
       
      
-    })
+    // })
   };
   goToNerdReport = () => {
     // this.clearPropertyId()
