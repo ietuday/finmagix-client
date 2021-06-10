@@ -233,7 +233,7 @@ const MapWithASearchBox = compose(
   withScriptjs,
   withGoogleMap
 )((props) => (
-  <>
+  <div>
 
     <GoogleMap
       ref={props.onMapMounted}
@@ -310,7 +310,7 @@ const MapWithASearchBox = compose(
         </MDBCol>
       </MDBRow>
     </div> */}
-  </>
+  </div>
 ));
 
 export default MapWithASearchBox;
