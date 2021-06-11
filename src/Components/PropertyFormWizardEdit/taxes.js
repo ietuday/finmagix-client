@@ -573,7 +573,7 @@ export class Taxes extends Component {
             <div className="tooltip-img">
               <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
-                Investment interest is interest paid on money you borrowed that
+                @@@@@@Investment interest is interest paid on money you borrowed that
                 is allocable to property held for investment. It doesn't include
                 any interest allocable to passive activities or to securities
                 that generate tax-exempt income. Source: IRS{" "}
@@ -598,10 +598,10 @@ export class Taxes extends Component {
               onValueChange={async (values) => {
                 const { formattedValue, value } = values;
                 await this.setState({
-                  tax_deductive_investment_interest: value,
+                  tax_deductive_investment_interest: formattedValue,
                 });
                 await this.setState({
-                  tax_deductive_investment_interest_percentage: formattedValue,
+                  tax_deductive_investment_interest_percentage: value,
                 });
               }}
             />

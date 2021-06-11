@@ -115,7 +115,6 @@ export class PersonalFinance extends Component {
       })
         .then(async(propertyInfo) => {
           const propertyDetail = propertyInfo.data.data[0];
-          debugger
           localStorage.setItem("personal_finance_array", JSON.stringify(propertyDetail.personal_finances));
         })
         .catch((err) => {})
@@ -136,7 +135,6 @@ export class PersonalFinance extends Component {
     //     .catch((err) => {})
         localStorage.setItem("personal_finance_array", JSON.stringify(this.state));
     // }
-    debugger
     this.props.handleContinue();
   };
   componentDidMount() {}
