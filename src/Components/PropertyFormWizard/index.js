@@ -3,6 +3,7 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
+import Axios from "axios";
 
 import GetStartedHouseInfo from "../PropertyFormWizard/houseInfo";
 import PersonalFinance from "../PropertyFormWizard/personalFinance";
@@ -47,7 +48,9 @@ import FirstLoanScenario from "./firstLoanScenario";
 import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";
 import { savePropertyId } from "../../../src/routes/utils";
+import { config } from '../config/default';
 
+const { baseURL } = config;
 
 export class StepperComponent extends Component {
   constructor(props) {
@@ -58,11 +61,11 @@ export class StepperComponent extends Component {
       saveButtonforPersonalFinance: false,
       propertyInfo: {},
       personalFinance: {
-        property_obj: localStorage.getItem("property_id"),
+        property_obj: "",
       },
       personalFinanceUpdate: {
-        property_obj: localStorage.getItem("property_id"),
-        id: JSON.parse(localStorage.getItem("personal_finance_array")).id,
+        property_obj: "",
+        id: "",
       },
       RentvsBuy: {},
       isRentvsBuyFilled: false,
@@ -185,10 +188,8 @@ export class StepperComponent extends Component {
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
-    // const newActiveStep =
-    //   this.isLastStep && !this.allStepsCompleted
-    //     ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-    //     : this.state.activeStep + 1;
+    
+    console.log(this.state)
     if (
       this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
       this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
@@ -226,34 +227,63 @@ export class StepperComponent extends Component {
     DetailExpenseUpdate(data);
   };
   handlePersonalFinance = (data) => {
-    Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-      .length !== 0
-      ? this.setState((prevState) => {
-        let personalFinanceUpdate = Object.assign(
-          {},
-          prevState.personalFinanceUpdate
-        );
-        personalFinanceUpdate = data;
-        personalFinanceUpdate.property_obj = localStorage.getItem(
-          "property_id"
-        );
-        personalFinanceUpdate.id = JSON.parse(
-          localStorage.getItem("personal_finance_array")
-        ).id;
-        return { personalFinanceUpdate };
+
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
       })
-      : this.setState((prevState) => {
-        let personalFinance = Object.assign({}, prevState.personalFinance);
-        personalFinance = data;
-        personalFinance.property_obj = localStorage.getItem("property_id");
-        let personalFinanceUpdate = Object.assign(
-          {},
-          prevState.personalFinanceUpdate
-        );
-        personalFinanceUpdate = data;
-        personalFinanceUpdate.property_obj = localStorage.getItem("property_id");
-        return { personalFinance, personalFinanceUpdate };
-      });
+        .then(async(propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+        //  await this.setState({
+        //     propertyId: propertyDetail.id,
+        //     loading: false
+        //   });
+
+        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+        .length !== 0
+        ? this.setState((prevState) => {
+          let personalFinanceUpdate = Object.assign(
+            {},
+            prevState.personalFinanceUpdate
+          );
+          personalFinanceUpdate = data;
+          personalFinanceUpdate.property_obj = propertyDetail.id
+          personalFinanceUpdate.id = propertyDetail.personal_finances.id
+          return { personalFinanceUpdate };
+        })
+        : this.setState((prevState) => {
+          let personalFinance = Object.assign({}, prevState.personalFinance);
+          personalFinance = data;
+          personalFinance.property_obj = propertyDetail.id;
+          let personalFinanceUpdate = Object.assign(
+            {},
+            prevState.personalFinanceUpdate
+          );
+          personalFinanceUpdate = data;
+          personalFinanceUpdate.property_obj = propertyDetail.id;
+          return { personalFinance, personalFinanceUpdate };
+        });
+
+
+         
+        })
+        .catch((err) => {});
+    }
+
+
+
+
+
+
+
+
+
+
+    
   };
   handleRentvsBuyData(data) {
     this.setState((prevState) => {
