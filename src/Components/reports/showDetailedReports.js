@@ -14,6 +14,7 @@ import { Input } from "antd";
 import { get_single_property } from "../redux/actions/PropertyListing/index";
 import { get_calculator } from "../redux/actions/Calculator/index";
 import "../../css/reports.css";
+import {SendEventToGA} from '../../Analitics/GoogleAnalitics';
 import Axios from "axios";
 import { config } from "../config/default";
 const { baseURL } = config;
@@ -55,18 +56,24 @@ export class ShowDetailedReports extends Component {
     this.setState({
       cheatSheet: !this.state.cheatSheet,
     });
-    // SendEventToGA({
-    //   category: 'Cheet Sheet Details',
-    //   action: 'Checked Cheet Sheet Report',
+    SendEventToGA({
+      category: 'Cheet Sheet Details',
+      action: 'Checked Cheet Sheet Report',
       
      
-    // })
+    })
   };
   goToNerdReport = () => {
     // this.clearPropertyId()
     this.setState({
       nerdReport: !this.state.nerdReport,
     });
+    SendEventToGA({
+      category: 'Nerd report Details',
+      action: 'Checked Nerd Report',
+      
+     
+    })
   };
   sleep = (milliseconds) => {
     let me = this; 

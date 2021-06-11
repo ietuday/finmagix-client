@@ -29,6 +29,7 @@
     "react-google-charts": "^3.0.15",
     "react-google-login": "^5.1.21",
     "react-google-maps": "^7.3.0",
+    "react-google-maps-loader": "^4.3.0",
     "react-icons": "^3.10.0",
     "react-native-input-spinner": "^1.2.14",
     "react-native-number-spinner": "^1.1.3",
