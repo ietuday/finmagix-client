@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import RangeSlider from "../../common/RangeSilder";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import Axios from "axios";
 
 import NumberFormat from "react-number-format";
 import "react-rangeslider/lib/index.css";
@@ -14,6 +15,10 @@ import "react-rangeslider/lib/index.css";
 // } from "../../common/ValidatorFunction";
 import DetailedExpenseModal from "../../common/detailedExpense";
 import quss from "../../assets/images/que.png";
+
+import { config } from '../config/default';
+
+const { baseURL } = config;
 
 export class PersonalFinance extends Component {
   constructor() {
@@ -87,6 +92,10 @@ export class PersonalFinance extends Component {
     // this.validators = PersonaLFinanceValidator;
     // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
+    setTimeout(() => {
+      this.setPersonalFinance()
+    }, 1000);
+    console.log("called")
   }
   handleRangeData = (data) => {
     this.setState({
@@ -94,9 +103,40 @@ export class PersonalFinance extends Component {
     });
     this.props.getPersonalFinanceData(this.state);
   };
-  goToNextPage = () => {
-    localStorage.setItem("personal_finance_array", JSON.stringify(this.state));
 
+  setPersonalFinance(){
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then(async(propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+          debugger
+          localStorage.setItem("personal_finance_array", JSON.stringify(propertyDetail.personal_finances));
+        })
+        .catch((err) => {})
+    }
+  }
+  goToNextPage = () => {
+    // const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    // if (propertyId) {
+    //   Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+    //     headers: {
+    //       "Content-type": "Application/json",
+    //       Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+    //     },
+    //   })
+    //     .then(async(propertyInfo) => {
+    //       const propertyDetail = propertyInfo.data.data[0];
+    //     })
+    //     .catch((err) => {})
+        localStorage.setItem("personal_finance_array", JSON.stringify(this.state));
+    // }
+    debugger
     this.props.handleContinue();
   };
   componentDidMount() {}
