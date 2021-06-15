@@ -154,12 +154,12 @@ button:focus {
 
 @media screen and (max-width: 600px) {
   .geocode-style {
-    top: 280px !important;
+    top: 285px !important;
     z-index: 0 !important;
     position: absolute !important;
-    left: 21px !important;
+    left: 15px !important;
     background: no-repeat padding-box rgb(255, 255, 255);
-    background-image: url("./favicon-32x32.png");
+    background-image: none;
     background-position-x: 237px;
     background-position-y: 13px;
     display: table-cell;
@@ -174,15 +174,15 @@ button:focus {
     direction: ltr;
     overflow: hidden;
     text-align: left;
-    height: 72px;
+    height: 66px;
     vertical-align: middle;
     color: rgb(86, 86, 86);
     font-family: 'Open Sans', sans-serif;
-    font-size: 21px !important;
+    font-size: 20px !important;
     border-radius: 40px;
     border-top-right-radius: 40px;
     box-shadow: rgb(0 0 0 / 30%) 11px 10px 5px -1px;
-    width: 287px;
+    width: 277px;
 }
   .header-row {
     width: 100% !important;
