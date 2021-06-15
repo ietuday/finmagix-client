@@ -53,7 +53,7 @@ export class SplashScreen7 extends Component {
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <div className="text-center ">
                 <img
-                  src={require("../../assets/images/Group 68.png")}
+                  src={require("../../assets/images/home-p.png")}
                   alt="finmagix"
                   className="splash-img"
                 />

@@ -14,7 +14,7 @@ export class SplashScreen2 extends Component {
       <Fragment>
         <CssBaseline />
 
-        <MDBContainer className="splash-container">
+        <div className="splash-container">
         <MDBRow >
             <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
               <div className="text-center">
@@ -66,7 +66,7 @@ export class SplashScreen2 extends Component {
               </div>
             </MDBCol>
           </MDBRow> */}
-        </MDBContainer>
+        </div>
       </Fragment>
     );
   }

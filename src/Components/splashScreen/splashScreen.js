@@ -28,12 +28,12 @@ export class SplashScreen extends Component {
               <Item>
                 <SplashScreen1 />
               </Item>
-              <Item>
+              {/* <Item>
                 <SplashScreen2 />
               </Item>
               <Item>
                 <SplashScreen3 />
-              </Item>
+              </Item> */}
               <Item>
                 <SplashScreen4 />
               </Item>
