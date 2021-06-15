@@ -463,21 +463,34 @@ export class Tax1 extends Component {
             </span>
             <div className="tooltip-img">
               <img src={quss} className="tool-img" alt="" />
-              <span className="tooltip-img-text">
-                Investment interest is interest paid on money you borrowed that
+              <span className="tooltip-img-text">   
+                #$%Investment interest is interest paid on money you borrowed that
                 is allocable to property held for investment. It doesn't include
                 any interest allocable to passive activities or to securities
                 that generate tax-exempt income. Source: IRS{" "}
               </span>
             </div>
             <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="tax_deductive_investment_interest"
-              value={this.state.tax_deductive_investment_interest}
-              onChange={this.handleChange}
-            />
+            <NumberFormat
+            className="input-class-mdb"
+            placeholder="Enter amount here"
+            name="tax_deductive_investment_interest"
+            value={this.state.tax_deductive_investment_interest}
+            onChange={this.handleChange}
+            suffix={"%"}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              console.log(formattedValue, value)
+              await this.setState({
+                tax_deductive_investment_interest: value,
+              });
+              await this.setState({
+                tax_deductive_investment_interest_percentage: formattedValue,
+              });
+            }}
+          />
+
+
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(

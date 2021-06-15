@@ -100,7 +100,7 @@ export class Signin extends Component {
   onSuccess =  (data) => {
      login(data.token, data.data.id,data.data);
     
-    if (data.data.last_login == null) {
+    if (!data.data.survey.is_survey) {
       // this.props.history.push("/select-modules");
       this.props.history.push("/survey")
     } else {

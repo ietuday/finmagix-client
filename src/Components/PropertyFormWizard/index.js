@@ -3,6 +3,7 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
+import Axios from "axios";
 
 import GetStartedHouseInfo from "../PropertyFormWizard/houseInfo";
 import PersonalFinance from "../PropertyFormWizard/personalFinance";
@@ -47,7 +48,9 @@ import FirstLoanScenario from "./firstLoanScenario";
 import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";
 import { savePropertyId } from "../../../src/routes/utils";
+import { config } from '../config/default';
 
+const { baseURL } = config;
 
 export class StepperComponent extends Component {
   constructor(props) {
@@ -58,11 +61,11 @@ export class StepperComponent extends Component {
       saveButtonforPersonalFinance: false,
       propertyInfo: {},
       personalFinance: {
-        property_obj: localStorage.getItem("property_id"),
+        property_obj: "",
       },
       personalFinanceUpdate: {
-        property_obj: localStorage.getItem("property_id"),
-        id: JSON.parse(localStorage.getItem("personal_finance_array")).id,
+        property_obj: "",
+        id: "",
       },
       RentvsBuy: {},
       isRentvsBuyFilled: false,
@@ -185,36 +188,49 @@ export class StepperComponent extends Component {
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
-    // const newActiveStep =
-    //   this.isLastStep && !this.allStepsCompleted
-    //     ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-    //     : this.state.activeStep + 1;
-    if (
-      this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
-      this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
-      this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
-
-    ) {
+    if(Object.entries(JSON.parse(localStorage.getItem("personal_finance_array"))).length !== 0){
+      if(
+        JSON.parse(localStorage.getItem("personal_finance_array")).federal_income &&
+        JSON.parse(localStorage.getItem("personal_finance_array")).fico_score_range && 
+        JSON.parse(localStorage.getItem("personal_finance_array")).filling_status && 
+        !isNaN(JSON.parse(localStorage.getItem("personal_finance_array")).marginal_tax_rate) && 
+        JSON.parse(localStorage.getItem("personal_finance_array")).monthly_debt_payments && 
+        JSON.parse(localStorage.getItem("personal_finance_array")).monthly_non_housing_expenses 
+      ){
+        if (
+          this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
+          this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
+          this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
+    
+        ) {
+          return NotificationManager.error('Error', 'Please correct your input',3000)
+        }
+        else {
+          this.setState({
+            saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
+          });
+    
+          
+            JSON.parse(localStorage.getItem("personal_finance_array")) && JSON.parse(localStorage.getItem("personal_finance_array")).id
+              
+              ? PersonalFinanceUpdate(JSON.parse(localStorage.getItem("personal_finance_array")))
+              : PersonalFinanceCreate(JSON.parse(localStorage.getItem("personal_finance_array")));
+          
+          if (
+            Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+              .length !== 0
+          ) {
+            this.handleNext();
+          }
+        }
+      }else{
+        return NotificationManager.error('Error', 'Please correct your input',3000)
+      }
+      
+    }else{
       return NotificationManager.error('Error', 'Please correct your input',3000)
     }
-    else {
-      this.setState({
-        saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-      });
-
-      
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-          : PersonalFinanceCreate(this.state.personalFinance);
-      
-      if (
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-      ) {
-        this.handleNext();
-      }
-    }
+   
 
   };
   saveDetailExpenses = (data) => {
@@ -226,34 +242,53 @@ export class StepperComponent extends Component {
     DetailExpenseUpdate(data);
   };
   handlePersonalFinance = (data) => {
-    Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-      .length !== 0
-      ? this.setState((prevState) => {
-        let personalFinanceUpdate = Object.assign(
-          {},
-          prevState.personalFinanceUpdate
-        );
-        personalFinanceUpdate = data;
-        personalFinanceUpdate.property_obj = localStorage.getItem(
-          "property_id"
-        );
-        personalFinanceUpdate.id = JSON.parse(
-          localStorage.getItem("personal_finance_array")
-        ).id;
-        return { personalFinanceUpdate };
+    console.log(data)
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
       })
-      : this.setState((prevState) => {
-        let personalFinance = Object.assign({}, prevState.personalFinance);
-        personalFinance = data;
-        personalFinance.property_obj = localStorage.getItem("property_id");
-        let personalFinanceUpdate = Object.assign(
-          {},
-          prevState.personalFinanceUpdate
-        );
-        personalFinanceUpdate = data;
-        personalFinanceUpdate.property_obj = localStorage.getItem("property_id");
-        return { personalFinance, personalFinanceUpdate };
-      });
+        .then(async(propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+        //  await this.setState({
+        //     propertyId: propertyDetail.id,
+        //     loading: false
+        //   });
+
+        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+        .length !== 0
+        ? this.setState((prevState) => {
+          let personalFinanceUpdate = Object.assign(
+            {},
+            prevState.personalFinanceUpdate
+          );
+          personalFinanceUpdate = data;
+          personalFinanceUpdate.property_obj = propertyDetail.id
+          personalFinanceUpdate.id = propertyDetail.personal_finances.id
+          localStorage.setItem("personal_finance_array", JSON.stringify(personalFinanceUpdate));
+          return { personalFinanceUpdate };
+        })
+        : this.setState((prevState) => {
+          let personalFinance = Object.assign({}, prevState.personalFinance);
+          personalFinance = data;
+          personalFinance.property_obj = propertyDetail.id;
+          let personalFinanceUpdate = Object.assign(
+            {},
+            prevState.personalFinanceUpdate
+          );
+          personalFinanceUpdate = data;
+          personalFinanceUpdate.property_obj = propertyDetail.id;
+          localStorage.setItem("personal_finance_array", JSON.stringify(personalFinanceUpdate));
+          return { personalFinance, personalFinanceUpdate };
+        });
+         
+        })
+        .catch((err) => {});
+    }
+    
   };
   handleRentvsBuyData(data) {
     this.setState((prevState) => {
@@ -411,7 +446,7 @@ export class StepperComponent extends Component {
   };
 
   async handleNext() {
-    // debugger
+   
     const {
       // PersonalFinanceUpdate,
       RentvsBuyCreate,
