@@ -188,34 +188,49 @@ export class StepperComponent extends Component {
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
+    if(Object.entries(JSON.parse(localStorage.getItem("personal_finance_array"))).length !== 0){
+      if(
+        JSON.parse(localStorage.getItem("personal_finance_array")).federal_income &&
+        JSON.parse(localStorage.getItem("personal_finance_array")).fico_score_range && 
+        JSON.parse(localStorage.getItem("personal_finance_array")).filling_status && 
+        !isNaN(JSON.parse(localStorage.getItem("personal_finance_array")).marginal_tax_rate) && 
+        JSON.parse(localStorage.getItem("personal_finance_array")).monthly_debt_payments && 
+        JSON.parse(localStorage.getItem("personal_finance_array")).monthly_non_housing_expenses 
+      ){
+        if (
+          this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
+          this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
+          this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
     
-    console.log(this.state)
-    if (
-      this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
-      this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
-      this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
-
-    ) {
+        ) {
+          return NotificationManager.error('Error', 'Please correct your input',3000)
+        }
+        else {
+          this.setState({
+            saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
+          });
+    
+          
+            JSON.parse(localStorage.getItem("personal_finance_array")) && JSON.parse(localStorage.getItem("personal_finance_array")).id
+              
+              ? PersonalFinanceUpdate(JSON.parse(localStorage.getItem("personal_finance_array")))
+              : PersonalFinanceCreate(JSON.parse(localStorage.getItem("personal_finance_array")));
+          
+          if (
+            Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+              .length !== 0
+          ) {
+            this.handleNext();
+          }
+        }
+      }else{
+        return NotificationManager.error('Error', 'Please correct your input',3000)
+      }
+      
+    }else{
       return NotificationManager.error('Error', 'Please correct your input',3000)
     }
-    else {
-      this.setState({
-        saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-      });
-
-      
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-          : PersonalFinanceCreate(this.state.personalFinance);
-      
-      if (
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-      ) {
-        this.handleNext();
-      }
-    }
+   
 
   };
   saveDetailExpenses = (data) => {
@@ -227,7 +242,7 @@ export class StepperComponent extends Component {
     DetailExpenseUpdate(data);
   };
   handlePersonalFinance = (data) => {
-
+    console.log(data)
     const propertyId = JSON.parse(localStorage.getItem("property_id"));
     if (propertyId) {
       Axios.get(`${baseURL}/property_listings/${propertyId}`, {
@@ -253,6 +268,7 @@ export class StepperComponent extends Component {
           personalFinanceUpdate = data;
           personalFinanceUpdate.property_obj = propertyDetail.id
           personalFinanceUpdate.id = propertyDetail.personal_finances.id
+          localStorage.setItem("personal_finance_array", JSON.stringify(personalFinanceUpdate));
           return { personalFinanceUpdate };
         })
         : this.setState((prevState) => {
@@ -265,24 +281,13 @@ export class StepperComponent extends Component {
           );
           personalFinanceUpdate = data;
           personalFinanceUpdate.property_obj = propertyDetail.id;
+          localStorage.setItem("personal_finance_array", JSON.stringify(personalFinanceUpdate));
           return { personalFinance, personalFinanceUpdate };
         });
-
-
          
         })
         .catch((err) => {});
     }
-
-
-
-
-
-
-
-
-
-
     
   };
   handleRentvsBuyData(data) {

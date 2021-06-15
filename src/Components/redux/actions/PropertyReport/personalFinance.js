@@ -6,7 +6,7 @@ const { baseURL } = config;
 
 export const personal_finance_create = (data) => {
   if(data && data.marginal_tax_rate){
-    data.marginal_tax_rate = String(parseInt(String(data.marginal_tax_rate_percentage).replace(/%/g, ""))/100)
+    data.marginal_tax_rate = String(parseInt(data.marginal_tax_rate)/100)
   }
   return (dispatch) => {
     Axios.post(`${baseURL}/personal_finances/list_or_create`, data, {
@@ -106,7 +106,8 @@ export const get_personal_finance_data = () => {
 export const personal_finance_update = (data) => {
   
   if(data && data.marginal_tax_rate){
-    data.marginal_tax_rate = String(parseInt(String(data.marginal_tax_rate_percentage).replace(/%/g, ""))/100)
+    // data.marginal_tax_rate = String(parseInt(String(data.marginal_tax_rate_percentage).replace(/%/g, ""))/100)
+    data.marginal_tax_rate = String(parseInt(data.marginal_tax_rate)/100)
   }
   return (dispatch) => {
     Axios.put(`${baseURL}/personal_finances/${JSON.parse(localStorage.getItem('personal_finance_array')).id}`, data,{
