@@ -1134,7 +1134,7 @@ export class ShowDetailedReports extends Component {
           : 0.0,
       Investmentinterest:
         this.state.taxes && this.state.taxes.id
-          ? Number(String(this.state.taxes.tax_deductive_investment_interest).replace(/%/g, ''))
+          ? Number(String(this.state.taxes.tax_deductive_investment_interest).replace(/,/g, ''))
           : 0.0,
       Charitabledonation:
         this.state.taxes && this.state.taxes.id
