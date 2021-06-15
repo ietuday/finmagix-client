@@ -17,7 +17,7 @@ export class Survey extends Component {
   constructor() {
     super();
     this.state = {
-      when_buy_home: "",
+      when_buy_home: 6,
       home_identified: false,
       lender_identified: false,
       realtor_identified: false,
@@ -202,9 +202,6 @@ export class Survey extends Component {
             </MDBCol>
             <MDBCol md="2"></MDBCol>
           </MDBRow>
-          {Object.entries(
-            JSON.parse(localStorage.getItem("personal_finance_array"))
-          ).length === 0 ? (
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <div className="text-center">
@@ -220,23 +217,6 @@ export class Survey extends Component {
                 </div>
               </MDBCol>
             </MDBRow>
-          ) : (
-            <MDBRow className="margin20">
-              <MDBCol md="12">
-                <div className="text-center">
-                  <Button
-                    variant="contained"
-                    size="large"
-                    className="button-inner-class"
-                    onClick={this.goToProperty}
-                  >
-                    {" "}
-                    Add Property{" "}
-                  </Button>
-                </div>
-              </MDBCol>
-            </MDBRow>
-          )}
         </MDBContainer>
       </Fragment>
     );

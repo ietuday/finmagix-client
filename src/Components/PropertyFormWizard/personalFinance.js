@@ -265,6 +265,7 @@ export class PersonalFinance extends Component {
             />
           </MDBCol>
         </MDBRow>
+        
 
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
