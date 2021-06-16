@@ -53,6 +53,7 @@ const MapWithASearchBox = compose(
         onMapMounted: (ref) => {
           refs.map = ref;
         },
+        searchTouched: false,
          
         checkProperty: () => {
           const propertyId = JSON.parse(localStorage.getItem("property_id"));
@@ -185,6 +186,7 @@ const MapWithASearchBox = compose(
                   house_address: this.state.house_address,
                   house_state: this.state.house_state,
                   house_zip_code: this.state.house_zip_code,
+                  searchTouched: this.state.searchTouched
                 };
                 localStorage.setItem("addressData", JSON.stringify(addressData));
               })
@@ -197,6 +199,7 @@ const MapWithASearchBox = compose(
         },
 
         onChange: (ev) => {
+          this.setState({ 'searchTouched': true})
           this.setState({ [ev.target.name]: ev.target.value });
         },
         onSearchBoxMounted: (ref) => {
