@@ -28,10 +28,10 @@ h2{
   margin-top: 11px;
   padding: 4px 17px !important;
   text-transform: none;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   position: relative;
-  -webkit-user-select: none;
-  user-select: none;
+  /* -webkit-user-select: initial;
+  user-select: none; */
   direction: ltr;
   overflow: hidden;
   text-align: left;
@@ -45,7 +45,9 @@ h2{
   box-shadow: rgb(0 0 0 / 30%) 16px 13px 5px -1px;
   width: 767px;
 }
-
+*:not(geocode-style){
+  
+}
 
 .popupstyle {
   padding: 50px 0 15px 0;
@@ -153,6 +155,7 @@ button:focus {
 }
 
 @media screen and (max-width: 600px) {
+
   .geocode-style {
     top: 285px !important;
     z-index: 0 !important;
@@ -167,10 +170,10 @@ button:focus {
     border: solid grey 5px;
     padding: 4px 17px !important;
     text-transform: none;
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
     position: relative;
-    -webkit-user-select: none;
-    user-select: none;
+    /* -webkit-user-select: initial; */
+    /* user-select: none; */
     direction: ltr;
     overflow: hidden;
     text-align: left;
@@ -184,6 +187,7 @@ button:focus {
     box-shadow: rgb(0 0 0 / 30%) 11px 10px 5px -1px;
     width: 277px;
 }
+
   .header-row {
     width: 100% !important;
   }
