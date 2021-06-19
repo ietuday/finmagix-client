@@ -193,9 +193,9 @@ export class SecondLoanScenario extends Component {
     })
   } 
   if(this.state.inSecondMortgage){
-    if(diff === 0) {
-      loanOnePercent = (this.state.loan_amount/100)*80;
-        secondMortagePercent = this.state.loan_amount - loanOnePercent
+    if(diff <= 0) {
+      loanOnePercent = (this.state.property_price/100)*80;
+      secondMortagePercent = this.state.property_price - loanOnePercent -this.state.property_downpayment
         this.setState({
           loan_amount: loanOnePercent,
           second_mortgage_changed_value: secondMortagePercent
