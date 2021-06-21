@@ -12,15 +12,14 @@
   font-weight: 600;
   font-size: 16px !important;
 }
-.splash-img {
-  opacity: 1;
-}
+
 .splash-container[class] {
-    background: rgb(11,167,236);
+    /* background: rgb(11,167,236);
     background: linear-gradient(180deg, rgba(11,167,236, 0.1) 0%, rgba(255,255,255, 0.1) 35%);
     width: 100% !important ;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 !important; */
+    background-color: #fff;
 }
 .splash-container-for-buttton{
   
@@ -67,4 +66,17 @@ width: 100%;
   padding:5px;
   text-align: center;
 list-style-type: none;
+}
+
+.splash-img {
+  height: 98vh;
+ 
+  
+  }
+@media only screen and (max-width: 768px) {
+  .splash-img {
+    width: 100%;
+    
+    }
+
 }
