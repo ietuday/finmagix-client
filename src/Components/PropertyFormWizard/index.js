@@ -470,6 +470,7 @@ export class StepperComponent extends Component {
       ) {
         return NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
+        debugger
         if (
           this.state.propertyInfo.property_price &&
           this.state.propertyInfo.downpayment_amount &&
@@ -486,7 +487,7 @@ export class StepperComponent extends Component {
           if (localStorage.getItem('addressData')) {
 
             const addressData = JSON.parse(localStorage.getItem('addressData'))
-            if (!addressData.searchTouched) {
+            if (!addressData.searchTouched && !this.state.propertyInfo.is_update) {
               return NotificationManager.error("Error", "Please input your property address", 3000);
             } else {
               this.setState({
