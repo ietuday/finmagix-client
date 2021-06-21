@@ -25,60 +25,27 @@ export class SplashScreen7 extends Component {
     return (
       <Fragment>
         <CssBaseline />
+        <MDBContainer className="splash-container" fluid breakpoint='md' breakpoint='sm'> 
+<MDBRow>
+    <MDBCol>
+      <div className="text-center margin10">
+        <img
+          src={require("../../assets/images/onboarding_6.png")}
+          alt="finmagix"
+          className="splash-img pointer"
+          onClick={this.getStarted}
+          
+        />
+      </div>
+    </MDBCol>
+  </MDBRow>
 
-        <MDBContainer className="splash-container">
-        <MDBRow >
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center">
-                <img
-                  src={require("../../assets/logo/finmagix-text.png")}
-                  alt="finmagix"
-                  className="splash-img"
-                />
-              </div>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow className="margin10">
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center">
-                <h5 className="splash-text-inner">
-               Leave the home purchase
-               number<br/> crunching to Finmagix!
-
-                </h5>
-              </div>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow>
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center ">
-                <img
-                  src={require("../../assets/images/home-p.png")}
-                  alt="finmagix"
-                  className="splash-img"
-                />
-              </div>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow>
-          <MDBCol xl="3" lg="3" md="3" sm="3" xs="3"></MDBCol>
-            <MDBCol xl="6" lg="6" md="6" sm="6" xs="6">
-              <div className="text-center">
-                <Button
-                  variant="contained"
-                  size="large"
-                  className="button-inner-class"
-                  onClick={this.getStarted}
-                >
-                  Get Started
-                </Button>
-              </div>
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
+</MDBContainer>
       </Fragment>
     );
   }
 }
 
 export default SplashScreen7;
+
+

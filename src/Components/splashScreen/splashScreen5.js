@@ -13,40 +13,21 @@ export class SplashScreen5 extends Component {
     return (
       <Fragment>
         <CssBaseline />
-
-        <MDBContainer className="splash-container">
-        <MDBRow >
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center">
-                <img
-                  src={require("../../assets/logo/finmagix-text.png")}
-                  alt="finmagix"
-                  className="splash-img"
-                />
-              </div>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow className="margin10">
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center">
-                <h5 className="splash-text-inner">
-                Equity Projections
-                </h5>
-              </div>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow>
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
+        <MDBContainer className="splash-container" fluid breakpoint='md' breakpoint='sm'> 
+        <MDBRow>
+            <MDBCol>
               <div className="text-center margin10">
                 <img
-                  src={require("../../assets/images/Equity-Projections.png")}
+                  src={require("../../assets/images/onboarding_5.png")}
                   alt="finmagix"
                   className="splash-img"
+                  
                 />
               </div>
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+    
       </Fragment>
     );
   }
