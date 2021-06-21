@@ -470,7 +470,6 @@ export class StepperComponent extends Component {
       ) {
         return NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
-        debugger
         if (
           this.state.propertyInfo.property_price &&
           this.state.propertyInfo.downpayment_amount &&
