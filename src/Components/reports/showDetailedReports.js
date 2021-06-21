@@ -278,7 +278,8 @@ export class ShowDetailedReports extends Component {
         data.GetSinglePropertyResponse["data"][0].annual_property_tax
       ),
       HOI: Number(
-        data.GetSinglePropertyResponse["data"][0].home_owner_insurance
+        data.GetSinglePropertyResponse["data"][0].home_owner_insurance.replace(/,/g,'')
+        
       ),
       HOA: Number(
         data.GetSinglePropertyResponse["data"][0]
