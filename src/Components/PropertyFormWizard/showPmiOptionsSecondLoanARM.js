@@ -20,8 +20,8 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       pmi_amount_number: "",
       second_mortgage_loan_amount: "",
       second_mortgage_loan_term: "",
-      second_mortgage_interest: "",
-      second_mortgage_interest_percentage: "",
+      second_mortgage_interest: "0",
+      second_mortgage_interest_percentage: "0",
       second_mortgage_points: "",
       second_mortgage_closing_costs:0,
       second_mortgage_closing_costs_number:0,
@@ -139,7 +139,9 @@ export class ShowPmiOptionsSecondLoanARM extends Component {
       await this.setState({
         showSecondloanOption: true,
         pmi_amount: 0,
-        pmi_amount_number: 0
+        pmi_amount_number: 0,
+        second_mortgage_interest: 4,
+        second_mortgage_interest_percentage: 4,
       });
       this.props.getEventfromSecondMortgage("SecondMortgage") 
     }

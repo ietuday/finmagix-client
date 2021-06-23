@@ -137,6 +137,8 @@ export class SecondLoanScenario extends Component {
               PMIfirst1: "0",
               loanamountsecond1: "0",
               Pmtsecond1: "0",
+              interest: 3,
+              interest_percentage: 3,
               ARMtype1: 0,
               ARM1rate: 0,
               ARMfirstadjin1: "0",
@@ -583,7 +585,7 @@ if (event.target.name === "closing_costs") {
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">
-                  Interest on your first mortgage
+                  Interest on your first mortgage 
                 </span>
                 <div className="tooltip-img">
                   <img src={quss} alt="" className="tool-img"></img>
