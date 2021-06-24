@@ -14,7 +14,7 @@ export class SplashScreen1 extends Component {
       <Fragment>
         <CssBaseline />
 
-        <MDBContainer className="splash-container" fluid breakpoint='md' breakpoint='sm'> 
+        <MDBContainer className="splash-container" > 
         <MDBRow>
             <MDBCol>
               <div className="text-center margin10">

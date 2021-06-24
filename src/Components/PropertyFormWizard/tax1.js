@@ -1,19 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
-
 import { withRouter} from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-
 import Axios from "axios";
 import NumberFormat from "react-number-format";
-
 import { 
   resetValidators,
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
-
 import Tax1YesValidator from "../validatorRules/Tax1YesValidator";
 import Tax1NoValidator from "../validatorRules/Tax1NoValidator";
 import quss from "../../assets/images/que.png";
