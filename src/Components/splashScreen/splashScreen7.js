@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import "../../css/splashScreen.css";
-import { Button } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -25,7 +24,7 @@ export class SplashScreen7 extends Component {
     return (
       <Fragment>
         <CssBaseline />
-        <MDBContainer className="splash-container" fluid breakpoint='md' breakpoint='sm'> 
+        <MDBContainer className="splash-container" > 
 <MDBRow>
     <MDBCol>
       <div className="text-center margin10">

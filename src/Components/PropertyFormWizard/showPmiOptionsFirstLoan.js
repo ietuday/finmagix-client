@@ -143,7 +143,9 @@ export class ShowPmiOptionsFirstLoan extends Component {
       await this.setState({
         showSecondloanOption: true,
         pmi_amount: 0,
-        pmi_amount_number: 0
+        pmi_amount_number: 0,
+        second_mortgage_interest: 4,
+        second_mortgage_interest_percentage: 4,
       });
       this.props.getEventfromSecondMortgage("SecondMortgage") 
     }
