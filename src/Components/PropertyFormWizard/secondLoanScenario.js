@@ -39,7 +39,7 @@ export class SecondLoanScenario extends Component {
       closing_costs: 0, 
       closing_costs_number:0,
       interest_only_option: "N",
-      interest_only_period: 0,
+      interest_only_period: 5,
       downpayment: 0,
       pmi: 0,
       select_loan_program: 0,

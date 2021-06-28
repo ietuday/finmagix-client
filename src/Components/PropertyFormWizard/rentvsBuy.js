@@ -98,8 +98,8 @@ export class RentvsBuy extends Component {
             is_rent_vs_buy_selected: propertyDetail.is_rent_vs_buy_selected,
             rate_of_investment: 3,
             rate_of_investment_percentage: 3,
-            rentinflation: 3,
-            rentinflation_percentage: 3,
+            rentinflation: 2,
+            rentinflation_percentage: 2,
             annual_rent_insurance: 150,
             annual_rent_insurance_number: 150,
             checkPropertyApiLoaded: true

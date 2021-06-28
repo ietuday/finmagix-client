@@ -41,7 +41,7 @@ export class ARMComponentFirstLoan extends Component {
       closing_costs: 0,
       closing_costs_number:0,
       interest_only_option: "N",
-      interest_only_period: 0,
+      interest_only_period: 5,
       pmi: 0,
       second_mortgage_loan_amount: 0,
       second_mortgage_loan_term: 0,
