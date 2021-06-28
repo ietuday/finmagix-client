@@ -144,10 +144,10 @@ export class PersonalFinanceReviewEdit extends Component {
             <MDBCol md="6" size="6">
               <div className="">
                 <span className="get-started-label">
-                  Marginal tax Rate
+                Estimated Tax Rate
                 </span>
                 <div className="tooltip-img"><img src={quss} className="tool-img" alt=""/>
-            <span className="tooltip-img-text">  Marginal Tax rate refers to the rate you pay  on the amount of your income that falls into a certain range. 
+            <span className="tooltip-img-text">  Estimated Tax Rate refers to the rate you pay  on the amount of your income that falls into a certain range. 
               We use to estimate monthly taxes you may pay on your income.</span>
             </div>
               </div>

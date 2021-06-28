@@ -595,7 +595,7 @@ export class FirstLoanScenario extends Component {
 
           <NumberFormat
             className="input-class-mdb"
-            placeholder="Enter period here"
+            placeholder="Please enter Interest Only Period"
             name="interest_only_period"
             value={this.state.interest_only_period}
             onChange={this.handleChange}

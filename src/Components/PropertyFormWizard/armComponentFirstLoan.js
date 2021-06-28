@@ -686,7 +686,7 @@ if(event.target.name === "points_percentage"){
           <br />
           <Input
             className="input-class-mdb"
-            placeholder="Enter period here"
+            placeholder="Please enter Interest Only Period"
             name="interest_only_period"
             value={this.state.interest_only_period}
             onChange={this.handleChange}
@@ -720,7 +720,7 @@ if(event.target.name === "points_percentage"){
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the loan amount"
               name="loan_amount"
               value={this.state.loan_amount}
               onChange={this.handleChange}
@@ -802,7 +802,7 @@ if(event.target.name === "points_percentage"){
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder=" Please enter interest rate"
               name="initial_interest_rate_percentage"
               value={this.state.initial_interest_rate_percentage}
               onChange={this.handleChange}

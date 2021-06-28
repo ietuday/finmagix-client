@@ -280,7 +280,7 @@ export class PropertyAndPersonalFinanceInfo extends Component {
 
                   <MDBRow className="margin20">
                     <MDBCol md="6">
-                      <h6>Marginal Tax Rate</h6>
+                      <h6> Estimated Tax Rate</h6>
                       <div className="property-finance-get-started-label" >
                         <img
                           src={require("../../assets/logo/taxs.png")}

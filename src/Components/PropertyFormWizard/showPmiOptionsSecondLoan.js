@@ -311,7 +311,7 @@ if (event.target.name === "second_mortgage_closing_costs") {
             /> */}
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the loan amount"
               name="loanamountsecond2"
               value={this.state.loanamountsecond2}
               onChange={this.handleChange}

@@ -337,7 +337,7 @@ export class ShowPmiOptionsFirstLoan extends Component {
             /> */}
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the loan amount"
               name="loanamountsecond1"
               value={this.state.loanamountsecond1}
               // value={this.state.second_mortgage_loan_amount}

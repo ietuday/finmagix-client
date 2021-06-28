@@ -82,7 +82,7 @@ export class GetStartedHouseInfo extends Component {
             <br />
             <Input
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the price of the property"
               name="propertyPrice"
               value={this.state.propertyPrice}
               onChange={this.handleChange}
@@ -128,7 +128,7 @@ export class GetStartedHouseInfo extends Component {
             <br />
             <Input
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the annual property tax"
               name="annualPropertyTax"
               value={this.state.annualPropertyTax}
               onChange={this.handleChange}
