@@ -254,8 +254,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_frm
-                        ? this.state.propertyDetail.first_frm.interest || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_frm.interest)*100 || 0
+                        : null}%
                        
                       </div>
                     </MDBCol>
@@ -278,8 +278,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_frm
-                        ? this.state.propertyDetail.first_frm.points || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_frm.points)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -329,7 +329,7 @@ export class MortgageProgramReviewEdit extends Component {
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_frm
                         ? this.state.propertyDetail.first_frm.interest_only_period || 0
-                        : null}
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -414,8 +414,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_frm
-                        ? this.state.propertyDetail.first_frm.second_mortgage_interest || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_frm.second_mortgage_interest)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -436,8 +436,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_frm
-                        ? this.state.propertyDetail.first_frm.second_mortgage_points || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_frm.second_mortgage_points)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -555,8 +555,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
-                        ? this.state.propertyDetail.first_arm.initial_interest_rate || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_arm.initial_interest_rate)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -575,8 +575,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
-                        ? this.state.propertyDetail.first_arm.first_interest_rate_adj_cap || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_arm.first_interest_rate_adj_cap)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -601,8 +601,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
-                        ? this.state.propertyDetail.first_arm.floor_interest_rate || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_arm.floor_interest_rate)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -621,8 +621,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
-                        ? this.state.propertyDetail.first_arm.ceiling_interest_rate || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_arm.ceiling_interest_rate)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -646,8 +646,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
-                        ? this.state.propertyDetail.first_arm.period_cap || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_arm.period_cap)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -671,7 +671,7 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
-                        ? this.state.propertyDetail.first_arm.rate_add || 0
+                        ? (this.state.propertyDetail.first_arm.rate_add)*100 || 0
                         : null}
                         
                       </div>
@@ -695,8 +695,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
-                        ? this.state.propertyDetail.first_arm.points || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_arm.points)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -831,8 +831,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
-                        ? this.state.propertyDetail.first_arm.second_mortgage_interest || 0
-                        : null}
+                        ? (this.state.propertyDetail.first_arm.second_mortgage_interest)*100 || 0
+                        : null}%
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -950,8 +950,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_frm
-                        ? this.state.propertyDetail.second_frm.interest || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_frm.interest)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -974,8 +974,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_frm
-                        ? this.state.propertyDetail.second_frm.points || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_frm.points)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -1110,8 +1110,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_frm
-                        ? this.state.propertyDetail.second_frm.second_mortgage_interest || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_frm.second_mortgage_interest)*100 || 0
+                        : null}%
                        
                       </div>
                     </MDBCol>
@@ -1252,8 +1252,8 @@ export class MortgageProgramReviewEdit extends Component {
 
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
-                        ? this.state.propertyDetail.second_arm.initial_interest_rate || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_arm.initial_interest_rate)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -1272,8 +1272,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
-                        ? this.state.propertyDetail.second_arm.first_interest_rate_adj_cap || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_arm.first_interest_rate_adj_cap)*100 || 0
+                        : null}%
                        
                       </div>
                     </MDBCol>
@@ -1293,8 +1293,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
-                        ? this.state.propertyDetail.second_arm.floor_interest_rate || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_arm.floor_interest_rate)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -1313,8 +1313,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
-                        ? this.state.propertyDetail.second_arm.ceiling_interest_rate || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_arm.ceiling_interest_rate)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -1381,8 +1381,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
-                        ? this.state.propertyDetail.second_arm.points || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_arm.points)*100 || 0
+                        : null}%
                        
                       </div>
                     </MDBCol>
@@ -1515,8 +1515,8 @@ export class MortgageProgramReviewEdit extends Component {
                       <div className="get-started-label text-center">
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
-                        ? this.state.propertyDetail.second_arm.second_mortgage_interest || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_arm.second_mortgage_interest)*100 || 0
+                        : null}%
                         
                       </div>
                     </MDBCol>
@@ -1538,8 +1538,8 @@ export class MortgageProgramReviewEdit extends Component {
 
                       {this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
-                        ? this.state.propertyDetail.second_arm.second_mortgage_points || 0
-                        : null}
+                        ? (this.state.propertyDetail.second_arm.second_mortgage_points)*100 || 0
+                        : null}%
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
