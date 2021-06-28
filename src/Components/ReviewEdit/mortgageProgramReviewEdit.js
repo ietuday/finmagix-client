@@ -13,7 +13,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import Tabs from "../../common/tabs";
 import "../../css/reviewEdit.css";
 import quss from "../../assets/images/que.png";
-
+import NumberFormat from "react-number-format";
 import Axios from "axios";
 import { config } from '../config/default';
 const { baseURL } = config;
@@ -213,10 +213,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                        {this.state.propertyDetail &&
+                           <NumberFormat value={this.state.propertyDetail &&
                           this.state.propertyDetail.first_frm
                           ? this.state.propertyDetail.first_frm.loan_amount || 0
-                          : null}
+                          : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -304,11 +304,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                         <NumberFormat value= {this.state.propertyDetail &&
                         this.state.propertyDetail.first_frm
                         ? this.state.propertyDetail.first_frm.closing_costs || 0
-                        : null}
-                        
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -368,11 +367,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                   
+                        <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.first_frm
                         ? this.state.propertyDetail.first_frm.loanamountsecond1 || 0
-                        : null}
-                        
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -456,11 +455,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                       <NumberFormat value=  {this.state.propertyDetail &&
                         this.state.propertyDetail.first_frm
                         ? this.state.propertyDetail.first_frm.second_mortgage_closing_costs || 0
-                        : null}
-                        
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -493,11 +491,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                 
+                      <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
                         ? this.state.propertyDetail.first_arm.loan_amount || 0
-                        : null}
-                       
+                        : null} displayType={'text'} thousandSeparator={true} /> 
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -721,11 +719,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                       <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
                         ? this.state.propertyDetail.first_arm.closing_costs
-                        : null}
-                        
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -786,11 +783,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                
+                         <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
                         ? this.state.propertyDetail.first_arm.second_mortgage_loan_amount || 0
-                        : null}
-                       
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -872,11 +869,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                        <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.first_arm
                         ? this.state.propertyDetail.first_arm.second_mortgage_closing_costs || 0
-                        : null}
-                        
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -909,10 +905,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+           
+                       <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.second_frm
                         ? this.state.propertyDetail.second_frm.loan_amount || 0
-                        : null}
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1000,11 +997,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                   
+                       <NumberFormat value=   {this.state.propertyDetail &&
                         this.state.propertyDetail.second_frm
                         ? this.state.propertyDetail.second_frm.closing_costs || 0
-                        : null}
-                        
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1064,11 +1061,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                   
+                       <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.second_frm
                         ? this.state.propertyDetail.second_frm.loanamountsecond2 || 0
-                        : null}
-                        
+                        : null} displayType={'text'} thousandSeparator={true} /> 
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1152,11 +1149,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                      <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.second_frm
                         ? this.state.propertyDetail.second_frm.second_mortgage_closing_costs || 0
-                        : null}
-                        
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1190,11 +1186,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                    
+                       <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
                         ? this.state.propertyDetail.second_arm.loan_amount || 0
-                        : null}
-                       
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1407,10 +1403,10 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                     <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
                         ? this.state.propertyDetail.second_arm.closing_costs || 0
-                        : null}
+                        : null} displayType={'text'} thousandSeparator={true} />
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1470,11 +1466,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                 
+                       <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
                         ? this.state.propertyDetail.second_arm.second_mortgage_loan_amount || 0
-                        : null}
-                        
+                        : null} displayType={'text'} thousandSeparator={true} /> 
                       </div>
                     </MDBCol>
                     <MDBCol md="2"></MDBCol>
@@ -1557,11 +1553,11 @@ export class MortgageProgramReviewEdit extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                     <MDBCol md="3" size="3">
                       <div className="get-started-label text-center">
-                      {this.state.propertyDetail &&
+                   
+                        <NumberFormat value={this.state.propertyDetail &&
                         this.state.propertyDetail.second_arm
                         ? this.state.propertyDetail.second_arm.second_mortgage_closing_costs || 0
-                        : null}
-
+                        : null} displayType={'text'} thousandSeparator={true} />
                         
                       </div>
                     </MDBCol>
