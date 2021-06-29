@@ -100,7 +100,7 @@ export class AddProperty extends Component {
               <br />
               <Input
                 className="input-class-mdb"
-                placeholder="Enter amount here"
+                placeholder="Please enter the price of the property"
                 name="propertyPrice"
                 value={this.state.propertyPrice}
                 onChange={this.handleChange}
@@ -117,7 +117,7 @@ export class AddProperty extends Component {
               <br />
               <Input
                 className="input-class-mdb"
-                placeholder="Enter amount here"
+                placeholder="Please enter the downpayment amount"
                 name="downPaymentAmount"
                 value={this.state.downPaymentAmount}
                 onChange={this.handleChange}
@@ -136,7 +136,7 @@ export class AddProperty extends Component {
             <br />
             <Input
             className="input-class-mdb"
-            placeholder="Duration of stay"
+            placeholder="Please enter the duration of your stay in this house"
             value={this.state.stay_duration}
             name="stay_duration"
             onChange={this.handleChange}
@@ -183,7 +183,7 @@ export class AddProperty extends Component {
               <br />
               <Input
                 className="input-class-mdb"
-                placeholder="Enter amount here"
+                placeholder="Please enter the annual property tax"
                 name="annualPropertyTax"
                 value={this.state.annualPropertyTax}
                 onChange={this.handleChange}

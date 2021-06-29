@@ -599,7 +599,7 @@ export class ARMComponentFirstLoan extends Component {
           <br />
           <Input
             className="input-class-mdb"
-            placeholder="Enter period here"
+            placeholder="Please enter Interest Only Period"
             name="interest_only_period"
             value={this.state.interest_only_period}
             onChange={this.handleChange}
@@ -632,7 +632,7 @@ export class ARMComponentFirstLoan extends Component {
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the loan amount"
               name="loan_amount"
               value={this.state.loan_amount}
               onChange={this.handleChange}
@@ -713,7 +713,7 @@ export class ARMComponentFirstLoan extends Component {
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter interest rate"
               name="initial_interest_rate_percentage"
               value={this.state.initial_interest_rate_percentage}
               decimalScale={2}

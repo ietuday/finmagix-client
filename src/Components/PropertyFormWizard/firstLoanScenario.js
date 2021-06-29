@@ -29,8 +29,8 @@ export class FirstLoanScenario extends Component {
       closing_costs: 0,
       closing_costs_number: 0,
       interest_only_option: "N",
-      interest_only_period: "0",
-      interest_only_period_number:"0",
+      interest_only_period: 5,
+      interest_only_period_number:5,
       downpayment: 0,
       pmi: 0,
       select_loan_program: "",
@@ -595,7 +595,7 @@ export class FirstLoanScenario extends Component {
 
           <NumberFormat
             className="input-class-mdb"
-            placeholder="Enter period here"
+            placeholder="Please enter Interest Only Period"
             name="interest_only_period"
             value={this.state.interest_only_period}
             onChange={this.handleChange}

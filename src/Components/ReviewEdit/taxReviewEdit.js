@@ -6,7 +6,7 @@ import { Button } from "@material-ui/core";
 import { Redirect,withRouter } from "react-router-dom";
 import "../../css/reviewEdit.css";
 import { get_tax_data } from "../redux/actions/PropertyReport/taxes";
-
+import NumberFormat from "react-number-format";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 export class TaxReviewEdit extends Component {
@@ -70,7 +70,8 @@ export class TaxReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-              {GetTaxResponse ? GetTaxResponse.medical_and_dental_expenses : "no data"}
+              
+              <NumberFormat value= {GetTaxResponse ? GetTaxResponse.medical_and_dental_expenses : "no data"} displayType={'text'} thousandSeparator={true} />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -85,7 +86,8 @@ export class TaxReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-              {GetTaxResponse ? GetTaxResponse.state_local_generalsales_taxes : "no data"}
+              
+              <NumberFormat value= {GetTaxResponse ? GetTaxResponse.state_local_generalsales_taxes : "no data"} displayType={'text'} thousandSeparator={true} />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -100,7 +102,8 @@ export class TaxReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-              {GetTaxResponse ? GetTaxResponse.other_taxes : "no data"}
+              <NumberFormat value= {GetTaxResponse ? GetTaxResponse.other_taxes : "no data"} displayType={'text'} thousandSeparator={true} />
+              
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -116,7 +119,8 @@ export class TaxReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-              {GetTaxResponse ? GetTaxResponse.tax_deductive_investment_interest : "no data"}
+              <NumberFormat value=  {GetTaxResponse ? GetTaxResponse.tax_deductive_investment_interest : "no data"} displayType={'text'} thousandSeparator={true} />
+             
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -131,7 +135,7 @@ export class TaxReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-              {GetTaxResponse ? GetTaxResponse.tax_deductible_charitable_donations : "no data"}
+              <NumberFormat value=  {GetTaxResponse ? GetTaxResponse.tax_deductible_charitable_donations : "no data"} displayType={'text'} thousandSeparator={true} />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -146,7 +150,8 @@ export class TaxReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-              {GetTaxResponse ? GetTaxResponse.tax_deductible_casualty_and_theft_losses : "no data"}
+              <NumberFormat value=  {GetTaxResponse ? GetTaxResponse.tax_deductible_casualty_and_theft_losses : "no data"} displayType={'text'} thousandSeparator={true} />
+              
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -161,7 +166,8 @@ export class TaxReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-              {GetTaxResponse ? GetTaxResponse.avg_loan_balance_for_grandfathered_debt : "no data"}
+              <NumberFormat value=  {GetTaxResponse ? GetTaxResponse.avg_loan_balance_for_grandfathered_debt : "no data"} displayType={'text'} thousandSeparator={true} />
+              
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -176,7 +182,8 @@ export class TaxReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-              {GetTaxResponse ? GetTaxResponse.avg_loan_balance_for_home_acquisition_debt : "no data"}
+              <NumberFormat value=  {GetTaxResponse ? GetTaxResponse.avg_loan_balance_for_home_acquisition_debt : "no data"} displayType={'text'} thousandSeparator={true} />
+              
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -191,7 +198,8 @@ export class TaxReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-              {GetTaxResponse ? GetTaxResponse.paid_mortgage_on_gf_ha_debt : "no data"}
+              <NumberFormat value=  {GetTaxResponse ? GetTaxResponse.paid_mortgage_on_gf_ha_debt : "no data"} displayType={'text'} thousandSeparator={true} />
+              
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
