@@ -341,7 +341,12 @@ export class ARMComponentSecondLoan extends Component {
           ceilinginterestrateValidationError:
             "Ceiling interest is greater than 15%",
         });
-      } else {
+      } else if(this.state.ceiling_interest_rate < this.state.initial_interest_rate){
+        this.setState({
+          ceilinginterestrateValidationError: "The ceiling interest rate cannot be less than the initial interest rate or less than the floor"
+        }) 
+      }
+      else{
         this.setState({
           ceilinginterestrateValidationError: "",
         });
