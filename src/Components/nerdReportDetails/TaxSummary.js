@@ -77,11 +77,11 @@ function TaxSummary(props) {
                           : CalculatorResponse.FRM1
                           ? CalculatorResponse.FRM1['marginal-tax-rate-improve']
                           : 0} </p>
-          <p>
+          {/* <p>
           To determine the tax benefit of buying a home, we calculate standard deductions and itemized deductions.
            Itemized deductions include amounts related to housing that can be deducted such as property tax and mortgage interest. 
            If your itemized deductions exceed your standardized deductions, then there’s a tax benefit associated with purchasing this home based on the assumptions you inputted.
-          </p>
+          </p> */}
 </div>
          
           </TabPanel>
@@ -98,11 +98,11 @@ function TaxSummary(props) {
                           : CalculatorResponse.FRM2
                           ? CalculatorResponse.FRM2['marginal-tax-rate-improve']
                           : 0}  </p>
-          <p>
+          {/* <p>
           To determine the tax benefit of buying a home, we calculate standard deductions and itemized deductions.
            Itemized deductions include amounts related to housing that can be deducted such as property tax and mortgage interest. 
            If your itemized deductions exceed your standardized deductions, then there’s a tax benefit associated with purchasing this home based on the assumptions you inputted.
-          </p>
+          </p> */}
 </div>
       
 

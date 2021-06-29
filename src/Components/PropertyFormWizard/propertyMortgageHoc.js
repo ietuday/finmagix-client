@@ -250,7 +250,10 @@ export class PropertyMortgageHOC extends Component {
                 Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
               );
             }
+            if (Number(this.state.firstLoanScenario["ceiling_interest_rate"]) < Number(this.state.firstLoanScenario["initial_interest_rate"])) {
+              return NotificationManager.error('error', 'The ceiling interest rate cannot be less than the initial interest rate or less than the floor.', 3000)
 
+            }
             if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
               ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
             } else {
@@ -422,7 +425,10 @@ export class PropertyMortgageHOC extends Component {
                 Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
               );
             }
+            if (Number(this.state.firstLoanScenario["ceiling_interest_rate"]) < Number(this.state.firstLoanScenario["initial_interest_rate"])) {
+              return NotificationManager.error('error', 'The ceiling interest rate cannot be less than the initial interest rate or less than the floor.', 3000)
 
+            }
             if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
               ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
             } else {
@@ -970,7 +976,10 @@ export class PropertyMortgageHOC extends Component {
                     Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
                   );
                 }
-    
+                if (Number(this.state.firstLoanScenario["ceiling_interest_rate"]) < Number(this.state.firstLoanScenario["initial_interest_rate"])) {
+                  return NotificationManager.error('error', 'The ceiling interest rate cannot be less than the initial interest rate or less than the floor.', 3000)
+  
+                }
                 if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
                   ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
                 } else {
@@ -1153,7 +1162,10 @@ export class PropertyMortgageHOC extends Component {
                     Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
                   );
                 }
-    
+                if (Number(this.state.firstLoanScenario["ceiling_interest_rate"]) < Number(this.state.firstLoanScenario["initial_interest_rate"])) {
+                  return NotificationManager.error('error', 'The ceiling interest rate cannot be less than the initial interest rate or less than the floor.', 3000)
+  
+                }
                 if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
                   ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
                 } else {
