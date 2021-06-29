@@ -117,7 +117,8 @@ export class PersonalFinanceReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-                {PeronalFinanceData.monthly_debt_payments}
+               
+                <NumberFormat value= {PeronalFinanceData.monthly_debt_payments} displayType={'text'} thousandSeparator={true} />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -134,7 +135,8 @@ export class PersonalFinanceReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-center">
-                {PeronalFinanceData.monthly_non_housing_expenses}
+                
+                <NumberFormat value= {PeronalFinanceData.monthly_non_housing_expenses} displayType={'text'} thousandSeparator={true} />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
