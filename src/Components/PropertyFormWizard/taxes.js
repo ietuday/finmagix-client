@@ -356,7 +356,7 @@ export class Taxes extends Component {
             name="fedral_adjusted_gross_income"
             value={this.state.fedral_adjusted_gross_income}
             onChange={this.handleChange}
-            placeholder="Enter amount here"
+            placeholder="Please enter your estimated adjusted gross income from recent tax filing"
             thousandSeparator={true}
             onValueChange={async (values) => {
               const { formattedValue, value } = values;

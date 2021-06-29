@@ -317,7 +317,7 @@ export class ShowPmiOptionsFirstLoanARM extends Component {
             /> */}
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the loan amount"
               name="loanamountsecond1"
               value={this.state.loanamountsecond1}
               onChange={this.handleChange}

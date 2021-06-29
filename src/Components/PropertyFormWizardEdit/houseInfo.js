@@ -348,7 +348,7 @@ export class GetStartedHouseInfo extends Component {
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the price of the property"
               name="property_price"
               value={this.state.property_price}
               onChange={this.handleChange}
@@ -388,7 +388,7 @@ export class GetStartedHouseInfo extends Component {
             /> */}
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount in Percentage"
+              placeholder="Please enter the projected home price growth per year"
               name="home_price_growth_percentage"
               value={this.state.home_price_growth_percentage}
               onChange={this.handleChange}
@@ -422,7 +422,7 @@ export class GetStartedHouseInfo extends Component {
             <br />
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the downpayment amount"
               name="downpayment_amount"
               value={this.state.downpayment_amount}
               onChange={this.handleChange}
@@ -472,7 +472,7 @@ export class GetStartedHouseInfo extends Component {
             /> */}
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Duration of stay"
+              placeholder="Please enter the duration of your stay in this house"
               value={this.state.stay_duration}
               name="stay_duration"
               onChange={this.handleChange}
@@ -591,7 +591,7 @@ export class GetStartedHouseInfo extends Component {
             /> */}
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the annual property tax"
               name="annual_property_tax"
               value={this.state.annual_property_tax}
               onChange={this.handleChange}
@@ -676,7 +676,7 @@ export class GetStartedHouseInfo extends Component {
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the annual home owner's insurance"
               name="home_owner_insurance"
               value={this.state.home_owner_insurance}
               onChange={this.handleChange}

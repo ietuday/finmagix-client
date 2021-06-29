@@ -216,9 +216,10 @@ export class PropertyInformationReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-left">
-                {GetPropertyinfoData
+              
+                 <NumberFormat value={GetPropertyinfoData
                   ? GetPropertyinfoData.area_of_the_house
-                  : null}
+                  : null} displayType={'text'} thousandSeparator={true} />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -234,12 +235,12 @@ export class PropertyInformationReviewEdit extends Component {
             </div>
               </div>
             </MDBCol>
-            
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-left">
-                {GetPropertyinfoData
+                <NumberFormat value={GetPropertyinfoData
                   ? GetPropertyinfoData.annual_property_tax
-                  : null}
+                  : null}   displayType={'text'} thousandSeparator={true} />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -256,9 +257,10 @@ export class PropertyInformationReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-left">
-                {GetPropertyinfoData
+              
+                <NumberFormat value={GetPropertyinfoData
                   ? GetPropertyinfoData.annual_home_owner_association_dues
-                  : null}
+                  : null} displayType={'text'} thousandSeparator={true} />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>
@@ -273,9 +275,10 @@ export class PropertyInformationReviewEdit extends Component {
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
             <MDBCol md="3" size="3">
               <div className="get-started-label text-left">
-                {GetPropertyinfoData
+            
+                 <NumberFormat value={GetPropertyinfoData
                   ? GetPropertyinfoData.home_owner_insurance
-                  : null}
+                  : null} displayType={'text'} thousandSeparator={true} />
               </div>
             </MDBCol>
             <MDBCol md="2"></MDBCol>

@@ -255,7 +255,7 @@ const MapWithASearchBox = compose(
         <input
           
           type="text"
-          placeholder="Please enter property address"
+          placeholder="Please enter your property address"
           className="geocode-style"
           onChange={props.onChange}
           style={{zIndex: '0',
