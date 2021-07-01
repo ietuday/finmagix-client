@@ -471,36 +471,28 @@ export class StepperComponent extends Component {
         return NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
         // debugger
-        if (this.state.propertyInfo.property_price) {
-        
-        } else {
+        if (!this.state.propertyInfo.property_price) {
           return NotificationManager.error('Please enter the price of the property', 3000)
-        }
-        if (this.state.propertyInfo.annual_property_tax) {
-        
-        } else {
+        } 
+       
+        if (!this.state.propertyInfo.annual_property_tax) {
           return NotificationManager.error('Please enter the annual property tax', 3000)
-        }
-        if(this.state.propertyInfo.home_owner_insurance)
+        } 
+        if(!this.state.propertyInfo.home_owner_insurance)
         {
-         
-        }else {
           return NotificationManager.error('Please enter the annual home owner insurance', 3000)
         }
-        if(this.state.propertyInfo.house_address){
-        
-        }else {
+        if(!this.state.propertyInfo.house_address){
           return NotificationManager.error('Please enter your property address', 3000)
         }
-        if(this.state.propertyInfo.home_price_growth){
-          
-        }else {
-          return NotificationManager.error('Please enter the projected home price growth per year', 3000)
+        if(!this.state.propertyInfo.home_price_growth){
+          return NotificationManager.error('Please enter the projected home price growth per year', 3000) 
         }
-        if(this.state.propertyInfo.stay_duration){
-          
-        }else {
+        if(!this.state.propertyInfo.stay_duration){
           return NotificationManager.error('Please enter the duration of your stay in this house', 3000)
+        }
+        if (!this.state.propertyInfo.downpayment_amount) {
+          return NotificationManager.error('Please enter the downpayment amount', 3000)
         }
         {
 
