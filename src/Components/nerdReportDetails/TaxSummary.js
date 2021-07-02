@@ -69,7 +69,7 @@ function TaxSummary(props) {
     <p>Tax benefit of buying a home for Option #1 for first year is {CalculatorResponse.ARM1
                           ? CalculatorResponse.ARM1['Taxbenfithomeoption1']
                           : CalculatorResponse.FRM1
-                          ? CalculatorResponse.FRM1['Taxbenfithomeoption1']
+                          ? CalculatorResponse.FRM1['Taxbenfithomeoption1'] 
                           : 0}</p>
     <p>    As a result of this home purchase, your margin tax rate is projected to
           improve by {CalculatorResponse.ARM1
@@ -77,6 +77,11 @@ function TaxSummary(props) {
                           : CalculatorResponse.FRM1
                           ? CalculatorResponse.FRM1['marginal-tax-rate-improve']
                           : 0} </p>
+                         <p> {CalculatorResponse.ARM1
+                          ? CalculatorResponse.ARM1['Taxcomment']
+                          : CalculatorResponse.FRM1
+                          ? CalculatorResponse.FRM1['Taxcomment'] 
+                          : 0}</p>
           {/* <p>
           To determine the tax benefit of buying a home, we calculate standard deductions and itemized deductions.
            Itemized deductions include amounts related to housing that can be deducted such as property tax and mortgage interest. 
@@ -98,6 +103,11 @@ function TaxSummary(props) {
                           : CalculatorResponse.FRM2
                           ? CalculatorResponse.FRM2['marginal-tax-rate-improve']
                           : 0}  </p>
+                          <p>{CalculatorResponse.ARM2
+                          ? CalculatorResponse.ARM2['Taxcomment']
+                          : CalculatorResponse.FRM2
+                          ? CalculatorResponse.FRM2['Taxcomment']
+                          : 0}</p>
           {/* <p>
           To determine the tax benefit of buying a home, we calculate standard deductions and itemized deductions.
            Itemized deductions include amounts related to housing that can be deducted such as property tax and mortgage interest. 
