@@ -70,6 +70,13 @@ export class PropertyMortgageHOC extends Component {
     });
   };
   handleNext = async () => {
+    if (this.state.firstLoanScenario['loan_amount']) {
+        
+    }else{
+      return NotificationManager.error('Validation Error', 'Please Enter Loan Amount', 3000)
+    }
+    
+   
     const { FRMMortgageCreateFirst, ARMMortgageCreateFirst, FRMMortgageUpdateFirst,
       ARMMortgageUpdateFirst } = this.props;
     if (
@@ -446,6 +453,12 @@ export class PropertyMortgageHOC extends Component {
     }
   };
   handleSubmit = async () => {
+    if (this.state.firstLoanScenario['loan_amount']) {
+        
+    }else{
+      return NotificationManager.error('Validation Error', 'Please Enter Loan Amount', 3000)
+    }
+    
     const {
 
       FRMMortgageCreateSecond,
@@ -467,6 +480,18 @@ export class PropertyMortgageHOC extends Component {
         this.state.secondLoanScenario.mortgage_program_type_value === 1
       ) {
           console.log(this.state.secondLoanScenario, 'in edit secondLoanscenario frm')
+         
+          // if(this.state.secondLoanScenario['interest_only_option']=='Y'){
+          //   if (this.state.secondLoanScenario['interest_only_period']) {
+                
+          //   }else{
+          //     return NotificationManager.error('error', 'Please Enter Interest Only Period', 3000)
+          //   }}
+          if (this.state.secondLoanScenario['loan_amount']) {
+        
+          }else{
+            return NotificationManager.error('Validation Error', 'Please Enter Loan Amount', 3000)
+          }
         if (
           this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
           this.state.secondLoanScenario.loan_amount_validation_error
@@ -815,7 +840,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.radioValue &&
             this.state.firstLoanScenario.mortgage_program_type_value === 1
           ) {
-    
+
             if (
               this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
               this.state.firstLoanScenario.loan_amount_validation_error
