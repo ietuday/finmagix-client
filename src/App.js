@@ -48,8 +48,6 @@ function App() {
     <React.Fragment>
     {axios.interceptors.response.use(
       (successRes)=>  {
-        console.log(successRes)
-        // ... modify response; 
         return successRes;
       }, 
       (error) =>  {
