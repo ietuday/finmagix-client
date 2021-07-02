@@ -604,6 +604,19 @@ export class StepperComponent extends Component {
       });
     } else if (this.state.activeStep === 3) {
       // console.log(this.state.RentvsBuy, 'rentvsbuy index')
+      if (!this.state.RentvsBuy.current_monthly_rent_payment) {
+        return NotificationManager.error('error', 'Please Enter Current monthly rent payment', 3000)
+      }
+      if (!this.state.RentvsBuy.annual_rent_insurance) {
+        return NotificationManager.error('error', 'Please Enter Annual rent insurance', 3000)
+      }
+      if (!this.state.RentvsBuy.rate_of_investment) {
+        return NotificationManager.error('error', 'Please Enter Rate of investment', 3000)
+      }
+      if (!this.state.RentvsBuy.rentinflation) {
+        return NotificationManager.error('error', 'Please Enter Rent Rate Inflation', 3000)
+      }
+
       if (this.state.RentvsBuy.current_monthly_rent_payment && this.state.RentvsBuy.annual_rent_insurance && this.state.RentvsBuy.rate_of_investment && this.state.RentvsBuy.rentinflation) {
         this.setState({
           activeStep: newActiveStep,
