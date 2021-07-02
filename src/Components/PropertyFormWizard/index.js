@@ -471,24 +471,36 @@ export class StepperComponent extends Component {
         return NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
         // debugger
-        if (
-          this.state.propertyInfo.property_price &&
-          this.state.propertyInfo.downpayment_amount &&
-          this.state.propertyInfo.annual_property_tax &&
-          this.state.propertyInfo.home_owner_insurance &&
-          this.state.propertyInfo.house_address &&
-          this.state.propertyInfo.house_state &&
-          this.state.propertyInfo.house_zip_code &&
-          this.state.propertyInfo.stay_duration,
-          this.state.propertyInfo.annual_property_tax
-        ) {
-         
-          
+        if (!this.state.propertyInfo.property_price) {
+          return NotificationManager.error('Please enter the price of the property', 3000)
+        } 
+       
+        if (!this.state.propertyInfo.annual_property_tax) {
+          return NotificationManager.error('Please enter the annual property tax', 3000)
+        } 
+        if(!this.state.propertyInfo.home_owner_insurance)
+        {
+          return NotificationManager.error('Please enter the annual home owner insurance', 3000)
+        }
+        if(!this.state.propertyInfo.house_address){
+          return NotificationManager.error('Please enter your property address', 3000)
+        }
+        if(!this.state.propertyInfo.home_price_growth){
+          return NotificationManager.error('Please enter the projected home price growth per year', 3000) 
+        }
+        if(!this.state.propertyInfo.stay_duration){
+          return NotificationManager.error('Please enter the duration of your stay in this house', 3000)
+        }
+        if (!this.state.propertyInfo.downpayment_amount) {
+          return NotificationManager.error('Please enter the downpayment amount', 3000)
+        }
+        {
+
           if (localStorage.getItem('addressData')) {
 
             const addressData = JSON.parse(localStorage.getItem('addressData'))
             if (!addressData.searchTouched && !this.state.propertyInfo.is_update) {
-              return NotificationManager.error("Error", "Please input your property address", 3000);
+              return NotificationManager.error("Please input your property address", 3000);
             } else {
               this.setState({
                 activeStep: newActiveStep,
@@ -540,13 +552,19 @@ export class StepperComponent extends Component {
           }
 
 
-        } else {
-          return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
         }
       }
 
     } else if (this.state.activeStep === 1) {
-      if (this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments && !this.state.personalFinanceUpdate.monthly_non_housing_expenses && !this.state.personalFinanceUpdate.fico_score_range && !this.state.personalFinanceUpdate.filling_status) {
+      if
+       (this.state.personalFinanceUpdate &&
+         !this.state.personalFinanceUpdate.federal_income &&
+          !this.state.personalFinanceUpdate.marginal_tax_rate && 
+          !this.state.personalFinanceUpdate.monthly_debt_payments && 
+          !this.state.personalFinanceUpdate.monthly_non_housing_expenses && 
+          !this.state.personalFinanceUpdate.fico_score_range && 
+          !this.state.personalFinanceUpdate.filling_status) 
+          {
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
         );
@@ -586,6 +604,19 @@ export class StepperComponent extends Component {
       });
     } else if (this.state.activeStep === 3) {
       // console.log(this.state.RentvsBuy, 'rentvsbuy index')
+      if (!this.state.RentvsBuy.current_monthly_rent_payment) {
+        return NotificationManager.error('error', 'Please Enter Current monthly rent payment', 3000)
+      }
+      if (!this.state.RentvsBuy.annual_rent_insurance) {
+        return NotificationManager.error('error', 'Please Enter Annual rent insurance', 3000)
+      }
+      if (!this.state.RentvsBuy.rate_of_investment) {
+        return NotificationManager.error('error', 'Please Enter Rate of investment', 3000)
+      }
+      if (!this.state.RentvsBuy.rentinflation) {
+        return NotificationManager.error('error', 'Please Enter Rent Rate Inflation', 3000)
+      }
+
       if (this.state.RentvsBuy.current_monthly_rent_payment && this.state.RentvsBuy.annual_rent_insurance && this.state.RentvsBuy.rate_of_investment && this.state.RentvsBuy.rentinflation) {
         this.setState({
           activeStep: newActiveStep,
