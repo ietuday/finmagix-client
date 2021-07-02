@@ -224,11 +224,25 @@ export class StepperComponent extends Component {
           }
         }
       } else {
-        return NotificationManager.error('Error', 'Please correct your input', 3000)
+        if(!this.state.personalFinanceUpdate.federal_income){
+          return NotificationManager.error('Validation error','Please enter your estimated adjusted gross income from recent tax filing', 3000)
+        }
+        if(!this.state.personalFinanceUpdate.monthly_debt_payments){
+          return NotificationManager.error('Validation error','Please enter your estimated monthly non-housing debt payments', 3000)
+        }
+        if(!this.state.personalFinanceUpdate.monthly_non_housing_expenses){
+          return NotificationManager.error('Validation error','Please enter your monthly non-housing expenses', 3000)
+        }
+        if(!this.state.personalFinanceUpdate.marginal_tax_rate){
+          return NotificationManager.error('Validation error','Please enter your estimated average tax rate', 3000)
+        }
+        if(!this.state.personalFinanceUpdate.filling_status){
+          return NotificationManager.error('Validation error','Please select your tax filing status', 3000)
+        }
       }
 
     } else {
-      return NotificationManager.error('Error', 'Please correct your input', 3000)
+      return NotificationManager.error('Error', 'Please correct your input ', 3000)
     }
 
 
@@ -471,24 +485,36 @@ export class StepperComponent extends Component {
         return NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
         // debugger
-        if (
-          this.state.propertyInfo.property_price &&
-          this.state.propertyInfo.downpayment_amount &&
-          this.state.propertyInfo.annual_property_tax &&
-          this.state.propertyInfo.home_owner_insurance &&
-          this.state.propertyInfo.house_address &&
-          this.state.propertyInfo.house_state &&
-          this.state.propertyInfo.house_zip_code &&
-          this.state.propertyInfo.stay_duration,
-          this.state.propertyInfo.annual_property_tax
-        ) {
-         
-          
+        if (!this.state.propertyInfo.property_price) {
+          return NotificationManager.error('Validation error','Please enter the price of the property', 3000)
+        } 
+       
+        if (!this.state.propertyInfo.annual_property_tax) {
+          return NotificationManager.error('Validation error','Please enter the annual property tax', 3000)
+        } 
+        if(!this.state.propertyInfo.home_owner_insurance)
+        {
+          return NotificationManager.error('Validation error','Please enter the annual home owner insurance', 3000)
+        }
+        if(!this.state.propertyInfo.house_address){
+          return NotificationManager.error('Validation error','Please enter your property address', 3000)
+        }
+        if(!this.state.propertyInfo.home_price_growth){
+          return NotificationManager.error('Validation error','Please enter the projected home price growth per year', 3000) 
+        }
+        if(!this.state.propertyInfo.stay_duration){
+          return NotificationManager.error('Validation error','Please enter the duration of your stay in this house', 3000)
+        }
+        if (!this.state.propertyInfo.downpayment_amount) {
+          return NotificationManager.error('Validation error','Please enter the downpayment amount', 3000)
+        }
+        {
+
           if (localStorage.getItem('addressData')) {
 
             const addressData = JSON.parse(localStorage.getItem('addressData'))
             if (!addressData.searchTouched && !this.state.propertyInfo.is_update) {
-              return NotificationManager.error("Error", "Please input your property address", 3000);
+              return NotificationManager.error('Validation error',"Please input your property address", 3000);
             } else {
               this.setState({
                 activeStep: newActiveStep,
@@ -540,13 +566,19 @@ export class StepperComponent extends Component {
           }
 
 
-        } else {
-          return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
         }
       }
 
     } else if (this.state.activeStep === 1) {
-      if (this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments && !this.state.personalFinanceUpdate.monthly_non_housing_expenses && !this.state.personalFinanceUpdate.fico_score_range && !this.state.personalFinanceUpdate.filling_status) {
+      if
+       (this.state.personalFinanceUpdate &&
+         !this.state.personalFinanceUpdate.federal_income &&
+          !this.state.personalFinanceUpdate.marginal_tax_rate && 
+          !this.state.personalFinanceUpdate.monthly_debt_payments && 
+          !this.state.personalFinanceUpdate.monthly_non_housing_expenses && 
+          !this.state.personalFinanceUpdate.fico_score_range && 
+          !this.state.personalFinanceUpdate.filling_status) 
+          {
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
         );
@@ -576,7 +608,7 @@ export class StepperComponent extends Component {
         });
 
       } else {
-        return NotificationManager.error('Please correct your inputy', 'Please fill required fields', 3000)
+        return NotificationManager.error('Validation error','Please enter your estimated average tax rate', 3000)
       }
 
 
