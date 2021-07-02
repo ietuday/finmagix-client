@@ -1,4 +1,5 @@
 import React from "react";
+
 import SplashScreen from "./Components/splashScreen/splashScreen";
 import GetStarted from "./Components/GetStarted/getStarted";
 import Signup from "./Components/signup";
@@ -37,13 +38,32 @@ import PostMortgagePurchaseProfile from "./Components/nerdReportDetails/PostMort
 import ForgotPassword from "./Components/ForgotPassword";
 import CreatePassword from "./Components/createPassword";
 import Geocode from "./common/geocode"
+import { logout } from './routes/utils';
+import { NotificationManager } from "react-notifications";
+
+const axios = require('axios');
 
 function App() {
   return (
     <React.Fragment>
+    {axios.interceptors.response.use(
+      (successRes)=>  {
+        return successRes;
+      }, 
+      (error) =>  {
+        console.log("####################",error.response.status)
+        if(error.response.status == 401){
+          console.log("Unauthorized");
+          logout();
+          NotificationManager.error('error', 'Token Expired', 3000)
+          window.location.reload(); 
+        }
+        // ... return Promise.reject(error);
+      }
+      )}
       <Router>
         <Switch>
-          <PublicRoute
+        <PublicRoute
             restricted={false}
             component={Geocode}
             path="/geo"
