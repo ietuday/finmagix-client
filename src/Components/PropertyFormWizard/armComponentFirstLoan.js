@@ -269,33 +269,70 @@ export class ARMComponentFirstLoan extends Component {
       }
   }
 
-  if(event.target.name === "floor_interest_rate_percentage"){
+//   if(event.target.name === "floor_interest_rate_percentage"){
     
-    if(this.state.initial_interest_rate < parseInt(String(event.target.value).replace(/%/g, '')) ){
-      this.setState({
+//     if(this.state.initial_interest_rate < parseInt(String(event.target.value).replace(/%/g, '')) ){
+//       this.setState({
         
-        floorinterestrateCheckValidationError: "Floor interest rate cannot be greater than initial interest rate"
-      }) 
-    }else{
-      this.setState({
-        floorinterestrateCheckValidationError: ""
-      }) 
-    }
-}
+//         floorinterestrateCheckValidationError: "Floor interest rate cannot be greater than initial interest rate"
+//       }) 
+//     }else{
+//       this.setState({
+//         floorinterestrateCheckValidationError: ""
+//       }) 
+//     }
+// }
 
+
+// if(event.target.name === "floor_interest_rate_percentage"){
+//   if(this.state.ceiling_interest_rate < parseInt(String(event.target.value).replace(/%/g, ''))){
+//     this.setState({
+//       floorinterestrateValidationError: "Floor interest rate cannot exceed Ceiling interest rate"
+//     }) 
+//   }else{
+//     this.setState({
+//       floorinterestrateValidationError: ""
+//     }) 
+//   }
+// }
 
 if(event.target.name === "floor_interest_rate_percentage"){
-  if(this.state.ceiling_interest_rate < parseInt(String(event.target.value).replace(/%/g, ''))){
+    
+  if(this.state.initial_interest_rate < parseInt(String(event.target.value).replace(/%/g, '')) && this.state.ceiling_interest_rate > parseInt(String(event.target.value).replace(/%/g, ''))){
     this.setState({
-      floorinterestrateValidationError: "Floor interest rate cannot exceed Ceiling interest rate"
+      
+      floorinterestrateCheckValidationError: "Floor interest rate cannot be greater than initial interest rate"
     }) 
   }else{
     this.setState({
-      floorinterestrateValidationError: ""
+      floorinterestrateCheckValidationError: ""
     }) 
   }
 }
 
+
+if(event.target.name === "floor_interest_rate_percentage"){
+if(parseInt(String(event.target.value).replace(/%/g, ''))>this.state.ceiling_interest_rate   ){
+  this.setState({
+    floorinterestrateValidationError: "Floor interest rate cannot exceed Ceiling interest rate"
+  }) 
+}else{
+  this.setState({
+    floorinterestrateValidationError: ""
+  }) 
+}
+}
+if(event.target.name === "floor_interest_rate_percentage"){
+if(this.state.initial_interest_rate < parseInt(String(event.target.value).replace(/%/g, '')) && this.state.ceiling_interest_rate < parseInt(String(event.target.value).replace(/%/g, ''))){
+  this.setState({
+    floorinterestrateValidationError: "Floor interest rate cannot be greater than initial interest rate and cannot exceed Ceiling interest rate"
+  }) 
+}else{
+  this.setState({
+    floorinterestrateValidationError: ""
+  }) 
+}
+}
 if(event.target.name === "ceiling_interest_rate_percentage"){
   const ceil_data = parseInt(String(event.target.value).replace(/%/g, ''))
   
