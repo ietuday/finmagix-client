@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import RangeSlider from "../../common/RangeSilder";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import Axios from "axios";
 
 import NumberFormat from "react-number-format";
 import "react-rangeslider/lib/index.css";
@@ -14,6 +15,10 @@ import "react-rangeslider/lib/index.css";
 // } from "../../common/ValidatorFunction";
 import DetailedExpenseModal from "../../common/detailedExpense";
 import quss from "../../assets/images/que.png";
+
+import { config } from '../config/default';
+
+const { baseURL } = config;
 
 export class PersonalFinance extends Component {
   constructor() {
@@ -87,6 +92,10 @@ export class PersonalFinance extends Component {
     // this.validators = PersonaLFinanceValidator;
     // resetValidators(this.validators);
     this.handleChange = this.handleChange.bind(this);
+    setTimeout(() => {
+      this.setPersonalFinance()
+    }, 1000);
+    console.log("called")
   }
   handleRangeData = (data) => {
     this.setState({
@@ -94,9 +103,38 @@ export class PersonalFinance extends Component {
     });
     this.props.getPersonalFinanceData(this.state);
   };
-  goToNextPage = () => {
-    localStorage.setItem("personal_finance_array", JSON.stringify(this.state));
 
+  setPersonalFinance(){
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then(async(propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+          localStorage.setItem("personal_finance_array", JSON.stringify(propertyDetail.personal_finances));
+        })
+        .catch((err) => {})
+    }
+  }
+  goToNextPage = () => {
+    // const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    // if (propertyId) {
+    //   Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+    //     headers: {
+    //       "Content-type": "Application/json",
+    //       Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+    //     },
+    //   })
+    //     .then(async(propertyInfo) => {
+    //       const propertyDetail = propertyInfo.data.data[0];
+    //     })
+    //     .catch((err) => {})
+        localStorage.setItem("personal_finance_array", JSON.stringify(this.state));
+    // }
     this.props.handleContinue();
   };
   componentDidMount() {}
@@ -227,11 +265,12 @@ export class PersonalFinance extends Component {
             />
           </MDBCol>
         </MDBRow>
+        
 
         <MDBRow className="margin20 marginbottom20">
           <MDBCol md="12">
             <span className="get-started-label">
-              Select your filing status
+            Please select your tax filing status
             </span>
             <br />
             <Select
@@ -268,7 +307,7 @@ export class PersonalFinance extends Component {
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter your estimated adjusted gross income from recent tax filing"
               name="federal_income"
               value={this.state.federal_income}
               onChange={this.handleChange}
@@ -313,7 +352,7 @@ export class PersonalFinance extends Component {
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter your estimated monthly non-housing debt payments"
               name="monthly_debt_payments"
               value={this.state.monthly_debt_payments}
               onChange={this.handleChange}
@@ -362,7 +401,7 @@ export class PersonalFinance extends Component {
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter your monthly non-housing expenses"
               name="monthly_non_housing_expenses"
               value={this.state.monthly_non_housing_expenses}
               onChange={this.handleChange}
@@ -387,11 +426,11 @@ export class PersonalFinance extends Component {
 
         <MDBRow className="margin20">
           <MDBCol md="12">
-            <span className="get-started-label">Marginal tax rate</span>
+            <span className="get-started-label">Estimated Tax Rate</span>
             <div className="tooltip-img">
               <img src={quss} className="tool-img" alt="" />
               <span className="tooltip-img-text">
-              Marginal Tax rate refers to the rate you pay  on the amount of your income that falls into a certain range. 
+              Estimated Tax Rate refers to the rate you pay  on the amount of your income that falls into a certain range. 
               We use to estimate monthly taxes you may pay on your income.{" "}
               </span>
             </div>
@@ -407,7 +446,7 @@ export class PersonalFinance extends Component {
 
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here %"
+              placeholder="Please enter your estimated average tax rate"
               name="marginal_tax_rate_percentage"
               value={this.state.marginal_tax_rate_percentage}
               onChange={this.handleChange}

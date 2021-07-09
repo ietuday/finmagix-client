@@ -30,15 +30,15 @@ export class RentvsBuy extends Component {
     this.state = {
       current_monthly_rent_payment: 0,
       current_monthly_rent_payment_number: 0,
-      annual_rent_insurance: 0,
       rate_of_investment: 0,
+      annual_rent_insurance: 0,
+      annual_rent_insurance_number: 0,
+      rate_of_investment_percentage: 0,
       openModal: true,
       property_obj: localStorage.getItem("property_id"),
       radioValue: false,
       rentinflation: 0,
-      rate_of_investment_percentage: 0,
       rentinflation_percentage: 0,
-      annual_rent_insurance_number: 0,
       is_update:false,
       id: "",
       annual_rent_insuranceValidationError: "",
@@ -96,7 +96,14 @@ export class RentvsBuy extends Component {
             is_update:true,
             id: propertyDetail.rent_vs_buy.id,
             is_rent_vs_buy_selected: propertyDetail.is_rent_vs_buy_selected,
+            rate_of_investment: 3,
+            rate_of_investment_percentage: 3,
+            rentinflation: 2,
+            rentinflation_percentage: 2,
+            annual_rent_insurance: 150,
+            annual_rent_insurance_number: 150,
             checkPropertyApiLoaded: true
+           
           });
           this.props.getRentvsBuyData(this.state);
           if(propertyDetail.rent_vs_buy){
@@ -267,7 +274,7 @@ export class RentvsBuy extends Component {
 
                 <NumberFormat
                   className="input-class-mdb"
-                  placeholder="Enter amount here"
+                  placeholder="Please enter the monthly rental amount"
                   name="current_monthly_rent_payment"
                   value={this.state.current_monthly_rent_payment}
                   onChange={this.handleChange}
@@ -315,7 +322,7 @@ export class RentvsBuy extends Component {
 
                 <NumberFormat
                   className="input-class-mdb"
-                  placeholder="Enter amount here"
+                  placeholder="Please enter the annual rent insurance"
                   name="annual_rent_insurance"
                   value={this.state.annual_rent_insurance}
                   onChange={this.handleChange}
@@ -360,7 +367,7 @@ export class RentvsBuy extends Component {
 
                 <NumberFormat
                   className="input-class-mdb"
-                  placeholder="Enter amount here %"
+                  placeholder="Please enter your average annual rate of investment"
                   name="rate_of_investment_percentage"
                   value={this.state.rate_of_investment_percentage}
                   allowNegative={false}
@@ -406,7 +413,7 @@ export class RentvsBuy extends Component {
 
                 <NumberFormat
                   className="input-class-mdb"
-                  placeholder="Enter amount here %"
+                  placeholder="Please enter your average annual rent increase %"
                   name="rentinflation_percentage"
                   value={this.state.rentinflation_percentage}
                   allowNegative={false}

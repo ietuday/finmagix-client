@@ -16,9 +16,6 @@ import { Button } from "@material-ui/core";
 import { isFormValid } from "../../common/ValidatorFunction";
 import Tax1 from "./tax1";
 import Tax2 from "./tax2";
-import Axios from "axios";
-import { config } from '../config/default';
-const { baseURL } = config;
 
 export class TaxHoc extends Component {
   constructor(props) {

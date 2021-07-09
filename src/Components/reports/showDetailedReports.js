@@ -10,7 +10,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import Loader from "./loader";
-import { Input } from "antd";
 import { get_single_property } from "../redux/actions/PropertyListing/index";
 import { get_calculator } from "../redux/actions/Calculator/index";
 import "../../css/reports.css";
@@ -38,6 +37,28 @@ export class ShowDetailedReports extends Component {
       is_tax_selected: false,
       is_rent_vs_buy_selected: false,
     };
+    this.propertyById()
+  }
+
+  propertyById(){
+    Axios.get(`${baseURL}/property_listings/${JSON.parse(localStorage.getItem("property_id"))}`, {
+      headers: {
+        "Content-type": "Application/json",
+        Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then(async (propertyInfoData) => {
+        console.log("propertyById ===============================================================")
+        console.log(propertyInfoData.data.data[0].is_tax_selected,'propertyInfoData tax')
+        console.log(propertyInfoData.data.data[0].is_rent_vs_buy_selected,'propertyInfoData rent')
+        await this.setState({
+          is_rent_vs_buy_selected: propertyInfoData.data.data[0].is_rent_vs_buy_selected,
+          is_tax_selected: propertyInfoData.data.data[0].is_tax_selected
+        })
+        console.log(this.state)
+        
+        
+      })
   }
 
   clearPropertyId(){
@@ -103,28 +124,15 @@ export class ShowDetailedReports extends Component {
       }
     )
       .then((userData) => {
+        console.log("USEER BY ID CALLED===============================================================")
         this.setState({
           personalFinace: userData.data.data["personal_finances"],
           taxes: userData.data.data["taxes"],
         });
-        // this.calculateSurvey(prevProps);
       })
       .catch((err) => {});
-      Axios.get(`${baseURL}/property_listings/${JSON.parse(localStorage.getItem("property_id"))}`, {
-        headers: {
-          "Content-type": "Application/json",
-          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
-        },
-      })
-        .then((propertyInfoData) => {
-          console.log(propertyInfoData.data.data[0].is_tax_selected,'propertyInfoData tax')
-          console.log(propertyInfoData.data.data[0].is_rent_vs_buy_selected,'propertyInfoData rent')
-          this.setState({
-            is_rent_vs_buy_selected: propertyInfoData.data.data[0].is_rent_vs_buy_selected,
-            is_tax_selected: propertyInfoData.data.data[0].is_tax_selected
-          })
-          console.log('first data', this.state)
-        })
+      // this.calculateSurvey(prevProps);
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -159,6 +167,7 @@ export class ShowDetailedReports extends Component {
       })
         .then((surveyData) => {
           //  surveyData.data.data[0]
+          console.log("SURVEY CALLED===============================================================")
           this.setState({
             survey: {
               whenbuyhome: Number(surveyData.data.data[0]["when_buy_home"]),
@@ -180,6 +189,12 @@ export class ShowDetailedReports extends Component {
                   : "N",
             },
           });
+
+
+         
+
+
+
         })
         .catch((err) => {});
     }
@@ -204,18 +219,18 @@ export class ShowDetailedReports extends Component {
 
       const calculatorInputObj = {
         //API Call Remaining
-        survey: this.state.survey,
-        ref: this.calculateRef(),
-        home: this.calculateHome(prevProps),
-        screen6: this.calculateScreen6(),
-        screen7: this.calculateScreen7(),
-        screen8: this.calculateScreen8(prevProps),
-        screen9: this.calculateScreen9(prevProps),
-        screen10: this.calculateScreen10(prevProps),
-        screen11: this.calculateScreen11(prevProps),
-        screen12: this.calculateScreen12(prevProps),
+        survey: await this.state.survey,
+        ref: await this.calculateRef(),
+        home: await this.calculateHome(prevProps),
+        screen6: await this.calculateScreen6(),
+        screen7: await this.calculateScreen7(),
+        screen8: await this.calculateScreen8(prevProps),
+        screen9: await this.calculateScreen9(prevProps),
+        screen10: await this.calculateScreen10(prevProps),
+        screen11: await this.calculateScreen11(prevProps),
+        screen12: await this.calculateScreen12(prevProps),
       };
-
+      console.log("calculateAPI BY ID CALLED===============================================================")
       Axios.post(
         `${baseURL}/calculator/`,calculatorInputObj,
         {
@@ -247,6 +262,8 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateHome(data) {
+    console.log("calculateHome CALLED===============================================================")
+    
     return {
       Homeaddress: data.GetSinglePropertyResponse["data"][0].house_address,
       homePrice: Number(
@@ -273,7 +290,8 @@ export class ShowDetailedReports extends Component {
         data.GetSinglePropertyResponse["data"][0].annual_property_tax
       ),
       HOI: Number(
-        data.GetSinglePropertyResponse["data"][0].home_owner_insurance
+        data.GetSinglePropertyResponse["data"][0].home_owner_insurance.replace(/,/g,'')
+        
       ),
       HOA: Number(
         data.GetSinglePropertyResponse["data"][0]
@@ -290,6 +308,8 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateScreen6() {
+    console.log("calculateHome CALLED===============================================================")
+    
     if (localStorage.getItem("property-mortgage-info")) {
       const rec_mortgage = JSON.parse(
         localStorage.getItem("property-mortgage-info")
@@ -318,15 +338,19 @@ export class ShowDetailedReports extends Component {
     }
   }
 
-  calculateScreen7() {
-    console.log(this.state)
-    return {
-      Taxmoduleoption: (this.state.is_tax_selected === true) ? "Y" : "N",
-      RvBuymoduleoption: (this.state.is_rent_vs_buy_selected === true) ? "Y" : "N",
-    };
+   calculateScreen7() {
+    console.log("77777777777777777777777777777777777777777777777777777777777777777777")
+      return {
+        Taxmoduleoption: (this.state.is_tax_selected === true) ? "Y" : "N",
+        RvBuymoduleoption: (this.state.is_rent_vs_buy_selected === true) ? "Y" : "N",
+      };
+
+
   }
 
   calculateScreen8(data) {
+    console.log("calculateScreen8 CALLED===============================================================")
+    
     // const personal_finance = JSON.parse(
     //   localStorage.getItem("personal_finance_array")
     // ).marginal_tax_rate;
@@ -406,6 +430,8 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateScreen9(data) {
+    console.log("calculateScreen9 CALLED===============================================================")
+    
     if (
       data.GetSinglePropertyResponse["data"][0].first_frm &&
       data.GetSinglePropertyResponse["data"][0].first_frm.id
@@ -702,6 +728,8 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateScreen10(data) {
+    console.log("calculateScreen10 CALLED===============================================================")
+    
     if (
       data.GetSinglePropertyResponse["data"][0].second_frm &&
       data.GetSinglePropertyResponse["data"][0].second_frm.id
@@ -1039,6 +1067,8 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateScreen11(data) {
+    console.log("calculateScreen11 CALLED===============================================================")
+
     return {
       rent:
         data.GetSinglePropertyResponse["data"][0].rent_vs_buy &&
@@ -1095,7 +1125,11 @@ export class ShowDetailedReports extends Component {
   }
 
   calculateScreen12(data) {
-   
+    console.log("calculateScreen12 CALLED===============================================================", this.state)
+    console.log(this.state.taxes.tax_deductive_investment_interest)
+    console.log(Number(this.state.taxes.tax_deductive_investment_interest))
+  //  console.log(String(this.state.taxes.tax_deductive_investment_interest).replace(/,/g, ''))
+    
     return {
       Detailedtaxexpenses:
         this.state.taxes && this.state.taxes.detailed_tax_expenses ? "Y" : "N",
@@ -1113,7 +1147,7 @@ export class ShowDetailedReports extends Component {
           : 0.0,
       Investmentinterest:
         this.state.taxes && this.state.taxes.id
-          ? Number(this.state.taxes.tax_deductive_investment_interest)
+          ? Number(String(this.state.taxes.tax_deductive_investment_interest).replace(/,/g, ''))
           : 0.0,
       Charitabledonation:
         this.state.taxes && this.state.taxes.id

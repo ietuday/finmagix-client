@@ -423,7 +423,7 @@ export class PropertyMortgageHOC extends Component {
       ARMMortgageUpdateSecond,
   
     } = this.props;
-    // debugger
+    
     // if(this.state.firstLoanScenario && (this.state.firstLoanScenario.mortgage_program_type === 1 || this.state.firstLoanScenario.mortgage_program_type == "FIRST")){
     //   FRMMortgageUpdateFirst(this.state.firstLoanScenario,this.props.FrmMortgageFirstEditId)
     // }

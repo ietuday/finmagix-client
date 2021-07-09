@@ -356,7 +356,7 @@ export class Taxes extends Component {
             name="fedral_adjusted_gross_income"
             value={this.state.fedral_adjusted_gross_income}
             onChange={this.handleChange}
-            placeholder="Enter amount here"
+            placeholder="Please enter your estimated adjusted gross income from recent tax filing"
             thousandSeparator={true}
             onValueChange={async (values) => {
               const { formattedValue, value } = values;
@@ -573,7 +573,7 @@ export class Taxes extends Component {
             <div className="tooltip-img">
               <img src={quss} className="tool-img"alt="" />
               <span className="tooltip-img-text">
-                Investment interest is interest paid on money you borrowed that
+                !!!!Investment interest is interest paid on money you borrowed that
                 is allocable to property held for investment. It doesn't include
                 any interest allocable to passive activities or to securities
                 that generate tax-exempt income. Source: IRS{" "}

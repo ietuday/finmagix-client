@@ -9,7 +9,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import SplashScreen3 from "./splashScreen3";
 import SplashScreen4 from "./splashScreen4";
 import SplashScreen5 from "./splashScreen5";
-import SplashScreen6 from "./splashScreen6";
 import SplashScreen7 from "./splashScreen7";
 
 export class SplashScreen extends Component {
@@ -39,9 +38,6 @@ export class SplashScreen extends Component {
               </Item>
               <Item>
                 <SplashScreen5 />
-              </Item>
-              <Item>
-                <SplashScreen6 />
               </Item>
               <Item>
                 <SplashScreen7 />

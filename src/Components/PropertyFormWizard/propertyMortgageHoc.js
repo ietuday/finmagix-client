@@ -70,6 +70,13 @@ export class PropertyMortgageHOC extends Component {
     });
   };
   handleNext = async () => {
+    if (this.state.firstLoanScenario['loan_amount']) {
+        
+    }else{
+      return NotificationManager.error('Validation Error', 'Please Enter Loan Amount', 3000)
+    }
+    
+   
     const { FRMMortgageCreateFirst, ARMMortgageCreateFirst, FRMMortgageUpdateFirst,
       ARMMortgageUpdateFirst } = this.props;
     if (
@@ -250,7 +257,10 @@ export class PropertyMortgageHOC extends Component {
                 Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
               );
             }
+            if (Number(this.state.firstLoanScenario["ceiling_interest_rate"]) < Number(this.state.firstLoanScenario["initial_interest_rate"])) {
+              return NotificationManager.error('error', 'The ceiling interest rate cannot be less than the initial interest rate or less than the floor.', 3000)
 
+            }
             if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
               ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
             } else {
@@ -422,7 +432,10 @@ export class PropertyMortgageHOC extends Component {
                 Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
               );
             }
+            if (Number(this.state.firstLoanScenario["ceiling_interest_rate"]) < Number(this.state.firstLoanScenario["initial_interest_rate"])) {
+              return NotificationManager.error('error', 'The ceiling interest rate cannot be less than the initial interest rate or less than the floor.', 3000)
 
+            }
             if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
               ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
             } else {
@@ -440,6 +453,12 @@ export class PropertyMortgageHOC extends Component {
     }
   };
   handleSubmit = async () => {
+    if (this.state.firstLoanScenario['loan_amount']) {
+        
+    }else{
+      return NotificationManager.error('Validation Error', 'Please Enter Loan Amount', 3000)
+    }
+    
     const {
 
       FRMMortgageCreateSecond,
@@ -461,6 +480,18 @@ export class PropertyMortgageHOC extends Component {
         this.state.secondLoanScenario.mortgage_program_type_value === 1
       ) {
           console.log(this.state.secondLoanScenario, 'in edit secondLoanscenario frm')
+         
+          // if(this.state.secondLoanScenario['interest_only_option']=='Y'){
+          //   if (this.state.secondLoanScenario['interest_only_period']) {
+                
+          //   }else{
+          //     return NotificationManager.error('error', 'Please Enter Interest Only Period', 3000)
+          //   }}
+          if (this.state.secondLoanScenario['loan_amount']) {
+        
+          }else{
+            return NotificationManager.error('Validation Error', 'Please Enter Loan Amount', 3000)
+          }
         if (
           this.state.secondLoanScenario.interestOnlyPeriodValidationError ||
           this.state.secondLoanScenario.loan_amount_validation_error
@@ -809,7 +840,7 @@ export class PropertyMortgageHOC extends Component {
             this.state.radioValue &&
             this.state.firstLoanScenario.mortgage_program_type_value === 1
           ) {
-    
+
             if (
               this.state.firstLoanScenario.interestOnlyPeriodValidationError ||
               this.state.firstLoanScenario.loan_amount_validation_error
@@ -970,7 +1001,10 @@ export class PropertyMortgageHOC extends Component {
                     Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
                   );
                 }
-    
+                if (Number(this.state.firstLoanScenario["ceiling_interest_rate"]) < Number(this.state.firstLoanScenario["initial_interest_rate"])) {
+                  return NotificationManager.error('error', 'The ceiling interest rate cannot be less than the initial interest rate or less than the floor.', 3000)
+  
+                }
                 if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
                   ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
                 } else {
@@ -1153,7 +1187,10 @@ export class PropertyMortgageHOC extends Component {
                     Number(this.state.firstLoanScenario["initial_interest_rate"]) / 100
                   );
                 }
-    
+                if (Number(this.state.firstLoanScenario["ceiling_interest_rate"]) < Number(this.state.firstLoanScenario["initial_interest_rate"])) {
+                  return NotificationManager.error('error', 'The ceiling interest rate cannot be less than the initial interest rate or less than the floor.', 3000)
+  
+                }
                 if (this.state.firstLoanScenario.is_update && this.state.firstLoanScenario.id) {
                   ARMMortgageUpdateFirst(this.state.firstLoanScenario, this.state.firstLoanScenario.id)
                 } else {

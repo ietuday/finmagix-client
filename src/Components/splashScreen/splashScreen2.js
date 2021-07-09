@@ -13,59 +13,19 @@ export class SplashScreen2 extends Component {
     return (
       <Fragment>
         <CssBaseline />
-
-        <MDBContainer className="splash-container">
-        <MDBRow >
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center">
-                <img
-                  src={require("../../assets/logo/finmagix-text.png")}
-                  alt="finmagix"
-                  className="splash-img"
-                />
-              </div>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow className="margin10">
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center">
-                <h5 className="splash-text-inner">
-                Finmagix will help you
-                </h5>
-              </div>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow>
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
+        <MDBContainer className="splash-container" > 
+        <MDBRow>
+            <MDBCol>
               <div className="text-center margin10">
                 <img
-                  src={require("../../assets/images/Group 27.png")}
+                  src={require("../../assets/images/onboarding_2.png")}
                   alt="finmagix"
                   className="splash-img"
+                 
                 />
               </div>
             </MDBCol>
           </MDBRow>
-          {/* <MDBRow className="margin20">
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center">
-                <img
-                  src={require("../../assets/logo/finmagix-text.png")}
-                  alt="finmagix"
-                  className="splash-img"
-                />
-              </div>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow className="margin20">
-            <MDBCol xl="12" lg="12" md="12" sm="12" xs="12">
-              <div className="text-center">
-                <h5 className="splash-text-inner">
-                  Let Finmagix crunch the numbers on your home purchase !!
-                </h5>
-              </div>
-            </MDBCol>
-          </MDBRow> */}
         </MDBContainer>
       </Fragment>
     );

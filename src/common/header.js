@@ -98,17 +98,17 @@ class Header extends Component {
           <MDBModalHeader toggle={this.toggle}></MDBModalHeader>
           <MDBModalBody>
             <div className="row">
-              <span className="modal-text">Help</span>
+              {/* <span className="modal-text">Help</span> */}
             </div>
-            <hr />
+           
             {Object.entries(JSON.parse(localStorage.getItem('personal_finance_array'))).length !== 0 ? 
             <div className="row">
-              <span className="modal-text" onClick={this.goToSurvey}>Survey</span>
+              {/* <span className="modal-text" onClick={this.goToSurvey}>Survey</span> */}
             </div>
             :
             null
             }
-            <hr />
+           
             <div className="row">
               <span className="modal-text" onClick={this.goToLogOut}>
                 Logout

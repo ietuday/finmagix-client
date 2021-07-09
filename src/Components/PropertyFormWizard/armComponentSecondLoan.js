@@ -36,8 +36,8 @@ export class ARMComponentSecondLoan extends Component {
       closing_costs: 0,
       closing_costs_number: 0,
       interest_only_option: "N",
-      interest_only_period: 0,
-      interest_only_period_number:0,
+      interest_only_period: 5,
+      interest_only_period_number:5,
       pmi: 0,
       second_mortgage_loan_amount: 0,
       second_mortgage_loan_term: 0,
@@ -244,9 +244,11 @@ export class ARMComponentSecondLoan extends Component {
     })
   } 
   if(this.state.inSecondMortgage){
-    if(diff === 0) {
-      loanOnePercent = (this.state.loan_amount/100)*80;
-        secondMortagePercent = this.state.loan_amount - loanOnePercent
+    if(diff <= 0) {
+      // loanOnePercent = (this.state.loan_amount/100)*80;
+        // secondMortagePercent = this.state.loan_amount - loanOnePercent
+        loanOnePercent = (this.state.property_price/100)*80;
+        secondMortagePercent = this.state.property_price - loanOnePercent -this.state.property_downpayment
         this.setState({
           loan_amount: loanOnePercent,
           second_mortgage_changed_value: secondMortagePercent
@@ -339,7 +341,12 @@ export class ARMComponentSecondLoan extends Component {
           ceilinginterestrateValidationError:
             "Ceiling interest is greater than 15%",
         });
-      } else {
+      } else if(this.state.ceiling_interest_rate < this.state.initial_interest_rate){
+        this.setState({
+          ceilinginterestrateValidationError: "The ceiling interest rate cannot be less than the initial interest rate or less than the floor"
+        }) 
+      }
+      else{
         this.setState({
           ceilinginterestrateValidationError: "",
         });
@@ -740,7 +747,7 @@ export class ARMComponentSecondLoan extends Component {
           /> */}
           <NumberFormat
             className="input-class-mdb"
-            placeholder="Enter period here"
+            placeholder="Please enter Interest Only Period"
             name="interest_only_period"
             value={this.state.interest_only_period}
             onChange={this.handleChange}
@@ -782,7 +789,7 @@ export class ARMComponentSecondLoan extends Component {
             /> */}
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter the loan amount"
               name="loan_amount"
               value={this.state.loan_amount}
               onChange={this.handleChange}
@@ -858,7 +865,7 @@ export class ARMComponentSecondLoan extends Component {
           /> */}
             <NumberFormat
               className="input-class-mdb"
-              placeholder="Enter amount here"
+              placeholder="Please enter interest rate"
               name="initial_interest_rate_percentage"
               value={this.state.initial_interest_rate_percentage}
               onChange={this.handleChange}

@@ -39,7 +39,7 @@ export class SecondLoanScenario extends Component {
       closing_costs: 0, 
       closing_costs_number:0,
       interest_only_option: "N",
-      interest_only_period: 0,
+      interest_only_period: 5,
       downpayment: 0,
       pmi: 0,
       select_loan_program: 0,
@@ -137,6 +137,8 @@ export class SecondLoanScenario extends Component {
               PMIfirst1: "0",
               loanamountsecond1: "0",
               Pmtsecond1: "0",
+              interest: 3,
+              interest_percentage: 3,
               ARMtype1: 0,
               ARM1rate: 0,
               ARMfirstadjin1: "0",
@@ -193,9 +195,9 @@ export class SecondLoanScenario extends Component {
     })
   } 
   if(this.state.inSecondMortgage){
-    if(diff === 0) {
-      loanOnePercent = (this.state.loan_amount/100)*80;
-        secondMortagePercent = this.state.loan_amount - loanOnePercent
+    if(diff <= 0) {
+      loanOnePercent = (this.state.property_price/100)*80;
+      secondMortagePercent = this.state.property_price - loanOnePercent -this.state.property_downpayment
         this.setState({
           loan_amount: loanOnePercent,
           second_mortgage_changed_value: secondMortagePercent
@@ -461,7 +463,7 @@ if (event.target.name === "closing_costs") {
           <br />
           <Input
             className="input-class-mdb"
-            placeholder="Enter period here"
+            placeholder="Please enter Interest Only Period"
             name="interest_only_period"
             value={this.state.interest_only_period}
             onChange={this.handleChange}
@@ -583,7 +585,7 @@ if (event.target.name === "closing_costs") {
             <MDBRow className="margin20">
               <MDBCol md="12">
                 <span className="get-started-label">
-                  Interest on your first mortgage
+                  Interest on your first mortgage 
                 </span>
                 <div className="tooltip-img">
                   <img src={quss} alt="" className="tool-img"></img>

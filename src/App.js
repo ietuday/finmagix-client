@@ -1,4 +1,5 @@
 import React from "react";
+
 import SplashScreen from "./Components/splashScreen/splashScreen";
 import GetStarted from "./Components/GetStarted/getStarted";
 import Signup from "./Components/signup";
@@ -43,6 +44,10 @@ import { InitiallizeGoogleAnalytics } from './Analitics/GoogleAnalitics'
 import { useEffect } from "react";
 
 InitiallizeGoogleAnalytics()
+import { logout } from './routes/utils';
+import { NotificationManager } from "react-notifications";
+
+const axios = require('axios');
 
 function App() {
   console.log(window.location)
@@ -53,9 +58,24 @@ function App() {
   }, [pathname])
   return (
     <React.Fragment>
+    {axios.interceptors.response.use(
+      (successRes)=>  {
+        return successRes;
+      }, 
+      (error) =>  {
+        console.log("####################",error.response.status)
+        if(error.response.status == 401){
+          console.log("Unauthorized");
+          logout();
+          NotificationManager.error('error', 'Token Expired', 3000)
+          window.location.reload(); 
+        }
+        // ... return Promise.reject(error);
+      }
+      )}
       <Router>
         <Switch>
-          <PublicRoute
+        <PublicRoute
             restricted={false}
             component={Geocode}
             path="/geo"

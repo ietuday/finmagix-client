@@ -1,19 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { MDBRow, MDBCol } from "mdbreact";
-import { Input } from "antd";
-
 import { withRouter} from "react-router-dom";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-
 import Axios from "axios";
 import NumberFormat from "react-number-format";
-
 import { 
   resetValidators,
   displayValidationErrors,
 } from "../../common/ValidatorFunction";
-
 import Tax1YesValidator from "../validatorRules/Tax1YesValidator";
 import Tax1NoValidator from "../validatorRules/Tax1NoValidator";
 import quss from "../../assets/images/que.png";
@@ -463,7 +458,7 @@ export class Tax1 extends Component {
             </span>
             <div className="tooltip-img">
               <img src={quss} className="tool-img" alt="" />
-              <span className="tooltip-img-text">
+              <span className="tooltip-img-text">   
                 Investment interest is interest paid on money you borrowed that
                 is allocable to property held for investment. It doesn't include
                 any interest allocable to passive activities or to securities
@@ -471,13 +466,25 @@ export class Tax1 extends Component {
               </span>
             </div>
             <br />
-            <Input
-              className="input-class-mdb"
-              placeholder="Enter amount here"
-              name="tax_deductive_investment_interest"
-              value={this.state.tax_deductive_investment_interest}
-              onChange={this.handleChange}
-            />
+
+            <NumberFormat
+            className="input-class-mdb"
+            placeholder="Enter amount here"
+            name="tax_deductive_investment_interest"
+            value={this.state.tax_deductive_investment_interest}
+            onChange={this.handleChange}
+            thousandSeparator={true}
+            onValueChange={async (values) => {
+              const { formattedValue, value } = values;
+              console.log(formattedValue, value)
+              await this.setState({
+                tax_deductive_investment_interest: value,
+              });
+              await this.setState({
+                tax_deductive_investment_interest_percentage: formattedValue,
+              });
+            }}
+          />
           </MDBCol>
         </MDBRow>
         {displayValidationErrors(

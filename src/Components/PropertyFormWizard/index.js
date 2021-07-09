@@ -3,6 +3,7 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
+import Axios from "axios";
 
 import GetStartedHouseInfo from "../PropertyFormWizard/houseInfo";
 import PersonalFinance from "../PropertyFormWizard/personalFinance";
@@ -47,7 +48,9 @@ import FirstLoanScenario from "./firstLoanScenario";
 import SecondLoanScenario from "./secondLoanScenario";
 import { NotificationManager } from "react-notifications";
 import { savePropertyId } from "../../../src/routes/utils";
+import { config } from '../config/default';
 
+const { baseURL } = config;
 
 export class StepperComponent extends Component {
   constructor(props) {
@@ -58,11 +61,11 @@ export class StepperComponent extends Component {
       saveButtonforPersonalFinance: false,
       propertyInfo: {},
       personalFinance: {
-        property_obj: localStorage.getItem("property_id"),
+        property_obj: "",
       },
       personalFinanceUpdate: {
-        property_obj: localStorage.getItem("property_id"),
-        id: JSON.parse(localStorage.getItem("personal_finance_array")).id,
+        property_obj: "",
+        id: "",
       },
       RentvsBuy: {},
       isRentvsBuyFilled: false,
@@ -98,11 +101,11 @@ export class StepperComponent extends Component {
     this.cleanPreviousPropertyDetail()
   }
 
-  cleanPreviousPropertyDetail(){
-    if(localStorage.getItem('addressData')) localStorage.removeItem('addressData')
-    if(localStorage.getItem('GetSinglePropertyResponse'))localStorage.removeItem('GetSinglePropertyResponse')
-    if(localStorage.getItem('calculatorResponse'))localStorage.removeItem('calculatorResponse')
-    
+  cleanPreviousPropertyDetail() {
+    if (localStorage.getItem('addressData')) localStorage.removeItem('addressData')
+    if (localStorage.getItem('GetSinglePropertyResponse')) localStorage.removeItem('GetSinglePropertyResponse')
+    if (localStorage.getItem('calculatorResponse')) localStorage.removeItem('calculatorResponse')
+
   }
   UNSAFE_componentWillMount() {
     if (this.props.location.returnBackFromreviewEdit === true) {
@@ -185,36 +188,63 @@ export class StepperComponent extends Component {
   };
   handleSaveforPersonalFinance = () => {
     const { PersonalFinanceUpdate, PersonalFinanceCreate } = this.props;
-    // const newActiveStep =
-    //   this.isLastStep && !this.allStepsCompleted
-    //     ? this.steps.findIndex((step, i) => !(i in this.state.completed))
-    //     : this.state.activeStep + 1;
-    if (
-      this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
-      this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
-      this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
-
-    ) {
-      return NotificationManager.error('Error', 'Please correct your input',3000)
-    }
-    else {
-      this.setState({
-        saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
-      });
-
-      
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
-          ? PersonalFinanceUpdate(this.state.personalFinanceUpdate)
-          : PersonalFinanceCreate(this.state.personalFinance);
-      
+    if (Object.entries(JSON.parse(localStorage.getItem("personal_finance_array"))).length !== 0) {
       if (
-        Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-          .length !== 0
+        JSON.parse(localStorage.getItem("personal_finance_array")).federal_income &&
+        JSON.parse(localStorage.getItem("personal_finance_array")).fico_score_range &&
+        JSON.parse(localStorage.getItem("personal_finance_array")).filling_status &&
+        !isNaN(JSON.parse(localStorage.getItem("personal_finance_array")).marginal_tax_rate) &&
+        JSON.parse(localStorage.getItem("personal_finance_array")).monthly_debt_payments &&
+        JSON.parse(localStorage.getItem("personal_finance_array")).monthly_non_housing_expenses
       ) {
-        this.handleNext();
+        if (
+          this.state.personalFinanceUpdate.monthlydebtPaymentValidationError ||
+          this.state.personalFinanceUpdate.monthlynonhousingExpensesValidationError ||
+          this.state.personalFinanceUpdate.marginal_tax_rate_ValidationError
+
+        ) {
+          return NotificationManager.error('Error', 'Please correct your input', 3000)
+        }
+        else {
+          this.setState({
+            saveButtonforPersonalFinance: !this.state.saveButtonforPersonalFinance,
+          });
+
+
+          JSON.parse(localStorage.getItem("personal_finance_array")) && JSON.parse(localStorage.getItem("personal_finance_array")).id
+
+            ? PersonalFinanceUpdate(JSON.parse(localStorage.getItem("personal_finance_array")))
+            : PersonalFinanceCreate(JSON.parse(localStorage.getItem("personal_finance_array")));
+
+          if (
+            Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+              .length !== 0
+          ) {
+            this.handleNext();
+          }
+        }
+      } else {
+        if(!this.state.personalFinanceUpdate.federal_income){
+          return NotificationManager.error('Validation error','Please enter your estimated adjusted gross income from recent tax filing', 3000)
+        }
+        if(!this.state.personalFinanceUpdate.monthly_debt_payments){
+          return NotificationManager.error('Validation error','Please enter your estimated monthly non-housing debt payments', 3000)
+        }
+        if(!this.state.personalFinanceUpdate.monthly_non_housing_expenses){
+          return NotificationManager.error('Validation error','Please enter your monthly non-housing expenses', 3000)
+        }
+        if(!this.state.personalFinanceUpdate.marginal_tax_rate){
+          return NotificationManager.error('Validation error','Please enter your estimated average tax rate', 3000)
+        }
+        if(!this.state.personalFinanceUpdate.filling_status){
+          return NotificationManager.error('Validation error','Please select your tax filing status', 3000)
+        }
       }
+
+    } else {
+      return NotificationManager.error('Error', 'Please correct your input ', 3000)
     }
+
 
   };
   saveDetailExpenses = (data) => {
@@ -226,34 +256,53 @@ export class StepperComponent extends Component {
     DetailExpenseUpdate(data);
   };
   handlePersonalFinance = (data) => {
-    Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
-      .length !== 0
-      ? this.setState((prevState) => {
-        let personalFinanceUpdate = Object.assign(
-          {},
-          prevState.personalFinanceUpdate
-        );
-        personalFinanceUpdate = data;
-        personalFinanceUpdate.property_obj = localStorage.getItem(
-          "property_id"
-        );
-        personalFinanceUpdate.id = JSON.parse(
-          localStorage.getItem("personal_finance_array")
-        ).id;
-        return { personalFinanceUpdate };
+    console.log(data)
+    const propertyId = JSON.parse(localStorage.getItem("property_id"));
+    if (propertyId) {
+      Axios.get(`${baseURL}/property_listings/${propertyId}`, {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
       })
-      : this.setState((prevState) => {
-        let personalFinance = Object.assign({}, prevState.personalFinance);
-        personalFinance = data;
-        personalFinance.property_obj = localStorage.getItem("property_id");
-        let personalFinanceUpdate = Object.assign(
-          {},
-          prevState.personalFinanceUpdate
-        );
-        personalFinanceUpdate = data;
-        personalFinanceUpdate.property_obj = localStorage.getItem("property_id");
-        return { personalFinance, personalFinanceUpdate };
-      });
+        .then(async (propertyInfo) => {
+          const propertyDetail = propertyInfo.data.data[0];
+          //  await this.setState({
+          //     propertyId: propertyDetail.id,
+          //     loading: false
+          //   });
+
+          Object.entries(JSON.parse(localStorage.getItem("personal_finance_array")))
+            .length !== 0
+            ? this.setState((prevState) => {
+              let personalFinanceUpdate = Object.assign(
+                {},
+                prevState.personalFinanceUpdate
+              );
+              personalFinanceUpdate = data;
+              personalFinanceUpdate.property_obj = propertyDetail.id
+              personalFinanceUpdate.id = propertyDetail.personal_finances.id
+              localStorage.setItem("personal_finance_array", JSON.stringify(personalFinanceUpdate));
+              return { personalFinanceUpdate };
+            })
+            : this.setState((prevState) => {
+              let personalFinance = Object.assign({}, prevState.personalFinance);
+              personalFinance = data;
+              personalFinance.property_obj = propertyDetail.id;
+              let personalFinanceUpdate = Object.assign(
+                {},
+                prevState.personalFinanceUpdate
+              );
+              personalFinanceUpdate = data;
+              personalFinanceUpdate.property_obj = propertyDetail.id;
+              localStorage.setItem("personal_finance_array", JSON.stringify(personalFinanceUpdate));
+              return { personalFinance, personalFinanceUpdate };
+            });
+
+        })
+        .catch((err) => { });
+    }
+
   };
   handleRentvsBuyData(data) {
     this.setState((prevState) => {
@@ -262,7 +311,7 @@ export class StepperComponent extends Component {
       return { RentvsBuy };
     });
   }
-  taxRadioValue = async(data) => {
+  taxRadioValue = async (data) => {
     await this.setState({
       is_tax_selected: data
     })
@@ -411,7 +460,7 @@ export class StepperComponent extends Component {
   };
 
   async handleNext() {
-    // debugger
+
     const {
       // PersonalFinanceUpdate,
       RentvsBuyCreate,
@@ -427,7 +476,7 @@ export class StepperComponent extends Component {
         : this.state.activeStep + 1;
 
     if (this.state.activeStep === 0) {
-      
+
       if (this.state.propertyInfo.homepriceGrowthValidationError ||
         this.state.propertyInfo.downpaymentnewValidationError ||
         this.state.propertyInfo.annualPropertytaxValidationError ||
@@ -435,66 +484,101 @@ export class StepperComponent extends Component {
       ) {
         return NotificationManager.error("Error", "Please correct your input", 3000);
       } else {
-        if (
-          this.state.propertyInfo.property_price &&
-          this.state.propertyInfo.downpayment_amount &&
-          this.state.propertyInfo.annual_property_tax &&
-          this.state.propertyInfo.home_owner_insurance &&
-          this.state.propertyInfo.house_address &&
-          this.state.propertyInfo.house_state &&
-          this.state.propertyInfo.house_zip_code &&
-          this.state.propertyInfo.stay_duration 
-        ) {
-          this.setState({
-            activeStep: newActiveStep,
-          });
-          this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)
+        // debugger
+        if (!this.state.propertyInfo.property_price) {
+          return NotificationManager.error('Validation error','Please enter the price of the property', 3000)
+        } 
+       
+        if (!this.state.propertyInfo.annual_property_tax) {
+          return NotificationManager.error('Validation error','Please enter the annual property tax', 3000)
+        } 
+        if(!this.state.propertyInfo.home_owner_insurance)
+        {
+          return NotificationManager.error('Validation error','Please enter the annual home owner insurance', 3000)
+        }
+        if(!this.state.propertyInfo.house_address){
+          return NotificationManager.error('Validation error','Please enter your property address', 3000)
+        }
+        if(!this.state.propertyInfo.home_price_growth){
+          return NotificationManager.error('Validation error','Please enter the projected home price growth per year', 3000) 
+        }
+        if(!this.state.propertyInfo.stay_duration){
+          return NotificationManager.error('Validation error','Please enter the duration of your stay in this house', 3000)
+        }
+        if (!this.state.propertyInfo.downpayment_amount) {
+          return NotificationManager.error('Validation error','Please enter the downpayment amount', 3000)
+        }
+        {
 
           if (localStorage.getItem('addressData')) {
 
             const addressData = JSON.parse(localStorage.getItem('addressData'))
-            await this.setState((prevState) => {
-              let propertyInfo = Object.assign({}, prevState.propertyInfo);
-              propertyInfo.house_address = addressData.house_address;
-              propertyInfo.house_state = addressData.house_state;
-              propertyInfo.house_zip_code = addressData.house_zip_code;
-              return { propertyInfo }
-            })
+            if (!addressData.searchTouched && !this.state.propertyInfo.is_update) {
+              return NotificationManager.error('Validation error',"Please input your property address", 3000);
+            } else {
+              this.setState({
+                activeStep: newActiveStep,
+              });
+              this.state.propertyInfo["home_price_growth"] = String(parseInt(String(this.state.propertyInfo["home_price_growth_percentage"]).replace(/%/g, "")) / 100)
+              await this.setState((prevState) => {
+                let propertyInfo = Object.assign({}, prevState.propertyInfo);
+                propertyInfo.house_address = addressData.house_address;
+                propertyInfo.house_state = addressData.house_state;
+                propertyInfo.house_zip_code = addressData.house_zip_code;
+                return { propertyInfo }
+              })
+              let newaddressData = {
+                house_address: this.state.propertyInfo.house_address,
+                house_state: this.state.propertyInfo.house_state,
+                house_zip_code: this.state.propertyInfo.house_zip_code,
+                searchTouched: false
+              };
+              localStorage.setItem("addressData", JSON.stringify(newaddressData));
+
+              if (this.state.propertyInfo.is_update) {
+                this.state.propertyInfo["id"] = JSON.parse(
+                  localStorage.getItem("property_id")
+                );
+                // localStorage.setItem('no_of_bathrooms', this.state.propertyInfo.no_of_bathrooms)
+                // localStorage.setItem('no_of_bedrooms', this.state.propertyInfo.no_of_bedrooms)
+                PropertyInfoUpdate(
+                  this.state.propertyInfo,
+                  this.onSuccessHouseInfo,
+                  this.onFailureHouseInfo
+                );
+              } else {
+                // localStorage.setItem('no_of_bathrooms', this.state.propertyInfo.no_of_bathrooms)
+                // localStorage.setItem('no_of_bedrooms', this.state.propertyInfo.no_of_bedrooms)
+                PropertyInfoCreate(
+                  this.state.propertyInfo,
+                  this.onSuccessHouseInfo,
+                  this.onFailureHouseInfo
+                );
+              }
+
+              if (this.props.location.surveyData) {
+                this.props.location.surveyData.property_obj = localStorage.getItem(
+                  "property_id"
+                );
+              }
+            }
+
           }
 
-          if (this.state.propertyInfo.is_update) {
-            this.state.propertyInfo["id"] = JSON.parse(
-              localStorage.getItem("property_id")
-            );
-            // localStorage.setItem('no_of_bathrooms', this.state.propertyInfo.no_of_bathrooms)
-            // localStorage.setItem('no_of_bedrooms', this.state.propertyInfo.no_of_bedrooms)
-            PropertyInfoUpdate(
-              this.state.propertyInfo,
-              this.onSuccessHouseInfo,
-              this.onFailureHouseInfo
-            );
-          } else {
-            // localStorage.setItem('no_of_bathrooms', this.state.propertyInfo.no_of_bathrooms)
-            // localStorage.setItem('no_of_bedrooms', this.state.propertyInfo.no_of_bedrooms)
-            PropertyInfoCreate(
-              this.state.propertyInfo,
-              this.onSuccessHouseInfo,
-              this.onFailureHouseInfo
-            );
-          }
 
-          if (this.props.location.surveyData) {
-            this.props.location.surveyData.property_obj = localStorage.getItem(
-              "property_id"
-            );
-          }
-        } else {
-          return NotificationManager.error('Please correct your input', 'Please fill required fields', 3000)
         }
       }
 
     } else if (this.state.activeStep === 1) {
-      if(this.state.personalFinanceUpdate && !this.state.personalFinanceUpdate.federal_income && !this.state.personalFinanceUpdate.marginal_tax_rate && !this.state.personalFinanceUpdate.monthly_debt_payments && !this.state.personalFinanceUpdate.monthly_non_housing_expenses && !this.state.personalFinanceUpdate.fico_score_range && !this.state.personalFinanceUpdate.filling_status){
+      if
+       (this.state.personalFinanceUpdate &&
+         !this.state.personalFinanceUpdate.federal_income &&
+          !this.state.personalFinanceUpdate.marginal_tax_rate && 
+          !this.state.personalFinanceUpdate.monthly_debt_payments && 
+          !this.state.personalFinanceUpdate.monthly_non_housing_expenses && 
+          !this.state.personalFinanceUpdate.fico_score_range && 
+          !this.state.personalFinanceUpdate.filling_status) 
+          {
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
         );
@@ -508,7 +592,7 @@ export class StepperComponent extends Component {
         this.setState({
           activeStep: newActiveStep,
         });
-      }else if(this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments && this.state.personalFinanceUpdate.monthly_non_housing_expenses && this.state.personalFinanceUpdate.fico_score_range && this.state.personalFinanceUpdate.filling_status){
+      } else if (this.state.personalFinanceUpdate && this.state.personalFinanceUpdate.federal_income && this.state.personalFinanceUpdate.marginal_tax_rate && this.state.personalFinanceUpdate.monthly_debt_payments && this.state.personalFinanceUpdate.monthly_non_housing_expenses && this.state.personalFinanceUpdate.fico_score_range && this.state.personalFinanceUpdate.filling_status) {
         const personal_finance_data = JSON.parse(
           localStorage.getItem("personal_finance_array")
         );
@@ -522,9 +606,9 @@ export class StepperComponent extends Component {
         this.setState({
           activeStep: newActiveStep,
         });
-       
-      }else{
-        return NotificationManager.error('Please correct your inputy', 'Please fill required fields',3000)
+
+      } else {
+        return NotificationManager.error('Validation error','Please enter your estimated average tax rate', 3000)
       }
 
 
@@ -534,7 +618,20 @@ export class StepperComponent extends Component {
       });
     } else if (this.state.activeStep === 3) {
       // console.log(this.state.RentvsBuy, 'rentvsbuy index')
-      if(this.state.RentvsBuy.current_monthly_rent_payment && this.state.RentvsBuy.annual_rent_insurance && this.state.RentvsBuy.rate_of_investment && this.state.RentvsBuy.rentinflation){
+      if (!this.state.RentvsBuy.current_monthly_rent_payment) {
+        return NotificationManager.error('error', 'Please Enter Current monthly rent payment', 3000)
+      }
+      if (!this.state.RentvsBuy.annual_rent_insurance) {
+        return NotificationManager.error('error', 'Please Enter Annual rent insurance', 3000)
+      }
+      if (!this.state.RentvsBuy.rate_of_investment) {
+        return NotificationManager.error('error', 'Please Enter Rate of investment', 3000)
+      }
+      if (!this.state.RentvsBuy.rentinflation) {
+        return NotificationManager.error('error', 'Please Enter Rent Rate Inflation', 3000)
+      }
+
+      if (this.state.RentvsBuy.current_monthly_rent_payment && this.state.RentvsBuy.annual_rent_insurance && this.state.RentvsBuy.rate_of_investment && this.state.RentvsBuy.rentinflation) {
         this.setState({
           activeStep: newActiveStep,
         });
@@ -680,16 +777,16 @@ export class StepperComponent extends Component {
                     Taxes
                   </span>
                 ) : (
-                            <span>
-                              <img
-                                className="img-header"
-                                src={require("../../assets/logo/report.svg")}
-                                alt="finmagix"
-                              // height={"60px"}
-                              />
+                  <span>
+                    <img
+                      className="img-header"
+                      src={require("../../assets/logo/report.svg")}
+                      alt="finmagix"
+                    // height={"60px"}
+                    />
                     Summary
-                            </span>
-                          )}
+                  </span>
+                )}
               </span>
               <br />
               <Stepper
@@ -732,12 +829,12 @@ export class StepperComponent extends Component {
               {Object.entries(
                 JSON.parse(localStorage.getItem("personal_finance_array"))
               ).length !== 0 ? (
-                  <div className="row">
-                    <span className="modal-text" onClick={this.goToSurvey}>
-                      Survey
+                <div className="row">
+                  <span className="modal-text" onClick={this.goToSurvey}>
+                    Survey
                   </span>
-                  </div>
-                ) : null}
+                </div>
+              ) : null}
               <hr />
               <div className="row">
                 <span className="modal-text" onClick={this.goToLogOut}>
@@ -755,28 +852,28 @@ export class StepperComponent extends Component {
                 size="large"
                 onClick={this.handlePreviousForFirstpage}
               >
-                  
-                    <ArrowBackIosIcon />
-                 
+
+                <ArrowBackIosIcon />
+
               </Button>
             ) : (
-                <Button
-                  className="back-arrow"
-                  size="large"
-                  onClick={this.handleBack}
-                >
-                  {`<`}&nbsp;
-                  {activeStep === 1
-                    ? "Property Information"
-                    : activeStep === 2
-                      ? "Personal Finance"
-                      : activeStep === 3
-                        ? "Mortgage Programs"
-                        : activeStep === 4
-                          ? "rent vs buy"
-                          : "Back"}
-                </Button>
-              )}
+              <Button
+                className="back-arrow"
+                size="large"
+                onClick={this.handleBack}
+              >
+                {`<`}&nbsp;
+                {activeStep === 1
+                  ? "Property Information"
+                  : activeStep === 2
+                    ? "Personal Finance"
+                    : activeStep === 3
+                      ? "Mortgage Programs"
+                      : activeStep === 4
+                        ? "rent vs buy"
+                        : "Back"}
+              </Button>
+            )}
 
             <br />
             {this.allStepsCompleted() ? (
@@ -785,73 +882,73 @@ export class StepperComponent extends Component {
                 <Button onClick={this.handleReset}>Reset</Button>
               </div>
             ) : (
-                <div>
-                  {this.getStepContent(activeStep)}
-                  <div className="text-center">
-                    {activeStep === 2 || activeStep === 4 || activeStep === 5 ? (
-                      ""
-                    ) : activeStep === 1 &&
-                      JSON.parse(
-                        localStorage.getItem("personal_finance_array")
-                      ) &&
-                      Object.entries(
-                        JSON.parse(localStorage.getItem("personal_finance_array"))
-                      ).length === 0 ? (
-                          this.state.saveButtonforPersonalFinance === false ? (
-                            <div>
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                size="large"
-                                className="button-inner-class"
-                                onClick={this.handleSaveforPersonalFinance}
-                              >
-                                {" "}
+              <div>
+                {this.getStepContent(activeStep)}
+                <div className="text-center">
+                  {activeStep === 2 || activeStep === 4 || activeStep === 5 ? (
+                    ""
+                  ) : activeStep === 1 &&
+                    JSON.parse(
+                      localStorage.getItem("personal_finance_array")
+                    ) &&
+                    Object.entries(
+                      JSON.parse(localStorage.getItem("personal_finance_array"))
+                    ).length === 0 ? (
+                    this.state.saveButtonforPersonalFinance === false ? (
+                      <div>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          size="large"
+                          className="button-inner-class"
+                          onClick={this.handleSaveforPersonalFinance}
+                        >
+                          {" "}
                           Save
                         </Button>
-                              <br />
-                              <br />
-                              <br />
-                            </div>
-                          ) : null
-                        ) : activeStep === 1 &&
-                          JSON.parse(
-                            localStorage.getItem("personal_finance_array")
-                          ) &&
-                          Object.entries(
-                            JSON.parse(localStorage.getItem("personal_finance_array"))
-                          ).length !== 0 ? (
-                            <div>
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                size="large"
-                                className="button-inner-class"
-                                onClick={this.handleSaveforPersonalFinance}
-                              >
-                                {" "}
+                        <br />
+                        <br />
+                        <br />
+                      </div>
+                    ) : null
+                  ) : activeStep === 1 &&
+                    JSON.parse(
+                      localStorage.getItem("personal_finance_array")
+                    ) &&
+                    Object.entries(
+                      JSON.parse(localStorage.getItem("personal_finance_array"))
+                    ).length !== 0 ? (
+                    <div>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        className="button-inner-class"
+                        onClick={this.handleSaveforPersonalFinance}
+                      >
+                        {" "}
                         Update
                       </Button>
-                              <br />
-                              <br />
-                              <br />
-                            </div>
-                          ) : (
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              size="large"
-                              className="button-inner-class"
-                              onClick={this.handleNext}
-                            >
-                              {" "}
+                      <br />
+                      <br />
+                      <br />
+                    </div>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      className="button-inner-class"
+                      onClick={this.handleNext}
+                    >
+                      {" "}
                       Continue
-                            </Button>
-                          )}
-                  </div>
-                  <br />
+                    </Button>
+                  )}
                 </div>
-              )}
+                <br />
+              </div>
+            )}
           </div>
         </MDBContainer>
       </Fragment>
