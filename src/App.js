@@ -1,5 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
 
+import { NotificationManager } from "react-notifications";
 import SplashScreen from "./Components/splashScreen/splashScreen";
 import GetStarted from "./Components/GetStarted/getStarted";
 import Signup from "./Components/signup";
@@ -41,13 +43,11 @@ import Geocode from "./common/geocode"
 import {SendPageViewToGA} from './Analitics/GoogleAnalitics'
 
 import { InitiallizeGoogleAnalytics } from './Analitics/GoogleAnalitics'
-import { useEffect } from "react";
+
+import { logout } from './routes/utils';
+const axios = require('axios');
 
 InitiallizeGoogleAnalytics()
-import { logout } from './routes/utils';
-import { NotificationManager } from "react-notifications";
-
-const axios = require('axios');
 
 function App() {
   console.log(window.location)
