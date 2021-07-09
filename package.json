@@ -40,7 +40,7 @@
     "react-rangeslider": "^2.2.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "2.1.8",
     "react-stepzilla": "^6.0.2",
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
@@ -60,11 +60,6 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -73,6 +68,6 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.2"
+    "babel-loader": "8.0.5"
   }
 }
