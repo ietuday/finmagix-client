@@ -236,7 +236,7 @@ const MapWithASearchBox = compose(
   withScriptjs,
   withGoogleMap
 )((props) => (
-  <>
+  <div>
 
     <GoogleMap
       ref={props.onMapMounted}
@@ -269,51 +269,8 @@ const MapWithASearchBox = compose(
         <Marker key={index} position={marker.position} />
       ))}
     </GoogleMap>
-    {/* <div>
-      <MDBRow className="margin20">
-        <MDBCol>
-          <span className="get-started-label">Address</span>
-          <br />
-          <Input
-            className="input-class-mdb"
-            placeholder="Address"
-            name="house_address"
-            disabled={true}
-            onChange={props.onChange}
-            value={props.hosue_info_house_address ? props.hosue_info_house_address : props.house_address}
-          />
-        </MDBCol>
-      </MDBRow>
-      <MDBRow className="margin20">
-        <MDBCol>
-          <span className="get-started-label">State</span>
-          <br />
-          <Input
-            className="input-class-mdb"
-            placeholder="Start typing state name"
-            name="house_state"
-            disabled={true}
-            onChange={props.getState}
-            value={props.hosue_info_house_state ? props.hosue_info_house_state : props.house_state}
-          />
-        </MDBCol>
-      </MDBRow>
-      <MDBRow className="margin20">
-        <MDBCol>
-          <span className="get-started-label">Zip Code</span>
-          <br />
-          <Input
-            className="input-class-mdb"
-            placeholder="zip code"
-            name="house_zip_code"
-            disabled={true}
-            onChange={props.onChange}
-            value={props.hosue_info_house_zip_code ? props.hosue_info_house_zip_code : props.house_zip_code}
-          />
-        </MDBCol>
-      </MDBRow>
-    </div> */}
-  </>
+    
+  </div>
 ));
 
 export default MapWithASearchBox;
