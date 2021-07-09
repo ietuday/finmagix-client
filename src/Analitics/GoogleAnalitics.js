@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga'
 
-const gaId = "UA-198889591-1"
+const gaId = "UA-201772883-1"
 const debug = "Y"
 
 const InitiallizeGoogleAnalytics = () => {
