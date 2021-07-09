@@ -25,9 +25,7 @@ import {
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { IconButton } from '@material-ui/core';
 // import FacebookIcon from '@material-ui/icons/Facebook';
-
-
-
+import {SendEventToGA} from '../Analitics/GoogleAnalitics';
 export class Signup extends Component {
   constructor() {
     super();
@@ -92,6 +90,13 @@ export class Signup extends Component {
     } else {
       NotificationManager.error("Please validate fields!", "Error", 3000);
     }
+    SendEventToGA({
+      category: 'Signup Details',
+      action: 'Signup',
+      value:[{name:this.state.name,email:this.state.email}]
+     
+    })
+    
   };
   onSuccess = () => {
     this.props.history.push("/signin");

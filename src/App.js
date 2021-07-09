@@ -1,5 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
 
+import { NotificationManager } from "react-notifications";
 import SplashScreen from "./Components/splashScreen/splashScreen";
 import GetStarted from "./Components/GetStarted/getStarted";
 import Signup from "./Components/signup";
@@ -38,12 +40,22 @@ import PostMortgagePurchaseProfile from "./Components/nerdReportDetails/PostMort
 import ForgotPassword from "./Components/ForgotPassword";
 import CreatePassword from "./Components/createPassword";
 import Geocode from "./common/geocode"
-import { logout } from './routes/utils';
-import { NotificationManager } from "react-notifications";
+import {SendPageViewToGA} from './Analitics/GoogleAnalitics'
 
+import { InitiallizeGoogleAnalytics } from './Analitics/GoogleAnalitics'
+
+import { logout } from './routes/utils';
 const axios = require('axios');
 
+InitiallizeGoogleAnalytics()
+
 function App() {
+  console.log(window.location)
+  const {pathname} =window.location
+  useEffect(() => {
+    SendPageViewToGA(pathname)
+    console.log(pathname)
+  }, [pathname])
   return (
     <React.Fragment>
     {axios.interceptors.response.use(
